@@ -319,6 +319,14 @@
    <field name="actor" type="integer" indexed="true" stored="true" required="false" />
    <field name="workflowItemId" type="integer" indexed="true" stored="true" required="false" />
 
+     <field name="containerCommunity" type="integer" indexed="true" stored="true" required="false" multiValued="true" />
+     <field name="containerCollection" type="integer" indexed="true" stored="true" required="false" multiValued="true" />
+     <field name="containerItem" type="integer" indexed="true" stored="true" required="false" multiValued="true" />
+     <field name="containerBitstream" type="integer" indexed="true" stored="true" required="false" multiValued="true" />
+     <field name="dateYear" type="string" indexed="true" stored="true" required="false" multiValued="false" />
+     <field name="dateYearMonth" type="string" indexed="true" stored="true" required="false" multiValued="false" />
+
+
 
  </fields>
 

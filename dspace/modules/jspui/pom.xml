@@ -16,6 +16,24 @@
         <relativePath>..</relativePath>
     </parent>
 
+    <repositories>
+        <repository>
+            <id>atmire.com-releases</id>
+            <name>atmire.com-releases</name>
+            <url>https://atmire.com/artifactory/atmire.com-releases</url>
+            <releases>
+                <enabled>true</enabled>
+                <checksumPolicy>fail</checksumPolicy>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+                <updatePolicy>never</updatePolicy>
+                <checksumPolicy>fail</checksumPolicy>
+            </snapshots>
+        </repository>
+    </repositories>
+
+
     <properties>
         <!-- This is the path to the root [dspace-src] directory. -->
         <root.basedir>${basedir}/../../..</root.basedir>
@@ -62,11 +80,17 @@
                         </resource>
                     </webResources>
                     <overlays>
-                        <overlay />
+                        <overlay>
+                            <groupId>com.atmire</groupId>
+                            <artifactId>atmire-listings-and-reports-webapp</artifactId>
+
+                            <type>war</type>
+                        </overlay>
                         <overlay>
                             <groupId>org.dspace</groupId>
                             <artifactId>dspace-jspui</artifactId>
                             <type>war</type>
+
                         </overlay>
                     </overlays>
                 </configuration>
@@ -84,6 +108,19 @@
         <dependency>
             <groupId>org.dspace.modules</groupId>
             <artifactId>additions</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atmire</groupId>
+            <artifactId>atmire-listings-and-reports-webapp</artifactId>
+            <version>${listings-and-reports.version.number}</version>
+            <type>war</type>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atmire</groupId>
+            <artifactId>atmire-listings-and-reports-api</artifactId>
+            <version>${listings-and-reports.version.number}</version>
         </dependency>
 
         <dependency>

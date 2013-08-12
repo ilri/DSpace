@@ -20,8 +20,24 @@
       <version>3.1</version>
       <relativePath>..</relativePath>
    </parent>
+    <repositories>
+        <repository>
+            <id>atmire.com-releases</id>
+            <name>atmire.com-releases</name>
+            <url>https://atmire.com/artifactory/atmire.com-releases</url>
+            <releases>
+                <enabled>true</enabled>
+                <checksumPolicy>fail</checksumPolicy>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+                <updatePolicy>never</updatePolicy>
+                <checksumPolicy>fail</checksumPolicy>
+            </snapshots>
+        </repository>
+    </repositories>
 
-   <properties>
+    <properties>
        <!-- This is the path to the root [dspace-src] directory. -->
        <root.basedir>${basedir}/../../..</root.basedir>
    </properties>
@@ -72,7 +88,14 @@
    Runtime and Compile Time dependencies for DSpace.
    -->
    <dependencies>
-      <dependency>
+
+       <dependency>
+           <groupId>com.atmire</groupId>
+           <artifactId>atmire-cua-api</artifactId>
+           <version>${cua.version.number}</version>
+       </dependency>
+
+       <dependency>
          <groupId>org.dspace</groupId>
          <artifactId>dspace-api</artifactId>
       </dependency>

@@ -91,7 +91,7 @@
              Usage Statistics Engines
              ======================== -->
         <!-- By default, DSpace uses a Statistics engine based on SOLR -->
-        <aspect name="Statistics" path="resource://aspects/Statistics/" />
+        <!--<aspect name="Statistics" path="resource://aspects/Statistics/" />-->
 
         <!--
              If you prefer to use "Elastic Search" Statistics, you can uncomment the below
@@ -105,6 +105,12 @@
              ========================= -->
         <!-- By default, DSpace uses a legacy 3-step approval workflow for new submissions -->
         <aspect name="Original Workflow" path="resource://aspects/Workflow/" />
+
+        <aspect name="ListingsAndReports" path="resource://aspects/ListingsAndReports/" />
+
+        <aspect name="CUA" path="resource://aspects/Statistics/" />
+        <aspect name="Atmire Modules Aspect" path="resource://aspects/AtmireModules/" />
+
 
         <!-- If you prefer, a Configurable XML-based Workflow is available. To enable it, you can
              uncomment the below aspect and comment out the "Original Workflow" aspect above.
@@ -170,6 +176,10 @@
 
         <!-- <theme name="Test Theme 1" handle="123456789/1" path="theme1/"/>    -->
         <!-- <theme name="Test Theme 2" regex="community-list" path="theme2/"/> -->
+        <theme name="ReportingSuite" regex="reporting-suite/graph-editor/.*" path="ReportingSuite/" />
+        <theme name="Atmire Modules Theme" regex="atmire/.*" path="AtmireModules/" />
+
+
 
         <theme name="ILRI" handle="10568/1" path="ILRI/"/>
         <theme name="CPWF" handle="10568/2983" path="CPWF/"/>

@@ -2351,4 +2351,11 @@
     <message key="xmlui.aspect.versioning.VersionNoticeTransformer.notice.workflow_version_help">A more recent version of this item is in the Workflow.</message>
 
     <!-- End Versioning -->
+
+
+    <!--CUA-->
+    <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_issuedate">Date Issued</message>
+    <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_accessioneddate">Date Accesioned</message>
+    <!--end CUA-->
+
 </catalogue>

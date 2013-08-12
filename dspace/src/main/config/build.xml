@@ -351,10 +351,17 @@ Common usage:
         Prepare properly filtered files
         -->
         <copy todir="config-temp" preservelastmodified="true" overwrite="true" failonerror="false">
-            <fileset dir="config" excludes="dspace.cfg" />
+            <fileset dir="config" excludes="dspace.cfg,**/fonts/**,**/docbook**" />
             <filterchain>
                 <expandproperties />
             </filterchain>
+        </copy>
+
+        <!--
+        Prepare binary files
+    -->
+        <copy todir="config-temp" preservelastmodified="true" overwrite="true" failonerror="false">
+            <fileset dir="config" includes="**/fonts/**,**/docbook**" />
         </copy>
 
     </target>

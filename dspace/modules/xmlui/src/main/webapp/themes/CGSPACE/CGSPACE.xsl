@@ -40,7 +40,8 @@
     <xsl:import href="lib/xsl/aspect/artifactbrowser/item-view.xsl"/>
     <xsl:import href="lib/xsl/aspect/artifactbrowser/community-list.xsl"/>
     <xsl:import href="lib/xsl/aspect/artifactbrowser/collection-list.xsl"/>
-    <xsl:output indent="yes"/>
+    <xsl:import href="../ReportingSuite/statistics.xsl"/>
+<xsl:output indent="yes"/>
     
 
 </xsl:stylesheet>

@@ -67,6 +67,13 @@
          </includes>
          <filtered>true</filtered>
       </fileSet>
+       <fileSet>
+           <directory>target/atmire-modules</directory>
+           <outputDirectory>.</outputDirectory>
+           <includes>
+               <include>**</include>
+           </includes>
+       </fileSet>
    </fileSets>
 
    <!-- Copy over the dspace.cfg & filter it -->
