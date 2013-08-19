@@ -90,7 +90,7 @@
                             <groupId>org.dspace</groupId>
                             <artifactId>dspace-jspui</artifactId>
                             <type>war</type>
-
+                            <excludes><exclude>WEB-INF/classes/**</exclude></excludes>
                         </overlay>
                     </overlays>
                 </configuration>

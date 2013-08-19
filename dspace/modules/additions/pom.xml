@@ -91,6 +91,13 @@
 
        <dependency>
            <groupId>com.atmire</groupId>
+           <artifactId>atmire-listings-and-reports-api</artifactId>
+           <version>${listings-and-reports.version.number}</version>
+       </dependency>
+
+
+       <dependency>
+           <groupId>com.atmire</groupId>
            <artifactId>atmire-cua-api</artifactId>
            <version>${cua.version.number}</version>
        </dependency>
