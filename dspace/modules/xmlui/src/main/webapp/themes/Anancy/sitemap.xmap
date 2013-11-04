@@ -28,8 +28,8 @@
 		-->
 		<map:component-configurations>
 			<global-variables>
-				<theme-path>Anancy</theme-path>
-				<theme-name>Anancy</theme-name>
+				<theme-path>CTA</theme-path>
+				<theme-name>CTA</theme-name>
 			</global-variables>
         </map:component-configurations>
 

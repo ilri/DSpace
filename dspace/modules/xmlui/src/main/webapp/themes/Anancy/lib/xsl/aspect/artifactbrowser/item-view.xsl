@@ -696,15 +696,15 @@
           </xsl:when>
 
 
-		<!-- Anancy Subject row -->
-		<xsl:when test="$clause = 23 and (dim:field[@element='subject' and @qualifier='anancy'])">
+		<!-- CTA Subject row -->
+		<xsl:when test="$clause = 23 and (dim:field[@element='subject' and @qualifier='cta'])">
                     <tr class="ds-table-row {$phase}">
-	                <td><span class="bold"><i18n:text>Anancy Subject Focus</i18n:text>:</span></td>
+	                <td><span class="bold"><i18n:text>CTA Subject Focus</i18n:text>:</span></td>
 	                <td>
-	                <xsl:for-each select="//dim:field[@element='subject'and @qualifier='anancy']">
+	                <xsl:for-each select="//dim:field[@element='subject'and @qualifier='cta']">
                       <xsl:variable name="lnk"><xsl:value-of select="."/></xsl:variable>
 
-                            <a href="/browse?value={.}&amp;type=anancy"><xsl:value-of select="."/></a><xsl:if test="position()!=last()"><xsl:text>, </xsl:text></xsl:if>
+                            <a href="/browse?value={.}&amp;type=cta"><xsl:value-of select="."/></a><xsl:if test="position()!=last()"><xsl:text>, </xsl:text></xsl:if>
 
                     </xsl:for-each>
 	                </td>

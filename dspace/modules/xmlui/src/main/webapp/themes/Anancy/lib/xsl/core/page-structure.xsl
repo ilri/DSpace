@@ -310,7 +310,7 @@
         <div id="ds-header-wrapper">
             <div id="ds-header" class="clearfix">
                 <a id="ds-header-logo-link">
-                     <a href="http://www.anancy.net" target="_blank"></a>
+                     <a href="http://cta.int" target="_blank"></a>
                  <!--   <xsl:attribute name="href">
                         <xsl:value-of
                                 select="/dri:document/dri:meta/dri:pageMeta/dri:metadata[@element='contextPath'][not(@qualifier)]"/>
