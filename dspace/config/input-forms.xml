@@ -96,8 +96,8 @@
     <name-map collection-handle="10568/24757" form-name="AgriFood Chain capacity building" />
     <name-map collection-handle="10568/24756" form-name="AgriFood Chain capacity building" />
     <name-map collection-handle="10568/24755" form-name="AgriFood Chain capacity building" />
-    <!--CTA/Anancy submission form -->
-    <name-map collection-handle="10568/33439" form-name="Anancy" />
+    <!--CTA submission form -->
+    <name-map collection-handle="10568/33439" form-name="CTA" />
     <!--WLE Submssion form -->
     <name-map collection-handle="10568/34494" form-name="WLE" />
     <name-map collection-handle="10568/37089" form-name="Bioversity" />
@@ -483,10 +483,10 @@
         <field>
           <dc-schema>cg</dc-schema>
           <dc-element>subject</dc-element>
-          <dc-qualifier>anancy</dc-qualifier>
+          <dc-qualifier>cta</dc-qualifier>
           <repeatable>true</repeatable>
-          <label>Anancy (CTA) Subject Focus</label>
-          <input-type value-pairs-name="anancy">dropdown</input-type>
+          <label>CTA Subject Focus</label>
+          <input-type value-pairs-name="cta">dropdown</input-type>
           <hint></hint>
           <required></required>
         </field>
@@ -1820,7 +1820,7 @@
         </field>
       </page>
     </form>
-    <form name="Anancy">
+    <form name="CTA">
       <page number="1">
         <field>
           <dc-schema>dc</dc-schema>
@@ -1978,10 +1978,10 @@
         <field>
           <dc-schema>cg</dc-schema>
           <dc-element>subject</dc-element>
-          <dc-qualifier>anancy</dc-qualifier>
+          <dc-qualifier>cta</dc-qualifier>
           <repeatable>true</repeatable>
-          <label>Anancy (CTA) Subject Focus</label>
-          <input-type value-pairs-name="anancy">dropdown</input-type>
+          <label>CTA Subject Focus</label>
+          <input-type value-pairs-name="cta">dropdown</input-type>
           <hint></hint>
           <required></required>
         </field>
@@ -3177,7 +3177,7 @@
         <stored-value>WOMEN</stored-value>
       </pair>
     </value-pairs>
-    <value-pairs value-pairs-name="anancy" dc-term="subject_anancy">
+    <value-pairs value-pairs-name="cta" dc-term="subject_cta">
       <pair>
         <displayed-value>AGRICULTURE - GENERAL</displayed-value>
         <stored-value>AGRICULTURE - GENERAL</stored-value>
