@@ -138,6 +138,7 @@
     <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_output">Output Type</message>
     <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_anancy">Anancy Subject</message>
     <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_wle">WLE Subject</message>
+    <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_bioversity">Bioversity Subject</message>
 
    <!--  some common other possibilities for Advanced Search Fields -->
    <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_contributor">Contributor</message>
@@ -2366,6 +2367,7 @@
     <!--CUA-->
     <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_issuedate">Date Issued</message>
     <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_accessioneddate">Date Accesioned</message>
+    <message key="xmlui.ArtifactBrowser.ConfigurableBrowse.sort_by.type">Output type</message>
     <!--end CUA-->
 
 </catalogue>
