@@ -137,7 +137,7 @@
     <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_crpsubject">CGIAR research program</message>
     <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_basin">River Basin</message>
     <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_output">Output Type</message>
-    <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_anancy">Anancy Subject</message>
+    <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_cta">CTA Subject</message>
     <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_wlesubject">WLE Subject</message>
     <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_bioversity">Bioversity Subject</message>
     <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_ciat">CIAT Subject</message>
@@ -194,7 +194,7 @@
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.ccafsubject.column_heading">CCAFS Subject Name</message>
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.ciforsubject.column_heading">CIFOR Subject Name</message>
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.iwmisubject.column_heading">IWMI Subject Name</message>
-	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.anancy.column_heading">Anancy Subject Name</message>
+	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.cta.column_heading">CTA Subject Name</message>
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.wlesubject.column_heading">WLE Subject Name</message>
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.bioversity.column_heading">Bioversity Subject Name</message>
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.ciat.column_heading">CIAT Subject Name</message>
@@ -258,8 +258,8 @@
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.title.metadata.output">Browsing {0} by Output Type {1}</message>
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.trail.metadata.output">Browsing {0} by Output Type</message>
 
-	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.title.metadata.anancy">Browsing {0} by Anancy Subject {1}</message>
-	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.trail.metadata.anancy">Browsing {0} by Anancy Subject</message>
+	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.title.metadata.cta">Browsing {0} by CTA Subject {1}</message>
+	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.trail.metadata.cta">Browsing {0} by CTA Subject</message>
 
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.title.metadata.wlesubject">Browsing {0} WLE Subject {1}</message>
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.trail.metadata.wlesubject">Browsing {0} by WLE Subject</message>
@@ -361,7 +361,7 @@
 	<message key="xmlui.ArtifactBrowser.Navigation.browse_ccafsubject">By CCAFS Subject</message>
 	<message key="xmlui.ArtifactBrowser.Navigation.browse_ciforsubject">By CIFOR Subject</message>
 	<message key="xmlui.ArtifactBrowser.Navigation.browse_iwmisubject">By IWMI Subject</message>
-	<message key="xmlui.ArtifactBrowser.Navigation.browse_anancy">By Anancy Subject</message>
+	<message key="xmlui.ArtifactBrowser.Navigation.browse_cta">By CTA Subject</message>
 	<message key="xmlui.ArtifactBrowser.Navigation.browse_wlesubject">By WLE Subject</message>
 	<message key="xmlui.ArtifactBrowser.Navigation.browse_bioversity">By Bioversity Subject</message>
 	<message key="xmlui.ArtifactBrowser.Navigation.browse_subregion">By Sub Region</message>
