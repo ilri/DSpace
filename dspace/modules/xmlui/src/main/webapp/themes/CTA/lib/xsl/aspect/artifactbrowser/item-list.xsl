@@ -137,8 +137,8 @@
                     </xsl:attribute>
 
                     <span class="content" style="width: {$metadataWidth - 110}px;">
-                      <xsl:for-each select="//dim:field[@element='ccsubject'and @qualifier='ccafsubject']">
-                <a href="/browse?value={.}&amp;type=ccafsubject"><xsl:value-of select="."/></a><xsl:if test="position()!=last()"><xsl:text>, </xsl:text></xsl:if>
+                      <xsl:for-each select="//dim:field[@element='subject'and @qualifier='cta']">
+                <a href="/browse?value={.}&amp;type=cta"><xsl:value-of select="."/></a><xsl:if test="position()!=last()"><xsl:text>, </xsl:text></xsl:if>
                       </xsl:for-each>
                     </span>
                 </xsl:element>
