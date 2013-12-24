@@ -138,6 +138,7 @@
     <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_output">Output Type</message>
     <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_anancy">Anancy Subject</message>
     <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_wle">WLE Subject</message>
+    <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_bioversity">Bioversity Subject</message>
 
    <!--  some common other possibilities for Advanced Search Fields -->
    <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_contributor">Contributor</message>
@@ -149,6 +150,9 @@
    <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_other">Other Contributor</message>
    <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_advisor">Advisor</message>
    <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_department">Department</message>
+   <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_common_status_identifier">Status</message>
+   <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_jtitle">Journal Title</message>
+   <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_ISI_Journal">ISI Journal status</message>
 
    <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_ANY">Full Text</message>
    <message key="xmlui.ArtifactBrowser.AdvancedSearch.and">AND</message>
@@ -2366,6 +2370,7 @@
     <!--CUA-->
     <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_issuedate">Date Issued</message>
     <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_accessioneddate">Date Accesioned</message>
+    <message key="xmlui.ArtifactBrowser.ConfigurableBrowse.sort_by.type">Output type</message>
     <!--end CUA-->
 
 </catalogue>
