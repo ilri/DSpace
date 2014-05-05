@@ -126,18 +126,15 @@
                 </span>
             </xsl:if>
 
-
-
             <span class="bold"><i18n:text>Subject Focus</i18n:text><xsl:text>:</xsl:text></span>
             <span class="content" style="width: {$metadataWidth - 110}px;">
                 <xsl:element name="a">
                     <xsl:attribute name="href">
                         <xsl:value-of select="$href"/>
                     </xsl:attribute>
-
                     <span class="content" style="width: {$metadataWidth - 110}px;">
-                      <xsl:for-each select="//dim:field[@element='ccsubject'and @qualifier='ccafsubject']">
-                <a href="/browse?value={.}&amp;type=ccafsubject"><xsl:value-of select="."/></a><xsl:if test="position()!=last()"><xsl:text>, </xsl:text></xsl:if>
+                      <xsl:for-each select="//dim:field[@element='subject'and @qualifier='bioversity']">
+                <a href="/browse?value={.}&amp;type=bioversity"><xsl:value-of select="."/></a><xsl:if test="position()!=last()"><xsl:text>, </xsl:text></xsl:if>
                       </xsl:for-each>
                     </span>
                 </xsl:element>
