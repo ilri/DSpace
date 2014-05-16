@@ -2608,6 +2608,14 @@
         <displayed-value>VALUE CHAINS</displayed-value>
         <stored-value>VALUE CHAINS</stored-value>
       </pair>
+      
+      
+      <pair>
+        <displayed-value>ALFATOXINS</displayed-value>
+        <stored-value>ALFATOXINS</stored-value>
+      </pair>
+      
+      
       <pair>
         <displayed-value>AGRICULTURE</displayed-value>
         <stored-value>AGRICULTURE</stored-value>
