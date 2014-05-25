@@ -480,7 +480,30 @@
           <hint></hint>
           <required></required>
         </field>
-        <field>
+        
+     <field>
+		 <dc-schema>cg</dc-schema>
+         <dc-element>subject</dc-element>
+         <dc-qualifier>humidtropics</dc-qualifier>
+         <repeatable>true</repeatable>
+         <label>Humidtropics Subject Focus</label>
+         <input-type value-pairs-name="humidtropics">dropdown</input-type>
+         <hint></hint>
+         <required></required>
+         </field>
+
+		 <field>
+		 <dc-schema>cg</dc-schema>
+         <dc-element>subject</dc-element>
+         <dc-qualifier>ciat</dc-qualifier>
+         <repeatable>true</repeatable>
+         <label>Ciat Subject Focus</label>
+         <input-type value-pairs-name="ciat">dropdown</input-type>
+         <hint></hint>
+         <required></required>
+         </field>
+        
+    <field>
           <dc-schema>cg</dc-schema>
           <dc-element>subject</dc-element>
           <dc-qualifier>anancy</dc-qualifier>
@@ -2372,44 +2395,34 @@
         <stored-value>MULTI-PURPOSE</stored-value>
       </pair>
     </value-pairs>
-    <value-pairs value-pairs-name="livestock_agegroup" dc-term="livestock_agegroup">
-      <pair>
-        <displayed-value>ADULT</displayed-value>
-        <stored-value>ADULT</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>ALL AGES</displayed-value>
-        <stored-value>ALL AGES</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>NEW BORN</displayed-value>
-        <stored-value>NEW BORN</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>YOUNG</displayed-value>
-        <stored-value>YOUNG</stored-value>
-      </pair>
-    </value-pairs>
-    <value-pairs value-pairs-name="common_types" dc-term="type">
+    
+     <value-pairs value-pairs-name="common_types" dc-term="type">
       <pair>
         <displayed-value>Audio</displayed-value>
         <stored-value>Audio</stored-value>
       </pair>
-      <pair>
-        <displayed-value>Book or Monograph</displayed-value>
-        <stored-value>Book or Monograph</stored-value>
+	  
+	 <pair>
+        <displayed-value>Blog</displayed-value>
+        <stored-value>Blog</stored-value>
+      </pair>
+	  
+	  <pair>
+        <displayed-value>Book</displayed-value>
+        <stored-value>Book</stored-value>
       </pair>
       <pair>
         <displayed-value>Book Chapter</displayed-value>
         <stored-value>Book Chapter</stored-value>
       </pair>
+	  
       <pair>
-        <displayed-value>Blog</displayed-value>
-        <stored-value>Blog</stored-value>
+        <displayed-value>Brief</displayed-value>
+        <stored-value>Brief</stored-value>
       </pair>
       <pair>
-        <displayed-value>Brochure or Flyer</displayed-value>
-        <stored-value>Brochure or Flyer</stored-value>
+        <displayed-value>Brochure</displayed-value>
+        <stored-value>Brochure</stored-value>
       </pair>
       <pair>
         <displayed-value>Case Study</displayed-value>
@@ -2435,10 +2448,18 @@
         <displayed-value>Image</displayed-value>
         <stored-value>Image</stored-value>
       </pair>
+	  
       <pair>
         <displayed-value>Journal Article</displayed-value>
         <stored-value>Journal Article</stored-value>
       </pair>
+	  
+	   <pair>
+        <displayed-value>Journal Item</displayed-value>
+        <stored-value>Journal Item</stored-value>
+      </pair>
+	  
+	  
       <pair>
         <displayed-value>Internal Document</displayed-value>
         <stored-value>Internal Document</stored-value>
@@ -2459,7 +2480,12 @@
         <displayed-value>Map</displayed-value>
         <stored-value>Map</stored-value>
       </pair>
-      <pair>
+	  
+	  <pair>
+        <displayed-value>Mobile Message</displayed-value>
+        <stored-value>Mobile Message</stored-value>
+      </pair>
+	  <pair>
         <displayed-value>News Item</displayed-value>
         <stored-value>News Item</stored-value>
       </pair>
@@ -2467,45 +2493,45 @@
         <displayed-value>Newsletter</displayed-value>
         <stored-value>Newsletter</stored-value>
       </pair>
-      <pair>
-        <displayed-value>Policy Brief</displayed-value>
-        <stored-value>Policy Brief</stored-value>
-      </pair>
-      <pair>
+    <pair>
         <displayed-value>Poster</displayed-value>
         <stored-value>Poster</stored-value>
       </pair>
-      <pair>
-        <displayed-value>Press Item</displayed-value>
-        <stored-value>Press Item</stored-value>
-      </pair>
-      <pair>
+	  
+     <pair>
         <displayed-value>Presentation</displayed-value>
         <stored-value>Presentation</stored-value>
       </pair>
-      <pair>
-        <displayed-value>Project Report</displayed-value>
-        <stored-value>Project Report</stored-value>
+	  
+	    <pair>
+        <displayed-value>Press Item</displayed-value>
+        <stored-value>Press Item</stored-value>
+       </pair>
+	  
+	  <pair>
+        <displayed-value>Report</displayed-value>
+        <stored-value>Report</stored-value>
       </pair>
       <pair>
         <displayed-value>Software</displayed-value>
         <stored-value>Software</stored-value>
       </pair>
+	  
       <pair>
-        <displayed-value>Technical Report</displayed-value>
-        <stored-value>Technical Report</stored-value>
+        <displayed-value>Source Code</displayed-value>
+        <stored-value>Source Code</stored-value>
       </pair>
       <pair>
         <displayed-value>Template</displayed-value>
         <stored-value>Template</stored-value>
       </pair>
       <pair>
-        <displayed-value>Thesis or Dissertation</displayed-value>
-        <stored-value>Thesis or Dissertation</stored-value>
+        <displayed-value>Thesis</displayed-value>
+        <stored-value>Thesis</stored-value>
       </pair>
       <pair>
-        <displayed-value>Training Module or Learning Object</displayed-value>
-        <stored-value>Training Module or Learning Object</stored-value>
+        <displayed-value>Training Material</displayed-value>
+        <stored-value>TTraining Material</stored-value>
       </pair>
       <pair>
         <displayed-value>Video</displayed-value>
@@ -2528,7 +2554,8 @@
         <stored-value>Other</stored-value>
       </pair>
     </value-pairs>
-    <!-- default language order: (from dspace 1.2.1)
+    
+ <!-- default language order: (from dspace 1.2.1)
         "en_US", "en", "es", "de", "fr", "it", "ja", "zh", "other", ""
      -->
     <value-pairs value-pairs-name="common_iso_languages" dc-term="language_iso">
@@ -3177,6 +3204,709 @@
         <stored-value>WOMEN</stored-value>
       </pair>
     </value-pairs>
+    
+    <!--HumidTropics subject list Begins-->
+ 
+ <value-pairs value-pairs-name="humidtropics" dc-term="subject_humidtropics">
+
+
+  <pair>
+       <displayed-value>ACTION AREA</displayed-value>
+       <stored-value>ACTION AREA</stored-value>
+     </pair>
+
+
+ 	  <pair>
+       <displayed-value>ACTION SITE</displayed-value>
+       <stored-value>ACTION SITE</stored-value>
+     </pair>
+
+	  <pair>
+       <displayed-value>AGRICULTURE</displayed-value>
+       <stored-value>AGRICULTURE</stored-value>
+     </pair>
+	 
+	   <pair>
+       <displayed-value>ATTITUDE CHANGES</displayed-value>
+       <stored-value>ATTITUDE CHANGES</stored-value>
+     </pair>
+	 
+	  <pair>
+       <displayed-value>BASELINES</displayed-value>
+       <stored-value>BASELINES</stored-value>
+     </pair>
+
+
+ 	  <pair>
+       <displayed-value>BEHAVIORAL CHANGES</displayed-value>
+       <stored-value>BEHAVIORAL CHANGES</stored-value>
+     </pair>
+
+	  <pair>
+       <displayed-value>BIODIVERSITY</displayed-value>
+       <stored-value>BIODIVERSITY</stored-value>
+     </pair>
+	 
+	 <pair>
+       <displayed-value>BIOTECHNOLOGY</displayed-value>
+       <stored-value>BIOTECHNOLOGY</stored-value>
+     </pair>
+	 
+	  <pair>
+       <displayed-value>CAPACITY DEVELOPMENT</displayed-value>
+       <stored-value>CAPACITY DEVELOPMENT</stored-value>
+     </pair>
+	 
+	 <pair>
+       <displayed-value>CAPACITY TO INNOVATE</displayed-value>
+       <stored-value>CAPACITY TO INNOVATE</stored-value>
+     </pair>
+	 
+	   
+	   <pair>
+       <displayed-value>CENTRAL MEKONG</displayed-value>
+       <stored-value>CENTRAL MEKONG</stored-value>
+     </pair>
+	 
+	<pair>
+       <displayed-value>CLIMAGE CHANGE</displayed-value>
+       <stored-value>CLIMAGE CHANGE</stored-value>
+     </pair>
+
+
+ 	  <pair>
+       <displayed-value>COMMUNICATION</displayed-value>
+       <stored-value>COMMUNICATION</stored-value>
+     </pair>
+
+	  <pair>
+       <displayed-value>CONFERENCE</displayed-value>
+       <stored-value>CONFERENCE</stored-value>
+     </pair>
+	 
+	   <pair>
+       <displayed-value>CROP-LIVESTOCK</displayed-value>
+       <stored-value>CROP-LIVESTOCK</stored-value>
+     </pair>
+	 
+	  <pair>
+       <displayed-value>CROPS</displayed-value>
+       <stored-value>CROPS</stored-value>
+     </pair>
+
+
+ 	  <pair>
+       <displayed-value>CULTURE</displayed-value>
+       <stored-value>CULTURE</stored-value>
+     </pair>
+
+	  <pair>
+       <displayed-value>CULTURAL ENVIRONMENT</displayed-value>
+       <stored-value>CULTURAL ENVIRONMENT</stored-value>
+     </pair>
+	 
+	 <pair>
+       <displayed-value>DISEASE CONTROL</displayed-value>
+       <stored-value>DISEASE CONTROL</stored-value>
+     </pair>
+	 
+	  <pair>
+       <displayed-value>ECOSYSTEM INTEGRITY</displayed-value>
+       <stored-value>ECOSYSTEM INTEGRITY</stored-value>
+     </pair>
+	 
+	 <pair>
+       <displayed-value>ECOSYSTEM SERVICES</displayed-value>
+       <stored-value>ECOSYSTEM SERVICES</stored-value>
+     </pair>
+	 
+	<pair>
+       <displayed-value>ENVIRONMENT</displayed-value>
+       <stored-value>ENVIRONMENT</stored-value>
+     </pair>
+	 
+     <pair>
+       <displayed-value>EVALUATION</displayed-value>
+       <stored-value>EVALUATION</stored-value>
+     </pair>
+
+
+ 	  <pair>
+       <displayed-value>EXPERIMENT</displayed-value>
+       <stored-value>EXPERIMENT</stored-value>
+     </pair>
+
+	  <pair>
+       <displayed-value>FARM MANAGEMENT</displayed-value>
+       <stored-value>FARM MANAGEMENT</stored-value>
+     </pair>
+	 
+	   <pair>
+       <displayed-value>FARMING SYSTEMS</displayed-value>
+       <stored-value>FARMING SYSTEMS</stored-value>
+     </pair>
+	 
+	  <pair>
+       <displayed-value>FIELD MANUAL</displayed-value>
+       <stored-value>FIELD MANUAL</stored-value>
+     </pair>
+
+
+ 	  <pair>
+       <displayed-value>FIELD SITE</displayed-value>
+       <stored-value>FIELD SITE</stored-value>
+     </pair>
+
+	  <pair>
+       <displayed-value>FLAGSHIP PROJECTS</displayed-value>
+       <stored-value>FLAGSHIP PROJECTS</stored-value>
+     </pair>
+	 
+	 <pair>
+       <displayed-value>FOOD SECURITY</displayed-value>
+       <stored-value>FOOD SECURITY</stored-value>
+     </pair>
+	 
+	  <pair>
+       <displayed-value>FORAGES</displayed-value>
+       <stored-value>FORAGES</stored-value>
+     </pair>
+	 
+	 <pair>
+       <displayed-value>FORESIGHT</displayed-value>
+       <stored-value>FORESIGHT</stored-value>
+     </pair>
+	 
+	  <pair>
+       <displayed-value>GENDER</displayed-value>
+       <stored-value>GENDER</stored-value>
+     </pair>
+	 
+	 
+	   <pair>
+       <displayed-value>GLOBAL SYNTHESIS</displayed-value>
+       <stored-value>GLOBAL SYNTHESIS</stored-value>
+     </pair>
+	 
+	<pair>
+       <displayed-value>GUIDELINES</displayed-value>
+       <stored-value>GUIDELINES</stored-value>
+     </pair>
+
+
+ 	  <pair>
+       <displayed-value>HUMIDTROPICS</displayed-value>
+       <stored-value>HUMIDTROPICS</stored-value>
+     </pair>
+
+	  <pair>
+       <displayed-value>IMPACT</displayed-value>
+       <stored-value>IMPACT</stored-value>
+     </pair>
+	 
+	   <pair>
+       <displayed-value>IMPACT PATHWAYS</displayed-value>
+       <stored-value>IMPACT PATHWAYS</stored-value>
+     </pair>
+	 
+	  <pair>
+       <displayed-value>INCOME</displayed-value>
+       <stored-value>INCOME</stored-value>
+     </pair>
+
+
+ 	  <pair>
+       <displayed-value>INCUBATORS AND NICHES</displayed-value>
+       <stored-value>INCUBATORS AND NICHES</stored-value>
+     </pair>
+
+	  <pair>
+       <displayed-value>INDEPENDENT ADVISORY COMMITTEE</displayed-value>
+       <stored-value>INDEPENDENT ADVISORY COMMITTEE</stored-value>
+     </pair>
+	 
+	 <pair>
+       <displayed-value>INNOVATION</displayed-value>
+       <stored-value>INNOVATION</stored-value>
+     </pair>
+	 
+	  <pair>
+       <displayed-value>INNOVATION PLATFORM</displayed-value>
+       <stored-value>INNOVATION PLATFORM</stored-value>
+     </pair>
+	 
+	 <pair>
+       <displayed-value>INPUTS</displayed-value>
+       <stored-value>INPUTS</stored-value>
+     </pair>
+	 
+	  <pair>
+       <displayed-value>INTEGRATED SYSTEMS</displayed-value>
+       <stored-value>INTEGRATED SYSTEMS</stored-value>
+     </pair>	 
+	 
+	   <pair>
+       <displayed-value>INTEGRATED SYSTEMS IMPROVEMENT</displayed-value>
+       <stored-value>INTEGRATED SYSTEMS IMPROVEMENT</stored-value>
+     </pair>
+	 
+	 <pair>
+       <displayed-value>INTENSIFICATION</displayed-value>
+       <stored-value>INTENSIFICATION</stored-value>
+     </pair>
+	 
+	  <pair>
+       <displayed-value>INTERMEDIATE DEVELOPMENT OUTCOMES</displayed-value>
+       <stored-value>INTERMEDIATE DEVELOPMENT OUTCOMES</stored-value>
+     </pair>	 
+	 
+	 
+	   <pair>
+       <displayed-value>KNOWLEDGE-BASED NETWORK</displayed-value>
+       <stored-value>KNOWLEDGE-BASED NETWORK</stored-value>
+     </pair>
+	 
+	 <pair>
+       <displayed-value>KNOWLEDGE AND INFORMATION</displayed-value>
+       <stored-value>KNOWLEDGE AND INFORMATION</stored-value>
+     </pair>
+	 
+	  <pair>
+       <displayed-value>LAND</displayed-value>
+       <stored-value>LAND</stored-value>
+     </pair>	 
+	 
+	 
+	 <pair>
+       <displayed-value>LANDSCAPE</displayed-value>
+       <stored-value>LANDSCAPE</stored-value>
+     </pair>	 
+	 
+	 
+	   <pair>
+       <displayed-value>LIVELIHOODS</displayed-value>
+       <stored-value>LIVELIHOODS</stored-value>
+     </pair>
+	 
+	 <pair>
+       <displayed-value>LIVESTOCK</displayed-value>
+       <stored-value>LIVESTOCK</stored-value>
+     </pair>
+	 
+	  <pair>
+       <displayed-value>MARKETS</displayed-value>
+       <stored-value>MARKETS</stored-value>
+     </pair>	 
+	 
+	<pair>
+       <displayed-value>MAINSTREAMING</displayed-value>
+       <stored-value>MAINSTREAMING</stored-value>
+     </pair>	 
+	 
+	 
+	 <pair>
+       <displayed-value>MEN</displayed-value>
+       <stored-value>MEN</stored-value>
+     </pair>	 
+	 
+	 
+	   <pair>
+       <displayed-value>METHODS AND TOOLS</displayed-value>
+       <stored-value>METHODS AND TOOLS</stored-value>
+     </pair>
+	 
+	 <pair>
+       <displayed-value>MODELS</displayed-value>
+       <stored-value>MODELS</stored-value>
+     </pair>
+	 
+	  <pair>
+       <displayed-value>MODELLING</displayed-value>
+       <stored-value>MODELLING</stored-value>
+     </pair>	  
+	 
+	 
+	  <pair>
+       <displayed-value>MONITORING</displayed-value>
+       <stored-value>MONITORING</stored-value>
+     </pair>	 
+	 
+	<pair>
+       <displayed-value>NATURAL RESOURCE MANAGEMENT</displayed-value>
+       <stored-value>NATURAL RESOURCE MANAGEMENT</stored-value>
+     </pair>	 
+	 
+	 
+	 <pair>
+       <displayed-value>NUTRITION</displayed-value>
+       <stored-value>NUTRITION</stored-value>
+     </pair>	 
+	 
+	 
+	   <pair>
+       <displayed-value>PARTNERSHIPS</displayed-value>
+       <stored-value>PARTNERSHIPS</stored-value>
+     </pair>
+	 
+	 <pair>
+       <displayed-value>PESTS</displayed-value>
+       <stored-value>PESTS</stored-value>
+     </pair>
+	 
+	  <pair>
+       <displayed-value>POLICY</displayed-value>
+       <stored-value>POLICY</stored-value>
+     </pair>	  
+	 
+ 
+	  <pair>
+       <displayed-value>POLICY ENVIRONMENT</displayed-value>
+       <stored-value>POLICY ENVIRONMENT</stored-value>
+     </pair>	 
+	 
+	<pair>
+       <displayed-value>POVERTY</displayed-value>
+       <stored-value>POVERTY</stored-value>
+     </pair>	 
+	 
+	 
+	 <pair>
+       <displayed-value>PRODUCTION SYSTEMS</displayed-value>
+       <stored-value>PRODUCTION SYSTEMS</stored-value>
+     </pair>	 
+	 
+	 
+	   <pair>
+       <displayed-value>PRODUCTIVITY</displayed-value>
+       <stored-value>PRODUCTIVITY</stored-value>
+     </pair>
+	 
+	 <pair>
+       <displayed-value>PROPOSALS</displayed-value>
+       <stored-value>PROPOSALS</stored-value>
+     </pair>
+	 
+	  <pair>
+       <displayed-value>PUBLICATIONS</displayed-value>
+       <stored-value>PUBLICATIONS</stored-value>
+     </pair>	  
+	 	 
+	 
+	 
+	  <pair>
+       <displayed-value>R4DPLATFORM</displayed-value>
+       <stored-value>R4DPLATFORM</stored-value>
+     </pair>
+	 
+	 <pair>
+       <displayed-value>RESEARCH OUTPUTS</displayed-value>
+       <stored-value>RESEARCH OUTPUTS</stored-value>
+     </pair>
+	 
+	  <pair>
+       <displayed-value>RESEARCH OUTCOMES</displayed-value>
+       <stored-value>RESEARCH OUTCOMES</stored-value>
+     </pair>	  
+	 	 
+	 <pair>
+       <displayed-value>RESEARCH FOR DEVELOPMENT</displayed-value>
+       <stored-value>RESEARCH FOR DEVELOPMENT</stored-value>
+     </pair>
+	 
+	 <pair>
+       <displayed-value>RESULTS</displayed-value>
+       <stored-value>RESULTS</stored-value>
+     </pair>
+	 
+	  <pair>
+       <displayed-value>RESULTS-BASED MANAGEMENT</displayed-value>
+       <stored-value>RESULTS-BASED MANAGEMENT</stored-value>
+     </pair>	  
+	 
+	  <pair>
+       <displayed-value>REVIEWS</displayed-value>
+       <stored-value>REVIEWS</stored-value>
+     </pair>
+	 
+	 <pair>
+       <displayed-value>SCALING</displayed-value>
+       <stored-value>SCALING</stored-value>
+     </pair>
+	 
+	  <pair>
+       <displayed-value>SCALING AND INSTITUTIONAL INNOVATION</displayed-value>
+       <stored-value>SCALING AND INSTITUTIONAL INNOVATION</stored-value>
+     </pair>	  
+	 
+	 
+	  <pair>
+       <displayed-value>SOCIO-TECHNICAL REGIME</displayed-value>
+       <stored-value>SOCIO-TECHNICAL REGIME</stored-value>
+     </pair>
+	 
+	  <pair>
+       <displayed-value>SOILS</displayed-value>
+       <stored-value>SOILS</stored-value>
+     </pair>	  
+	 
+	  <pair>
+       <displayed-value>SOIL FERTILITY</displayed-value>
+       <stored-value>SOIL FERTILITY</stored-value>
+     </pair>
+	 
+	 <pair>
+       <displayed-value>STRATEGIC FRAMEWORK</displayed-value>
+       <stored-value>STRATEGIC FRAMEWORK</stored-value>
+     </pair>
+	 
+	  <pair>
+       <displayed-value>STRATEGIC RESEARCH THEMES</displayed-value>
+       <stored-value>STRATEGIC RESEARCH THEMES</stored-value>
+     </pair>	  
+	 
+	 <pair>
+       <displayed-value>SURVEY</displayed-value>
+       <stored-value>SURVEY</stored-value>
+     </pair>
+	 
+	  <pair>
+       <displayed-value>SUSTAINABILITY</displayed-value>
+       <stored-value>SUSTAINABILITY</stored-value>
+     </pair>	  
+	 
+	 
+	  <pair>
+       <displayed-value>SYSTEM LEVEL OUTCOMES</displayed-value>
+       <stored-value>SYSTEM LEVEL OUTCOMES</stored-value>
+     </pair>
+	 
+	  <pair>
+       <displayed-value>SYSTEMS PRODUCTIVITY</displayed-value>
+       <stored-value>SYSTEMS PRODUCTIVITY</stored-value>
+     </pair>	  
+	 
+	  <pair>
+       <displayed-value>SYSTEMS ANALYSIS AND SYNTHESIS</displayed-value>
+       <stored-value>SYSTEMS ANALYSIS AND SYNTHESIS</stored-value>
+     </pair>
+	 
+	 <pair>
+       <displayed-value>TECHNOLOGICAL ENVIRONMENT</displayed-value>
+       <stored-value>TECHNOLOGICAL ENVIRONMENT</stored-value>
+     </pair>
+	 
+	  <pair>
+       <displayed-value>TECHNOLOGIES</displayed-value>
+       <stored-value>TECHNOLOGIES</stored-value>
+     </pair>	  
+	 
+	  <pair>
+       <displayed-value>THEORY OF CHANGE</displayed-value>
+       <stored-value>THEORY OF CHANGE</stored-value>
+     </pair>	  
+	 
+	  <pair>
+       <displayed-value>TRADE-OFFS</displayed-value>
+       <stored-value>TRADE-OFFS</stored-value>
+     </pair>
+	 
+	 <pair>
+       <displayed-value>TRIAL</displayed-value>
+       <stored-value>TRIAL</stored-value>
+     </pair>
+	 
+	  <pair>
+       <displayed-value>TYPOLOGIES</displayed-value>
+       <stored-value>TYPOLOGIES</stored-value>
+     </pair>	  
+	 
+	   <pair>
+       <displayed-value>VALUE CHAINS</displayed-value>
+       <stored-value>VALUE CHAINS</stored-value>
+     </pair>	  
+	 
+	  <pair>
+       <displayed-value>VULNERABLE GROUPS</displayed-value>
+       <stored-value>VULNERABLE GROUPS</stored-value>
+     </pair>	  
+	 
+ </value-pairs>
+ 
+ 
+    <!--Ciat subject list Begins-->  
+ <value-pairs value-pairs-name="ciat" dc-term="subject_ciat">
+
+
+     <pair>
+       <displayed-value>AGROFORESTRY</displayed-value>
+       <stored-value>AGROFORESTRY</stored-value>
+     </pair>
+
+	<pair>
+       <displayed-value>BEANS</displayed-value>
+       <stored-value>BEANS</stored-value>
+     </pair>
+	 
+	<pair>
+       <displayed-value>BIODIVERSITY</displayed-value>
+       <stored-value>BIODIVERSITY</stored-value>
+     </pair> 
+
+     <pair>
+       <displayed-value>BIOFORTIFICATION</displayed-value>
+       <stored-value>BIOFORTIFICATION</stored-value>
+     </pair>
+
+	 <pair>
+       <displayed-value>CASSAVA</displayed-value>
+       <stored-value>CASSAVA</stored-value>
+     </pair>
+	 
+	  <pair>
+       <displayed-value>CLIMATE CHANGE ADAPTATION</displayed-value>
+       <stored-value>CLIMATE CHANGE ADAPTATION</stored-value>
+     </pair>
+	 
+	  <pair>
+       <displayed-value>CLIMATE CHANGE MITIGATION</displayed-value>
+       <stored-value>CLIMATE CHANGE MITIGATION</stored-value>
+     </pair>
+	 
+	  <pair>
+       <displayed-value>ECOSYSTEMS SERVICES</displayed-value>
+       <stored-value>ECOSYSTEMS SERVICES</stored-value>
+     </pair>
+	
+	 <pair>
+       <displayed-value>FARMING SYSTEMS</displayed-value>
+       <stored-value>FARMING SYSTEMS</stored-value>
+     </pair>
+	
+	 <pair>
+       <displayed-value>GENDER AND EQUITY</displayed-value>
+       <stored-value>GENETIC RESOURCES</stored-value>
+     </pair>
+	
+	
+	 <pair>
+       <displayed-value>GENETIC RESOURCES</displayed-value>
+       <stored-value>GENETIC RESOURCES</stored-value>
+     </pair>
+	
+ 	 
+
+	<pair>
+       <displayed-value>IMPACT ASSESSMENT</displayed-value>
+       <stored-value>IMPACT ASSESSMENT</stored-value>
+     </pair>
+
+
+   <pair>
+       <displayed-value>KNOWLEDGE MANAGEMENT</displayed-value>
+       <stored-value>KNOWLEDGE MANAGEMENT</stored-value>
+   </pair>
+
+
+  <pair>
+       <displayed-value>LAND USE</displayed-value>
+       <stored-value>LAND USE</stored-value>
+     </pair>
+	 
+	<pair>
+       <displayed-value>LIVELIHOODS</displayed-value>
+       <stored-value>LIVELIHOODS</stored-value>
+ </pair> 	 
+
+ <pair>
+       <displayed-value>LIVESTOCK</displayed-value>
+       <stored-value>LIVESTOCK</stored-value>
+ </pair>
+ 
+ 
+ 
+	<pair>
+       <displayed-value>MARKETS</displayed-value>
+       <stored-value>MARKETS</stored-value>
+     </pair>
+
+	<pair>
+       <displayed-value>MONITORING AND REPORTING</displayed-value>
+       <stored-value>MONITORING AND REPORTING</stored-value>
+     </pair> 
+	 
+     <pair>
+       <displayed-value>NUTRITION</displayed-value>
+       <stored-value>NUTRITION</stored-value>
+     </pair> 
+
+  <pair>
+       <displayed-value>PARTICIPATORY RESEARCH</displayed-value>
+       <stored-value>PARTICIPATORY RESEARCH</stored-value>
+     </pair> 
+
+
+<pair>
+       <displayed-value>PESTS AND DISEASES</displayed-value>
+       <stored-value>PESTS AND DISEASES</stored-value>
+ </pair> 	 
+
+<pair>
+       <displayed-value>PLANT BREEDING</displayed-value>
+       <stored-value>PLANT BREEDING</stored-value>
+ </pair> 	
+
+<pair>
+       <displayed-value>POLICY</displayed-value>
+       <stored-value>POLICY</stored-value>
+ </pair> 
+
+ <pair>
+       <displayed-value>RICE</displayed-value>
+       <stored-value>RICE</stored-value>
+ </pair>
+
+  <pair>
+       <displayed-value>SEED SYSTEMS</displayed-value>
+       <stored-value>SEED SYSTEMS</stored-value>
+ </pair>
+ 
+ 
+ 
+	<pair>
+       <displayed-value>SOIL HEALTH</displayed-value>
+       <stored-value>SOIL HEALTH</stored-value>
+     </pair>
+
+	<pair>
+       <displayed-value>SOIL INFORMATION</displayed-value>
+       <stored-value>SOIL INFORMATION</stored-value>
+     </pair>
+
+<pair>
+       <displayed-value>SOIL LANDSCAPES</displayed-value>
+       <stored-value>SOIL LANDSCAPES</stored-value>
+</pair>	 
+	 
+<pair>
+       <displayed-value>SOIL LANDSCAPES</displayed-value>
+       <stored-value>SOIL LANDSCAPES</stored-value>
+</pair>		 
+	 
+
+<pair>
+       <displayed-value>TROPICAL FORAGES</displayed-value>
+       <stored-value>TROPICAL FORAGES</stored-value>
+ </pair> 
+
+<pair>
+       <displayed-value>WATER</displayed-value>
+       <stored-value>WATER</stored-value>
+ </pair> 
+
+  
+</value-pairs>
+
+
     <value-pairs value-pairs-name="anancy" dc-term="subject_anancy">
       <pair>
         <displayed-value>AGRICULTURE - GENERAL</displayed-value>
