@@ -131,6 +131,26 @@
           <hint>Enter the names of the authors of this item below.</hint>
           <required></required>
         </field>
+        
+        <field>
+          <dc-schema>dc</dc-schema>
+          <dc-element>contributor</dc-element>
+          <dc-qualifier>corporate</dc-qualifier>
+          <repeatable>true</repeatable>
+          <label>Authors</label>
+          <input-type>name</input-type>
+          <hint>Enter the names of the Corporate authors of this item below.</hint>
+          <required></required>
+        </field>
+        <field>
+          <dc-schema>dc</dc-schema>
+          <dc-element>contributor</dc-element>
+          <dc-qualifier>affiliation</dc-qualifier>
+          <repeatable>true</repeatable>
+          <label>Affiliation</label>
+          <input-type>name</input-type>
+          <required></required> 
+          </field>
         <field>
           <dc-schema>dc</dc-schema>
           <dc-element>title</dc-element>
@@ -295,6 +315,25 @@
           <input-type>onebox</input-type>
           <required></required>
         </field>
+         <field>
+          <dc-schema>dc</dc-schema>
+          <dc-element>description</dc-element>
+          <dc-qualifier>version</dc-qualifier>
+          <repeatable>false</repeatable>
+          <label>Peer status</label>
+          <input-type>onebox</input-type>
+          <required></required>
+        </field>
+         <field>
+          <dc-schema>dc</dc-schema>
+          <dc-element>format</dc-element>
+          <dc-qualifier>extent</dc-qualifier>
+          <repeatable>false</repeatable>
+          <label>Pagination</label>
+          <input-type>onebox</input-type>
+          <required></required>
+        </field>
+        
         <field>
           <dc-schema>dc</dc-schema>
           <dc-element>title</dc-element>
