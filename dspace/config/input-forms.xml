@@ -1693,7 +1693,7 @@
           <hint>Enter the series and number assigned to this item by your community.</hint>
           <required></required>
         </field>
-        <field>
+        <field>      
           <dc-schema>dc</dc-schema>
           <dc-element>identifier</dc-element>
           <dc-qualifier></dc-qualifier>
@@ -3363,8 +3363,8 @@
         <stored-value>GUIDELINES</stored-value>
       </pair>
       <pair>
-        <displayed-value>HUMIDTROPICS</displayed-value>
-        <stored-value>HUMIDTROPICS</stored-value>
+        <displayed-value>HUMID TROPICS</displayed-value>
+        <stored-value>HUMID TROPICS</stored-value>
       </pair>
       <pair>
         <displayed-value>IMPACT</displayed-value>
