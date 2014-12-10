@@ -37,19 +37,17 @@
         <property name="map">
             <map>
                 <!--The map containing all the settings,
-                     the key is used to refer to the page (the "site" or a community/collection handle)
-                     the value-ref is a reference to an identifier of the DiscoveryConfiguration format
+                    the key is used to refer to the page (the "site" or a community/collection handle)
+                    the value-ref is a reference to an identifier of the DiscoveryConfiguration format
                     -->
                 <!--The default entry, DO NOT REMOVE the system requires this-->
-                <entry key="default" value-ref="defaultConfiguration" />
-                <entry key="general_cua" value-ref="cuaConfig"/>
+               <entry key="default" value-ref="defaultConfiguration" />
 
-                <!--Use site to override the default configuration for the home page & default discovery page-->
-                <entry key="site" value-ref="homepageConfiguration" />
-                <!--<entry key="123456789/7621" value-ref="defaultConfiguration"/>-->
+               <!--Use site to override the default configuration for the home page & default discovery page-->
+               <entry key="site" value-ref="homepageConfiguration" />
+               <!--<entry key="123456789/7621" value-ref="defaultConfiguration"/>-->
             </map>
         </property>
-
         <property name="toIgnoreMetadataFields">
             <map>
                 <entry>
@@ -98,19 +96,48 @@
         <property name="sidebarFacets">
             <list>
                 <ref bean="searchFilterAuthor" />
-                <ref bean="searchFilterSubject" />
-                <ref bean="searchFilterCrpsubject" />
                 <ref bean="searchFilterIssued" />
+				<ref bean="searchFiltertype" />
+				<ref bean="searchFilterCRP" />
+				<ref bean="searchFilterRegion" />
+				<ref bean="searchFilterCountry" />
+				<ref bean="searchFilterSubject" />
+				<ref bean="searchFilterBioversitySubject"/>
+				<ref bean="searchFilterCcafSubject"/>
+                <ref bean="searchFilterCiatSubject"/>
+				<ref bean="searchFilterCiforSubject"/>
+				<ref bean="searchFilterCipSubject"/>
+				<ref bean="searchFilterCtaSubject"/>
+				<ref bean="searchFilterDrylandsSubject"/>
+				<ref bean="searchFilterIcardaSubject"/>
+				<ref bean="searchFilterIlriSubject"/>
+				<ref bean="searchFilterIwmiSubject"/>
+				<ref bean="searchFilterHumidtropicsSubject"/>
+				<ref bean="searchFilterWleSubject"/>
             </list>
         </property>
         <!--The search filters which can be used on the discovery search page-->
         <property name="searchFilters">
             <list>
-                <ref bean="searchFilterTitle" />
                 <ref bean="searchFilterAuthor" />
-                <ref bean="searchFilterSubject" />
-                <ref bean="searchFilterCrpsubject" />
                 <ref bean="searchFilterIssued" />
+				<ref bean="searchFiltertype" />
+				<ref bean="searchFilterCRP" />
+				<ref bean="searchFilterRegion" />
+				<ref bean="searchFilterCountry" />
+				<ref bean="searchFilterSubject" />
+				<ref bean="searchFilterBioversitySubject"/>
+				<ref bean="searchFilterCcafSubject"/>
+                <ref bean="searchFilterCiatSubject"/>
+				<ref bean="searchFilterCiforSubject"/>
+				<ref bean="searchFilterCipSubject"/>
+				<ref bean="searchFilterCtaSubject"/>
+				<ref bean="searchFilterDrylandsSubject"/>
+				<ref bean="searchFilterIcardaSubject"/>
+				<ref bean="searchFilterIlriSubject"/>
+				<ref bean="searchFilterIwmiSubject"/>
+				<ref bean="searchFilterHumidtropicsSubject"/>
+				<ref bean="searchFilterWleSubject"/>
             </list>
         </property>
         <!--The sort filters for the discovery search-->
@@ -139,7 +166,7 @@
             <bean class="org.dspace.discovery.configuration.DiscoveryRecentSubmissionsConfiguration">
                 <property name="metadataSortField" value="dc.date.accessioned" />
                 <property name="type" value="date"/>
-                <property name="max" value="5"/>
+                <property name="max" value="20"/>
                 <!-- If enabled the collection home page will not display metadata but show a pageable list of recent submissions -->
                 <property name="useAsHomePage" value="false"/>
             </bean>
@@ -202,19 +229,49 @@
         <!--Which sidebar facets are to be displayed (same as defaultConfiguration above)-->
         <property name="sidebarFacets">
             <list>
-                <ref bean="searchFilterAuthor" />
-                <ref bean="searchFilterSubject" />
+               <ref bean="searchFilterAuthor" />
                 <ref bean="searchFilterIssued" />
+				<ref bean="searchFiltertype" />
+				<ref bean="searchFilterCRP" />
+				<ref bean="searchFilterRegion" />
+				<ref bean="searchFilterCountry" />
+				<ref bean="searchFilterSubject" />
+				<ref bean="searchFilterBioversitySubject"/>
+				<ref bean="searchFilterCcafSubject"/>
+                <ref bean="searchFilterCiatSubject"/>
+				<ref bean="searchFilterCiforSubject"/>
+				<ref bean="searchFilterCipSubject"/>
+				<ref bean="searchFilterCtaSubject"/>
+				<ref bean="searchFilterDrylandsSubject"/>
+				<ref bean="searchFilterIcardaSubject"/>
+				<ref bean="searchFilterIlriSubject"/>
+				<ref bean="searchFilterIwmiSubject"/>
+				<ref bean="searchFilterHumidtropicsSubject"/>
+				<ref bean="searchFilterWleSubject"/>
             </list>
         </property>
         <!--The search filters which can be used on the discovery search page (same as defaultConfiguration above)-->
         <property name="searchFilters">
             <list>
-                <ref bean="searchFilterTitle" />
-                <ref bean="searchFilterAuthor" />
-                <ref bean="searchFilterSubject" />
-                <ref bean="searchFilterCrpsubject" />
+               <ref bean="searchFilterAuthor" />
                 <ref bean="searchFilterIssued" />
+				<ref bean="searchFiltertype" />
+				<ref bean="searchFilterCRP" />
+				<ref bean="searchFilterRegion" />
+				<ref bean="searchFilterCountry" />
+				<ref bean="searchFilterSubject" />
+				<ref bean="searchFilterBioversitySubject"/>
+				<ref bean="searchFilterCcafSubject"/>
+                <ref bean="searchFilterCiatSubject"/>
+				<ref bean="searchFilterCiforSubject"/>
+				<ref bean="searchFilterCipSubject"/>
+				<ref bean="searchFilterCtaSubject"/>
+				<ref bean="searchFilterDrylandsSubject"/>
+				<ref bean="searchFilterIcardaSubject"/>
+				<ref bean="searchFilterIlriSubject"/>
+				<ref bean="searchFilterIwmiSubject"/>
+				<ref bean="searchFilterHumidtropicsSubject"/>
+				<ref bean="searchFilterWleSubject"/>
             </list>
         </property>
         <!--The sort filters for the discovery search (same as defaultConfiguration above)-->
@@ -229,6 +286,15 @@
                         <ref bean="sortDateIssued" />
                     </list>
                 </property>
+            </bean>
+        </property>
+        <!-- Limit recent submissions on homepage to only 5 (default is 20) -->
+        <property name="recentSubmissionConfiguration">
+            <bean class="org.dspace.discovery.configuration.DiscoveryRecentSubmissionsConfiguration">
+                <property name="metadataSortField" value="dc.date.accessioned" />
+                <property name="type" value="date"/>
+                <property name="max" value="5"/>
+                <property name="useAsHomePage" value="false"/>
             </bean>
         </property>
         <property name="hitHighlightingConfiguration">
@@ -262,16 +328,8 @@
     </bean>
 
     <!--Search filter configuration beans-->
-    <bean id="searchFilterTitle" class="org.dspace.discovery.configuration.DiscoverySearchFilter">
-        <property name="indexFieldName" value="title"/>
-        <property name="metadataFields">
-            <list>
-                <value>dc.title</value>
-            </list>
-        </property>
-    </bean>
-
-    <bean id="searchFilterAuthor" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
+	
+	<bean id="searchFilterAuthor" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
         <property name="indexFieldName" value="author"/>
         <property name="metadataFields">
             <list>
@@ -279,21 +337,11 @@
                 <value>dc.creator</value>
             </list>
         </property>
-        <property name="facetLimit" value="10"/>
+        <property name="facetLimit" value="5"/>
         <property name="sortOrder" value="COUNT"/>
     </bean>
 
-    <bean id="searchFilterSubject" class="org.dspace.discovery.configuration.HierarchicalSidebarFacetConfiguration">
-        <property name="indexFieldName" value="subject"/>
-        <property name="metadataFields">
-            <list>
-                <value>dc.subject.*</value>
-            </list>
-        </property>
-        <property name="facetLimit" value="10"/>
-        <property name="sortOrder" value="COUNT"/>
-        <property name="splitter" value="::"/>
-    </bean>
+    
 
     <bean id="searchFilterIssued" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
         <property name="indexFieldName" value="dateIssued"/>
@@ -305,217 +353,204 @@
         <property name="type" value="date"/>
         <property name="sortOrder" value="VALUE"/>
     </bean>
-
-    <bean id="searchFilterStatus" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
-        <property name="indexFieldName" value="status"/>
-        <property name="metadataFields">
-            <list>
-                <value>dc.identifier.status</value>
-            </list>
-        </property>
-        <property name="facetLimit" value="10"/>
-        <property name="sortOrder" value="COUNT"/>
-    </bean>
-
-    <bean id="searchFilterDateAccessioned" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
-        <property name="indexFieldName" value="dateAccessioned"/>
-        <property name="metadataFields">
-            <list>
-                <value>dc.date.accessioned</value>
-            </list>
-        </property>
-        <property name="facetLimit" value="10"/>
-        <property name="sortOrder" value="COUNT"/>
-    </bean>
-
-    <bean id="searchFilterISIJournal" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
-        <property name="indexFieldName" value="isijournal"/>
-        <property name="metadataFields">
-            <list>
-                <value>dc.isijournal.*</value>
-            </list>
-        </property>
-        <property name="facetLimit" value="10"/>
-        <property name="sortOrder" value="COUNT"/>
-    </bean>
-
-    <bean id="searchFilterIlriSubject" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
-        <property name="indexFieldName" value="ilrisubject"/>
-        <property name="metadataFields">
-            <list>
-                <value>dc.isubject.*</value>
-            </list>
-        </property>
-        <property name="facetLimit" value="10"/>
-        <property name="sortOrder" value="COUNT"/>
-    </bean>
-
-    <bean id="searchFilterCpwfSubject" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
-        <property name="indexFieldName" value="cpwfsubject"/>
-        <property name="metadataFields">
-            <list>
-                <value>dc.cpsubject.*</value>
-            </list>
-        </property>
-        <property name="facetLimit" value="10"/>
-        <property name="sortOrder" value="COUNT"/>
-    </bean>
-
-    <bean id="searchFilterCcafSubject" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
-        <property name="indexFieldName" value="ccafsubject"/>
-        <property name="metadataFields">
-            <list>
-                <value>dc.ccsubject.*</value>
-            </list>
-        </property>
-        <property name="facetLimit" value="10"/>
-        <property name="sortOrder" value="COUNT"/>
-    </bean>
-
-    <bean id="searchFilterCiforSubject" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
-        <property name="indexFieldName" value="ciforsubject"/>
-        <property name="metadataFields">
-            <list>
-                <value>dc.cisubject.*</value>
-            </list>
-        </property>
-        <property name="facetLimit" value="10"/>
-        <property name="sortOrder" value="COUNT"/>
-    </bean>
-
-    <bean id="searchFilterIwmiSubject" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
-        <property name="indexFieldName" value="iwmisubject"/>
-        <property name="metadataFields">
-            <list>
-                <value>dc.iwsubject.*</value>
-            </list>
-        </property>
-        <property name="facetLimit" value="10"/>
-        <property name="sortOrder" value="COUNT"/>
-    </bean>
-
-    <bean id="searchFilterRegion" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
-        <property name="indexFieldName" value="region"/>
-        <property name="metadataFields">
-            <list>
-                <value>dc.rplace.*</value>
-            </list>
-        </property>
-        <property name="facetLimit" value="10"/>
-        <property name="sortOrder" value="COUNT"/>
-    </bean>
-
-    <bean id="searchFilterCountry" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
-        <property name="indexFieldName" value="country"/>
-        <property name="metadataFields">
-            <list>
-                <value>dc.cplace.*</value>
-            </list>
-        </property>
-        <property name="facetLimit" value="10"/>
-        <property name="sortOrder" value="COUNT"/>
-    </bean>
-
-    <bean id="searchFilterSubregion" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
-        <property name="indexFieldName" value="subregion"/>
-        <property name="metadataFields">
-            <list>
-                <value>dc.srplace.*</value>
-            </list>
-        </property>
-        <property name="facetLimit" value="10"/>
-        <property name="sortOrder" value="COUNT"/>
-    </bean>
-
-    <bean id="searchFilterCrpsubject" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
-        <property name="indexFieldName" value="crpsubject"/>
-        <property name="metadataFields">
-            <list>
-                <value>dc.crsubject.*</value>
-            </list>
-        </property>
-        <property name="facetLimit" value="10"/>
-        <property name="sortOrder" value="COUNT"/>
-    </bean>
-
-    <bean id="searchFilterBasin" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
-        <property name="indexFieldName" value="basin"/>
-        <property name="metadataFields">
-            <list>
-                <value>dc.river.*</value>
-            </list>
-        </property>
-        <property name="facetLimit" value="10"/>
-        <property name="sortOrder" value="COUNT"/>
-    </bean>
-
-    <bean id="searchFilterOutput" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
+	
+ <bean id="searchFiltertype" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
         <property name="indexFieldName" value="output"/>
         <property name="metadataFields">
             <list>
-                <value>dc.type.*</value>
+                <value>dc.type.output</value>
             </list>
         </property>
-        <property name="facetLimit" value="10"/>
+        <property name="facetLimit" value="5"/>
         <property name="sortOrder" value="COUNT"/>
-    </bean>
-
-    <bean id="searchFilterCta" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
-        <property name="indexFieldName" value="cta"/>
+     </bean>
+	 
+<bean id="searchFilterCRP" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
+        <property name="indexFieldName" value="crpsubject"/>
         <property name="metadataFields">
             <list>
-                <value>cg.subject.cta</value>
+                <value>dc.crsubject.crpsubject</value>
             </list>
         </property>
-        <property name="facetLimit" value="10"/>
+        <property name="facetLimit" value="5"/>
         <property name="sortOrder" value="COUNT"/>
-    </bean>
+    </bean>	 
+	 
 
-    <bean id="searchFilterWlesubject" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
-        <property name="indexFieldName" value="wlesubject"/>
+<bean id="searchFilterRegion" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
+        <property name="indexFieldName" value="region"/>
         <property name="metadataFields">
             <list>
-                <value>cg.subject.wle</value>
+                <value>dc.rplace.region</value>
             </list>
         </property>
-        <property name="facetLimit" value="10"/>
+        <property name="facetLimit" value="5"/>
         <property name="sortOrder" value="COUNT"/>
-    </bean>
+        </bean>
 
-    <bean id="searchFilterBioversity" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
+
+<bean id="searchFilterCountry" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
+        <property name="indexFieldName" value="country"/>
+        <property name="metadataFields">
+            <list>
+                <value>dc.cplace.country</value>
+            </list>
+        </property>
+        <property name="facetLimit" value="5"/>
+        <property name="sortOrder" value="COUNT"/>
+       </bean>
+	   
+<bean id="searchFilterSubject" class="org.dspace.discovery.configuration.HierarchicalSidebarFacetConfiguration">
+        <property name="indexFieldName" value="subject"/>
+        <property name="metadataFields">
+            <list>
+                <value>dc.subject.*</value>
+            </list>
+        </property>
+        <property name="facetLimit" value="5"/>
+        <property name="sortOrder" value="COUNT"/>
+        <property name="splitter" value="::"/>
+ </bean>	
+     <!--Search filter since Nov 8 2014-->
+ 
+ <bean id="searchFilterBioversitySubject" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
         <property name="indexFieldName" value="bioversity"/>
         <property name="metadataFields">
             <list>
                 <value>cg.subject.bioversity</value>
             </list>
         </property>
-        <property name="facetLimit" value="10"/>
+        <property name="facetLimit" value="5"/>
         <property name="sortOrder" value="COUNT"/>
-    </bean>
-
-    <bean id="searchFilterCiat" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
+ </bean>
+ 
+ <bean id="searchFilterCcafSubject" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
+        <property name="indexFieldName" value="ccafsubject"/>
+        <property name="metadataFields">
+            <list>
+                <value>cg.ccsubject.ccafsubject</value>
+            </list>
+        </property>
+        <property name="facetLimit" value="5"/>
+        <property name="sortOrder" value="COUNT"/>
+       </bean>
+ 
+ 
+ <bean id="searchFilterCiatSubject" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
         <property name="indexFieldName" value="ciat"/>
         <property name="metadataFields">
             <list>
                 <value>cg.subject.ciat</value>
             </list>
         </property>
-        <property name="facetLimit" value="10"/>
+        <property name="facetLimit" value="5"/>
         <property name="sortOrder" value="COUNT"/>
-    </bean>
-
-    <bean id="searchFilterHumidtropics" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
+       </bean>
+  
+ <bean id="searchFilterCiforSubject" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
+        <property name="indexFieldName" value="ciforsubject"/>
+        <property name="metadataFields">
+            <list>
+                <value>dc.cisubject.ciforsubject</value>
+            </list>
+        </property>
+        <property name="facetLimit" value="5"/>
+        <property name="sortOrder" value="COUNT"/>
+</bean>
+ 
+ 
+ 
+ <bean id="searchFilterCipSubject" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
+        <property name="indexFieldName" value="cip"/>
+        <property name="metadataFields">
+            <list>
+                <value>cg.subject.cip</value>
+            </list>
+        </property>
+        <property name="facetLimit" value="5"/>
+        <property name="sortOrder" value="COUNT"/>
+       </bean>
+ 
+ 
+ <bean id="searchFilterCtaSubject" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
+        <property name="indexFieldName" value="cta"/>
+        <property name="metadataFields">
+            <list>
+                <value>cg.subject.cta</value>
+            </list>
+        </property>
+        <property name="facetLimit" value="5"/>
+        <property name="sortOrder" value="COUNT"/>
+       </bean>
+ 
+ 
+ <bean id="searchFilterDrylandsSubject" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
+        <property name="indexFieldName" value="drylands"/>
+        <property name="metadataFields">
+            <list>
+                <value>cg.subject.drylands</value>
+            </list>
+        </property>
+        <property name="facetLimit" value="5"/>
+        <property name="sortOrder" value="COUNT"/>
+       </bean>
+ 
+ <bean id="searchFilterIcardaSubject" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
+        <property name="indexFieldName" value="icarda"/>
+        <property name="metadataFields">
+            <list>
+                <value>cg.subject.icarda</value>
+            </list>
+        </property>
+        <property name="facetLimit" value="5"/>
+        <property name="sortOrder" value="COUNT"/>
+       </bean>
+ 
+ <bean id="searchFilterIlriSubject" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
+        <property name="indexFieldName" value="ilrisubject"/>
+        <property name="metadataFields">
+            <list>
+                <value>cg.isubject.ilrisubject</value>
+            </list>
+        </property>
+        <property name="facetLimit" value="5"/>
+        <property name="sortOrder" value="COUNT"/>
+       </bean>
+ 
+ <bean id="searchFilterIwmiSubject" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
+        <property name="indexFieldName" value="iwmisubject"/>
+        <property name="metadataFields">
+            <list>
+                <value>dc.iwsubject.iwmisubject</value>
+            </list>
+        </property>
+        <property name="facetLimit" value="5"/>
+        <property name="sortOrder" value="COUNT"/>
+       </bean>
+ 
+ <bean id="searchFilterHumidtropicsSubject" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
         <property name="indexFieldName" value="humidtropics"/>
         <property name="metadataFields">
             <list>
                 <value>cg.subject.humidtropics</value>
             </list>
         </property>
-        <property name="facetLimit" value="10"/>
+        <property name="facetLimit" value="5"/>
         <property name="sortOrder" value="COUNT"/>
-    </bean>
-
-    <!--Sort properties-->
+       </bean>
+ 
+<bean id="searchFilterWleSubject" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
+        <property name="indexFieldName" value="wle"/>
+        <property name="metadataFields">
+            <list>
+                <value>cg.subject.wle</value>
+            </list>
+        </property>
+        <property name="facetLimit" value="5"/>
+        <property name="sortOrder" value="COUNT"/>
+       </bean> 
+  
+ <!--Sort properties-->
     <bean id="sortTitle" class="org.dspace.discovery.configuration.DiscoverySortFieldConfiguration">
         <property name="metadataField" value="dc.title"/>
     </bean>
@@ -524,101 +559,5 @@
         <property name="metadataField" value="dc.date.issued"/>
         <property name="type" value="date"/>
     </bean>
-
-
-    <bean id="cuaConfig" class="org.dspace.discovery.configuration.DiscoveryConfiguration" scope="prototype">
-        <property name="id" value="cuaConfig"/>
-        <!--Which sidebar facets are to be displayed-->
-        <property name="sidebarFacets">
-            <list>
-                <ref bean="searchFilterAuthor"/>
-                <ref bean="searchFilterSubject"/>
-                <ref bean="searchFilterIssued"/>
-
-            </list>
-        </property>
-        <!--The search filters which can be used on the discovery search page-->
-        <property name="searchFilters">
-            <list>
-                <ref bean="searchFilterTitle"/>
-                <ref bean="searchFilterAuthor"/>
-                <ref bean="searchFilterSubject"/>
-                <ref bean="searchFilterIssued"/>
-                <ref bean="searchFilterDateAccessioned"/>
-                <ref bean="searchFilterStatus"/>
-
-                <ref bean="searchFilterLanguage"/>
-                <ref bean="searchFilterType"/>
-
-                <ref bean="searchFilterISIJournal"/>
-
-                <ref bean="searchFilterIlriSubject"/>
-                <ref bean="searchFilterCpwfSubject"/>
-                <ref bean="searchFilterCcafSubject"/>
-                <ref bean="searchFilterCiforSubject"/>
-                <ref bean="searchFilterIwmiSubject"/>
-                <ref bean="searchFilterRegion"/>
-                <ref bean="searchFilterCountry"/>
-                <ref bean="searchFilterSubregion"/>
-                <ref bean="searchFilterCrpsubject"/>
-                <ref bean="searchFilterBasin"/>
-                <ref bean="searchFilterOutput"/>
-                <ref bean="searchFilterCta"/>
-                <ref bean="searchFilterWlesubject"/>
-                <ref bean="searchFilterBioversity"/>
-                <ref bean="searchFilterCiat"/>
-                <ref bean="searchFilterHumidtropics"/>
-
-            </list>
-        </property>
-        <!--The sort filters for the discovery search-->
-        <property name="searchSortConfiguration">
-            <bean class="org.dspace.discovery.configuration.DiscoverySortConfiguration">
-                <!--<property name="defaultSort" ref="sortDateIssued"/>-->
-                <!--DefaultSortOrder can either be desc or asc (desc is default)-->
-                <property name="defaultSortOrder" value="desc"/>
-                <property name="sortFields">
-                    <list>
-                        <ref bean="sortTitle"/>
-                        <ref bean="sortDateIssued"/>
-                    </list>
-                </property>
-            </bean>
-        </property>
-
-        <property name="recentSubmissionConfiguration">
-            <bean class="org.dspace.discovery.configuration.DiscoveryRecentSubmissionsConfiguration">
-                <property name="metadataSortField" value="dc.date.accessioned"/>
-                <property name="type" value="date"/>
-                <property name="max" value="5"/>
-            </bean>
-        </property>
-
-
-
-    </bean>
-
-    <bean id="searchFilterLanguage" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
-        <property name="indexFieldName" value="iso"/>
-        <property name="metadataFields">
-            <list>
-                <value>dc.language.iso</value>
-
-            </list>
-        </property>
-        <property name="facetLimit" value="10"/>
-        <property name="sortOrder" value="COUNT"/>
-    </bean>
-
-    <bean id="searchFilterType" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
-        <property name="indexFieldName" value="type"/>
-        <property name="metadataFields">
-            <list>
-                <value>dc.type</value>
-
-            </list>
-        </property>
-        <property name="facetLimit" value="10"/>
-        <property name="sortOrder" value="COUNT"/>
-    </bean>
+    
 </beans>
