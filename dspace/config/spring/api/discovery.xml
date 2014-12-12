@@ -514,7 +514,38 @@
         <property name="facetLimit" value="10"/>
         <property name="sortOrder" value="COUNT"/>
     </bean>
-
+    <bean id="searchFilterCipSubject" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
+        <property name="indexFieldName" value="cip"/>
+        <property name="metadataFields">
+            <list>
+                <value>cg.subject.cip</value>
+            </list>
+        </property>
+        <property name="facetLimit" value="10"/>
+        <property name="sortOrder" value="COUNT"/>
+    </bean>
+	
+	<bean id="searchFilterDrylandsSubject" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
+        <property name="indexFieldName" value="drylands"/>
+        <property name="metadataFields">
+            <list>
+                <value>cg.subject.drylands</value>
+            </list>
+        </property>
+        <property name="facetLimit" value="10"/>
+        <property name="sortOrder" value="COUNT"/>
+    </bean>
+	
+	<bean id="searchFilterIcardaSubject" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
+        <property name="indexFieldName" value="icarda"/>
+        <property name="metadataFields">
+            <list>
+                <value>cg.subject.icarda</value>
+            </list>
+        </property>
+        <property name="facetLimit" value="10"/>
+        <property name="sortOrder" value="COUNT"/>
+    </bean>
     <!--Sort properties-->
     <bean id="sortTitle" class="org.dspace.discovery.configuration.DiscoverySortFieldConfiguration">
         <property name="metadataField" value="dc.title"/>
@@ -534,7 +565,25 @@
                 <ref bean="searchFilterAuthor"/>
                 <ref bean="searchFilterSubject"/>
                 <ref bean="searchFilterIssued"/>
-
+                <ref bean="searchFilterAuthor"/>
+				<ref bean="searchFilterIssued"/>
+                <ref bean="searchFilterType"/>
+				<ref bean="searchFilterCrpsubject"/>
+				<ref bean="searchFilterRegion"/>
+                <ref bean="searchFilterCountry"/>
+                <ref bean="searchFilterSubject"/>
+				<ref bean="searchFilterBioversity"/>
+                <ref bean="searchFilterCcafSubject"/>
+				<ref bean="searchFilterCiat"/> 
+				<ref bean="searchFilterCiforSubject"/>
+				<ref bean="searchFilterCipSubject"/>
+				<ref bean="searchFilterCta"/>
+				<ref bean="searchFilterDrylandsSubject"/>
+				<ref bean="searchFilterIcardaSubject"/>
+				<ref bean="searchFilterIlriSubject"/>
+				<ref bean="searchFilterIwmiSubject"/>
+				<ref bean="searchFilterHumidtropics"/>
+				<ref bean="searchFilterWlesubject"/> 
             </list>
         </property>
         <!--The search filters which can be used on the discovery search page-->
