@@ -35,7 +35,7 @@
              as it is used to reference the LICENSE_HEADER and *.properties file(s) in that directory. -->
         <root.basedir>${basedir}</root.basedir>
         <listings-and-reports.version.number>4.2-2.9.3-0</listings-and-reports.version.number>
-        <cua.version.number>4.2-3.1.4-0</cua.version.number>
+        <cua.version.number>4.2-3.1.10-0</cua.version.number>
     </properties>
 
     <build>
