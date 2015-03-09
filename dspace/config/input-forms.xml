@@ -2756,11 +2756,19 @@
         <stored-value>CBPP</stored-value>
       </pair>
       <pair>
+        <displayed-value>CHICKENS</displayed-value>
+        <stored-value>CHICKENS</stored-value>
+      </pair>
+      <pair>
         <displayed-value>CLIMATE CHANGE</displayed-value>
         <stored-value>CLIMATE CHANGE</stored-value>
       </pair>
+       <pair>
+      <displayed-value>COMMUNICATIONS</displayed-value>
+       <stored-value>COMMUNICATIONS</stored-value>
+      </pair>
       <pair>
-        <displayed-value>CONSUMPTION</displayed-value>
+      <displayed-value>CONSUMPTION</displayed-value>
         <stored-value>CONSUMPTION</stored-value>
       </pair>
       <pair>
@@ -2782,6 +2790,10 @@
       <pair>
         <displayed-value>DAIRYING</displayed-value>
         <stored-value>DAIRYING</stored-value>
+      </pair>
+       <pair>
+        <displayed-value>DATA</displayed-value>
+        <stored-value>DATA</stored-value>
       </pair>
       <pair>
         <displayed-value>DIAGNOSTICS</displayed-value>
@@ -2908,12 +2920,20 @@
         <stored-value>INSURANCE</stored-value>
       </pair>
       <pair>
+        <displayed-value>IRRIGATION</displayed-value>
+        <stored-value>IRRIGATION</stored-value>
+      </pair>
+      <pair>
         <displayed-value>KNOWLEDGE AND INFORMATION</displayed-value>
         <stored-value>KNOWLEDGE AND INFORMATION</stored-value>
       </pair>
-      <pair>
+       <pair>
         <displayed-value>LIVELIHOODS</displayed-value>
         <stored-value>LIVELIHOODS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>LEGUMES</displayed-value>
+        <stored-value>LEGUMES</stored-value>
       </pair>
       <pair>
         <displayed-value>LIVESTOCK</displayed-value>
