@@ -928,6 +928,16 @@
         </field>
         <field>
           <dc-schema>dc</dc-schema>
+          <dc-element>contributor</dc-element>
+          <dc-qualifier>affiliation</dc-qualifier>
+          <repeatable>false</repeatable>
+          <label>Affilation</label>
+          <input-type>onebox</input-type>
+          <hint>Enter Affiliation.</hint>
+          <required></required>
+        </field>
+        <field>
+          <dc-schema>dc</dc-schema>
           <dc-element>Species</dc-element>
           <dc-qualifier>animal</dc-qualifier>
           <repeatable>true</repeatable>
