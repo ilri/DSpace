@@ -1,4 +1,5 @@
 #!/bin/bash
+#Add commit!
 
 # rudimentary strip of .properties from end of 1st argument
 # mostly because I ./build.sh blah<tab> to complete the site
