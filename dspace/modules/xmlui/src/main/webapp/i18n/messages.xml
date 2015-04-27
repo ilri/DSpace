@@ -2529,6 +2529,7 @@
     <message key="xmlui.reporting-suite.statistics.graph-editor.data-source.dataset.option.iso">Language</message>
     <message key="xmlui.reporting-suite.statistics.graph-editor.data-source.dataset.option.ilrisubject">ILRI subject</message>
     <message key="xmlui.reporting-suite.statistics.graph-editor.data-source.dataset.option.isijournal">ISI journal</message>
+    <message key="xmlui.reporting-suite.statistics.graph-editor.data-source.dataset.option.jtitle">Journal title</message>
     <message key="xmlui.reporting-suite.statistics.graph-editor.data-source.dataset.option.cipsubject">CIP subject</message>
     <message key="xmlui.reporting-suite.statistics.graph-editor.data-source.dataset.option.drylandssubject">Dryland systems subject</message>
     <message key="xmlui.reporting-suite.statistics.graph-editor.data-source.dataset.option.icardasubject">ICARDA subject</message>
@@ -2548,6 +2549,7 @@
     <message key="xmlui.reporting-suite.statistics.contentanalysis.iso">Language</message>
     <message key="xmlui.reporting-suite.statistics.contentanalysis.ilrisubject">ILRI subject</message>
     <message key="xmlui.reporting-suite.statistics.contentanalysis.isijournal">ISI journal</message>
+    <message key="xmlui.reporting-suite.statistics.contentanalysis.jtitle">Journal title</message>
     <message key="xmlui.reporting-suite.statistics.contentanalysis.cipsubject">CIP subject</message>
     <message key="xmlui.reporting-suite.statistics.contentanalysis.drylandssubject">Dryland systems subject</message>
     <message key="xmlui.reporting-suite.statistics.contentanalysis.icardasubject">ICARDA subject</message>
