@@ -677,15 +677,15 @@
 
 
 
-		<!-- ICARDA subjects row -->
-		<xsl:when test="$clause = 22 and (dim:field[@element='subject' and @qualifier='icarda'])">
+		<!-- ILRI subjects row -->
+		<xsl:when test="$clause = 22 and (dim:field[@element='isubject' and @qualifier='ilrisubject'])">
                     <tr class="ds-table-row {$phase}">
 	                <td><span class="bold"><i18n:text>Subject Focus</i18n:text>:</span></td>
 	                <td>
-	                <xsl:for-each select="//dim:field[@element='subject'and @qualifier='icarda']">
+	                <xsl:for-each select="//dim:field[@element='isubject'and @qualifier='ilrisubject']">
                       <xsl:variable name="lnk"><xsl:value-of select="."/></xsl:variable>
 
-                            <a href="/browse?value={.}&amp;type=icardasubject"><xsl:value-of select="."/></a><xsl:if test="position()!=last()"><xsl:text>, </xsl:text></xsl:if>
+                            <a href="/browse?value={.}&amp;type=ilrisubject"><xsl:value-of select="."/></a><xsl:if test="position()!=last()"><xsl:text>, </xsl:text></xsl:if>
 
                     </xsl:for-each>
 	                </td>
