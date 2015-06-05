@@ -762,21 +762,21 @@
                 <xsl:with-param name="phase" select="$otherPhase"/>
               </xsl:call-template>
           </xsl:when>
-        <!-- ANIMAL SPECIES -->
-		<xsl:when test="$clause =26 and (dim:field[@element='Species' and @qualifier='animal'])">
+        <!-- ANIMAL Breeds -->
+		<xsl:when test="$clause =26 and (dim:field[@element='species' and @qualifier='breeds'])">
                     <tr class="ds-table-row {$phase}">
-	                <td><span class="bold"><i18n:text>Animal species</i18n:text>:</span></td>
+	                <td><span class="bold"><i18n:text>Animal Breeds</i18n:text>:</span></td>
 	                <td>
-	                <xsl:if test="count(dim:field[@element='Species' and @qualifier='animal']) &gt; 1">
+	                <xsl:if test="count(dim:field[@element='species' and @qualifier='breeds']) &gt; 1">
 	                	<hr class="metadata-seperator"/>
 	                </xsl:if>
-	                <xsl:for-each select="dim:field[@element='Species' and @qualifier='animal']">
+	                <xsl:for-each select="dim:field[@element='species' and @qualifier='breeds']">
 		                <xsl:copy-of select="./node()"/>
-		                <xsl:if test="count(following-sibling::dim:field[@element='Species' and @qualifier='animal']) != 0">
+		                <xsl:if test="count(following-sibling::dim:field[@element='species' and @qualifier='breeds']) != 0">
 	                    	<hr class="metadata-seperator"/>
 	                    </xsl:if>
 	              	</xsl:for-each>
-	              	<xsl:if test="count(dim:field[@element='Species' and @qualifier='animal']) &gt; 1">
+	              	<xsl:if test="count(dim:field[@element='species' and @qualifier='breeds']) &gt; 1">
 	                	<hr class="metadata-seperator"/>
 	                </xsl:if>
 	                </td>
