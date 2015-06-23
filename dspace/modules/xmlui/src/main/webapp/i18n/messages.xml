@@ -436,7 +436,7 @@
 	<message key="xmlui.ArtifactBrowser.SimpleSearch.filter.status">Status</message>
 	<message key="xmlui.ArtifactBrowser.SimpleSearch.filter.region">Region</message>
 	<message key="xmlui.ArtifactBrowser.SimpleSearch.filter.country">Country</message>
-
+        <message key="xmlui.ArtifactBrowser.SimpleSearch.filter.breed">Animal Breed</message>  
 	<!-- org.dspace.app.xmlui.artifactbrowser.RestrictedItem.java -->
 	<message key="xmlui.ArtifactBrowser.RestrictedItem.title">This resource is restricted</message>
 	<message key="xmlui.ArtifactBrowser.RestrictedItem.trail">Restricted</message>
