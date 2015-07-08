@@ -588,6 +588,38 @@
           </xsl:when>
 
 
+   <!-- Related reference  row -->
+
+		<xsl:when test="$clause = 17 and (dim:field[@element='link' and @qualifier='reference  '])">
+                    <tr class="ds-table-row {$phase}">
+	                <td><span class="bold"><i18n:text>Related reference</i18n:text>:</span></td>
+	                <td>
+	                <xsl:if test="count(dim:field[@element='link' and @qualifier='reference  ']) &gt; 1">
+	                	<hr class="metadata-seperator"/>
+	                </xsl:if>
+	                <xsl:for-each select="dim:field[@element='link' and @qualifier='reference  ']">
+		                    <a>
+		                        <xsl:attribute name="href">
+		                            <xsl:copy-of select="./node()"/>
+		                        </xsl:attribute>
+		                        <xsl:copy-of select="./node()"/>
+		                    </a>
+		                <xsl:if test="count(following-sibling::dim:field[@element='link' and @qualifier='reference']) != 0">
+		                    	<br/>
+		                    </xsl:if>
+	                    </xsl:for-each>
+	              	<xsl:if test="count(dim:field[@element='link' and @qualifier='reference  ']) &gt; 1">
+	                	<hr class="metadata-seperator"/>
+	                </xsl:if>
+	                </td>
+	            </tr>
+              <xsl:call-template name="itemSummaryView-DIM-fields">
+                <xsl:with-param name="clause" select="($clause + 1)"/>
+                <xsl:with-param name="phase" select="$otherPhase"/>
+              </xsl:call-template>
+          </xsl:when>
+
+
 
 
 
