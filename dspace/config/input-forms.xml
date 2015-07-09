@@ -1758,6 +1758,10 @@
         <stored-value>FISH</stored-value>
       </pair>
       <pair>
+        <displayed-value>FMD</displayed-value>
+        <stored-value>FMD</stored-value>
+      </pair>
+      <pair>
         <displayed-value>FODDER</displayed-value>
         <stored-value>FODDER</stored-value>
       </pair>
