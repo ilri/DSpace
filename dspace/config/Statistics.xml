@@ -156,7 +156,7 @@
 
         <collection-home>
             <tables>
-                <table id="tab2" title="StatletCollectionTopItemPageViews">
+                <table id="tab2" title="StatletCollectionTopFileDownloads">
                     <datasetgenerators>
                         <datasetgenerator type="com.atmire.statistics.generator.DSpaceObjectDatasetGenerator">
                             <dsotype>2</dsotype>
@@ -181,7 +181,7 @@
                     </labels>
 
                 </table>
-                <table id="tab1" title="StatletCollectionTopFileDownloads">
+                <table id="tab1" title="StatletCollectionTopItemPageViews">
                     <datasetgenerators>
                         <datasetgenerator type="com.atmire.statistics.generator.DSpaceObjectDatasetGenerator">
                             <dsotype>2</dsotype>
