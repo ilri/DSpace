@@ -1,0 +1,16 @@
+update emailreport set definition = replace(definition, 'org.dspace.statistics.content.DSpaceObjectDatasetGenerator','com.atmire.statistics.generator.DSpaceObjectDatasetGenerator');
+update emailreport set definition = replace(definition, 'org.dspace.statistics.content.DatasetNestedGenerator','org.dspace.statistics.content.DatasetNestedGenerator');
+update emailreport set definition = replace(definition, 'org.dspace.statistics.content.DatasetQuarterGenerator','com.atmire.statistics.generator.DatasetQuarterGenerator');
+update emailreport set definition = replace(definition, 'org.dspace.statistics.content.DatasetTimeGenerator','org.dspace.statistics.content.DatasetTimeGenerator');
+update emailreport set definition = replace(definition, 'org.dspace.statistics.content.DatasetTypeGenerator','org.dspace.statistics.content.DatasetTypeGenerator');
+update emailreport set definition = replace(definition, 'org.dspace.statistics.content.MetadataMatchRateGenerator','com.atmire.statistics.generator.metadata.MetadataMatchRateGenerator');
+update emailreport set definition = replace(definition, 'org.dspace.statistics.content.SpecifiedDSODatasetGenerator','com.atmire.statistics.generator.SpecifiedDSODatasetGenerator');
+update emailreport set definition = replace(definition, 'org.dspace.statistics.content.StatisticsDataVisits','org.dspace.statistics.content.StatisticsDataVisits');
+update emailreport set definition = replace(definition, 'org.dspace.statistics.content.TopNConfigurableFacetFieldDatasetGenerator','com.atmire.statistics.generator.TopNConfigurableFacetFieldDatasetGenerator');
+update emailreport set definition = replace(definition, 'org.dspace.statistics.content.TopNDSODatasetGenerator','com.atmire.statistics.generator.TopNDSODatasetGenerator');
+update emailreport set definition = replace(definition, 'org.dspace.statistics.content.filter.StatisticsDsoFilter','com.atmire.statistics.content.filter.StatisticsDsoFilter');
+update emailreport set definition = replace(definition, 'org.dspace.statistics.content.filter.StatisticsHitTypeFilter','com.atmire.statistics.content.filter.StatisticsHitTypeFilter');
+update emailreport set definition = replace(definition, 'org.dspace.statistics.content.filter.StatisticsRelativeSolrDateFilter','com.atmire.statistics.content.filter.StatisticsRelativeSolrDateFilter');
+update emailreport set definition = replace(definition, 'org.dspace.statistics.content.filter.StatisticsStringFilter','com.atmire.statistics.content.filter.StatisticsStringFilter');
+update emailreport set definition = replace(definition, 'org.dspace.statistics.content.filter.StatisticsValuesFilter','com.atmire.statistics.content.filter.StatisticsValuesFilter');
+update emailreport set definition = replace(definition, 'org.dspace.statistics.content.filter.storage.StatisticsQueryFilter','com.atmire.statistics.content.filter.storage.StatisticsQueryFilter');
