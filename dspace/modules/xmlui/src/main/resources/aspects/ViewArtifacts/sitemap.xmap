@@ -44,6 +44,7 @@ and searching the repository.
             <map:transformer name="ItemRequestResponseSent" src="org.dspace.app.xmlui.aspect.artifactbrowser.ItemRequestResponseSent" />
             <map:transformer name="ItemRequestStatusChanged" src="org.dspace.app.xmlui.aspect.artifactbrowser.ItemRequestStatusChanged" />
             <map:transformer name="DuplicateRedirecter" src="com.atmire.app.xmlui.aspect.duplicatechecker.DuplicateRedirect"/>
+            <map:transformer name="ConfigToDRI" src="com.atmire.util.xmlui.transformers.ConfigToDRI"/>
 
             <map:transformer name="Statistics" src="org.dspace.app.xmlui.aspect.artifactbrowser.StatisticsViewer"/>
         </map:transformers>
@@ -93,6 +94,7 @@ and searching the repository.
                             3) Metadata about the search urls.
                             -->
             <map:transform type="Navigation"/>
+            <map:transform type="ConfigToDRI"/>
 
 
             <!--

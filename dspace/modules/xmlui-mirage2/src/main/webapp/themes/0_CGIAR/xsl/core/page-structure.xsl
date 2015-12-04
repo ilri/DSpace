@@ -77,6 +77,7 @@
 
                 <!-- Then proceed to the body -->
                 <body>
+                    <xsl:call-template name="bodyAttributes"/>
                     <!-- Prompt IE 6 users to install Chrome Frame. Remove this if you support IE 6.
                    chromium.org/developers/how-tos/chrome-frame-getting-started -->
                     <!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
@@ -138,6 +139,16 @@
                 <xsl:apply-templates select="dri:body" mode="modal"/>
             </xsl:otherwise>
         </xsl:choose>
+    </xsl:template>
+
+    <xsl:template name="bodyAttributes">
+
+        <xsl:if test="/dri:document/dri:meta/dri:pageMeta/dri:metadata[@element='config'][@qualifier='atmire-cua.auto-open-statlets'][text()='true']">
+            <xsl:attribute name="class">
+                <xsl:text>auto-open-statlets</xsl:text>
+            </xsl:attribute>
+        </xsl:if>
+
     </xsl:template>
 
     <!-- The HTML head element contains references to CSS as well as embedded JavaScript code. Most of this
@@ -785,9 +796,14 @@
 
         <!--TODO concat & minify!-->
 
-        <script>
+        <xsl:element name="script">
             <xsl:text>if(!window.DSpace){window.DSpace={};}window.DSpace.context_path='</xsl:text><xsl:value-of select="$context-path"/><xsl:text>';window.DSpace.theme_path='</xsl:text><xsl:value-of select="$theme-path"/><xsl:text>';</xsl:text>
-        </script>
+            <xsl:text>window.DSpace.config = window.DSpace.config || {};</xsl:text>
+            <xsl:for-each select="/dri:document/dri:meta/dri:pageMeta/dri:metadata[@element='config' and @qualifier]">
+                <xsl:text>window.DSpace.config['</xsl:text><xsl:value-of select="@qualifier"/><xsl:text>']='</xsl:text><xsl:value-of select="text()"/><xsl:text>';</xsl:text>
+            </xsl:for-each>
+        </xsl:element>
+
 
         <!--inject scripts.html containing all the theme specific javascript references
         that can be minified and concatinated in to a single file or separate and untouched
