@@ -36,11 +36,11 @@
         <jena.version>2.12.0</jena.version>
         <slf4j.version>1.6.1</slf4j.version>
         <listings-and-reports.version.number>5.1-2.10.2-0</listings-and-reports.version.number>
-        <cua.version.number>5.1-4.0.7-0</cua.version.number>
+        <cua.version.number>5.1-4.0.18-0</cua.version.number>
         <!-- 'root.basedir' is the path to the root [dspace-src] dir. It must be redefined by each child POM,
              as it is used to reference the LICENSE_HEADER and *.properties file(s) in that directory. -->
         <root.basedir>${basedir}</root.basedir>
-        <mqm.version.number>5.1-2.9.6-0</mqm.version.number>
+        <mqm.version.number>5.1-2.9.12-0</mqm.version.number>
 
     </properties>
 
@@ -1288,28 +1288,28 @@
           <dependency>
               <groupId>com.atmire</groupId>
               <artifactId>atmire-dspace-api</artifactId>
-              <version>5.1-1.15.4-1</version>
+              <version>5.1-1.15.6-0</version>
           </dependency>
           <dependency>
               <groupId>com.atmire</groupId>
               <artifactId>atmire-dspace-xmlui</artifactId>
-              <version>5.1-1.15.1-0</version>
+              <version>5.1-1.15.8-0</version>
           </dependency>
           <dependency>
               <groupId>com.atmire</groupId>
               <artifactId>atmire-dspace-xmlui</artifactId>
-              <version>5.1-1.15.1-0</version>
+              <version>5.1-1.15.8-0</version>
               <classifier>classes</classifier>
           </dependency>
           <dependency>
-          <groupId>com.atmire</groupId>
-          <artifactId>datatables-api</artifactId>
-          <version>5.1-2.0.3-0</version>
-      </dependency>
+              <groupId>com.atmire</groupId>
+              <artifactId>datatables-api</artifactId>
+              <version>5.1-2.0.7-0</version>
+          </dependency>
           <dependency>
               <groupId>com.atmire</groupId>
               <artifactId>datatables-xmlui-api</artifactId>
-              <version>5.1-2.0.3-0</version>
+              <version>5.1-2.0.7-0</version>
           </dependency>
       </dependencies>
    </dependencyManagement>
