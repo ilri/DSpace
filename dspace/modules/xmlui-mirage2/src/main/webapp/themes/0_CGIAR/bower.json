@@ -12,7 +12,7 @@
     "html5shiv": "3.7.2",
     "holderjs": "2.4.1",
     "chartist" :"0.9.4",
-    "fontawesome": "4.2.0",
+    "fontawesome": "4.5.0",
     "datatables": "1.10.3"
   },
   "devDependencies": {}
