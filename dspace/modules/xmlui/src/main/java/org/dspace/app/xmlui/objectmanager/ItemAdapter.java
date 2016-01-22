@@ -7,9 +7,11 @@
  */
 package org.dspace.app.xmlui.objectmanager;
 
+import com.atmire.dspace.app.xmlui.objectmanager.ItemAdapterReportingPlugin;
 import org.apache.cocoon.environment.Request;
 import org.dspace.app.util.MetadataExposure;
 import org.dspace.app.util.Util;
+import org.dspace.app.xmlui.objectmanager.plugins.adapter.decorators.AdapterDecoratorManager;
 import org.dspace.app.xmlui.wing.AttributeMap;
 import org.dspace.app.xmlui.wing.WingException;
 import org.dspace.authorize.AuthorizeException;
@@ -176,7 +178,7 @@ public class ItemAdapter extends AbstractAdapter
 	/**
 	 * Return a unique id for a bitstream.
 	 */
-	protected String getFileID(Bitstream bitstream)
+	public String getFileID(Bitstream bitstream)
 	{
 		return "file_" + bitstream.getID();
 	}
@@ -184,7 +186,7 @@ public class ItemAdapter extends AbstractAdapter
 	/**
 	 * Return a group id for a bitstream.
 	 */
-	protected String getGroupFileID(Bitstream bitstream)
+	public String getGroupFileID(Bitstream bitstream)
 	{
 		return "group_file_" + bitstream.getID();
 	}
@@ -715,6 +717,10 @@ public class ItemAdapter extends AbstractAdapter
 				continue;
 			}
 
+			if (fileGrpTypes.size() != 0 && !fileGrpTypes.contains(use))
+				// The user requested specific file groups and this is not one of them.
+				continue;
+
 			// ///////////////////
 			// Start bundle's file group
 			attributes = new AttributeMap();
@@ -760,6 +766,8 @@ public class ItemAdapter extends AbstractAdapter
 			// End the bundle's file group
 			endElement(METS,"fileGrp");
 		}
+		AdapterDecoratorManager manager = AdapterDecoratorManager.getInstance();
+		manager.decorateElement(context, Constants.ITEM, AdapterDecoratorManager.FILE_SEC, this);
 
 		// //////////////////////
 		// End the file section
@@ -1043,6 +1051,10 @@ public class ItemAdapter extends AbstractAdapter
 
 		embargoCheck(context, bitstream, attributes);
 
+		AdapterDecoratorManager manager = AdapterDecoratorManager.getInstance();
+		manager.decorateAttribute(context, Constants.BITSTREAM, AdapterDecoratorManager.FILE, attributes, item, bitstream, fileID, groupID, admID);
+
+
 		startElement(METS,"file",attributes);
 
 
@@ -1125,4 +1137,9 @@ public class ItemAdapter extends AbstractAdapter
 		// End the file
 		endElement(METS,"file");
 	}
+
+	public List<Bitstream> getContentBitstreams() {
+		return contentBitstreams;
+	}
+
 }
