@@ -8,6 +8,7 @@
 package org.dspace.app.xmlui.objectmanager;
 
 import org.dspace.app.util.Util;
+import org.dspace.app.xmlui.objectmanager.plugins.adapter.decorators.AdapterDecoratorManager;
 import org.dspace.app.xmlui.wing.AttributeMap;
 import org.dspace.app.xmlui.wing.Namespace;
 import org.dspace.app.xmlui.wing.WingException;
@@ -412,6 +413,9 @@ public abstract class AbstractAdapter
 		renderFile(item, bitstream, fileID, groupID, null);
 	}
 
+	protected final void renderFile(Context context, Item item, Bitstream bitstream, String fileID, String groupID) throws SAXException, SQLException {
+		renderFile(context, item, bitstream, fileID, groupID, null);
+	}
 
 	protected final void renderFile(Item item, Bitstream bitstream, String fileID, String groupID, String admID) throws SAXException, SQLException {
 		renderFile(null, item, bitstream, fileID, groupID, null);
@@ -441,9 +445,11 @@ public abstract class AbstractAdapter
 		// Determine the file attributes
 		BitstreamFormat format = bitstream.getFormat();
 		String mimeType = null;
+        String kind = null;
 		if (format != null)
 		{
 			mimeType = format.getMIMEType();
+            kind = format.getDescription();
 		}
 		String checksumType = bitstream.getChecksumAlgorithm();
 		String checksum = bitstream.getChecksum();
@@ -462,7 +468,10 @@ public abstract class AbstractAdapter
 		{
 			attributes.put("MIMETYPE", mimeType);
 		}
-		if (checksumType != null && checksum != null)
+        if (kind != null){
+            attributes.put("KIND", kind);
+        }
+        if (checksumType != null && checksum != null && !checksumType.equals(""))
 		{
 			attributes.put("CHECKSUM", checksum);
 			attributes.put("CHECKSUMTYPE", checksumType);
@@ -470,6 +479,9 @@ public abstract class AbstractAdapter
 		attributes.put("SIZE", String.valueOf(size));
 
 		embargoCheck(context, bitstream, attributes);
+
+		AdapterDecoratorManager manager = AdapterDecoratorManager.getInstance();
+		manager.decorateAttribute(context, Constants.BITSTREAM, AdapterDecoratorManager.FILE, attributes, item, bitstream, fileID, groupID, admID);
 
 		startElement(METS,"file",attributes);
 
@@ -674,7 +686,7 @@ public abstract class AbstractAdapter
 	 * @param attributes
 	 *            (May be null) Attributes for this element
 	 */
-	protected final void startElement(Namespace namespace, String name,
+    public final void startElement(Namespace namespace, String name,
 	                                  AttributeMap... attributes) throws SAXException
 	{
 		contentHandler.startElement(namespace.URI, name, qName(namespace, name),
@@ -705,7 +717,7 @@ public abstract class AbstractAdapter
 	 * @param name
 	 *            (Required) The local name of this element.
 	 */
-	protected final void endElement(Namespace namespace, String name)
+    public final void endElement(Namespace namespace, String name)
 			throws SAXException
 	{
 		contentHandler.endElement(namespace.URI, name, qName(namespace, name));
@@ -782,4 +794,7 @@ public abstract class AbstractAdapter
 		}
 	}
 
+    public String getContextPath() {
+        return contextPath;
+    }
 }
