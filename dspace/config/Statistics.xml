@@ -215,6 +215,11 @@
                         </datasetgenerator>
                     </datasetgenerators>
                     <filters>
+                        <filter type="com.atmire.statistics.content.filter.StatisticsSolrDateFilter">
+                            <type>day</type>
+                            <start str="+-30"/>
+                            <end str="+0"/>
+                        </filter>
                         <filter type="com.atmire.statistics.content.filter.StatisticsHitTypeFilter">
                             <dsotype>2</dsotype>
                             <dsotype>0</dsotype>
