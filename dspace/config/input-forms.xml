@@ -1417,8 +1417,8 @@
         <stored-value>Equation</stored-value>
       </pair>
       <pair>
-        <displayed-value>Extension material</displayed-value>
-        <stored-value>Extension material</stored-value>
+        <displayed-value>Extension Material</displayed-value>
+        <stored-value>Extension Material</stored-value>
       </pair>
       <pair>
         <displayed-value>Image</displayed-value>
@@ -3670,6 +3670,10 @@
         <stored-value>EA_PAR</stored-value>
       </pair>
       <pair>
+        <displayed-value>EA_PAR_CSA_Portfoilios</displayed-value>
+        <stored-value>EA_PAR_CSA_Portfoilios</stored-value>
+      </pair>
+      <pair>
         <displayed-value>FP1_BigData</displayed-value>
         <stored-value>FP1_BigData</stored-value>
       </pair>
@@ -3688,6 +3692,14 @@
       <pair>
         <displayed-value>FP1_CSAPartnerships</displayed-value>
         <stored-value>FP1_CSAPartnerships</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>FP1_localAdaptationPlanning</displayed-value>
+        <stored-value>FP1_localAdaptationPlanning</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>FP1_ValueChains</displayed-value>
+        <stored-value>FP1_ValueChains</stored-value>
       </pair>
       <pair>
         <displayed-value>FP2_ClimateServicesRwanda</displayed-value>
@@ -3904,6 +3916,10 @@
       <pair>
         <displayed-value>SA_RiskMitigation</displayed-value>
         <stored-value>SA_RiskMitigation</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SA_PAR_CSV</displayed-value>
+        <stored-value>SA_PAR_CSV</stored-value>
       </pair>
       <pair>
         <displayed-value>SEA_ApproachesCSV</displayed-value>

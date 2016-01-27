@@ -1,6 +1,7 @@
 $fa-font-path: "../vendor/fontawesome/fonts";
 
 @import "../vendor/fontawesome/scss/font-awesome";
+@import "../vendor/academicons/css/academicons.css";
 @import "atmire-cua";
 @import "atmire-cua-customizations";
 
@@ -226,7 +227,13 @@ div.secondary.search-browse{
   margin-bottom: 8px;
 }
 
-.item-summary-view-metadata .fa {
-  color: #333;
+.item-summary-view-metadata .fa, .item-summary-view-metadata .ai {
+  color: $brand-primary;
   margin: 2px;
+}
+
+// fix for long URLs in item view
+// https://github.com/ilri/DSpace/issues/172
+.simple-item-view-description .marginleft {
+  text-align: left;
 }

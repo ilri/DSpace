@@ -465,7 +465,7 @@
                 <value>dc.date.issued</value>
             </list>
         </property>
-        <property name="facetLimit" value="5"/>
+        <property name="facetLimit" value="10"/>
         <property name="type" value="date"/>
         <property name="sortOrderSidebar" value="COUNT"/>
         <property name="sortOrderFilterPage" value="COUNT"/>
@@ -490,7 +490,7 @@
                 <value>dc.date.accessioned</value>
             </list>
         </property>
-        <property name="facetLimit" value="5"/>
+        <property name="facetLimit" value="10"/>
         <property name="sortOrderSidebar" value="COUNT"/>
         <property name="sortOrderFilterPage" value="COUNT"/>
     </bean>

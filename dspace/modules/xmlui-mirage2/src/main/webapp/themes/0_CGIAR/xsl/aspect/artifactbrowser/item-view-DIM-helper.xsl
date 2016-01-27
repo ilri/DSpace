@@ -600,22 +600,38 @@ such as authors, subject, citation, description, etc
             <a>
                 <xsl:attribute name="href"><xsl:text>https://twitter.com/home?status=</xsl:text><xsl:value-of select="dim:field[@element='identifier' and @qualifier='uri']"/></xsl:attribute>
                 <xsl:attribute name="title"><xsl:text>Tweet this</xsl:text></xsl:attribute>
+                <xsl:attribute name="target"><xsl:text>blank</xsl:text></xsl:attribute>
                 <span class="fa fa-twitter-square fa-lg"></span>
             </a>
             <a>
                 <xsl:attribute name="href"><xsl:text>https://www.facebook.com/sharer/sharer.php?u=</xsl:text><xsl:value-of select="dim:field[@element='identifier' and @qualifier='uri']"/></xsl:attribute>
                 <xsl:attribute name="title"><xsl:text>Share on Facebook</xsl:text></xsl:attribute>
+                <xsl:attribute name="target"><xsl:text>blank</xsl:text></xsl:attribute>
                 <span class="fa fa-facebook-square fa-lg"></span>
             </a>
             <a>
                 <xsl:attribute name="href"><xsl:text>https://plus.google.com/share?url=</xsl:text><xsl:value-of select="dim:field[@element='identifier' and @qualifier='uri']"/></xsl:attribute>
                 <xsl:attribute name="title"><xsl:text>Share on Google+</xsl:text></xsl:attribute>
+                <xsl:attribute name="target"><xsl:text>blank</xsl:text></xsl:attribute>
                 <span class="fa fa-google-plus-square fa-lg"></span>
             </a>
             <a>
                 <xsl:attribute name="href"><xsl:text>https://www.linkedin.com/shareArticle?mini=true&amp;url=</xsl:text><xsl:value-of select="dim:field[@element='identifier' and @qualifier='uri']"/></xsl:attribute>
                 <xsl:attribute name="title"><xsl:text>Share on LinkedIn</xsl:text></xsl:attribute>
+                <xsl:attribute name="target"><xsl:text>blank</xsl:text></xsl:attribute>
                 <span class="fa fa-linkedin-square fa-lg"></span>
+            </a>
+            <a>
+                <xsl:attribute name="href"><xsl:text>https://delicious.com/save?v=5&amp;provider=CGSpace&amp;noui&amp;jump=close&amp;url=</xsl:text><xsl:value-of select="dim:field[@element='identifier' and @qualifier='uri']"/></xsl:attribute>
+                <xsl:attribute name="title"><xsl:text>Save this on Delicious</xsl:text></xsl:attribute>
+                <xsl:attribute name="target"><xsl:text>_blank</xsl:text></xsl:attribute>
+                <span class="fa fa-delicious fa-lg"></span>
+            </a>
+            <a>
+                <xsl:attribute name="href"><xsl:text>https://www.mendeley.com/import/?url=</xsl:text><xsl:value-of select="dim:field[@element='identifier' and @qualifier='uri']"/></xsl:attribute>
+                <xsl:attribute name="title"><xsl:text>Add this article to your Mendeley library</xsl:text></xsl:attribute>
+                <xsl:attribute name="target"><xsl:text>blank</xsl:text></xsl:attribute>
+                <span class="ai ai-mendeley-square ai-lg"></span>
             </a>
             <a>
                 <xsl:attribute name="href"><xsl:text>mailto:?&amp;body=</xsl:text><xsl:value-of select="dim:field[@element='identifier' and @qualifier='uri']"/><xsl:text>&amp;media=&amp;description=</xsl:text></xsl:attribute>
