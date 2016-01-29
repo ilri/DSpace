@@ -355,6 +355,9 @@
                         <filter type="com.atmire.statistics.content.filter.StatisticsHitTypeFilter">
                             <dsotype>2</dsotype>
                         </filter>
+	                    <filter type="com.atmire.statistics.content.filter.StatisticsRelativeSolrDateFilter">
+		                    <period>6 months</period>
+	                    </filter>
                     </filters>
                     <position/>
                 </table>
@@ -373,6 +376,9 @@
                         <filter type="com.atmire.statistics.content.filter.StatisticsHitTypeFilter">
                             <dsotype>0</dsotype>
                         </filter>
+	                    <filter type="com.atmire.statistics.content.filter.StatisticsRelativeSolrDateFilter">
+		                    <period>6 months</period>
+	                    </filter>
                     </filters>
                     <position/>
                 </table>
