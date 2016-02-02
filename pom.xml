@@ -1288,7 +1288,7 @@
           <dependency>
               <groupId>com.atmire</groupId>
               <artifactId>atmire-dspace-api</artifactId>
-              <version>5.1-1.15.6-0</version>
+              <version>5.1-1.15.9-0</version>
           </dependency>
           <dependency>
               <groupId>com.atmire</groupId>
