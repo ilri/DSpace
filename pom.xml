@@ -36,7 +36,7 @@
         <jena.version>2.12.0</jena.version>
         <slf4j.version>1.6.1</slf4j.version>
         <listings-and-reports.version.number>5.1-2.10.2-0</listings-and-reports.version.number>
-        <cua.version.number>5.1-4.0.18-0</cua.version.number>
+        <cua.version.number>5.1-4.0.24-0</cua.version.number>
         <!-- 'root.basedir' is the path to the root [dspace-src] dir. It must be redefined by each child POM,
              as it is used to reference the LICENSE_HEADER and *.properties file(s) in that directory. -->
         <root.basedir>${basedir}</root.basedir>
