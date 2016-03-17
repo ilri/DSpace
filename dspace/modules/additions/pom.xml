@@ -77,6 +77,12 @@
          <groupId>com.atmire</groupId>
          <artifactId>atmire-listings-and-reports-api</artifactId>
          <version>${listings-and-reports.version.number}</version>
+         <exclusions>
+            <exclusion>
+               <groupId>org.dspace</groupId>
+               <artifactId>dspace-jspui</artifactId>
+            </exclusion>
+         </exclusions>
       </dependency>
       <dependency>
          <groupId>com.atmire</groupId>
@@ -94,7 +100,10 @@
          <artifactId>atmire-metadata-quality-api</artifactId>
          <version>${mqm.version.number}</version>
       </dependency>
-
+      <dependency>
+         <groupId>com.atmire</groupId>
+         <artifactId>atmire-dspace-api</artifactId>
+      </dependency>
       <dependency>
          <groupId>org.dspace</groupId>
          <artifactId>dspace-api</artifactId>

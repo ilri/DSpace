@@ -873,7 +873,7 @@ DAMAGE.
     <message key="cua.statlet.total">Total</message>
     <message key="cua.statlet.total-hits">All Time Usage</message>
     <message key="cua.statlet.country">Country</message>
-    <message key="cua.statlet.top-5-country-views">Last 6 months pageviews</message>
+    <message key="cua.statlet.top-5-country-views">Last 6 months page views</message>
     <message key="cua.statlet.top-5-country-downloads">Last 6 months downloads</message>
     <message key="cua.statlet.item-views-month">Item Page Views by month</message>
     <message key="cua.statlet.bitstream-downloads-month">File Downloads by month</message>
@@ -881,8 +881,8 @@ DAMAGE.
     <message key="cua.statlet.top-items-downloads">Top items by bitstream downloads</message>
     <message key="cua.statlet.top-subcollections-views">Top sub-collections by item views</message>
     <message key="cua.statlet.top-subcollections-downloads">Top sub-collections by bitstream downloads</message>
-    <message key="cua.statlet.top-communities-views">Last 6 months pageviews</message>
-    <message key="cua.statlet.top-communities-downloads">Last 6 months downloads</message>
+    <message key="cua.statlet.top-communities-views">All Time Page Views</message>
+    <message key="cua.statlet.top-communities-downloads">All Time Downloads</message>
     <message key="cua.statlet.item">Item</message>
     <message key="cua.statlet.collection">Collection</message>
     <message key="cua.statlet.community">Item</message>
