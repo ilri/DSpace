@@ -99,7 +99,7 @@
                 <ref bean="searchFilterAuthor" />
                 <ref bean="searchFilterAffiliation" />
                 <ref bean="searchFilterIssued" />
-                <ref bean="searchFilterOutputType" />
+                <ref bean="searchFilterType" />
                 <ref bean="searchFilterCrpsubject" />
                 <ref bean="searchFilterRegion" />
                 <ref bean="searchFilterCountry" />
@@ -129,7 +129,7 @@
                 <ref bean="searchFilterAuthor" />
                 <ref bean="searchFilterAffiliation" />
                 <ref bean="searchFilterIssued" />
-                <ref bean="searchFilterOutputType" />
+                <ref bean="searchFilterType" />
                 <ref bean="searchFilterCrpsubject" />
                 <ref bean="searchFilterRegion" />
                 <ref bean="searchFilterCountry" />
@@ -233,7 +233,7 @@
                 <ref bean="searchFilterAuthor" />
                 <ref bean="searchFilterAffiliation" />
                 <ref bean="searchFilterIssued" />
-                <ref bean="searchFilterOutputType" />
+                <ref bean="searchFilterType" />
                 <ref bean="searchFilterCrpsubject" />
                 <ref bean="searchFilterRegion" />
                 <ref bean="searchFilterCountry" />
@@ -264,7 +264,7 @@
                 <ref bean="searchFilterAuthor" />
                 <ref bean="searchFilterAffiliation" />
                 <ref bean="searchFilterIssued" />
-                <ref bean="searchFilterOutputType" />
+                <ref bean="searchFilterType" />
                 <ref bean="searchFilterCrpsubject" />
                 <ref bean="searchFilterRegion" />
                 <ref bean="searchFilterCountry" />
@@ -639,8 +639,8 @@
         <property name="sortOrderFilterPage" value="COUNT"/>
     </bean>
 
-    <bean id="searchFilterOutput" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
-        <property name="indexFieldName" value="output"/>
+    <bean id="searchFilterType" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
+        <property name="indexFieldName" value="type"/>
         <property name="metadataFields">
             <list>
                 <value>dc.type.*</value>
@@ -771,18 +771,6 @@
         <property name="sortOrderFilterPage" value="COUNT"/>
     </bean>
 
-    <bean id="searchFilterOutputType" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
-        <property name="indexFieldName" value="outputtype"/>
-        <property name="metadataFields">
-            <list>
-                <value>dc.type.output</value>
-            </list>
-        </property>
-        <property name="facetLimit" value="10"/>
-        <property name="sortOrderSidebar" value="COUNT"/>
-        <property name="sortOrderFilterPage" value="VALUE"/>
-    </bean>
-
     <bean id="searchFilterBreed" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
         <property name="indexFieldName" value="breed"/>
         <property name="metadataFields">
@@ -817,6 +805,12 @@
             </list>
         </property>
         <!--The search filters which can be used on the discovery search page-->
+
+        <!-- Note from Alan: indexes for search filters are only created if you
+             actually use them in a searchFilters property. Simply defining a
+             filter doesn't create the index! Atmire's strategy is to list the
+             filters here just in case we aren't using them in the site-wide
+             sidebarFacets configuration -->
         <property name="searchFilters">
             <list>
                 <ref bean="searchFilterTitle"/>
@@ -839,7 +833,6 @@
                 <ref bean="searchFilterSubregion"/>
                 <ref bean="searchFilterCrpsubject"/>
                 <ref bean="searchFilterBasin"/>
-                <ref bean="searchFilterOutput"/>
                 <ref bean="searchFilterCta"/>
                 <ref bean="searchFilterWlesubject"/>
                 <ref bean="searchFilterBioversity"/>
@@ -879,17 +872,6 @@
         <property name="metadataFields">
             <list>
                 <value>dc.language.iso</value>
-            </list>
-        </property>
-        <property name="facetLimit" value="10"/>
-        <property name="sortOrderSidebar" value="COUNT"/>
-        <property name="sortOrderFilterPage" value="VALUE"/>
-    </bean>
-    <bean id="searchFilterType" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
-        <property name="indexFieldName" value="type"/>
-        <property name="metadataFields">
-            <list>
-                <value>dc.type</value>
             </list>
         </property>
         <property name="facetLimit" value="10"/>

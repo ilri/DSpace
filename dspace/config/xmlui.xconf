@@ -218,6 +218,7 @@
         <theme name="LIVES" handle="10568/25101" path="LIVES/" />
         <theme name="TechnicalConsortium" handle="10568/25209" path="TechnicalConsortium/" />
         <theme name="WLE" handle="10568/34494" path="WLE/" />
+        <theme name="AVCD" handle="10568/72600" path="AVCD/" />
 
         <theme name="CGIAR" regex=".*" path="0_CGIAR/" />
 

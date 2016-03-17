@@ -129,7 +129,7 @@
         <field>
           <dc-schema>dc</dc-schema>
           <dc-element>type</dc-element>
-          <dc-qualifier>output</dc-qualifier>
+          <dc-qualifier></dc-qualifier>
           <repeatable>true</repeatable>
           <label>Item type (required)</label>
           <input-type value-pairs-name="common_types">dropdown</input-type>

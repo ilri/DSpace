@@ -598,7 +598,7 @@ such as authors, subject, citation, description, etc
                 <xsl:for-each select="dim:field[@element='type' and @qualifier='output' ]">
                     <a target="_black" >
                         <xsl:attribute name="href">
-                            <xsl:value-of select="concat($context-path,'/discover?filtertype=outputtype&amp;filter_relational_operator=equals&amp;filter=',url:encode(node()))"></xsl:value-of>
+                            <xsl:value-of select="concat($context-path,'/discover?filtertype=type&amp;filter_relational_operator=equals&amp;filter=',url:encode(node()))"></xsl:value-of>
                         </xsl:attribute>
                         <xsl:copy-of select="./node()"/>
                     </a>                    <xsl:if test="count(following-sibling::dim:field[@element='type' and @qualifier='output'] ) != 0">

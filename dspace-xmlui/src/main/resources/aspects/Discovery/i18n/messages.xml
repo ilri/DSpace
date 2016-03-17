@@ -96,21 +96,6 @@
     <message key="xmlui.dri2xhtml.structural.pagination-info.nototal">Now showing items {0}-{1}</message>
 
     <message key="xmlui.Discovery.AbstractSearch.type_author">Filter by: Author</message>
-    <message key="xmlui.Discovery.AbstractSearch.type_wlesubject">Filter by: WLE subjects</message>
-    <message key="xmlui.Discovery.AbstractSearch.type_iwmisubject">Filter by: IWMI subjects</message>
-    <message key="xmlui.Discovery.AbstractSearch.type_ilrisubject">Filter by: ILRI subjects</message>
-    <message key="xmlui.Discovery.AbstractSearch.type_humidtropics">Filter by: Humidtropics subjects</message>
-    <message key="xmlui.Discovery.AbstractSearch.type_cta">Filter by: CTA subjects</message>
-    <message key="xmlui.Discovery.AbstractSearch.type_cpwfsubject">Filter by: CPWF subjects</message>
-    <message key="xmlui.Discovery.AbstractSearch.type_ciforsubject">Filter by: CIFOR subjects</message>
-    <message key="xmlui.Discovery.AbstractSearch.type_ciat">Filter by: CIAT subjects</message>
-    <message key="xmlui.Discovery.AbstractSearch.type_ccafsubject">Filter by: CCAFS subjects</message>
-    <message key="xmlui.Discovery.AbstractSearch.type_bioversity">Filter by: Biodiversity subjects</message>
-    <message key="xmlui.Discovery.AbstractSearch.type_country">Filter by: Country</message>
-    <message key="xmlui.Discovery.AbstractSearch.type_region">Filter by: Region</message>
-    <message key="xmlui.Discovery.AbstractSearch.type_outputtype">Filter by: Outputtype</message>
-    <message key="xmlui.Discovery.AbstractSearch.type_affiliation">Filter by: Author Affiliation</message>
-
     <message key="xmlui.ArtifactBrowser.SimpleSearch.filter.author">Author</message>
     <message key="xmlui.ArtifactBrowser.SimpleSearch.filter.author_filter">Author</message>
     <message key="xmlui.Discovery.AbstractSearch.type_subject">Filter by: Subject</message>
