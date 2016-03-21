@@ -3745,6 +3745,14 @@
         <displayed-value>FP3_FAOcollaboration</displayed-value>
         <stored-value>FP3_FAOcollaboration</stored-value>
       </pair>
+       <pair>
+        <displayed-value>FP3_Finance</displayed-value>
+        <stored-value>FP3_Finance</stored-value>
+      </pair> 
+      <pair>
+        <displayed-value>FP3_Gender</displayed-value> 
+        <stored-value>FP3_Gender</stored-value>
+      </pair>
       <pair>
         <displayed-value>FP3_GII</displayed-value>
         <stored-value>FP3_GII</stored-value>
@@ -3752,10 +3760,22 @@
       <pair>
         <displayed-value>FP3_LEDPathways</displayed-value>
         <stored-value>FP3_LEDPathways</stored-value>
+      </pair>   
+      <pair>
+        <displayed-value>FP3_LEDPathways_IIASA</displayed-value>
+        <stored-value>FP3_LEDPathways_IIASA</stored-value>
+      </pair>  
+      <pair> 
+      <displayed-value>FP3_LEDPriorities</displayed-value>
+        <stored-value>FP3_LEDPriorities</stored-value>
       </pair>
       <pair>
         <displayed-value>FP3_LEDs</displayed-value>
         <stored-value>FP3_LEDs</stored-value>
+      </pair>         
+      <pair>
+        <displayed-value>FP3_LEDScaling</displayed-value>
+        <stored-value>FP3_LEDScaling</stored-value>
       </pair>
       <pair>
         <displayed-value>FP3_LowEmissionsIndia</displayed-value>
