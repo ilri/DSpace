@@ -207,7 +207,7 @@
         <workflow-editable>true</workflow-editable>
       </step>
 
-       <!--Step 3 will be to Manage Item access.
+       <!--Step 3 will be to Manage Item access.-->
        <step>
            <heading>submit.progressbar.access</heading>
            <processing-class>org.dspace.submit.step.AccessStep</processing-class>
@@ -225,8 +225,8 @@
 		<xmlui-binding>org.dspace.app.xmlui.aspect.submission.submit.UploadStep</xmlui-binding>
         <workflow-editable>true</workflow-editable>
       </step>
-
-
+      -->
+     
        <!--MQM duplicate check-->
        <step>
            <heading>duplicatecheck.submission.check</heading>
@@ -236,7 +236,7 @@
            <workflow-editable>true</workflow-editable>
        </step>
 
-       <!-- Step 4 Upload Item with Embargo Features
+       <!-- Step 4 Upload Item with Embargo Features -->
             to enable this step, please make sure to comment-out the previous step "UploadStep"  
        <step>
            <heading>submit.progressbar.upload</heading>
