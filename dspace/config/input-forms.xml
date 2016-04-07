@@ -87,9 +87,9 @@
           <required>You must enter a main title for this item.</required>
         </field>
         <field>
-          <dc-schema>dc</dc-schema>
+          <dc-schema>cg</dc-schema>
           <dc-element>title</dc-element>
-          <dc-qualifier>jtitle</dc-qualifier>
+          <dc-qualifier>journal</dc-qualifier>
           <repeatable>false</repeatable>
           <label>Journal Title</label>
           <input-type>onebox</input-type>
@@ -670,9 +670,9 @@
           <required></required>
         </field>
         <field>
-          <dc-schema>dc</dc-schema>
+          <dc-schema>cg</dc-schema>
           <dc-element>title</dc-element>
-          <dc-qualifier>jtitle</dc-qualifier>
+          <dc-qualifier>journal</dc-qualifier>
           <repeatable>false</repeatable>
           <label>Journal Title</label>
           <input-type>onebox</input-type>
