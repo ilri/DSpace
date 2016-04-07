@@ -288,8 +288,8 @@
           <required></required>
         </field>
         <field>
-          <dc-schema>dc</dc-schema>
-          <dc-element>srplace</dc-element>
+          <dc-schema>cg</dc-schema>
+          <dc-element>place</dc-element>
           <dc-qualifier>subregion</dc-qualifier>
           <repeatable>true</repeatable>
           <label>Sub Region Focus</label>
@@ -4402,7 +4402,7 @@
         <stored-value>WEST AND CENTRAL AFRICA</stored-value>
       </pair>
     </value-pairs>
-    <value-pairs value-pairs-name="subregion_types" dc-term="srplace_subregion">
+    <value-pairs value-pairs-name="subregion_types" dc-term="place_subregion">
       <pair>
         <displayed-value>AFAR</displayed-value>
         <stored-value>AFAR</stored-value>
