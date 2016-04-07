@@ -449,7 +449,7 @@
           <required></required>
         </field>
         <field>
-          <dc-schema>dc</dc-schema>
+          <dc-schema>cg</dc-schema>
           <dc-element>subject</dc-element>
           <dc-qualifier>ilri</dc-qualifier>
           <repeatable>true</repeatable>
@@ -770,7 +770,7 @@
           <required></required>
         </field>
         <field>
-          <dc-schema>dc</dc-schema>
+          <dc-schema>cg</dc-schema>
           <dc-element>subject</dc-element>
           <dc-qualifier>ilri</dc-qualifier>
           <repeatable>true</repeatable>
