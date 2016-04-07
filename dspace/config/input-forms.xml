@@ -449,9 +449,9 @@
           <required></required>
         </field>
         <field>
-          <dc-schema>dc</dc-schema>
-          <dc-element>isubject</dc-element>
-          <dc-qualifier>ilrisubject</dc-qualifier>
+          <dc-schema>cg</dc-schema>
+          <dc-element>subject</dc-element>
+          <dc-qualifier>ilri</dc-qualifier>
           <repeatable>true</repeatable>
           <label>ILRI Subject Focus</label>
           <input-type value-pairs-name="ilrisubject">dropdown</input-type>
@@ -770,9 +770,9 @@
           <required></required>
         </field>
         <field>
-          <dc-schema>dc</dc-schema>
-          <dc-element>isubject</dc-element>
-          <dc-qualifier>ilrisubject</dc-qualifier>
+          <dc-schema>cg</dc-schema>
+          <dc-element>subject</dc-element>
+          <dc-qualifier>ilri</dc-qualifier>
           <repeatable>true</repeatable>
           <label>ILRI Subject Focus</label>
           <input-type value-pairs-name="ilrisubject">dropdown</input-type>
@@ -957,7 +957,7 @@
         <stored-value>WLI</stored-value>
       </pair>
     </value-pairs>
-    <value-pairs value-pairs-name="ilrisubject" dc-term="isubject_ilrisubject">
+    <value-pairs value-pairs-name="ilrisubject" dc-term="subject_ilri">
       <pair>
         <displayed-value>VALUE CHAINS</displayed-value>
         <stored-value>VALUE CHAINS</stored-value>
