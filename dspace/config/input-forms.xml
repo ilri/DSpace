@@ -268,8 +268,8 @@
           <required></required>
         </field>
         <field>
-          <dc-schema>dc</dc-schema>
-          <dc-element>cplace</dc-element>
+          <dc-schema>cg</dc-schema>
+          <dc-element>place</dc-element>
           <dc-qualifier>country</dc-qualifier>
           <repeatable>true</repeatable>
           <label>Country Focus</label>
@@ -4472,7 +4472,7 @@
         <stored-value>UTTAR PRADESH</stored-value>
       </pair>
     </value-pairs>
-    <value-pairs value-pairs-name="countrylist" dc-term="cplace_country">
+    <value-pairs value-pairs-name="countrylist" dc-term="place_country">
       <pair>
         <displayed-value>AFGHANISTAN</displayed-value>
         <stored-value>AFGHANISTAN</stored-value>
