@@ -278,8 +278,8 @@
           <required></required>
         </field>
         <field>
-          <dc-schema>dc</dc-schema>
-          <dc-element>rplace</dc-element>
+          <dc-schema>cg</dc-schema>
+          <dc-element>place</dc-element>
           <dc-qualifier>region</dc-qualifier>
           <repeatable>true</repeatable>
           <label>Region Focus</label>
