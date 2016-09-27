@@ -717,9 +717,7 @@
                             <i18n:text>xmlui.dri2xhtml.structural.feedback-link</i18n:text>
                         </a>
                         <a href="//github.com/ilri/DSpace">
-                            <img alt="The GitHub Logo" src="{concat($theme-path, '/images/invertocat.png')}" width="24"
-                                 height="24"/>
-
+                            <span class="fa fa-github fa-2x" aria-hidden="true"></span>
                         </a>
 
 
