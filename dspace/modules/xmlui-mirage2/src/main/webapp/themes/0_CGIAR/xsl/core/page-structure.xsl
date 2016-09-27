@@ -716,7 +716,7 @@
                             </xsl:attribute>
                             <i18n:text>xmlui.dri2xhtml.structural.feedback-link</i18n:text>
                         </a>
-                        <a href="//github.com/ilri/DSpace">
+                        <a href="https://github.com/ilri/DSpace">
                             <span class="fa fa-github fa-2x" aria-hidden="true"></span>
                         </a>
 
