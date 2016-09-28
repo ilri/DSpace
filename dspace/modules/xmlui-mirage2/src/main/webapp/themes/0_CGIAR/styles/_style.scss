@@ -258,3 +258,19 @@ div.secondary.search-browse{
   background-color: lighten($brand-primary, 10%);
   border-color: lighten($brand-primary, 5%);
 }
+
+/* RSS icons should be orange! */
+/* See: https://en.wikipedia.org/wiki/Feed_icon */
+.fa-rss {
+  color: #FA9B39;
+}
+
+/* GitHub icon should be black! */
+.fa-github {
+  color: black;
+}
+
+/* @ icon should be redish, like the old image it replaces */
+.fa-at {
+  color: maroon;
+}
