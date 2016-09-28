@@ -204,6 +204,11 @@ footer div.footer{
   background-color: #fcfcfc;
 }
 
+/* better alignment of Font Awesome icons with surrounding footer text */
+.footer .fa-2x {
+  vertical-align: middle;
+}
+
 #aspect_discovery_CollectionSearch_p_search-query,#aspect_discovery_CommunitySearch_p_search-query{
   left:25%;
  }
