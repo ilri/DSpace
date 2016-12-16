@@ -106,6 +106,9 @@
     </xsl:template>
 
 
+
+
+
     <xsl:template match="dim:dim" mode="itemSummaryView-DIM">
         <div class="item-summary-view-metadata">
             <xsl:call-template name="itemSummaryView-DIM-title"/>
@@ -130,8 +133,8 @@
                     <xsl:call-template name="itemSummaryView-DIM-type"/>
                     <xsl:call-template name="itemSummaryView-DIM-review-status"/>
                     <xsl:call-template name="itemSummaryView-DIM-accessibility"/>
-
-
+                                       
+                   
                     <xsl:if test="$ds_item_view_toggle_url != ''">
                         <xsl:call-template name="itemSummaryView-show-full"/>
                     </xsl:if>
@@ -155,6 +158,12 @@
                     <xsl:call-template name="itemSummaryView-DIM-breeds"/>
                     <xsl:call-template name="itemSummaryView-DIM-investors-sponsors"/>
                     <xsl:call-template name="itemSummaryView-DIM-related-material"/>
+                
+                  <div class="simple-item-view-collections item-page-field-wrapper table">
+ 
+                   <xsl:call-template name="itemSummaryView-collections"/>
+                 </div>  
+
                 </div>
             </div>
         </div>
@@ -240,18 +249,18 @@
         </div>
     </xsl:template>
 
-
-
 <xsl:template name="itemSummaryView-collections">
 <xsl:if test="$document//dri:referenceSet[@id='aspect.artifactbrowser.ItemViewer.referenceSet.collection-viewer']">
     <div class="simple-item-view-collections item-page-field-wrapper table">
-        <h5>
+        <h5 class="bold">
             <i18n:text>xmlui.mirage2.itemSummaryView.Collections</i18n:text>
         </h5>
         <xsl:apply-templates select="$document//dri:referenceSet[@id='aspect.artifactbrowser.ItemViewer.referenceSet.collection-viewer']/dri:reference"/>
     </div>
 </xsl:if>
 </xsl:template>
+
+
 
 <xsl:template name="itemSummaryView-DIM-file-section">
 <xsl:choose>
@@ -673,6 +682,10 @@
 
     <xsl:template name='impact-altmetric'>
         <div id='impact-altmetric' class="item-page-field-wrapper">
+
+
+
+
 
             <!-- Altmetric.com -->
             <script type="text/javascript" src="{concat($scheme, 'd1bxh8uas1mnw7.cloudfront.net/assets/embed.js')}">&#160;</script>
