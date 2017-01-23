@@ -145,6 +145,14 @@
                                     <type>war</type>
                                 </overlay>
                                 <overlay>
+                                    <groupId>com.atmire</groupId>
+                                    <artifactId>atmire-dspace-xmlui</artifactId>
+                                    <type>war</type>
+                                    <excludes>
+                                        <exclude>WEB-INF/classes/**</exclude>
+                                    </excludes>
+                                </overlay>
+                                <overlay>
                                     <groupId>org.dspace</groupId>
                                     <artifactId>dspace-xmlui-lang</artifactId>
                                     <type>war</type>
@@ -193,6 +201,63 @@
             <artifactId>additions</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.atmire</groupId>
+            <artifactId>atmire-listings-and-reports-xmlui-api</artifactId>
+            <version>${listings-and-reports.version.number}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atmire</groupId>
+            <artifactId>atmire-cua-xmlui-webapp</artifactId>
+            <version>${cua.version.number}</version>
+            <type>war</type>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atmire</groupId>
+            <artifactId>atmire-cua-xmlui-api</artifactId>
+            <version>${cua.version.number}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atmire</groupId>
+            <artifactId>atmire-metadata-quality-webapp</artifactId>
+            <type>war</type>
+            <version>${mqm.version.number}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atmire</groupId>
+            <artifactId>atmire-metadata-quality-xmlui-api</artifactId>
+            <version>${mqm.version.number}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atmire</groupId>
+            <artifactId>datatables-xmlui-webapp</artifactId>
+            <type>war</type>
+            <version>${datatables.version.number}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atmire</groupId>
+            <artifactId>datatables-xmlui-api</artifactId>
+            <version>${datatables.version.number}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atmire</groupId>
+            <artifactId>atmire-dspace-xmlui</artifactId>
+            <type>war</type>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atmire</groupId>
+            <artifactId>atmire-dspace-xmlui</artifactId>
+            <classifier>classes</classifier>
+        </dependency>
+
         <!-- DSpace XMLUI Languages -->
         <dependency>
             <groupId>org.dspace</groupId>
@@ -219,47 +284,6 @@
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
             <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.atmire</groupId>
-            <artifactId>atmire-listings-and-reports-xmlui-api</artifactId>
-            <version>${listings-and-reports.version.number}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.atmire</groupId>
-            <artifactId>atmire-cua-api</artifactId>
-            <version>${cua.version.number}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.atmire</groupId>
-            <artifactId>atmire-cua-xmlui-api</artifactId>
-            <version>${cua.version.number}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.atmire</groupId>
-            <artifactId>atmire-cua-xmlui-webapp</artifactId>
-            <version>${cua.version.number}</version>
-            <type>war</type>
-        </dependency>
-        <dependency>
-            <groupId>com.atmire</groupId>
-            <artifactId>atmire-metadata-quality-api</artifactId>
-            <version>${mqm.version.number}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.atmire</groupId>
-            <artifactId>atmire-metadata-quality-xmlui-api</artifactId>
-            <version>${mqm.version.number}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.atmire</groupId>
-            <artifactId>atmire-metadata-quality-webapp</artifactId>
-            <type>war</type>
-            <version>${mqm.version.number}</version>
         </dependency>
 
 

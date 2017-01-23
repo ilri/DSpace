@@ -154,6 +154,8 @@
             var sm_y_offset = Math.max(statletNS.chartist.getHighestValue(statlet, 'sm').toString().length * 10, 30);
             var xs_y_offset = Math.max(statletNS.chartist.getHighestValue(statlet, 'xs').toString().length * 10, 30);
 
+            statlet.type = "number";
+
             var options = {
                 seriesBarDistance: 15,
                 axisY: {
@@ -166,7 +168,13 @@
                     showGrid: true
                 },
                 classNames: {bar: 'ct-bar ct-bar'},
-                distributeSeries: true
+                distributeSeries: true,
+                chartPadding: {
+                    left: 50,
+                    right: 25,
+                    top: 25,
+                    bottom: 10
+                }
             };
 
             var responsiveOptions = [

@@ -2686,4 +2686,55 @@
     <message key="xmlui.Discovery.AbstractSearch.type_subject">Filter by: AGROVOC keyword</message>
     <message key="xmlui.ArtifactBrowser.SimpleSearch.filter.subject">AGROVOC keyword</message>
     <message key="xmlui.ArtifactBrowser.SimpleSearch.filter.subject_filter">AGROVOC keyword</message>
+
+
+	<message key="xmlui.metadataquality.batch-edit.field.label.cg.authorship.types">Authorship types (cg.authorship.types)</message>
+	<message key="xmlui.metadataquality.batch-edit.field.label.cg.contributor.affiliation">Contributor Affiliation (cg.contributor.affiliation)</message>
+	<message key="xmlui.metadataquality.batch-edit.field.label.cg.contributor.crp">Contributor CRP (cg.contributor.crp)</message>
+	<message key="xmlui.metadataquality.batch-edit.field.label.cg.coverage.country">Coverage country (cg.coverage.country)</message>
+	<message key="xmlui.metadataquality.batch-edit.field.label.cg.coverage.region">Coverage region (cg.coverage.region)</message>
+	<message key="xmlui.metadataquality.batch-edit.field.label.cg.coverage.subregion">Coverage subregion (cg.coverage.subregion)</message>
+	<message key="xmlui.metadataquality.batch-edit.field.label.cg.edition">Edition (cg.edition)</message>
+	<message key="xmlui.metadataquality.batch-edit.field.label.cg.fulltextstatus">Fulltext status (cg.fulltextstatus)</message>
+	<message key="xmlui.metadataquality.batch-edit.field.label.cg.identifier.ccafsproject">CCAFS project (cg.identifier.ccafsproject)</message>
+	<message key="xmlui.metadataquality.batch-edit.field.label.cg.identifier.ciatproject">CIAT project (cg.identifier.ciatproject)</message>
+	<message key="xmlui.metadataquality.batch-edit.field.label.cg.identifier.cpwfproject">CPWF project (cg.identifier.cpwfproject)</message>
+	<message key="xmlui.metadataquality.batch-edit.field.label.cg.identifier.dataurl">Data url (cg.identifier.dataurl)</message>
+	<message key="xmlui.metadataquality.batch-edit.field.label.cg.identifier.doi">DOI (cg.identifier.doi)</message>
+	<message key="xmlui.metadataquality.batch-edit.field.label.cg.identifier.googleurl">Google url (cg.identifier.googleurl)</message>
+	<message key="xmlui.metadataquality.batch-edit.field.label.cg.identifier.status">Status (cg.identifier.status)</message>
+	<message key="xmlui.metadataquality.batch-edit.field.label.cg.identifier.url">Url (cg.identifier.url)</message>
+	<message key="xmlui.metadataquality.batch-edit.field.label.cg.isijournal">Isi journal (cg.isijournal)</message>
+	<message key="xmlui.metadataquality.batch-edit.field.label.cg.link.audio">Audio link (cg.link.audio)</message>
+	<message key="xmlui.metadataquality.batch-edit.field.label.cg.link.citation">Citation link</message>
+	<message key="xmlui.metadataquality.batch-edit.field.label.cg.link.permalink">Perma link (cg.link.permalink)</message>
+	<message key="xmlui.metadataquality.batch-edit.field.label.cg.link.photo">Photo link (cg.link.photo)</message>
+	<message key="xmlui.metadataquality.batch-edit.field.label.cg.link.reference">Reference link (cg.link.reference)</message>
+	<message key="xmlui.metadataquality.batch-edit.field.label.cg.link.video">Video link (cg.link.video)</message>
+	<message key="xmlui.metadataquality.batch-edit.field.label.cg.message.sms">SMS messages (cg.message.sms)</message>
+	<message key="xmlui.metadataquality.batch-edit.field.label.cg.message.voice">Voice messages (cg.message.voice)</message>
+	<message key="xmlui.metadataquality.batch-edit.field.label.cg.place">Place</message>
+	<message key="xmlui.metadataquality.batch-edit.field.label.cg.river.basin">River basin (cg.river.basin)</message>
+	<message key="xmlui.metadataquality.batch-edit.field.label.cg.species">Species (cg.species)</message>
+	<message key="xmlui.metadataquality.batch-edit.field.label.cg.species.breed">Species breed (cg.species.breed)</message>
+	<message key="xmlui.metadataquality.batch-edit.field.label.cg.subject.bioversity">Bioversity subject (cg.subject.bioversity)</message>
+	<message key="xmlui.metadataquality.batch-edit.field.label.cg.subject.ccafs">CCAFS subject (cg.subject.ccafs)</message>
+	<message key="xmlui.metadataquality.batch-edit.field.label.cg.subject.ciat">CIAT subject (cg.subject.ciat)</message>
+	<message key="xmlui.metadataquality.batch-edit.field.label.cg.subject.cifor">CIFOR subject (cg.subject.cifor)</message>
+	<message key="xmlui.metadataquality.batch-edit.field.label.cg.subject.cip">CIP subject (cg.subject.cip)</message>
+	<message key="xmlui.metadataquality.batch-edit.field.label.cg.subject.cpwf">CPWF subject (cg.subject.cpwf)</message>
+	<message key="xmlui.metadataquality.batch-edit.field.label.cg.subject.cta">CTA subject (cg.subject.cta)</message>
+	<message key="xmlui.metadataquality.batch-edit.field.label.cg.subject.drylands">Drylands subject (cg.subject.drylands)</message>
+	<message key="xmlui.metadataquality.batch-edit.field.label.cg.subject.humidtropics">Humidtropics subject (cg.subject.humidtropics)</message>
+	<message key="xmlui.metadataquality.batch-edit.field.label.cg.subject.icarda">ICARDA subject (cg.subject.icarda)</message>
+	<message key="xmlui.metadataquality.batch-edit.field.label.cg.subject.iita">IITA subject(cg.subject.iita)</message>
+	<message key="xmlui.metadataquality.batch-edit.field.label.cg.subject.ilri">ILRI subject (cg.subject.ilri)</message>
+	<message key="xmlui.metadataquality.batch-edit.field.label.cg.subject.iwmi">IWMI subject (cg.subject.iwmi)</message>
+	<message key="xmlui.metadataquality.batch-edit.field.label.cg.subject.wle">WLE subject (cg.subject.wle)</message>
+	<message key="xmlui.metadataquality.batch-edit.field.label.cg.targetaudience">Target audience (cg.targetaudience)</message>
+	<message key="xmlui.metadataquality.batch-edit.field.label.dc.provenance">Provenance (dc.provenance)</message>
+	<message key="xmlui.metadataquality.batch-edit.field.label.dc.rights.license">License (dc.rights.license)</message>
+	<message key="xmlui.metadataquality.batch-edit.field.label.dcterms.conformsTo">Conforms to (dcterms.conformsTo)</message>
+	<message key="xmlui.metadataquality.batch-edit.field.label.workflow.score">Workflow score (workflow.score)</message>
+
 </catalogue>

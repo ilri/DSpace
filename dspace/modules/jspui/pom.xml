@@ -95,6 +95,13 @@
 
         <dependency>
             <groupId>com.atmire</groupId>
+            <artifactId>atmire-listings-and-reports-webapp</artifactId>
+            <version>${listings-and-reports.version.number}</version>
+            <type>war</type>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atmire</groupId>
             <artifactId>atmire-listings-and-reports-jspui-api</artifactId>
             <version>${listings-and-reports.version.number}</version>
         </dependency>
@@ -116,13 +123,6 @@
            <groupId>javax.servlet</groupId>
            <artifactId>servlet-api</artifactId>
            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.atmire</groupId>
-            <artifactId>atmire-listings-and-reports-webapp</artifactId>
-            <version>${listings-and-reports.version.number}</version>
-            <type>war</type>
         </dependency>
 
     </dependencies>

@@ -62,7 +62,7 @@
                                 WEB-INF/**,META-INF/**
                             </excludes>
                             <includeArtifactIds>
-                                dspace-xmlui-mirage2,atmire-cua-xmlui-mirage2
+                                dspace-xmlui-mirage2,atmire-cua-xmlui-mirage2,atmire-cua-xmlui-webapp
                             </includeArtifactIds>
                         </configuration>
                     </execution>
@@ -519,6 +519,14 @@
             <version>${cua.version.number}</version>
             <type>war</type>
         </dependency>
+
+        <dependency>
+            <groupId>com.atmire</groupId>
+            <artifactId>atmire-cua-xmlui-webapp</artifactId>
+            <version>${cua.version.number}</version>
+            <type>war</type>
+        </dependency>
+
     </dependencies>
 
 </project>

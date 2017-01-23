@@ -466,7 +466,7 @@
                             <map:mount check-reload="no" src="aspects/json-mqm.xmap" uri-prefix="JSON/mqm/"/>
                         </map:match>
                         <map:match pattern="JSON/datatables/**">
-                            <map:mount check-reload="no" src="aspects/json-datatables.xmap" uri-prefix="JSON/ datatables/"/>
+                            <map:mount check-reload="no" src="aspects/json-datatables.xmap" uri-prefix="JSON/datatables/"/>
                         </map:match>
 
                     <map:match pattern="cua/**">

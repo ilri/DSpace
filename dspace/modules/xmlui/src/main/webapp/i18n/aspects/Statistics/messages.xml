@@ -586,6 +586,7 @@ DAMAGE.
     <message key="xmlui.reporting-suite.statistics.graph-editor.data-source.dataset.option.dc.type">Type (dc.type)</message>
     <message key="xmlui.reporting-suite.statistics.graph-editor.data-source.dataset.option.type">Type (dc.type)</message>
 
+    <message key="xmlui.reporting-suite.statistics.graph-editor.data-source.dataset.option.title">Title (dc.title)</message>
     <message key="xmlui.reporting-suite.statistics.graph-editor.data-source.dataset.option.status">Status (cg.identifier.status)</message>
     <message key="xmlui.reporting-suite.statistics.graph-editor.data-source.dataset.option.isijournal">ISI journal (cg.isijournal)</message>
     <message key="xmlui.reporting-suite.statistics.graph-editor.data-source.dataset.option.journaltitle">Journal title (dc.source)</message>
@@ -979,6 +980,10 @@ DAMAGE.
     <message key="xmlui.metadataquality.batch-edit.field.label.dc.type.template">Type Template (dc.type.template)</message>
     <message key="xmlui.metadataquality.batch-edit.field.label.dc.type">Type (dc.type)</message>
     <message key="xmlui.metadataquality.batch-edit.field.label.workflow.batchedit.claimedby">Batch edit step claimed user identifier (workflow.batchedit.claimedby)</message>
-
+    <message key="xmlui.metadataquality.batch-edit.field.label.cg.livestock.agegroup">Livestock age group (cg.livestock.agegroup)</message>
+    <message key="xmlui.metadataquality.batch-edit.field.label.cg.livestock.function">Livestock function (cg.livestock.function)</message>
+    <message key="xmlui.metadataquality.batch-edit.field.label.cg.subject.crp">Subject crp (cg.subject.crp)</message>
+    <message key="xmlui.metadataquality.batch-edit.field.label.cg.title.journal">Journal title (cg.title.journal)</message>
+    <message key="xmlui.metadataquality.batch-edit.field.label.dc.publicationcategory">Publication category (dc.publicationcategory)</message>
 
 </catalogue>

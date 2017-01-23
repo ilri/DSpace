@@ -97,6 +97,7 @@
             <version>${cua.version.number}</version>
             <type>jar</type>
         </dependency>
+
         <dependency>
             <groupId>com.atmire</groupId>
             <artifactId>atmire-cua-rest-webapp</artifactId>

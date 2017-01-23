@@ -183,18 +183,8 @@
         </dependency>
         <dependency>
             <groupId>com.atmire</groupId>
-            <artifactId>atmire-listings-and-reports-api</artifactId>
+            <artifactId>atmire-listings-and-reports-common</artifactId>
             <version>${listings-and-reports.version.number}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.atmire</groupId>
-            <artifactId>atmire-cua-api</artifactId>
-            <version>${cua.version.number}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.atmire</groupId>
-            <artifactId>atmire-metadata-quality-api</artifactId>
-            <version>${mqm.version.number}</version>
         </dependency>
         <dependency>
             <groupId>com.atmire</groupId>
@@ -203,12 +193,13 @@
         </dependency>
         <dependency>
             <groupId>com.atmire</groupId>
-            <artifactId>atmire-datatables-common</artifactId>
-            <version>${datatables.version.number}</version>
+            <artifactId>atmire-metadata-quality-common</artifactId>
+            <version>${mqm.version.number}</version>
         </dependency>
         <dependency>
-            <groupId>org.dspace</groupId>
-            <artifactId>dspace-api</artifactId>
+            <groupId>com.atmire</groupId>
+            <artifactId>atmire-datatables-common</artifactId>
+            <version>${datatables.version.number}</version>
         </dependency>
     	<!-- This dependency ensures DSpace OAI JAR is added to [dspace]/lib/,
              so that the 'dspace oai' launcher.xml command works.  -->
