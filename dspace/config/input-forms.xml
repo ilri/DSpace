@@ -83,8 +83,9 @@
           <dc-qualifier></dc-qualifier>
           <repeatable>false</repeatable>
           <label>Journal title</label>
+          <vocabulary>dc-source</vocabulary>
           <input-type>onebox</input-type>
-          <hint>Enter the full journal title.</hint>
+          <hint>Click below to see a pre-populated list of journal titles, or enter the full journal title manually.</hint>
           <required></required>
         </field>
         <field>
@@ -1312,6 +1313,11 @@
         <displayed-value>RVF</displayed-value>
         <stored-value>RVF</stored-value>
       </pair>
+
+      <pair>
+        <displayed-value>SCALING</displayed-value>
+        <stored-value>SCALING</stored-value>
+      </pair>
       <pair>
         <displayed-value>SEEDS</displayed-value>
         <stored-value>SEEDS</stored-value>
@@ -2238,6 +2244,10 @@
         <stored-value>FARMING SYSTEMS</stored-value>
       </pair>
       <pair>
+        <displayed-value>FOOD SYSTEMS</displayed-value>
+        <stored-value>FOOD SYSTEMS</stored-value>
+      </pair>
+      <pair>
         <displayed-value>GENDER AND EQUITY</displayed-value>
         <stored-value>GENDER AND EQUITY</stored-value>
       </pair>
@@ -2908,32 +2918,68 @@
     </value-pairs>
     <value-pairs value-pairs-name="crpsubject" dc-term="crsubject_crpsubject">
       <pair>
-        <displayed-value>DRYLAND SYSTEMS</displayed-value>
-        <stored-value>DRYLAND SYSTEMS</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>HUMIDTROPICS</displayed-value>
-        <stored-value>HUMIDTROPICS</stored-value>
+        <displayed-value>AGRICULTURE FOR NUTRITION AND HEALTH</displayed-value>
+        <stored-value>AGRICULTURE FOR NUTRITION AND HEALTH</stored-value>
       </pair>
       <pair>
         <displayed-value>AQUATIC AGRICULTURAL SYSTEMS</displayed-value>
         <stored-value>AQUATIC AGRICULTURAL SYSTEMS</stored-value>
       </pair>
       <pair>
+        <displayed-value>BIG DATA</displayed-value>
+        <stored-value>BIG DATA</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>CLIMATE CHANGE, AGRICULTURE AND FOOD SECURITY</displayed-value>
+        <stored-value>CLIMATE CHANGE, AGRICULTURE AND FOOD SECURITY</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>DRYLAND CEREALS</displayed-value>
+        <stored-value>DRYLAND CEREALS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>DRYLAND SYSTEMS</displayed-value>
+        <stored-value>DRYLAND SYSTEMS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>EXCELLENCE IN BREEDING</displayed-value>
+        <stored-value>EXCELLENCE IN BREEDING</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>FISH</displayed-value>
+        <stored-value>FISH</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>FORESTS, TREES AND AGROFORESTRY</displayed-value>
+        <stored-value>FORESTS, TREES AND AGROFORESTRY</stored-value>
+      </pair>
+      <pair>
         <displayed-value>GENEBANKS</displayed-value>
         <stored-value>GENEBANKS</stored-value>
       </pair>
       <pair>
-        <displayed-value>POLICIES, INSTITUTIONS, AND MARKETS</displayed-value>
-        <stored-value>POLICIES, INSTITUTIONS, AND MARKETS</stored-value>
+        <displayed-value>GRAIN LEGUMES</displayed-value>
+        <stored-value>GRAIN LEGUMES</stored-value>
       </pair>
       <pair>
-        <displayed-value>WHEAT</displayed-value>
-        <stored-value>WHEAT</stored-value>
+        <displayed-value>HUMIDTROPICS</displayed-value>
+        <stored-value>HUMIDTROPICS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>LIVESTOCK</displayed-value>
+        <stored-value>LIVESTOCK</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>LIVESTOCK AND FISH</displayed-value>
+        <stored-value>LIVESTOCK AND FISH</stored-value>
       </pair>
       <pair>
         <displayed-value>MAIZE</displayed-value>
         <stored-value>MAIZE</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>POLICIES, INSTITUTIONS, AND MARKETS</displayed-value>
+        <stored-value>POLICIES, INSTITUTIONS, AND MARKETS</stored-value>
       </pair>
       <pair>
         <displayed-value>RICE</displayed-value>
@@ -2944,32 +2990,12 @@
         <stored-value>ROOTS, TUBERS AND BANANAS</stored-value>
       </pair>
       <pair>
-        <displayed-value>GRAIN LEGUMES</displayed-value>
-        <stored-value>GRAIN LEGUMES</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>DRYLAND CEREALS</displayed-value>
-        <stored-value>DRYLAND CEREALS</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>LIVESTOCK AND FISH</displayed-value>
-        <stored-value>LIVESTOCK AND FISH</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>AGRICULTURE FOR NUTRITION AND HEALTH</displayed-value>
-        <stored-value>AGRICULTURE FOR NUTRITION AND HEALTH</stored-value>
-      </pair>
-      <pair>
         <displayed-value>WATER, LAND AND ECOSYSTEMS</displayed-value>
         <stored-value>WATER, LAND AND ECOSYSTEMS</stored-value>
       </pair>
       <pair>
-        <displayed-value>FORESTS, TREES AND AGROFORESTRY</displayed-value>
-        <stored-value>FORESTS, TREES AND AGROFORESTRY</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>CLIMATE CHANGE, AGRICULTURE AND FOOD SECURITY</displayed-value>
-        <stored-value>CLIMATE CHANGE, AGRICULTURE AND FOOD SECURITY</stored-value>
+        <displayed-value>WHEAT</displayed-value>
+        <stored-value>WHEAT</stored-value>
       </pair>
     </value-pairs>
     <value-pairs value-pairs-name="ccafsubject" dc-term="ccafsubject">
