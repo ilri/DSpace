@@ -95,7 +95,7 @@
                                     </a>
                                 </span>
                                 <xsl:if test="count(following-sibling::dim:field[@element='contributor'][@qualifier='author']) != 0">
-                                    <xsl:text>, </xsl:text>
+                                    <xsl:text>; </xsl:text>
                                 </xsl:if>
 
                             </xsl:for-each>
