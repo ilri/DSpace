@@ -1,0 +1,30 @@
+@import "../../0_CGIAR/styles/main";
+
+header .navbar-default {
+  color: $livestock-white;
+}
+
+.trail-wrapper {
+  background-color: $livestock-white;
+  color: $livestock-black-text;
+  border-bottom: none;
+}
+
+.breadcrumb .dropdown-toggle {
+  color: $livestock-black-text;;
+}
+
+.headerInfoName {
+  color: $livestock-white;
+}
+
+.headerInfoText {
+  color: $livestock-white;
+}
+
+// text on breadcrumb
+.breadcrumb > li,
+.breadcrumb > li > a,
+.trail-wrapper .breadcrumb > li + li::before {
+  color: $livestock-black-text;
+}

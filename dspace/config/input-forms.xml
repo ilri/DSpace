@@ -83,8 +83,9 @@
           <dc-qualifier></dc-qualifier>
           <repeatable>false</repeatable>
           <label>Journal title</label>
+          <vocabulary>dc-source</vocabulary>
           <input-type>onebox</input-type>
-          <hint>Enter the full journal title.</hint>
+          <hint>Click below to see a pre-populated list of journal titles, or enter the full journal title manually.</hint>
           <required></required>
         </field>
         <field>
@@ -335,8 +336,18 @@
           <dc-element>identifier</dc-element>
           <dc-qualifier>ccafsproject</dc-qualifier>
           <repeatable>true</repeatable>
-          <label>CCAFS project tag</label>
+          <label>CCAFS project tag (phase I)</label>
           <input-type value-pairs-name="ccafsproject">dropdown</input-type>
+          <hint></hint>
+          <required></required>
+        </field>
+        <field>
+          <dc-schema>cg</dc-schema>
+          <dc-element>identifier</dc-element>
+          <dc-qualifier>ccafsprojectpii</dc-qualifier>
+          <repeatable>true</repeatable>
+          <label>CCAFS project tag (phase II)</label>
+          <input-type value-pairs-name="ccafsprojectpii">dropdown</input-type>
           <hint></hint>
           <required></required>
         </field>
@@ -433,16 +444,6 @@
         <field>
           <dc-schema>cg</dc-schema>
           <dc-element>subject</dc-element>
-          <dc-qualifier>icarda</dc-qualifier>
-          <repeatable>true</repeatable>
-          <label>ICARDA subject</label>
-          <input-type value-pairs-name="icardasubject">dropdown</input-type>
-          <hint></hint>
-          <required></required>
-        </field>
-        <field>
-          <dc-schema>cg</dc-schema>
-          <dc-element>subject</dc-element>
           <dc-qualifier>iita</dc-qualifier>
           <repeatable>true</repeatable>
           <label>IITA subject</label>
@@ -467,6 +468,16 @@
           <repeatable>true</repeatable>
           <label>IWMI subject</label>
           <input-type value-pairs-name="iwmisubject">dropdown</input-type>
+          <hint></hint>
+          <required></required>
+        </field>
+        <field>
+          <dc-schema>cg</dc-schema>
+          <dc-element>subject</dc-element>
+          <dc-qualifier>pabra</dc-qualifier>
+          <repeatable>true</repeatable>
+          <label>PABRA subject</label>
+          <input-type value-pairs-name="pabrasubject">dropdown</input-type>
           <hint></hint>
           <required></required>
         </field>
@@ -905,52 +916,6 @@
         <stored-value>TREE-BASED SYSTEMS</stored-value>
       </pair>
     </value-pairs>
-    <value-pairs value-pairs-name="icardasubject" dc-term="subject_icarda">
-      <pair>
-        <displayed-value>ARAB FOOD SECURITY</displayed-value>
-        <stored-value>ARAB FOOD SECURITY</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>BIODIVERSITY AND INTEGRATED GENE MANAGEMENT</displayed-value>
-        <stored-value>BIODIVERSITY AND INTEGRATED GENE MANAGEMENT</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>CGIAR RESEARCH PROGRAM ON DRYLAND SYSTEMS</displayed-value>
-        <stored-value>CGIAR RESEARCH PROGRAM ON DRYLAND SYSTEMS</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>DIVERSIFICATION AND SUSTAINABLE INTENSIFICATION</displayed-value>
-        <stored-value>DIVERSIFICATION AND SUSTAINABLE INTENSIFICATION</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>GEO-INFORMATICS</displayed-value>
-        <stored-value>GEO-INFORMATICS</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>HSAD</displayed-value>
-        <stored-value>HSAD</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>INTEGRATED WATER AND LAND MANAGEMENT</displayed-value>
-        <stored-value>INTEGRATED WATER AND LAND MANAGEMENT</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>IRAQ SALINITY</displayed-value>
-        <stored-value>IRAQ SALINITY</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>MENARID</displayed-value>
-        <stored-value>MENARID</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>SOCIAL, ECONOMIC, AND POLICY RESEARCH</displayed-value>
-        <stored-value>SOCIAL, ECONOMIC, AND POLICY RESEARCH</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>WLI</displayed-value>
-        <stored-value>WLI</stored-value>
-      </pair>
-    </value-pairs>
     <value-pairs value-pairs-name="ilrisubject" dc-term="ilrisubject">
       <pair>
         <displayed-value>AGRICULTURE</displayed-value>
@@ -1313,6 +1278,10 @@
         <stored-value>RVF</stored-value>
       </pair>
       <pair>
+        <displayed-value>SCALING</displayed-value>
+        <stored-value>SCALING</stored-value>
+      </pair>
+      <pair>
         <displayed-value>SEEDS</displayed-value>
         <stored-value>SEEDS</stored-value>
       </pair>
@@ -1614,6 +1583,40 @@
       <pair>
         <displayed-value>DRILLING</displayed-value>
         <stored-value>DRILLING</stored-value>
+      </pair>
+    </value-pairs>
+    <value-pairs value-pairs-name="pabrasubject" dc-term="pabrasubject">
+      <pair>
+        <displayed-value>BEAN CORRIDORS</displayed-value>
+        <stored-value>BEAN CORRIDORS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>BREEDING</displayed-value>
+        <stored-value>BREEDING</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>GENDER</displayed-value>
+        <stored-value>GENDER</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>INTEGRATED CROP MANAGEMENT</displayed-value>
+        <stored-value>INTEGRATED CROP MANAGEMENT</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>LINKING FARMERS TO MARKETS</displayed-value>
+        <stored-value>LINKING FARMERS TO MARKETS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>MONITORING AND EVALUATION</displayed-value>
+        <stored-value>MONITORING AND EVALUATION</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>NUTRITION</displayed-value>
+        <stored-value>NUTRITION</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SEED SYSTEMS</displayed-value>
+        <stored-value>SEED SYSTEMS</stored-value>
       </pair>
     </value-pairs>
     <value-pairs value-pairs-name="bioversity" dc-term="subject_bioversity">
@@ -2236,6 +2239,10 @@
       <pair>
         <displayed-value>FARMING SYSTEMS</displayed-value>
         <stored-value>FARMING SYSTEMS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>FOOD SYSTEMS</displayed-value>
+        <stored-value>FOOD SYSTEMS</stored-value>
       </pair>
       <pair>
         <displayed-value>GENDER AND EQUITY</displayed-value>
@@ -2994,8 +3001,8 @@
         <stored-value>BASELINE SURVEY</stored-value>
       </pair>
       <pair>
-        <displayed-value>CLIMATE-SMART AGRICULTURAL PRACTICES</displayed-value>
-        <stored-value>CLIMATE-SMART AGRICULTURAL PRACTICES</stored-value>
+        <displayed-value>CLIMATE-SMART TECHNOLOGIES AND PRACTICES</displayed-value>
+        <stored-value>CLIMATE-SMART TECHNOLOGIES AND PRACTICES</stored-value>
       </pair>
       <pair>
         <displayed-value>DATA AND TOOLS FOR ANALYSIS AND PLANNING</displayed-value>
@@ -3010,16 +3017,12 @@
         <stored-value>GENDER AND SOCIAL DIFFERENTIATION</stored-value>
       </pair>
       <pair>
-        <displayed-value>LOW EMISSIONS AGRICULTURE</displayed-value>
-        <stored-value>LOW EMISSIONS AGRICULTURE</stored-value>
+        <displayed-value>LOW EMISSIONS DEVELOPMENT</displayed-value>
+        <stored-value>LOW EMISSIONS DEVELOPMENT</stored-value>
       </pair>
       <pair>
-        <displayed-value>MANAGING CLIMATE RISK</displayed-value>
-        <stored-value>MANAGING CLIMATE RISK</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>POLICIES AND INSTITUTIONS</displayed-value>
-        <stored-value>POLICIES AND INSTITUTIONS</stored-value>
+        <displayed-value>PRIORITIES AND POLICIES FOR CSA</displayed-value>
+        <stored-value>PRIORITIES AND POLICIES FOR CSA</stored-value>
       </pair>
       <pair>
         <displayed-value>SCENARIOS</displayed-value>
@@ -3632,6 +3635,160 @@
       <pair>
         <displayed-value>WA_SciencePolicyExchange</displayed-value>
         <stored-value>WA_SciencePolicyExchange</stored-value>
+      </pair>
+    </value-pairs>
+    <value-pairs value-pairs-name="ccafsprojectpii" dc-term="ccafsprojectpii">
+      <pair>
+        <displayed-value>PII-FP1_ICRISATWA</displayed-value>
+        <stored-value>PII-FP1_ICRISATWA</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PII-FP1_CIATLAM</displayed-value>
+        <stored-value>PII-FP1_CIATLAM</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PII-FP1_PACCA</displayed-value>
+        <stored-value>PII-FP1_PACCA</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PII-FP1_ILRIEA</displayed-value>
+        <stored-value>PII-FP1_ILRIEA</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PII-SEA_PIRCCA</displayed-value>
+        <stored-value>PII-SEA_PIRCCA</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PII-LAM_LivestockPlus</displayed-value>
+        <stored-value>PII-LAM_LivestockPlus</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PII-FP3_TerraCert</displayed-value>
+        <stored-value>PII-FP3_TerraCert</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PII-FP3_EALivestockLED</displayed-value>
+        <stored-value>PII-FP3_EALivestockLED</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PII-FP3_EALivestockNAMA</displayed-value>
+        <stored-value>PII-FP3_EALivestockNAMA</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PII-FP3_LowEmissionsIndia</displayed-value>
+        <stored-value>PII-FP3_LowEmissionsIndia</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PII-FP3_LEDPriorities</displayed-value>
+        <stored-value>PII-FP3_LEDPriorities</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PII-SA_RiskMitigation</displayed-value>
+        <stored-value>PII-SA_RiskMitigation</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PII-SEA_NoRegrets</displayed-value>
+        <stored-value>PII-SEA_NoRegrets</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PII-FP3_NitrogenEstimates</displayed-value>
+        <stored-value>PII-FP3_NitrogenEstimates</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PII-SA_CSA</displayed-value>
+        <stored-value>PII-SA_CSA</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PII-SEA_ResilientCSVs</displayed-value>
+        <stored-value>PII-SEA_ResilientCSVs</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PII-WA_AgroSylvopastoralSystems</displayed-value>
+        <stored-value>PII-WA_AgroSylvopastoralSystems</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PII-WA_IntegratedInterventions</displayed-value>
+        <stored-value>PII-WA_IntegratedInterventions</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PII-EA_PAR_CSA_Portfolios</displayed-value>
+        <stored-value>PII-EA_PAR_CSA_Portfolios</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PII-LAM_AgroClimas</displayed-value>
+        <stored-value>PII-LAM_AgroClimas</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PII-FP2_CitizenScience</displayed-value>
+        <stored-value>PII-FP2_CitizenScience</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PII-SA_IndexInsurance</displayed-value>
+        <stored-value>PII-SA_IndexInsurance</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PII-FP4_CRMWestAfrica</displayed-value>
+        <stored-value>PII-FP4_CRMWestAfrica</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PII-SEA_WomenEM</displayed-value>
+        <stored-value>PII-SEA_WomenEM</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PII-SEA_EWSdiseases</displayed-value>
+        <stored-value>PII-SEA_EWSdiseases</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PII-FP4_IndexInsurance</displayed-value>
+        <stored-value>PII-FP4_IndexInsurance</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PII-SEA_Mekong</displayed-value>
+        <stored-value>PII-SEA_Mekong</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PII-SEA_Evidenceforupscaling</displayed-value>
+        <stored-value>PII-SEA_Evidenceforupscaling</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PII-FP2_CSAPartnerships</displayed-value>
+        <stored-value>PII-FP2_CSAPartnerships</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PII-FP2_ValueChains</displayed-value>
+        <stored-value>PII-FP2_ValueChains</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PII-FP2_BigData</displayed-value>
+        <stored-value>PII-FP2_BigData</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PII-FP1_CSASouthAsia</displayed-value>
+        <stored-value>PII-FP1_CSASouthAsia</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PII-SA_PAR_CSV</displayed-value>
+        <stored-value>PII-SA_PAR_CSV</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PII-FP1_IMPACT</displayed-value>
+        <stored-value>PII-FP1_IMPACT</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PII-FP1_GeneticDiversity</displayed-value>
+        <stored-value>PII-FP1_GeneticDiversity</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PII-LAM_CSV</displayed-value>
+        <stored-value>PII-LAM_CSV</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PII-SEA_UpscalingInnovation</displayed-value>
+        <stored-value>PII-SEA_UpscalingInnovation</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PII-LAM_CSA</displayed-value>
+        <stored-value>PII-LAM_CSA</stored-value>
       </pair>
     </value-pairs>
     <value-pairs value-pairs-name="ciatproject" dc-term="ciatproject">

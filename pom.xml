@@ -979,8 +979,14 @@
          <dependency>
             <groupId>commons-collections</groupId>
             <artifactId>commons-collections</artifactId>
-            <version>3.2</version>
+            <version>3.2.2</version>
             <!-- <version>3.1</version> xmlui - wing -->
+         </dependency>
+         <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <!-- added on 2017-03-08 to temporary fix DS-3520 in Atmire modules -->
+            <version>4.1</version>
          </dependency>
          <dependency>
             <groupId>commons-dbcp</groupId>
@@ -1312,12 +1318,6 @@
               <artifactId>atmire-dspace-xmlui</artifactId>
               <classifier>classes</classifier>
               <version>5.5-1.15.13-0</version>
-          </dependency>
-          <dependency>
-              <groupId>com.atmire</groupId>
-              <artifactId>atmire-dspace-xmlui</artifactId>
-              <version>5.5-1.15.13-0</version>
-              <classifier>classes</classifier>
           </dependency>
           <dependency>
               <groupId>com.atmire</groupId>

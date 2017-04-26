@@ -211,7 +211,6 @@
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.crpsubject.column_heading">CGIAR Research Program</message>
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.basin.column_heading">River basin</message>
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.cipsubject.column_heading">CIP subject</message>
-	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.icardasubject.column_heading">ICARDA subject</message>
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.breed.column_heading">Animal breed</message>
 
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.region.column_heading">Region</message>
@@ -270,8 +269,6 @@
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.trail.metadata.ciat">Browsing {0} by CIAT subject</message>
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.title.metadata.cipsubject">Browsing {0} by CIP subject {1}</message>
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.trail.metadata.cipsubject">Browsing {0} by CIP subject</message>
-	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.title.metadata.icardasubject">Browsing {0} by ICARDA subject {1}</message>
-	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.trail.metadata.icardasubject">Browsing {0} by ICARDA subject</message>
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.title.metadata.breed">Browsing {0} by animal breed {1}</message>
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.trail.metadata.breed">Browsing {0} by animal breed</message>
 
@@ -387,7 +384,6 @@
 	<message key="xmlui.ArtifactBrowser.Navigation.browse_basin">By River basin</message>
 	<message key="xmlui.ArtifactBrowser.Navigation.browse_type">By Output type</message>
 	<message key="xmlui.ArtifactBrowser.Navigation.browse_cipsubject">By CIP subject</message>
-	<message key="xmlui.ArtifactBrowser.Navigation.browse_icardasubject">By ICARDA subject</message>
 	<message key="xmlui.ArtifactBrowser.Navigation.browse_breed">By animal breed</message>
 
 	<!-- org.dspace.app.xmlui.artifactbrowser.SimpleSearch.java -->
@@ -2678,7 +2674,6 @@
     <message key="xmlui.Discovery.AbstractSearch.type_type">Filter by: Output type</message>
     <message key="xmlui.Discovery.AbstractSearch.type_affiliation">Filter by: Author affiliation</message>
     <message key="xmlui.Discovery.AbstractSearch.type_iitasubject">Filter by: IITA subject</message>
-    <message key="xmlui.Discovery.AbstractSearch.type_icardasubject">Filter by: ICARDA subject</message>
     <message key="xmlui.Discovery.AbstractSearch.type_cipsubject">Filter by: CIP subject</message>
     <message key="xmlui.Discovery.AbstractSearch.type_sponsorship">Filter by: Investor</message>
 

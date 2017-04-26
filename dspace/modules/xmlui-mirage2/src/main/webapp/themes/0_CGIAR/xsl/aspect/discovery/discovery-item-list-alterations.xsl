@@ -120,7 +120,7 @@
                                             </a>
                                         </span>
                                         <xsl:if test="count(following-sibling::dri:item) != 0">
-                                            <xsl:text>, </xsl:text>
+                                            <xsl:text>; </xsl:text>
                                         </xsl:if>
 
                                     </xsl:for-each>

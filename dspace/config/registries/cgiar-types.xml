@@ -107,6 +107,13 @@
     <dc-type>
         <schema>cg</schema>
         <element>identifier</element>
+        <qualifier>ccafsprojectpii</qualifier>
+        <scope_note>CCAFS Phase II project tag</scope_note>
+    </dc-type>
+
+    <dc-type>
+        <schema>cg</schema>
+        <element>identifier</element>
         <qualifier>ciatproject</qualifier>
     </dc-type>
 
@@ -180,6 +187,13 @@
         <schema>cg</schema>
         <element>subject</element>
         <qualifier>iwmi</qualifier>
+    </dc-type>
+
+    <dc-type>
+        <schema>cg</schema>
+        <element>subject</element>
+        <qualifier>pabra</qualifier>
+        <scope_note>Pan-Africa Bean Research Alliance (PABRA) subject.</scope_note>
     </dc-type>
 
     <dc-type>
