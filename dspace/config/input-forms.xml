@@ -287,7 +287,7 @@
           <label>Subregion</label>
           <input-type>onebox</input-type>
           <vocabulary>cg-coverage-subregion</vocabulary>
-          <hint>Click below to see a pre-populated list of subregions — normally provinces, states, regions, etc WITHIN a country (or enter a new one in UPPER CASE).</hint>
+          <hint>Click below to see a pre-populated list of subregions&#226;&#8364;&#352;&#226;&#8364;&#8221;&#226;&#8364;&#352;normally provinces, states, regions, etc WITHIN a country (or enter a new one in UPPER CASE).</hint>
           <required></required>
         </field>
         <field>
@@ -488,6 +488,16 @@
           <repeatable>true</repeatable>
           <label>PABRA subject</label>
           <input-type value-pairs-name="pabrasubject">dropdown</input-type>
+          <hint></hint>
+          <required></required>
+        </field>
+        <field>
+          <dc-schema>cg</dc-schema>
+          <dc-element>identifier</dc-element>
+          <dc-qualifier>rtbflagship</dc-qualifier>
+          <repeatable>true</repeatable>
+          <label>RTB flagship</label>
+          <input-type value-pairs-name="rtbflagship">dropdown</input-type>
           <hint></hint>
           <required></required>
         </field>
@@ -1627,6 +1637,28 @@
       <pair>
         <displayed-value>SEED SYSTEMS</displayed-value>
         <stored-value>SEED SYSTEMS</stored-value>
+      </pair>
+    </value-pairs>
+    <value-pairs value-pairs-name="rtbflagship" dc-term="rtbflagship">
+      <pair>
+        <displayed-value>Flagship 1 &#226;&#8364;&#8220; Enhanced genetic resources</displayed-value>
+        <stored-value>Flagship 1 &#226;&#8364;&#8220; Enhanced genetic resources</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Flagship 2 &#226;&#8364;&#8220; Adapted productive varieties and quality seed</displayed-value>
+        <stored-value>Flagship 2 &#226;&#8364;&#8220; Adapted productive varieties and quality seed</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Flagship 3 &#226;&#8364;&#8220; Resilient crops</displayed-value>
+        <stored-value>Flagship 3 &#226;&#8364;&#8220; Resilient crops</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Flagship 4 &#226;&#8364;&#8220; Nutritious food and added value</displayed-value>
+        <stored-value>Flagship 4 &#226;&#8364;&#8220; Nutritious food and added value</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Flagship 5 &#226;&#8364;&#8220; Improved livelihoods at scale</displayed-value>
+        <stored-value>Flagship 5 &#226;&#8364;&#8220; Improved livelihoods at scale</stored-value>
       </pair>
     </value-pairs>
     <value-pairs value-pairs-name="bioversity" dc-term="subject_bioversity">
