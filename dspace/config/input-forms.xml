@@ -287,7 +287,7 @@
           <label>Subregion</label>
           <input-type>onebox</input-type>
           <vocabulary>cg-coverage-subregion</vocabulary>
-          <hint>Click below to see a pre-populated list of subregions — normally provinces, states, regions, etc WITHIN a country (or enter a new one in UPPER CASE).</hint>
+          <hint>Click below to see a pre-populated list of subregions&#226;&#8364;&#352;&#226;&#8364;&#8221;&#226;&#8364;&#352;normally provinces, states, regions, etc WITHIN a country (or enter a new one in UPPER CASE).</hint>
           <required></required>
         </field>
         <field>
@@ -1452,6 +1452,10 @@
       <pair>
         <displayed-value>Press Item</displayed-value>
         <stored-value>Press Item</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Photo Report</displayed-value>
+        <stored-value>Photo Report</stored-value>
       </pair>
       <pair>
         <displayed-value>Report</displayed-value>
