@@ -1449,7 +1449,11 @@
         <displayed-value>Presentation</displayed-value>
         <stored-value>Presentation</stored-value>
       </pair>
-      <pair>
+     <pair>
+        <displayed-value>Photo Report</displayed-value>
+        <stored-value>Photo Report</stored-value>
+      </pair>
+      <pair> 
         <displayed-value>Press Item</displayed-value>
         <stored-value>Press Item</stored-value>
       </pair>
