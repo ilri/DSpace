@@ -3295,18 +3295,6 @@
     </value-pairs>
     <value-pairs value-pairs-name="ccafsproject" dc-term="ccafsproject">
       <pair>
-        <displayed-value>EA_CSV</displayed-value>
-        <stored-value>EA_CSV</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>EA_PAR</displayed-value>
-        <stored-value>EA_PAR</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>EA_PAR_CSA_Portfoilios</displayed-value>
-        <stored-value>EA_PAR_CSA_Portfoilios</stored-value>
-      </pair>
-      <pair>
         <displayed-value>FP1_BigData</displayed-value>
         <stored-value>FP1_BigData</stored-value>
       </pair>
@@ -3319,28 +3307,12 @@
         <stored-value>FP1_CoffeeLandscapes</stored-value>
       </pair>
       <pair>
-        <displayed-value>FP1_CSAEvidence</displayed-value>
-        <stored-value>FP1_CSAEvidence</stored-value>
-      </pair>
-      <pair>
         <displayed-value>FP1_CSAPartnerships</displayed-value>
         <stored-value>FP1_CSAPartnerships</stored-value>
       </pair>
       <pair>
-        <displayed-value>FP1_localAdaptationPlanning</displayed-value>
-        <stored-value>FP1_localAdaptationPlanning</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>FP1_ValueChains</displayed-value>
-        <stored-value>FP1_ValueChains</stored-value>
-      </pair>
-      <pair>
         <displayed-value>FP2_ClimateServicesRwanda</displayed-value>
         <stored-value>FP2_ClimateServicesRwanda</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>FP2_CRMWestAfrica</displayed-value>
-        <stored-value>FP2_CRMWestAfrica</stored-value>
       </pair>
       <pair>
         <displayed-value>FP2_ForecastingEastAfrica</displayed-value>
@@ -3357,6 +3329,14 @@
       <pair>
         <displayed-value>FP2_IndexInsurance</displayed-value>
         <stored-value>FP2_IndexInsurance</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>FP3_LEDs</displayed-value>
+        <stored-value>FP3_LEDs</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>FP3_TerraCert</displayed-value>
+        <stored-value>FP3_TerraCert</stored-value>
       </pair>
       <pair>
         <displayed-value>FP3_CCAC</displayed-value>
@@ -3379,36 +3359,12 @@
         <stored-value>FP3_FAOcollaboration</stored-value>
       </pair>
       <pair>
-        <displayed-value>FP3_Finance</displayed-value>
-        <stored-value>FP3_Finance</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>FP3_Gender</displayed-value>
-        <stored-value>FP3_Gender</stored-value>
-      </pair>
-      <pair>
         <displayed-value>FP3_GII</displayed-value>
         <stored-value>FP3_GII</stored-value>
       </pair>
       <pair>
         <displayed-value>FP3_LEDPathways</displayed-value>
         <stored-value>FP3_LEDPathways</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>FP3_LEDPathways_IIASA</displayed-value>
-        <stored-value>FP3_LEDPathways_IIASA</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>FP3_LEDPriorities</displayed-value>
-        <stored-value>FP3_LEDPriorities</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>FP3_LEDs</displayed-value>
-        <stored-value>FP3_LEDs</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>FP3_LEDScaling</displayed-value>
-        <stored-value>FP3_LEDScaling</stored-value>
       </pair>
       <pair>
         <displayed-value>FP3_LowEmissionsIndia</displayed-value>
@@ -3431,68 +3387,48 @@
         <stored-value>FP3_REDD+</stored-value>
       </pair>
       <pair>
-        <displayed-value>FP3_SAMPLES</displayed-value>
-        <stored-value>FP3_SAMPLES</stored-value>
-      </pair>
-      <pair>
         <displayed-value>FP3_SHAMBA</displayed-value>
         <stored-value>FP3_SHAMBA</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>FP3_TerraCert</displayed-value>
-        <stored-value>FP3_TerraCert</stored-value>
       </pair>
       <pair>
         <displayed-value>FP3_USAIDLEDOpportunities</displayed-value>
         <stored-value>FP3_USAIDLEDOpportunities</stored-value>
       </pair>
       <pair>
-        <displayed-value>FP3_VeitnamLED</displayed-value>
-        <stored-value>FP3_VeitnamLED</stored-value>
+        <displayed-value>FP3_VietnamLED</displayed-value>
+        <stored-value>FP3_VietnamLED</stored-value>
       </pair>
       <pair>
         <displayed-value>FP3_VietnamHotSpots</displayed-value>
         <stored-value>FP3_VietnamHotSpots</stored-value>
       </pair>
       <pair>
-        <displayed-value>FP4_AgMIP</displayed-value>
-        <stored-value>FP4_AgMIP</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>FP4_Baseline</displayed-value>
-        <stored-value>FP4_Baseline</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>FP4_CCPAG</displayed-value>
-        <stored-value>FP4_CCPAG</stored-value>
-      </pair>
-      <pair>
         <displayed-value>FP4_CCSL</displayed-value>
         <stored-value>FP4_CCSL</stored-value>
       </pair>
       <pair>
-        <displayed-value>FP4_CIATLAM</displayed-value>
-        <stored-value>FP4_CIATLAM</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>FP4_ClimateModels</displayed-value>
-        <stored-value>FP4_ClimateModels</stored-value>
+        <displayed-value>FP4_IMPACT</displayed-value>
+        <stored-value>FP4_IMPACT</stored-value>
       </pair>
       <pair>
         <displayed-value>FP4_CSASouthAsia</displayed-value>
         <stored-value>FP4_CSASouthAsia</stored-value>
       </pair>
       <pair>
-        <displayed-value>FP4_GenderToolbox</displayed-value>
-        <stored-value>FP4_GenderToolbox</stored-value>
+        <displayed-value>FP4_Scenarios</displayed-value>
+        <stored-value>FP4_Scenarios</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>FP4_PICSA</displayed-value>
+        <stored-value>FP4_PICSA</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>FP4_CIATLAM</displayed-value>
+        <stored-value>FP4_CIATLAM</stored-value>
       </pair>
       <pair>
         <displayed-value>FP4_GeneticDiversity</displayed-value>
         <stored-value>FP4_GeneticDiversity</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>FP4_GovernanceAnalysis</displayed-value>
-        <stored-value>FP4_GovernanceAnalysis</stored-value>
       </pair>
       <pair>
         <displayed-value>FP4_ICRISATWA</displayed-value>
@@ -3503,10 +3439,6 @@
         <stored-value>FP4_ILRIEA</stored-value>
       </pair>
       <pair>
-        <displayed-value>FP4_IMPACT</displayed-value>
-        <stored-value>FP4_IMPACT</stored-value>
-      </pair>
-      <pair>
         <displayed-value>FP4_PACCA</displayed-value>
         <stored-value>FP4_PACCA</stored-value>
       </pair>
@@ -3515,16 +3447,8 @@
         <stored-value>FP4_Pacific</stored-value>
       </pair>
       <pair>
-        <displayed-value>FP4_PICSA</displayed-value>
-        <stored-value>FP4_PICSA</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>FP4_PolicyEngagement</displayed-value>
-        <stored-value>FP4_PolicyEngagement</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>FP4_Scenarios</displayed-value>
-        <stored-value>FP4_Scenarios</stored-value>
+        <displayed-value>EA_CSV</displayed-value>
+        <stored-value>EA_CSV</stored-value>
       </pair>
       <pair>
         <displayed-value>LAM_AgroClimas</displayed-value>
@@ -3543,24 +3467,12 @@
         <stored-value>LAM_LivestockPlus</stored-value>
       </pair>
       <pair>
-        <displayed-value>SA_Biodiversity</displayed-value>
-        <stored-value>SA_Biodiversity</stored-value>
-      </pair>
-      <pair>
         <displayed-value>SA_CSA</displayed-value>
         <stored-value>SA_CSA</stored-value>
       </pair>
       <pair>
         <displayed-value>SA_CSATool</displayed-value>
         <stored-value>SA_CSATool</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>SA_CSV</displayed-value>
-        <stored-value>SA_CSV</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>SA_GHGMeasurement</displayed-value>
-        <stored-value>SA_GHGMeasurement</stored-value>
       </pair>
       <pair>
         <displayed-value>SA_IndexInsurance</displayed-value>
@@ -3571,36 +3483,12 @@
         <stored-value>SA_RiskMitigation</stored-value>
       </pair>
       <pair>
-        <displayed-value>SA_PAR_CSV</displayed-value>
-        <stored-value>SA_PAR_CSV</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>SEA_ApproachesCSV</displayed-value>
-        <stored-value>SEA_ApproachesCSV</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>SEA_CCImpacts</displayed-value>
-        <stored-value>SEA_CCImpacts</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>SEA_CSAAS</displayed-value>
-        <stored-value>SEA_CSAAS</stored-value>
-      </pair>
-      <pair>
         <displayed-value>SEA_Mekong</displayed-value>
         <stored-value>SEA_Mekong</stored-value>
       </pair>
       <pair>
-        <displayed-value>SEA_mitigationSAMPLES</displayed-value>
-        <stored-value>SEA_mitigationSAMPLES</stored-value>
-      </pair>
-      <pair>
         <displayed-value>SEA_NoRegrets</displayed-value>
         <stored-value>SEA_NoRegrets</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>SEA_Partnerships</displayed-value>
-        <stored-value>SEA_Partnerships</stored-value>
       </pair>
       <pair>
         <displayed-value>SEA_PIRCCA</displayed-value>
@@ -3615,48 +3503,128 @@
         <stored-value>SEA_UpscalingCSA</stored-value>
       </pair>
       <pair>
-        <displayed-value>SEA_UpscalingInnovation</displayed-value>
-        <stored-value>SEA_UpscalingInnovation</stored-value>
+        <displayed-value>SEA_ApproachesCSV</displayed-value>
+        <stored-value>SEA_ApproachesCSV</stored-value>
       </pair>
       <pair>
         <displayed-value>SEA_WomenEM</displayed-value>
         <stored-value>SEA_WomenEM</stored-value>
       </pair>
       <pair>
+        <displayed-value>SEA_CSAAS</displayed-value>
+        <stored-value>SEA_CSAAS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SEA_CCImpacts</displayed-value>
+        <stored-value>SEA_CCImpacts</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SEA_Partnerships</displayed-value>
+        <stored-value>SEA_Partnerships</stored-value>
+      </pair>
+      <pair>
         <displayed-value>WA_AgroSylvopastoralSystems</displayed-value>
         <stored-value>WA_AgroSylvopastoralSystems</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>WA_CASCAID</displayed-value>
-        <stored-value>WA_CASCAID</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>WA_CINSERE</displayed-value>
-        <stored-value>WA_CINSERE</stored-value>
       </pair>
       <pair>
         <displayed-value>WA_CSA</displayed-value>
         <stored-value>WA_CSA</stored-value>
       </pair>
       <pair>
-        <displayed-value>WA_CSV</displayed-value>
-        <stored-value>WA_CSV</stored-value>
+        <displayed-value>WA_IntegratedInterventions</displayed-value>
+        <stored-value>WA_IntegratedInterventions</stored-value>
       </pair>
       <pair>
         <displayed-value>WA_Incomes</displayed-value>
         <stored-value>WA_Incomes</stored-value>
       </pair>
       <pair>
-        <displayed-value>WA_IntegratedInterventions</displayed-value>
-        <stored-value>WA_IntegratedInterventions</stored-value>
+        <displayed-value>WA_CASCAID</displayed-value>
+        <stored-value>WA_CASCAID</stored-value>
       </pair>
       <pair>
-        <displayed-value>WA_Partnership</displayed-value>
-        <stored-value>WA_Partnership</stored-value>
+        <displayed-value>FP4_GovernanceAnalysis</displayed-value>
+        <stored-value>FP4_GovernanceAnalysis</stored-value>
       </pair>
       <pair>
-        <displayed-value>WA_SciencePolicyExchange</displayed-value>
-        <stored-value>WA_SciencePolicyExchange</stored-value>
+        <displayed-value>FP4_AgMIP</displayed-value>
+        <stored-value>FP4_AgMIP</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>EA_Partnerships</displayed-value>
+        <stored-value>EA_Partnerships</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>FP4_Governance</displayed-value>
+        <stored-value>FP4_Governance</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SEA_Evidenceforupscaling</displayed-value>
+        <stored-value>SEA_Evidenceforupscaling</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>FP1_ValueChains</displayed-value>
+        <stored-value>FP1_ValueChains</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>EA_PAR_CSA_Portfolios</displayed-value>
+        <stored-value>EA_PAR_CSA_Portfolios</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SA_PAR_CSV</displayed-value>
+        <stored-value>SA_PAR_CSV</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>FP1_PredictiveTechnologies</displayed-value>
+        <stored-value>FP1_PredictiveTechnologies</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>FP1_LocalAdaptationPlanning</displayed-value>
+        <stored-value>FP1_LocalAdaptationPlanning</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>FP3_LEDPriorities</displayed-value>
+        <stored-value>FP3_LEDPriorities</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>FP3_Finance</displayed-value>
+        <stored-value>FP3_Finance</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>FP3_LEDScaling</displayed-value>
+        <stored-value>FP3_LEDScaling</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>FP3_LEDPathways_IIASA</displayed-value>
+        <stored-value>FP3_LEDPathways_IIASA</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>FP3_SAMPLES</displayed-value>
+        <stored-value>FP3_SAMPLES</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>WA_CINSERE</displayed-value>
+        <stored-value>WA_CINSERE</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>WA_CSV</displayed-value>
+        <stored-value>WA_CSV</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>FP2_IBFI</displayed-value>
+        <stored-value>FP2_IBFI</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>FP3_LACCMA</displayed-value>
+        <stored-value>FP3_LACCMA</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>FP4_ShambaShapeUp</displayed-value>
+        <stored-value>FP4_ShambaShapeUp</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>FP2_CRAFT</displayed-value>
+        <stored-value>FP2_CRAFT</stored-value>
       </pair>
     </value-pairs>
     <value-pairs value-pairs-name="ccafsprojectpii" dc-term="ccafsprojectpii">
