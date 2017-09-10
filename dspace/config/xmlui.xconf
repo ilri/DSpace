@@ -222,6 +222,7 @@
         <theme name="Livestock" handle="10568/80099" path="Livestock/" />
         <theme name="PABRA" handle="10568/80211" path="PABRA/" />
         <theme name="RTB" handle="10568/80100" path="RTB/" />
+        <theme name="CGIARSystem" handle="10568/83389" path="CGIARSystem/" />
 
         <theme name="CGIAR" regex=".*" path="0_CGIAR/" />
 

@@ -1,0 +1,11 @@
+{
+  "name": "Mirage2",
+  "version": "0.1.1",
+  "dependencies": {
+    "jquery-ui": "1.10.3",
+    "bootstrap-sass-official": "3.3.0",
+    "fontawesome": "4.5.0",
+    "academicons": "1.8.0"
+  },
+  "devDependencies": {}
+}
