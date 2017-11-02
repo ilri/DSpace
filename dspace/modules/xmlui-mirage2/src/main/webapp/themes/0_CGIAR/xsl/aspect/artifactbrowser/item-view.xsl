@@ -201,10 +201,14 @@
     <xsl:template name="itemSummaryView-DIM-thumbnail">
         <div class="thumbnail">
             <xsl:choose>
+                <!-- Alan: check if there is a thumbnail and that the link is allowed -->
                 <xsl:when test="//mets:fileSec/mets:fileGrp[@USE='THUMBNAIL'] and not(contains(//mets:fileSec/mets:fileGrp[@USE='THUMBNAIL']/mets:file/mets:FLocat[@LOCTYPE='URL']/@xlink:href,'isAllowed=n'))">
+                    <!-- Alan: start determining the value of the src variable -->
                     <xsl:variable name="src">
                         <xsl:choose>
+                            <!-- Alan: check if groupid for thumbnail is the same as that of the first content bitstream -->
                             <xsl:when test="/mets:METS/mets:fileSec/mets:fileGrp[@USE='THUMBNAIL']/mets:file[@GROUPID=../../mets:fileGrp[@USE='CONTENT']/mets:file[@GROUPID=../../mets:fileGrp[@USE='THUMBNAIL']/mets:file/@GROUPID][1]/@GROUPID]">
+                                <!-- Alan: select the URL of the thumbnail -->
                                 <xsl:value-of
                                         select="/mets:METS/mets:fileSec/mets:fileGrp[@USE='THUMBNAIL']/mets:file[@GROUPID=../../mets:fileGrp[@USE='CONTENT']/mets:file[@GROUPID=../../mets:fileGrp[@USE='THUMBNAIL']/mets:file/@GROUPID][1]/@GROUPID]/mets:FLocat[@LOCTYPE='URL']/@xlink:href"/>
                             </xsl:when>
@@ -214,11 +218,17 @@
                             </xsl:otherwise>
                         </xsl:choose>
                     </xsl:variable>
-                    <img alt="Thumbnail">
-                        <xsl:attribute name="src">
-                            <xsl:value-of select="$src"/>
+                    <a>
+                        <xsl:attribute name="href">
+                            <xsl:value-of select="//mets:fileSec/mets:fileGrp[@USE='CONTENT']/mets:file/mets:FLocat[@LOCTYPE='URL']/@xlink:href"/>
                         </xsl:attribute>
-                    </img>
+
+                        <img alt="Thumbnail">
+                            <xsl:attribute name="src">
+                                <xsl:value-of select="$src"/>
+                            </xsl:attribute>
+                        </img>
+                    </a>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:choose>
