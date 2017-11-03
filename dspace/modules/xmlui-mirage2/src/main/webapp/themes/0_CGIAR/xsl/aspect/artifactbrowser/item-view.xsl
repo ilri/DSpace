@@ -218,17 +218,31 @@
                             </xsl:otherwise>
                         </xsl:choose>
                     </xsl:variable>
-                    <a>
-                        <xsl:attribute name="href">
-                            <xsl:value-of select="//mets:fileSec/mets:fileGrp[@USE='CONTENT']/mets:file/mets:FLocat[@LOCTYPE='URL']/@xlink:href"/>
-                        </xsl:attribute>
+                    <!-- Alan: if there is a content bitstream, add a link to the thumbnail -->
+                    <xsl:choose>
+                        <xsl:when test="//mets:fileSec/mets:fileGrp[@USE='CONTENT']/mets:file/mets:FLocat[@LOCTYPE='URL']/@xlink:href">
+                            <a>
+                                <xsl:attribute name="href">
+                                    <xsl:value-of select="//mets:fileSec/mets:fileGrp[@USE='CONTENT']/mets:file/mets:FLocat[@LOCTYPE='URL']/@xlink:href"/>
+                                </xsl:attribute>
 
-                        <img alt="Thumbnail">
-                            <xsl:attribute name="src">
-                                <xsl:value-of select="$src"/>
-                            </xsl:attribute>
-                        </img>
-                    </a>
+                                <img alt="Thumbnail">
+                                    <xsl:attribute name="src">
+                                        <xsl:value-of select="$src"/>
+                                    </xsl:attribute>
+                                </img>
+                            </a>
+                        </xsl:when>
+                        <!-- Alan: otherwise, just print the thumbnail -->
+                        <xsl:otherwise>
+
+                            <img alt="Thumbnail">
+                                <xsl:attribute name="src">
+                                    <xsl:value-of select="$src"/>
+                                </xsl:attribute>
+                            </img>
+                        </xsl:otherwise>
+                    </xsl:choose>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:choose>
