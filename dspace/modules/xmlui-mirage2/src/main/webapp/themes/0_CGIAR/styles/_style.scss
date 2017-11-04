@@ -179,6 +179,10 @@ width:85%
   border:0;
   margin-left: 0;
 }
+.thumbnail a {
+  /* clickable area of thumbnails should not fill the entire area of the parent div */
+  display: inline-block;
+}
 .auto-open-statlets #aspect_statistics_StatletTransformer_div_showStats{
   display: none;
 }
