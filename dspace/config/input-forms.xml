@@ -3629,6 +3629,14 @@
     </value-pairs>
     <value-pairs value-pairs-name="ccafsprojectpii" dc-term="ccafsprojectpii">
       <pair>
+        <displayed-value>PII-EA_CSV</displayed-value>
+        <stored-value>PII-EA_CSV</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PII-EA_Partnerships</displayed-value>
+        <stored-value>PII-EA_Partnerships</stored-value>
+      </pair>
+      <pair>
         <displayed-value>PII-FP1_CIATLAM</displayed-value>
         <stored-value>PII-FP1_CIATLAM</stored-value>
       </pair>
