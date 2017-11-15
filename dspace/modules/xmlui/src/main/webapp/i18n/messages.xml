@@ -2359,8 +2359,8 @@
 	<message key="xmlui.dri2xhtml.METS-1.0.item-investors-sponsors">Investors/sponsors</message>
 	<message key="xmlui.dri2xhtml.METS-1.0.item-identifiers">Identifiers</message>
 	<message key="xmlui.dri2xhtml.METS-1.0.item-identifier-googleurl">Google URL: </message>
-	<message key="xmlui.dri2xhtml.METS-1.0.item-identifier-permanenturi">Permanent link to this item: </message>
-	<message key="xmlui.dri2xhtml.METS-1.0.item-identifier-interneturl">Internet URL: </message>
+	<message key="xmlui.dri2xhtml.METS-1.0.item-identifier-permanenturi">Permanent link to cite or share this item: </message>
+	<message key="xmlui.dri2xhtml.METS-1.0.item-identifier-interneturl">External link to download this item: </message>
 	<message key="xmlui.dri2xhtml.METS-1.0.item-identifier-doi">DOI: </message>
 	<message key="xmlui.dri2xhtml.METS-1.0.item-species">Species</message>
 	<message key="xmlui.dri2xhtml.METS-1.0.item-breeds">Livestock breed types</message>
