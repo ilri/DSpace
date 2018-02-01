@@ -561,6 +561,16 @@
         </field>
         <field>
           <dc-schema>dc</dc-schema>
+          <dc-element>rights</dc-element>
+          <dc-qualifier></dc-qualifier>
+          <repeatable>true</repeatable>
+          <label>Usage rights (required)</label>
+          <input-type value-pairs-name="dc-rights">dropdown</input-type>
+          <hint>Usage rights for this work.</hint>
+          <required>Please indicate the license terms for using this work.</required>
+        </field>
+        <field>
+          <dc-schema>dc</dc-schema>
           <dc-element>description</dc-element>
           <dc-qualifier>sponsorship</dc-qualifier>
           <repeatable>true</repeatable>
@@ -6223,6 +6233,44 @@
       <pair>
         <displayed-value>GENERAL PUBLIC</displayed-value>
         <stored-value>GENERAL PUBLIC</stored-value>
+      </pair>
+    </value-pairs>
+    <value-pairs value-pairs-name="dc-rights" dc-term="dc-rights">
+      <pair>
+        <displayed-value>CC BY</displayed-value>
+        <stored-value>CC BY</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>CC BY-NC</displayed-value>
+        <stored-value>CC BY-NC</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Copyrighted; All rights reserved; self-archive copy only</displayed-value>
+        <stored-value>Copyrighted; All rights reserved; self-archive copy only</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Copyrighted; Non-commercial educational use only</displayed-value>
+        <stored-value>Copyrighted; Non-commercial educational use only</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Copyrighted; Non-commercial use only</displayed-value>
+        <stored-value>Copyrighted; Non-commercial use only</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Access (unrestricted); Re-use (unrestricted)</displayed-value>
+        <stored-value>Access (unrestricted); Re-use (unrestricted)</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Access (unrestricted); Reuse (non-commercial only)</displayed-value>
+        <stored-value>Access (unrestricted); Reuse (non-commercial only)</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Access (unrestricted); Reuse (non-commercial, no translations)</displayed-value>
+        <stored-value>Access (unrestricted); Reuse (non-commercial, no translations)</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Other</displayed-value>
+        <stored-value>Other</stored-value>
       </pair>
     </value-pairs>
   </form-value-pairs>
