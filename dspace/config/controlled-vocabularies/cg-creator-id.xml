@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<node id="Researcher ORCiDs" label="">
+  <isComposedBy>
+    <node label="Alan S. Orth (0000-0002-1735-7458)" />
+    <node label="Peter G. Ballantyne (0000-0001-9346-2893)" />
+  </isComposedBy>
+</node>

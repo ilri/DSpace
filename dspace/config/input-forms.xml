@@ -48,6 +48,17 @@
         </field>
         <field>
           <dc-schema>cg</dc-schema>
+          <dc-element>creator</dc-element>
+          <dc-qualifier>id</dc-qualifier>
+          <repeatable>true</repeatable>
+          <label>Researcher ORCiDs</label>
+          <vocabulary>cg-creator-id</vocabulary>
+          <input-type>onebox</input-type>
+          <hint>Click below to see a pre-populated list of researcher ORCiDs, or enter a new one in this format, with the researcher's name in their preferred format: First M. Name (0000-0002-1735-7458)</hint>
+          <required></required>
+        </field>
+        <field>
+          <dc-schema>cg</dc-schema>
           <dc-element>contributor</dc-element>
           <dc-qualifier>affiliation</dc-qualifier>
           <repeatable>true</repeatable>
