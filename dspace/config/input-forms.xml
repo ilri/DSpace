@@ -42,8 +42,9 @@
           <dc-qualifier>author</dc-qualifier>
           <repeatable>true</repeatable>
           <label>Authors (required)</label>
-          <input-type>name</input-type>
-          <hint>Enter the names of individual or full corporate authors of this item. Enter each individually.</hint>
+          <input-type>onebox</input-type>
+          <hint>Click below to see a pre-populated list of authors, or enter the names of individual or corporate authors of this item (enter each individually).</hint>
+          <vocabulary>dc-contributor-author</vocabulary>
           <required>Please enter the author(s).</required>
         </field>
         <field>
