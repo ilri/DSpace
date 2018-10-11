@@ -184,6 +184,10 @@ width:85%
   /* clickable area of thumbnails should not fill the entire area of the parent div */
   display: inline-block;
 }
+.artifact-preview a>img {
+  /* visually constrain very tall thumbnails in the item lists (but not item views) */
+  max-height: 200px;
+}
 .auto-open-statlets #aspect_statistics_StatletTransformer_div_showStats{
   display: none;
 }
