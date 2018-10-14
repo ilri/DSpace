@@ -118,6 +118,7 @@
                 <ref bean="searchFilterIwmiSubject"/>
                 <ref bean="searchFilterWlesubject"/>
                 <ref bean="searchFilterStatus" />
+                <ref bean="searchFilterUsageRights" />
             </list>
         </property>
         <!-- Set TagCloud configuration per discovery configuration -->
@@ -153,6 +154,7 @@
                 <ref bean="searchFilterIwmiSubject"/>
                 <ref bean="searchFilterWlesubject"/>
                 <ref bean="searchFilterStatus" />
+                <ref bean="searchFilterUsageRights" />
                 <ref bean="searchFilterOrcid" />
                 <ref bean="searchFilterLanguage"/>
                 <ref bean="searchFilterJournalTitle"/>
@@ -259,6 +261,7 @@
                 <ref bean="searchFilterIwmiSubject"/>
                 <ref bean="searchFilterWlesubject"/>
                 <ref bean="searchFilterStatus" />
+                <ref bean="searchFilterUsageRights" />
             </list>
         </property>
         <!-- Set TagCloud configuration per discovery configuration -->
@@ -295,6 +298,7 @@
                 <ref bean="searchFilterIwmiSubject"/>
                 <ref bean="searchFilterWlesubject"/>
                 <ref bean="searchFilterStatus" />
+                <ref bean="searchFilterUsageRights" />
                 <ref bean="searchFilterOrcid" />
                 <ref bean="searchFilterLanguage"/>
                 <ref bean="searchFilterJournalTitle"/>
@@ -491,6 +495,16 @@
             </list>
         </property>
         <property name="facetLimit" value="2"/>
+    </bean>
+
+    <bean id="searchFilterUsageRights" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
+        <property name="indexFieldName" value="usageRights"/>
+        <property name="metadataFields">
+            <list>
+                <value>dc.rights</value>
+            </list>
+        </property>
+        <property name="facetLimit" value="6"/>
         <property name="sortOrderSidebar" value="COUNT"/>
         <property name="sortOrderFilterPage" value="COUNT"/>
     </bean>
@@ -880,6 +894,7 @@
                 <ref bean="searchFilterIssued"/>
                 <ref bean="searchFilterDateAccessioned"/>
                 <ref bean="searchFilterStatus"/>
+                <ref bean="searchFilterUsageRights" />
                 <ref bean="searchFilterLanguage"/>
                 <ref bean="searchFilterType"/>
                 <ref bean="searchFilterISIJournal"/>

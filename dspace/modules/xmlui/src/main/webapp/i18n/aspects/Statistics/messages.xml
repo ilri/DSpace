@@ -588,6 +588,7 @@ DAMAGE.
 
     <message key="xmlui.reporting-suite.statistics.graph-editor.data-source.dataset.option.title">Title (dc.title)</message>
     <message key="xmlui.reporting-suite.statistics.graph-editor.data-source.dataset.option.status">Status (cg.identifier.status)</message>
+    <message key="xmlui.reporting-suite.statistics.graph-editor.data-source.dataset.option.usageRights">Usage rights (dc.rights)</message>
     <message key="xmlui.reporting-suite.statistics.graph-editor.data-source.dataset.option.isijournal">ISI journal (cg.isijournal)</message>
     <message key="xmlui.reporting-suite.statistics.graph-editor.data-source.dataset.option.journaltitle">Journal title (dc.source)</message>
     <message key="xmlui.reporting-suite.statistics.graph-editor.data-source.dataset.option.ilrisubject">ILRI subject (cg.subject.ilri)</message>
@@ -798,6 +799,7 @@ DAMAGE.
     <message key="xmlui.reporting-suite.statistics.contentanalysis.type">Type</message>
     <message key="xmlui.reporting-suite.statistics.contentanalysis.dateAccessioned">Date Submitted</message>
     <message key="xmlui.reporting-suite.statistics.contentanalysis.status">Status</message>
+    <message key="xmlui.reporting-suite.statistics.contentanalysis.usageRights">Usage rights</message>
     <message key="xmlui.reporting-suite.statistics.contentanalysis.isijournal">ISI journal</message>
     <message key="xmlui.reporting-suite.statistics.contentanalysis.journaltitle">Journal title</message>
     <message key="xmlui.reporting-suite.statistics.contentanalysis.ilrisubject">ILRI subject</message>
