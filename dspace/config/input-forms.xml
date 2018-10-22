@@ -547,7 +547,7 @@
           <repeatable>false</repeatable>
           <label>Usage rights (required)</label>
           <input-type value-pairs-name="usage-rights">dropdown</input-type>
-          <hint>Indicate the usage rights of the item. For most items this will be a Creative Commons license. Look on the publisher's page or in the bitstream itself.</hint>
+          <hint>Indicate the usage rights of the item. For most items this will be a Creative Commons license. Look on the publisher's page or in the bitstream itself. Choose "Other" if the item does not have a license or none is specified.</hint>
           <required>Usage rights is required.</required>
         </field>
         <field>
@@ -781,7 +781,7 @@
           <repeatable>false</repeatable>
           <label>Usage rights (required)</label>
           <input-type value-pairs-name="usage-rights">dropdown</input-type>
-          <hint>Indicate the usage rights of the item. For most items this will be a Creative Commons license. Look on the publisher's page or in the bitstream itself.</hint>
+          <hint>Indicate the usage rights of the item. For most items this will be a Creative Commons license. Look on the publisher's page or in the bitstream itself. Choose "Other" if the item does not have a license or none is specified.</hint>
           <required>Usage rights is required.</required>
         </field>
         <field>
