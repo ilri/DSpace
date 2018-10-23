@@ -2358,6 +2358,7 @@
 	<message key="xmlui.dri2xhtml.METS-1.0.item-type">Type</message>
 	<message key="xmlui.dri2xhtml.METS-1.0.item-review-status">Review status</message>
 	<message key="xmlui.dri2xhtml.METS-1.0.item-accessibility">Accessibility</message>
+	<message key="xmlui.dri2xhtml.METS-1.0.item-usage-rights">Usage rights</message>
 	<message key="xmlui.dri2xhtml.METS-1.0.item-citation">Citation</message>
 	<message key="xmlui.dri2xhtml.METS-1.0.item-notes">Notes</message>
 	<message key="xmlui.dri2xhtml.METS-1.0.item-affiliations">CGIAR Affiliations</message>
