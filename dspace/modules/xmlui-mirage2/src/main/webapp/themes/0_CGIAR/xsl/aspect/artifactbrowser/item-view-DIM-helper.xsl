@@ -700,6 +700,22 @@ such as authors, subject, citation, description, etc
 
     </xsl:template>
 
+    <xsl:template name="itemSummaryView-DIM-usage-rights">
+        <xsl:if test="dim:field[@element='rights'][not(@qualifier)]">
+            <div class=" word-break item-page-field-wrapper table">
+                <h5 class="bold">
+                    <i18n:text>xmlui.dri2xhtml.METS-1.0.item-usage-rights</i18n:text>
+                </h5>
+                <xsl:for-each select="dim:field[@element='rights'][not(@qualifier)]">
+                    <xsl:copy-of select="./node()"/>
+                    <xsl:if test="count(following-sibling::dim:field[@element='rights'][not(@qualifier)] ) != 0">
+                        <xsl:text>; </xsl:text>
+                    </xsl:if>
+                </xsl:for-each>
+            </div>
+        </xsl:if>
+    </xsl:template>
+
     <xsl:template name="itemSummaryView-show-full">
         <div class="simple-item-view-show-full item-page-field-wrapper table">
             <h5 class="bold">
