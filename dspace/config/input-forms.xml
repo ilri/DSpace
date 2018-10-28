@@ -1617,6 +1617,30 @@
         <stored-value>CC0-1.0</stored-value>
       </pair>
       <pair>
+        <displayed-value>Creative Commons Attribution No Version (CC BY)</displayed-value>
+        <stored-value>CC-BY</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Creative Commons Attribution-ShareAlike No Version (CC BY-SA)</displayed-value>
+        <stored-value>CC-BY-SA</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Creative Commons Attribution-NoDerivatives No Version (CC BY-ND)</displayed-value>
+        <stored-value>CC-BY-ND</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Creative Commons Attribution-NonCommercial No Version (CC BY-NC)</displayed-value>
+        <stored-value>CC-BY-NC</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Creative Commons Attribution-NonCommercial-ShareAlike No Version (CC BY-NC-SA)</displayed-value>
+        <stored-value>CC-BY-NC-SA</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Creative Commons Attribution-NonCommercial-NoDerivatives No Version (CC BY-NC-ND)</displayed-value>
+        <stored-value>CC-BY-NC-ND</stored-value>
+      </pair>
+      <pair>
         <displayed-value>Copyrighted; Any re-use allowed</displayed-value>
         <stored-value>Copyrighted; Any re-use allowed</stored-value>
       </pair>
