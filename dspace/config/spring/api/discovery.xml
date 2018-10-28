@@ -158,6 +158,7 @@
                 <ref bean="searchFilterOrcid" />
                 <ref bean="searchFilterLanguage"/>
                 <ref bean="searchFilterJournalTitle"/>
+                <ref bean="searchFilterPublisher"/>
             </list>
         </property>
         <!--The sort filters for the discovery search-->
@@ -302,6 +303,7 @@
                 <ref bean="searchFilterOrcid" />
                 <ref bean="searchFilterLanguage"/>
                 <ref bean="searchFilterJournalTitle"/>
+                <ref bean="searchFilterPublisher"/>
             </list>
         </property>
         <!--The sort filters for the discovery search (same as defaultConfiguration above)-->
@@ -855,6 +857,15 @@
         <property name="facetLimit" value="5"/>
         <property name="sortOrderSidebar" value="COUNT"/>
         <property name="sortOrderFilterPage" value="COUNT"/>
+    </bean>
+
+    <bean id="searchFilterPublisher" class="org.dspace.discovery.configuration.DiscoverySearchFilter">
+        <property name="indexFieldName" value="publisher"/>
+        <property name="metadataFields">
+            <list>
+                <value>dc.publisher</value>
+            </list>
+        </property>
     </bean>
 
     <!--Sort properties-->

@@ -426,6 +426,7 @@
 	<message key="xmlui.ArtifactBrowser.SimpleSearch.filter.iso">Language</message>
 	<message key="xmlui.ArtifactBrowser.SimpleSearch.filter.journaltitle">Journal title</message>
 	<message key="xmlui.ArtifactBrowser.SimpleSearch.filter.usageRights">Usage rights</message>
+	<message key="xmlui.ArtifactBrowser.SimpleSearch.filter.publisher">Publisher</message>
 
 	<!-- org.dspace.app.xmlui.artifactbrowser.RestrictedItem.java -->
 	<message key="xmlui.ArtifactBrowser.RestrictedItem.title">This resource is restricted</message>
