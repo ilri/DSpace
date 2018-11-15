@@ -57,6 +57,10 @@ public class RelationshipTypeServiceImpl implements RelationshipTypeService {
         return relationshipTypeDAO.findByEntityType(context, entityType);
     }
 
+    public List<RelationshipType> findByLeftOrRightLabel(Context context, String label) throws SQLException {
+        return relationshipTypeDAO.findByLeftOrRightLabel(context, label);
+    }
+
     public RelationshipType find(Context context,int id) throws SQLException {
         return relationshipTypeDAO.findByID(context, RelationshipType.class, id);
     }
