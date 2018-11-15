@@ -73,6 +73,9 @@ public class RelationshipServiceImpl implements RelationshipService {
 
         if (!leftRelationships.isEmpty()) {
             leftRelationships.sort((o1, o2) -> o2.getLeftPlace() - o1.getLeftPlace());
+            for (int i = 0; i < leftRelationships.size(); i++) {
+                leftRelationships.get(leftRelationships.size() - 1 - i).setLeftPlace(i + 1);
+            }
             relationship.setLeftPlace(leftRelationships.get(0).getLeftPlace() + 1);
         } else {
             relationship.setLeftPlace(1);
@@ -80,6 +83,9 @@ public class RelationshipServiceImpl implements RelationshipService {
 
         if (!rightRelationships.isEmpty()) {
             rightRelationships.sort((o1, o2) -> o2.getRightPlace() - o1.getRightPlace());
+            for (int i = 0; i < rightRelationships.size(); i++) {
+                rightRelationships.get(rightRelationships.size() - 1 - i).setRightPlace(i + 1);
+            }
             relationship.setRightPlace(rightRelationships.get(0).getRightPlace() + 1);
         } else {
             relationship.setRightPlace(1);
@@ -215,6 +221,8 @@ public class RelationshipServiceImpl implements RelationshipService {
                     "Only administrators can delete relationship");
             }
             relationshipDAO.delete(context, relationship);
+
+            updatePlaceInRelationship(context, relationship);
         } else {
             throw new IllegalArgumentException("The relationship given was not valid");
         }
@@ -300,4 +308,5 @@ public class RelationshipServiceImpl implements RelationshipService {
         }
         return listToReturn;
     }
+
 }
