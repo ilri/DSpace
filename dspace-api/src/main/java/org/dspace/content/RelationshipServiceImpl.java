@@ -303,10 +303,15 @@ public class RelationshipServiceImpl implements RelationshipService {
         List<Relationship> listToReturn = new LinkedList<>();
         for (Relationship relationship : list) {
             if (relationship.getRelationshipType().equals(relationshipType)) {
-               listToReturn.add(relationship);
+                listToReturn.add(relationship);
             }
         }
         return listToReturn;
+    }
+
+    public List<Relationship> findByRelationshipType(Context context, RelationshipType relationshipType)
+        throws SQLException {
+        return relationshipDAO.findByRelationshipType(context, relationshipType);
     }
 
 }

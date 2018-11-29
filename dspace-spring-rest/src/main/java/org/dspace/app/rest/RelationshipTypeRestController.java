@@ -1,3 +1,10 @@
+/**
+ * The contents of this file are subject to the license and copyright
+ * detailed in the LICENSE and NOTICE files at the root of the source
+ * tree and available online at
+ *
+ * http://www.dspace.org/license/
+ */
 package org.dspace.app.rest;
 
 import java.sql.SQLException;
@@ -7,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.dspace.app.rest.converter.RelationshipTypeConverter;
+import org.dspace.app.rest.link.HalLinkService;
 import org.dspace.app.rest.model.RelationshipTypeRest;
 import org.dspace.app.rest.model.RelationshipTypeRestWrapper;
 import org.dspace.app.rest.model.hateoas.RelationshipTypeResourceWrapper;
@@ -40,6 +48,9 @@ public class RelationshipTypeRestController {
     @Autowired
     private Utils utils;
 
+    @Autowired
+    private HalLinkService halLinkService;
+
     @RequestMapping(method = RequestMethod.GET)
     public RelationshipTypeResourceWrapper retrieve(@PathVariable Integer id, HttpServletResponse response,
                                                     HttpServletRequest request) throws SQLException {
@@ -55,7 +66,13 @@ public class RelationshipTypeRestController {
 
 
         RelationshipTypeRestWrapper relationshipTypeRestWrapper = new RelationshipTypeRestWrapper();
+        relationshipTypeRestWrapper.setEntityTypeId(id);
+        relationshipTypeRestWrapper.setEntityTypeLabel(entityType.getLabel());
         relationshipTypeRestWrapper.setRelationshipTypeRestList(relationshipTypeRests);
-        return new RelationshipTypeResourceWrapper(relationshipTypeRestWrapper, utils);
+
+        RelationshipTypeResourceWrapper relationshipTypeResourceWrapper = new RelationshipTypeResourceWrapper(
+            relationshipTypeRestWrapper, utils);
+        halLinkService.addLinks(relationshipTypeResourceWrapper);
+        return relationshipTypeResourceWrapper;
     }
 }
