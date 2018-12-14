@@ -31,7 +31,8 @@ public class RelationshipResourceWrapperHalLinkFactory
                                                          halResource.getContent().getRelationshipRestList().size());
 
         halResource.setPageHeader(new EmbeddedPage(getSelfLink(halResource.getContent(), pageable),
-                                                   page, halResource.getContent().getRelationshipRestList(), true, "relationships"));
+                                                   page, halResource.getContent().getRelationshipRestList(),
+                                                   true, "relationships"));
     }
 
     public String getSelfLink(RelationshipRestWrapper content, Pageable pageable) throws Exception {

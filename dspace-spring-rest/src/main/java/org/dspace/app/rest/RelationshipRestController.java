@@ -87,7 +87,8 @@ public class RelationshipRestController {
                 throw new ResourceNotFoundException("The request DSO with id: " + dsoId + " was not found");
             }
             for (RelationshipType relationshipType : relationshipTypeList) {
-                relationships.addAll(relationshipService.findByItemAndRelationshipType(context, item, relationshipType));
+                relationships.addAll(relationshipService
+                                         .findByItemAndRelationshipType(context, item, relationshipType));
             }
         } else {
             for (RelationshipType relationshipType : relationshipTypeList) {
