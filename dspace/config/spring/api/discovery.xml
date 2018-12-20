@@ -108,15 +108,15 @@
                 <ref bean="searchFilterSubject" />
                 <ref bean="searchFilterBioversity"/>
                 <ref bean="searchFilterCcafSubject"/>
-                <ref bean="searchFilterCiat"/>
+                <ref bean="searchFilterCiatSubject"/>
                 <ref bean="searchFilterCiforSubject"/>
                 <ref bean="searchFilterCipSubject" />
                 <ref bean="searchFilterCpwfSubject"/>
-                <ref bean="searchFilterCta"/>
+                <ref bean="searchFilterCtaSubject"/>
                 <ref bean="searchFilterIitaSubject"/>
                 <ref bean="searchFilterIlriSubject"/>
                 <ref bean="searchFilterIwmiSubject"/>
-                <ref bean="searchFilterWlesubject"/>
+                <ref bean="searchFilterWleSubject"/>
                 <ref bean="searchFilterStatus" />
                 <ref bean="searchFilterUsageRights" />
             </list>
@@ -141,18 +141,18 @@
                 <ref bean="searchFilterSpecies" />
                 <ref bean="searchFilterBioversity"/>
                 <ref bean="searchFilterCcafSubject"/>
-                <ref bean="searchFilterCiat"/>
+                <ref bean="searchFilterCiatSubject"/>
                 <ref bean="searchFilterCiforSubject"/>
                 <ref bean="searchFilterCipSubject" />
                 <ref bean="searchFilterCpwfSubject"/>
-                <ref bean="searchFilterCta"/>
+                <ref bean="searchFilterCtaSubject"/>
                 <ref bean="searchFilterDrylandsSubject" />
                 <ref bean="searchFilterHumidtropics"/>
                 <ref bean="searchFilterIcardaSubject" />
                 <ref bean="searchFilterIitaSubject"/>
                 <ref bean="searchFilterIlriSubject"/>
                 <ref bean="searchFilterIwmiSubject"/>
-                <ref bean="searchFilterWlesubject"/>
+                <ref bean="searchFilterWleSubject"/>
                 <ref bean="searchFilterStatus" />
                 <ref bean="searchFilterUsageRights" />
                 <ref bean="searchFilterOrcid" />
@@ -252,15 +252,15 @@
                 <ref bean="searchFilterBreed" />
                 <ref bean="searchFilterBioversity"/>
                 <ref bean="searchFilterCcafSubject"/>
-                <ref bean="searchFilterCiat"/>
+                <ref bean="searchFilterCiatSubject"/>
                 <ref bean="searchFilterCiforSubject"/>
                 <ref bean="searchFilterCipSubject" />
                 <ref bean="searchFilterCpwfSubject"/>
-                <ref bean="searchFilterCta"/>
+                <ref bean="searchFilterCtaSubject"/>
                 <ref bean="searchFilterIitaSubject"/>
                 <ref bean="searchFilterIlriSubject"/>
                 <ref bean="searchFilterIwmiSubject"/>
-                <ref bean="searchFilterWlesubject"/>
+                <ref bean="searchFilterWleSubject"/>
                 <ref bean="searchFilterStatus" />
                 <ref bean="searchFilterUsageRights" />
             </list>
@@ -286,18 +286,18 @@
                 <ref bean="searchFilterBreed" />
                 <ref bean="searchFilterBioversity"/>
                 <ref bean="searchFilterCcafSubject"/>
-                <ref bean="searchFilterCiat"/>
+                <ref bean="searchFilterCiatSubject"/>
                 <ref bean="searchFilterCiforSubject"/>
                 <ref bean="searchFilterCipSubject" />
                 <ref bean="searchFilterCpwfSubject"/>
-                <ref bean="searchFilterCta"/>
+                <ref bean="searchFilterCtaSubject"/>
                 <ref bean="searchFilterDrylandsSubject" />
                 <ref bean="searchFilterHumidtropics"/>
                 <ref bean="searchFilterIcardaSubject" />
                 <ref bean="searchFilterIitaSubject"/>
                 <ref bean="searchFilterIlriSubject"/>
                 <ref bean="searchFilterIwmiSubject"/>
-                <ref bean="searchFilterWlesubject"/>
+                <ref bean="searchFilterWleSubject"/>
                 <ref bean="searchFilterStatus" />
                 <ref bean="searchFilterUsageRights" />
                 <ref bean="searchFilterOrcid" />
@@ -691,8 +691,8 @@
         <property name="sortOrderFilterPage" value="COUNT"/>
     </bean>
 
-    <bean id="searchFilterCta" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
-        <property name="indexFieldName" value="cta"/>
+    <bean id="searchFilterCtaSubject" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
+        <property name="indexFieldName" value="ctasubject"/>
         <property name="metadataFields">
             <list>
                 <value>cg.subject.cta</value>
@@ -703,7 +703,7 @@
         <property name="sortOrderFilterPage" value="COUNT"/>
     </bean>
 
-    <bean id="searchFilterWlesubject" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
+    <bean id="searchFilterWleSubject" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
         <property name="indexFieldName" value="wlesubject"/>
         <property name="metadataFields">
             <list>
@@ -727,8 +727,8 @@
         <property name="sortOrderFilterPage" value="COUNT"/>
     </bean>
 
-    <bean id="searchFilterCiat" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
-        <property name="indexFieldName" value="ciat"/>
+    <bean id="searchFilterCiatSubject" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
+        <property name="indexFieldName" value="ciatsubject"/>
         <property name="metadataFields">
             <list>
                 <value>cg.subject.ciat</value>
@@ -921,10 +921,10 @@
                 <ref bean="searchFilterCrpsubject"/>
                 <ref bean="searchFilterSponsorship" />
                 <ref bean="searchFilterBasin"/>
-                <ref bean="searchFilterCta"/>
-                <ref bean="searchFilterWlesubject"/>
+                <ref bean="searchFilterCtaSubject"/>
+                <ref bean="searchFilterWleSubject"/>
                 <ref bean="searchFilterBioversity"/>
-                <ref bean="searchFilterCiat"/>
+                <ref bean="searchFilterCiatSubject"/>
                 <ref bean="searchFilterHumidtropics"/>
                 <ref bean="searchFilterCipSubject"/>
                 <ref bean="searchFilterDrylandsSubject"/>
