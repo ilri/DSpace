@@ -8,7 +8,10 @@
 package org.dspace.app.rest.model;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -33,6 +36,9 @@ public class ItemRest extends DSpaceObjectRest {
     List<BitstreamRest> bitstreams;
 
     List<RelationshipRest> relationships;
+
+    @JsonIgnore
+    private Map<String, List<RelationshipRest>> relationshipsByRelationshipType;
 
     @Override
     public String getCategory() {
@@ -110,5 +116,31 @@ public class ItemRest extends DSpaceObjectRest {
 
     public void setRelationships(List<RelationshipRest> relationships) {
         this.relationships = relationships;
+    }
+
+    @JsonIgnore
+    public Map<String, List<RelationshipRest>> getRelationshipsByRelationshipType() {
+        return relationshipsByRelationshipType;
+    }
+
+    public void setRelationshipsByRelationshipType(
+        Map<String, List<RelationshipRest>> relationshipsByRelationshipType) {
+        this.relationshipsByRelationshipType = relationshipsByRelationshipType;
+    }
+
+    public void addToRelationshipsByRelationshipTyp(RelationshipRest relationshipRest) {
+        if (relationshipsByRelationshipType == null) {
+            relationshipsByRelationshipType = new HashMap<>();
+        }
+        if (relationshipsByRelationshipType.containsKey(relationshipRest.getRelationshipType().getLeftLabel())) {
+            List<RelationshipRest> relationships = relationshipsByRelationshipType
+                .get(relationshipRest.getRelationshipType().getLeftLabel());
+            relationships.add(relationshipRest);
+            relationshipsByRelationshipType.put(relationshipRest.getRelationshipType().getLeftLabel(), relationships);
+        } else {
+            List<RelationshipRest> relationships = new LinkedList<>();
+            relationships.add(relationshipRest);
+            relationshipsByRelationshipType.put(relationshipRest.getRelationshipType().getLeftLabel(), relationships);
+        }
     }
 }

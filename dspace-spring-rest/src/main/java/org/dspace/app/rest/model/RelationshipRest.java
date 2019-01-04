@@ -19,6 +19,8 @@ import org.dspace.app.rest.RestResourceController;
  */
 public class RelationshipRest extends BaseObjectRest<Integer> {
     public static final String NAME = "relationship";
+    @JsonIgnore
+    public static final String PLURAL_NAME = "relationships";
     public static final String CATEGORY = "core";
 
     private UUID leftId;

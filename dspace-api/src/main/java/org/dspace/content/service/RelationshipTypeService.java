@@ -53,8 +53,6 @@ public interface RelationshipTypeService extends DSpaceCRUDService<RelationshipT
      */
     List<RelationshipType> findAll(Context context) throws SQLException;
 
-    List<RelationshipType> findByEntityType(Context context, EntityType entityType) throws SQLException;
-
     /**
      * Retrieves all RelationshipType objects that have a left or right label that is
      * equal to the given String
@@ -65,4 +63,15 @@ public interface RelationshipTypeService extends DSpaceCRUDService<RelationshipT
      * @throws SQLException If something goes wrong
      */
     List<RelationshipType> findByLeftOrRightLabel(Context context, String label) throws SQLException;
+
+    /**
+     * Returns a list of RelationshipType objects for which the given EntityType is equal to either the leftType
+     * or the rightType
+     * @param context       The relevant DSpace context
+     * @param entityType    The EntityType object used to check the leftType and rightType properties
+     * @return  A list of RelationshipType objects for which the leftType or rightType property are equal to the
+     *          given EntityType object
+     * @throws SQLException If something goes wrong
+     */
+    List<RelationshipType> findByEntityType(Context context, EntityType entityType) throws SQLException;
 }

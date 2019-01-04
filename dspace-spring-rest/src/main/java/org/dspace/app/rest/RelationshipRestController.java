@@ -70,7 +70,7 @@ public class RelationshipRestController {
     @RequestMapping(method = RequestMethod.GET, value = REGEX_REQUESTMAPPING_LABEL)
     public RelationshipResourceWrapper retrieveByLabel(HttpServletResponse response,
                                                        HttpServletRequest request, @PathVariable String label,
-                                                       @RequestParam(name = "dso", required = false) String dsoId,
+                                                       @RequestParam(name = "dso", required = false) String dso,
                                                        Pageable pageable)
         throws Exception {
 
@@ -78,17 +78,17 @@ public class RelationshipRestController {
 
         List<RelationshipType> relationshipTypeList = relationshipTypeService.findByLeftOrRightLabel(context, label);
         List<Relationship> relationships = new LinkedList<>();
-        if (StringUtils.isNotBlank(dsoId)) {
+        if (StringUtils.isNotBlank(dso)) {
 
-            UUID uuid = UUIDUtils.fromString(dsoId);
+            UUID uuid = UUIDUtils.fromString(dso);
             Item item = itemService.find(context, uuid);
 
             if (item == null) {
-                throw new ResourceNotFoundException("The request DSO with id: " + dsoId + " was not found");
+                throw new ResourceNotFoundException("The request DSO with id: " + dso + " was not found");
             }
             for (RelationshipType relationshipType : relationshipTypeList) {
-                relationships.addAll(relationshipService
-                                         .findByItemAndRelationshipType(context, item, relationshipType));
+                relationships.addAll(relationshipService.findByItemAndRelationshipType(context,
+                                                                                       item, relationshipType));
             }
         } else {
             for (RelationshipType relationshipType : relationshipTypeList) {
@@ -103,7 +103,7 @@ public class RelationshipRestController {
 
         RelationshipRestWrapper relationshipRestWrapper = new RelationshipRestWrapper();
         relationshipRestWrapper.setLabel(label);
-        relationshipRestWrapper.setDsoId(dsoId);
+        relationshipRestWrapper.setDsoId(dso);
         relationshipRestWrapper.setRelationshipRestList(relationshipRests);
 
         RelationshipResourceWrapper relationshipResourceWrapper = new RelationshipResourceWrapper(
