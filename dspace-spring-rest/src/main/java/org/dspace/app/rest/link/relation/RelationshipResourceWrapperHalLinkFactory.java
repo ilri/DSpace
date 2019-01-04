@@ -46,6 +46,18 @@ public class RelationshipResourceWrapperHalLinkFactory
         return null;
     }
 
+    public UriComponentsBuilder buildRelationshipWithLabelLink(final String label, final String dsoId) {
+        try {
+            UriComponentsBuilder uriBuilder = uriBuilder(getMethodOn()
+                                                             .retrieveByLabel(null, null, label, dsoId, null));
+
+            return uriBuilder;
+        } catch (Exception ex) {
+            //The method throwing the exception is never really executed, so this exception can never occur
+            return null;
+        }
+    }
+
     protected Class<RelationshipRestController> getControllerClass() {
         return RelationshipRestController.class;
     }

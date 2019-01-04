@@ -91,8 +91,10 @@ public class ItemConverter extends DSpaceObjectConverter<org.dspace.content.Item
         for (Relationship relationship : relationships) {
             RelationshipRest relationshipRest = relationshipConverter.fromModel(relationship);
             relationshipRestList.add(relationshipRest);
+            item.addToRelationshipsByRelationshipTyp(relationshipRest);
         }
         item.setRelationships(relationshipRestList);
+
 
         List<MetadataValue> fullList = new LinkedList<>();
         fullList.addAll(obj.getMetadata());
