@@ -98,6 +98,10 @@ public interface RelationshipService extends DSpaceCRUDService<Relationship> {
      */
     List<Relationship> findByRelationshipType(Context context, RelationshipType relationshipType) throws SQLException;
 
-    public void updatePlaceInRelationship(Context context, Relationship relationship) throws SQLException;
+    public void updatePlaceInRelationship(Context context, Relationship relationship, boolean isCreation)
+        throws SQLException, AuthorizeException;
+
+    public void updateItems(Context context, Relationship relationship) throws SQLException, AuthorizeException;
+
 
 }
