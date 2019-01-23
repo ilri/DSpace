@@ -59,8 +59,8 @@ public class RelationshipServiceImpl implements RelationshipService {
         if (isRelationshipValidToCreate(context, relationship)) {
             if (authorizeService.authorizeActionBoolean(context, relationship.getLeftItem(), Constants.WRITE) ||
                 authorizeService.authorizeActionBoolean(context, relationship.getRightItem(), Constants.WRITE)) {
-                updatePlaceInRelationship(context, relationship);
                 updatePlaceInRelationship(context, relationship, true);
+                return relationshipDAO.create(context, relationship);
             } else {
                 throw new AuthorizeException(
                     "You do not have write rights on this relationship's items");

@@ -38,11 +38,6 @@ public class Collected implements VirtualBean {
     private List<String> fields;
 
     /**
-     * The boolean value indicating whether this field should be used for place or not
-     */
-    private boolean useForPlace;
-
-    /**
      * Generic getter for the fields property
      * @return The list of fields to be used in this bean
      */
