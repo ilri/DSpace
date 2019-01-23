@@ -31,5 +31,4 @@ public class UUIDValue implements VirtualBean {
     public boolean getUseForPlace() {
         return useForPlace;
     }
-
 }

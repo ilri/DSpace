@@ -1322,7 +1322,7 @@ prevent the generation of resource policy entry values with null dspace_object a
     }
 
     @Override
-    public List<RelationshipMetadataValue> getRelationshipMetadata(Item item, boolean extra) {
+    public List<RelationshipMetadataValue> getRelationshipMetadata(Item item, boolean enableVirtualMetadata) {
         Context context = new Context();
         List<RelationshipMetadataValue> fullMetadataValueList = new LinkedList<>();
         try {
@@ -1331,8 +1331,8 @@ prevent the generation of resource policy entry values with null dspace_object a
             if (StringUtils.isNotBlank(entityType)) {
                 List<Relationship> relationships = relationshipService.findByItem(context, item);
                 for (Relationship relationship : relationships) {
-                    fullMetadataValueList
-                        .addAll(handleItemRelationship(context, item, entityType, relationship, extra));
+                    fullMetadataValueList.addAll(handleItemRelationship(context, item, entityType,
+                                                                        relationship, enableVirtualMetadata));
                 }
 
             }
@@ -1343,8 +1343,7 @@ prevent the generation of resource policy entry values with null dspace_object a
     }
 
     private List<RelationshipMetadataValue> handleItemRelationship(Context context, Item item, String entityType,
-                                                                   Relationship relationship,
-                                                                   boolean enableVirtualMetadata)
+                                                       Relationship relationship, boolean enableVirtualMetadata)
         throws SQLException {
         List<RelationshipMetadataValue> resultingMetadataValueList = new LinkedList<>();
         RelationshipType relationshipType = relationship.getRelationshipType();
@@ -1427,7 +1426,7 @@ prevent the generation of resource policy entry values with null dspace_object a
 
     private RelationshipMetadataValue constructResultingMetadataValue(Item item, String value,
                                                                       RelationshipMetadataValue metadataValue,
-                                                                      Integer relationshipId) {
+                                                                      int relationshipId) {
         metadataValue.setValue(value);
         metadataValue.setAuthority("virtual::" + relationshipId);
         metadataValue.setConfidence(-1);
