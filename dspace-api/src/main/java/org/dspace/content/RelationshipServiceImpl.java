@@ -53,6 +53,7 @@ public class RelationshipServiceImpl implements RelationshipService {
         return relationshipDAO.create(context, new Relationship());
     }
 
+    @Override
     public Relationship create(Context context, Relationship relationship) throws SQLException, AuthorizeException {
         if (isRelationshipValidToCreate(context, relationship)) {
             if (!authorizeService.isAdmin(context)) {
@@ -149,10 +150,12 @@ public class RelationshipServiceImpl implements RelationshipService {
         }
     }
 
+    @Override
     public int findLeftPlaceByLeftItem(Context context, Item item) throws SQLException {
         return relationshipDAO.findLeftPlaceByLeftItem(context, item);
     }
 
+    @Override
     public int findRightPlaceByRightItem(Context context, Item item) throws SQLException {
         return relationshipDAO.findRightPlaceByRightItem(context, item);
     }
@@ -228,6 +231,7 @@ public class RelationshipServiceImpl implements RelationshipService {
         return relationship;
     }
 
+    @Override
     public List<Relationship> findByItem(Context context, Item item) throws SQLException {
 
         List<Relationship> list = relationshipDAO.findByItem(context, item);
@@ -248,6 +252,7 @@ public class RelationshipServiceImpl implements RelationshipService {
         return list;
     }
 
+    @Override
     public List<Relationship> findAll(Context context) throws SQLException {
         return relationshipDAO.findAll(context, Relationship.class);
     }
@@ -357,6 +362,7 @@ public class RelationshipServiceImpl implements RelationshipService {
     @Override
     public List<Relationship> findByItemAndRelationshipType(Context context, Item item,
                                                             RelationshipType relationshipType)
+
         throws SQLException {
         List<Relationship> list = this.findByItem(context, item);
         List<Relationship> listToReturn = new LinkedList<>();
@@ -366,5 +372,11 @@ public class RelationshipServiceImpl implements RelationshipService {
             }
         }
         return listToReturn;
+    }
+
+    @Override
+    public List<Relationship> findByRelationshipType(Context context, RelationshipType relationshipType)
+        throws SQLException {
+        return relationshipDAO.findByRelationshipType(context, relationshipType);
     }
 }
