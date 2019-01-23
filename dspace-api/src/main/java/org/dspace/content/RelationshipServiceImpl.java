@@ -22,6 +22,7 @@ import org.dspace.content.dao.RelationshipDAO;
 import org.dspace.content.service.ItemService;
 import org.dspace.content.service.RelationshipService;
 import org.dspace.content.service.RelationshipTypeService;
+import org.dspace.content.virtual.VirtualMetadataPopulator;
 import org.dspace.core.Context;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -41,6 +42,9 @@ public class RelationshipServiceImpl implements RelationshipService {
     @Autowired(required = true)
     protected RelationshipTypeService relationshipTypeService;
 
+    @Autowired
+    private VirtualMetadataPopulator virtualMetadataPopulator;
+
     public Relationship create(Context context) throws SQLException, AuthorizeException {
         if (!authorizeService.isAdmin(context)) {
             throw new AuthorizeException(
@@ -55,7 +59,7 @@ public class RelationshipServiceImpl implements RelationshipService {
                 throw new AuthorizeException(
                     "Only administrators can modify relationship");
             }
-            updatePlaceInRelationship(context, relationship);
+            updatePlaceInRelationship(context, relationship, true);
 
             return relationshipDAO.create(context, relationship);
         } else {
@@ -63,33 +67,85 @@ public class RelationshipServiceImpl implements RelationshipService {
         }
     }
 
-    private void updatePlaceInRelationship(Context context, Relationship relationship) throws SQLException {
+    public void updatePlaceInRelationship(Context context, Relationship relationship, boolean isCreation)
+        throws SQLException, AuthorizeException {
+        Item leftItem = relationship.getLeftItem();
         List<Relationship> leftRelationships = findByItemAndRelationshipType(context,
-                                                                             relationship.getLeftItem(),
+                                                                             leftItem,
                                                                              relationship.getRelationshipType(), true);
+        Item rightItem = relationship.getRightItem();
         List<Relationship> rightRelationships = findByItemAndRelationshipType(context,
-                                                                              relationship.getRightItem(),
+                                                                              rightItem,
                                                                               relationship.getRelationshipType(),
                                                                               false);
 
-        if (!leftRelationships.isEmpty()) {
-            leftRelationships.sort((o1, o2) -> o2.getLeftPlace() - o1.getLeftPlace());
-            for (int i = 0; i < leftRelationships.size(); i++) {
-                leftRelationships.get(leftRelationships.size() - 1 - i).setLeftPlace(i + 1);
+        if (!virtualMetadataPopulator.isUseForPlaceTrueForRelationshipType(relationship.getRelationshipType(), true)) {
+            if (!leftRelationships.isEmpty()) {
+                leftRelationships.sort((o1, o2) -> o2.getLeftPlace() - o1.getLeftPlace());
+                for (int i = 0; i < leftRelationships.size(); i++) {
+                    leftRelationships.get(leftRelationships.size() - 1 - i).setLeftPlace(i);
+                }
+                relationship.setLeftPlace(leftRelationships.get(0).getLeftPlace() + 1);
+            } else {
+                relationship.setLeftPlace(0);
             }
+        } else {
+            updateItem(context, leftItem);
+
+        }
+
+        if (!virtualMetadataPopulator.isUseForPlaceTrueForRelationshipType(relationship.getRelationshipType(), false)) {
+            if (!rightRelationships.isEmpty()) {
+                rightRelationships.sort((o1, o2) -> o2.getRightPlace() - o1.getRightPlace());
+                for (int i = 0; i < rightRelationships.size(); i++) {
+                    rightRelationships.get(rightRelationships.size() - 1 - i).setRightPlace(i);
+                }
+                relationship.setRightPlace(rightRelationships.get(0).getRightPlace() + 1);
+            } else {
+                relationship.setRightPlace(0);
+            }
+
+        } else {
+            updateItem(context, rightItem);
+
+        }
+
+        if (isCreation) {
+            handleCreationPlaces(context, relationship);
+        }
+
+    }
+
+    public void updateItem(Context context, Item leftItem)
+        throws SQLException, AuthorizeException {
+        leftItem.setMetadataModified();
+        itemService.update(context, leftItem);
+    }
+
+
+    private void handleCreationPlaces(Context context, Relationship relationship) throws SQLException {
+        List<Relationship> leftRelationships;
+        List<Relationship> rightRelationships;
+        leftRelationships = findByItemAndRelationshipType(context,
+                                                          relationship.getLeftItem(),
+                                                          relationship.getRelationshipType(), true);
+        rightRelationships = findByItemAndRelationshipType(context,
+                                                           relationship.getRightItem(),
+                                                           relationship.getRelationshipType(),
+                                                           false);
+        leftRelationships.sort((o1, o2) -> o2.getLeftPlace() - o1.getLeftPlace());
+        rightRelationships.sort((o1, o2) -> o2.getRightPlace() - o1.getRightPlace());
+
+        if (!leftRelationships.isEmpty()) {
             relationship.setLeftPlace(leftRelationships.get(0).getLeftPlace() + 1);
         } else {
-            relationship.setLeftPlace(1);
+            relationship.setLeftPlace(0);
         }
 
         if (!rightRelationships.isEmpty()) {
-            rightRelationships.sort((o1, o2) -> o2.getRightPlace() - o1.getRightPlace());
-            for (int i = 0; i < rightRelationships.size(); i++) {
-                rightRelationships.get(rightRelationships.size() - 1 - i).setRightPlace(i + 1);
-            }
             relationship.setRightPlace(rightRelationships.get(0).getRightPlace() + 1);
         } else {
-            relationship.setRightPlace(1);
+            relationship.setRightPlace(0);
         }
     }
 
@@ -210,23 +266,25 @@ public class RelationshipServiceImpl implements RelationshipService {
             }
 
             for (Relationship relationship : relationships) {
-                relationshipDAO.save(context, relationship);
+                if (isRelationshipValidToCreate(context, relationship)) {
+                    relationshipDAO.save(context, relationship);
+                }
             }
         }
     }
 
     public void delete(Context context, Relationship relationship) throws SQLException, AuthorizeException {
-        if (isRelationshipValidToDelete(context, relationship)) {
-            if (!authorizeService.isAdmin(context)) {
-                throw new AuthorizeException(
-                    "Only administrators can delete relationship");
-            }
-            relationshipDAO.delete(context, relationship);
-
-            updatePlaceInRelationship(context, relationship);
-        } else {
-            throw new IllegalArgumentException("The relationship given was not valid");
+//        if (isRelationshipValidToDelete(context, relationship)) {
+        if (!authorizeService.isAdmin(context)) {
+            throw new AuthorizeException(
+                "Only administrators can delete relationship");
         }
+        relationshipDAO.delete(context, relationship);
+
+        updatePlaceInRelationship(context, relationship, false);
+//        } else {
+//            throw new IllegalArgumentException("The relationship given was not valid");
+//        }
     }
 
     private boolean isRelationshipValidToDelete(Context context, Relationship relationship) throws SQLException {
@@ -234,12 +292,12 @@ public class RelationshipServiceImpl implements RelationshipService {
             log.warn("The relationship has been deemed invalid since the relation was null");
             return false;
         }
-        if (relationship.getId() == null) {
+        if (relationship.getID() == null) {
             log.warn("The relationship has been deemed invalid since the ID" +
                          " off the given relationship was null");
             return false;
         }
-        if (this.find(context, relationship.getId()) == null) {
+        if (this.find(context, relationship.getID()) == null) {
             log.warn("The relationship has been deemed invalid since the relationship" +
                          " is not present in the DB with the current ID");
             logRelationshipTypeDetails(relationship.getRelationshipType());
