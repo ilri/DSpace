@@ -83,6 +83,7 @@ public class RelationshipServiceImpl implements RelationshipService {
                                                                               relationship.getRelationshipType(),
                                                                               false);
 
+        context.turnOffAuthorisationSystem();
         if (!virtualMetadataPopulator.isUseForPlaceTrueForRelationshipType(relationship.getRelationshipType(), true)) {
             if (!leftRelationships.isEmpty()) {
                 leftRelationships.sort((o1, o2) -> o2.getLeftPlace() - o1.getLeftPlace());
@@ -117,6 +118,7 @@ public class RelationshipServiceImpl implements RelationshipService {
         if (isCreation) {
             handleCreationPlaces(context, relationship);
         }
+        context.restoreAuthSystemState();
 
     }
 
