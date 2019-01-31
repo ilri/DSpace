@@ -225,6 +225,16 @@
         <workflow-editable>true</workflow-editable>
       </step>
 
+       <!--MQM duplicate check-->
+       <step>
+           <heading>duplicatecheck.submission.check</heading>
+           <processing-class>com.atmire.duplicate.submit.DuplicateCheckerStep</processing-class>
+           <jspui-binding>com.atmire.app.webui.submit.step.JSPDuplicateCheckerStep</jspui-binding>
+           <xmlui-binding>com.atmire.app.xmlui.aspect.duplicatechecker.submission.DuplicateCheckerStep</xmlui-binding>
+           <workflow-editable>true</workflow-editable>
+       </step>
+
+
 
        <!-- Step 4 Upload Item with Embargo Features
             to enable this step, please make sure to comment-out the previous step "UploadStep"  

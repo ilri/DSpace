@@ -77,7 +77,8 @@
                                     <goal>unpack-dependencies</goal>
                                 </goals>
                                 <configuration>
-                                   <includeArtifactIds>atmire-listings-and-reports-common,atmire-cua-common,atmire-datatables-common</includeArtifactIds>
+                                   <includeArtifactIds>atmire-listings-and-reports-common,atmire-cua-common,
+                                       atmire-metadata-quality-common, atmire-datatables-common</includeArtifactIds>
                                     <overWriteReleases>true</overWriteReleases>
                                     <overWriteSnapshots>true</overWriteSnapshots>
                                     <outputDirectory>${project.build.directory}/atmire-modules</outputDirectory>
@@ -190,6 +191,10 @@
             <groupId>com.atmire</groupId>
             <artifactId>atmire-cua-common</artifactId>
             <version>${cua.version.number}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.atmire</groupId>
+            <artifactId>atmire-metadata-quality-common</artifactId>
         </dependency>
         <dependency>
             <groupId>com.atmire</groupId>

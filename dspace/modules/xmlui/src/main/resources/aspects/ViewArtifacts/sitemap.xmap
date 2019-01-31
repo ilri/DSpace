@@ -46,6 +46,7 @@ and searching the repository.
             <map:transformer name="ConfigToDRI" src="com.atmire.util.xmlui.transformers.ConfigToDRI"/>
 
             <map:transformer name="Statistics" src="org.dspace.app.xmlui.aspect.artifactbrowser.StatisticsViewer"/>
+            <map:transformer name="DuplicateRedirecter" src="com.atmire.app.xmlui.aspect.duplicatechecker.DuplicateRedirect"/>
         </map:transformers>
 
 
@@ -69,6 +70,7 @@ and searching the repository.
         <map:selectors>
             <map:selector name="AuthenticatedSelector" src="org.dspace.app.xmlui.aspect.general.AuthenticatedSelector" />
             <map:selector name="IfModifiedSinceSelector" src="org.dspace.app.xmlui.aspect.general.IfModifiedSinceSelector" />
+            <map:selector name="ReplacedByDouble" src="com.atmire.app.xmlui.aspect.duplicatechecker.IsReplacedByDoubleSelector"/>
         </map:selectors>
 
 
@@ -168,6 +170,14 @@ and searching the repository.
                             <map:serialize type="xml"/>
                         </map:match>
                         <map:match type="HandleTypeMatcher" pattern="item">
+                            <!-- @MIRE METADATA QUALITY MODULE - START -->
+                            <map:select type="ReplacedByDouble">
+                                <map:when test="redirect">
+                                    <map:transform type="DuplicateRedirecter"/>
+                                </map:when>
+                                <map:otherwise>
+                                    <!-- @MIRE METADATA QUALITY MODULE - END -->
+
                                     <map:act type="UsageLoggerAction">
                                         <map:parameter name="type" value="item"/>
                                         <map:parameter name="eventType" value="view"/>
@@ -199,6 +209,8 @@ and searching the repository.
                                             <map:serialize type="xml"/>
                                         </map:otherwise>
                                     </map:select>
+                                        </map:otherwise>
+                                    </map:select>
                         </map:match>
                     </map:match>
 
@@ -228,13 +240,42 @@ and searching the repository.
                                     <map:parameter name="eventType" value="view" />
                                 </map:act>
                             </map:match>-->
+                            <map:select type="AuthenticatedSelector">
+                                <map:when test="eperson">
+                                    <!-- @MIRE METADATA QUALITY MODULE - START -->
+                                    <map:select type="ReplacedByDouble">
+                                        <map:when test="redirect">
+                                            <map:transform type="DuplicateRedirecter"/>
+                                        </map:when>
+                                        <map:otherwise>
                             <map:transform type="RestrictedItem">
                                 <map:parameter name="header"
                                                value="xmlui.ArtifactBrowser.RestrictedItem.auth_header" />
                                 <map:parameter name="message"
                                                value="xmlui.ArtifactBrowser.RestrictedItem.auth_message" />
                             </map:transform>
-                            <map:serialize type="xml" />
+                                            <map:serialize/>
+                                        </map:otherwise>
+                                    </map:select>
+                                </map:when>
+                                <map:otherwise>
+                                    <map:select type="ReplacedByDouble">
+                                        <map:when test="redirect">
+                                            <map:transform type="DuplicateRedirecter"/>
+                                        </map:when>
+                                        <map:otherwise>
+                                            <map:act type="StartAuthentication">
+                                                <map:parameter name="header"
+                                                               value="xmlui.ArtifactBrowser.RestrictedItem.auth_header"/>
+                                                <map:parameter name="message"
+                                                               value="xmlui.ArtifactBrowser.RestrictedItem.auth_message"/>
+                                            </map:act>
+                                        </map:otherwise>
+                                    </map:select>
+                                    <!-- @MIRE METADATA QUALITY MODULE - END -->
+                                    <map:serialize/>
+                                </map:otherwise>
+                            </map:select>
                             <!-- Implement HTTP If-Modified-Since protocol (commonly used by search
                                 - engine crawlers): return 304 NOT MODIFIED status if Item's - last-modified
                                 date is before If-Modified-Since header. - - NOTE: Do NOT do this for interactive

@@ -102,6 +102,9 @@
         <!-- Atmire Listings and Reports -->
         <aspect name="ListingsAndReports" path="resource://aspects/ListingsAndReports/" />
 
+        <aspect name="QualityAssurance" path="resource://aspects/MetadataQuality/"/>
+
+
         <!--
              If you prefer to use "Elastic Search" Statistics, you can uncomment the below
              aspect and COMMENT OUT the default "Statistics" aspect above.

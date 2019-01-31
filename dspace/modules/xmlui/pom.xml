@@ -287,6 +287,16 @@
             <type>war</type>
         </dependency>
 
+        <dependency>
+            <groupId>com.atmire</groupId>
+            <artifactId>atmire-metadata-quality-webapp</artifactId>
+            <type>war</type>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atmire</groupId>
+            <artifactId>atmire-metadata-quality-xmlui-api</artifactId>
+        </dependency>
         <!-- DSpace XMLUI Languages -->
         <dependency>
             <groupId>org.dspace</groupId>
