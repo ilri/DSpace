@@ -529,7 +529,7 @@
    <field name="search.uniqueid" type="string" indexed="true" stored="true" required="true" omitNorms="true" docValues="true"/>
    
     <!-- All Items/Communities/Collections placed in Discovery should have an handle -->
-   <field name="handle" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
+     <field name="handle" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
 
      <field name="handle_unversioned" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
 

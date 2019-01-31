@@ -30,6 +30,7 @@
     <xsl:import href="lib/xsl/aspect/artifactbrowser/community-list.xsl"/>
     <xsl:import href="lib/xsl/aspect/artifactbrowser/collection-list.xsl"/>
     <xsl:import href="../ReportingSuite/statistics.xsl"/>
+    <xsl:import href="../MetadataQualityModule/mqm.xsl"/>
     <xsl:import href="../Atmire-add-ons/Atmire-add-ons.xsl"/>
     <xsl:output indent="yes"/>
     <xsl:template name="renderCOinS"/>

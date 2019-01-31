@@ -40,6 +40,8 @@
              as it is used to reference the LICENSE_HEADER and *.properties file(s) in that directory. -->
         <root.basedir>${basedir}</root.basedir>
         <cua.version.number>${project.version}-4.1.6-0</cua.version.number>
+        <mqm.version.number>${project.version}-2.10.4-0</mqm.version.number>
+
         <datatables.version.number>${project.version}-2.0.10-0</datatables.version.number>
     </properties>
 
@@ -776,6 +778,27 @@
               <groupId>com.atmire</groupId>
               <artifactId>atmire-cua-common</artifactId>
               <version>${cua.version.number}</version>
+          </dependency>
+          <dependency>
+              <groupId>com.atmire</groupId>
+              <artifactId>atmire-metadata-quality-api</artifactId>
+              <version>${mqm.version.number}</version>
+          </dependency>
+          <dependency>
+              <groupId>com.atmire</groupId>
+              <artifactId>atmire-metadata-quality-webapp</artifactId>
+              <type>war</type>
+              <version>${mqm.version.number}</version>
+          </dependency>
+          <dependency>
+              <groupId>com.atmire</groupId>
+              <artifactId>atmire-metadata-quality-xmlui-api</artifactId>
+              <version>${mqm.version.number}</version>
+          </dependency>
+          <dependency>
+              <groupId>com.atmire</groupId>
+              <artifactId>atmire-metadata-quality-common</artifactId>
+              <version>${mqm.version.number}</version>
           </dependency>
           <dependency>
               <groupId>it.ipzs</groupId>

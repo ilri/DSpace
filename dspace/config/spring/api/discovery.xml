@@ -969,4 +969,7 @@
     </bean>
     <bean class="com.atmire.dspace.discovery.AtmireSolrService" id="org.dspace.discovery.SearchService"/>
 
+    <bean class="com.atmire.dspace.discovery.HasBitstreamsSSIPlugin" id="hasBitstreamsSSIPlugin"/>
+    <bean class="com.atmire.dspace.discovery.ItemCollectionPlugin" id="itemCollectionPlugin"/>
+
 </beans>

@@ -483,6 +483,21 @@
             <map:match pattern="JSON/controlled-vocabulary">
                 <map:read type="JSONControlledVocabularyReader"/>
             </map:match>
+
+                    <map:match pattern="JSON/mqm/**">
+                        <map:mount check-reload="no" src="aspects/json-mqm.xmap" uri-prefix="JSON/mqm/"/>
+                    </map:match>
+
+                    <map:match pattern="JSON/datatables/**">
+                        <map:mount check-reload="no" src="aspects/json-datatables.xmap" uri-prefix="JSON/datatables/"/>
+                    </map:match>
+
+                    <map:match pattern="atmire/documentation/*">
+                        <map:read type="AtmireModuleDocumentationReader">
+                            <map:parameter name="documentationFile" value="{1}"/>
+                        </map:read>
+                    </map:match>
+
         </map:pipeline>
 
         <!-- new AJAX menu (choices) responses for metadata authority control -->
