@@ -376,6 +376,16 @@
         <field>
           <dc-schema>cg</dc-schema>
           <dc-element>identifier</dc-element>
+          <dc-qualifier>iitatheme</dc-qualifier>
+          <repeatable>true</repeatable>
+          <label>IITA research theme</label>
+          <input-type value-pairs-name="iitatheme">dropdown</input-type>
+          <hint></hint>
+          <required></required>
+        </field>
+        <field>
+          <dc-schema>cg</dc-schema>
+          <dc-element>identifier</dc-element>
           <dc-qualifier>wletheme</dc-qualifier>
           <repeatable>true</repeatable>
           <label>WLE research theme</label>
@@ -4531,6 +4541,32 @@
       <pair>
         <displayed-value>S149</displayed-value>
         <stored-value>S149</stored-value>
+      </pair>
+    </value-pairs>
+    <value-pairs value-pairs-name="iitatheme" dc-term="iitatheme">
+      <pair>
+        <displayed-value>BIOMETRICS</displayed-value>
+        <stored-value>BIOMETRICS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>BIOTECH &amp; PLANT BREEDING</displayed-value>
+        <stored-value>BIOTECH &amp; PLANT BREEDING</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>NATURAL RESOURCE MANAGEMENT</displayed-value>
+        <stored-value>NATURAL RESOURCE MANAGEMENT</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>NUTRITION &amp; HUMAN HEALTH</displayed-value>
+        <stored-value>NUTRITION &amp; HUMAN HEALTH</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PLANT PRODUCTION &amp; HEALTH</displayed-value>
+        <stored-value>PLANT PRODUCTION &amp; HEALTH</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SOCIAL SCIENCE &amp; AGRIBUSINESS</displayed-value>
+        <stored-value>SOCIAL SCIENCE &amp; AGRICUSINESS</stored-value>
       </pair>
     </value-pairs>
     <value-pairs value-pairs-name="wletheme" dc-term="wletheme">
