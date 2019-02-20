@@ -60,7 +60,7 @@ def read_identifiers_from_file():
         if line not in orcids:
             orcids.append(line)
 
-    # close output file before we exit
+    # close input file before we exit
     args.input_file.close()
 
     resolve_orcid_identifiers(orcids)
