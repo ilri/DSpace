@@ -48,8 +48,10 @@ def read_subjects_from_file():
         # trim any leading or trailing whitespace (including newlines)
         line = line.strip()
 
-        # regular expression for matching alphanumeric (skip comments)
-        pattern = re.compile('^[A-Z]+$')
+        # match lines beginning with words like:
+        # SUBJECT
+        # ANOTHER SUBJECT
+        pattern = re.compile('^[A-Z]+?[A-Z ]+$')
 
         # skip the line if it doesn't match the pattern
         if not pattern.match(line):
@@ -87,12 +89,12 @@ def resolve_subjects(subjects):
 
             # check if there is 1 result, ie an exact subject term match
             if len(data['results']) == 1:
-                print(f'Exact match for {subject} in AGROVOC {args.language}')
+                print(f'Exact match for {subject!r} in AGROVOC {args.language}')
 
                 args.output_matches_file.write(subject + '\n')
             else:
                 if args.debug:
-                    sys.stderr.write(Fore.YELLOW + f'No match for {subject} in AGROVOC {args.language}\n' + Fore.RESET)
+                    sys.stderr.write(Fore.YELLOW + f'No match for {subject!r} in AGROVOC {args.language}\n' + Fore.RESET)
 
                 args.output_rejects_file.write(subject + '\n')
 
