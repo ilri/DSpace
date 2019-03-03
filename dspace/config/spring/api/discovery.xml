@@ -159,6 +159,7 @@
                 <ref bean="searchFilterLanguage"/>
                 <ref bean="searchFilterJournalTitle"/>
                 <ref bean="searchFilterPublisher"/>
+                <ref bean="searchFilterIitaTheme"/>
             </list>
         </property>
         <!--The sort filters for the discovery search-->
@@ -304,6 +305,7 @@
                 <ref bean="searchFilterLanguage"/>
                 <ref bean="searchFilterJournalTitle"/>
                 <ref bean="searchFilterPublisher"/>
+                <ref bean="searchFilterIitaTheme"/>
             </list>
         </property>
         <!--The sort filters for the discovery search (same as defaultConfiguration above)-->
@@ -868,6 +870,15 @@
         </property>
     </bean>
 
+    <bean id="searchFilterIitaTheme" class="org.dspace.discovery.configuration.DiscoverySearchFilter">
+        <property name="indexFieldName" value="iitatheme"/>
+        <property name="metadataFields">
+            <list>
+                <value>cg.identifier.iitatheme</value>
+            </list>
+        </property>
+    </bean>
+
     <!--Sort properties-->
     <bean id="sortTitle" class="org.dspace.discovery.configuration.DiscoverySortFieldConfiguration">
         <property name="metadataField" value="dc.title"/>
@@ -930,6 +941,7 @@
                 <ref bean="searchFilterDrylandsSubject"/>
                 <ref bean="searchFilterIcardaSubject"/>
                 <ref bean="searchFilterSystemSubject"/>
+                <ref bean="searchFilterIitaTheme"/>
             </list>
         </property>
         <!--The sort filters for the discovery search-->
