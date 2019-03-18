@@ -60,6 +60,9 @@ def read_subjects_from_file():
 
         # skip the line if it doesn't match the pattern
         if not pattern.match(line):
+            if args.debug:
+                sys.stderr.write(Fore.YELLOW + f'Skipping invalid subject term: {line}\n' + Fore.RESET)
+
             continue
 
         # iterate over results and add subjects that aren't already present
