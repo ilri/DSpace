@@ -76,7 +76,7 @@ def resolve_subjects(subjects):
         request_url = f'http://agrovoc.uniroma2.it/agrovoc/rest/v1/search?query={subject}&lang={args.language}'
 
         # enable transparent request cache with seven days expiry
-        expire_after = timedelta(days=7)
+        expire_after = timedelta(days=30)
         requests_cache.install_cache('agrovoc-response-cache', expire_after=expire_after)
 
         request = requests.get(request_url)
