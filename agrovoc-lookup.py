@@ -48,10 +48,15 @@ def read_subjects_from_file():
         # trim any leading or trailing whitespace (including newlines)
         line = line.strip()
 
-        # match lines beginning with words like:
+        # match lines beginning with words, paying attention to subjects with
+        # special characters like spaces, quotes, dashes, etc:
         # SUBJECT
         # ANOTHER SUBJECT
-        pattern = re.compile('^[A-Z]+?[A-Z ]+$')
+        # XANTHOMONAS CAMPESTRIS PV. MANIHOTIS
+        # WOMEN'S PARTICIPATION
+        # COMMUNITY-BASED FOREST MANAGEMENT
+        # INTERACCIÓN GENOTIPO AMBIENTE
+        pattern = re.compile('^[\w\-\.\']+?[\w\s\-\.\']+$')
 
         # skip the line if it doesn't match the pattern
         if not pattern.match(line):
