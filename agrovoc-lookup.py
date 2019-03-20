@@ -102,7 +102,7 @@ def resolve_subjects(subjects):
                 args.output_matches_file.write(subject + '\n')
             else:
                 if args.debug:
-                    sys.stderr.write(Fore.YELLOW + f'No match for {subject!r} in AGROVOC {args.language}\n' + Fore.RESET)
+                    sys.stderr.write(Fore.YELLOW + f'No exact match for {subject!r} in AGROVOC {args.language}\n' + Fore.RESET)
 
                 args.output_rejects_file.write(subject + '\n')
 
