@@ -49,14 +49,15 @@ def read_subjects_from_file():
         line = line.strip()
 
         # match lines beginning with words, paying attention to subjects with
-        # special characters like spaces, quotes, dashes, etc:
+        # special characters like spaces, quotes, dashes, parentheses, etc:
         # SUBJECT
         # ANOTHER SUBJECT
         # XANTHOMONAS CAMPESTRIS PV. MANIHOTIS
         # WOMEN'S PARTICIPATION
         # COMMUNITY-BASED FOREST MANAGEMENT
         # INTERACCIÓN GENOTIPO AMBIENTE
-        pattern = re.compile('^[\w\-\.\']+?[\w\s\-\.\']+$')
+        # COCOA (PLANT)
+        pattern = re.compile('^[\w\-\.\'\(\)]+?[\w\s\-\.\'\(\)]+$')
 
         # skip the line if it doesn't match the pattern
         if not pattern.match(line):
