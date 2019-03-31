@@ -64,6 +64,8 @@ def read_subjects_from_file():
             if args.debug:
                 sys.stderr.write(Fore.YELLOW + f'Skipping invalid subject term: {line}\n' + Fore.RESET)
 
+            args.output_rejects_file.write(line + '\n')
+
             continue
 
         # iterate over results and add subjects that aren't already present
