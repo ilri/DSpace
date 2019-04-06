@@ -84,7 +84,7 @@ def resolve_subjects(subjects):
         if args.debug:
             sys.stderr.write(Fore.GREEN + f'Looking up the subject: {subject} ({args.language})\n' + Fore.RESET)
 
-        request_url = f'http://agrovoc.uniroma2.it/agrovoc/rest/v1/search?query={subject}&lang={args.language}'
+        request_url = f'http://agrovoc.uniroma2.it/agrovoc/rest/v1/agrovoc/search?query={subject}&lang={args.language}'
 
         # enable transparent request cache with seven days expiry
         expire_after = timedelta(days=30)
