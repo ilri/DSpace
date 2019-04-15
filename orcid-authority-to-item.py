@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# orcid-authority-to-item.py 1.0.0
+# orcid-authority-to-item.py 1.1.0
 #
 # Copyright 2018 Alan Orth.
 #
@@ -25,7 +25,7 @@
 # This script is written for Python 3 and requires several modules that you can
 # install with pip (I recommend setting up a Python virtual environment first):
 #
-#   $ pip install colorama psycopg2-binary requests requests-cache SolrClient
+#   $ pip install colorama psycopg2-binary requests requests-cache
 #
 
 import argparse
@@ -35,7 +35,6 @@ import psycopg2
 import requests
 import requests_cache
 import signal
-from SolrClient import SolrClient
 import sys
 
 
@@ -58,19 +57,29 @@ def main():
 
 # query DSpace's authority Solr core for authority IDs with ORCID identifiers
 def read_identifiers_from_solr(args):
-    solr = SolrClient(args.solr_url)
     # simple query from the 'authority' collection 2000 rows at a time (default is 1000)
-    # see: https://solrclient.readthedocs.io/en/latest/SolrClient.html
-    res = solr.query('authority', {'q': 'orcid_id:*'}, rows=2000)
+    solr_query_params = {
+        'q': 'orcid_id:*',
+        'wt': 'json',
+        'rows': 2000
+    }
+
+    solr_url = args.solr_url + '/authority/select'
+
+    res = requests.get(solr_url, params=solr_query_params)
 
     if args.debug:
-        sys.stderr.write(Fore.GREEN + 'Total number of authorities with ORCID iDs: {0}\n\n'.format(str(res.get_num_found())) + Fore.RESET)
+        numFound = res.json()['response']['numFound']
+        sys.stderr.write(Fore.GREEN + 'Total number of Solr records with ORCID iDs: {0}\n'.format(str(numFound) + Fore.RESET))
 
     # initialize an empty dictionary for authorities
     # format will be: {'d7ef744b-bbd4-4171-b449-00e37e1b776f': '0000-0002-3476-272X', ...}
     authorities = {}
 
-    for doc in res.docs:
+    docs = res.json()['response']['docs']
+    # iterate over results and add ORCID iDs that aren't already in the list
+    # for example, we had 1600 ORCID iDs in Solr, but only 600 are unique
+    for doc in docs:
         if (doc['id'] not in authorities):
             authorities.update({doc['id']: doc['orcid_id']})
 
