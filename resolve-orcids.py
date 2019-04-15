@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# resolve-orcids.py 1.1.0
+# resolve-orcids.py 1.2.0
 #
 # Copyright 2018 Alan Orth.
 #
@@ -26,7 +26,7 @@
 # This script is written for Python 3 and requires several modules that you can
 # install with pip (I recommend setting up a Python virtual environment first):
 #
-#   $ pip install colorama requests requests-cache SolrClient
+#   $ pip install colorama requests requests-cache
 #
 
 import argparse
@@ -36,7 +36,6 @@ import re
 import requests
 import requests_cache
 import signal
-from SolrClient import SolrClient
 import sys
 
 
@@ -68,20 +67,28 @@ def read_identifiers_from_file():
 
 # query DSpace's authority Solr core for ORCID identifiers
 def read_identifiers_from_solr():
-    solr = SolrClient(args.solr_url)
     # simple query from the 'authority' collection 2000 rows at a time (default is 1000)
-    # see: https://solrclient.readthedocs.io/en/latest/SolrClient.html
-    res = solr.query('authority', {'q': 'orcid_id:*'}, rows=2000)
+    solr_query_params = {
+        'q': 'orcid_id:*',
+        'wt': 'json',
+        'rows': 2000
+    }
+
+    solr_url = args.solr_url + '/authority/select'
+
+    res = requests.get(solr_url, params=solr_query_params)
 
     if args.debug:
-        sys.stderr.write(Fore.GREEN + 'Total number of Solr records with ORCID iDs: {0}\n'.format(str(res.get_num_found())) + Fore.RESET)
+        numFound = res.json()['response']['numFound']
+        sys.stderr.write(Fore.GREEN + 'Total number of Solr records with ORCID iDs: {0}\n'.format(str(numFound) + Fore.RESET))
 
     # initialize an empty list for ORCID iDs
     orcids = []
 
+    docs = res.json()['response']['docs']
     # iterate over results and add ORCID iDs that aren't already in the list
     # for example, we had 1600 ORCID iDs in Solr, but only 600 are unique
-    for doc in res.docs:
+    for doc in docs:
         if doc['orcid_id'] not in orcids:
             orcids.append(doc['orcid_id'])
 
