@@ -2,7 +2,7 @@
 #
 # resolve-orcids.py 1.2.0
 #
-# Copyright 2018 Alan Orth.
+# Copyright 2018–2019 Alan Orth.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
