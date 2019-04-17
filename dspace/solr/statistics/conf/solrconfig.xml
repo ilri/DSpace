@@ -508,8 +508,8 @@
                and old cache.  
       -->
     <filterCache class="solr.FastLRUCache"
-                 size="512"
-                 initialSize="512"
+                 size="16384"
+                 initialSize="16384"
                  autowarmCount="0"/>
 
     <!-- Query Result Cache
