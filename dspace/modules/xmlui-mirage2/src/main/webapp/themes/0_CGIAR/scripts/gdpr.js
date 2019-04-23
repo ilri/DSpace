@@ -9,7 +9,7 @@ function initializeCookieConsent() {
             "dismiss": "Disagree",
             "allow": "Agree",
             "link": "Our privacy statement.",
-            "href": "https://www.ilri.org/privacy-cookies-statement"
+            "href": "https://cgspace.cgiar.org/page/privacy"
         }
     });
 };

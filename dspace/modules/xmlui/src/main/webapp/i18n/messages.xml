@@ -2312,6 +2312,7 @@
 	<message key="xmlui.dri2xhtml.structural.contact-link">Contact Us</message>
 	<message key="xmlui.dri2xhtml.structural.feedback-link">Send Feedback</message>
 	<message key="xmlui.dri2xhtml.structural.about-link">About</message>
+	<message key="xmlui.dri2xhtml.structural.privacy-link">Privacy Statement</message>
 
 	<message key="xmlui.dri2xhtml.structural.head-subtitle">CGSpace</message>
 
@@ -2657,6 +2658,7 @@
     <message key="xmlui.mirage2.forms.nonCompositeFieldSet.remove">Remove</message>
 
     <message key="xmlui.mirage2.page-structure.aboutThisRepository">About This Repository</message>
+    <message key="xmlui.mirage2.page-structure.privacyStatement">Privacy Statement</message>
     <message key="xmlui.mirage2.page-structure.toggleNavigation">Toggle navigation</message>
 
     <message key="xmlui.mirage2.page-structure.heroUnit.title">About This Repository</message>

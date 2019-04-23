@@ -290,6 +290,9 @@
                     <xsl:when test="starts-with($request-uri, 'page/about')">
                         <i18n:text>xmlui.mirage2.page-structure.aboutThisRepository</i18n:text>
                     </xsl:when>
+                    <xsl:when test="starts-with($request-uri, 'page/privacy')">
+                        <i18n:text>xmlui.mirage2.page-structure.privacyStatement</i18n:text>
+                    </xsl:when>
                     <xsl:when test="not($page_title)">
                         <xsl:text>  </xsl:text>
                     </xsl:when>
@@ -711,7 +714,15 @@
 
                             <i18n:text>xmlui.dri2xhtml.structural.about-link</i18n:text>
                         </a>
-                        <a href="https://www.ilri.org/privacy-cookies-statement" title="ILRI privacy statement" target="_blank" rel="noopener">Privacy Policy</a>
+                        <a>
+                            <xsl:attribute name="href">
+                                <xsl:value-of
+                                        select="/dri:document/dri:meta/dri:pageMeta/dri:metadata[@element='contextPath'][not(@qualifier)]"/>
+                                <xsl:text>/page/privacy</xsl:text>
+                            </xsl:attribute>
+
+                            <i18n:text>xmlui.dri2xhtml.structural.privacy-link</i18n:text>
+                        </a>
                         <a>
                             <xsl:attribute name="href">
                                 <xsl:value-of
@@ -810,6 +821,99 @@
 					  <h2>Disclaimer</h2>
 					    <p>CGSpace content providers and partners accept no liability to any consequence resulting from use of the content or data made available in this repository. Users of this content assume full responsibility for compliance with all relevant national or international regulations and legislation.</p>
                         
+                    </div>
+                </xsl:when>
+                <xsl:when test="starts-with($request-uri, 'page/privacy')">
+                    <div class="hero-unit">
+                        <h2>CGSpace privacy statement (May 2018)</h2>
+                        <p>The CGSpace platform is hosted by the International Livestock Research Institute (ILRI) on behalf of its partners. This statement aims to help you understand what information ILRI collects about you and how we use it. ILRI is committed to protecting your personal information. This statement is derived from the official ILRI privacy statement available at: <a href="https://hdl.handle.net/10568/92832">https://hdl.handle.net/10568/92832</a></p>
+                        <h2>What personal information do we collect from CGSpace users?</h2>
+                        <h3>Personal identification information</h3>
+                        <p>When registering or logging into the CGSpace repository, you may be asked to enter your email address or other details, such as name and institutional affiliation. ILRI will collect your personal identification information only if you voluntarily submit such information to us. Users can always opt not to supply personal identification information, except that it may prevent them from engaging in certain activities, for example signing for email alerts.</p>
+                        <h3>Non-personally identifiable information</h3>
+                        <p>You can browse CGSpace without telling us who you are or revealing any personally identifiable information about yourself.</p>
+                        <p>The only information we gather during general browsing is from standard <b>server logs</b>: these include your internet protocol (IP) address, browser type, operating system, and information such as the website that referred you to us, the files you download, the pages you visit, and the dates/times of those visits. These do not specifically identify you. The information is used only for website traffic analysis and is treated confidentially.</p>
+                        <p><b>Cookie data</b>. The Site may use "cookies"; to enhance your user experience. A cookie is a small text file that a website saves on your computer or mobile device when you visit the site. There are multiple types of cookies, but cookies in general have two principal purposes:</p>
+                        <ol>
+                            <li>to improve your browsing experience by remembering your actions and preferences</li>
+                            <li>to facilitate analysis of website traffic.</li>
+                        </ol>
+                        <p>ILRI uses cookies to facilitate the analysis of website traffic and to remember preferences you may have set. This helps us to understand and improve the performance and usability of CGSpace. Specifically, ILRI uses cookies when communicating with Google Analytics (for web traffic analysis). Personally identifiable information is not stored in these cookies.</p>
+                        <h3>When do we collect personal information?</h3>
+                        <p>You are not asked to provide any personally identifiable information to access most parts of CGSpace. You will be asked to provide basic personal information such as your email address to subscribe to email alerts or leave a comment on the Site.</p>
+                        <h3>How does ILRI use your personal information?</h3>
+                        <p>We will use your personally identifiable information for the purposes of:</p>
+                        <ul>
+                            <li>giving you the products, information or services you have requested</li>
+                            <li>improving the quality of the products, information or services you have requested</li>
+                            <li>communicating with you about an event or conference</li>
+                            <li>evaluating your job application</li>
+                            <li>complying with law and regulations</li>
+                        </ul>
+                        <p>To do some of this, we may process your information using third party service providers or agents who may be located outside your home country. However, your information will only be used for the purposes you requested or agreed to or as required by law. Please see section F on third party disclosure for more information on how we share your information with others.</p>
+                        <p>We will use your non-personally identifiable information to facilitate analysis of website traffic to improve the performance, usability and data security of the Site.</p>
+                        <h3>How does ILRI protect your personal information?</h3>
+                        <p>ILRI adopts appropriate data collection, storage and processing practices and security measures to protect against unauthorized access, alteration, disclosure or destruction of your personal information and data stored on the Site and elsewhere.</p>
+                        <h3>Third-party disclosure</h3>
+                        <p>ILRI does not sell, trade, or rent user personal identification information to others. ILRI may share generic aggregated demographic information not linked to any personally identifiable information regarding visitors and users with our partners, trusted affiliates and advertisers for the purposes outlined above or as described in section G below.</p>
+                        <p>We may also use third party service providers to help us with the management of offline and online services (e.g. the Site), such as sending out newsletters and undertaking surveys. We may share user information with these third parties for those limited purposes for which you have given your permission.</p>
+                        <h3>Legal disclosures</h3>
+                        <p>Notwithstanding anything to the contrary in this Privacy statement, users acknowledge, consent and agree that ILRI may disclose information in order to: (a) comply with applicable law, regulation, legal process, or governmental request; (b) protect the rights, property and safety of ILRI and others, including intellectual property rights; and (c) enforce or apply our agreements and policies.</p>
+                        <p>If you post or send offensive, inappropriate, or objectionable content anywhere on or to the Site or otherwise engage in any disruptive behaviour on any ILRI service, we may use your personal information to stop such behaviour. Where ILRI reasonably believes that you are or may be in breach of any applicable laws (e.g. because content you have posted is considered defamatory or in violation of copyright), we may use your personal information to inform relevant third parties such as law enforcement agencies about the content and your behaviour.</p>
+                        <h3>Third-party links</h3>
+                        <p>You may find other content on CGSpace that link to the sites and services of our partners, donors and other third parties. ILRI does not control the content or links that appear on these sites and is not responsible for the practices employed by websites linked to or from the Site. Browsing and interaction on any other website, including websites which have a link to the Site, is subject to that website's own terms and policies. ILRI is, however, committed to the integrity of the Site and welcomes feedback on any of the linked sites.</p>
+                        <p>ILRI also uses "social plugins" for Facebook, Google, LinkedIn, Flickr, Pinterest, SlideShare, YouTube and Twitter. The most common use of these social plugins is to share content on social networks. They also transmit cookies to and from the Site to a third party service.</p>
+                        <h3>Children</h3>
+                        <p>ILRI does not intend, and the Site is not designed, to collect personal information from children under the age of 18. If you are under 18 years old, you should not provide personal information on the Site or use it without the supervision or authorization of an adult.</p>
+                        <h3>Specific data subject rights regarding data privacy and protection</h3>
+                        <p>Privacy by design Privacy by design is a methodology that enables privacy to be "built in" to the design and architecture of information systems, business processes and networked infrastructure. ILRI ensures that all its archival systems containing personally identifiable information use design methodology or system procurement criteria that includes privacy by design.</p>
+                        <h3>Collection of and access to personal data</h3>
+                        <p>ILRI will only collect the minimum amount of personally identifiable data that is necessary to complete the action to which that information is associated. If actions change and information is no longer needed, we will stop collecting the information immediately.</p>
+                        <p>Further, ILRI will only grant access to data to individuals who absolutely need access in order to perform their duties. If duties or individuals change, ILRI will remove permissions from any accounts who do not need access.</p>
+                        <p>ILRI will also conduct periodic reviews of every filing system under its control and ensure that data collection and data access requirements are up to date. </p>
+                        <h3>Affirmative consent</h3>
+                        <p>In collecting your personal data, affirmative consent will be requested from you. The consent request notice contains the following information:</p>
+                        <ul>
+                            <li>ILRI contact details;</li>
+                            <li>The reason for collecting the information;</li>
+                            <li>Whether the information will be transferred to another country or international organization (e.g. the CGIAR System Organization);</li>
+                            <li>How long the information will be stored;</li>
+                            <li>How the data subject can correct, delete, restrict processing, or object to processing of their data as well as how they can receive their data to move it someplace else;</li>
+                            <li>The right for the data subject to withdraw their consent at any time;</li>
+                            <li>The right for the data subject to lodge a complaint with the appropriate authorities; and</li>
+                            <li>If providing the personal data is a requirement to comply with a law or contract, the possible consequences of not providing the information.</li>
+                        </ul>
+                        <h3>Affirmative consent in signing up for ILRI surveys or information products</h3>
+                        <p>In signing up to ILRI surveys or for our information products, the conditions and associated user rights are as follows:</p>
+                        <ul>
+                            <li>You may correct, delete or restrict processing of your data held by ILRI by writing to <a href="mailto:ILRIdataprivacysupport@cgiar.org">ILRIdataprivacysupport@cgiar.org</a>. We will respond within the time period specified in this privacy statement.</li>
+                            <li>The information collected is for the purposes of providing you with the product requested and/or to improve the quality of our content.</li>
+                            <li>Your information may be shared across ILRI and with partners participating in the respective projects, often in different countries.</li>
+                            <li>The data provided to us through participation in ILRI surveys will be held for three years after which it will be destroyed.</li>
+                            <li>The data provided to us by signing up for information products will be held for as long as you wish to receive the specific products.To remove yourself from the subscriber list, follow the instructions at the bottom of the email containing your information product.</li>
+                            <li>Comments left by you on our blogs will be deleted upon your request to <a href="mailto:ILRIdataprivacysupport@cgiar.org">ILRIdataprivacysupport@cgiar.org</a>.</li>
+                        </ul>
+                        <h3>Data subject access rights</h3>
+                        <p>You have the right to, upon request, access your information to amend and confirm accuracy; request your data be provided so you can submit it elsewhere; and request that your information be deleted from the ILRI data filing system.</p>
+                        <ul>
+                            <li>Upon request, ILRI will provide the data subject with their information free of charge unless the request is manifestly unfounded or excessive (particularly if it is repetitive). If unfounded or excessive then ILRI may charge a reasonable fee based on the administrative cost of providing the information;</li>
+                            <li>ILRI will respond to you within one month of receipt of their request, and may extend the response period and must notify you within one month if so explaining why the extension is necessary, if the requests are complex or numerous. Unless the request is for a large amount of information, responses will not linger past three months of receipt of the request; and</li>
+                            <li>ILRI will provide the requested information in an easily accessible, commonly used, electronic format.</li>
+                        </ul>
+                        <p>You can opt out of receiving emails from us at any time by unsubscribing to one of the Google FeedBurner subscriptions, look for the "unsubscribe now" link located at the bottom of the email you have signed up for. To unsubscribe from RSS updates, please check your specific reader's settings.</p>
+                        <h3>Breach</h3>
+                        <p>For data filing systems over which ILRI has control, a breach notification system and process is in place guaranteeing that data subjects will be notified of the breach within 72 hours (or less) of ILRI first having become aware of a breach. ILRI has robust mitigation and monitoring in place to prevent and/or identify a breach when it occurs.</p>
+                        <h3>Third party data filing systems</h3>
+                        <p>If data filing systems are hosted or managed by a third party, ILRI will use its best efforts and execute service agreements with appropriate compliance, confidentially and non-disclosure clauses.</p>
+                        <h3>User acceptance of these terms</h3>
+                        <p>By using the ILRI Site, you signify your acceptance of this statement, terms and conditions. If ILRI changes this privacy statement, we will post those changes to this page so that you are always aware of what information we collect and how we use it.</p>
+                        <h3>Contacting ILRI</h3>
+                        <p>For any questions regarding ILRI's Privacy statement, the practices of the Site or user's dealings with it, the contact information is as follows:</p>
+                        <address>
+International Livestock Research Institute (ILRI)<br />
+Headquarters Nairobi Kenya P.O Box 30709-00100<br />
+<a href="mailto:ILRIdataprivacysupport@cgiar.org">ILRIdataprivacysupport@cgiar.org</a>
+                        </address>
                     </div>
                 </xsl:when>
                 <!-- Otherwise use default handling of body -->
