@@ -1091,11 +1091,11 @@ public class ItemsResource extends Resource
                 if (context.getCurrentUser() != null)
                 {
                     log.error("User(" + context.getCurrentUser().getEmail() + ") has not permission to "
-                            + getActionString(action) + " item!");
+                            + getActionString(action) + " item(id=" + id + ")!");
                 }
                 else
                 {
-                    log.error("User(anonymous) has not permission to " + getActionString(action) + " item!");
+                    log.error("User(anonymous) has not permission to " + getActionString(action) + " item(id=" + id + ")!");
                 }
                 throw new WebApplicationException(Response.Status.UNAUTHORIZED);
             }
