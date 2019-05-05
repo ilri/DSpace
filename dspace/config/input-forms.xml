@@ -3494,6 +3494,14 @@
         <stored-value>PII-LAM_AgroClimas</stored-value>
       </pair>
       <pair>
+        <displayed-value>PII-LAM_AGROCLIMAS2</displayed-value>
+        <stored-value>PII-LAM_AGROCLIMAS2</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PII-LAM_ASACDIGITAL</displayed-value>
+        <stored-value>PII-LAM_ASACDIGITAL</stored-value>
+      </pair>
+      <pair>
         <displayed-value>PII-LAM_CSA</displayed-value>
         <stored-value>PII-LAM_CSA</stored-value>
       </pair>
@@ -3524,6 +3532,10 @@
       <pair>
         <displayed-value>PII-LAM_LivestockPlus</displayed-value>
         <stored-value>PII-LAM_LivestockPlus</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PII-LAM_POLITICAS</displayed-value>
+        <stored-value>PII-LAM_POLITICAS</stored-value>
       </pair>
       <pair>
         <displayed-value>PII-SA_CSA</displayed-value>
@@ -3616,6 +3628,14 @@
       <pair>
         <displayed-value>PII-WA_Cowpeas</displayed-value>
         <stored-value>PII-WA_Cowpeas</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PII-FP1_LP1</displayed-value>
+        <stored-value>PII-FP1_LP1</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PII-FP1_PCSL</displayed-value>
+        <stored-value>PII-FP1_PCSL</stored-value>
       </pair>
       <pair>
         <displayed-value>PII-FP4_CSRD</displayed-value>
