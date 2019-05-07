@@ -26,13 +26,15 @@
 # This script is written for Python 3.6+ and requires several modules that you
 # can install with pip (I recommend using a Python virtual environment):
 #
-#   $ pip install requests colorama
+#   $ pip install requests requests-cache colorama
 #
 
 import argparse
 from colorama import Fore
+from datetime import timedelta
 import ipaddress
 import requests
+import requests_cache
 import signal
 import sys
 
@@ -78,10 +80,18 @@ def resolve_addresses(addresses):
         if args.debug:
             sys.stderr.write(Fore.GREEN + f'Looking up the address: {address}\n' + Fore.RESET)
 
+        # enable transparent request cache with 30 day expiry
+        expire_after = timedelta(days=30)
+        # cache HTTP 200 responses
+        requests_cache.install_cache('ipapi-response-cache', expire_after=expire_after)
+
         # build request URL for current address
         request_url = f'https://ipapi.co/{address}/json'
 
         request = requests.get(request_url)
+
+        # prune old cache entries
+        requests_cache.core.remove_expired_responses()
 
         # if request status 200 OK
         if request.status_code == requests.codes.ok:
