@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# resolve-addresses.py 0.2.0
+# resolve-addresses.py 0.3.0
 #
 # Copyright 2019 Alan Orth.
 #
