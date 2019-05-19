@@ -24,13 +24,13 @@
 #
 # The script is written for Python 3+ and requires PETL and Requests:
 #
-#   $ pip install petl requests
+#   $ pip install requests
 #
-# See: https://petl.readthedocs.org/en/latest
 # See: https://requests.readthedocs.org/en/master
 
+import argparse
+import csv
 import os.path
-import petl as etl
 import re
 import requests
 import signal
@@ -42,14 +42,28 @@ def signal_handler(signal, frame):
     sys.exit(0)
 
 
+parser = argparse.ArgumentParser(description='Download PDFs and generate thumbnails from files in a CSV.')
+parser.add_argument('--csv-file', '-i', help='Path to CSV file', required=True, type=argparse.FileType('r', encoding='UTF-8'))
+parser.add_argument('--debug', '-d', help='Print debug messages to standard error (stderr).', action='store_true')
+parser.add_argument('--dry-run', '-n', help='Only print changes that would be made.', action='store_true')
+parser.add_argument('--filename-field-name', '-f', help='Name of column with thumbnail filenames.', default='filename')
+parser.add_argument('--quiet', '-q', help='Do not print progress messages to the screen.', action='store_true')
+parser.add_argument('--url-field-name', '-u', help='Name of column with URLs for the PDFs.', default='dc.description.url')
+parser.add_argument('--download-only', '-w', help='Only download the PDFs.')
+args = parser.parse_args()
+
+# open the CSV
+reader = csv.DictReader(args.csv_file)
+
+
 # Process thumbnails from filename.pdf to filename.jpg using GraphicsMagick
 # and Ghostscript. Equivalent to the following shell invocation:
 #
 #   gm convert -quality 85 -thumbnail x400 -flatten 64661.pdf\[0\] cover.jpg
 #
-def create_thumbnail(record):
+def create_thumbnail(row):
 
-    filename = record[0]
+    filename = row[args.filename_field_name]
     thumbnail = os.path.splitext(filename)[0] + '.jpg'
     # check if we already have a thumbnail
     if os.path.isfile(thumbnail):
@@ -61,12 +75,12 @@ def create_thumbnail(record):
     return
 
 
-def download_bitstream(record):
+def download_bitstream(row):
 
     # some records have multiple URLs separated by "||"
     pattern = re.compile("\|\|")
-    urls = pattern.split(record[0])
-    filenames = pattern.split(record[1])
+    urls = pattern.split(row[args.url_field_name])
+    filenames = pattern.split(row[args.filename_field_name])
     for url, filename in zip(urls, filenames):
         print("URL: " + url)
         print("File: " + filename)
@@ -88,21 +102,11 @@ def download_bitstream(record):
     return
 
 
-# make sure the user passed us the name of a CSV on the command line
-if len(sys.argv) == 2:
-    # read records from the CSV
-    records = etl.fromcsv(sys.argv[1])
-else:
-    print("Usage: " + sys.argv[0] + " filename.csv")
-    exit()
-
 # set the signal handler for SIGINT (^C)
 signal.signal(signal.SIGINT, signal_handler)
 
-# get URL and filename fields for each record
-# make sure other URL fields like dc.identifier.url[] etc are merged into this one and filename column exists!
-for record in etl.values(records, 'dc.identifier.url', 'filename'):
-    download_bitstream(record)
+for row in reader:
+    download_bitstream(row)
 
     # maybe only generate thumbnails if -t is passed?
-    #create_thumbnail(record)
+    #create_thumbnail(row)
