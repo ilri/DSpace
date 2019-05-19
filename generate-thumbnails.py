@@ -19,16 +19,18 @@
 #
 # ---
 
-# Reads the "filename" and "dc.identifier.url" fields from a CSV,
-# fetches the PDF, and generates a thumbnail using GraphicsMagick.
+# Reads the filename and URL fields from a CSV, fetches the PDF, and generates
+# a thumbnail using GraphicsMagick (must be installed on the host).
 #
-# The script is written for Python 3+ and requires PETL and Requests:
+# This script is written for Python 3 and requires several modules that you can
+# install with pip (I recommend setting up a Python virtual environment first):
 #
-#   $ pip install requests
+#   $ pip install colorama requests
 #
 # See: https://requests.readthedocs.org/en/master
 
 import argparse
+from colorama import Fore
 import csv
 import os.path
 import re
