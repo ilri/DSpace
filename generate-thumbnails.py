@@ -51,7 +51,7 @@ parser.add_argument('--dry-run', '-n', help='Only print changes that would be ma
 parser.add_argument('--filename-field-name', '-f', help='Name of column with thumbnail filenames.', default='filename')
 parser.add_argument('--quiet', '-q', help='Do not print progress messages to the screen.', action='store_true')
 parser.add_argument('--url-field-name', '-u', help='Name of column with URLs for the PDFs.', default='dc.description.url')
-parser.add_argument('--download-only', '-w', help='Only download the PDFs.')
+parser.add_argument('--download-only', '-w', help='Only download the PDFs.', action='store_true')
 args = parser.parse_args()
 
 # open the CSV
@@ -120,5 +120,5 @@ signal.signal(signal.SIGINT, signal_handler)
 for row in reader:
     download_bitstream(row)
 
-    # maybe only generate thumbnails if -t is passed?
-    #create_thumbnail(row)
+    if args.download_only is not True:
+        create_thumbnail(row)
