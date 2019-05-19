@@ -129,6 +129,7 @@
                     <xsl:call-template name="itemSummaryView-DIM-language"/>
                     <xsl:call-template name="itemSummaryView-DIM-type"/>
                     <xsl:call-template name="itemSummaryView-DIM-review-status"/>
+                    <xsl:call-template name="itemSummaryView-DIM-isijournal"/>
                     <xsl:call-template name="itemSummaryView-DIM-accessibility"/>
                     <xsl:call-template name="itemSummaryView-DIM-usage-rights"/>
 
