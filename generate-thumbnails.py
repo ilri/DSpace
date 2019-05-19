@@ -57,6 +57,13 @@ args = parser.parse_args()
 # open the CSV
 reader = csv.DictReader(args.csv_file)
 
+# check if the filename and URL fields specified by the user exist in the CSV
+if args.filename_field_name not in reader.fieldnames:
+    sys.stderr.write(Fore.RED + 'Specified field "{}" does not exist in the CSV.\n'.format(args.filename_field_name) + Fore.RESET)
+    sys.exit(1)
+if args.url_field_name not in reader.fieldnames:
+    sys.stderr.write(Fore.RED + 'Specified field "{0}" does not exist in the CSV.\n'.format(args.url_field_name) + Fore.RESET)
+    sys.exit(1)
 
 # Process thumbnails from filename.pdf to filename.jpg using GraphicsMagick
 # and Ghostscript. Equivalent to the following shell invocation:
