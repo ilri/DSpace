@@ -41,7 +41,7 @@ import sys
 
 
 def signal_handler(signal, frame):
-    sys.exit(0)
+    sys.exit(1)
 
 
 parser = argparse.ArgumentParser(description='Download PDFs and generate thumbnails from files in a CSV.')
