@@ -26,13 +26,14 @@
 # This script is written for Python 3 and requires several modules that you can
 # install with pip (I recommend setting up a Python virtual environment first):
 #
-#   $ pip install psycopg2-binary
+#   $ pip install psycopg2-binary colorama
 #
 # See: http://initd.org/psycopg
 # See: http://initd.org/psycopg/docs/usage.html#with-statement
 # See: http://initd.org/psycopg/docs/faq.html#best-practices
 
 import argparse
+from colorama import Fore
 import csv
 import psycopg2
 import signal
@@ -61,10 +62,10 @@ reader = csv.DictReader(args.csv_file)
 
 # check if the from/to fields specified by the user exist in the CSV
 if args.from_field_name not in reader.fieldnames:
-    sys.stderr.write('Specified field "{0}" does not exist in the CSV.\n'.format(args.from_field_name))
+    sys.stderr.write(Fore.RED + 'Specified field "{0}" does not exist in the CSV.\n'.format(args.from_field_name) + Fore.RESET)
     sys.exit(1)
 if args.to_field_name not in reader.fieldnames:
-    sys.stderr.write('Specified field "{0}" does not exist in the CSV.\n'.format(args.to_field_name))
+    sys.stderr.write(Fore.RED + 'Specified field "{0}" does not exist in the CSV.\n'.format(args.to_field_name) + Fore.RESET)
     sys.exit(1)
 
 # set the signal handler for SIGINT (^C)
@@ -75,15 +76,15 @@ try:
     conn = psycopg2.connect("dbname={} user={} password={} host='localhost'".format(args.database_name, args.database_user, args.database_pass))
 
     if args.debug:
-        sys.stderr.write('Connected to database.\n')
+        sys.stderr.write(Fore.GREEN + 'Connected to database.\n' + Fore.RESET)
 except psycopg2.OperationalError:
-    sys.stderr.write('Could not connect to database.\n')
+    sys.stderr.write(Fore.RED + 'Could not connect to database.\n' + Fore.RESET)
     sys.exit(1)
 
 for row in reader:
     if row[args.from_field_name] == row[args.to_field_name] and args.debug:
         # sometimes editors send me corrections with identical search/replace patterns
-        sys.stderr.write('Skipping identical search and replace for value: {0}\n'.format(row[args.from_field_name]))
+        sys.stderr.write(Fore.YELLOW + 'Skipping identical search and replace for value: {0}\n'.format(row[args.from_field_name]) + Fore.RESET)
         continue
 
     with conn:
@@ -96,13 +97,13 @@ for row in reader:
                 cursor.execute(sql, (args.metadata_field_id, row[args.from_field_name]))
 
                 if cursor.rowcount > 0 and not args.quiet:
-                    print('Would fix {0} occurences of: {1}'.format(cursor.rowcount, row[args.from_field_name]))
+                    print(Fore.GREEN + 'Would fix {0} occurences of: {1}'.format(cursor.rowcount, row[args.from_field_name]) + Fore.RESET)
             else:
                 sql = 'UPDATE metadatavalue SET text_value=%s WHERE resource_type_id=2 AND metadata_field_id=%s AND text_value=%s'
                 cursor.execute(sql, (row[args.to_field_name], args.metadata_field_id, row[args.from_field_name]))
 
                 if cursor.rowcount > 0 and not args.quiet:
-                    print('Fixed {0} occurences of: {1}'.format(cursor.rowcount, row[args.from_field_name]))
+                    print(Fore.GREEN + 'Fixed {0} occurences of: {1}'.format(cursor.rowcount, row[args.from_field_name]) + Fore.RESET)
 
 # close database connection before we exit
 conn.close()
