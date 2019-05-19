@@ -49,7 +49,6 @@ parser.add_argument('--csv-file', '-i', help='Path to CSV file', required=True, 
 parser.add_argument('--debug', '-d', help='Print debug messages to standard error (stderr).', action='store_true')
 parser.add_argument('--dry-run', '-n', help='Only print changes that would be made.', action='store_true')
 parser.add_argument('--filename-field-name', '-f', help='Name of column with thumbnail filenames.', default='filename')
-parser.add_argument('--quiet', '-q', help='Do not print progress messages to the screen.', action='store_true')
 parser.add_argument('--url-field-name', '-u', help='Name of column with URLs for the PDFs.', default='dc.description.url')
 parser.add_argument('--download-only', '-w', help='Only download the PDFs.', action='store_true')
 args = parser.parse_args()
