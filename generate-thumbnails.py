@@ -76,9 +76,9 @@ def create_thumbnail(row):
     thumbnail = os.path.splitext(filename)[0] + '.jpg'
     # check if we already have a thumbnail
     if os.path.isfile(thumbnail):
-        print("> Thumbnail for", filename, "already exists")
+        print(Fore.YELLOW + '> Thumbnail for {} already exists.\n'.format(filename) + Fore.RESET)
     else:
-        print("> Creating thumbnail for", filename)
+        print(Fore.Green + '> Creating thumbnail for {}...'.format(filename) + Fore.RESET)
         subprocess.run(["gm", "convert", "-quality", "85", "-thumbnail", "x400", "-flatten", filename + "[0]", thumbnail])
 
     return
@@ -91,14 +91,14 @@ def download_bitstream(row):
     urls = pattern.split(row[args.url_field_name])
     filenames = pattern.split(row[args.filename_field_name])
     for url, filename in zip(urls, filenames):
-        print("URL: " + url)
-        print("File: " + filename)
+        print('URL: {}'.format(url))
+        print('File: {}'.format(filename))
 
         # check if file exists
         if os.path.isfile(filename):
-            print(">", filename, "already downloaded")
+            print(Fore.YELLOW + '> {} already downloaded.'.format(filename) + Fore.RESET)
         else:
-            print("> Downloading", filename)
+            print(Fore.GREEN + '> Downloading {}...'.format(filename) + Fore.RESET)
 
             response = requests.get(url, stream=True)
             if response.status_code == 200:
@@ -106,7 +106,7 @@ def download_bitstream(row):
                     for chunk in response:
                         fd.write(chunk)
             else:
-                print("> Download failed, I'll try again next time")
+                print(Fore.RED + '> Download failed, I will try again next time.' + Fore.RESET)
 
     return
 
