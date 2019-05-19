@@ -58,6 +58,11 @@ args = parser.parse_args()
 # open the CSV
 reader = csv.DictReader(args.csv_file)
 
+# check if the from/to fields specified by the user exist in the CSV
+if args.from_field_name not in reader.fieldnames:
+    sys.stderr.write('Specified field "{0}" does not exist in the CSV.\n'.format(args.from_field_name))
+    sys.exit(1)
+
 # set the signal handler for SIGINT (^C)
 signal.signal(signal.SIGINT, signal_handler)
 
