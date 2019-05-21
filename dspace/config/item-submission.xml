@@ -26,8 +26,8 @@
 		<name-map collection-handle="123456789/28" submission-name="Journals" />
 		<name-map collection-handle="123456789/29" submission-name="JournalVolumes" />
 		<name-map collection-handle="123456789/30" submission-name="JournalIssues" />
-		<name-map collection-handle="123456789/3" submission-name="DataPackage" />
-		<name-map collection-handle="123456789/4" submission-name="DataFile" />
+		<name-map collection-handle="123456789/502" submission-name="DataPackage" />
+		<name-map collection-handle="123456789/503" submission-name="DataFile" />
 	</submission-map>
 
 
