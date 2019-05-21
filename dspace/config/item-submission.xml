@@ -62,8 +62,14 @@
 			<type>collection</type>
 			<scope visibility="hidden" visibilityOutside="hidden">submission</scope>       
      	</step>
+
 		<step id="traditionalpageone" mandatory="true">
 			<heading>submit.progressbar.describe.stepone</heading>
+			<processing-class>org.dspace.app.rest.submit.step.DescribeStep</processing-class>
+			<type>submission-form</type>
+		</step>
+		<step id="traditionalpagetwo" mandatory="true">
+			<heading>submit.progressbar.describe.steptwo</heading>
 			<processing-class>org.dspace.app.rest.submit.step.DescribeStep</processing-class>
 			<type>submission-form</type>
 		</step>
@@ -93,7 +99,7 @@
 			<processing-class>org.dspace.app.rest.submit.step.DescribeStep</processing-class>
 			<type>submission-form</type>
 		</step>
-		<step id="journalIssuesStep" mandatory="true">
+		<step id="journalIssueStep" mandatory="true">
 			<heading>submit.progressbar.describe.stepone</heading>
 			<processing-class>org.dspace.app.rest.submit.step.DescribeStep</processing-class>
 			<type>submission-form</type>
@@ -104,7 +110,7 @@
 			<type>submission-form</type>
 		</step>
 		<step id="datapackagepagetwo" mandatory="true">
-			<heading>submit.progressbar.describe.stepone</heading>
+			<heading>submit.progressbar.describe.steptwo</heading>
 			<processing-class>org.dspace.app.rest.submit.step.DescribeStep</processing-class>
 			<type>submission-form</type>
 		</step>
@@ -113,16 +119,13 @@
 			<processing-class>org.dspace.app.rest.submit.step.DescribeStep</processing-class>
 			<type>submission-form</type>
 		</step>
-		<step id="traditionalpagetwo" mandatory="true">
-			<heading>submit.progressbar.describe.steptwo</heading>
-			<processing-class>org.dspace.app.rest.submit.step.DescribeStep</processing-class>
-			<type>submission-form</type>
-		</step>
+
 		<step id="upload">
 			<heading>submit.progressbar.upload</heading>
 			<processing-class>org.dspace.app.rest.submit.step.UploadStep</processing-class>
 			<type>upload</type>
 		</step>
+
 		<step id="license">
 			<heading>submit.progressbar.license</heading>
 			<processing-class>org.dspace.app.rest.submit.step.LicenseStep</processing-class>
@@ -240,7 +243,7 @@
 		</submission-process>
 		<submission-process name="JournalIssues">
 			<step id="collection" />
-			<step id="journalIssuesStep"/>
+			<step id="journalIssueStep"/>
 			<step id="upload" />
 			<step id="license" />
 		</submission-process>
