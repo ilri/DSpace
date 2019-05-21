@@ -611,6 +611,157 @@ it, please enter the types and the actual numbers or codes.</hint>
 
    </form>
 
+   <form name="datapackagepageone">
+     <row>
+       <field>
+         <dc-schema>dc</dc-schema>
+         <dc-element>title</dc-element>
+         <dc-qualifier></dc-qualifier>
+         <repeatable>false</repeatable>
+         <label>Title</label>
+         <input-type>onebox</input-type>
+         <hint>Enter the main title of the item.</hint>
+         <required>You must enter a main title for this item.</required>
+         <!--    <language value-pairs-name="common_iso_languages">true</language> -->
+       </field>
+     </row>
+     <row>
+       <field>
+         <dc-schema>dc</dc-schema>
+         <dc-element>contributor</dc-element>
+         <dc-qualifier>author</dc-qualifier>
+         <repeatable>true</repeatable>
+         <label>Authors</label>
+         <input-type>name</input-type>
+         <hint>Manually add an author: Please include the entire first name, and a middle initial if appropriate. Do not use only
+           initials, as this makes the author more difficult to identify later.</hint>
+         <required></required>
+       </field>
+     </row>
+     <row>
+       <field>
+         <dc-schema>prism</dc-schema>
+         <dc-element>publicationName</dc-element>
+         <dc-qualifier></dc-qualifier>
+         <repeatable>false</repeatable>
+         <label>Journal name</label>
+         <input-type>onebox</input-type>
+         <hint>Enter the journal name of the item.</hint>
+         <required>You must enter the journal name.</required>
+         <!--    <language value-pairs-name="common_iso_languages">true</language> -->
+       </field>
+     </row>
+   </form>
+
+   <form name="datapackagepagetwo">
+     <row>
+       <field>
+         <dc-schema>dc</dc-schema>
+         <dc-element>description</dc-element>
+         <dc-qualifier>abstract</dc-qualifier>
+         <repeatable>false</repeatable>
+         <label>Abstract</label>
+         <input-type>textarea</input-type>
+         <hint>Enter the abstract of the item. </hint>
+         <required></required>
+       </field>
+     </row>
+     <row>
+       <field>
+         <dc-schema>dc</dc-schema>
+         <dc-element>identifier</dc-element>
+         <dc-qualifier></dc-qualifier>
+         <!-- An input-type of qualdrop_value MUST be marked as repeatable -->
+         <repeatable>true</repeatable>
+         <label>Identifiers</label>
+         <input-type value-pairs-name="common_identifiers">qualdrop_value</input-type>
+         <hint>If the item has any identification numbers or codes associated with
+           it, please enter the types and the actual numbers or codes.</hint>
+         <required></required>
+       </field>
+     </row>
+     <row>
+       <field>
+         <dc-schema>dc</dc-schema>
+         <dc-element>subject</dc-element>
+         <dc-qualifier></dc-qualifier>
+         <!-- An input-type of tag MUST be marked as repeatable -->
+         <repeatable>true</repeatable>
+         <label>Subject Keywords</label>
+         <input-type>tag</input-type>
+         <hint>Enter appropriate subject keywords or phrases. </hint>
+         <required></required>
+         <vocabulary>srsc</vocabulary>
+       </field>
+     </row>
+   </form>
+
+   <form name="datafilepageone">
+     <row>
+       <field>
+         <dc-schema>dc</dc-schema>
+         <dc-element>title</dc-element>
+         <dc-qualifier></dc-qualifier>
+         <repeatable>false</repeatable>
+         <label>Title</label>
+         <input-type>onebox</input-type>
+         <hint>Enter a short, descriptive title for this data file. The title will help to distinguish this data file from others associated with the same publication. For example: Morphological measurements of Galapagos finches, Species diversity in coastal North Carolina</hint>
+         <required>You must enter a main title for this item.</required>
+         <!--    <language value-pairs-name="common_iso_languages">true</language> -->
+       </field>
+     </row>
+     <row>
+       <field>
+         <dc-schema>dc</dc-schema>
+         <dc-element>description</dc-element>
+         <dc-qualifier></dc-qualifier>
+         <repeatable>false</repeatable>
+         <label>Description</label>
+         <input-type>textarea</input-type>
+         <hint>Please describe your data file. Include details such as the original source of the information (e.g., collected in the field, simulated electronically), software used to create the data file, and a description of any abbreviations (e.g., for column headings). If more than two paragraphs are required for adequate description, please upload a README file.</hint>
+         <required></required>
+       </field>
+     </row>
+     <row>
+       <field>
+         <dc-schema>dc</dc-schema>
+         <dc-element>contributor</dc-element>
+         <dc-qualifier>author</dc-qualifier>
+         <repeatable>true</repeatable>
+         <label>Author of data file</label>
+         <input-type>name</input-type>
+         <hint>Manually add an author: Please include the entire first name, and a middle initial if appropriate. Do not use only initials, as this makes the author more difficult to identify later.</hint>
+         <required></required>
+       </field>
+     </row>
+     <row>
+       <field>
+         <dc-schema>dc</dc-schema>
+         <dc-element>type</dc-element>
+         <dc-qualifier>embargo</dc-qualifier>
+         <repeatable>false</repeatable>
+         <label>Set a data embargo</label>
+         <input-type value-pairs-name="embargo_types">dropdown</input-type>
+         <hint>If an embargo is set, this data file will not be available until the embargo expires.</hint>
+       </field>
+     </row>
+     <row>
+       <field>
+         <dc-schema>dc</dc-schema>
+         <dc-element>subject</dc-element>
+         <dc-qualifier></dc-qualifier>
+         <!-- An input-type of tag MUST be marked as repeatable -->
+         <repeatable>true</repeatable>
+         <label>Subject Keywords</label>
+         <input-type>tag</input-type>
+         <hint>Enter appropriate subject keywords or phrases. </hint>
+         <required></required>
+         <vocabulary>srsc</vocabulary>
+       </field>
+     </row>
+   </form>
+
+
  </form-definitions>
 
 
@@ -652,6 +803,25 @@ it, please enter the types and the actual numbers or codes.</hint>
      <pair>
        <displayed-value>ISBN</displayed-value>
        <stored-value>isbn</stored-value>
+     </pair>
+   </value-pairs>
+
+   <value-pairs value-pairs-name="embargo_types" dc-term="type">
+     <pair>
+       <displayed-value>Publish immediately</displayed-value>
+       <stored-value>none</stored-value>
+     </pair>
+     <pair>
+       <displayed-value>Embargo until article appears</displayed-value>
+       <stored-value>untilArticleAppears</stored-value>
+     </pair>
+     <pair>
+       <displayed-value>1 year embargo</displayed-value>
+       <stored-value>oneyear</stored-value>
+     </pair>
+     <pair>
+       <displayed-value>Custom length embargo (approved by journal editor)</displayed-value>
+       <stored-value>custom</stored-value>
      </pair>
    </value-pairs>
 

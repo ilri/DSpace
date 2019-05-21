@@ -18,6 +18,16 @@
 	<!-- for handle "default". -->
 	<submission-map>
 		<name-map collection-handle="default" submission-name="traditional" />
+		<name-map collection-handle="123456789/6" submission-name="People" />
+		<name-map collection-handle="123456789/279" submission-name="People" />
+		<name-map collection-handle="123456789/7" submission-name="Project" />
+		<name-map collection-handle="123456789/280" submission-name="Project" />
+		<name-map collection-handle="123456789/8" submission-name="OrgUnit" />
+		<name-map collection-handle="123456789/28" submission-name="Journals" />
+		<name-map collection-handle="123456789/29" submission-name="JournalVolumes" />
+		<name-map collection-handle="123456789/30" submission-name="JournalIssues" />
+		<name-map collection-handle="123456789/3" submission-name="JournalIssues" />
+		<name-map collection-handle="123456789/4" submission-name="JournalIssues" />
 	</submission-map>
 
 
@@ -182,24 +192,55 @@
 		</submission-process>
 
 		<submission-process name="People">
+			<step id="collection" />
 			<step id="peopleStep"/>
+			<step id="upload" />
+			<step id="license" />
 		</submission-process>
 
 		<submission-process name="Project">
+			<step id="collection" />
 			<step id="projectStep"/>
+			<step id="upload" />
+			<step id="license" />
 		</submission-process>
 
 		<submission-process name="OrgUnit">
+			<step id="collection" />
 			<step id="orgUnitStep"/>
+			<step id="upload" />
+			<step id="license" />
 		</submission-process>
 		<submission-process name="Journals">
+			<step id="collection" />
 			<step id="journalStep"/>
+			<step id="upload" />
+			<step id="license" />
 		</submission-process>
 		<submission-process name="JournalVolumes">
+			<step id="collection" />
 			<step id="journalVolumesStep"/>
+			<step id="upload" />
+			<step id="license" />
 		</submission-process>
 		<submission-process name="JournalIssues">
+			<step id="collection" />
 			<step id="journalIssuesStep"/>
+			<step id="upload" />
+			<step id="license" />
+		</submission-process>
+		<submission-process name="DataPackage">
+			<step id="collection" />
+			<step id="datapackagepageone"/>
+			<step id="datapackagepagetwo"/>
+			<step id="upload" />
+			<step id="license" />
+		</submission-process>
+		<submission-process name="DataFile">
+			<step id="collection" />
+			<step id="datafilepageone"/>
+			<step id="upload" />
+			<step id="license" />
 		</submission-process>
 	</submission-definitions>
 
