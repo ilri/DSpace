@@ -98,6 +98,21 @@
 			<processing-class>org.dspace.app.rest.submit.step.DescribeStep</processing-class>
 			<type>submission-form</type>
 		</step>
+		<step id="datapackagepageone" mandatory="true">
+			<heading>submit.progressbar.describe.stepone</heading>
+			<processing-class>org.dspace.app.rest.submit.step.DescribeStep</processing-class>
+			<type>submission-form</type>
+		</step>
+		<step id="datapackagepagetwo" mandatory="true">
+			<heading>submit.progressbar.describe.stepone</heading>
+			<processing-class>org.dspace.app.rest.submit.step.DescribeStep</processing-class>
+			<type>submission-form</type>
+		</step>
+		<step id="datafilepageone" mandatory="true">
+			<heading>submit.progressbar.describe.stepone</heading>
+			<processing-class>org.dspace.app.rest.submit.step.DescribeStep</processing-class>
+			<type>submission-form</type>
+		</step>
 		<step id="traditionalpagetwo" mandatory="true">
 			<heading>submit.progressbar.describe.steptwo</heading>
 			<processing-class>org.dspace.app.rest.submit.step.DescribeStep</processing-class>
