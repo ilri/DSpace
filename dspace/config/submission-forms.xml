@@ -459,7 +459,7 @@ it, please enter the types and the actual numbers or codes.</hint>
        <dc-element>identifier</dc-element>
        <dc-qualifier>name</dc-qualifier>
        <label>Name</label>
-       <input-type>textarea</input-type>
+       <input-type>onebox</input-type>
        <hint>Enter the name of the journal</hint>
      </field>
     </row>
@@ -470,7 +470,7 @@ it, please enter the types and the actual numbers or codes.</hint>
        <dc-element>contributor</dc-element>
        <dc-qualifier>editor</dc-qualifier>
        <label>Editor</label>
-       <input-type>textarea</input-type>
+       <input-type>name</input-type>
        <hint>Enter the editor of the journal</hint>
      </field>
        </row>
@@ -480,8 +480,8 @@ it, please enter the types and the actual numbers or codes.</hint>
        <dc-schema>journal</dc-schema>
        <dc-element>identifier</dc-element>
        <dc-qualifier>issn</dc-qualifier>
-       <label>Name</label>
-       <input-type>textarea</input-type>
+       <label>ISSN</label>
+       <input-type>onebox</input-type>
        <hint>Enter the issn of the journal</hint>
      </field>
 
@@ -502,7 +502,7 @@ it, please enter the types and the actual numbers or codes.</hint>
        <dc-schema>journal</dc-schema>
        <dc-element>publisher</dc-element>
        <label>Publisher</label>
-       <input-type>textarea</input-type>
+       <input-type>onebox</input-type>
        <hint>Enter the publisher of the journal</hint>
      </field>
        </row>
@@ -516,7 +516,7 @@ it, please enter the types and the actual numbers or codes.</hint>
        <dc-element>identifier</dc-element>
        <dc-qualifier>name</dc-qualifier>
        <label>Name</label>
-       <input-type>textarea</input-type>
+       <input-type>onebox</input-type>
        <hint>Enter the name of the journal volume</hint>
      </field>
 
@@ -527,7 +527,7 @@ it, please enter the types and the actual numbers or codes.</hint>
        <dc-element>identifier</dc-element>
        <dc-qualifier>volume</dc-qualifier>
        <label>Volume</label>
-       <input-type>textarea</input-type>
+       <input-type>onebox</input-type>
        <hint>Enter the volume of the journal volume</hint>
      </field>
 
@@ -561,7 +561,7 @@ it, please enter the types and the actual numbers or codes.</hint>
        <dc-element>identifier</dc-element>
        <dc-qualifier>name</dc-qualifier>
        <label>Name</label>
-       <input-type>textarea</input-type>
+       <input-type>onebox</input-type>
        <hint>Enter the name of the journal issue</hint>
      </field>
     </row>
@@ -572,7 +572,7 @@ it, please enter the types and the actual numbers or codes.</hint>
        <dc-element>identifier</dc-element>
        <dc-qualifier>number</dc-qualifier>
        <label>Number</label>
-       <input-type>textarea</input-type>
+       <input-type>onebox</input-type>
        <hint>Enter the number of the journal issue</hint>
      </field>
        </row>
@@ -603,8 +603,9 @@ it, please enter the types and the actual numbers or codes.</hint>
        <dc-schema>journalissue</dc-schema>
        <dc-element>identifier</dc-element>
        <dc-qualifier>keyword</dc-qualifier>
+       <repeatable>true</repeatable>
        <label>Keywords</label>
-       <input-type>textarea</input-type>
+       <input-type>onebox</input-type>
        <hint>Enter the keywords of the journal issue</hint>
      </field>
        </row>
@@ -618,7 +619,7 @@ it, please enter the types and the actual numbers or codes.</hint>
          <dc-element>title</dc-element>
          <dc-qualifier></dc-qualifier>
          <repeatable>false</repeatable>
-         <label>Title</label>
+         <label>Data Package Title</label>
          <input-type>onebox</input-type>
          <hint>Enter the main title of the item.</hint>
          <required>You must enter a main title for this item.</required>
@@ -703,7 +704,7 @@ it, please enter the types and the actual numbers or codes.</hint>
          <dc-element>title</dc-element>
          <dc-qualifier></dc-qualifier>
          <repeatable>false</repeatable>
-         <label>Title</label>
+         <label>Data File Title</label>
          <input-type>onebox</input-type>
          <hint>Enter a short, descriptive title for this data file. The title will help to distinguish this data file from others associated with the same publication. For example: Morphological measurements of Galapagos finches, Species diversity in coastal North Carolina</hint>
          <required>You must enter a main title for this item.</required>
