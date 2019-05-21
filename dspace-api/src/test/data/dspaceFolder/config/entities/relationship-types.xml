@@ -125,31 +125,31 @@
         </rightCardinality>
     </type>
 
-    <type>
-        <leftType>Publication</leftType>
-        <rightType>DataPackage</rightType>
-        <leftLabel>isDataPackageOfPublication</leftLabel>
-        <rightLabel>isPublicationOfDataPackage</rightLabel>
-        <leftCardinality>
-            <min>0</min>
-        </leftCardinality>
-        <rightCardinality>
-            <min>0</min>
-            <max>1</max>
-        </rightCardinality>
-    </type>
+    <!--<type>-->
+        <!--<leftType>Publication</leftType>-->
+        <!--<rightType>DataPackage</rightType>-->
+        <!--<leftLabel>isDataPackageOfPublication</leftLabel>-->
+        <!--<rightLabel>isPublicationOfDataPackage</rightLabel>-->
+        <!--<leftCardinality>-->
+            <!--<min>0</min>-->
+        <!--</leftCardinality>-->
+        <!--<rightCardinality>-->
+            <!--<min>0</min>-->
+            <!--<max>1</max>-->
+        <!--</rightCardinality>-->
+    <!--</type>-->
 
-    <type>
-        <leftType>DataPackage</leftType>
-        <rightType>DataFile</rightType>
-        <leftLabel>isDataFileOfDataPackage</leftLabel>
-        <rightLabel>isDataPackageOfDataFile</rightLabel>
-        <leftCardinality>
-            <min>0</min>
-        </leftCardinality>
-        <rightCardinality>
-            <min>0</min>
-            <max>1</max>
-        </rightCardinality>
-    </type>
+    <!--<type>-->
+        <!--<leftType>DataPackage</leftType>-->
+        <!--<rightType>DataFile</rightType>-->
+        <!--<leftLabel>isDataFileOfDataPackage</leftLabel>-->
+        <!--<rightLabel>isDataPackageOfDataFile</rightLabel>-->
+        <!--<leftCardinality>-->
+            <!--<min>0</min>-->
+        <!--</leftCardinality>-->
+        <!--<rightCardinality>-->
+            <!--<min>0</min>-->
+            <!--<max>1</max>-->
+        <!--</rightCardinality>-->
+    <!--</type>-->
 </relationships>
