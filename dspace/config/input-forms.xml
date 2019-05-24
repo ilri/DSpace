@@ -907,12 +907,104 @@
     </value-pairs>
     <value-pairs value-pairs-name="cipsubject" dc-term="subject_cip">
       <pair>
+        <displayed-value>BIGDATA</displayed-value>
+        <stored-value>BIGDATA</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>BIODIVERSITY FOR THE FUTURE</displayed-value>
+        <stored-value>BIODIVERSITY FOR THE FUTURE</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>BIOFORTIFICATION</displayed-value>
+        <stored-value>BIOFORTIFICATION</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>BREEDING</displayed-value>
+        <stored-value>BREEDING</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>CLIMATE CHANGE</displayed-value>
+        <stored-value>CLIMATE CHANGE</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>CLIMATE-SMART AGRICULTURE</displayed-value>
+        <stored-value>CLIMATE-SMART AGRICULTURE</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>CROP PROTECTION</displayed-value>
+        <stored-value>CROP PROTECTION</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>CROP AND SYSTEMS SCIENCES CSS</displayed-value>
+        <stored-value>CROP AND SYSTEMS SCIENCES CSS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>CRYOPRESERVATION</displayed-value>
+        <stored-value>CRYOPRESERVATION</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>FOOD SECURITY</displayed-value>
+        <stored-value>FOOD SECURITY</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>FOOD SYSTEMS</displayed-value>
+        <stored-value>FOOD SYSTEMS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>GENDER</displayed-value>
+        <stored-value>GENDER</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>GENEBANK</displayed-value>
+        <stored-value>GENEBANK</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>GENETIC RESOURCES</displayed-value>
+        <stored-value>GENETIC RESOURCES</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>GENETICS, GENOMICS AND CROP IMPROVEMENT SCIENCES GGCI</displayed-value>
+        <stored-value>GENETICS, GENOMICS AND CROP IMPROVEMENT SCIENCES GGCI</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>IMPACT ASSESSMENT</displayed-value>
+        <stored-value>IMPACT ASSESSMENT</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>INCLUSIVE VALUE CHAINS</displayed-value>
+        <stored-value>INCLUSIVE VALUE CHAINS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>NUTRITION</displayed-value>
+        <stored-value>NUTRITION</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>NUTRITIONAL SECURITY</displayed-value>
+        <stored-value>NUTRITIONAL SECURITY</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>POTATO AGRI-FOOD SYSTEMS</displayed-value>
+        <stored-value>POTATO AGRI-FOOD SYSTEMS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>POTATOES</displayed-value>
+        <stored-value>POTATOES</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SEED SYSTEMS</displayed-value>
+        <stored-value>SEED SYSTEMS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SOCIAL AND NUTRITIONAL SCIENCES SNS</displayed-value>
+        <stored-value>SOCIAL AND NUTRITIONAL SCIENCES SNS</stored-value>
+      </pair>
+      <pair>
         <displayed-value>SWEET POTATOES</displayed-value>
         <stored-value>SWEET POTATOES</stored-value>
       </pair>
       <pair>
-        <displayed-value>FOOD SUPPLY</displayed-value>
-        <stored-value>FOOD SUPPLY</stored-value>
+        <displayed-value>SWEETPOTATO AGRI-FOOD SYSTEMS</displayed-value>
+        <stored-value>SWEETPOTATO AGRI-FOOD SYSTEMS</stored-value>
       </pair>
     </value-pairs>
     <value-pairs value-pairs-name="ilrisubject" dc-term="ilrisubject">
