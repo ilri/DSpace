@@ -1,0 +1,37 @@
+<dspace-dc-types>
+
+    <dspace-header>
+        <title>Organization Types</title>
+    </dspace-header>
+
+    <!-- NO EQUIVALENT FOUND:
+        - orgunit.identifier.id >  NOT FOUND(specific sort of id’s found/options: orgnization.isicV4,
+                organization.leiCode, organization.naics, .vatID, .taxID, …)
+        - orgunit.identifier.country > NOT FOUND (optional: organization.globalLocationNumber)
+        - orgunit.identifier.description > NOT FOUND (optional: organization.knowsAbout)
+    -->
+
+    <dc-schema>
+        <name>organization</name>
+        <namespace>https://schema.org/Organization</namespace>
+    </dc-schema>
+
+    <dc-type>
+        <schema>organization</schema>
+        <element>legalName</element>
+        <scope_note>The official name of the organization, e.g. the registered company name.</scope_note>
+    </dc-type>
+
+    <dc-type>
+        <schema>organization</schema>
+        <element>foundingDate</element>
+        <scope_note>The date that this organization was founded.</scope_note>
+    </dc-type>
+
+    <dc-type>
+        <schema>organization</schema>
+        <element>address</element>
+        <scope_note>Physical address of the organization.</scope_note>
+    </dc-type>
+
+</dspace-dc-types>
