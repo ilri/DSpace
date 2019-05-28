@@ -14,11 +14,6 @@
         <namespace>https://schema.org/CreativeWork</namespace>
     </dc-schema>
 
-    <!-- NO EQUIVALENT FOUND:
-        - journalissue.identifier.name > NOT FOUND
-        - journalissue.identifier.description > NOT FOUND
-    -->
-
     <dc-type>
         <schema>publicationissue</schema>
         <element>issueNumber</element>

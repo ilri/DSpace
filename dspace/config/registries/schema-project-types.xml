@@ -9,17 +9,12 @@
         <namespace>https://schema.org/Project</namespace>
     </dc-schema>
 
-    <!-- TODO: Project (https://schema.org/Project) has no own fields, trying to match with its parent ‘Organization’
-    wouldn’t give correct matching fields, ‘Project’ is still in ‘Pending’ https://pending.schema.org/
-    - project.identifier.name > NOT FOUND
-    - project.identifier.id > NOT FOUND
-    - project.identifier.status > NOT FOUND
-    - project.identifier.startdate > NOT FOUND
-    - project.identifier.expectedcompletion > NOT FOUND
-    - project.identifier.keyword > NOT FOUND
-    - project.identifier.description > NOT FOUND
-    - project.contributor.other > NOT FOUND
-    - project.contributor.author > NOT FOUND
+    <!-- Project (https://schema.org/Project) has no own fields
+     ‘Project’ is still in ‘Pending’ https://pending.schema.org/
+     NO EQUIVALENT FOUND:
+        - project.identifier.status > NOT FOUND
+        - project.identifier.startdate > NOT FOUND
+        - project.identifier.expectedcompletion > NOT FOUND
     -->
 
 </dspace-dc-types>

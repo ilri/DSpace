@@ -8,9 +8,6 @@
         - journalvolume.identifier.name
             > NOT FOUND (not great options in direct parent creative work: creativework.about or creativework.mainEntity;
                 option non-direct parent thing.name)
-        - journalvolume.identifier.description
-            > NOT FOUND (not great option in direct parent creative work: creativework.about;
-                option non-direct parent thing.description)
     -->
 
     <dc-schema>

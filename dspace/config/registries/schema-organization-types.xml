@@ -7,8 +7,6 @@
     <!-- NO EQUIVALENT FOUND:
         - orgunit.identifier.id >  NOT FOUND(specific sort of id’s found/options: orgnization.isicV4,
                 organization.leiCode, organization.naics, .vatID, .taxID, …)
-        - orgunit.identifier.country > NOT FOUND (optional: organization.globalLocationNumber)
-        - orgunit.identifier.description > NOT FOUND (optional: organization.knowsAbout)
     -->
 
     <dc-schema>
@@ -31,7 +29,17 @@
     <dc-type>
         <schema>organization</schema>
         <element>address</element>
-        <scope_note>Physical address of the organization.</scope_note>
+        <qualifier>addressLocality</qualifier>
+        <scope_note>Physical address locality (ex. Mountain View) of the organization.</scope_note>
+    </dc-type>
+
+    <dc-type>
+        <schema>organization</schema>
+        <element>address</element>
+        <qualifier>addressCountry</qualifier>
+        <scope_note>Physical address country (ex. USA) of the organization. You can also provide the two-letter ISO
+            3166-1 alpha-2 country code.
+        </scope_note>
     </dc-type>
 
 </dspace-dc-types>

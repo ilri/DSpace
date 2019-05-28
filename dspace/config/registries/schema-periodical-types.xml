@@ -20,12 +20,6 @@
     </dc-schema>
 
     <!--NO EQUIVALENT FOUND
-        - journal.identifier.name
-            > NOT FOUND (not great options in direct parent creative work: creativework.about or creativework.mainEntity;
-                option non-direct parent thing.name)
-        - journal.identifier.description
-            > NOT FOUND (not great option in direct parent creative work: creativework.about;
-                option non-direct parent thing.description)
         - journal.title
             > NOT FOUND (not great options in direct parent creative work: creativework.about or reativework.mainEntity;
                 option non-direct parent thing.name)
