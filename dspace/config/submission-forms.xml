@@ -237,7 +237,7 @@ it, please enter the types and the actual numbers or codes.</hint>
        <dc-element>identifier</dc-element>
        <dc-qualifier>lastname</dc-qualifier>
        <label>Last name</label>
-       <input-type>textarea</input-type>
+       <input-type>onebox</input-type>
        <hint>Enter the last name of the person</hint>
      </field>
      </row>
@@ -248,7 +248,7 @@ it, please enter the types and the actual numbers or codes.</hint>
        <dc-element>identifier</dc-element>
        <dc-qualifier>firstname</dc-qualifier>
        <label>First name</label>
-       <input-type>textarea</input-type>
+       <input-type>onebox</input-type>
        <hint>Enter the first name of the person</hint>
      </field>
      </row>
@@ -259,7 +259,7 @@ it, please enter the types and the actual numbers or codes.</hint>
        <dc-element>identifier</dc-element>
        <dc-qualifier>email</dc-qualifier>
        <label>Email</label>
-       <input-type>textarea</input-type>
+       <input-type>onebox</input-type>
        <hint>Enter the email of the person</hint>
      </field>
      </row>
@@ -270,7 +270,7 @@ it, please enter the types and the actual numbers or codes.</hint>
        <dc-element>identifier</dc-element>
        <dc-qualifier>orcid</dc-qualifier>
        <label>Orcid</label>
-       <input-type>textarea</input-type>
+       <input-type>onebox</input-type>
        <hint>Enter the orcid of the person</hint>
      </field>
      </row>
@@ -292,7 +292,7 @@ it, please enter the types and the actual numbers or codes.</hint>
        <dc-element>identifier</dc-element>
        <dc-qualifier>staffid</dc-qualifier>
        <label>Staff ID</label>
-       <input-type>textarea</input-type>
+       <input-type>onebox</input-type>
        <hint>Enter the staff id of the person</hint>
      </field>
      </row>
@@ -303,7 +303,7 @@ it, please enter the types and the actual numbers or codes.</hint>
        <dc-element>identifier</dc-element>
        <dc-qualifier>jobtitle</dc-qualifier>
        <label>Job title</label>
-       <input-type>textarea</input-type>
+       <input-type>onebox</input-type>
        <hint>Enter the job title of the person</hint>
      </field>
      </row>
@@ -320,7 +320,7 @@ it, please enter the types and the actual numbers or codes.</hint>
        <dc-element>identifier</dc-element>
        <dc-qualifier>name</dc-qualifier>
        <label>Name</label>
-       <input-type>textarea</input-type>
+       <input-type>onebox</input-type>
        <hint>Enter the name of the project</hint>
      </field>
        </row>
@@ -331,7 +331,7 @@ it, please enter the types and the actual numbers or codes.</hint>
        <dc-element>identifier</dc-element>
        <dc-qualifier>id</dc-qualifier>
        <label>ID</label>
-       <input-type>textarea</input-type>
+       <input-type>onebox</input-type>
        <hint>Enter the id of the project</hint>
      </field>
        </row>
@@ -342,7 +342,7 @@ it, please enter the types and the actual numbers or codes.</hint>
        <dc-element>identifier</dc-element>
        <dc-qualifier>status</dc-qualifier>
        <label>Status</label>
-       <input-type>textarea</input-type>
+       <input-type value-pairs-name="project_status">dropdown</input-type>
        <hint>Enter the status of the project</hint>
      </field>
        </row>
@@ -372,8 +372,9 @@ it, please enter the types and the actual numbers or codes.</hint>
        <dc-schema>project</dc-schema>
        <dc-element>identifier</dc-element>
        <dc-qualifier>keyword</dc-qualifier>
+       <repeatable>true</repeatable>
        <label>Keywords</label>
-       <input-type>textarea</input-type>
+       <input-type>onebox</input-type>
        <hint>Enter the keywords of the project</hint>
      </field>
        </row>
@@ -396,7 +397,7 @@ it, please enter the types and the actual numbers or codes.</hint>
        <dc-element>identifier</dc-element>
        <dc-qualifier>name</dc-qualifier>
        <label>Name</label>
-       <input-type>textarea</input-type>
+       <input-type>onebox</input-type>
        <hint>Enter the name of the orgunit</hint>
      </field>
        </row>
@@ -406,7 +407,7 @@ it, please enter the types and the actual numbers or codes.</hint>
        <dc-element>identifier</dc-element>
        <dc-qualifier>id</dc-qualifier>
        <label>ID</label>
-       <input-type>textarea</input-type>
+       <input-type>onebox</input-type>
        <hint>Enter the id of the orgunit</hint>
      </field>
        </row>
@@ -426,7 +427,7 @@ it, please enter the types and the actual numbers or codes.</hint>
        <dc-element>identifier</dc-element>
        <dc-qualifier>city</dc-qualifier>
        <label>City</label>
-       <input-type>textarea</input-type>
+       <input-type>onebox</input-type>
        <hint>Enter the city of the orgunit</hint>
      </field>
        </row>
@@ -436,7 +437,7 @@ it, please enter the types and the actual numbers or codes.</hint>
        <dc-element>identifier</dc-element>
        <dc-qualifier>country</dc-qualifier>
        <label>Country</label>
-       <input-type>textarea</input-type>
+       <input-type>onebox</input-type>
        <hint>Enter the country of the orgunit</hint>
      </field>
        </row>
@@ -459,7 +460,7 @@ it, please enter the types and the actual numbers or codes.</hint>
        <dc-element>identifier</dc-element>
        <dc-qualifier>name</dc-qualifier>
        <label>Name</label>
-       <input-type>textarea</input-type>
+       <input-type>onebox</input-type>
        <hint>Enter the name of the journal</hint>
      </field>
     </row>
@@ -470,7 +471,7 @@ it, please enter the types and the actual numbers or codes.</hint>
        <dc-element>contributor</dc-element>
        <dc-qualifier>editor</dc-qualifier>
        <label>Editor</label>
-       <input-type>textarea</input-type>
+       <input-type>name</input-type>
        <hint>Enter the editor of the journal</hint>
      </field>
        </row>
@@ -480,8 +481,8 @@ it, please enter the types and the actual numbers or codes.</hint>
        <dc-schema>journal</dc-schema>
        <dc-element>identifier</dc-element>
        <dc-qualifier>issn</dc-qualifier>
-       <label>Name</label>
-       <input-type>textarea</input-type>
+       <label>ISSN</label>
+       <input-type>onebox</input-type>
        <hint>Enter the issn of the journal</hint>
      </field>
 
@@ -502,7 +503,7 @@ it, please enter the types and the actual numbers or codes.</hint>
        <dc-schema>journal</dc-schema>
        <dc-element>publisher</dc-element>
        <label>Publisher</label>
-       <input-type>textarea</input-type>
+       <input-type>onebox</input-type>
        <hint>Enter the publisher of the journal</hint>
      </field>
        </row>
@@ -516,7 +517,7 @@ it, please enter the types and the actual numbers or codes.</hint>
        <dc-element>identifier</dc-element>
        <dc-qualifier>name</dc-qualifier>
        <label>Name</label>
-       <input-type>textarea</input-type>
+       <input-type>onebox</input-type>
        <hint>Enter the name of the journal volume</hint>
      </field>
 
@@ -527,7 +528,7 @@ it, please enter the types and the actual numbers or codes.</hint>
        <dc-element>identifier</dc-element>
        <dc-qualifier>volume</dc-qualifier>
        <label>Volume</label>
-       <input-type>textarea</input-type>
+       <input-type>onebox</input-type>
        <hint>Enter the volume of the journal volume</hint>
      </field>
 
@@ -561,7 +562,7 @@ it, please enter the types and the actual numbers or codes.</hint>
        <dc-element>identifier</dc-element>
        <dc-qualifier>name</dc-qualifier>
        <label>Name</label>
-       <input-type>textarea</input-type>
+       <input-type>onebox</input-type>
        <hint>Enter the name of the journal issue</hint>
      </field>
     </row>
@@ -572,7 +573,7 @@ it, please enter the types and the actual numbers or codes.</hint>
        <dc-element>identifier</dc-element>
        <dc-qualifier>number</dc-qualifier>
        <label>Number</label>
-       <input-type>textarea</input-type>
+       <input-type>onebox</input-type>
        <hint>Enter the number of the journal issue</hint>
      </field>
        </row>
@@ -603,8 +604,9 @@ it, please enter the types and the actual numbers or codes.</hint>
        <dc-schema>journalissue</dc-schema>
        <dc-element>identifier</dc-element>
        <dc-qualifier>keyword</dc-qualifier>
+       <repeatable>true</repeatable>
        <label>Keywords</label>
-       <input-type>textarea</input-type>
+       <input-type>onebox</input-type>
        <hint>Enter the keywords of the journal issue</hint>
      </field>
        </row>
@@ -652,6 +654,21 @@ it, please enter the types and the actual numbers or codes.</hint>
      <pair>
        <displayed-value>ISBN</displayed-value>
        <stored-value>isbn</stored-value>
+     </pair>
+   </value-pairs>
+
+   <value-pairs value-pairs-name="project_status" dc-term="type">
+     <pair>
+       <displayed-value>Not started</displayed-value>
+       <stored-value>Not started</stored-value>
+     </pair>
+     <pair>
+       <displayed-value>In progress</displayed-value>
+       <stored-value>In progress</stored-value>
+     </pair>
+     <pair>
+       <displayed-value>Completed</displayed-value>
+       <stored-value>Completed</stored-value>
      </pair>
    </value-pairs>
 
