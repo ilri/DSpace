@@ -484,16 +484,15 @@
         </form>
 
         <form name="journalVolumeStep">
-<!--            <row>-->
-<!--                <field>-->
-<!--                    <dc-schema>journalvolume</dc-schema>-->
-<!--                    <dc-element>identifier</dc-element>-->
-<!--                    <dc-qualifier>name</dc-qualifier>-->
-<!--                    <label>Name</label>-->
-<!--                    <input-type>onebox</input-type>-->
-<!--                    <hint>Enter the name of the journal volume</hint>-->
-<!--                </field>-->
-<!--            </row>-->
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>title</dc-element>
+                    <label>Name</label>
+                    <input-type>onebox</input-type>
+                    <hint>Enter the name of the journal volume</hint>
+                </field>
+            </row>
             <row>
                 <field>
                     <dc-schema>publicationVolume</dc-schema>
