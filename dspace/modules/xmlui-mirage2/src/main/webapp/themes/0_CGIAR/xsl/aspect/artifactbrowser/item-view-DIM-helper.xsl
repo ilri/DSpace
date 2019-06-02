@@ -683,6 +683,16 @@ such as authors, subject, citation, description, etc
         </xsl:if>
 
     </xsl:template>
+    <xsl:template name="itemSummaryView-DIM-isijournal">
+        <xsl:if test="dim:field[@element='isijournal' and descendant::text()]">
+            <div class=" word-break item-page-field-wrapper table">
+                <h5 class="bold">
+                    <xsl:text>ISI journal</xsl:text>
+                </h5>
+            </div>
+        </xsl:if>
+
+    </xsl:template>
     <xsl:template name="itemSummaryView-DIM-accessibility">
         <xsl:if test="dim:field[@mdschema='cg' and @element='identifier' and @qualifier='status' and descendant::text()]">
             <div class=" word-break item-page-field-wrapper table">
