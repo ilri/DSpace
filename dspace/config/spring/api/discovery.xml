@@ -61,7 +61,7 @@
                 <entry key="123456789/6" value-ref="personConfiguration"/>
                 <entry key="123456789/279" value-ref="personConfiguration"/>
 
-                <entry key="123456789/8" value-ref="personConfiguration"/>
+                <entry key="123456789/8" value-ref="organizationConfiguration"/>
 
                 <entry key="123456789/30" value-ref="publicationIssueConfiguration"/>
 
