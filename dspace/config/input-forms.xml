@@ -1588,6 +1588,10 @@
      -->
     <value-pairs value-pairs-name="common_iso_languages" dc-term="language_iso">
       <pair>
+        <displayed-value>Arabic</displayed-value>
+        <stored-value>ar</stored-value>
+      </pair>
+      <pair>
         <displayed-value>Amharic</displayed-value>
         <stored-value>am</stored-value>
       </pair>
