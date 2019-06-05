@@ -1271,6 +1271,7 @@
                 <value>organization.foundingDate</value>
             </list>
         </property>
+        <property name="type" value="date"/>
         <property name="facetLimit" value="5"/>
         <property name="sortOrderSidebar" value="COUNT"/>
         <property name="sortOrderFilterPage" value="COUNT"/>
@@ -1347,6 +1348,7 @@
                 <value>creativework.datePublished</value>
             </list>
         </property>
+        <property name="type" value="date"/>
         <property name="facetLimit" value="5"/>
         <property name="sortOrderSidebar" value="COUNT"/>
         <property name="sortOrderFilterPage" value="COUNT"/>
