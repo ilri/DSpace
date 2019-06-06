@@ -151,7 +151,7 @@ public class SolrServiceMetadataBrowseIndexingPlugin implements SolrServiceIndex
 
                                     // is there any valid (with appropriate
                                     // confidence) authority key?
-                                    if (!(ignoreAuthority && !bi.isAuthorityIndex())
+                                    if ((ignoreAuthority && !bi.isAuthorityIndex())
                                         || (values.get(x).getAuthority() != null && values.get(x)
                                                                                           .getConfidence() >=
                                         minConfidence)) {
