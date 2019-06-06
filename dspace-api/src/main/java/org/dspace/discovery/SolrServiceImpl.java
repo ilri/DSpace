@@ -861,24 +861,29 @@ public class SolrServiceImpl implements SearchService, IndexingService {
         try {
             if (getSolr() != null) {
                 if (streams != null && !streams.isEmpty()) {
-                    ContentStreamUpdateRequest req = new ContentStreamUpdateRequest("/update/extract");
-                    req.addContentStream(streams);
+                    try {
+                        ContentStreamUpdateRequest req = new ContentStreamUpdateRequest("/update/extract");
+                        req.addContentStream(streams);
 
-                    ModifiableSolrParams params = new ModifiableSolrParams();
+                        ModifiableSolrParams params = new ModifiableSolrParams();
 
-                    //req.setParam(ExtractingParams.EXTRACT_ONLY, "true");
-                    for (String name : doc.getFieldNames()) {
-                        for (Object val : doc.getFieldValues(name)) {
-                            params.add(ExtractingParams.LITERALS_PREFIX + name, val.toString());
+                        //req.setParam(ExtractingParams.EXTRACT_ONLY, "true");
+                        for (String name : doc.getFieldNames()) {
+                            for (Object val : doc.getFieldValues(name)) {
+                                params.add(ExtractingParams.LITERALS_PREFIX + name, val.toString());
+                            }
                         }
-                    }
 
-                    req.setParams(params);
-                    req.setParam(ExtractingParams.UNKNOWN_FIELD_PREFIX, "attr_");
-                    req.setParam(ExtractingParams.MAP_PREFIX + "content", "fulltext");
-                    req.setParam(ExtractingParams.EXTRACT_FORMAT, "text");
-                    req.setAction(AbstractUpdateRequest.ACTION.COMMIT, true, true);
-                    req.process(getSolr());
+                        req.setParams(params);
+                        req.setParam(ExtractingParams.UNKNOWN_FIELD_PREFIX, "attr_");
+                        req.setParam(ExtractingParams.MAP_PREFIX + "content", "fulltext");
+                        req.setParam(ExtractingParams.EXTRACT_FORMAT, "text");
+                        req.setAction(AbstractUpdateRequest.ACTION.COMMIT, true, true);
+                        req.process(getSolr());
+                    } catch (Exception e) {
+                        log.error("Failed to process streams", e);
+                        getSolr().add(doc);
+                    }
                 } else {
                     getSolr().add(doc);
                 }
