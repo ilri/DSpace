@@ -155,7 +155,9 @@ public class SolrServiceMetadataBrowseIndexingPlugin implements SolrServiceIndex
                                         || (values.get(x).getAuthority() != null && values.get(x)
                                                                                           .getConfidence() >=
                                         minConfidence)) {
-                                        distFAuths.add(values.get(x).getAuthority());
+                                        if (values.get(x).getAuthority() != null) {
+                                            distFAuths.add(values.get(x).getAuthority());
+                                        }
                                         distValuesForAC.add(values.get(x).getValue());
 
                                         String preferedLabel = null;

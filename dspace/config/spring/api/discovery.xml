@@ -422,14 +422,6 @@
         </property>
         <!--Default result per page  -->
         <property name="defaultRpp" value="10"/>
-        <property name="recentSubmissionConfiguration">
-            <bean class="org.dspace.discovery.configuration.DiscoveryRecentSubmissionsConfiguration">
-                <property name="metadataSortField" value="dc.date.accessioned"/>
-                <property name="type" value="date"/>
-                <property name="max" value="5"/>
-                <property name="useAsHomePage" value="false"/>
-            </bean>
-        </property>
         <property name="hitHighlightingConfiguration">
             <bean class="org.dspace.discovery.configuration.DiscoveryHitHighlightingConfiguration">
                 <property name="metadataFields">
@@ -507,14 +499,6 @@
         </property>
         <!--Default result per page  -->
         <property name="defaultRpp" value="10"/>
-        <property name="recentSubmissionConfiguration">
-            <bean class="org.dspace.discovery.configuration.DiscoveryRecentSubmissionsConfiguration">
-                <property name="metadataSortField" value="dc.date.accessioned"/>
-                <property name="type" value="date"/>
-                <property name="max" value="5"/>
-                <property name="useAsHomePage" value="false"/>
-            </bean>
-        </property>
         <property name="hitHighlightingConfiguration">
             <bean class="org.dspace.discovery.configuration.DiscoveryHitHighlightingConfiguration">
                 <property name="metadataFields">

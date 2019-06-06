@@ -121,4 +121,16 @@
         <element>isPublicationOfJournalIssue</element>
         <scope_note></scope_note>
     </dc-type>
+
+    <dc-type>
+        <schema>relation</schema>
+        <element>isDataFileOfDataPackage</element>
+        <scope_note></scope_note>
+    </dc-type>
+
+    <dc-type>
+        <schema>relation</schema>
+        <element>isDataPackageOfDataFile</element>
+        <scope_note></scope_note>
+    </dc-type>
 </dspace-dc-types>
