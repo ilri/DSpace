@@ -1514,7 +1514,7 @@ public class RelationshipRestRepositoryIT extends AbstractEntityIntegrationTest 
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$._links.leftItem.href",
                         containsString(publication2.getID().toString())))
-                .andExpect(jsonPath("$._links.leftItem.href",
+                .andExpect(jsonPath("$._links.rightItem.href",
                         containsString(author1.getID().toString())));
 
         //Modify the right item in the relationship publication > publication 2
