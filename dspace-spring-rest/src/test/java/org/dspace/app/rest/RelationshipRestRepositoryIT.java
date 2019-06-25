@@ -1530,8 +1530,10 @@ public class RelationshipRestRepositoryIT extends AbstractEntityIntegrationTest 
         //verify right item change and other not changed
         getClient(token).perform(get("/api/core/relationships/" + id))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.rightId", is(author2.getID().toString())))
-                .andExpect(jsonPath("$.leftId", is(publication2.getID().toString())));
+                .andExpect(jsonPath("$._links.rightItem.href",
+                                containsString(author2.getID().toString())))
+                .andExpect(jsonPath("$._links.leftItem.href",
+                                containsString(publication2.getID().toString())));
 
     }
 
