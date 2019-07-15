@@ -151,12 +151,6 @@ public class SearchUtils {
 
         //Also add one for the default
         addConfigurationIfExists(result, prefix);
-        if (prefix == null) {
-            DiscoveryConfiguration configuration = getDiscoveryConfiguration(null);
-            if (!result.containsKey(configuration.getId())) {
-                result.put(configuration.getId(), configuration);
-            }
-        }
 
         return Arrays.asList(result.values().toArray(new DiscoveryConfiguration[result.size()]));
     }
