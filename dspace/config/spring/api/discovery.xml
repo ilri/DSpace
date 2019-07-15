@@ -537,6 +537,7 @@
     </bean>
 
     <bean id="publicationConfiguration" class="org.dspace.discovery.configuration.DiscoveryConfiguration" scope="prototype">
+        <property name="id" value="publication"/>
         <!--Which sidebar facets are to be displayed-->
         <property name="sidebarFacets">
             <list>
@@ -606,6 +607,7 @@
     </bean>
 
     <bean id="personConfiguration" class="org.dspace.discovery.configuration.DiscoveryConfiguration" scope="prototype">
+        <property name="id" value="person"/>
         <!--Which sidebar facets are to be displayed-->
         <property name="sidebarFacets">
             <list>
@@ -668,6 +670,7 @@
 
     <bean id="organizationConfiguration" class="org.dspace.discovery.configuration.DiscoveryConfiguration"
           scope="prototype">
+        <property name="id" value="organization"/>
         <!--Which sidebar facets are to be displayed-->
         <property name="sidebarFacets">
             <list>
@@ -731,6 +734,7 @@
 
     <bean id="publicationIssueConfiguration" class="org.dspace.discovery.configuration.DiscoveryConfiguration"
           scope="prototype">
+        <property name="id" value="publicationIssue"/>
         <!--Which sidebar facets are to be displayed-->
         <property name="sidebarFacets">
             <list>
@@ -790,6 +794,7 @@
 
     <bean id="publicationVolumeConfiguration" class="org.dspace.discovery.configuration.DiscoveryConfiguration"
           scope="prototype">
+        <property name="id" value="publicationVolume"/>
         <!--Which sidebar facets are to be displayed-->
         <property name="sidebarFacets">
             <list>
@@ -848,6 +853,7 @@
 
     <bean id="periodicalConfiguration" class="org.dspace.discovery.configuration.DiscoveryConfiguration"
           scope="prototype">
+        <property name="id" value="periodical"/>
         <!--Which sidebar facets are to be displayed-->
         <property name="sidebarFacets">
             <list>
