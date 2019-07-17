@@ -16,16 +16,29 @@ set -o errexit
 # fields are separated with tabs or spaces. Uses bash's `mapfile` to read into
 # an array.
 mapfile -t fields_to_move <<TO_MOVE
-72  55  #dc.source
-86  230 #cg.contributor.crp
-91  211 #cg.contributor.affiliation
-94  212 #cg.species
-107 231 #cg.coverage.subregion
-126 3   #dc.contributor.author
-73  219 #cg.identifier.url
-74  220 #cg.identifier.doi
-79  222 #cg.identifier.googleurl
-89  223 #cg.identifier.dataurl
+3   151 #dc.contributor.author→dcterms.creator
+240 241 #cg.creator.id→cg.creator.identifier
+64  190 #dc.title→dcterms.title
+34  158 #dc.format.extent→dcterms.extent
+15  170 #dc.date.issued→dcterms.issued
+27  138 #dc.description.abstract→dcterms.abstract
+26  243 #dc.description→cg.notes
+29  244 #dc.description.sponsorship→cg.contributor.donor
+68  245 #dc.description.version→cg.peer-reviewed
+214 246 #cg.fulltextstatus→cg.howpublished
+18  146 #dc.identifier.citation→dcterms.bibliographicCitation
+206 139 #cg.identifier.status→dcterms.accessRights
+28  172 #dc.language.iso→dcterms.language
+113 180 #cg.link.reference→dcterms.relation
+39  178 #dc.publisher→dcterms.publisher
+43  166 #dc.relation.ispartofseries→dcterms.isPartOf
+53  173 #dc.rights→dcterms.license
+55  247 #dc.source→cg.journal
+57  187 #dc.subject→dcterms.subject
+109 191 #dc.type→dcterms.type
+20  248 #dc.identifier.isbn→cg.isbn
+21  249 #dc.identifier.issn→cg.issn
+223 250 #cg.identifier.dataurl→cg.HasMetadata
 TO_MOVE
 
 # psql stuff
