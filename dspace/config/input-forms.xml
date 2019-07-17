@@ -37,23 +37,23 @@
     <form name="traditional">
       <page number="1">
         <field>
-          <dc-schema>dc</dc-schema>
-          <dc-element>contributor</dc-element>
-          <dc-qualifier>author</dc-qualifier>
+          <dc-schema>dcterms</dc-schema>
+          <dc-element>creator</dc-element>
+          <dc-qualifier></dc-qualifier>
           <repeatable>true</repeatable>
           <label>Authors (required)</label>
           <input-type>onebox</input-type>
           <hint>Click below to see a pre-populated list of authors, or enter the names of individual or corporate authors of this item (enter each individually).</hint>
-          <vocabulary>dc-contributor-author</vocabulary>
+          <vocabulary>dcterms-creator</vocabulary>
           <required>Please enter the author(s).</required>
         </field>
         <field>
           <dc-schema>cg</dc-schema>
           <dc-element>creator</dc-element>
-          <dc-qualifier>id</dc-qualifier>
+          <dc-qualifier>identifier</dc-qualifier>
           <repeatable>true</repeatable>
           <label>CGIAR author ORCID iDs</label>
-          <vocabulary>cg-creator-id</vocabulary>
+          <vocabulary>cg-creator-identifier</vocabulary>
           <input-type>onebox</input-type>
           <hint>Enter ORCID iDs for CGIAR authors. Click below to see a pre-populated list of author ORCID iDs that you can select from. Enter one per author. If an iD is missing, enter a new one in the exact same format (Name: 0000-0002-1735-7458). Use the exact name style the author uses at https://orcid.org</hint>
           <required></required>
@@ -80,7 +80,7 @@
           <required></required>
         </field>
         <field>
-          <dc-schema>dc</dc-schema>
+          <dc-schema>dcterms</dc-schema>
           <dc-element>title</dc-element>
           <dc-qualifier></dc-qualifier>
           <repeatable>false</repeatable>
@@ -90,12 +90,12 @@
           <required>You must enter a main title for this item.</required>
         </field>
         <field>
-          <dc-schema>dc</dc-schema>
-          <dc-element>source</dc-element>
+          <dc-schema>cg</dc-schema>
+          <dc-element>journal</dc-element>
           <dc-qualifier></dc-qualifier>
           <repeatable>false</repeatable>
           <label>Journal title</label>
-          <vocabulary>dc-source</vocabulary>
+          <vocabulary>cg-journal</vocabulary>
           <input-type>onebox</input-type>
           <hint>Click below to see a pre-populated list of journal titles, or enter the full journal title manually.</hint>
           <required></required>
@@ -111,9 +111,9 @@
           <required></required>
         </field>
         <field>
-          <dc-schema>dc</dc-schema>
-          <dc-element>format</dc-element>
-          <dc-qualifier>extent</dc-qualifier>
+          <dc-schema>dcterms</dc-schema>
+          <dc-element>extent</dc-element>
+          <dc-qualifier></dc-qualifier>
           <repeatable>false</repeatable>
           <label>Pagination</label>
           <input-type>onebox</input-type>
@@ -131,7 +131,7 @@
           <required></required>
         </field>
         <field>
-          <dc-schema>dc</dc-schema>
+          <dc-schema>dcterms</dc-schema>
           <dc-element>type</dc-element>
           <dc-qualifier></dc-qualifier>
           <repeatable>true</repeatable>
@@ -141,9 +141,9 @@
           <required>You must select item type.</required>
         </field>
         <field>
-          <dc-schema>dc</dc-schema>
+          <dc-schema>dcterms</dc-schema>
           <dc-element>language</dc-element>
-          <dc-qualifier>iso</dc-qualifier>
+          <dc-qualifier></dc-qualifier>
           <repeatable>true</repeatable>
           <label>Language</label>
           <input-type value-pairs-name="common_iso_languages">dropdown</input-type>
@@ -161,9 +161,9 @@
           <required></required>
         </field>
         <field>
-          <dc-schema>dc</dc-schema>
-          <dc-element>date</dc-element>
-          <dc-qualifier>issued</dc-qualifier>
+          <dc-schema>dcterms</dc-schema>
+          <dc-element>issued</dc-element>
+          <dc-qualifier></dc-qualifier>
           <repeatable>false</repeatable>
           <label>Date of publication (required)</label>
           <input-type>date</input-type>
@@ -171,7 +171,7 @@
           <required>You must enter at least the year.</required>
         </field>
         <field>
-          <dc-schema>dc</dc-schema>
+          <dc-schema>dcterms</dc-schema>
           <dc-element>publisher</dc-element>
           <dc-qualifier></dc-qualifier>
           <repeatable>false</repeatable>
@@ -181,9 +181,9 @@
           <required></required>
         </field>
         <field>
-          <dc-schema>dc</dc-schema>
-          <dc-element>identifier</dc-element>
-          <dc-qualifier>citation</dc-qualifier>
+          <dc-schema>dcterms</dc-schema>
+          <dc-element>bibliographicCitation</dc-element>
+          <dc-qualifier></dc-qualifier>
           <repeatable>false</repeatable>
           <label>Citation (required)</label>
           <input-type>onebox</input-type>
@@ -191,9 +191,9 @@
           <required>Standard citation is required.</required>
         </field>
         <field>
-          <dc-schema>dc</dc-schema>
-          <dc-element>relation</dc-element>
-          <dc-qualifier>ispartofseries</dc-qualifier>
+          <dc-schema>dcterms</dc-schema>
+          <dc-element>isPartOf</dc-element>
+          <dc-qualifier></dc-qualifier>
           <repeatable>true</repeatable>
           <label>Series/Report No.</label>
           <input-type>series</input-type>
@@ -201,9 +201,9 @@
           <required></required>
         </field>
         <field>
-          <dc-schema>dc</dc-schema>
-          <dc-element>description</dc-element>
-          <dc-qualifier>abstract</dc-qualifier>
+          <dc-schema>dcterms</dc-schema>
+          <dc-element>abstract</dc-element>
+          <dc-qualifier></dc-qualifier>
           <repeatable>false</repeatable>
           <label>Abstract</label>
           <input-type>textarea</input-type>
@@ -314,10 +314,10 @@
         </field>
         <!-- An input-type of twobox MUST be marked as repeatable -->
         <field>
-          <dc-schema>dc</dc-schema>
+          <dc-schema>dcterms</dc-schema>
           <dc-element>subject</dc-element>
           <dc-qualifier></dc-qualifier>
-          <vocabulary>dc-subject</vocabulary>
+          <vocabulary>dcterms-subject</vocabulary>
           <input-type>onebox</input-type>
           <hint>Click below to see a pre-populated list of AGROVOC keywords, or enter the valid subject terms manually (enter each individually).</hint>
           <repeatable>true</repeatable>
@@ -495,8 +495,8 @@
           <required></required>
         </field>
         <field>
-          <dc-schema>dc</dc-schema>
-          <dc-element>description</dc-element>
+          <dc-schema>cg</dc-schema>
+          <dc-element>notes</dc-element>
           <dc-qualifier></dc-qualifier>
           <repeatable>false</repeatable>
           <label>Notes</label>
@@ -515,7 +515,7 @@
         </field>
         <field>
           <dc-schema>cg</dc-schema>
-          <dc-element>fulltextstatus</dc-element>
+          <dc-element>howpublished</dc-element>
           <dc-qualifier></dc-qualifier>
           <repeatable>false</repeatable>
           <label>Grey literature</label>
@@ -523,9 +523,9 @@
           <required></required>
         </field>
         <field>
-          <dc-schema>dc</dc-schema>
-          <dc-element>description</dc-element>
-          <dc-qualifier>version</dc-qualifier>
+          <dc-schema>cg</dc-schema>
+          <dc-element>peer-reviewed</dc-element>
+          <dc-qualifier></dc-qualifier>
           <repeatable>false</repeatable>
           <label>Review status</label>
           <hint>Indicate whether it has undergone internal or peer review.</hint>
@@ -543,9 +543,9 @@
           <required></required>
         </field>
         <field>
-          <dc-schema>cg</dc-schema>
-          <dc-element>identifier</dc-element>
-          <dc-qualifier>status</dc-qualifier>
+          <dc-schema>dcterms</dc-schema>
+          <dc-element>accessRights</dc-element>
+          <dc-qualifier></dc-qualifier>
           <repeatable>false</repeatable>
           <label>Accessibility status (required)</label>
           <input-type value-pairs-name="common_status_identifier">dropdown</input-type>
@@ -553,8 +553,8 @@
           <required>Accesibility status is required.</required>
         </field>
         <field>
-          <dc-schema>dc</dc-schema>
-          <dc-element>rights</dc-element>
+          <dc-schema>dcterms</dc-schema>
+          <dc-element>license</dc-element>
           <repeatable>false</repeatable>
           <label>Usage rights (required)</label>
           <input-type value-pairs-name="usage-rights">dropdown</input-type>
@@ -562,13 +562,13 @@
           <required>Usage rights is required.</required>
         </field>
         <field>
-          <dc-schema>dc</dc-schema>
-          <dc-element>description</dc-element>
-          <dc-qualifier>sponsorship</dc-qualifier>
+          <dc-schema>cg</dc-schema>
+          <dc-element>contributor</dc-element>
+          <dc-qualifier>donor</dc-qualifier>
           <repeatable>true</repeatable>
           <label>Sponsor</label>
           <input-type>onebox</input-type>
-          <vocabulary>dc-description-sponsorship</vocabulary>
+          <vocabulary>cg-contributor-donor</vocabulary>
           <hint>Enter full institution name(s) who sponsored the item. Click below to see a pre-populated list, or add one manually. CGIAR Research Program funding is identified in the field above.</hint>
           <required></required>
         </field>
@@ -603,9 +603,9 @@
           <required></required>
         </field>
         <field>
-          <dc-schema>cg</dc-schema>
-          <dc-element>link</dc-element>
-          <dc-qualifier>reference</dc-qualifier>
+          <dc-schema>dcterms</dc-schema>
+          <dc-element>relation</dc-element>
+          <dc-qualifier></dc-qualifier>
           <repeatable>false</repeatable>
           <label>Related reference</label>
           <input-type>onebox</input-type>
@@ -624,8 +624,8 @@
         </field>
         <field>
           <dc-schema>cg</dc-schema>
-          <dc-element>identifier</dc-element>
-          <dc-qualifier>dataurl</dc-qualifier>
+          <dc-element>HasMetadata</dc-element>
+          <dc-qualifier></dc-qualifier>
           <repeatable>false</repeatable>
           <label>URL for datafile</label>
           <input-type>onebox</input-type>
@@ -677,9 +677,9 @@
     <form name="AgriFood Chain capacity building">
       <page number="1">
         <field>
-          <dc-schema>dc</dc-schema>
-          <dc-element>contributor</dc-element>
-          <dc-qualifier>author</dc-qualifier>
+          <dc-schema>dcterms</dc-schema>
+          <dc-element>creator</dc-element>
+          <dc-qualifier></dc-qualifier>
           <repeatable>true</repeatable>
           <label>Authors</label>
           <input-type>name</input-type>
@@ -687,8 +687,8 @@
           <required></required>
         </field>
         <field>
-          <dc-schema>dc</dc-schema>
-          <dc-element>source</dc-element>
+          <dc-schema>cg</dc-schema>
+          <dc-element>journal</dc-element>
           <dc-qualifier></dc-qualifier>
           <repeatable>false</repeatable>
           <label>Journal Title</label>
@@ -697,7 +697,7 @@
           <required></required>
         </field>
         <field>
-          <dc-schema>dc</dc-schema>
+          <dc-schema>dcterms</dc-schema>
           <dc-element>title</dc-element>
           <dc-qualifier></dc-qualifier>
           <repeatable>false</repeatable>
@@ -707,9 +707,9 @@
           <required>You must enter a main title for this item.</required>
         </field>
         <field>
-          <dc-schema>dc</dc-schema>
-          <dc-element>identifier</dc-element>
-          <dc-qualifier>citation</dc-qualifier>
+          <dc-schema>dcterms</dc-schema>
+          <dc-element>bibliographicCitation</dc-element>
+          <dc-qualifier></dc-qualifier>
           <repeatable>false</repeatable>
           <label>Citation (required)</label>
           <input-type>onebox</input-type>
@@ -737,9 +737,9 @@
           <required></required>
         </field>
         <field>
-          <dc-schema>dc</dc-schema>
-          <dc-element>date</dc-element>
-          <dc-qualifier>issued</dc-qualifier>
+          <dc-schema>dcterms</dc-schema>
+          <dc-element>issued</dc-element>
+          <dc-qualifier></dc-qualifier>
           <repeatable>false</repeatable>
           <label>Date of Publication</label>
           <input-type>date</input-type>
@@ -747,7 +747,7 @@
           <required>You must enter at least the year.</required>
         </field>
         <field>
-          <dc-schema>dc</dc-schema>
+          <dc-schema>dcterms</dc-schema>
           <dc-element>publisher</dc-element>
           <dc-qualifier></dc-qualifier>
           <repeatable>false</repeatable>
@@ -757,7 +757,7 @@
           <required></required>
         </field>
         <field>
-          <dc-schema>dc</dc-schema>
+          <dc-schema>dcterms</dc-schema>
           <dc-element>type</dc-element>
           <dc-qualifier></dc-qualifier>
           <repeatable>true</repeatable>
@@ -777,9 +777,9 @@
           <required></required>
         </field>
         <field>
-          <dc-schema>cg</dc-schema>
-          <dc-element>identifier</dc-element>
-          <dc-qualifier>status</dc-qualifier>
+          <dc-schema>dcterms</dc-schema>
+          <dc-element>accessRights</dc-element>
+          <dc-qualifier></dc-qualifier>
           <repeatable>false</repeatable>
           <label>Accessibility status</label>
           <input-type value-pairs-name="common_status_identifier">dropdown</input-type>
@@ -787,8 +787,8 @@
           <required></required>
         </field>
         <field>
-          <dc-schema>dc</dc-schema>
-          <dc-element>rights</dc-element>
+          <dc-schema>dcterms</dc-schema>
+          <dc-element>license</dc-element>
           <repeatable>false</repeatable>
           <label>Usage rights (required)</label>
           <input-type value-pairs-name="usage-rights">dropdown</input-type>
@@ -806,9 +806,9 @@
           <required></required>
         </field>
         <field>
-          <dc-schema>dc</dc-schema>
+          <dc-schema>dcterms</dc-schema>
           <dc-element>language</dc-element>
-          <dc-qualifier>iso</dc-qualifier>
+          <dc-qualifier></dc-qualifier>
           <repeatable>false</repeatable>
           <label>Language</label>
           <input-type value-pairs-name="common_iso_languages">dropdown</input-type>
