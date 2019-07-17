@@ -624,7 +624,7 @@
         </field>
         <field>
           <dc-schema>cg</dc-schema>
-          <dc-element>HasMetadata</dc-element>
+          <dc-element>hasMetadata</dc-element>
           <dc-qualifier></dc-qualifier>
           <repeatable>false</repeatable>
           <label>URL for datafile</label>

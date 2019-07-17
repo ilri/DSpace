@@ -38,7 +38,7 @@ mapfile -t fields_to_move <<TO_MOVE
 109 191 #dc.type→dcterms.type
 20  248 #dc.identifier.isbn→cg.isbn
 21  249 #dc.identifier.issn→cg.issn
-223 250 #cg.identifier.dataurl→cg.HasMetadata
+223 250 #cg.identifier.dataurl→cg.hasMetadata
 TO_MOVE
 
 # psql stuff
