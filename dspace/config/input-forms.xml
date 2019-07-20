@@ -495,8 +495,8 @@
           <required></required>
         </field>
         <field>
-          <dc-schema>cg</dc-schema>
-          <dc-element>notes</dc-element>
+          <dc-schema>dcterms</dc-schema>
+          <dc-element>description</dc-element>
           <dc-qualifier></dc-qualifier>
           <repeatable>false</repeatable>
           <label>Notes</label>

@@ -22,7 +22,7 @@ mapfile -t fields_to_move <<TO_MOVE
 34  158 #dc.format.extent→dcterms.extent
 15  170 #dc.date.issued→dcterms.issued
 27  138 #dc.description.abstract→dcterms.abstract
-26  243 #dc.description→cg.notes
+26  156 #dc.description→dcterms.description
 29  244 #dc.description.sponsorship→cg.contributor.donor
 68  245 #dc.description.version→cg.peer-reviewed
 214 246 #cg.fulltextstatus→cg.howpublished
