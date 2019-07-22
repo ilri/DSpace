@@ -211,14 +211,23 @@
           <required></required>
         </field>
         <field>
-          <dc-schema>dc</dc-schema>
-          <dc-element>identifier</dc-element>
+          <dc-schema>cg</dc-schema>
+          <dc-element>isbn</dc-element>
           <dc-qualifier></dc-qualifier>
-          <!-- An input-type of qualdrop_value MUST be marked as repeatable -->
-          <repeatable>true</repeatable>
-          <label>Identifiers</label>
-          <input-type value-pairs-name="common_identifiers">qualdrop_value</input-type>
-          <hint>Enter any associated identification numbers or codes.</hint>
+          <repeatable>false</repeatable>
+          <label>ISBN</label>
+          <input-type>onebox</input-type>
+          <hint>Enter the ISBN for the the item, for example: 978-3-16-148410-0</hint>
+          <required></required>
+        </field>
+        <field>
+          <dc-schema>cg</dc-schema>
+          <dc-element>issn</dc-element>
+          <dc-qualifier></dc-qualifier>
+          <repeatable>false</repeatable>
+          <label>ISSN</label>
+          <input-type>onebox</input-type>
+          <hint>Enter the ISSN for the serial publication where this item appears, for example: 2049-3630</hint>
           <required></required>
         </field>
         <field>
