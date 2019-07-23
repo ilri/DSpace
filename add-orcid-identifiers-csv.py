@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #
 # add-orcid-identifiers-csv.py 1.0.0
 #

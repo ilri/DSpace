@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #
 # orcid-authority-to-item.py 1.1.0
 #
