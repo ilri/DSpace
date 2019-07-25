@@ -20,12 +20,13 @@ import org.dspace.app.rest.model.SubmissionFormRest;
 import org.dspace.app.rest.model.SubmissionFormRowRest;
 import org.dspace.app.rest.model.SubmissionVisibilityRest;
 import org.dspace.app.rest.model.VisibilityEnum;
+import org.dspace.app.rest.model.submit.SelectableMetadata;
+import org.dspace.app.rest.model.submit.SelectableRelationship;
 import org.dspace.app.rest.repository.SubmissionFormRestRepository;
 import org.dspace.app.rest.utils.AuthorityUtils;
 import org.dspace.app.util.DCInput;
 import org.dspace.app.util.DCInputSet;
 import org.dspace.submit.model.LanguageFormField;
-import org.dspace.submit.model.SelectableMetadata;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -77,7 +78,7 @@ public class SubmissionFormConverter implements DSpaceConverter<DCInputSet, Subm
     private SubmissionFormFieldRest getField(DCInput dcinput, String formName) {
         SubmissionFormFieldRest inputField = new SubmissionFormFieldRest();
         List<SelectableMetadata> selectableMetadata = new ArrayList<SelectableMetadata>();
-
+        List<SelectableRelationship> selectableRelationships = new ArrayList<SelectableRelationship>();
         inputField.setLabel(dcinput.getLabel());
         inputField.setHints(dcinput.getHints());
         inputField.setStyle(dcinput.getStyle());
@@ -106,23 +107,26 @@ public class SubmissionFormConverter implements DSpaceConverter<DCInputSet, Subm
         inputRest.setRegex(dcinput.getRegex());
 
         if (!StringUtils.equalsIgnoreCase(dcinput.getInputType(), "qualdrop_value")) {
-            // value-pair and vocabulary are a special kind of authorities
-            String inputType = dcinput.getInputType();
+            if (dcinput.isMetadataField()) {
+                // value-pair and vocabulary are a special kind of authorities
+                String inputType = dcinput.getInputType();
 
-            SelectableMetadata selMd = new SelectableMetadata();
-            if (authorityUtils.isChoice(dcinput.getSchema(), dcinput.getElement(), dcinput.getQualifier())) {
-                inputRest.setType(
-                        getPresentation(dcinput.getSchema(), dcinput.getElement(), dcinput.getQualifier(), inputType));
-                selMd.setAuthority(getAuthorityName(dcinput.getSchema(), dcinput.getElement(), dcinput.getQualifier(),
-                        dcinput.getPairsType(), dcinput.getVocabulary()));
-                selMd.setClosed(
-                        authorityUtils.isClosed(dcinput.getSchema(), dcinput.getElement(), dcinput.getQualifier()));
-            } else {
-                inputRest.setType(inputType);
+                SelectableMetadata selMd = new SelectableMetadata();
+                if (authorityUtils.isChoice(dcinput.getSchema(), dcinput.getElement(), dcinput.getQualifier())) {
+                    inputRest.setType(getPresentation(dcinput.getSchema(), dcinput.getElement(),
+                                                      dcinput.getQualifier(), inputType));
+                    selMd.setAuthority(getAuthorityName(dcinput.getSchema(), dcinput.getElement(),
+                                                        dcinput.getQualifier(), dcinput.getPairsType(),
+                                                        dcinput.getVocabulary()));
+                    selMd.setClosed(
+                            authorityUtils.isClosed(dcinput.getSchema(), dcinput.getElement(), dcinput.getQualifier()));
+                } else {
+                    inputRest.setType(inputType);
+                }
+                selMd.setMetadata(org.dspace.core.Utils
+                    .standardize(dcinput.getSchema(), dcinput.getElement(), dcinput.getQualifier(), "."));
+                selectableMetadata.add(selMd);
             }
-            selMd.setMetadata(org.dspace.core.Utils
-                .standardize(dcinput.getSchema(), dcinput.getElement(), dcinput.getQualifier(), "."));
-            selectableMetadata.add(selMd);
 
         } else {
             inputRest.setType(INPUT_TYPE_ONEBOX);
@@ -142,8 +146,22 @@ public class SubmissionFormConverter implements DSpaceConverter<DCInputSet, Subm
             }
         }
         inputField.setInput(inputRest);
-        inputField.setSelectableMetadata(selectableMetadata);
+        if (dcinput.isMetadataField()) {
+            inputField.setSelectableMetadata(selectableMetadata);
+        }
+        if (dcinput.isRelationshipField()) {
+            handleSelectableRelationships(dcinput, selectableRelationships);
+            inputField.setSelectableRelationships(selectableRelationships);
+        }
         return inputField;
+    }
+
+    private void handleSelectableRelationships(DCInput dcinput, List<SelectableRelationship> selectableRelationships) {
+        SelectableRelationship selectableRelationship = new SelectableRelationship();
+        selectableRelationship.setRelationshipType(dcinput.getRelationshipType());
+        selectableRelationship.setFilter(dcinput.getFilter());
+        selectableRelationship.setSearchConfiguration(dcinput.getSearchConfiguration());
+        selectableRelationships.add(selectableRelationship);
     }
 
     private String getPresentation(String schema, String element, String qualifier, String inputType) {
