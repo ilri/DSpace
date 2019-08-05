@@ -1,25 +1,25 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.dspace.modules</groupId>
-    <artifactId>rest</artifactId>
+    <artifactId>server</artifactId>
     <packaging>war</packaging>
-    <name>DSpace (Deprecated) REST Webapp :: Local Customizations</name>
-    <description>
-        This project allows you to overlay your own local REST customizations
-        on top of the deprecated REST API provided with DSpace. NOTE: This REST API is DEPRECATED. Please consider
-        using the REST API in dspace-server-webapp instead.
-    </description>
+    <name>DSpace Server Webapp:: Local Customizations</name>
+    <description>Overlay customizations.
+This is probably a temporary solution to the build problems. We like to investigate about
+the possibility to remove the overlays enable a more flexible extension mechanism.
+The use of web-fragment and spring mvc technology allow us to add request handlers
+just adding new jar in the classloader</description>
 
     <parent>
-        <groupId>org.dspace</groupId>
         <artifactId>modules</artifactId>
+        <groupId>org.dspace</groupId>
         <version>7.0-SNAPSHOT</version>
         <relativePath>..</relativePath>
     </parent>
 
     <properties>
-        <!-- This is the path to the root [dspace-src] directory. -->
-        <root.basedir>${basedir}/../../..</root.basedir>
+       <!-- This is the path to the root [dspace-src] directory. -->
+       <root.basedir>${basedir}/../../..</root.basedir>
     </properties>
 
     <build>
@@ -66,19 +66,6 @@
                             <targetPath>WEB-INF/classes</targetPath>
                         </resource>
                     </webResources>
-                    <overlays>
-                        <!--
-                           the priority of overlays is determined here
-                           1.) default: anything in the current project has highest
-                           2.) anything defined here has precedence in the order defined
-                           3.) any war found transitively in the dependencies will be applied
-                           next. the order is unpredictable.
-                        -->
-                        <overlay>
-                            <groupId>org.dspace</groupId>
-                            <artifactId>dspace-rest</artifactId>
-                        </overlay>
-                    </overlays>
                 </configuration>
                 <executions>
                     <execution>
@@ -86,7 +73,6 @@
                     </execution>
                 </executions>
             </plugin>
-
         </plugins>
     </build>
 
@@ -109,45 +95,15 @@
     </profiles>
 
     <dependencies>
-
         <dependency>
             <groupId>org.dspace.modules</groupId>
             <artifactId>additions</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.fasterxml.jackson.core</groupId>
-                    <artifactId>jackson-core</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.fasterxml.jackson.core</groupId>
-                    <artifactId>jackson-databind</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.fasterxml.jackson.core</groupId>
-                    <artifactId>jackson-annotations</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
-
-        <!-- DSpace REST Webapp -->
         <dependency>
             <groupId>org.dspace</groupId>
-            <artifactId>dspace-rest</artifactId>
+            <artifactId>dspace-server-webapp</artifactId>
             <type>war</type>
         </dependency>
-        <dependency>
-            <groupId>org.dspace</groupId>
-            <artifactId>dspace-rest</artifactId>
-            <type>jar</type>
-            <classifier>classes</classifier>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
     </dependencies>
 
 </project>

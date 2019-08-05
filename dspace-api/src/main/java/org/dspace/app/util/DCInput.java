@@ -134,8 +134,8 @@ public class DCInput {
      */
     private List<String> typeBind = null;
 
-    private boolean relationshipField = false;
-    private boolean metadataField = false;
+    private boolean isRelationshipField = false;
+    private boolean isMetadataField = false;
     private String relationshipType = null;
     private String searchConfiguration = null;
     private String filter;
@@ -212,9 +212,9 @@ public class DCInput {
             }
         }
         style = fieldMap.get("style");
-        relationshipField = fieldMap.containsKey("relationshiptype");
-        metadataField = fieldMap.containsKey("dc-schema");
-        relationshipType = fieldMap.get("relationshiptype");
+        isRelationshipField = fieldMap.containsKey("relationship-type");
+        isMetadataField = fieldMap.containsKey("dc-schema");
+        relationshipType = fieldMap.get("relationship-type");
         searchConfiguration = fieldMap.get("search-configuration");
         filter = fieldMap.get("filter");
     }
@@ -529,11 +529,21 @@ public class DCInput {
         return true;
     }
 
+    /**
+     * Verify whether the current field contains an entity relationship
+     * This also implies a relationship type is defined for this field
+     * The field can contain both an entity relationship and a metadata field simultaneously
+     */
     public boolean isRelationshipField() {
-        return relationshipField;
+        return isRelationshipField;
     }
 
+    /**
+     * Verify whether the current field contains a metadata field
+     * This also implies a field type is defined for this field
+     * The field can contain both an entity relationship and a metadata field simultaneously
+     */
     public boolean isMetadataField() {
-        return metadataField;
+        return isMetadataField;
     }
 }
