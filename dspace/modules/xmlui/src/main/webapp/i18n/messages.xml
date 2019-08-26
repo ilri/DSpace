@@ -2381,6 +2381,7 @@
 	<message key="xmlui.dri2xhtml.METS-1.0.item-related-reference">Related reference: </message>
 	<message key="xmlui.dri2xhtml.METS-1.0.item-agrovoc-terms">AGROVOC Keywords</message>
 	<message key="xmlui.dri2xhtml.METS-1.0.item-orcid">CGIAR Author ORCID iDs</message>
+	<message key="xmlui.dri2xhtml.METS-1.0.item-cg-link-citation">Related citation</message>
 
 	<message key="xmlui.dri2xhtml.METS-1.0.item-files-head">Files in this item</message>
 	<message key="xmlui.dri2xhtml.METS-1.0.item-files-file">Files</message>

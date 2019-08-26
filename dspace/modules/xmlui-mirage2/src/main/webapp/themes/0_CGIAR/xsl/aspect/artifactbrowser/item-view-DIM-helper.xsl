@@ -69,6 +69,32 @@ such as authors, subject, citation, description, etc
         </xsl:if>
     </xsl:template>
 
+    <xsl:template name="itemSummaryView-DIM-cg-link-citation">
+        <xsl:if test="dim:field[@mdschema='cg' and @element='link' and @qualifier='citation']">
+            <div class="simple-item-view-description item-page-field-wrapper table">
+                <h5 class="bold"><i18n:text>xmlui.dri2xhtml.METS-1.0.item-cg-link-citation</i18n:text></h5>
+                <div>
+                    <xsl:for-each select="dim:field[@mdschema='cg' and @element='link' and @qualifier='citation']">
+                        <xsl:choose>
+                            <xsl:when test="node()">
+                                <xsl:copy-of select="node()"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:text>&#160;</xsl:text>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                        <xsl:if test="count(following-sibling::dim:field[@mdschema='cg' and @element='link' and @qualifier='citation']) != 0">
+                            <div class="spacer">&#160;</div>
+                        </xsl:if>
+                    </xsl:for-each>
+                    <xsl:if test="count(dim:field[@mdschema='cg' and @element='link' and @qualifier='citation']) &gt; 1">
+                        <div class="spacer">&#160;</div>
+                    </xsl:if>
+                </div>
+            </div>
+        </xsl:if>
+    </xsl:template>
+
 
     <xsl:template name="itemSummaryView-DIM-notes">
         <xsl:if test="dim:field[@element='description'][not(@qualifier)]">
@@ -188,6 +214,7 @@ such as authors, subject, citation, description, etc
                 <xsl:call-template name="itemSummaryView-DIM-audiolink"/>
                 <xsl:call-template name="itemSummaryView-DIM-photolink"/>
                 <xsl:call-template name="itemSummaryView-DIM-referencelink"/>
+                <xsl:call-template name="itemSummaryView-DIM-cg-link-citation"/>
                 </div>
             </div>
         </xsl:if>
