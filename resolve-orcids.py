@@ -49,7 +49,7 @@ def read_identifiers_from_file():
         line = line.strip()
 
         # regular expression for matching exactly one ORCID identifier on a line
-        pattern = re.compile('^[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$')
+        pattern = re.compile(r'^[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$')
 
         # skip the line if it doesn't match the pattern
         if not pattern.match(line):

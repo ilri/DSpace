@@ -111,7 +111,7 @@ def main():
                     # extract cg.creator.id text to add from CSV and strip leading/trailing whitespace
                     text_value = row[args.orcid_field_name].strip()
                     # extract the ORCID identifier from the cg.creator.id text field in the CSV
-                    orcid_identifier_pattern = re.compile('[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}')
+                    orcid_identifier_pattern = re.compile(r'[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}')
                     orcid_identifier_match = orcid_identifier_pattern.search(text_value)
 
                     # sanity check to make sure we extracted the ORCID identifier from the cg.creator.id text in the CSV

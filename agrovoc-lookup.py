@@ -57,7 +57,7 @@ def read_subjects_from_file():
         # COMMUNITY-BASED FOREST MANAGEMENT
         # INTERACCIÓN GENOTIPO AMBIENTE
         # COCOA (PLANT)
-        pattern = re.compile('^[\w\-\.\'\(\)]+?[\w\s\-\.\'\(\)]+$')
+        pattern = re.compile(r'^[\w\-\.\'\(\)]+?[\w\s\-\.\'\(\)]+$')
 
         # skip the line if it doesn't match the pattern
         if not pattern.match(line):

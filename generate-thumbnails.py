@@ -86,7 +86,7 @@ def create_thumbnail(row):
 def download_bitstream(row):
 
     # some records have multiple URLs separated by "||"
-    pattern = re.compile("\|\|")
+    pattern = re.compile(r"\|\|")
     urls = pattern.split(row[args.url_field_name])
     filenames = pattern.split(row[args.filename_field_name])
     for url, filename in zip(urls, filenames):
