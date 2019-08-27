@@ -87,6 +87,12 @@ for row in reader:
         sys.stderr.write(Fore.YELLOW + 'Skipping identical search and replace for value: {0}\n'.format(row[args.from_field_name]) + Fore.RESET)
         continue
 
+    if '|' in row[args.to_field_name]:
+        # sometimes editors send me corrections with multi-value fields, which are supported in DSpace itself, but not here!
+        sys.stderr.write(Fore.YELLOW + 'Skipping correction with invalid | character: {0}\n'.format(row[args.to_field_name]) + Fore.RESET)
+
+        continue
+
     with conn:
         # cursor will be closed after this block exits
         # see: http://initd.org/psycopg/docs/usage.html#with-statement
