@@ -82,9 +82,10 @@ except psycopg2.OperationalError:
     sys.exit(1)
 
 for row in reader:
-    if row[args.from_field_name] == row[args.to_field_name] and args.debug:
-        # sometimes editors send me corrections with identical search/replace patterns
-        sys.stderr.write(Fore.YELLOW + 'Skipping identical search and replace for value: {0}\n'.format(row[args.from_field_name]) + Fore.RESET)
+    if row[args.from_field_name] == row[args.to_field_name]:
+        if args.debug:
+            # sometimes editors send me corrections with identical search/replace patterns
+            sys.stderr.write(Fore.YELLOW + 'Skipping identical search and replace for value: {0}\n'.format(row[args.from_field_name]) + Fore.RESET)
         continue
 
     if '|' in row[args.to_field_name]:
