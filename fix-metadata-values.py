@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# fix-metadata-values.py 1.0.1
+# fix-metadata-values.py 1.0.2
 #
 # Copyright 2018 Alan Orth.
 #
