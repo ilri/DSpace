@@ -89,8 +89,9 @@ for row in reader:
         continue
 
     if '|' in row[args.to_field_name]:
-        # sometimes editors send me corrections with multi-value fields, which are supported in DSpace itself, but not here!
-        sys.stderr.write(Fore.YELLOW + 'Skipping correction with invalid | character: {0}\n'.format(row[args.to_field_name]) + Fore.RESET)
+        if args.debug:
+            # sometimes editors send me corrections with multi-value fields, which are supported in DSpace itself, but not here!
+            sys.stderr.write(Fore.YELLOW + 'Skipping correction with invalid | character: {0}\n'.format(row[args.to_field_name]) + Fore.RESET)
 
         continue
 
