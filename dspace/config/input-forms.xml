@@ -121,9 +121,9 @@
           <required></required>
         </field>
         <field>
-          <dc-schema>dc</dc-schema>
-          <dc-element>title</dc-element>
-          <dc-qualifier>alternative</dc-qualifier>
+          <dc-schema>dcterms</dc-schema>
+          <dc-element>alternative</dc-element>
+          <dc-qualifier></dc-qualifier>
           <repeatable>true</repeatable>
           <label>Other titles</label>
           <input-type>onebox</input-type>
