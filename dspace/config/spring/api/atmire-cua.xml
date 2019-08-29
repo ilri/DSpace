@@ -48,7 +48,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
     <bean class="com.atmire.statistics.MetadataStorageInfo">
         <property name="metadataFields">
             <list>
-                <value>dc.subject.*</value>
+                <value>dcterms.subject</value>
             </list>
         </property>
         <property name="solrSearchField">
@@ -62,7 +62,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
     <bean class="com.atmire.statistics.MetadataStorageInfo">
         <property name="metadataFields">
             <list>
-                <value>dc.language.iso</value>
+                <value>dcterms.language</value>
             </list>
         </property>
         <property name="solrSearchField">
