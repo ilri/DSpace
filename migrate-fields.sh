@@ -17,28 +17,28 @@ set -o errexit
 # an array.
 mapfile -t fields_to_move <<TO_MOVE
 3   151 #dc.contributor.author→dcterms.creator
-240 241 #cg.creator.id→cg.creator.identifier
+240 242 #cg.creator.id→cg.creator.identifier
 64  190 #dc.title→dcterms.title
 34  158 #dc.format.extent→dcterms.extent
 15  170 #dc.date.issued→dcterms.issued
 27  138 #dc.description.abstract→dcterms.abstract
 26  156 #dc.description→dcterms.description
-29  244 #dc.description.sponsorship→cg.contributor.donor
-68  245 #dc.description.version→cg.peer-reviewed
-214 246 #cg.fulltextstatus→cg.howpublished
+29  243 #dc.description.sponsorship→cg.contributor.donor
+68  244 #dc.description.version→cg.peer-reviewed
+214 245 #cg.fulltextstatus→cg.howpublished
 18  146 #dc.identifier.citation→dcterms.bibliographicCitation
 206 139 #cg.identifier.status→dcterms.accessRights
-28  172 #dc.language.iso→dcterms.language
+38  172 #dc.language.iso→dcterms.language
 113 180 #cg.link.reference→dcterms.relation
 39  178 #dc.publisher→dcterms.publisher
 43  166 #dc.relation.ispartofseries→dcterms.isPartOf
 53  173 #dc.rights→dcterms.license
-55  247 #dc.source→cg.journal
+55  246 #dc.source→cg.journal
 57  187 #dc.subject→dcterms.subject
 109 191 #dc.type→dcterms.type
-20  248 #dc.identifier.isbn→cg.isbn
-21  249 #dc.identifier.issn→cg.issn
-223 250 #cg.identifier.dataurl→cg.hasMetadata
+20  247 #dc.identifier.isbn→cg.isbn
+21  248 #dc.identifier.issn→cg.issn
+223 249 #cg.identifier.dataurl→cg.hasMetadata
 65  143 #dc.title.alternative→dcterms.alternative
 TO_MOVE
 
