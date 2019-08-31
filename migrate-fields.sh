@@ -37,7 +37,8 @@ readonly PSQL_OPTS="--no-psqlrc --tuples-only --dbname $DATABASE_NAME"
 migrate_field() {
     local old_id=$1
     local new_id=$2
-    local psql_cmd="UPDATE metadatavalue SET metadata_field_id=${new_id} WHERE metadata_field_id=${old_id}"
+    # only modify item metadata (resource_type_id=2)
+    local psql_cmd="UPDATE metadatavalue SET metadata_field_id=${new_id} WHERE metadata_field_id=${old_id} AND resource_type_id=2"
 
     $PSQL_BIN $PSQL_OPTS --echo-queries --command "$psql_cmd" \
         && return 0 \
