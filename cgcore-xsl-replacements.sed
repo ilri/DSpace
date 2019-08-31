@@ -3,7 +3,9 @@
 # Replacements
 
 # dcterms.title
-s/dim:field\[@element='title'\]/dim:field[@mdschema='dcterms' and @element='title']/g
+s/"dim:field\[@element='title'\]/"dim:field[@mdschema='dcterms' and @element='title']/g
+s/(dim:field\[@element='title'\]/(dim:field[@mdschema='dcterms' and @element='title']/g
+s/::dim:field\[@element='title'\]/::dim:field[@mdschema='dcterms' and @element='title']/g
 # dcterms.bibliographicCitation
 s/dim:field\[@element='identifier' and @qualifier='citation'\]/dim:field[@mdschema='dcterms' and @element='bibliographicCitation']/g
 # dcterms.creator
@@ -22,7 +24,7 @@ s/dim:field\[@mdschema='cg' and @element = 'identifier' and @qualifier='status'\
 s/dim:field\[@mdschema='cg' and @element='identifier' and @qualifier='status'/dim:field[@mdschema='dcterms' and @element='accessRights'/g
 s/:cg.identifier.status/:dcterms.accessRights/g
 # dcterms.description
-s/dim:field\[@element='description'\]/dim:field[@mdschema='dcterms' and @element='description']/g
+s/dim:field\[@element='description'\]\[not(@qualifier)\]/dim:field[@mdschema='dcterms' and @element='description'][not(@qualifier)]/g
 # dcterms.subject
 s/dim:field\[@element='subject'/dim:field[@mdschema='dcterms' and @element='subject'/g
 # cg.contributor.donor
@@ -47,7 +49,6 @@ s/dim:field\[@element='rights'\]\[not(@qualifier)\]/dim:field[@mdschema='dcterms
 
 ## Add dcterms.relation in item-view-DIM-helper.xsl (make sure source pattern is
 ## long enough so that it doesn't match if we run the replacements again)
-#206 s/dim:field\[@mdschema='cg' and @element='link' \] or/dim:field[@mdschema='cg' and @element='link' ] or dim:field[@mdschema='dcterms' and @element='relation' ] or/
 206 s/dim:field\[@mdschema='cg' and @element='link' \] or dim:field\[@mdschema='cg'/dim:field[@mdschema='cg' and @element='link' ] or dim:field[@mdschema='dcterms' and @element='relation' ] or dim:field[@mdschema='cg'/
 
 # Removals
