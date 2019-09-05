@@ -7,14 +7,29 @@
  */
 package org.dspace.app.rest;
 
+import static java.util.UUID.randomUUID;
+
+import static org.apache.commons.collections.CollectionUtils.isEmpty;
+import static org.dspace.app.rest.matcher.BitstreamFormatMatcher.matchBitstreamFormat;
+import static org.dspace.content.BitstreamFormat.KNOWN;
+import static org.dspace.content.BitstreamFormat.SUPPORTED;
+import static org.dspace.content.BitstreamFormat.UNKNOWN;
+import static org.dspace.core.Constants.READ;
+import static org.dspace.core.Constants.WRITE;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.nullValue;
+import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
+import static org.springframework.data.rest.webmvc.RestMediaTypes.TEXT_URI_LIST_VALUE;
+import static org.springframework.http.MediaType.parseMediaType;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.head;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.io.ByteArrayInputStream;
@@ -26,11 +41,10 @@ import java.io.StringWriter;
 import java.io.Writer;
 import java.util.UUID;
 
+import com.amazonaws.util.StringInputStream;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.CharEncoding;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
 import org.apache.solr.client.solrj.SolrServerException;
@@ -40,9 +54,14 @@ import org.dspace.app.rest.builder.CommunityBuilder;
 import org.dspace.app.rest.builder.GroupBuilder;
 import org.dspace.app.rest.builder.ItemBuilder;
 import org.dspace.app.rest.test.AbstractControllerIntegrationTest;
+import org.dspace.authorize.ResourcePolicy;
+import org.dspace.authorize.service.ResourcePolicyService;
 import org.dspace.content.Bitstream;
+import org.dspace.content.BitstreamFormat;
 import org.dspace.content.Collection;
 import org.dspace.content.Item;
+import org.dspace.content.service.BitstreamFormatService;
+import org.dspace.content.service.BitstreamService;
 import org.dspace.core.Constants;
 import org.dspace.disseminate.CitationDocumentServiceImpl;
 import org.dspace.eperson.Group;
@@ -51,23 +70,21 @@ import org.dspace.statistics.ObjectCount;
 import org.dspace.statistics.SolrLoggerServiceImpl;
 import org.dspace.statistics.factory.StatisticsServiceFactory;
 import org.dspace.statistics.service.SolrLoggerService;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * Integration test to test the /api/core/bitstreams/[id]/content endpoint
+ * Integration test to test the /api/core/bitstreams/[id]/* endpoints
  *
  * @author Tom Desair (tom dot desair at atmire dot com)
  * @author Frederic Van Reet (frederic dot vanreet at atmire dot com)
  */
-public class BitstreamContentRestControllerIT extends AbstractControllerIntegrationTest {
+public class BitstreamRestControllerIT extends AbstractControllerIntegrationTest {
 
     protected SolrLoggerService solrLoggerService = StatisticsServiceFactory.getInstance().getSolrLoggerService();
-
-    private static final Logger log = LogManager
-        .getLogger(BitstreamContentRestControllerIT.class);
 
     @Autowired
     private ConfigurationService configurationService;
@@ -75,18 +92,90 @@ public class BitstreamContentRestControllerIT extends AbstractControllerIntegrat
     @Autowired
     private CitationDocumentServiceImpl citationDocumentService;
 
+    @Autowired
+    private BitstreamService bitstreamService;
+
+    @Autowired
+    private BitstreamFormatService bitstreamFormatService;
+
+    @Autowired
+    private ResourcePolicyService resourcePolicyService;
+
+    private Bitstream bitstream;
+    private BitstreamFormat supportedFormat;
+    private BitstreamFormat knownFormat;
+    private BitstreamFormat unknownFormat;
+    private ResourcePolicy resourcePolicy;
+
     @BeforeClass
     public static void clearStatistics() throws Exception {
         // To ensure these tests start "fresh", clear out any existing statistics data.
         // NOTE: this is committed immediately in removeIndex()
-        StatisticsServiceFactory.getInstance().getSolrLoggerService().removeIndex("*:*");
+//        StatisticsServiceFactory.getInstance().getSolrLoggerService().removeIndex("*:*");
     }
 
     @Before
-    public void setup() throws Exception {
+    @Override
+    public void setUp() throws Exception {
+
         super.setUp();
 
         configurationService.setProperty("citation-page.enable_globally", false);
+
+        context.turnOffAuthorisationSystem();
+
+        bitstream = bitstreamService.create(context, new StringInputStream("test"));
+
+        unknownFormat = bitstreamFormatService.create(context);
+        unknownFormat.setMIMEType("unknown test mime type");
+        unknownFormat.setDescription("unknown test description");
+        unknownFormat.setShortDescription(context, "unknown test short description");
+        unknownFormat.setSupportLevel(UNKNOWN);
+
+        knownFormat = bitstreamFormatService.create(context);
+        knownFormat.setMIMEType("known test mime type");
+        knownFormat.setDescription("known test description");
+        knownFormat.setShortDescription(context, "known test short description");
+        knownFormat.setSupportLevel(KNOWN);
+
+        supportedFormat = bitstreamFormatService.create(context);
+        supportedFormat.setMIMEType("supported mime type");
+        supportedFormat.setDescription("supported description");
+        supportedFormat.setShortDescription(context, "supported short description");
+        supportedFormat.setSupportLevel(SUPPORTED);
+
+        bitstream.setFormat(context, supportedFormat);
+
+        context.commit();
+    }
+
+    @After
+    @Override
+    public void destroy() throws Exception {
+
+        if (resourcePolicy != null) {
+            resourcePolicyService.delete(context, resourcePolicy);
+        }
+
+        if (bitstream != null) {
+            bitstreamService.delete(context, context.reloadEntity(bitstream));
+        }
+
+        if (supportedFormat != null) {
+            bitstreamFormatService.delete(context, context.reloadEntity(supportedFormat));
+        }
+
+        if (knownFormat != null) {
+            bitstreamFormatService.delete(context, context.reloadEntity(knownFormat));
+        }
+
+        if (unknownFormat != null) {
+            bitstreamFormatService.delete(context, context.reloadEntity(unknownFormat));
+        }
+
+        context.commit();
+
+        super.destroy();
     }
 
     @Test
@@ -425,5 +514,127 @@ public class BitstreamContentRestControllerIT extends AbstractControllerIntegrat
         }
     }
 
+    @Test
+    public void getBitstreamFormat() throws Exception {
 
+        getClient().perform(get("/api/core/bitstreams/" + bitstream.getID() + "/format"))
+                .andExpect(status().isUnauthorized());
+
+        getClient(getAuthToken(eperson.getEmail(), password))
+                .perform(get("/api/core/bitstreams/" + bitstream.getID() + "/format"))
+                .andExpect(status().isForbidden());
+
+        context.turnOffAuthorisationSystem();
+
+        resourcePolicy = resourcePolicyService.create(context);
+        resourcePolicy.setEPerson(eperson);
+        resourcePolicy.setAction(READ);
+        resourcePolicy.setdSpaceObject(bitstream);
+
+        context.commit();
+
+        getClient(getAuthToken(eperson.getEmail(), password))
+                .perform(get("/api/core/bitstreams/" + bitstream.getID() + "/format"))
+                .andExpect(status().isOk());
+
+        getClient(getAuthToken(admin.getEmail(), password))
+                .perform(get("/api/core/bitstreams/" + bitstream.getID() + "/format"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", matchBitstreamFormat(
+                        supportedFormat.getID(),
+                        supportedFormat.getMIMEType(),
+                        supportedFormat.getDescription(),
+                        supportedFormat.getShortDescription(),
+                        "SUPPORTED"
+                )));
+    }
+
+    @Test
+    public void updateBitstreamFormat() throws Exception {
+
+        getClient().perform(
+                put("/api/core/bitstreams/" + bitstream.getID() + "/format")
+                        .contentType(parseMediaType(TEXT_URI_LIST_VALUE))
+                        .content(
+                                "https://localhost:8080/spring-rest/api/core/bitstreamformat/" + knownFormat.getID()
+                        )
+        ).andExpect(status().isUnauthorized());
+
+        getClient(getAuthToken(eperson.getEmail(), password)).perform(
+                put("/api/core/bitstreams/" + bitstream.getID() + "/format")
+                        .contentType(parseMediaType(TEXT_URI_LIST_VALUE))
+                        .content(
+                                "https://localhost:8080/spring-rest/api/core/bitstreamformat/" + knownFormat.getID()
+                        )
+        ).andExpect(status().isForbidden());
+
+        context.turnOffAuthorisationSystem();
+
+        resourcePolicy = resourcePolicyService.create(context);
+        resourcePolicy.setEPerson(eperson);
+        resourcePolicy.setAction(WRITE);
+        resourcePolicy.setdSpaceObject(bitstream);
+
+        bitstream = context.reloadEntity(bitstream);
+        bitstreamService.addMetadata(context, bitstream, "dc", "format", null, null, "test format");
+
+        context.commit();
+
+        getClient(getAuthToken(eperson.getEmail(), password)).perform(
+                put("/api/core/bitstreams/" + bitstream.getID() + "/format")
+                        .contentType(parseMediaType(TEXT_URI_LIST_VALUE))
+                        .content(
+                                "https://localhost:8080/spring-rest/api/core/bitstreamformat/" + knownFormat.getID()
+                        )
+        ).andExpect(status().isOk());
+
+        assertThat(knownFormat, equalTo(context.reloadEntity(bitstream).getFormat(context)));
+        assertTrue(isEmpty(
+                bitstreamService.getMetadataByMetadataString(context.reloadEntity(bitstream), "dc.format")
+        ));
+
+        bitstream = context.reloadEntity(bitstream);
+        bitstreamService.addMetadata(context, bitstream, "dc", "format", null, null, "another test format");
+
+        context.commit();
+
+        getClient(getAuthToken(admin.getEmail(), password)).perform(
+                put("/api/core/bitstreams/" + bitstream.getID() + "/format")
+                        .contentType(parseMediaType(TEXT_URI_LIST_VALUE))
+                        .content(
+                                "https://localhost:8080/spring-rest/api/core/bitstreamformat/" + unknownFormat.getID()
+                        )
+        ).andExpect(status().isOk());
+
+        getClient(getAuthToken(admin.getEmail(), password)).perform(
+                put("/api/core/bitstreams/" + randomUUID() + "/format")
+                        .contentType(parseMediaType(TEXT_URI_LIST_VALUE))
+                        .content(
+                                "https://localhost:8080/spring-rest/api/core/bitstreamformat/" + unknownFormat.getID()
+                        )
+        ).andExpect(status().isNotFound());
+
+        getClient(getAuthToken(admin.getEmail(), password)).perform(
+                put("/api/core/bitstreams/" + bitstream.getID() + "/format")
+                        .contentType(parseMediaType(TEXT_URI_LIST_VALUE))
+                        .content(
+                                "https://localhost:8080/spring-rest/api/core/bitstreamformat/-1"
+                        )
+        ).andExpect(status().isBadRequest());
+
+        getClient(getAuthToken(admin.getEmail(), password)).perform(
+                put("/api/core/bitstreams/" + bitstream.getID() + "/format")
+                        .contentType(parseMediaType(TEXT_URI_LIST_VALUE))
+                        .content(
+                                "https://localhost:8080/spring-rest/api/core/bitstreamformat/" + knownFormat.getID()
+                                        + "\n https://localhost:8080/spring-rest/api/core/bitstreamformat/"
+                                        + supportedFormat.getID()
+                        )
+        ).andExpect(status().isBadRequest());
+
+        assertThat(unknownFormat, equalTo(context.reloadEntity(bitstream).getFormat(context)));
+        assertTrue(isEmpty(
+                bitstreamService.getMetadataByMetadataString(context.reloadEntity(bitstream), "dc.format")
+        ));
+    }
 }
