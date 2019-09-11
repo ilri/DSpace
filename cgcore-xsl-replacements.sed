@@ -6,11 +6,13 @@
 s/"dim:field\[@element='title'\]/"dim:field[@mdschema='dcterms' and @element='title']/g
 s/(dim:field\[@element='title'\]/(dim:field[@mdschema='dcterms' and @element='title']/g
 s/::dim:field\[@element='title'\]/::dim:field[@mdschema='dcterms' and @element='title']/g
+s/':dc.title'/':dcterms.title'/g
 # dcterms.bibliographicCitation
 s/dim:field\[@element='identifier' and @qualifier='citation'\]/dim:field[@mdschema='dcterms' and @element='bibliographicCitation']/g
 # dcterms.creator
 s/dim:field\[@element='contributor'\]\[@qualifier='author'\]/dim:field[@mdschema='dcterms' and @element='creator']/g
 s/dim:field\[@element='creator'/dim:field[@mdschema='dcterms' and @element='creator'/g
+s/':dc.contributor.author'/':dcterms.creator'/g
 # dcterms.issued
 s/dim:field\[@element='date' and @qualifier='issued'\]/dim:field[@mdschema='dcterms' and @element='issued']/g
 s/dim:field\[@element='date' and @qualifier='issued' and descendant::text()\]/dim:field[@mdschema='dcterms' and @element='issued' and descendant::text()]/g
