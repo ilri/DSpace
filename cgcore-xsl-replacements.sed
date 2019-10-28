@@ -2,11 +2,12 @@
 
 # Replacements
 
-# dcterms.title
-s/"dim:field\[@element='title'\]/"dim:field[@mdschema='dcterms' and @element='title']/g
-s/(dim:field\[@element='title'\]/(dim:field[@mdschema='dcterms' and @element='title']/g
-s/::dim:field\[@element='title'\]/::dim:field[@mdschema='dcterms' and @element='title']/g
-s/':dc.title'/':dcterms.title'/g
+# dcterms.title (disabled on 2019-10-28)
+#s/"dim:field\[@element='title'\]/"dim:field[@mdschema='dcterms' and @element='title']/g
+#s/(dim:field\[@element='title'\]/(dim:field[@mdschema='dcterms' and @element='title']/g
+#s/::dim:field\[@element='title'\]/::dim:field[@mdschema='dcterms' and @element='title']/g
+#s/':dc.title'/':dcterms.title'/g
+#s/dim:field\[@element='title'\]/dim:field[@mdschema='dcterms' and @element='title']/g
 # dcterms.bibliographicCitation
 s/dim:field\[@element='identifier' and @qualifier='citation'\]/dim:field[@mdschema='dcterms' and @element='bibliographicCitation']/g
 # dcterms.creator

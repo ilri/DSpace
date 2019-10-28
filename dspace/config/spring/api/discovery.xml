@@ -200,7 +200,7 @@
                 <property name="metadataFields">
                     <list>
                         <bean class="org.dspace.discovery.configuration.DiscoveryHitHighlightFieldConfiguration">
-                            <property name="field" value="dcterms.title"/>
+                            <property name="field" value="dc.title"/>
                             <property name="snippets" value="5"/>
                         </bean>
                         <bean class="org.dspace.discovery.configuration.DiscoveryHitHighlightFieldConfiguration">
@@ -217,7 +217,7 @@
                 the metadata fields below-->
                 <property name="similarityMetadataFields">
                     <list>
-                        <value>dcterms.title</value>
+                        <value>dc.title</value>
                         <value>dc.contributor.author</value>
                         <value>dcterms.creator</value>
                         <value>dcterms.subject</value>
@@ -336,7 +336,7 @@
                 <property name="metadataFields">
                     <list>
                         <bean class="org.dspace.discovery.configuration.DiscoveryHitHighlightFieldConfiguration">
-                            <property name="field" value="dcterms.title"/>
+                            <property name="field" value="dc.title"/>
                             <property name="snippets" value="5"/>
                         </bean>
                         <bean class="org.dspace.discovery.configuration.DiscoveryHitHighlightFieldConfiguration">
@@ -448,8 +448,8 @@
         <property name="indexFieldName" value="title"/>
         <property name="metadataFields">
             <list>
-                <value>dcterms.title</value>
-                <value>dcterms.alternative</value>
+                <value>dc.title</value>
+                <value>dc.title.alternative</value>
             </list>
         </property>
     </bean>
@@ -882,7 +882,7 @@
 
     <!--Sort properties-->
     <bean id="sortTitle" class="org.dspace.discovery.configuration.DiscoverySortFieldConfiguration">
-        <property name="metadataField" value="dcterms.title"/>
+        <property name="metadataField" value="dc.title"/>
     </bean>
 
     <bean id="sortDateIssued" class="org.dspace.discovery.configuration.DiscoverySortFieldConfiguration">

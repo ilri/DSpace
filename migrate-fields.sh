@@ -18,7 +18,7 @@ set -o errexit
 mapfile -t fields_to_move <<TO_MOVE
 3   151 #dc.contributor.author→dcterms.creator
 240 242 #cg.creator.id→cg.creator.identifier
-64  190 #dc.title→dcterms.title
+#64 190 #dc.title→dcterms.title
 34  158 #dc.format.extent→dcterms.extent
 15  170 #dc.date.issued→dcterms.issued
 27  138 #dc.description.abstract→dcterms.abstract
@@ -39,14 +39,14 @@ mapfile -t fields_to_move <<TO_MOVE
 20  247 #dc.identifier.isbn→cg.isbn
 21  248 #dc.identifier.issn→cg.issn
 223 249 #cg.identifier.dataurl→cg.hasMetadata
-65  143 #dc.title.alternative→dcterms.alternative
+#65  143 #dc.title.alternative→dcterms.alternative
 TO_MOVE
 
 # psql stuff
-readonly DATABASE_NAME=dspacetest
+readonly DATABASE_NAME=dspacecgcorev2
 readonly PSQL_BIN="/usr/bin/env psql"
 # clean startup, and only print results
-readonly PSQL_OPTS="--no-psqlrc --tuples-only --dbname $DATABASE_NAME"
+readonly PSQL_OPTS="--no-psqlrc --tuples-only -U postgres -h localhost --dbname $DATABASE_NAME"
 
 migrate_field() {
     local old_id=$1
