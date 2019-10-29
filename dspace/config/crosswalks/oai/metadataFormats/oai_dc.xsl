@@ -32,7 +32,7 @@
 				<dc:title><xsl:value-of select="." /></dc:title>
 			</xsl:for-each>
 			<!-- dc.creator -->
-			<xsl:for-each select="doc:metadata/doc:element[@name='dcterms']/doc:element[@name='creator']/doc:element/doc:field[@name='value']">
+			<xsl:for-each select="doc:metadata/doc:element[@name='dc']/doc:element[@name='creator']/doc:element/doc:field[@name='value']">
 				<dc:creator><xsl:value-of select="." /></dc:creator>
 			</xsl:for-each>
 			<!-- dc.contributor.author -->

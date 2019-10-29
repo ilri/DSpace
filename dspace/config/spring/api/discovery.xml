@@ -204,7 +204,7 @@
                             <property name="snippets" value="5"/>
                         </bean>
                         <bean class="org.dspace.discovery.configuration.DiscoveryHitHighlightFieldConfiguration">
-                            <property name="field" value="dcterms.creator"/>
+                            <property name="field" value="dc.contributor.author"/>
                             <property name="snippets" value="5"/>
                         </bean>
                     </list>
@@ -219,7 +219,7 @@
                     <list>
                         <value>dc.title</value>
                         <value>dc.contributor.author</value>
-                        <value>dcterms.creator</value>
+                        <value>dc.creator</value>
                         <value>dcterms.subject</value>
                     </list>
                 </property>
@@ -340,7 +340,7 @@
                             <property name="snippets" value="5"/>
                         </bean>
                         <bean class="org.dspace.discovery.configuration.DiscoveryHitHighlightFieldConfiguration">
-                            <property name="field" value="dcterms.creator"/>
+                            <property name="field" value="dc.contributor.author"/>
                             <property name="snippets" value="5"/>
                         </bean>
 

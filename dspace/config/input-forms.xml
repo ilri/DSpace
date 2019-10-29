@@ -37,14 +37,14 @@
     <form name="traditional">
       <page number="1">
         <field>
-          <dc-schema>dcterms</dc-schema>
-          <dc-element>creator</dc-element>
-          <dc-qualifier></dc-qualifier>
+          <dc-schema>dc</dc-schema>
+          <dc-element>contributor</dc-element>
+          <dc-qualifier>author</dc-qualifier>
           <repeatable>true</repeatable>
           <label>Authors (required)</label>
           <input-type>onebox</input-type>
           <hint>Click below to see a pre-populated list of authors, or enter the names of individual or corporate authors of this item (enter each individually).</hint>
-          <vocabulary>dcterms-creator</vocabulary>
+          <vocabulary>dc-contributor-author</vocabulary>
           <required>Please enter the author(s).</required>
         </field>
         <field>
@@ -686,9 +686,9 @@
     <form name="AgriFood Chain capacity building">
       <page number="1">
         <field>
-          <dc-schema>dcterms</dc-schema>
-          <dc-element>creator</dc-element>
-          <dc-qualifier></dc-qualifier>
+          <dc-schema>dc</dc-schema>
+          <dc-element>contributor</dc-element>
+          <dc-qualifier>author</dc-qualifier>
           <repeatable>true</repeatable>
           <label>Authors</label>
           <input-type>name</input-type>

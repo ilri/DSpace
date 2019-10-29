@@ -16,7 +16,7 @@ set -o errexit
 # fields are separated with tabs or spaces. Uses bash's `mapfile` to read into
 # an array.
 mapfile -t fields_to_move <<TO_MOVE
-3   151 #dc.contributor.author→dcterms.creator
+#3  151 #dc.contributor.author→dcterms.creator
 240 242 #cg.creator.id→cg.creator.identifier
 #64 190 #dc.title→dcterms.title
 34  158 #dc.format.extent→dcterms.extent

@@ -10,10 +10,10 @@
 #s/dim:field\[@element='title'\]/dim:field[@mdschema='dcterms' and @element='title']/g
 # dcterms.bibliographicCitation
 s/dim:field\[@element='identifier' and @qualifier='citation'\]/dim:field[@mdschema='dcterms' and @element='bibliographicCitation']/g
-# dcterms.creator
-s/dim:field\[@element='contributor'\]\[@qualifier='author'\]/dim:field[@mdschema='dcterms' and @element='creator']/g
-s/dim:field\[@element='creator'/dim:field[@mdschema='dcterms' and @element='creator'/g
-s/':dc.contributor.author'/':dcterms.creator'/g
+# dcterms.creator (disabled on 2019-10-29)
+#s/dim:field\[@element='contributor'\]\[@qualifier='author'\]/dim:field[@mdschema='dcterms' and @element='creator']/g
+#s/dim:field\[@element='creator'/dim:field[@mdschema='dcterms' and @element='creator'/g
+#s/':dc.contributor.author'/':dcterms.creator'/g
 # dcterms.issued
 s/dim:field\[@element='date' and @qualifier='issued'\]/dim:field[@mdschema='dcterms' and @element='issued']/g
 s/dim:field\[@element='date' and @qualifier='issued' and descendant::text()\]/dim:field[@mdschema='dcterms' and @element='issued' and descendant::text()]/g
@@ -56,5 +56,5 @@ s/dim:field\[@element='rights'\]\[not(@qualifier)\]/dim:field[@mdschema='dcterms
 
 # Removals
 
-## dc.contributor.author will no longer exist so just remove this
-s/dim:field\[@element='contributor'\]\[@qualifier='author' and descendant::text()\] or //g
+## dc.contributor.author will no longer exist so just remove this (disabled on 2019-10-29)
+#s/dim:field\[@element='contributor'\]\[@qualifier='author' and descendant::text()\] or //g
