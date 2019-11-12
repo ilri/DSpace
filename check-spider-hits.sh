@@ -52,6 +52,12 @@ function parse_options() {
         case $opt in
             f)
                 SPIDERS_PATTERN_FILE=$OPTARG
+
+                if ! [[ -r "$SPIDERS_PATTERN_FILE" ]]; then
+                    echo "(ERROR) Spider patterns file \"$SPIDERS_PATTERN_FILE\" doesn't exist."
+
+                    exit 1
+                fi
                 ;;
             p)
                 # make sure -p is passed yes or no
