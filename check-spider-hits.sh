@@ -33,9 +33,10 @@ readonly ARGS="$@"
 
 function usage() {
     cat <<-EOF
-Usage: $PROGNAME [-f] [-m] [-s] [-u]
+Usage: $PROGNAME [-d] [-f] [-m] [-s] [-u]
 
 Optional arguments:
+    -d: print debug messages
     -f: path to file containing spider user agent patterns (default: $DEF_SPIDERS_PATTERN_FILE)
     -p: purge statistics that match spider user agents (yes or no, default: $DEF_PURGE_SPIDER_HITS)
     -s: Solr statistics shard, for example statistics or statistics-2018 (default: $DEF_STATISTICS_SHARD)
@@ -48,8 +49,11 @@ EOF
 }
 
 function parse_options() {
-    while getopts ":f:p:s:u:" opt; do
+    while getopts ":df:p:s:u:" opt; do
         case $opt in
+            d)
+                DEBUG=yes
+                ;;
             f)
                 SPIDERS_PATTERN_FILE=$OPTARG
 
@@ -117,6 +121,8 @@ parse_options $ARGS
 # set up the defaults
 envsetup
 
+[[ $DEBUG ]] && echo "(DEBUG) Using spiders pattern file: $SPIDERS_PATTERN_FILE"
+
 # Read list of spider user agents from the patterns file. For now, only read
 # patterns that don't have regular expression or space characters, because we
 # they are tricky to parse in bash and Solr's regular expression search uses
@@ -128,6 +134,8 @@ SPIDERS=$(grep -v -E '(\^|\\|\[|\]|!|\?|\.|\s)' $SPIDERS_PATTERN_FILE)
 BOT_HITS=0
 
 for spider in $SPIDERS; do
+    [[ $DEBUG ]] && echo "(DEBUG) Checking for hits from spider: $spider"
+
     # lazy extraction of Solr numFound (relies on sed -E for extended regex)
     numFound=$(curl -s "$SOLR_URL/$STATISTICS_SHARD/select?q=userAgent:*$spider*&rows=0" | xmllint --format - | grep numFound | sed -E 's/^.*numFound="([0-9]+)".*$/\1/')
 
