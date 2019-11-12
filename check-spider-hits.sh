@@ -136,8 +136,21 @@ BOT_HITS=0
 for spider in $SPIDERS; do
     [[ $DEBUG ]] && echo "(DEBUG) Checking for hits from spider: $spider"
 
+    # Check for hits from this spider in Solr and save results into a variable,
+    # setting a custom curl output format so I can get the HTTP status code and
+    # Solr response in one request, then tease them out later.
+    solr_result=$(curl -s -w "http_code=%{http_code}" "$SOLR_URL/$STATISTICS_SHARD/select?q=userAgent:*$spider*&rows=0")
+    http_code=$(echo $solr_result | grep -o -E 'http_code=[0-9]+' | awk -F= '{print $2}')
+
+    # Check the Solr HTTP response code and skip spider if not successful
+    if [[ $http_code -ne 200 ]]; then
+        [[ $DEBUG ]] && echo "(DEBUG) Solr query returned HTTP $http_code, skipping $spider."
+
+        continue
+    fi
+
     # lazy extraction of Solr numFound (relies on sed -E for extended regex)
-    numFound=$(curl -s "$SOLR_URL/$STATISTICS_SHARD/select?q=userAgent:*$spider*&rows=0" | xmllint --format - | grep numFound | sed -E 's/^.*numFound="([0-9]+)".*$/\1/')
+    numFound=$(echo $solr_result | sed -E 's/\s+http_code=[0-9]+//' | xmllint --format - | grep numFound | sed -E 's/^.*numFound="([0-9]+)".*$/\1/')
 
     if [[ numFound -gt 0 ]]; then
         if [[ $PURGE_SPIDER_HITS == 'yes' ]]; then
