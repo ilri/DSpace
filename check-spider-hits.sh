@@ -33,7 +33,7 @@ readonly ARGS="$@"
 
 function usage() {
     cat <<-EOF
-Usage: $PROGNAME [-d] [-f] [-p] [-s] [-u]
+Usage: $PROGNAME [-d] [-f $DEF_SPIDERS_PATTERN_FILE] [-p] [-s $DEF_STATISTICS_SHARD] [-u $DEF_SOLR_URL]
 
 Optional arguments:
     -d: print debug messages
