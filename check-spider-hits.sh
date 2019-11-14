@@ -111,28 +111,69 @@ envsetup
 
 [[ $DEBUG ]] && echo "(DEBUG) Using spiders pattern file: $SPIDERS_PATTERN_FILE"
 
-# Read list of spider user agents from the patterns file. For now, only read
-# patterns that don't have regular expression or space characters, because we
-# they are tricky to parse in bash and Solr's regular expression search uses
-# a different format (patterns are anchored with ^ and $ by default and some
-# meta characters like \d are not supported).
-SPIDERS=$(grep -v -E '(\^|\\|\[|\]|!|\?|\.|\s)' $SPIDERS_PATTERN_FILE)
+# Read list of spider user agents from the patterns file, converting PCRE-style
+# regular expressions to a format that is easier to deal with in bash (spaces!)
+# and that Solr supports (ie, patterns are anchored by ^ and $ implicitly, and
+# some character types like \d are not supported).
+#
+# For now this seems to be enough:
+#   - Replace spaces with \s
+#   - Replace \d with [0-9] character class
+#   - Unescape dashes
+#   - Escape @
+#   - Apply percent encoding to %
+SPIDERS=$(sed -e 's/ /\\s/g' -e 's/\\d/[0-9]/g' -e 's/\\-/-/g' -e 's/@/\\@/g' -e 's/\\%/%25/g' $SPIDERS_PATTERN_FILE)
 
 # Start a tally of bot hits so we can report the total at the end
 BOT_HITS=0
 
 for spider in $SPIDERS; do
-    [[ $DEBUG ]] && echo "(DEBUG) Checking for hits from spider: $spider"
+    # Save the original pattern so we can inform the user later
+    original_spider=$spider
+
+    unset has_beginning_anchor
+    unset has_end_anchor
+
+    # Remove ^ at the beginning because it is implied in Solr's regex search
+    if [[ $spider =~ ^\^ ]]; then
+        spider=$(echo $spider | sed -e 's/^\^//')
+
+        # Record that this spider's original user agent pattern had a ^
+        has_beginning_anchor=yes
+    fi
+
+    # Remove $ at the end because it is implied in Solr's regex search
+    if [[ $spider =~ \$ ]]; then
+        spider=$(echo $spider | sed -e 's/\$$//')
+
+        # Record that this spider's original user agent pattern had a $
+        has_end_anchor=yes
+    fi
+
+    # If the original pattern did NOT have a beginning anchor (^), then add a
+    # wildcard at the beginning.
+    if [[ -z $has_beginning_anchor ]]; then
+        spider=".*$spider"
+    fi
+
+    # If the original pattern did NOT have an ending enchor ($), then add a
+    # wildcard at the end.
+    if [[ -z $has_end_anchor ]]; then
+        spider="$spider.*"
+    fi
+
+    [[ $DEBUG ]] && echo "(DEBUG) Checking for hits from spider: $original_spider"
 
     # Check for hits from this spider in Solr and save results into a variable,
     # setting a custom curl output format so I can get the HTTP status code and
     # Solr response in one request, then tease them out later.
-    solr_result=$(curl -s -w "http_code=%{http_code}" "$SOLR_URL/$STATISTICS_SHARD/select" -d "q=userAgent:*$spider*&rows=0")
+    solr_result=$(curl -s -w "http_code=%{http_code}" "$SOLR_URL/$STATISTICS_SHARD/select" -d "q=userAgent:/$spider/&rows=0")
+
     http_code=$(echo $solr_result | grep -o -E 'http_code=[0-9]+' | awk -F= '{print $2}')
 
     # Check the Solr HTTP response code and skip spider if not successful
     if [[ $http_code -ne 200 ]]; then
-        [[ $DEBUG ]] && echo "(DEBUG) Solr query returned HTTP $http_code, skipping $spider."
+        [[ $DEBUG ]] && echo "(DEBUG) Solr query returned HTTP $http_code, skipping $original_spider."
 
         continue
     fi
@@ -142,12 +183,12 @@ for spider in $SPIDERS; do
 
     if [[ numFound -gt 0 ]]; then
         if [[ $PURGE_SPIDER_HITS ]]; then
-            echo "Purging $numFound hits from $spider in $STATISTICS_SHARD"
+            echo "Purging $numFound hits from $original_spider in $STATISTICS_SHARD"
 
             # Purge the hits and soft commit
             curl -s "$SOLR_URL/$STATISTICS_SHARD/update?softCommit=true" -H "Content-Type: text/xml" --data-binary "<delete><query>userAgent:*$spider*</query></delete>" > /dev/null 2>&1
         else
-            echo "Found $numFound hits from $spider in $STATISTICS_SHARD"
+            echo "Found $numFound hits from $original_spider in $STATISTICS_SHARD"
         fi
 
         BOT_HITS=$((BOT_HITS+numFound))
