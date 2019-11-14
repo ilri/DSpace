@@ -22,7 +22,7 @@ set -o errexit
 
 # defaults
 readonly DEF_PURGE_SPIDER_HITS=no
-readonly DEF_SPIDERS_PATTERN_FILE=~/src/git/DSpace/dspace/config/spiders/agents/example
+readonly DEF_SPIDERS_PATTERN_FILE=/dspace/config/spiders/agents/example
 readonly DEF_SOLR_URL=http://localhost:8081/solr
 readonly DEF_STATISTICS_SHARD=statistics
 
