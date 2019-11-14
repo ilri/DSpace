@@ -36,12 +36,15 @@ Usage: $PROGNAME [-d] [-f $DEF_SPIDERS_PATTERN_FILE] [-p] [-s $DEF_STATISTICS_SH
 
 Optional arguments:
     -d: print debug messages
-    -f: path to file containing spider user agent patterns (default: $DEF_SPIDERS_PATTERN_FILE)
+    -f: path to file containing spider user agent patterns¹ (default: $DEF_SPIDERS_PATTERN_FILE)
     -p: purge statistics that match spider user agents
-    -s: Solr statistics shard, for example statistics or statistics-2018 (default: $DEF_STATISTICS_SHARD)
+    -s: Solr statistics shard, for example statistics or statistics-2018² (default: $DEF_STATISTICS_SHARD)
     -u: URL to Solr (default: $DEF_SOLR_URL)
 
 Written by: Alan Orth <a.orth@cgiar.org>
+
+¹ DSpace ships an "example" pattern file that works well. Another option is the patterns file maintained by the COUNTER-Robots project.
+² If your statistics core has been split into yearly "shards" by DSpace's stats-util you need to search each shard separately.
 EOF
 
     exit 0
