@@ -186,7 +186,7 @@ for spider in $SPIDERS; do
             echo "Purging $numFound hits from $original_spider in $STATISTICS_SHARD"
 
             # Purge the hits and soft commit
-            curl -s "$SOLR_URL/$STATISTICS_SHARD/update?softCommit=true" -H "Content-Type: text/xml" --data-binary "<delete><query>userAgent:*$spider*</query></delete>" > /dev/null 2>&1
+            curl -s "$SOLR_URL/$STATISTICS_SHARD/update?softCommit=true" -H "Content-Type: text/xml" --data-binary "<delete><query>userAgent:/$spider/</query></delete>" > /dev/null 2>&1
         else
             echo "Found $numFound hits from $original_spider in $STATISTICS_SHARD"
         fi
