@@ -33,7 +33,7 @@ readonly ARGS="$@"
 
 function usage() {
     cat <<-EOF
-Usage: $PROGNAME [-d] [-f] [-m] [-s] [-u]
+Usage: $PROGNAME [-d] [-f] [-p] [-s] [-u]
 
 Optional arguments:
     -d: print debug messages
