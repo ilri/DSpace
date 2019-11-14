@@ -21,7 +21,6 @@
 set -o errexit
 
 # defaults
-readonly DEF_PURGE_SPIDER_HITS=no
 readonly DEF_SPIDERS_PATTERN_FILE=/dspace/config/spiders/agents/example
 readonly DEF_SOLR_URL=http://localhost:8081/solr
 readonly DEF_STATISTICS_SHARD=statistics
@@ -38,7 +37,7 @@ Usage: $PROGNAME [-d] [-f $DEF_SPIDERS_PATTERN_FILE] [-p] [-s $DEF_STATISTICS_SH
 Optional arguments:
     -d: print debug messages
     -f: path to file containing spider user agent patterns (default: $DEF_SPIDERS_PATTERN_FILE)
-    -p: purge statistics that match spider user agents (yes or no, default: $DEF_PURGE_SPIDER_HITS)
+    -p: purge statistics that match spider user agents
     -s: Solr statistics shard, for example statistics or statistics-2018 (default: $DEF_STATISTICS_SHARD)
     -u: URL to Solr (default: $DEF_SOLR_URL)
 
@@ -49,7 +48,7 @@ EOF
 }
 
 function parse_options() {
-    while getopts ":df:p:s:u:" opt; do
+    while getopts ":df:ps:u:" opt; do
         case $opt in
             d)
                 DEBUG=yes
@@ -64,12 +63,7 @@ function parse_options() {
                 fi
                 ;;
             p)
-                # make sure -p is passed yes or no
-                if ! [[ "$OPTARG" =~ ^(yes|no)$ ]]; then
-                    usage
-                fi
-
-                PURGE_SPIDER_HITS=$OPTARG
+                PURGE_SPIDER_HITS=yes
                 ;;
             s)
                 STATISTICS_SHARD=$OPTARG
@@ -94,12 +88,6 @@ function envsetup() {
     # ... otherwise use the default
     if [[ -z $SOLR_URL ]]; then
         SOLR_URL=$DEF_SOLR_URL
-    fi
-
-    # check to see if user wants to purge spider hits
-    # ... otherwise use the default
-    if [[ -z $PURGE_SPIDER_HITS ]]; then
-        PURGE_SPIDER_HITS=$DEF_PURGE_SPIDER_HITS
     fi
 
     # check to see if user specified a spiders pattern file
@@ -153,7 +141,7 @@ for spider in $SPIDERS; do
     numFound=$(echo $solr_result | sed -E 's/\s+http_code=[0-9]+//' | xmllint --format - | grep numFound | sed -E 's/^.*numFound="([0-9]+)".*$/\1/')
 
     if [[ numFound -gt 0 ]]; then
-        if [[ $PURGE_SPIDER_HITS == 'yes' ]]; then
+        if [[ $PURGE_SPIDER_HITS ]]; then
             echo "Purging $numFound hits from $spider in $STATISTICS_SHARD"
 
             # Purge the hits and soft commit
@@ -167,7 +155,7 @@ for spider in $SPIDERS; do
 done
 
 if [[ $BOT_HITS -gt 0 ]]; then
-    if [[ $PURGE_SPIDER_HITS == 'yes' ]]; then
+    if [[ $PURGE_SPIDER_HITS ]]; then
         echo
         echo "Total number of bot hits purged: $BOT_HITS"
 
