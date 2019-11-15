@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# check-spider-hits.sh v1.1.0
+# check-spider-hits.sh v1.1.1
 #
 # Copyright (C) 2019 Alan Orth
 #
