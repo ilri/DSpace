@@ -125,7 +125,11 @@ envsetup
 #   - Unescape dashes
 #   - Escape @
 #   - Apply percent encoding to %
-SPIDERS=$(sed -e 's/ /\\s/g' -e 's/\\d/[0-9]/g' -e 's/\\-/-/g' -e 's/@/\\@/g' -e 's/\\%/%25/g' $SPIDERS_PATTERN_FILE)
+#
+# Also, skip patterns that contain a plus or percent sign (+ or %) because they
+# are tricky to deal with in Solr. For some reason escaping them seems to work
+# for searches, but not for deletes. I don't have time to figure it out.
+SPIDERS=$(sed -e 's/ /\\s/g' -e 's/\\d/[0-9]/g' -e 's/\\-/-/g' -e 's/@/\\@/g' -e 's/\\%/%25/g' $SPIDERS_PATTERN_FILE | grep -v -E '(\+|\%)')
 
 # Start a tally of bot hits so we can report the total at the end
 BOT_HITS=0
