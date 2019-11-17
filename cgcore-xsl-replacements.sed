@@ -32,9 +32,9 @@ s/dim:field\[@element='description'\]\[not(@qualifier)\]/dim:field[@mdschema='dc
 s/dim:field\[@element='subject'/dim:field[@mdschema='dcterms' and @element='subject'/g
 # cg.contributor.donor
 s/dim:field\[@element='description' and @qualifier='sponsorship'/dim:field[@mdschema='cg' and @element='contributor' and @qualifier='donor'/g
-# cg.hasMetadata
-s/dim:field\[@mdschema='cg' and @element='identifier' and @qualifier='dataurl'/dim:field[@mdschema='cg' and @element='hasMetadata'/g
-s/dim:field\[ @mdschema='cg' and @element='identifier' and @qualifier='dataurl'/dim:field[ @mdschema='cg' and @element='hasMetadata'/g
+# cg.hasMetadata (disabled on 2019-11-17)
+#s/dim:field\[@mdschema='cg' and @element='identifier' and @qualifier='dataurl'/dim:field[@mdschema='cg' and @element='hasMetadata'/g
+#s/dim:field\[ @mdschema='cg' and @element='identifier' and @qualifier='dataurl'/dim:field[ @mdschema='cg' and @element='hasMetadata'/g
 # dcterms.abstract
 s/dim:field\[@element='description' and @qualifier='abstract'\]/dim:field[@mdschema='dcterms' and @element='abstract']/g
 # cg.creator.identifier 
