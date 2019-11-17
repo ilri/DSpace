@@ -1,5 +1,3 @@
-#!/usr/bin/env -S sed -i -f
-
 # Replacements
 
 # dcterms.title (disabled on 2019-10-28)
