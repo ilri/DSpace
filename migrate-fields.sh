@@ -38,7 +38,7 @@ mapfile -t fields_to_move <<TO_MOVE
 109 191 #dc.type→dcterms.type
 20  247 #dc.identifier.isbn→cg.isbn
 21  248 #dc.identifier.issn→cg.issn
-223 249 #cg.identifier.dataurl→cg.hasMetadata
+#223 249 #cg.identifier.dataurl→cg.hasMetadata
 #65  143 #dc.title.alternative→dcterms.alternative
 TO_MOVE
 

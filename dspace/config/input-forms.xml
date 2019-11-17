@@ -633,8 +633,8 @@
         </field>
         <field>
           <dc-schema>cg</dc-schema>
-          <dc-element>hasMetadata</dc-element>
-          <dc-qualifier></dc-qualifier>
+          <dc-element>identifier</dc-element>
+          <dc-qualifier>dataurl</dc-qualifier>
           <repeatable>false</repeatable>
           <label>URL for datafile</label>
           <input-type>onebox</input-type>
