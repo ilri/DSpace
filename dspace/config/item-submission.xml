@@ -18,6 +18,16 @@
 	<!-- for handle "default". -->
 	<submission-map>
 		<name-map collection-handle="default" submission-name="traditional" />
+		<name-map collection-handle="123456789/6" submission-name="People" />
+		<name-map collection-handle="123456789/279" submission-name="People" />
+		<name-map collection-handle="123456789/7" submission-name="Project" />
+		<name-map collection-handle="123456789/280" submission-name="Project" />
+		<name-map collection-handle="123456789/8" submission-name="OrgUnit" />
+		<name-map collection-handle="123456789/28" submission-name="Journals" />
+		<name-map collection-handle="123456789/29" submission-name="JournalVolumes" />
+		<name-map collection-handle="123456789/30" submission-name="JournalIssues" />
+		<name-map collection-handle="123456789/502" submission-name="DataPackage" />
+		<name-map collection-handle="123456789/503" submission-name="DataFile" />
 	</submission-map>
 
 
@@ -89,6 +99,21 @@
 			<type>submission-form</type>
 		</step>
 		<step id="journalIssueStep" mandatory="true">
+			<heading>submit.progressbar.describe.stepone</heading>
+			<processing-class>org.dspace.app.rest.submit.step.DescribeStep</processing-class>
+			<type>submission-form</type>
+		</step>
+		<step id="datapackagepageone" mandatory="true">
+			<heading>submit.progressbar.describe.stepone</heading>
+			<processing-class>org.dspace.app.rest.submit.step.DescribeStep</processing-class>
+			<type>submission-form</type>
+		</step>
+		<step id="datapackagepagetwo" mandatory="true">
+			<heading>submit.progressbar.describe.steptwo</heading>
+			<processing-class>org.dspace.app.rest.submit.step.DescribeStep</processing-class>
+			<type>submission-form</type>
+		</step>
+		<step id="datafilepageone" mandatory="true">
 			<heading>submit.progressbar.describe.stepone</heading>
 			<processing-class>org.dspace.app.rest.submit.step.DescribeStep</processing-class>
 			<type>submission-form</type>
@@ -217,6 +242,19 @@
 		<submission-process name="JournalIssues">
 			<step id="collection" />
 			<step id="journalIssueStep"/>
+			<step id="upload" />
+			<step id="license" />
+		</submission-process>
+		<submission-process name="DataPackage">
+			<step id="collection" />
+			<step id="datapackagepageone"/>
+			<step id="datapackagepagetwo"/>
+			<step id="upload" />
+			<step id="license" />
+		</submission-process>
+		<submission-process name="DataFile">
+			<step id="collection" />
+			<step id="datafilepageone"/>
 			<step id="upload" />
 			<step id="license" />
 		</submission-process>
