@@ -1,0 +1,27 @@
+<dspace-dc-types>
+
+    <dspace-header>
+        <title>DSpace Dataset Types</title>
+    </dspace-header>
+
+    <dc-schema>
+        <name>prism</name>
+        <namespace>http://dspace.org/prism</namespace>
+    </dc-schema>
+
+
+    <dc-type>
+        <schema>prism</schema>
+        <element>publicationName</element>
+        <qualifier></qualifier>
+        <scope_note></scope_note>
+    </dc-type>
+    <dc-type>
+        <schema>dc</schema>
+        <element>type</element>
+        <qualifier>embargo</qualifier>
+        <scope_note></scope_note>
+    </dc-type>
+
+
+</dspace-dc-types>
