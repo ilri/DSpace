@@ -7,9 +7,17 @@
  */
 package org.dspace.scripts.handler.impl;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
+import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.Logger;
+import org.dspace.core.Context;
 import org.dspace.scripts.handler.DSpaceRunnableHandler;
 
 /**
@@ -83,5 +91,31 @@ public class CommandLineDSpaceRunnableHandler implements DSpaceRunnableHandler {
             HelpFormatter formatter = new HelpFormatter();
             formatter.printHelp(name, options);
         }
+    }
+
+    @Override
+    public InputStream getFileStream(Context context, String fileName) throws IOException {
+        File file = new File(fileName);
+        if (!file.isFile()) {
+            return null;
+        }
+        return FileUtils.openInputStream(file);
+    }
+
+    @Override
+    public void writeFilestream(Context context, String fileName, InputStream inputStream, String type)
+        throws IOException {
+        File file = new File(fileName);
+        FileUtils.copyInputStreamToFile(inputStream, file);
+    }
+
+    @Override
+    public boolean getUserValidation() throws IOException {
+        logInfo("Do you want to make these changes? [y/n] ");
+        String yn = (new BufferedReader(new InputStreamReader(System.in))).readLine();
+        if ("y".equalsIgnoreCase(yn)) {
+            return true;
+        }
+        return false;
     }
 }

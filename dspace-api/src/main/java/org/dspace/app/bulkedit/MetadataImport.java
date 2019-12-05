@@ -7,10 +7,8 @@
  */
 package org.dspace.app.bulkedit;
 
-import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -23,16 +21,12 @@ import java.util.Set;
 import java.util.UUID;
 import javax.annotation.Nullable;
 
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
-import org.apache.commons.cli.PosixParser;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.Logger;
 import org.dspace.authority.AuthorityValue;
-import org.dspace.authority.factory.AuthorityServiceFactory;
 import org.dspace.authority.service.AuthorityValueService;
 import org.dspace.authorize.AuthorizeException;
 import org.dspace.content.Collection;
@@ -63,18 +57,20 @@ import org.dspace.core.Context;
 import org.dspace.core.LogManager;
 import org.dspace.eperson.EPerson;
 import org.dspace.eperson.factory.EPersonServiceFactory;
-import org.dspace.handle.factory.HandleServiceFactory;
 import org.dspace.handle.service.HandleService;
+import org.dspace.scripts.DSpaceRunnable;
 import org.dspace.workflow.WorkflowItem;
 import org.dspace.workflow.WorkflowService;
 import org.dspace.workflow.factory.WorkflowServiceFactory;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Metadata importer to allow the batch import of metadata from a file
  *
  * @author Stuart Lewis
  */
-public class MetadataImport {
+public class MetadataImport extends DSpaceRunnable implements InitializingBean {
     /**
      * The Context
      */
@@ -94,10 +90,6 @@ public class MetadataImport {
      * The authority controlled fields
      */
     protected static Set<String> authorityControlled;
-
-    static {
-        setAuthorizedMetadataFields();
-    }
 
     /**
      * The prefix of the authority controlled field
@@ -143,22 +135,39 @@ public class MetadataImport {
      */
     protected Integer rowCount = 1;
 
+    private boolean useTemplate = false;
+    private String filename = null;
+    private boolean useWorkflow = false;
+    private boolean workflowNotify = false;
+    private boolean change = false;
+    private boolean help = false;
+    protected boolean validateOnly;
+
     /**
      * Logger
      */
     protected static final Logger log = org.apache.logging.log4j.LogManager.getLogger(MetadataImport.class);
 
-    protected final AuthorityValueService authorityValueService;
-
-    protected final ItemService itemService;
-    protected final InstallItemService installItemService;
-    protected final CollectionService collectionService;
-    protected final HandleService handleService;
-    protected final WorkspaceItemService workspaceItemService;
-    protected final RelationshipTypeService relationshipTypeService;
-    protected final RelationshipService relationshipService;
-    protected final EntityTypeService entityTypeService;
-    protected final EntityService entityService;
+    @Autowired
+    protected ItemService itemService;
+    @Autowired
+    protected InstallItemService installItemService;
+    @Autowired
+    protected CollectionService collectionService;
+    @Autowired
+    protected HandleService handleService;
+    @Autowired
+    protected WorkspaceItemService workspaceItemService;
+    @Autowired
+    protected RelationshipTypeService relationshipTypeService;
+    @Autowired
+    protected RelationshipService relationshipService;
+    @Autowired
+    protected EntityTypeService entityTypeService;
+    @Autowired
+    protected EntityService entityService;
+    @Autowired
+    protected AuthorityValueService authorityValueService;
 
     /**
      * Create an instance of the metadata importer. Requires a context and an array of CSV lines
@@ -167,21 +176,184 @@ public class MetadataImport {
      * @param c        The context
      * @param toImport An array of CSV lines to examine
      */
-    public MetadataImport(Context c, DSpaceCSV toImport) {
+    public void initMetadataImport(Context c, DSpaceCSV toImport) {
         // Store the import settings
         this.c = c;
         csv = toImport;
         this.toImport = toImport.getCSVLines();
-        installItemService = ContentServiceFactory.getInstance().getInstallItemService();
-        itemService = ContentServiceFactory.getInstance().getItemService();
-        collectionService = ContentServiceFactory.getInstance().getCollectionService();
-        handleService = HandleServiceFactory.getInstance().getHandleService();
-        authorityValueService = AuthorityServiceFactory.getInstance().getAuthorityValueService();
-        workspaceItemService = ContentServiceFactory.getInstance().getWorkspaceItemService();
-        relationshipService = ContentServiceFactory.getInstance().getRelationshipService();
-        relationshipTypeService = ContentServiceFactory.getInstance().getRelationshipTypeService();
-        entityTypeService = ContentServiceFactory.getInstance().getEntityTypeService();
-        entityService = ContentServiceFactory.getInstance().getEntityService();
+    }
+
+    @Override
+    public void internalRun() throws Exception {
+        if (help) {
+            printHelp();
+            return;
+        }
+        // Read commandLines from the CSV file
+        try {
+
+            csv = new DSpaceCSV(handler.getFileStream(c, filename), c);
+        } catch (MetadataImportInvalidHeadingException miihe) {
+            throw miihe;
+        } catch (Exception e) {
+            throw new Exception("Error reading file: " + e.getMessage(), e);
+        }
+
+        // Perform the first import - just highlight differences
+        initMetadataImport(c, csv);
+        List<BulkEditChange> changes;
+
+        if (!commandLine.hasOption('s') || validateOnly) {
+            // See what has changed
+            try {
+                changes = runImport(false, useWorkflow, workflowNotify, useTemplate);
+            } catch (MetadataImportException mie) {
+                throw mie;
+            }
+
+            // Display the changes
+            int changeCounter = displayChanges(changes, false);
+
+            // If there were changes, ask if we should execute them
+            if (!validateOnly && changeCounter > 0) {
+                try {
+                    // Ask the user if they want to make the changes
+                    handler.logInfo("\n" + changeCounter + " item(s) will be changed\n");
+                    change = handler.getUserValidation();
+
+                } catch (IOException ioe) {
+                    throw new IOException("Error: " + ioe.getMessage() + ", No changes have been made", ioe);
+                }
+            } else {
+                handler.logInfo("There were no changes detected");
+            }
+        } else {
+            change = true;
+        }
+
+        try {
+            // If required, make the change
+            if (change && !validateOnly) {
+                try {
+                    // Make the changes
+                    changes = runImport(true, useWorkflow, workflowNotify, useTemplate);
+                } catch (MetadataImportException mie) {
+                    throw mie;
+                }
+
+                // Display the changes
+                displayChanges(changes, true);
+            }
+
+            // Finsh off and tidy up
+            c.restoreAuthSystemState();
+            c.complete();
+        } catch (Exception e) {
+            c.abort();
+            throw new Exception(
+                "Error committing changes to database: " + e.getMessage() + ", aborting most recent changes", e);
+        }
+
+    }
+
+    public void setup() throws ParseException {
+        useTemplate = false;
+        filename = null;
+        useWorkflow = false;
+        workflowNotify = false;
+
+        if (commandLine.hasOption('h')) {
+            help = true;
+        }
+
+        // Check a filename is given
+        if (!commandLine.hasOption('f')) {
+            throw new ParseException("Required parameter -f missing!");
+        }
+        filename = commandLine.getOptionValue('f');
+
+        // Option to apply template to new items
+        if (commandLine.hasOption('t')) {
+            useTemplate = true;
+        }
+
+        // Options for workflows, and workflow notifications for new items
+        if (commandLine.hasOption('w')) {
+            useWorkflow = true;
+            if (commandLine.hasOption('n')) {
+                workflowNotify = true;
+            }
+        } else if (commandLine.hasOption('n')) {
+            throw new ParseException(
+                "Invalid option 'n': (notify) can only be specified with the 'w' (workflow) option.");
+        }
+        validateOnly = commandLine.hasOption('v');
+
+
+        // Create a context
+        try {
+            c = new Context();
+            c.turnOffAuthorisationSystem();
+        } catch (Exception e) {
+            throw new ParseException("Unable to create a new DSpace Context: " + e.getMessage());
+        }
+
+        // Find the EPerson, assign to context
+        try {
+            if (commandLine.hasOption('e')) {
+                EPerson eperson;
+                String e = commandLine.getOptionValue('e');
+                if (e.indexOf('@') != -1) {
+                    eperson = EPersonServiceFactory.getInstance().getEPersonService().findByEmail(c, e);
+                } else {
+                    eperson = EPersonServiceFactory.getInstance().getEPersonService().find(c, UUID.fromString(e));
+                }
+
+                if (eperson == null) {
+                    throw new ParseException("Error, eperson cannot be found: " + e);
+                }
+                c.setCurrentUser(eperson);
+            }
+        } catch (Exception e) {
+            throw new ParseException("Unable to find DSpace user: " + e.getMessage());
+        }
+
+        // Is this a silent run?
+        change = false;
+    }
+
+    private MetadataImport() {
+        Options options = constructOptions();
+        this.options = options;
+    }
+
+    private Options constructOptions() {
+        Options options = new Options();
+
+        options.addOption("f", "file", true, "source file");
+        options.getOption("f").setType(InputStream.class);
+        options.getOption("f").setRequired(true);
+        options.addOption("e", "email", true, "email address or user id of user (required if adding new items)");
+        options.getOption("e").setType(String.class);
+        options.getOption("e").setRequired(true);
+        options.addOption("s", "silent", false,
+                          "silent operation - doesn't request confirmation of changes USE WITH CAUTION");
+        options.getOption("s").setType(boolean.class);
+        options.addOption("w", "workflow", false, "workflow - when adding new items, use collection workflow");
+        options.getOption("w").setType(boolean.class);
+        options.addOption("n", "notify", false,
+                          "notify - when adding new items using a workflow, send notification emails");
+        options.getOption("n").setType(boolean.class);
+        options.addOption("v", "validate-only", false,
+                          "validate - just validate the csv, don't run the import");
+        options.getOption("v").setType(boolean.class);
+        options.addOption("t", "template", false,
+                          "template - when adding new items, use the collection template (if it exists)");
+        options.getOption("t").setType(boolean.class);
+        options.addOption("h", "help", false, "help");
+        options.getOption("h").setType(boolean.class);
+
+        return options;
     }
 
     /**
@@ -404,12 +576,12 @@ public class MetadataImport {
                         for (BulkEditMetadataValue dcv : whatHasChanged.getAdds()) {
                             if (!StringUtils.equals(dcv.getSchema(), MetadataSchemaEnum.RELATION.getName())) {
                                 itemService.addMetadata(c, item, dcv.getSchema(),
-                                        dcv.getElement(),
-                                        dcv.getQualifier(),
-                                        dcv.getLanguage(),
-                                        dcv.getValue(),
-                                        dcv.getAuthority(),
-                                        dcv.getConfidence());
+                                                        dcv.getElement(),
+                                                        dcv.getQualifier(),
+                                                        dcv.getLanguage(),
+                                                        dcv.getValue(),
+                                                        dcv.getAuthority(),
+                                                        dcv.getConfidence());
                             }
                         }
                         //Add relations after all metadata has been processed
@@ -468,7 +640,7 @@ public class MetadataImport {
         }
 
         // Return the changes
-        if (!change ) {
+        if (!change) {
             validateExpressedRelations();
         }
         return changes;
@@ -694,8 +866,8 @@ public class MetadataImport {
      * @throws AuthorizeException   If something goes wrong
      */
     private void addRelationships(Context c, Item item, String typeName, List<String> values)
-            throws SQLException, AuthorizeException,
-                                        MetadataImportException {
+        throws SQLException, AuthorizeException,
+        MetadataImportException {
         for (String value : values) {
             addRelationship(c, item, typeName, value);
         }
@@ -746,22 +918,23 @@ public class MetadataImport {
         Entity relationEntity = getEntity(c, value);
         // Get relationship type of entity and item
         String relationEntityRelationshipType = itemService.getMetadata(relationEntity.getItem(),
-                "relationship", "type",
-                null, Item.ANY).get(0).getValue();
+                                                                        "relationship", "type",
+                                                                        null, Item.ANY).get(0).getValue();
         String itemRelationshipType = itemService.getMetadata(item, "relationship", "type",
-                null, Item.ANY).get(0).getValue();
+                                                              null, Item.ANY).get(0).getValue();
 
         // Get the correct RelationshipType based on typeName
         List<RelationshipType> relType = relationshipTypeService.findByLeftwardOrRightwardTypeName(c, typeName);
         RelationshipType foundRelationshipType = matchRelationshipType(relType,
-                relationEntityRelationshipType, itemRelationshipType, typeName);
+                                                                       relationEntityRelationshipType,
+                                                                       itemRelationshipType, typeName);
 
         if (foundRelationshipType == null) {
             throw new MetadataImportException("Error on CSV row " + rowCount + ":" + "\n" +
-                    "No Relationship type found for:\n" +
-                    "Target type: " + relationEntityRelationshipType + "\n" +
-                    "Origin referer type: " + itemRelationshipType + "\n" +
-                    "with typeName: " + typeName);
+                                                  "No Relationship type found for:\n" +
+                                                  "Target type: " + relationEntityRelationshipType + "\n" +
+                                                  "Origin referer type: " + itemRelationshipType + "\n" +
+                                                  "with typeName: " + typeName);
         }
 
         if (foundRelationshipType.getLeftwardType().equalsIgnoreCase(typeName)) {
@@ -783,7 +956,7 @@ public class MetadataImport {
         int leftPlace = relationshipService.findNextLeftPlaceByLeftItem(c, leftItem);
         int rightPlace = relationshipService.findNextRightPlaceByRightItem(c, rightItem);
         Relationship persistedRelationship = relationshipService.create(c, leftItem, rightItem,
-                foundRelationshipType, leftPlace, rightPlace);
+                                                                        foundRelationshipType, leftPlace, rightPlace);
         relationshipService.update(c, persistedRelationship);
     }
 
@@ -1243,7 +1416,7 @@ public class MetadataImport {
     /**
      * Set authority controlled fields
      */
-    private static void setAuthorizedMetadataFields() {
+    private void setAuthorizedMetadataFields() {
         authorityControlled = new HashSet<String>();
         Enumeration propertyNames = ConfigurationManager.getProperties().propertyNames();
         while (propertyNames.hasMoreElements()) {
@@ -1252,191 +1425,6 @@ public class MetadataImport {
                 && ConfigurationManager.getBooleanProperty(key, false)) {
                 authorityControlled.add(key.substring(AC_PREFIX.length()));
             }
-        }
-    }
-
-    /**
-     * main method to run the metadata exporter
-     *
-     * @param argv the command line arguments given
-     */
-    public static void main(String[] argv) {
-        // Create an options object and populate it
-        CommandLineParser parser = new PosixParser();
-
-        Options options = new Options();
-
-        options.addOption("f", "file", true, "source file");
-        options.addOption("e", "email", true, "email address or user id of user (required if adding new items)");
-        options.addOption("s", "silent", false,
-                          "silent operation - doesn't request confirmation of changes USE WITH CAUTION");
-        options.addOption("w", "workflow", false, "workflow - when adding new items, use collection workflow");
-        options.addOption("n", "notify", false,
-                          "notify - when adding new items using a workflow, send notification emails");
-        options.addOption("t", "template", false,
-                          "template - when adding new items, use the collection template (if it exists)");
-        options.addOption("v", "validate-only", false,
-                          "validate - just validate the csv, don't run the import");
-        options.addOption("h", "help", false, "help");
-
-        // Parse the command line arguments
-        CommandLine line;
-        try {
-            line = parser.parse(options, argv);
-        } catch (ParseException pe) {
-            System.err.println("Error parsing command line arguments: " + pe.getMessage());
-            System.exit(1);
-            return;
-        }
-
-        if (line.hasOption('h')) {
-            printHelp(options, 0);
-        }
-
-        // Check a filename is given
-        if (!line.hasOption('f')) {
-            System.err.println("Required parameter -f missing!");
-            printHelp(options, 1);
-        }
-        String filename = line.getOptionValue('f');
-
-        // Option to apply template to new items
-        boolean useTemplate = false;
-        if (line.hasOption('t')) {
-            useTemplate = true;
-        }
-
-        // Options for workflows, and workflow notifications for new items
-        boolean useWorkflow = false;
-        boolean workflowNotify = false;
-        if (line.hasOption('w')) {
-            useWorkflow = true;
-            if (line.hasOption('n')) {
-                workflowNotify = true;
-            }
-        } else if (line.hasOption('n')) {
-            System.err.println("Invalid option 'n': (notify) can only be specified with the 'w' (workflow) option.");
-            System.exit(1);
-        }
-
-        // Create a context
-        Context c;
-        try {
-            c = new Context();
-            c.turnOffAuthorisationSystem();
-        } catch (Exception e) {
-            System.err.println("Unable to create a new DSpace Context: " + e.getMessage());
-            System.exit(1);
-            return;
-        }
-
-        // Find the EPerson, assign to context
-        try {
-            if (line.hasOption('e')) {
-                EPerson eperson;
-                String e = line.getOptionValue('e');
-                if (e.indexOf('@') != -1) {
-                    eperson = EPersonServiceFactory.getInstance().getEPersonService().findByEmail(c, e);
-                } else {
-                    eperson = EPersonServiceFactory.getInstance().getEPersonService().find(c, UUID.fromString(e));
-                }
-
-                if (eperson == null) {
-                    System.out.println("Error, eperson cannot be found: " + e);
-                    System.exit(1);
-                }
-                c.setCurrentUser(eperson);
-            }
-        } catch (Exception e) {
-            System.err.println("Unable to find DSpace user: " + e.getMessage());
-            System.exit(1);
-            return;
-        }
-
-        // Is this a silent run?
-        boolean change = false;
-
-        // Read lines from the CSV file
-        DSpaceCSV csv;
-        try {
-            csv = new DSpaceCSV(new File(filename), c);
-        } catch (MetadataImportInvalidHeadingException miihe) {
-            System.err.println(miihe.getMessage());
-            System.exit(1);
-            return;
-        } catch (Exception e) {
-            System.err.println("Error reading file: " + e.getMessage());
-            System.exit(1);
-            return;
-        }
-
-        // Perform the first import - just highlight differences
-        MetadataImport importer = new MetadataImport(c, csv);
-        List<BulkEditChange> changes;
-
-        boolean validateOnly = line.hasOption('v');
-
-        if (!line.hasOption('s') || validateOnly) {
-            // See what has changed
-            try {
-                changes = importer.runImport(false, useWorkflow, workflowNotify, useTemplate);
-            } catch (MetadataImportException mie) {
-                System.err.println("Error: " + mie.getMessage());
-                System.exit(1);
-                return;
-            }
-
-            // Display the changes
-            int changeCounter = displayChanges(changes, false);
-
-            // If there were changes, ask if we should execute them
-            if (!validateOnly && changeCounter > 0) {
-                try {
-                    // Ask the user if they want to make the changes
-                    System.out.println("\n" + changeCounter + " item(s) will be changed\n");
-                    System.out.print("Do you want to make these changes? [y/n] ");
-                    String yn = (new BufferedReader(new InputStreamReader(System.in))).readLine();
-                    if ("y".equalsIgnoreCase(yn)) {
-                        change = true;
-                    } else {
-                        System.out.println("No data has been changed.");
-                    }
-                } catch (IOException ioe) {
-                    System.err.println("Error: " + ioe.getMessage());
-                    System.err.println("No changes have been made");
-                    System.exit(1);
-                }
-            } else {
-                System.out.println("There were no changes detected");
-            }
-        } else {
-            change = true;
-        }
-
-        try {
-            // If required, make the change
-            if (change && !validateOnly) {
-                try {
-                    // Make the changes
-                    changes = importer.runImport(true, useWorkflow, workflowNotify, useTemplate);
-                } catch (MetadataImportException mie) {
-                    System.err.println("Error: " + mie.getMessage());
-                    System.exit(1);
-                    return;
-                }
-
-                // Display the changes
-                displayChanges(changes, true);
-            }
-
-            // Finsh off and tidy up
-            c.restoreAuthSystemState();
-            c.complete();
-        } catch (Exception e) {
-            c.abort();
-            System.err.println("Error committing changes to database: " + e.getMessage());
-            System.err.println("Aborting most recent changes.");
-            System.exit(1);
         }
     }
 
@@ -1503,7 +1491,7 @@ public class MetadataImport {
                 originIds.add(originId);
                 typeNames.put(relationField, originIds);
             } else {
-                ArrayList<String> originIds =  typeNames.get(relationField);
+                ArrayList<String> originIds = typeNames.get(relationField);
                 originIds.add(originId);
                 typeNames.put(relationField, originIds);
             }
@@ -1533,7 +1521,7 @@ public class MetadataImport {
         }
         for (String key : line.keys()) {
             if (key.contains(".") && !key.split("\\.")[0].equalsIgnoreCase("relation") ||
-                    key.equalsIgnoreCase("rowName")) {
+                key.equalsIgnoreCase("rowName")) {
                 for (String value : line.get(key)) {
                     String valueKey = key + ":" + value;
                     Set<Integer> rowNums = csvRefMap.get(valueKey);
@@ -1575,20 +1563,20 @@ public class MetadataImport {
             try {
                 return UUID.fromString(reference);
             } catch (IllegalArgumentException e) {
-                throw new MetadataImportException("Error in CSV row " + rowCount +  ":\n" +
-                        "Not a UUID or indirect entity reference: '" + reference + "'");
+                throw new MetadataImportException("Error in CSV row " + rowCount + ":\n" +
+                                                      "Not a UUID or indirect entity reference: '" + reference + "'");
             }
-        } else if (!reference.startsWith("rowName:") ) { // Not a rowName ref; so it's a metadata value reference
+        } else if (!reference.startsWith("rowName:")) { // Not a rowName ref; so it's a metadata value reference
             MetadataValueService metadataValueService = ContentServiceFactory.getInstance().getMetadataValueService();
             MetadataFieldService metadataFieldService =
-                    ContentServiceFactory.getInstance().getMetadataFieldService();
+                ContentServiceFactory.getInstance().getMetadataFieldService();
             int i = reference.indexOf(":");
             String mfValue = reference.substring(i + 1);
             String mf[] = reference.substring(0, i).split("\\.");
             if (mf.length < 2) {
-                throw new MetadataImportException("Error in CSV row " + rowCount +  ":\n" +
-                        "Bad metadata field in reference: '" + reference
-                        + "' (expected syntax is schema.element[.qualifier])");
+                throw new MetadataImportException("Error in CSV row " + rowCount + ":\n" +
+                                                      "Bad metadata field in reference: '" + reference
+                                                      + "' (expected syntax is schema.element[.qualifier])");
             }
             String schema = mf[0];
             String element = mf[1];
@@ -1600,13 +1588,13 @@ public class MetadataImport {
                     MetadataValue mdvVal = mdv.next();
                     uuid = mdvVal.getDSpaceObject().getID();
                     if (mdv.hasNext()) {
-                        throw new MetadataImportException("Error in CSV row " + rowCount +  ":\n" +
-                                "Ambiguous reference; multiple matches in db: " + reference);
+                        throw new MetadataImportException("Error in CSV row " + rowCount + ":\n" +
+                                                          "Ambiguous reference; multiple matches in db: " + reference);
                     }
                 }
             } catch (SQLException e) {
-                throw new MetadataImportException("Error in CSV row " + rowCount +  ":\n" +
-                        "Error looking up item by metadata reference: " + reference, e);
+                throw new MetadataImportException("Error in CSV row " + rowCount + ":\n" +
+                                                      "Error looking up item by metadata reference: " + reference, e);
             }
         }
         // Lookup UUIDs that may have already been processed into the csvRefMap
@@ -1614,24 +1602,25 @@ public class MetadataImport {
         // See getMatchingCSVUUIDs() for how the reference param is sourced from the csvRefMap
         Set<UUID> csvUUIDs = getMatchingCSVUUIDs(reference);
         if (csvUUIDs.size() > 1) {
-            throw new MetadataImportException("Error in CSV row " + rowCount +  ":\n" +
-                    "Ambiguous reference; multiple matches in csv: " + reference);
+            throw new MetadataImportException("Error in CSV row " + rowCount + ":\n" +
+                                                  "Ambiguous reference; multiple matches in csv: " + reference);
         } else if (csvUUIDs.size() == 1) {
             UUID csvUUID = csvUUIDs.iterator().next();
             if (csvUUID.equals(uuid)) {
                 return uuid; // one match from csv and db (same item)
             } else if (uuid != null) {
-                throw new MetadataImportException("Error in CSV row " + rowCount +  ":\n" +
-                        "Ambiguous reference; multiple matches in db and csv: " + reference);
+                throw new MetadataImportException("Error in CSV row " + rowCount + ":\n" +
+                                                  "Ambiguous reference; multiple matches in db and csv: " + reference);
             } else {
                 return csvUUID; // one match from csv
             }
         } else { // size == 0; the reference does not exist throw an error
             if (uuid == null) {
-                throw new MetadataImportException("Error in CSV row " + rowCount +  ":\n" +
-                        "No matches found for reference: " + reference
-                        + "\nKeep in mind you can only reference entries that are listed before " +
-                        "this one within the CSV.");
+                throw new MetadataImportException("Error in CSV row " + rowCount + ":\n" +
+                                                      "No matches found for reference: " + reference
+                                                      + "\nKeep in mind you can only reference entries that are " +
+                                                      "listed before " +
+                                                      "this one within the CSV.");
             } else {
                 return uuid; // one match from db
             }
@@ -1695,7 +1684,9 @@ public class MetadataImport {
                 // Get the type of reference. Attempt lookup in processed map first before looking in archive.
                 if (entityTypeMap.get(UUID.fromString(targetUUID)) != null) {
                     targetType = entityTypeService.
-                            findByEntityType(c, entityTypeMap.get(UUID.fromString(targetUUID))).getLabel();
+                                                      findByEntityType(c,
+                                                                       entityTypeMap.get(UUID.fromString(targetUUID)))
+                                                  .getLabel();
                 } else {
                     // Target item may be archived; check there.
                     // Add to errors if Realtionship.type cannot be derived
@@ -1703,18 +1694,19 @@ public class MetadataImport {
                     if (itemService.find(c, UUID.fromString(targetUUID)) != null) {
                         targetItem = itemService.find(c, UUID.fromString(targetUUID));
                         List<MetadataValue> relTypes = itemService.
-                                getMetadata(targetItem, "relationship", "type", null, Item.ANY);
+                                                                      getMetadata(targetItem, "relationship", "type",
+                                                                                  null, Item.ANY);
                         String relTypeValue = null;
                         if (relTypes.size() > 0) {
                             relTypeValue = relTypes.get(0).getValue();
                             targetType = entityTypeService.findByEntityType(c, relTypeValue).getLabel();
                         } else {
                             relationValidationErrors.add("Cannot resolve Entity type for target UUID: " +
-                                    targetUUID);
+                                                             targetUUID);
                         }
                     } else {
                         relationValidationErrors.add("Cannot resolve Entity type for target UUID: " +
-                                targetUUID);
+                                                         targetUUID);
                     }
                 }
                 if (targetType == null) {
@@ -1747,7 +1739,8 @@ public class MetadataImport {
                             if (itemService.find(c, UUID.fromString(targetUUID)) != null) {
                                 originItem = itemService.find(c, UUID.fromString(originRefererUUID));
                                 List<MetadataValue> relTypes = itemService.
-                                        getMetadata(originItem, "relationship", "type", null, Item.ANY);
+                                                                              getMetadata(originItem, "relationship",
+                                                                                          "type", null, Item.ANY);
                                 String relTypeValue = null;
                                 if (relTypes.size() > 0) {
                                     relTypeValue = relTypes.get(0).getValue();
@@ -1755,14 +1748,14 @@ public class MetadataImport {
                                     validateTypesByTypeByTypeName(targetType, originType, typeName, originRow);
                                 } else {
                                     relationValidationErrors.add("Error on CSV row " + originRow + ":" + "\n" +
-                                            "Cannot resolve Entity type for reference: "
-                                            + originRefererUUID);
+                                                                     "Cannot resolve Entity type for reference: "
+                                                                     + originRefererUUID);
                                 }
 
                             } else {
                                 relationValidationErrors.add("Error on CSV row " + originRow + ":" + "\n" +
-                                        "Cannot resolve Entity type for reference: "
-                                        + originRefererUUID + " in row: " + originRow );
+                                                                 "Cannot resolve Entity type for reference: "
+                                                                 + originRefererUUID + " in row: " + originRow);
                             }
                         }
                     }
@@ -1792,19 +1785,20 @@ public class MetadataImport {
      * @return the UUID of the item.
      */
     private void validateTypesByTypeByTypeName(String targetType, String originType, String typeName, String originRow)
-            throws MetadataImportException {
+        throws MetadataImportException {
         try {
             RelationshipType foundRelationshipType = null;
             List<RelationshipType> relationshipTypeList = relationshipTypeService.
-                    findByLeftwardOrRightwardTypeName(c, typeName.split("\\.")[1]);
+                                                                                     findByLeftwardOrRightwardTypeName(
+                                                                                         c, typeName.split("\\.")[1]);
             // Validate described relationship form the CSV.
             foundRelationshipType = matchRelationshipType(relationshipTypeList, targetType, originType, typeName);
             if (foundRelationshipType == null) {
                 relationValidationErrors.add("Error on CSV row " + originRow + ":" + "\n" +
-                        "No Relationship type found for:\n" +
-                        "Target type: " + targetType + "\n" +
-                        "Origin referer type: " + originType + "\n" +
-                        "with typeName: " + typeName + " for type: " + originType);
+                                                 "No Relationship type found for:\n" +
+                                                 "Target type: " + targetType + "\n" +
+                                                 "Origin referer type: " + originType + "\n" +
+                                                 "with typeName: " + typeName + " for type: " + originType);
             }
         } catch (SQLException sqle) {
             throw new MetadataImportException("Error interacting with database!", sqle);
@@ -1837,7 +1831,7 @@ public class MetadataImport {
                     continue;
                 }
                 if (relationshipType.getLeftType().getLabel().equalsIgnoreCase(originType) &&
-                        relationshipType.getRightType().getLabel().equalsIgnoreCase(targetType)) {
+                    relationshipType.getRightType().getLabel().equalsIgnoreCase(targetType)) {
                     foundRelationshipType = relationshipType;
                 }
             } else {
@@ -1845,7 +1839,7 @@ public class MetadataImport {
                     continue;
                 }
                 if (relationshipType.getLeftType().getLabel().equalsIgnoreCase(targetType) &&
-                        relationshipType.getRightType().getLabel().equalsIgnoreCase(originType)) {
+                    relationshipType.getRightType().getLabel().equalsIgnoreCase(originType)) {
                     foundRelationshipType = relationshipType;
                 }
             }
@@ -1853,4 +1847,7 @@ public class MetadataImport {
         return foundRelationshipType;
     }
 
+    public void afterPropertiesSet() throws Exception {
+        setAuthorizedMetadataFields();
+    }
 }

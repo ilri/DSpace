@@ -9,10 +9,9 @@ package org.dspace.app.bulkedit;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Serializable;
@@ -27,7 +26,9 @@ import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.pdfbox.util.Charsets;
 import org.dspace.authority.AuthorityValue;
 import org.dspace.authority.factory.AuthorityServiceFactory;
 import org.dspace.authority.service.AuthorityValueService;
@@ -141,18 +142,18 @@ public class DSpaceCSV implements Serializable {
     /**
      * Create a new instance, reading the lines in from file
      *
-     * @param f The file to read from
+     * @param inputStream the inputstream to read from
      * @param c The DSpace Context
      * @throws Exception thrown if there is an error reading or processing the file
      */
-    public DSpaceCSV(File f, Context c) throws Exception {
+    public DSpaceCSV(InputStream inputStream, Context c) throws Exception {
         // Initialise the class
         init();
 
         // Open the CSV file
         BufferedReader input = null;
         try {
-            input = new BufferedReader(new InputStreamReader(new FileInputStream(f), "UTF-8"));
+            input = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
 
             // Read the heading line
             String head = input.readLine();
@@ -638,6 +639,14 @@ public class DSpaceCSV implements Serializable {
         }
         out.flush();
         out.close();
+    }
+
+    public InputStream getInputStream() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (String csvLine : getCSVLinesAsStringArray()) {
+            stringBuilder.append(csvLine + "\n");
+        }
+        return IOUtils.toInputStream(stringBuilder.toString(), Charsets.UTF_8);
     }
 
     /**

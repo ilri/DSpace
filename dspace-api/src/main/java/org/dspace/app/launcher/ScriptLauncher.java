@@ -22,6 +22,7 @@ import org.dspace.scripts.handler.impl.CommandLineDSpaceRunnableHandler;
 import org.dspace.servicemanager.DSpaceKernelImpl;
 import org.dspace.servicemanager.DSpaceKernelInit;
 import org.dspace.services.RequestService;
+import org.dspace.utils.DSpace;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
@@ -44,7 +45,8 @@ public class ScriptLauncher {
     /**
      * Default constructor
      */
-    private ScriptLauncher() { }
+    private ScriptLauncher() {
+    }
 
     /**
      * Execute the DSpace script launcher
