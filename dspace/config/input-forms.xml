@@ -3682,6 +3682,10 @@
         <stored-value>PII-LAM_POLITICAS</stored-value>
       </pair>
       <pair>
+        <displayed-value>PII-SA_BigDataCSA</displayed-value>
+        <stored-value>PII-SA_BigDataCSA</stored-value>
+      </pair>
+      <pair>
         <displayed-value>PII-SA_CSA</displayed-value>
         <stored-value>PII-SA_CSA</stored-value>
       </pair>
@@ -3706,12 +3710,20 @@
         <stored-value>PII-SA_RiskMitigation</stored-value>
       </pair>
       <pair>
+        <displayed-value>PII-SA_ScalingCRM</displayed-value>
+        <stored-value>PII-SA_ScalingCRM</stored-value>
+      </pair>
+      <pair>
         <displayed-value>PII-SA_ScalingCSVIndia</displayed-value>
         <stored-value>PII-SA_ScalingCSVIndia</stored-value>
       </pair>
       <pair>
         <displayed-value>PII-SEA_ApproachesCSV</displayed-value>
         <stored-value>PII-SEA_ApproachesCSV</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PII-SEA_CliSM</displayed-value>
+        <stored-value>PII-SEA_CliSM</stored-value>
       </pair>
       <pair>
         <displayed-value>PII_SEA_CSVscaling</displayed-value>
