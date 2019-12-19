@@ -17,6 +17,7 @@ import javax.ws.rs.BadRequestException;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.dspace.app.rest.converter.ConverterService;
 import org.dspace.app.rest.exception.UnprocessableEntityException;
 import org.dspace.app.rest.model.CollectionRest;
 import org.dspace.app.rest.model.ItemRest;
@@ -58,6 +59,9 @@ public class CollectionItemtemplateController {
 
     @Autowired
     private CollectionService collectionService;
+
+    @Autowired
+    private ConverterService converter;
 
     /**
      * This method will create an Item and add it as a template to a Collection.
@@ -146,7 +150,7 @@ public class CollectionItemtemplateController {
         Collection collection = getCollection(context, uuid);
         ItemRest templateItem = collectionRestRepository.getTemplateItem(collection);
 
-        return new ItemResource(templateItem, utils);
+        return converter.toResource(templateItem);
     }
 
     private Collection getCollection(Context context, UUID uuid) throws SQLException {
