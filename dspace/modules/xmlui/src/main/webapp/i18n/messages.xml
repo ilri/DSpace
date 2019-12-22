@@ -2746,7 +2746,7 @@
 	<message key="xmlui.metadataquality.batch-edit.field.label.cg.subject.ilri">ILRI subject (cg.subject.ilri)</message>
 	<message key="xmlui.metadataquality.batch-edit.field.label.cg.subject.iwmi">IWMI subject (cg.subject.iwmi)</message>
 	<message key="xmlui.metadataquality.batch-edit.field.label.cg.subject.wle">WLE subject (cg.subject.wle)</message>
-	<message key="xmlui.metadataquality.batch-edit.field.label.cg.targetaudience">Target audience (cg.targetaudience)</message>
+	<message key="xmlui.metadataquality.batch-edit.field.label.dcterms.audience">Target audience (dcterms.audience)</message>
 	<message key="xmlui.metadataquality.batch-edit.field.label.dc.provenance">Provenance (dc.provenance)</message>
 	<message key="xmlui.metadataquality.batch-edit.field.label.dc.rights.license">License (dc.rights.license)</message>
 	<message key="xmlui.metadataquality.batch-edit.field.label.dcterms.conformsTo">Conforms to (dcterms.conformsTo)</message>
