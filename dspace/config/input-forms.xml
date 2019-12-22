@@ -542,8 +542,8 @@
           <required></required>
         </field>
         <field>
-          <dc-schema>cg</dc-schema>
-          <dc-element>targetaudience</dc-element>
+          <dc-schema>dcterms</dc-schema>
+          <dc-element>audience</dc-element>
           <dc-qualifier></dc-qualifier>
           <repeatable>true</repeatable>
           <label>Target audience</label>
@@ -5861,7 +5861,7 @@
         <stored-value>Formally Published</stored-value>
       </pair>
     </value-pairs>
-    <value-pairs value-pairs-name="TARGET_AUDIENCE" dc-term="targetaudience">
+    <value-pairs value-pairs-name="TARGET_AUDIENCE" dc-term="audience">
       <pair>
         <displayed-value>SCIENTISTS</displayed-value>
         <stored-value>SCIENTISTS</stored-value>
