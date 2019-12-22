@@ -533,7 +533,7 @@
         </field>
         <field>
           <dc-schema>cg</dc-schema>
-          <dc-element>peer-reviewed</dc-element>
+          <dc-element>review-status</dc-element>
           <dc-qualifier></dc-qualifier>
           <repeatable>false</repeatable>
           <label>Review status</label>

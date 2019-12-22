@@ -40,8 +40,8 @@ s/dim:field\[@mdschema='cg' and @element='creator'\]\[@qualifier='id'/dim:field[
 s/cg\.creator\.id/cg.creator.identifier/g
 # dcterms.language
 s/dim:field\[@element='language' and @qualifier='iso'/dim:field[@mdschema='dcterms' and @element='language'/g
-# cg.peer-reviewed
-s/dim:field\[@element='description' and @qualifier='version'/dim:field[@mdschema='cg' and @element='peer-reviewed'/g
+# cg.review-status
+s/dim:field\[@element='description' and @qualifier='version'/dim:field[@mdschema='cg' and @element='review-status'/g
 # dcterms.license
 s/dim:field\[@element='rights'\]\[not(@qualifier)\]/dim:field[@mdschema='dcterms' and @element='license']/g
 

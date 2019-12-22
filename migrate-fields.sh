@@ -24,7 +24,7 @@ mapfile -t fields_to_move <<TO_MOVE
 27  138 #dc.description.abstract→dcterms.abstract
 26  156 #dc.description→dcterms.description
 29  243 #dc.description.sponsorship→cg.contributor.donor
-68  244 #dc.description.version→cg.peer-reviewed
+68  244 #dc.description.version→cg.review-status
 214 245 #cg.fulltextstatus→cg.howpublished
 18  146 #dc.identifier.citation→dcterms.bibliographicCitation
 206 139 #cg.identifier.status→dcterms.accessRights
