@@ -25,7 +25,9 @@ import org.dspace.app.rest.model.BitstreamRest;
 import org.dspace.app.rest.model.CollectionRest;
 import org.dspace.app.rest.model.CommunityRest;
 import org.dspace.app.rest.model.ItemRest;
+import org.dspace.app.rest.model.TemplateItemRest;
 import org.dspace.app.rest.model.patch.Patch;
+import org.dspace.app.rest.model.wrapper.TemplateItem;
 import org.dspace.app.rest.projection.Projection;
 import org.dspace.app.rest.repository.patch.DSpaceObjectPatch;
 import org.dspace.app.rest.utils.CollectionRestEqualityUtils;
@@ -260,27 +262,26 @@ public class CollectionRestRepository extends DSpaceObjectRestRepository<Collect
      * @throws SQLException
      * @throws AuthorizeException
      */
-    public ItemRest createTemplateItem(Context context, Collection collection, ItemRest inputItemRest)
+    public TemplateItemRest createTemplateItem(Context context, Collection collection, TemplateItemRest inputItemRest)
         throws SQLException, AuthorizeException {
         if (collection.getTemplateItem() != null) {
             throw new UnprocessableEntityException("Collection with ID " + collection.getID()
                 + " already contains a template item");
         }
 
-        if (inputItemRest.getInArchive() || inputItemRest.getDiscoverable() || inputItemRest.getWithdrawn()) {
-            throw new UnprocessableEntityException(
-                    "The template item should not be archived, discoverable or withdrawn");
-        }
-
         cs.createTemplateItem(context, collection);
-        Item templateItem = collection.getTemplateItem();
-        metadataConverter.setMetadata(context, templateItem, inputItemRest.getMetadata());
-        templateItem.setDiscoverable(false);
+        Item item = collection.getTemplateItem();
+        metadataConverter.setMetadata(context, item, inputItemRest.getMetadata());
+        item.setDiscoverable(false);
 
         cs.update(context, collection);
-        itemService.update(context, templateItem);
+        itemService.update(context, item);
 
-        return converter.toRest(templateItem, Projection.DEFAULT);
+        try {
+            return converter.toRest(new TemplateItem(item), Projection.DEFAULT);
+        } catch (IllegalArgumentException e) {
+            throw new UnprocessableEntityException("The item with id " + item.getID() + " is not a template item");
+        }
     }
 
     /**
@@ -290,7 +291,7 @@ public class CollectionRestRepository extends DSpaceObjectRestRepository<Collect
      * @return              The template Item from the Collection
      * @throws SQLException
      */
-    public ItemRest getTemplateItem(Collection collection) throws SQLException {
+    public TemplateItemRest getTemplateItem(Collection collection) throws SQLException {
         Item item = collection.getTemplateItem();
         if (item == null) {
             throw new ResourceNotFoundException(
@@ -298,6 +299,10 @@ public class CollectionRestRepository extends DSpaceObjectRestRepository<Collect
                             + collection.getID() + " not found");
         }
 
-        return converter.toRest(item, Projection.DEFAULT);
+        try {
+            return converter.toRest(new TemplateItem(item), Projection.DEFAULT);
+        } catch (IllegalArgumentException e) {
+            throw new UnprocessableEntityException("The item with id " + item.getID() + " is not a template item");
+        }
     }
 }

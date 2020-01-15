@@ -28,7 +28,9 @@ import org.dspace.app.rest.exception.RepositoryMethodNotImplementedException;
 import org.dspace.app.rest.exception.UnprocessableEntityException;
 import org.dspace.app.rest.model.BundleRest;
 import org.dspace.app.rest.model.ItemRest;
+import org.dspace.app.rest.model.TemplateItemRest;
 import org.dspace.app.rest.model.patch.Patch;
+import org.dspace.app.rest.model.wrapper.TemplateItem;
 import org.dspace.app.rest.projection.Projection;
 import org.dspace.app.rest.repository.handler.service.UriListHandlerService;
 import org.dspace.app.rest.repository.patch.ItemPatch;
@@ -113,6 +115,9 @@ public class ItemRestRepository extends DSpaceObjectRestRepository<Item, ItemRes
         }
         if (item == null) {
             return null;
+        }
+        if (item.getTemplateItemOf() != null) {
+            throw new ResourceNotFoundException("Item with id: " + id + " is a template item.");
         }
         return converter.toRest(item, utils.obtainProjection());
     }
@@ -367,24 +372,51 @@ public class ItemRestRepository extends DSpaceObjectRestRepository<Item, ItemRes
     }
 
     /**
+     * Method to get a template item by ID
+     *
+     * @param context   The context
+     * @param id        The ID of the requested template item
+     * @return The specified template item
+     */
+    @PreAuthorize("hasPermission(#id, 'ITEM', 'READ')")
+    public TemplateItemRest findOneTemplateItem(Context context, UUID id) {
+        Item item = null;
+        try {
+            item = itemService.find(context, id);
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage(), e);
+        }
+        if (item == null) {
+            return null;
+        }
+
+        try {
+            return converter.toRest(new TemplateItem(item), Projection.DEFAULT);
+        } catch (IllegalArgumentException e) {
+            throw new ResourceNotFoundException("The item with id " + item.getID() + " is not a template item");
+        }
+    }
+
+    /**
      * Modify a template Item which is a template Item
-     * @param item          The Item to be modified
+     * @param templateItem          The Item to be modified
      * @param jsonNode      The patch to be applied
      * @return              The Item as it is after applying the patch
      * @throws SQLException
      * @throws AuthorizeException
      */
-    public ItemRest patchTemplateItem(Item item, JsonNode jsonNode)
+    public TemplateItemRest patchTemplateItem(TemplateItem templateItem, JsonNode jsonNode)
         throws SQLException, AuthorizeException {
 
         ObjectMapper mapper = new ObjectMapper();
         JsonPatchConverter patchConverter = new JsonPatchConverter(mapper);
         Patch patch = patchConverter.convert(jsonNode);
 
-        ItemRest patchedItemRest = dsoPatch.patch(converter.toRest(item, Projection.DEFAULT), patch.getOperations());
-        updateDSpaceObject(item, patchedItemRest);
+        ItemRest patchedItemRest =
+            dsoPatch.patch(converter.toRest(templateItem.getItem(), Projection.DEFAULT), patch.getOperations());
+        updateDSpaceObject(templateItem.getItem(), patchedItemRest);
 
-        return converter.toRest(item, Projection.DEFAULT);
+        return converter.toRest(templateItem, Projection.DEFAULT);
     }
 
     /**
@@ -393,14 +425,14 @@ public class ItemRestRepository extends DSpaceObjectRestRepository<Item, ItemRes
      * Note: The caller is responsible for checking that this item is in fact a template item.
      *
      * @param context
-     * @param item          The item to be removed
+     * @param templateItem          The item to be removed
      * @throws SQLException
      * @throws IOException
      * @throws AuthorizeException
      */
-    public void removeTemplateItem(Context context, Item item) throws SQLException, IOException, AuthorizeException {
+    public void removeTemplateItem(Context context, TemplateItem templateItem) throws SQLException, IOException, AuthorizeException {
 
-        Collection collection = item.getTemplateItemOf();
+        Collection collection = templateItem.getItem().getTemplateItemOf();
         collectionService.removeTemplateItem(context, collection);
         collectionService.update(context, collection);
     }

@@ -93,6 +93,7 @@ public class ItemRest extends DSpaceObjectRest {
         this.owningCollection = owningCollection;
     }
 
+    @JsonIgnore
     public CollectionRest getTemplateItemOf() {
         return templateItemOf;
     }
