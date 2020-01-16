@@ -49,7 +49,8 @@ public class TemplateItemConverter
             templateItemRest.setTemplateItemOf(converter.toRest(templateItemOf, projection));
         }
 
-        List<MetadataValue> fullList = itemService.getMetadata(templateItem.getItem(), Item.ANY, Item.ANY, Item.ANY, Item.ANY, true);
+        List<MetadataValue> fullList =
+            itemService.getMetadata(templateItem.getItem(), Item.ANY, Item.ANY, Item.ANY, Item.ANY, true);
         MetadataValueList metadataValues = new MetadataValueList(fullList);
         templateItemRest.setMetadata(converter.toRest(metadataValues, projection));
 

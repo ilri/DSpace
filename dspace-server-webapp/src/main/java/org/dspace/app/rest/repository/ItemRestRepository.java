@@ -430,7 +430,8 @@ public class ItemRestRepository extends DSpaceObjectRestRepository<Item, ItemRes
      * @throws IOException
      * @throws AuthorizeException
      */
-    public void removeTemplateItem(Context context, TemplateItem templateItem) throws SQLException, IOException, AuthorizeException {
+    public void removeTemplateItem(Context context, TemplateItem templateItem)
+        throws SQLException, IOException, AuthorizeException {
 
         Collection collection = templateItem.getItem().getTemplateItemOf();
         collectionService.removeTemplateItem(context, collection);

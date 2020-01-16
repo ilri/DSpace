@@ -28,6 +28,7 @@ import org.dspace.app.rest.matcher.MetadataMatcher;
 import org.dspace.app.rest.model.ItemRest;
 import org.dspace.app.rest.model.MetadataRest;
 import org.dspace.app.rest.model.MetadataValueRest;
+import org.dspace.app.rest.model.TemplateItemRest;
 import org.dspace.app.rest.model.patch.AddOperation;
 import org.dspace.app.rest.model.patch.Operation;
 import org.dspace.app.rest.model.patch.ReplaceOperation;
@@ -43,7 +44,7 @@ public class ItemTemplateRestControllerIT extends AbstractControllerIntegrationT
     private ObjectMapper mapper;
     private String adminAuthToken;
     private Collection childCollection;
-    private ItemRest testTemplateItem;
+    private TemplateItemRest testTemplateItem;
     private String patchBody;
 
     @Before
@@ -60,10 +61,7 @@ public class ItemTemplateRestControllerIT extends AbstractControllerIntegrationT
     }
 
     private void setupTestTemplate() {
-        testTemplateItem = new ItemRest();
-        testTemplateItem.setInArchive(false);
-        testTemplateItem.setDiscoverable(false);
-        testTemplateItem.setWithdrawn(false);
+        testTemplateItem = new TemplateItemRest();
 
         testTemplateItem.setMetadata(new MetadataRest()
                 .put("dc.description", new MetadataValueRest("dc description content"))

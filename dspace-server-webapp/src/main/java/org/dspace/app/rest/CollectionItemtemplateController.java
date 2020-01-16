@@ -119,7 +119,8 @@ public class CollectionItemtemplateController {
             throw new UnprocessableEntityException("Error parsing request body", e1);
         }
 
-        TemplateItemRest templateItem = collectionRestRepository.createTemplateItem(context, collection, inputTemplateItemRest);
+        TemplateItemRest templateItem =
+            collectionRestRepository.createTemplateItem(context, collection, inputTemplateItemRest);
         context.commit();
 
         return ControllerUtils.toResponseEntity(HttpStatus.CREATED, null,

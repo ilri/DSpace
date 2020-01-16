@@ -24,7 +24,6 @@ import org.dspace.app.rest.exception.UnprocessableEntityException;
 import org.dspace.app.rest.model.BitstreamRest;
 import org.dspace.app.rest.model.CollectionRest;
 import org.dspace.app.rest.model.CommunityRest;
-import org.dspace.app.rest.model.ItemRest;
 import org.dspace.app.rest.model.TemplateItemRest;
 import org.dspace.app.rest.model.patch.Patch;
 import org.dspace.app.rest.model.wrapper.TemplateItem;
