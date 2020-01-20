@@ -21,7 +21,6 @@ public class TemplateItemRest extends BaseObjectRest<String> {
     public static final String CATEGORY = RestAddressableModel.CORE;
     @JsonIgnore
     private CollectionRest templateItemOf;
-    private String uuid;
     MetadataRest metadata = new MetadataRest();
     private Date lastModified = new Date();
 
@@ -47,14 +46,6 @@ public class TemplateItemRest extends BaseObjectRest<String> {
 
     public MetadataRest getMetadata() {
         return this.metadata;
-    }
-
-    public String getUuid() {
-        return uuid;
-    }
-
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
     }
 
     @Override

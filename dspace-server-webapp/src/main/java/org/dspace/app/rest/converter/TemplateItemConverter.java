@@ -39,7 +39,6 @@ public class TemplateItemConverter
         TemplateItemRest templateItemRest = new TemplateItemRest();
         templateItemRest.setProjection(projection);
         if (templateItem.getID() != null) {
-            templateItemRest.setUuid(templateItem.getID().toString());
             templateItemRest.setId(templateItem.getID().toString());
         }
 

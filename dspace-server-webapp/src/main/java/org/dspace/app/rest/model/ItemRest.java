@@ -37,8 +37,6 @@ public class ItemRest extends DSpaceObjectRest {
     private Date lastModified = new Date();
     @JsonIgnore
     private CollectionRest owningCollection;
-    @JsonIgnore
-    private CollectionRest templateItemOf;
 
     List<BundleRest> bundles;
 
@@ -91,14 +89,6 @@ public class ItemRest extends DSpaceObjectRest {
 
     public void setOwningCollection(CollectionRest owningCollection) {
         this.owningCollection = owningCollection;
-    }
-
-    public CollectionRest getTemplateItemOf() {
-        return templateItemOf;
-    }
-
-    public void setTemplateItemOf(CollectionRest templateItemOf) {
-        this.templateItemOf = templateItemOf;
     }
 
     @LinkRest(linkClass = BundleRest.class)

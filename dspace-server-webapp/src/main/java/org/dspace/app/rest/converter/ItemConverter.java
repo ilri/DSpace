@@ -53,10 +53,6 @@ public class ItemConverter
         if (owningCollection != null) {
             item.setOwningCollection(converter.toRest(owningCollection, projection));
         }
-        Collection templateItemOf = obj.getTemplateItemOf();
-        if (templateItemOf != null) {
-            item.setTemplateItemOf(converter.toRest(templateItemOf, projection));
-        }
 
         item.setBundles(obj.getBundles()
                             .stream()

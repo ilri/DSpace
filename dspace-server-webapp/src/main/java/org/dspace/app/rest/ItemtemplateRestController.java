@@ -17,11 +17,12 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import org.dspace.app.rest.converter.ConverterService;
+import org.dspace.app.rest.exception.DSpaceBadRequestException;
 import org.dspace.app.rest.exception.UnprocessableEntityException;
 import org.dspace.app.rest.model.TemplateItemRest;
 import org.dspace.app.rest.model.hateoas.TemplateItemResource;
 import org.dspace.app.rest.model.wrapper.TemplateItem;
-import org.dspace.app.rest.repository.ItemRestRepository;
+import org.dspace.app.rest.repository.TemplateItemRestRepository;
 import org.dspace.app.rest.utils.ContextUtil;
 import org.dspace.app.rest.utils.Utils;
 import org.dspace.authorize.AuthorizeException;
@@ -56,7 +57,7 @@ public class ItemtemplateRestController {
     private ItemService itemService;
 
     @Autowired
-    private ItemRestRepository itemRestRepository;
+    private TemplateItemRestRepository templateItemRestRepository;
 
     @Autowired
     private ConverterService converter;
@@ -81,7 +82,7 @@ public class ItemtemplateRestController {
     public TemplateItemResource getTemplateItem(HttpServletRequest request, @PathVariable UUID uuid) {
 
         Context context = ContextUtil.obtainContext(request);
-        TemplateItemRest templateItem = itemRestRepository.findOneTemplateItem(context, uuid);
+        TemplateItemRest templateItem = templateItemRestRepository.findOne(context, uuid.toString());
 
         if (templateItem == null) {
             throw new ResourceNotFoundException("Item with id: " + uuid + " not found");
@@ -117,13 +118,13 @@ public class ItemtemplateRestController {
      */
     @PreAuthorize("hasPermission(#uuid, 'ITEM', 'WRITE')")
     @RequestMapping(method = RequestMethod.PATCH)
-    public ResponseEntity<ResourceSupport> replaceTemplateItem(HttpServletRequest request, @PathVariable UUID uuid,
+    public ResponseEntity<ResourceSupport> patch(HttpServletRequest request, @PathVariable UUID uuid,
                                                                @RequestBody(required = true) JsonNode jsonNode)
         throws SQLException, AuthorizeException {
 
         Context context = ContextUtil.obtainContext(request);
         TemplateItem templateItem = getTemplateItem(context, uuid);
-        TemplateItemRest templateItemRest = itemRestRepository.patchTemplateItem(templateItem, jsonNode);
+        TemplateItemRest templateItemRest = templateItemRestRepository.patchTemplateItem(templateItem, jsonNode);
         context.commit();
 
         return ControllerUtils.toResponseEntity(HttpStatus.OK, null,
@@ -155,7 +156,7 @@ public class ItemtemplateRestController {
 
         Context context = ContextUtil.obtainContext(request);
         TemplateItem item = getTemplateItem(context, uuid);
-        itemRestRepository.removeTemplateItem(context, item);
+        templateItemRestRepository.removeTemplateItem(context, item);
         context.commit();
 
         return ControllerUtils.toEmptyResponse(HttpStatus.NO_CONTENT);
@@ -166,6 +167,9 @@ public class ItemtemplateRestController {
         if (item == null) {
             throw new ResourceNotFoundException(
                 "The given uuid did not resolve to an item on the server: " + uuid);
+        }
+        if (item.getTemplateItemOf() == null) {
+            throw new DSpaceBadRequestException("This given uuid does not resolve to a TemplateItem");
         }
 
         try {

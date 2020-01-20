@@ -74,7 +74,8 @@ public class CollectionRestRepository extends DSpaceObjectRestRepository<Collect
     private ItemService itemService;
 
     public CollectionRestRepository(CollectionService dsoService) {
-        super(dsoService, new DSpaceObjectPatch<CollectionRest>() {});
+        super(dsoService, new DSpaceObjectPatch<CollectionRest>() {
+        });
     }
 
     @Override
@@ -105,13 +106,13 @@ public class CollectionRestRepository extends DSpaceObjectRestRepository<Collect
 
     @SearchRestMethod(name = "findAuthorizedByCommunity")
     public Page<CollectionRest> findAuthorizedByCommunity(
-            @Parameter(value = "uuid", required = true) UUID communityUuid, Pageable pageable) {
+        @Parameter(value = "uuid", required = true) UUID communityUuid, Pageable pageable) {
         try {
             Context context = obtainContext();
             Community com = communityService.find(context, communityUuid);
             if (com == null) {
                 throw new ResourceNotFoundException(
-                        CommunityRest.CATEGORY + "." + CommunityRest.NAME + " with id: " + communityUuid
+                    CommunityRest.CATEGORY + "." + CommunityRest.NAME + " with id: " + communityUuid
                         + " not found");
             }
             List<Collection> collections = cs.findAuthorized(context, com, Constants.ADD);
@@ -155,7 +156,7 @@ public class CollectionRestRepository extends DSpaceObjectRestRepository<Collect
 
         if (id == null) {
             throw new DSpaceBadRequestException("Parent Community UUID is null. " +
-                "Cannot create a Collection without providing a parent Community");
+                                                    "Cannot create a Collection without providing a parent Community");
         }
 
         HttpServletRequest req = getRequestService().getCurrentRequest().getHttpServletRequest();
@@ -173,7 +174,7 @@ public class CollectionRestRepository extends DSpaceObjectRestRepository<Collect
             Community parent = communityService.find(context, id);
             if (parent == null) {
                 throw new UnprocessableEntityException("Parent community for id: "
-                    + id + " not found");
+                                                           + id + " not found");
             }
             collection = cs.create(context, parent);
             cs.update(context, collection);
@@ -188,7 +189,7 @@ public class CollectionRestRepository extends DSpaceObjectRestRepository<Collect
     @Override
     @PreAuthorize("hasPermission(#id, 'COLLECTION', 'WRITE')")
     protected CollectionRest put(Context context, HttpServletRequest request, String apiCategory, String model, UUID id,
-                                JsonNode jsonNode)
+                                 JsonNode jsonNode)
         throws RepositoryMethodNotImplementedException, SQLException, AuthorizeException {
         CollectionRest collectionRest;
         try {
@@ -210,6 +211,7 @@ public class CollectionRestRepository extends DSpaceObjectRestRepository<Collect
         }
         return converter.toRest(collection, Projection.DEFAULT);
     }
+
     @Override
     @PreAuthorize("hasPermission(#id, 'COLLECTION', 'DELETE')")
     protected void delete(Context context, UUID id) throws AuthorizeException {
@@ -233,7 +235,7 @@ public class CollectionRestRepository extends DSpaceObjectRestRepository<Collect
      * @param context
      * @param collection    The collection on which to install the logo
      * @param uploadfile    The new logo
-     * @return              The created bitstream containing the new logo
+     * @return The created bitstream containing the new logo
      * @throws IOException
      * @throws AuthorizeException
      * @throws SQLException
@@ -257,7 +259,7 @@ public class CollectionRestRepository extends DSpaceObjectRestRepository<Collect
      * @param context
      * @param collection    The collection for which to make the item
      * @param inputItemRest The new item
-     * @return              The created item
+     * @return The created item
      * @throws SQLException
      * @throws AuthorizeException
      */
@@ -265,9 +267,8 @@ public class CollectionRestRepository extends DSpaceObjectRestRepository<Collect
         throws SQLException, AuthorizeException {
         if (collection.getTemplateItem() != null) {
             throw new UnprocessableEntityException("Collection with ID " + collection.getID()
-                + " already contains a template item");
+                                                       + " already contains a template item");
         }
-
         cs.createTemplateItem(context, collection);
         Item item = collection.getTemplateItem();
         metadataConverter.setMetadata(context, item, inputItemRest.getMetadata());
@@ -276,26 +277,22 @@ public class CollectionRestRepository extends DSpaceObjectRestRepository<Collect
         cs.update(context, collection);
         itemService.update(context, item);
 
-        try {
-            return converter.toRest(new TemplateItem(item), Projection.DEFAULT);
-        } catch (IllegalArgumentException e) {
-            throw new UnprocessableEntityException("The item with id " + item.getID() + " is not a template item");
-        }
+        return converter.toRest(new TemplateItem(item), Projection.DEFAULT);
     }
 
     /**
      * This method looks up the template Item associated with a Collection
      *
      * @param collection    The Collection for which to find the template
-     * @return              The template Item from the Collection
+     * @return The template Item from the Collection
      * @throws SQLException
      */
     public TemplateItemRest getTemplateItem(Collection collection) throws SQLException {
         Item item = collection.getTemplateItem();
         if (item == null) {
             throw new ResourceNotFoundException(
-                    "TemplateItem from " + CollectionRest.CATEGORY + "." + CollectionRest.NAME + " with id: "
-                            + collection.getID() + " not found");
+                "TemplateItem from " + CollectionRest.CATEGORY + "." + CollectionRest.NAME + " with id: "
+                    + collection.getID() + " not found");
         }
 
         try {
