@@ -330,10 +330,6 @@ public class ItemRestRepositoryIT extends AbstractControllerIntegrationTest {
                    .andExpect(jsonPath("$._links.self.href",
                            Matchers.containsString("/api/core/collections")))
         ;
-
-        getClient().perform(get("/api/core/items/" + publicItem1.getID() + "/templateItemOf"))
-                   .andExpect(status().isNoContent());
-        ;
     }
 
     @Test
@@ -1202,9 +1198,9 @@ public class ItemRestRepositoryIT extends AbstractControllerIntegrationTest {
         getClient(token).perform(delete("/api/core/items/" + templateItem.getID()))
                     .andExpect(status().is(422));
 
-        //Check templateItem is available after failed deletion
+        //Check templateItem is not deleted
         getClient(token).perform(get("/api/core/items/" + templateItem.getID()))
-                   .andExpect(status().isOk());
+                   .andExpect(status().isBadRequest());
     }
 
     @Test
