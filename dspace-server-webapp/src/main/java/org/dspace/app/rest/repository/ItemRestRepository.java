@@ -124,7 +124,8 @@ public class ItemRestRepository extends DSpaceObjectRestRepository<Item, ItemRes
     public Page<ItemRest> findAll(Context context, Pageable pageable) {
         try {
             long total = itemService.countTotal(context);
-            Iterator<Item> it = itemService.findAll(context, pageable.getPageSize(), pageable.getOffset());
+            Iterator<Item> it = itemService.findAll(context, pageable.getPageSize(),
+                    Math.toIntExact(pageable.getOffset()));
             List<Item> items = new ArrayList<>();
             while (it.hasNext()) {
                 items.add(it.next());
@@ -147,7 +148,7 @@ public class ItemRestRepository extends DSpaceObjectRestRepository<Item, ItemRes
         if (item.getTemplateItemOf() != null) {
             throw new DSpaceBadRequestException("The given ID resolved to a template item");
         }
-        ItemRest itemRest = dsoPatch.patch(findOne(id), patch.getOperations());
+        ItemRest itemRest = dsoPatch.patch(findOne(context, id), patch.getOperations());
         updateDSpaceObject(item, itemRest);
     }
 
