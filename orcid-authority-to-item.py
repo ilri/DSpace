@@ -41,11 +41,11 @@ import sys
 def main():
     # parse the command line arguments
     parser = argparse.ArgumentParser(description='Map ORCID identifiers from the DSpace Solr authority core to cg.creator.id fields in each item.')
-    parser.add_argument('--debug', '-d', help='Print debug messages to standard error (stderr).', action='store_true')
-    parser.add_argument("--database-name", "-db", help='Database name', required=True)
-    parser.add_argument("--database-user", "-u", help='Database username', required=True)
-    parser.add_argument("--database-pass", "-p", help='Database password', required=True)
-    parser.add_argument('--solr-url', '-s', help='URL of Solr application', default='http://localhost:8080/solr')
+    parser.add_argument('-d', '--debug', help='Print debug messages to standard error (stderr).', action='store_true')
+    parser.add_argument('-db', "--database-name", help='Database name', required=True)
+    parser.add_argument('-u', "--database-user", help='Database username', required=True)
+    parser.add_argument('-p', "--database-pass", help='Database password', required=True)
+    parser.add_argument('-s', '--solr-url', help='URL of Solr application', default='http://localhost:8080/solr')
     args = parser.parse_args()
 
     # set the signal handler for SIGINT (^C) so we can exit cleanly

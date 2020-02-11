@@ -123,11 +123,11 @@ def signal_handler(signal, frame):
 
 
 parser = argparse.ArgumentParser(description='Query the AGROVOC REST API to validate subject terms from a text file.')
-parser.add_argument('--debug', '-d', help='Print debug messages to standard error (stderr).', action='store_true')
-parser.add_argument('--input-file', '-i', help='File name containing subject terms to look up.', required=True, type=argparse.FileType('r'))
-parser.add_argument('--language', '-l', help='Language to query terms (default en).', default='en')
-parser.add_argument('--output-matches-file', '-om', help='Name of output file to write matched subjects to.', required=True, type=argparse.FileType('w', encoding='UTF-8'))
-parser.add_argument('--output-rejects-file', '-or', help='Name of output file to write rejected subjects to.', required=True, type=argparse.FileType('w', encoding='UTF-8'))
+parser.add_argument('-d', '--debug', help='Print debug messages to standard error (stderr).', action='store_true')
+parser.add_argument('-i', '--input-file', help='File name containing subject terms to look up.', required=True, type=argparse.FileType('r'))
+parser.add_argument('-l', '--language', help='Language to query terms (default en).', default='en')
+parser.add_argument('-om', '--output-matches-file', help='Name of output file to write matched subjects to.', required=True, type=argparse.FileType('w', encoding='UTF-8'))
+parser.add_argument('-or', '--output-rejects-file', help='Name of output file to write rejected subjects to.', required=True, type=argparse.FileType('w', encoding='UTF-8'))
 args = parser.parse_args()
 
 # set the signal handler for SIGINT (^C) so we can exit cleanly

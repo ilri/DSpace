@@ -212,14 +212,14 @@ def signal_handler(signal, frame):
 
 
 parser = argparse.ArgumentParser(description='Query the public ORCID API for names associated with a list of ORCID identifiers, either from a text file or a DSpace authority Solr core. Optional "extract only" mode will simply fetch the ORCID identifiers from Solr and write them to the output file without resolving their names from ORCID\'s API.')
-parser.add_argument('--debug', '-d', help='Print debug messages to standard error (stderr).', action='store_true')
-parser.add_argument('--extract-only', '-e', help='If fetching ORCID identifiers from Solr, write them to the output file without resolving their names from the ORCID API.', action='store_true')
-parser.add_argument('--output-file', '-o', help='Name of output file to write to.', required=True, type=argparse.FileType('w', encoding='UTF-8'))
-parser.add_argument('--quiet', '-q', help='Do not print results to screen as we find them (results will still go to output file).', action='store_true')
+parser.add_argument('-d', '--debug', help='Print debug messages to standard error (stderr).', action='store_true')
+parser.add_argument('-e', '--extract-only', help='If fetching ORCID identifiers from Solr, write them to the output file without resolving their names from the ORCID API.', action='store_true')
+parser.add_argument('-o', '--output-file', help='Name of output file to write to.', required=True, type=argparse.FileType('w', encoding='UTF-8'))
+parser.add_argument('-q', '--quiet', help='Do not print results to screen as we find them (results will still go to output file).', action='store_true')
 # group of mutually exclusive options
 group = parser.add_mutually_exclusive_group(required=True)
-group.add_argument('--input-file', '-i', help='File name containing ORCID identifiers to resolve.', type=argparse.FileType('r'))
-group.add_argument('--solr-url', '-s', help='URL of Solr application (for example: http://localhost:8080/solr).')
+group.add_argument('-i', '--input-file', help='File name containing ORCID identifiers to resolve.', type=argparse.FileType('r'))
+group.add_argument('-s', '--solr-url', help='URL of Solr application (for example: http://localhost:8080/solr).')
 args = parser.parse_args()
 
 # set the signal handler for SIGINT (^C) so we can exit cleanly

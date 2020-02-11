@@ -128,9 +128,9 @@ def signal_handler(signal, frame):
 
 
 parser = argparse.ArgumentParser(description='Query the public IPAPI.co API for information associated with a list of IP addresses from a text file.')
-parser.add_argument('--debug', '-d', help='Print debug messages to standard error (stderr).', action='store_true')
-parser.add_argument('--input-file', '-i', help='File name containing IP addresses to resolve.', required=True, type=argparse.FileType('r'))
-parser.add_argument('--output-file', '-o', help='File name to save CSV output.', required=True, type=argparse.FileType('w'))
+parser.add_argument('-d', '--debug', help='Print debug messages to standard error (stderr).', action='store_true')
+parser.add_argument('-i', '--input-file', help='File name containing IP addresses to resolve.', required=True, type=argparse.FileType('r'))
+parser.add_argument('-o', '--output-file', help='File name to save CSV output.', required=True, type=argparse.FileType('w'))
 args = parser.parse_args()
 
 # set the signal handler for SIGINT (^C) so we can exit cleanly

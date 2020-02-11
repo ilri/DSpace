@@ -45,12 +45,12 @@ def signal_handler(signal, frame):
 
 
 parser = argparse.ArgumentParser(description='Download PDFs and generate thumbnails from files in a CSV.')
-parser.add_argument('--csv-file', '-i', help='Path to CSV file', required=True, type=argparse.FileType('r', encoding='UTF-8'))
-parser.add_argument('--debug', '-d', help='Print debug messages to standard error (stderr).', action='store_true')
-parser.add_argument('--dry-run', '-n', help='Only print changes that would be made.', action='store_true')
-parser.add_argument('--filename-field-name', '-f', help='Name of column with thumbnail filenames.', default='filename')
-parser.add_argument('--url-field-name', '-u', help='Name of column with URLs for the PDFs.', default='dc.description.url')
-parser.add_argument('--download-only', '-w', help='Only download the PDFs.', action='store_true')
+parser.add_argument('-i', '--csv-file', help='Path to CSV file', required=True, type=argparse.FileType('r', encoding='UTF-8'))
+parser.add_argument('-d', '--debug', help='Print debug messages to standard error (stderr).', action='store_true')
+parser.add_argument('-n', '--dry-run', help='Only print changes that would be made.', action='store_true')
+parser.add_argument('-f', '--filename-field-name', help='Name of column with thumbnail filenames.', default='filename')
+parser.add_argument('-u', '--url-field-name', help='Name of column with URLs for the PDFs.', default='dc.description.url')
+parser.add_argument('-w', '--download-only', help='Only download the PDFs.', action='store_true')
 args = parser.parse_args()
 
 # open the CSV

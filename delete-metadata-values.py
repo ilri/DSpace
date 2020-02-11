@@ -45,15 +45,15 @@ def signal_handler(signal, frame):
 
 
 parser = argparse.ArgumentParser(description='Delete metadata values in the DSpace SQL database.')
-parser.add_argument('--csv-file', '-i', help='Path to CSV file', type=argparse.FileType('r', encoding='UTF-8'))
-parser.add_argument('--database-name', '-db', help='Database name', required=True)
-parser.add_argument('--database-user', '-u', help='Database username', required=True)
-parser.add_argument('--database-pass', '-p', help='Database password', required=True)
-parser.add_argument('--debug', '-d', help='Print debug messages to standard error (stderr).', action='store_true')
-parser.add_argument('--dry-run', '-n', help='Only print changes that would be made.', action='store_true')
-parser.add_argument('--from-field-name', '-f', help='Name of column with values to be deleted', required=True)
-parser.add_argument('--metadata-field-id', '-m', type=int, help='ID of the field in the metadatafieldregistry table', required=True)
-parser.add_argument('--quiet', '-q', help='Do not print progress messages to the screen.', action='store_true')
+parser.add_argument('-i', '--csv-file', help='Path to CSV file', type=argparse.FileType('r', encoding='UTF-8'))
+parser.add_argument('-db', '--database-name', help='Database name', required=True)
+parser.add_argument('-u', '--database-user', help='Database username', required=True)
+parser.add_argument('-p', '--database-pass', help='Database password', required=True)
+parser.add_argument('-d', '--debug', help='Print debug messages to standard error (stderr).', action='store_true')
+parser.add_argument('-n', '--dry-run', help='Only print changes that would be made.', action='store_true')
+parser.add_argument('-f', '--from-field-name', help='Name of column with values to be deleted', required=True)
+parser.add_argument('-m', '--metadata-field-id', type=int, help='ID of the field in the metadatafieldregistry table', required=True)
+parser.add_argument('-q', '--quiet', help='Do not print progress messages to the screen.', action='store_true')
 args = parser.parse_args()
 
 # open the CSV

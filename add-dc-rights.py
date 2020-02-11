@@ -45,14 +45,14 @@ import sys
 def main():
     # parse the command line arguments
     parser = argparse.ArgumentParser(description='Add usage rights to items from CSV.')
-    parser.add_argument('--csv-file', '-i', help='CSV file containing item handles and rights.', required=True, type=argparse.FileType('r', encoding='UTF-8'))
-    parser.add_argument('--database-name', "-db", help='Database name', required=True)
-    parser.add_argument('--database-user', "-u", help='Database username', required=True)
-    parser.add_argument('--database-pass', "-p", help='Database password', required=True)
-    parser.add_argument('--debug', '-d', help='Print debug messages to standard error (stderr).', action='store_true')
-    parser.add_argument('--dry-run', '-n', help='Only print changes that would be made.', action='store_true')
-    parser.add_argument('--handle-field-name', '-hf', help='Name of column with handles in "10568/4" format (no URL).', default='handle')
-    parser.add_argument('--rights-field-name', '-rf', help='Name of column with usage rights.', default='dc.rights')
+    parser.add_argument('-i', '--csv-file', help='CSV file containing item handles and rights.', required=True, type=argparse.FileType('r', encoding='UTF-8'))
+    parser.add_argument('-db', '--database-name', help='Database name', required=True)
+    parser.add_argument('-u', '--database-user', help='Database username', required=True)
+    parser.add_argument('-p', '--database-pass', help='Database password', required=True)
+    parser.add_argument('-d', '--debug', help='Print debug messages to standard error (stderr).', action='store_true')
+    parser.add_argument('-n', '--dry-run', help='Only print changes that would be made.', action='store_true')
+    parser.add_argument('-hf', '--handle-field-name', help='Name of column with handles in "10568/4" format (no URL).', default='handle')
+    parser.add_argument('-rf', '--rights-field-name', help='Name of column with usage rights.', default='dc.rights')
     args = parser.parse_args()
 
     # set the signal handler for SIGINT (^C) so we can exit cleanly

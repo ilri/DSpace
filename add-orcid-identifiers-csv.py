@@ -55,14 +55,14 @@ import sys
 def main():
     # parse the command line arguments
     parser = argparse.ArgumentParser(description='Add ORCID identifiers to items for a given author name from CSV. Respects the author order from the dc.contributor.author field.')
-    parser.add_argument('--author-field-name', '-f', help='Name of column with author names.', default='dc.contributor.author')
-    parser.add_argument('--csv-file', '-i', help='CSV file containing author names and ORCID identifiers.', required=True, type=argparse.FileType('r', encoding='UTF-8'))
-    parser.add_argument("--database-name", "-db", help='Database name', required=True)
-    parser.add_argument("--database-user", "-u", help='Database username', required=True)
-    parser.add_argument("--database-pass", "-p", help='Database password', required=True)
-    parser.add_argument('--debug', '-d', help='Print debug messages to standard error (stderr).', action='store_true')
-    parser.add_argument('--dry-run', '-n', help='Only print changes that would be made.', action='store_true')
-    parser.add_argument('--orcid-field-name', '-o', help='Name of column with creators in "Name: 0000-0000-0000-0000" format.', default='cg.creator.id')
+    parser.add_argument('-f', '--author-field-name', help='Name of column with author names.', default='dc.contributor.author')
+    parser.add_argument('-i', '--csv-file', help='CSV file containing author names and ORCID identifiers.', required=True, type=argparse.FileType('r', encoding='UTF-8'))
+    parser.add_argument('-db', "--database-name", help='Database name', required=True)
+    parser.add_argument('-u', "--database-user", help='Database username', required=True)
+    parser.add_argument('-p', "--database-pass", help='Database password', required=True)
+    parser.add_argument('-d', '--debug', help='Print debug messages to standard error (stderr).', action='store_true')
+    parser.add_argument('-n', '--dry-run', help='Only print changes that would be made.', action='store_true')
+    parser.add_argument('-o', '--orcid-field-name', help='Name of column with creators in "Name: 0000-0000-0000-0000" format.', default='cg.creator.id')
     args = parser.parse_args()
 
     # set the signal handler for SIGINT (^C) so we can exit cleanly

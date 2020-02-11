@@ -79,8 +79,8 @@ def parse_community(community_id):
 
 parser = argparse.ArgumentParser(description='Find all collections under a given DSpace community.')
 parser.add_argument('community', help='Community to process, for example: 10568/1')
-parser.add_argument('--debug', '-d', help='Print debug messages.', action='store_true')
-parser.add_argument('--rest-url', '-u', help='URL of DSpace REST application.', default='http://localhost:8080/rest')
+parser.add_argument('-d', '--debug', help='Print debug messages.', action='store_true')
+parser.add_argument('-u', '--rest-url', help='URL of DSpace REST application.', default='http://localhost:8080/rest')
 args = parser.parse_args()
 
 handle = args.community
