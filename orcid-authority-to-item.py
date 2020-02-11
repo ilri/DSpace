@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# orcid-authority-to-item.py 1.1.0
+# orcid-authority-to-item.py 1.1.1
 #
 # Copyright 2018–2019 Alan Orth.
 #

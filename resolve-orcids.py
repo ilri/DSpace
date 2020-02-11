@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# resolve-orcids.py 1.2.0
+# resolve-orcids.py 1.2.1
 #
 # Copyright 2018–2019 Alan Orth.
 #

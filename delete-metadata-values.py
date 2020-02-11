@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# delete-metadata-values.py 1.0.1
+# delete-metadata-values.py 1.0.2
 #
 # Copyright 2018 Alan Orth.
 #

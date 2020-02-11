@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# add-orcid-identifiers-csv.py 1.0.0
+# add-orcid-identifiers-csv.py 1.0.1
 #
 # Copyright 2018 Alan Orth.
 #

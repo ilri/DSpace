@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# rest-find-collections.py 1.1.1
+# rest-find-collections.py 1.1.2
 #
 # Copyright 2018 Alan Orth.
 #
