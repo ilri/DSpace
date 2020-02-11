@@ -34,7 +34,7 @@
     <node label="Agnes Padre: 0000-0002-8281-3325" />
     <node label="Agnes Quisumbing: 0000-0002-5429-1857" />
     <node label="Ahmed Amri: 0000-0003-0997-0276" />
-    <node label="Akmal: 0000-0002-4316-5580" />
+    <node label="Akmal Akramkhanov: 0000-0002-4316-5580" />
     <node label="Aladdin Hamwieh: 0000-0001-6060-5560" />
     <node label="Alamu Emmanuel Oladeji: 0000-0001-6263-1359" />
     <node label="Alan Duncan: 0000-0002-3954-3067" />
@@ -79,6 +79,7 @@
     <node label="Ana Elizabeth Díaz Montilla: 0000-0002-7902-2549" />
     <node label="Ana Maria Leiva Sandoval: 0000-0002-7302-8253" />
     <node label="Ana Maria Loboguerrero: 0000-0003-2690-0763" />
+    <node label="Andrea Fongar: 0000-0003-2084-1571" />
     <node label="Andrea Visioni: 0000-0002-0586-4532" />
     <node label="Andreas Wilkes: 0000-0001-7546-991X" />
     <node label="Andreas de Neergaard: 0000-0001-9108-1122" />
@@ -90,8 +91,10 @@
     <node label="Andy Jarvis: 0000-0001-6543-0798" />
     <node label="Anette Engelund Friis: 0000-0002-0628-3668" />
     <node label="Anna Lacasta: 0000-0001-8381-9844" />
+    <node label="Anna Müller: 0000-0003-3120-8560" />
     <node label="Anna Vittoria Carluccio: 0000-0001-6887-5792" />
     <node label="Anne Mottet: 0000-0003-4142-5171" />
+    <node label="Anne Rietveld: 0000-0002-9400-9473" />
     <node label="Annet Mulema: 0000-0003-4192-3939" />
     <node label="Anoj Kumar: 0000-0003-3986-161X" />
     <node label="Anthony Whitbread: 0000-0003-4840-7670" />
@@ -290,6 +293,7 @@
     <node label="Dominique Dufour: 0000-0002-6046-0741" />
     <node label="Dong-Gill Kim: 0000-0003-3084-2658" />
     <node label="Dorcas Olubunmi Ibitoye: 0000-0002-3477-5723" />
+    <node label="Dr Jaindra Nath Tripathi, Ph.D.: 0000-0002-6366-917X" />
     <node label="Drew Shindell: 0000-0001-9925-8500" />
     <node label="Dries Roobroeck: 0000-0003-3176-4444" />
     <node label="E J Parkes: 0000-0003-4063-1483" />
@@ -326,9 +330,9 @@
     <node label="Endalkachew Wolde-meskel: 0000-0001-6433-0162" />
     <node label="Enoch Kikulwe: 0000-0003-2433-1704" />
     <node label="Enrico Bonaiuti: 0000-0002-4010-4141" />
+    <node label="Eric G. Nartey: 0000-0002-1562-3628" />
     <node label="Eric Koper: 0000-0003-3750-9639" />
     <node label="Eric M. Fèvre: 0000-0001-8931-4986" />
-    <node label="Eric Nartey: 0000-0002-1562-3628" />
     <node label="Eric Welch: 0000-0003-1902-0370" />
     <node label="Ericson Aranzales Rondon: 0000-0001-7487-9909" />
     <node label="Erik Delaquis: 0000-0002-1427-6572" />
@@ -406,6 +410,7 @@
     <node label="Giulia Rota Nodari: 0000-0002-6467-0228" />
     <node label="Giuseppe Pulighe: 0000-0002-6470-0984" />
     <node label="Glenn Hyman: 0000-0002-0406-1201" />
+    <node label="Gloria Mbabazi: 0000-0003-4149-3895" />
     <node label="Gloria Otieno: 0000-0002-2433-2996" />
     <node label="Godefroy Grosjean: 0000-0002-7027-9444" />
     <node label="Godfree Chigeza: 0000-0002-9235-0694" />
@@ -440,7 +445,6 @@
     <node label="Herath Manthrithilake: 0000-0001-5939-0566" />
     <node label="Hernan Ceballos: 0000-0002-8744-7918" />
     <node label="Hideki Kobayashi: 0000-0001-9319-0621" />
-    <node label="Hildo Loayza Loza: 0000-0002-4145-5453" />
     <node label="Hirut Betaw: 0000-0002-1205-3711" />
     <node label="Hloniphani Peter Moyo: 0000-0002-5938-2117" />
     <node label="Hu Suk Lee: 0000-0002-8731-9836" />
@@ -475,10 +479,8 @@
     <node label="J. Musembi Mutuku: 0000-0002-3985-368X" />
     <node label="JOHN IKEORGU: 0000-0003-4767-7062" />
     <node label="Jacob Midiwo: 0000-0002-1173-7820" />
-    <node label="Jacob Van Etten: 0000-0001-7554-2558" />
     <node label="Jacobo Arango: 0000-0002-4828-9398" />
     <node label="Jacques Wery: 0000-0003-0014-4541" />
-    <node label="Jaindra Tripathi: 0000-0002-6366-917X" />
     <node label="Jairo Rodriguez Chalarca: 0000-0002-3476-272X" />
     <node label="James Akoko: 0000-0001-5730-4505" />
     <node label="James Butler: 0000-0001-8057-6875" />
@@ -522,7 +524,6 @@
     <node label="Jesús Rodríguez De Luque: 0000-0002-8179-0109" />
     <node label="Jian Feng Liu: 0000-0003-1589-9605" />
     <node label="Jiang Li: 0000-0001-6298-2036" />
-    <node label="Jim Lorenzen: 0000-0001-7930-5752" />
     <node label="Joanna Joiner: 0000-0003-4278-1020" />
     <node label="Joanne Morris: 0000-0002-0068-0515" />
     <node label="Job Kihara: 0000-0002-4394-9553" />
@@ -560,7 +561,7 @@
     <node label="Jorge Luis Luna Meléndez: 0000-0002-3341-1039" />
     <node label="Jorge Luna: 0000-0002-9541-1181" />
     <node label="Jorge Sellare: 0000-0002-4445-0252" />
-    <node label="Jose De Vega: 0000-0003-2847-5158" />
+    <node label="Jose J. De Vega: 0000-0003-2847-5158" />
     <node label="Jose Polania: 0000-0002-1186-0503" />
     <node label="Joseph Fargione: 0000-0002-0636-5380" />
     <node label="Joseph M. Sandro: 0000-0002-8311-2299" />
@@ -663,6 +664,7 @@
     <node label="Lisa-Maria Rebelo: 0000-0002-8785-7810" />
     <node label="Liza Debevec: 0000-0001-6757-7435" />
     <node label="Lizeth Llanos-Herrera: 0000-0003-3540-7348" />
+    <node label="Loayza, H.: 0000-0002-4145-5453" />
     <node label="Lorena Soto-Pinto: 0000-0002-2254-8603" />
     <node label="Lorenzo Maggioni: 0000-0003-2521-8690" />
     <node label="Lotte Klapwijk: 0000-0002-8925-8037" />
@@ -842,7 +844,6 @@
     <node label="Netsayi Mudege: 0000-0002-0389-1967" />
     <node label="Nga Nguyen: 0000-0003-3273-8272" />
     <node label="Ngonidzashe Chirinda: 0000-0002-4213-6294" />
-    <node label="Nguyen Duc Trung: 0000-0001-6209-4821" />
     <node label="Nguyen Hong Son: 0000-0003-4462-1450" />
     <node label="Nhamo: 0000-0002-1182-6014" />
     <node label="Nicklas Forsell: 0000-0002-4984-3231" />
@@ -1007,6 +1008,7 @@
     <node label="Robert B. Zougmore: 0000-0002-6215-4852" />
     <node label="Robert Christley: 0000-0001-9250-3032" />
     <node label="Robert Dyball: 0000-0002-3264-9520" />
+    <node label="Robert Fungo: 0000-0002-4264-6905" />
     <node label="Robert J. Zomer: 0000-0002-2259-3359" />
     <node label="Robert Mwanga: 0000-0003-4405-2745" />
     <node label="Robert Ochago: 0000-0002-9814-0313" />
@@ -1023,6 +1025,7 @@
     <node label="Rony Swennen: 0000-0002-5258-9043" />
     <node label="Rosa Maria Roman-Cuesta: 0000-0002-6945-8402" />
     <node label="Rose Nankya: 0000-0003-4975-181X" />
+    <node label="Roseline Remans: 0000-0003-3659-8529" />
     <node label="Rosemirta Birungi: 0000-0001-6386-1930" />
     <node label="Ross Maidment: 0000-0003-2054-3259" />
     <node label="Rousseau Djouaka: 0000-0003-4772-0753" />
@@ -1053,7 +1056,7 @@
     <node label="Sandra Ruckstuhl Ruckstuhl: 0000-0002-7677-0234" />
     <node label="Sanita Dhaubanjar: 0000-0003-2974-0427" />
     <node label="Sanjiv de Silva: 0000-0001-8852-800X" />
-    <node label="Sarah Jones: 0000-0002-9422-5563" />
+    <node label="Sarah K. Jones: 0000-0002-9422-5563" />
     <node label="Sarah Mayanja: 0000-0002-9698-0036" />
     <node label="Sarath Gunasinghe: 0000-0002-2044-1685" />
     <node label="Sawasan Hassan: 0000-0002-5057-8957" />
@@ -1246,6 +1249,7 @@
     <node label="azaiez Ouled Belgacem: 0000-0002-5946-7540" />
     <node label="bernard vanlauwe: 0000-0001-6016-6027" />
     <node label="bodo raatz: 0000-0003-0556-0691" />
+    <node label="charles staver: 0000-0002-4532-6077" />
     <node label="evert thomas: 0000-0002-7838-6228" />
     <node label="fida alo: 0000-0001-8166-7947" />
     <node label="flavia scafetti: 0000-0003-3414-6131" />
