@@ -1431,6 +1431,10 @@
     </value-pairs>
     <value-pairs value-pairs-name="common_types" dc-term="type">
       <pair>
+        <displayed-value>Abstract</displayed-value>
+        <stored-value>Abstract</stored-value>
+      </pair>
+      <pair>
         <displayed-value>Audio</displayed-value>
         <stored-value>Audio</stored-value>
       </pair>
