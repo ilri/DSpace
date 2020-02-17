@@ -667,15 +667,17 @@ public abstract class DSpaceObjectServiceImpl<T extends DSpaceObject> implements
         clearMetadata(context, dso, schema, element, qualifier, Item.ANY);
 
         int idx = 0;
+        int place = 0;
         boolean last = true;
         for (MetadataValue rr : list) {
             if (idx == index) {
                 addMetadata(context, dso, schema, element, qualifier,
                             lang, value, authority, confidence);
+                place++;
                 last = false;
             }
-            addMetadata(context, dso, schema, element, qualifier,
-                        rr.getLanguage(), rr.getValue(), rr.getAuthority(), rr.getConfidence());
+            addSingleMetadataValueForMove(context, dso, schema, element, qualifier, place, rr);
+            place++;
             idx++;
         }
         if (last) {
@@ -712,28 +714,38 @@ public abstract class DSpaceObjectServiceImpl<T extends DSpaceObject> implements
         }
 
         idx = 0;
+        int place = 0;
         boolean last = true;
         for (MetadataValue rr : list) {
             if (idx == to && to < from) {
-                addMetadata(context, dso, schema, element, qualifier, moved.getLanguage(), moved.getValue(),
-                            moved.getAuthority(), moved.getConfidence());
+                addSingleMetadataValueForMove(context, dso, schema, element, qualifier, place, moved);
+                place++;
                 last = false;
             }
             if (idx != from) {
-                addMetadata(context, dso, schema, element, qualifier, rr.getLanguage(), rr.getValue(),
-                            rr.getAuthority(), rr.getConfidence());
+                addSingleMetadataValueForMove(context, dso, schema, element, qualifier, place, rr);
+                place++;
             }
             if (idx == to && to > from) {
-                addMetadata(context, dso, schema, element, qualifier, moved.getLanguage(), moved.getValue(),
-                            moved.getAuthority(), moved.getConfidence());
+                addSingleMetadataValueForMove(context, dso, schema, element, qualifier, place, moved);
+                place++;
                 last = false;
             }
             idx++;
         }
         if (last) {
-            addMetadata(context, dso, schema, element, qualifier, moved.getLanguage(), moved.getValue(),
-                        moved.getAuthority(), moved.getConfidence());
+            addSingleMetadataValueForMove(context, dso, schema, element, qualifier, place, moved);
         }
+    }
+
+    /**
+     * Supports moving metadata by adding the metadata value
+     */
+    protected void addSingleMetadataValueForMove(Context context, T dso, String schema, String element,
+                                               String qualifier, int place, MetadataValue rr) throws SQLException {
+        //just add the metadata
+        addMetadata(context, dso, schema, element, qualifier, rr.getLanguage(), rr.getValue(),
+                rr.getAuthority(), rr.getConfidence());
     }
 
     @Override

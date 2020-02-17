@@ -1373,6 +1373,33 @@ prevent the generation of resource policy entry values with null dspace_object a
     }
 
     /**
+     * Supports moving metadata by adding the metadata value or updating the place of the relationship
+     */
+    protected void addSingleMetadataValueForMove(Context context, Item dso, String schema, String element,
+                                               String qualifier, int place, MetadataValue rr) throws SQLException {
+        if (rr instanceof RelationshipMetadataValue) {
+            try {
+                //Retrieve the applicable relationship
+                Relationship rs = relationshipService.find(context,
+                        ((RelationshipMetadataValue) rr).getRelationshipId());
+                if (rs.getLeftItem() == dso) {
+                    rs.setLeftPlace(place);
+                } else {
+                    rs.setRightPlace(place);
+                }
+                relationshipService.update(context, rs);
+            } catch (Exception e) {
+                //should not occur, otherwise metadata can't be updated either
+                log.error("An error occurred while moving " + rr.getAuthority() + " for item " + dso.getID(), e);
+            }
+        } else {
+            //just add the metadata
+            addMetadata(context, dso, schema, element, qualifier, rr.getLanguage(), rr.getValue(),
+                    rr.getAuthority(), rr.getConfidence());
+        }
+    }
+
+    /**
      * This method will sort the List of MetadataValue objects based on the MetadataSchema, MetadataField Element,
      * MetadataField Qualifier and MetadataField Place in that order.
      * @param listToReturn  The list to be sorted
