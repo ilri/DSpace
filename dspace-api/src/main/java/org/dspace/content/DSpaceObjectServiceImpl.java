@@ -660,11 +660,9 @@ public abstract class DSpaceObjectServiceImpl<T extends DSpaceObject> implements
     @Override
     public void addAndShiftRightMetadata(Context context, T dso, String schema, String element, String qualifier,
                                          String lang, String value, String authority, int confidence, int index)
-        throws SQLException {
+            throws SQLException {
 
         List<MetadataValue> list = getMetadata(dso, schema, element, qualifier);
-
-        clearMetadata(context, dso, schema, element, qualifier, Item.ANY);
 
         int idx = 0;
         int place = 0;
@@ -672,23 +670,23 @@ public abstract class DSpaceObjectServiceImpl<T extends DSpaceObject> implements
         for (MetadataValue rr : list) {
             if (idx == index) {
                 addMetadata(context, dso, schema, element, qualifier,
-                            lang, value, authority, confidence);
+                        lang, value, authority, confidence);
                 place++;
                 last = false;
             }
-            addSingleMetadataValueForMove(context, dso, schema, element, qualifier, place, rr);
+            moveSingleMetadataValue(context, dso, schema, element, qualifier, place, rr);
             place++;
             idx++;
         }
         if (last) {
             addMetadata(context, dso, schema, element, qualifier,
-                        lang, value, authority, confidence);
+                    lang, value, authority, confidence);
         }
     }
 
     @Override
     public void moveMetadata(Context context, T dso, String schema, String element, String qualifier, int from, int to)
-        throws SQLException, IllegalArgumentException {
+            throws SQLException, IllegalArgumentException {
 
         if (from == to) {
             throw new IllegalArgumentException("The \"from\" location MUST be different from \"to\" location");
@@ -698,10 +696,8 @@ public abstract class DSpaceObjectServiceImpl<T extends DSpaceObject> implements
 
         if (from >= list.size()) {
             throw new IllegalArgumentException(
-                "The \"from\" location MUST exist for the operation to be successful. Idx:" + from);
+                    "The \"from\" location MUST exist for the operation to be successful. Idx:" + from);
         }
-
-        clearMetadata(context, dso, schema, element, qualifier, Item.ANY);
 
         int idx = 0;
         MetadataValue moved = null;
@@ -718,34 +714,33 @@ public abstract class DSpaceObjectServiceImpl<T extends DSpaceObject> implements
         boolean last = true;
         for (MetadataValue rr : list) {
             if (idx == to && to < from) {
-                addSingleMetadataValueForMove(context, dso, schema, element, qualifier, place, moved);
+                moveSingleMetadataValue(context, dso, schema, element, qualifier, place, moved);
                 place++;
                 last = false;
             }
             if (idx != from) {
-                addSingleMetadataValueForMove(context, dso, schema, element, qualifier, place, rr);
+                moveSingleMetadataValue(context, dso, schema, element, qualifier, place, rr);
                 place++;
             }
             if (idx == to && to > from) {
-                addSingleMetadataValueForMove(context, dso, schema, element, qualifier, place, moved);
+                moveSingleMetadataValue(context, dso, schema, element, qualifier, place, moved);
                 place++;
                 last = false;
             }
             idx++;
         }
         if (last) {
-            addSingleMetadataValueForMove(context, dso, schema, element, qualifier, place, moved);
+            moveSingleMetadataValue(context, dso, schema, element, qualifier, place, moved);
         }
     }
 
     /**
-     * Supports moving metadata by adding the metadata value
+     * Supports moving metadata by updating the place of the metadata value
      */
-    protected void addSingleMetadataValueForMove(Context context, T dso, String schema, String element,
-                                               String qualifier, int place, MetadataValue rr) throws SQLException {
-        //just add the metadata
-        addMetadata(context, dso, schema, element, qualifier, rr.getLanguage(), rr.getValue(),
-                rr.getAuthority(), rr.getConfidence());
+    protected void moveSingleMetadataValue(Context context, T dso, String schema, String element,
+                                           String qualifier, int place, MetadataValue rr) throws SQLException {
+        //just move the metadata
+        rr.setPlace(place);
     }
 
     @Override

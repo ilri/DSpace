@@ -1375,8 +1375,9 @@ prevent the generation of resource policy entry values with null dspace_object a
     /**
      * Supports moving metadata by adding the metadata value or updating the place of the relationship
      */
-    protected void addSingleMetadataValueForMove(Context context, Item dso, String schema, String element,
-                                               String qualifier, int place, MetadataValue rr) throws SQLException {
+    @Override
+    protected void moveSingleMetadataValue(Context context, Item dso, String schema, String element,
+                                           String qualifier, int place, MetadataValue rr) throws SQLException {
         if (rr instanceof RelationshipMetadataValue) {
             try {
                 //Retrieve the applicable relationship
@@ -1393,9 +1394,8 @@ prevent the generation of resource policy entry values with null dspace_object a
                 log.error("An error occurred while moving " + rr.getAuthority() + " for item " + dso.getID(), e);
             }
         } else {
-            //just add the metadata
-            addMetadata(context, dso, schema, element, qualifier, rr.getLanguage(), rr.getValue(),
-                    rr.getAuthority(), rr.getConfidence());
+            //just move the metadata
+            rr.setPlace(place);
         }
     }
 
