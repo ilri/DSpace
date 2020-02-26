@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
 import javax.servlet.http.HttpServletRequest;
 
 import gr.ekt.bte.core.TransformationEngine;
@@ -78,7 +79,8 @@ import org.springframework.web.multipart.MultipartFile;
  * @author Andrea Bollini (andrea.bollini at 4science.it)
  */
 @Component(WorkspaceItemRest.CATEGORY + "." + WorkspaceItemRest.NAME)
-public class WorkspaceItemRestRepository extends DSpaceRestRepository<WorkspaceItemRest, Integer> {
+public class WorkspaceItemRestRepository extends DSpaceRestRepository<WorkspaceItemRest, Integer>
+    implements FindableObjectRepository<WorkspaceItem, Integer> {
 
     public static final String OPERATION_PATH_SECTIONS = "sections";
 
@@ -531,4 +533,13 @@ public class WorkspaceItemRestRepository extends DSpaceRestRepository<WorkspaceI
         }
     }
 
+    @Override
+    public WorkspaceItem findDomainObjectByPk(Context context, Integer id) throws SQLException {
+        return wis.find(context, id);
+    }
+
+    @Override
+    public Class<Integer> getPKClass() {
+        return Integer.class;
+    }
 }
