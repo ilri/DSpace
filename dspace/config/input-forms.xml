@@ -5850,7 +5850,7 @@
     </value-pairs>
     <value-pairs value-pairs-name="ISI_Journal" dc-term="isijournal">
       <pair>
-        <displayed-value>N/A</displayed-value>
+        <displayed-value>Non-ISI Journal</displayed-value>
         <stored-value></stored-value>
       </pair>
       <pair>
