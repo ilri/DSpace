@@ -78,6 +78,7 @@ public class GroupRestRepositoryIT extends AbstractControllerIntegrationTest {
                             .content(mapper.writeValueAsBytes(groupRest))
                             .contentType(contentType))
                     .andExpect(status().isCreated())
+                    .andExpect(jsonPath("$", GroupMatcher.matchFullEmbeds()))
                     .andDo(result -> idRef
                             .set(UUID.fromString(read(result.getResponse().getContentAsString(), "$.id")))
                     );
@@ -103,6 +104,7 @@ public class GroupRestRepositoryIT extends AbstractControllerIntegrationTest {
         } finally {
             // remove the created group if any
             GroupBuilder.deleteGroup(idRef.get());
+            GroupBuilder.deleteGroup(idRefNoEmbeds.get());
         }
     }
 
