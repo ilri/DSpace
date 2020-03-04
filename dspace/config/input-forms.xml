@@ -1009,6 +1009,10 @@
     </value-pairs>
     <value-pairs value-pairs-name="ilrisubject" dc-term="ilrisubject">
       <pair>
+        <displayed-value>ADVOCACY</displayed-value>
+        <stored-value>ADVOCACY</stored-value>
+      </pair>
+      <pair>
         <displayed-value>AGRICULTURE</displayed-value>
         <stored-value>AGRICULTURE</stored-value>
       </pair>
@@ -1055,6 +1059,10 @@
       <pair>
         <displayed-value>ANIMAL PRODUCTS</displayed-value>
         <stored-value>ANIMAL PRODUCTS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>ANIMAL WELFARE</displayed-value>
+        <stored-value>ANIMAL WELFARE</stored-value>
       </pair>
       <pair>
         <displayed-value>APICULTURE</displayed-value>
@@ -1149,6 +1157,10 @@
         <stored-value>DIAGNOSTICS</stored-value>
       </pair>
       <pair>
+        <displayed-value>DIET</displayed-value>
+        <stored-value>DIET</stored-value>
+      </pair>
+      <pair>
         <displayed-value>DISEASE CONTROL</displayed-value>
         <stored-value>DISEASE CONTROL</stored-value>
       </pair>
@@ -1213,6 +1225,10 @@
         <stored-value>FOOD SECURITY</stored-value>
       </pair>
       <pair>
+        <displayed-value>FOOD SYSTEMS</displayed-value>
+        <stored-value>FOOD SYSTEMS</stored-value>
+      </pair>
+      <pair>
         <displayed-value>FORAGES</displayed-value>
         <stored-value>FORAGES</stored-value>
       </pair>
@@ -1237,12 +1253,16 @@
         <stored-value>GEODATA</stored-value>
       </pair>
       <pair>
+        <displayed-value>GHG EMISSIONS</displayed-value>
+        <stored-value>GHG EMISSIONS</stored-value>
+      </pair>
+      <pair>
         <displayed-value>GOATS</displayed-value>
         <stored-value>GOATS</stored-value>
       </pair>
       <pair>
-        <displayed-value>HEALTH</displayed-value>
-        <stored-value>HEALTH</stored-value>
+        <displayed-value>HUMAN HEALTH</displayed-value>
+        <stored-value>HUMAN HEALTH</stored-value>
       </pair>
       <pair>
         <displayed-value>HIV-AIDS</displayed-value>
@@ -1303,6 +1323,10 @@
       <pair>
         <displayed-value>MARKETS</displayed-value>
         <stored-value>MARKETS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>MEAT</displayed-value>
+        <stored-value>MEAT</stored-value>
       </pair>
       <pair>
         <displayed-value>MERS</displayed-value>
