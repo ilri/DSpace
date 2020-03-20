@@ -7,15 +7,22 @@
  */
 package org.dspace.scripts;
 
+import java.io.InputStream;
 import java.sql.SQLException;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.UUID;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
+import org.apache.commons.lang3.StringUtils;
 import org.dspace.authorize.service.AuthorizeService;
 import org.dspace.core.Context;
 import org.dspace.scripts.handler.DSpaceRunnableHandler;
+import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 
@@ -24,8 +31,9 @@ import org.springframework.beans.factory.annotation.Required;
  * it provides the basic variables to be hold by the script as well as the means to initialize, parse and run the script
  * Every DSpaceRunnable that is implemented in this way should be defined in the scripts.xml config file as a bean
  */
-public abstract class DSpaceRunnable implements Runnable {
+public abstract class DSpaceRunnable implements Runnable, BeanNameAware {
 
+    private UUID epersonIdentifier;
     /**
      * The name of the script
      */
@@ -51,15 +59,6 @@ public abstract class DSpaceRunnable implements Runnable {
     @Autowired
     private AuthorizeService authorizeService;
 
-    public String getName() {
-        return name;
-    }
-
-    @Required
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -71,6 +70,24 @@ public abstract class DSpaceRunnable implements Runnable {
 
     public Options getOptions() {
         return options;
+    }
+
+    /**
+     * This method will traverse all the options and it'll grab options defined as an InputStream type to then save
+     * the filename specified by that option in a list of Strings that'll be returned in the end
+     * @return  The list of Strings representing filenames from the options given to the script
+     */
+    public List<String> getFileNamesFromInputStreamOptions() {
+        List<String> fileNames = new LinkedList<>();
+
+        for (Option option : options.getOptions()) {
+            if (option.getType() == InputStream.class &&
+                StringUtils.isNotBlank(commandLine.getOptionValue(option.getOpt()))) {
+                fileNames.add(commandLine.getOptionValue(option.getOpt()));
+            }
+        }
+
+        return fileNames;
     }
 
     /**
@@ -152,5 +169,33 @@ public abstract class DSpaceRunnable implements Runnable {
             handler.logError("Error occured when trying to verify permissions for script: " + name);
         }
         return false;
+    }
+
+    public void setBeanName(String beanName) {
+        this.name = beanName;
+    }
+
+    /**
+     * Generic getter for the name
+     * @return the name value of this DSpaceRunnable
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Generic getter for the epersonIdentifier
+     * @return the epersonIdentifier value of this DSpaceRunnable
+     */
+    public UUID getEpersonIdentifier() {
+        return epersonIdentifier;
+    }
+
+    /**
+     * Generic setter for the epersonIdentifier
+     * @param epersonIdentifier   The epersonIdentifier to be set on this DSpaceRunnable
+     */
+    public void setEpersonIdentifier(UUID epersonIdentifier) {
+        this.epersonIdentifier = epersonIdentifier;
     }
 }

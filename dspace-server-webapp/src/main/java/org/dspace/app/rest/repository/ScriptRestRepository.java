@@ -22,12 +22,14 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.dspace.app.rest.converter.DSpaceRunnableParameterConverter;
 import org.dspace.app.rest.exception.DSpaceBadRequestException;
+import org.dspace.app.rest.exception.UnprocessableEntityException;
 import org.dspace.app.rest.model.ParameterValueRest;
 import org.dspace.app.rest.model.ProcessRest;
 import org.dspace.app.rest.model.ScriptRest;
 import org.dspace.app.rest.scripts.handler.impl.RestDSpaceRunnableHandler;
 import org.dspace.authorize.AuthorizeException;
 import org.dspace.core.Context;
+import org.dspace.eperson.EPerson;
 import org.dspace.scripts.DSpaceCommandLineParameter;
 import org.dspace.scripts.DSpaceRunnable;
 import org.dspace.scripts.service.ScriptService;
@@ -36,6 +38,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * This is the REST repository dealing with the Script logic
@@ -84,7 +87,8 @@ public class ScriptRestRepository extends DSpaceRestRepository<ScriptRest, Strin
      * @throws SQLException If something goes wrong
      * @throws IOException  If something goes wrong
      */
-    public ProcessRest startProcess(String scriptName) throws SQLException, IOException, AuthorizeException {
+    public ProcessRest startProcess(String scriptName,
+                                    List<MultipartFile> files) throws SQLException, IOException, AuthorizeException {
         Context context = obtainContext();
         String properties = requestService.getCurrentRequest().getServletRequest().getParameter("properties");
         List<DSpaceCommandLineParameter> dSpaceCommandLineParameters =
@@ -96,11 +100,15 @@ public class ScriptRestRepository extends DSpaceRestRepository<ScriptRest, Strin
         if (!scriptToExecute.isAllowedToExecute(context)) {
             throw new AuthorizeException("Current user is not eligible to execute script with name: " + scriptName);
         }
+        EPerson currentUser = context.getCurrentUser();
+        if (currentUser != null) {
+            scriptToExecute.setEpersonIdentifier(currentUser.getID());
+        }
         RestDSpaceRunnableHandler restDSpaceRunnableHandler = new RestDSpaceRunnableHandler(
             context.getCurrentUser(), scriptName, dSpaceCommandLineParameters);
         List<String> args = constructArgs(dSpaceCommandLineParameters);
         try {
-            runDSpaceScript(scriptToExecute, restDSpaceRunnableHandler, args);
+            runDSpaceScript(files, context, scriptToExecute, restDSpaceRunnableHandler, args);
             context.complete();
             return converter.toRest(restDSpaceRunnableHandler.getProcess(), utils.obtainProjection());
         } catch (SQLException e) {
@@ -137,10 +145,13 @@ public class ScriptRestRepository extends DSpaceRestRepository<ScriptRest, Strin
         return args;
     }
 
-    private void runDSpaceScript(DSpaceRunnable scriptToExecute,
-                                 RestDSpaceRunnableHandler restDSpaceRunnableHandler, List<String> args) {
+    private void runDSpaceScript(List<MultipartFile> files, Context context, DSpaceRunnable scriptToExecute,
+                                 RestDSpaceRunnableHandler restDSpaceRunnableHandler, List<String> args)
+        throws IOException, SQLException, AuthorizeException {
         try {
             scriptToExecute.initialize(args.toArray(new String[0]), restDSpaceRunnableHandler);
+            checkFileNames(scriptToExecute, files);
+            processFiles(context, restDSpaceRunnableHandler, files);
             restDSpaceRunnableHandler.schedule(scriptToExecute);
         } catch (ParseException e) {
             scriptToExecute.printHelp();
@@ -150,5 +161,38 @@ public class ScriptRestRepository extends DSpaceRestRepository<ScriptRest, Strin
                         + " and args: " + args, e);
         }
     }
+
+    private void processFiles(Context context, RestDSpaceRunnableHandler restDSpaceRunnableHandler,
+                              List<MultipartFile> files)
+        throws IOException, SQLException, AuthorizeException {
+        for (MultipartFile file : files) {
+            restDSpaceRunnableHandler
+                .writeFilestream(context, file.getOriginalFilename(), file.getInputStream(), "inputfile");
+        }
+    }
+
+    /**
+     * This method checks if the files referenced in the options are actually present for the request
+     * If this isn't the case, we'll abort the script now instead of creating issues later on
+     * @param scriptToExecute   The script that we'll attempt to run
+     * @param files             The list of files in the request
+     */
+    private void checkFileNames(DSpaceRunnable scriptToExecute, List<MultipartFile> files) {
+        List<String> fileNames = new LinkedList<>();
+        for (MultipartFile file : files) {
+            String fileName = file.getOriginalFilename();
+            if (fileNames.contains(fileName)) {
+                throw new UnprocessableEntityException("There are two files with the same name: " + fileName);
+            } else {
+                fileNames.add(fileName);
+            }
+        }
+
+        List<String> fileNamesFromOptions = scriptToExecute.getFileNamesFromInputStreamOptions();
+        if (!fileNames.containsAll(fileNamesFromOptions)) {
+            throw new UnprocessableEntityException("Files given in properties aren't all present in the request");
+        }
+    }
+
 
 }
