@@ -39,6 +39,7 @@ import org.dspace.app.rest.builder.WorkspaceItemBuilder;
 import org.dspace.app.rest.matcher.CollectionMatcher;
 import org.dspace.app.rest.matcher.ItemMatcher;
 import org.dspace.app.rest.matcher.WorkflowItemMatcher;
+import org.dspace.app.rest.matcher.WorkflowStepMatcher;
 import org.dspace.app.rest.matcher.WorkspaceItemMatcher;
 import org.dspace.app.rest.model.patch.AddOperation;
 import org.dspace.app.rest.model.patch.Operation;
@@ -52,6 +53,8 @@ import org.dspace.content.Item;
 import org.dspace.content.WorkspaceItem;
 import org.dspace.eperson.EPerson;
 import org.dspace.services.ConfigurationService;
+import org.dspace.xmlworkflow.factory.XmlWorkflowFactory;
+import org.dspace.xmlworkflow.state.Step;
 import org.dspace.xmlworkflow.storedcomponents.ClaimedTask;
 import org.dspace.xmlworkflow.storedcomponents.XmlWorkflowItem;
 import org.hamcrest.Matchers;
@@ -70,6 +73,8 @@ public class WorkflowItemRestRepositoryIT extends AbstractControllerIntegrationT
     @Autowired
     private ConfigurationService configurationService;
 
+    @Autowired
+    private XmlWorkflowFactory xmlWorkflowFactory;
 
     @Before
     @Override
