@@ -8,7 +8,6 @@
 package org.dspace.app.rest;
 
 import static com.jayway.jsonpath.matchers.JsonPathMatchers.hasJsonPath;
-
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -247,8 +246,10 @@ public class ItemRestRepositoryIT extends AbstractControllerIntegrationTest {
         Matcher<? super Object> publicItem1Matcher = ItemMatcher.matchItemWithTitleAndDateIssued(publicItem1,
                         "Public item 1", "2017-10-17");
 
+        String token = getAuthToken(admin.getEmail(), password);
+
         // When full projection is requested, response should include expected properties, links, and embeds.
-        getClient().perform(get("/api/core/items/" + publicItem1.getID())
+        getClient(token).perform(get("/api/core/items/" + publicItem1.getID())
                 .param("projection", "full"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", ItemMatcher.matchFullEmbeds()))

@@ -14,7 +14,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
 import javax.servlet.http.HttpServletRequest;
 
 import gr.ekt.bte.core.TransformationEngine;
@@ -69,6 +68,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.rest.webmvc.json.patch.PatchException;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -79,7 +79,7 @@ import org.springframework.web.multipart.MultipartFile;
  */
 @Component(WorkspaceItemRest.CATEGORY + "." + WorkspaceItemRest.NAME)
 public class WorkspaceItemRestRepository extends DSpaceRestRepository<WorkspaceItemRest, Integer>
-    implements FindableObjectRepository<WorkspaceItem, Integer> {
+    implements ReloadableEntityObjectRepository<WorkspaceItem, Integer> {
 
     public static final String OPERATION_PATH_SECTIONS = "sections";
 
@@ -127,7 +127,7 @@ public class WorkspaceItemRestRepository extends DSpaceRestRepository<WorkspaceI
         submissionConfigReader = new SubmissionConfigReader();
     }
 
-    //TODO @PreAuthorize("hasPermission(#id, 'WORKSPACEITEM', 'READ')")
+    @PreAuthorize("hasPermission(#id, 'WORKSPACEITEM', 'READ')")
     @Override
     public WorkspaceItemRest findOne(Context context, Integer id) {
         WorkspaceItem witem = null;
@@ -142,7 +142,7 @@ public class WorkspaceItemRestRepository extends DSpaceRestRepository<WorkspaceI
         return converter.toRest(witem, utils.obtainProjection());
     }
 
-    //TODO @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     @Override
     public Page<WorkspaceItemRest> findAll(Context context, Pageable pageable) {
         try {
@@ -155,7 +155,7 @@ public class WorkspaceItemRestRepository extends DSpaceRestRepository<WorkspaceI
         }
     }
 
-    //TODO @PreAuthorize("hasPermission(#submitterID, 'EPERSON', 'READ')")
+    @PreAuthorize("hasPermission(#submitterID, 'EPERSON', 'READ')")
     @SearchRestMethod(name = "findBySubmitter")
     public Page<WorkspaceItemRest> findBySubmitter(@Parameter(value = "uuid", required = true) UUID submitterID,
             Pageable pageable) {
@@ -221,7 +221,7 @@ public class WorkspaceItemRestRepository extends DSpaceRestRepository<WorkspaceI
         return WorkspaceItemRest.class;
     }
 
-    //TODO @PreAuthorize("hasPermission(#id, 'WORKSPACEITEM', 'WRITE')")
+    @PreAuthorize("hasPermission(#id, 'WORKSPACEITEM', 'WRITE')")
     @Override
     public WorkspaceItemRest upload(HttpServletRequest request, String apiCategory, String model, Integer id,
                                     MultipartFile file) throws SQLException {
@@ -271,7 +271,7 @@ public class WorkspaceItemRestRepository extends DSpaceRestRepository<WorkspaceI
         return wsi;
     }
 
-    //TODO @PreAuthorize("hasPermission(#id, 'WORKSPACEITEM', 'WRITE')")
+    @PreAuthorize("hasPermission(#id, 'WORKSPACEITEM', 'WRITE')")
     @Override
     public void patch(Context context, HttpServletRequest request, String apiCategory, String model, Integer id,
                       Patch patch) throws SQLException, AuthorizeException {
@@ -334,7 +334,7 @@ public class WorkspaceItemRestRepository extends DSpaceRestRepository<WorkspaceI
         }
     }
 
-    //TODO @PreAuthorize("hasPermission(#id, 'WORKSPACEITEM', 'DELETE')")
+    @PreAuthorize("hasPermission(#id, 'WORKSPACEITEM', 'DELETE')")
     @Override
     protected void delete(Context context, Integer id) throws AuthorizeException {
         WorkspaceItem witem = null;

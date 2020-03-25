@@ -25,6 +25,7 @@ import org.dspace.authorize.AuthorizeException;
 import org.dspace.authorize.service.AuthorizeService;
 import org.dspace.content.Community;
 import org.dspace.content.service.CommunityService;
+import org.dspace.core.Constants;
 import org.dspace.core.Context;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ControllerUtils;
@@ -40,6 +41,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * This RestController will take care of all the calls for a specific community's admingroup
+ * This is handled by calling "/api/core/communities/{uuid}/adminGroup" with the correct RequestMethod
+ */
 @RestController
 @RequestMapping("/api/core/communities" + REGEX_REQUESTMAPPING_IDENTIFIER_AS_UUID + "/adminGroup")
 public class CommunityAdminGroupRestController {
@@ -57,6 +62,16 @@ public class CommunityAdminGroupRestController {
     @Autowired
     private AuthorizeService authorizeService;
 
+    /**
+     * This method creates and returns an AdminGroup object for the given community
+     * This is called by using RequestMethod.POST on the default url for this class
+     * @param uuid      The UUID of the community for which we'll create an adminGroup
+     * @param response  The current response
+     * @param request   The current request
+     * @return          The created AdminGroup
+     * @throws SQLException         If something goes wrong
+     * @throws AuthorizeException   If something goes wrong
+     */
     @RequestMapping(method = RequestMethod.POST)
     @PreAuthorize("hasPermission(#uuid, 'COMMUNITY', 'WRITE')")
     public ResponseEntity<ResourceSupport> postAdminGroup(@PathVariable UUID uuid, HttpServletResponse response,
@@ -69,7 +84,8 @@ public class CommunityAdminGroupRestController {
         if (community == null) {
             throw new ResourceNotFoundException("No such community: " + uuid);
         }
-        if (!authorizeService.isAdmin(context) && !authorizeService.isCommunityAdmin(context)) {
+        if (!authorizeService.isAdmin(context) && !authorizeService.authorizeActionBoolean(context, community,
+                                                                                           Constants.ADMIN, true)) {
             throw new AccessDeniedException("The current user was not allowed to retrieve the AdminGroup for" +
                                                 " community: " + uuid);
         }
@@ -83,6 +99,17 @@ public class CommunityAdminGroupRestController {
         return ControllerUtils.toResponseEntity(HttpStatus.CREATED, new HttpHeaders(), groupResource);
     }
 
+    /**
+     * This method takes care of the deletion of an AdminGroup for the given community
+     * This is called by using RequestMethod.DELETE on the default url for this class
+     * @param uuid      The UUID of the community for which we'll delete the AdminGroup
+     * @param response  The current response
+     * @param request   The current request
+     * @return          An empty response if the deletion was successful
+     * @throws SQLException         If something goes wrong
+     * @throws AuthorizeException   If something goes wrong
+     * @throws IOException          If something goes wrong
+     */
     @RequestMapping(method = RequestMethod.DELETE)
     @PreAuthorize("hasPermission(#uuid, 'COMMUNITY', 'WRITE')")
     public ResponseEntity<ResourceSupport> deleteAdminGroup(@PathVariable UUID uuid, HttpServletResponse response,
@@ -95,7 +122,8 @@ public class CommunityAdminGroupRestController {
             throw new ResourceNotFoundException("No such community: " + uuid);
         }
 
-        if (!authorizeService.isAdmin(context) && !authorizeService.isCommunityAdmin(context)) {
+        if (!authorizeService.isAdmin(context) && !authorizeService.authorizeActionBoolean(context, community,
+                                                                                           Constants.ADMIN, true)) {
             throw new AccessDeniedException("The current user was not allowed to retrieve the AdminGroup for" +
                                                 " community: " + uuid);
         }

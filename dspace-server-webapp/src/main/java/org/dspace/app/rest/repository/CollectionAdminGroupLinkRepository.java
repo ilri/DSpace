@@ -12,12 +12,12 @@ import java.util.UUID;
 import javax.annotation.Nullable;
 import javax.servlet.http.HttpServletRequest;
 
-import org.dspace.app.rest.model.CommunityRest;
+import org.dspace.app.rest.model.CollectionRest;
 import org.dspace.app.rest.model.GroupRest;
 import org.dspace.app.rest.projection.Projection;
 import org.dspace.authorize.service.AuthorizeService;
-import org.dspace.content.Community;
-import org.dspace.content.service.CommunityService;
+import org.dspace.content.Collection;
+import org.dspace.content.service.CollectionService;
 import org.dspace.core.Constants;
 import org.dspace.core.Context;
 import org.dspace.eperson.Group;
@@ -29,44 +29,44 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
 
 /**
- * Link repository for "admingroup" subresource of an individual community.
+ * Link repository for "admingroup" subresource of an individual collection.
  *
  */
-@Component(CommunityRest.CATEGORY + "." + CommunityRest.NAME + "." + CommunityRest.ADMIN_GROUP)
-public class CommunityAdminGroupLinkRepository extends AbstractDSpaceRestRepository implements LinkRestRepository {
+@Component(CollectionRest.CATEGORY + "." + CollectionRest.NAME + "." + CollectionRest.ADMIN_GROUP)
+public class CollectionAdminGroupLinkRepository extends AbstractDSpaceRestRepository implements LinkRestRepository {
 
     @Autowired
-    private CommunityService communityService;
+    private CollectionService collectionService;
 
     @Autowired
     private AuthorizeService authorizeService;
 
     /**
-     * This method is responsible for retrieving the AdminGroup of a Community
+     * This method is responsible for retrieving the AdminGroup of a Collection
      * @param request           The current request
-     * @param communityId       The id of the community that we'll retrieve the admingroup for
+     * @param collectionId       The id of the collection that we'll retrieve the admingroup for
      * @param optionalPageable  The pageable if applicable
      * @param projection        The current Projection
-     * @return                  The admingroup of the given community
+     * @return                  The admingroup of the given collection
      */
-    @PreAuthorize("hasPermission(#communityId, 'COMMUNITY', 'READ')")
+    @PreAuthorize("hasPermission(#collectionId, 'COLLECTION', 'READ')")
     public GroupRest getAdminGroup(@Nullable HttpServletRequest request,
-                                   UUID communityId,
+                                   UUID collectionId,
                                    @Nullable Pageable optionalPageable,
                                    Projection projection) {
         try {
             Context context = obtainContext();
-            Community community = communityService.find(context, communityId);
-            if (community == null) {
-                throw new ResourceNotFoundException("No such community: " + communityId);
+            Collection collection = collectionService.find(context, collectionId);
+            if (collection == null) {
+                throw new ResourceNotFoundException("No such collection: " + collectionId);
             }
 
-            Group administrators = community.getAdministrators();
+            Group administrators = collection.getAdministrators();
 
-            if (!authorizeService.isAdmin(context) && !authorizeService.authorizeActionBoolean(context, community,
+            if (!authorizeService.isAdmin(context) && !authorizeService.authorizeActionBoolean(context, collection,
                                                                                                Constants.ADMIN, true)) {
                 throw new AccessDeniedException("The current user was not allowed to retrieve the AdminGroup for" +
-                                                    " community: " + communityId);
+                                                    " collection: " + collectionId);
             }
             if (administrators == null) {
                 return null;

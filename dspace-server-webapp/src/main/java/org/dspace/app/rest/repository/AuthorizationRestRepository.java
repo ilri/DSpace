@@ -92,7 +92,7 @@ public class AuthorizationRestRepository extends DSpaceRestRepository<Authorizat
             if (authorizationFeature == null) {
                 return null;
             }
-            // get the user specified identified by the id
+            // get the user specified identified by the id, can be null for anonymous
             EPerson user;
             try {
                 user = authorizationRestUtil.getEperson(context, id);
@@ -101,9 +101,11 @@ public class AuthorizationRestRepository extends DSpaceRestRepository<Authorizat
                 return null;
             }
             EPerson currUser = context.getCurrentUser();
-            // Temporarily change the Context's current user in order to retrieve
-            // authorizations based on that user
-            context.setCurrentUser(user);
+            if (currUser != user) {
+                // Temporarily change the Context's current user in order to retrieve
+                // authorizations based on that user
+                context.switchContextUser(user);
+            }
 
             if (authorizationFeatureService.isAuthorized(context, authorizationFeature, object)) {
                 Authorization authz = new Authorization();
@@ -112,8 +114,10 @@ public class AuthorizationRestRepository extends DSpaceRestRepository<Authorizat
                 authz.setObject(object);
                 authorizationRest = converter.toRest(authz, utils.obtainProjection());
             }
-            // restore the real current user
-            context.setCurrentUser(currUser);
+            if (currUser != user) {
+                // restore the real current user
+                context.restoreContextUser();
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage(), e);
         }
@@ -125,16 +129,11 @@ public class AuthorizationRestRepository extends DSpaceRestRepository<Authorizat
     /**
      * It returns the list of matching available authorizations granted to the specified eperson or to the anonymous
      * user. Only administrators and the user identified by the epersonUuid parameter can access this method
-     *
      * 
-     * @param context
-     *            the DSpace Context
      * @param uri
      *            the uri of the object to check the authorization against
      * @param epersonUuid
      *            the eperson uuid to use in the authorization evaluation
-     * @param featureName
-     *            limit the authorization check to only the feature identified via its name
      * @param pageable
      *            the pagination options
      * @return the list of matching authorization available for the requested user and object, filtered by feature if
@@ -154,11 +153,14 @@ public class AuthorizationRestRepository extends DSpaceRestRepository<Authorizat
         }
 
         EPerson currUser = context.getCurrentUser();
-        // get the user specified in the requested parameters
+        // get the user specified in the requested parameters, can be null for anonymous
         EPerson user = getUserFromRequestParameter(context, epersonUuid);
-        // Temporarily change the Context's current user in order to retrieve
-        // authorizations based on that user
-        context.setCurrentUser(user);
+        if (currUser != user) {
+            // Temporarily change the Context's current user in order to retrieve
+            // authorizations based on that user
+            context.switchContextUser(user);
+        }
+
         List<AuthorizationFeature> features = authorizationFeatureService.findByResourceType(obj.getUniqueType());
         List<Authorization> authorizations = new ArrayList<Authorization>();
         for (AuthorizationFeature f : features) {
@@ -166,8 +168,11 @@ public class AuthorizationRestRepository extends DSpaceRestRepository<Authorizat
                 authorizations.add(new Authorization(user, f, obj));
             }
         }
-        // restore the real current user
-        context.setCurrentUser(currUser);
+
+        if (currUser != user) {
+            // restore the real current user
+            context.restoreContextUser();
+        }
         return converter.toRestPage(utils.getPage(authorizations, pageable), utils.obtainProjection());
     }
 
@@ -175,9 +180,6 @@ public class AuthorizationRestRepository extends DSpaceRestRepository<Authorizat
      * It returns the authorization related to the requested feature if granted to the specified eperson or to the
      * anonymous user. Only administrators and the user identified by the epersonUuid parameter can access this method
      *
-     * 
-     * @param context
-     *            the DSpace Context
      * @param uri
      *            the uri of the object to check the authorization against
      * @param epersonUuid
@@ -204,11 +206,13 @@ public class AuthorizationRestRepository extends DSpaceRestRepository<Authorizat
         }
 
         EPerson currUser = context.getCurrentUser();
-        // get the user specified in the requested parameters
+        // get the user specified in the requested parameters, can be null for anonymous
         EPerson user = getUserFromRequestParameter(context, epersonUuid);
-        // Temporarily change the Context's current user in order to retrieve
-        // authorizations based on that user
-        context.setCurrentUser(user);
+        if (currUser != user) {
+            // Temporarily change the Context's current user in order to retrieve
+            // authorizations based on that user
+            context.switchContextUser(user);
+        }
         AuthorizationFeature feature = authorizationFeatureService.find(featureName);
         AuthorizationRest authorizationRest = null;
         if (authorizationFeatureService.isAuthorized(context, feature, obj)) {
@@ -218,8 +222,10 @@ public class AuthorizationRestRepository extends DSpaceRestRepository<Authorizat
             authz.setObject(obj);
             authorizationRest = converter.toRest(authz, utils.obtainProjection());
         }
-        // restore the real current user
-        context.setCurrentUser(currUser);
+        if (currUser != user) {
+            // restore the real current user
+            context.restoreContextUser();
+        }
         return authorizationRest;
     }
 

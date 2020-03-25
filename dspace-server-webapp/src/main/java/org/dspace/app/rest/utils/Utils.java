@@ -38,7 +38,6 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.UUID;
-
 import javax.annotation.Nullable;
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
@@ -66,8 +65,8 @@ import org.dspace.app.rest.projection.DefaultProjection;
 import org.dspace.app.rest.projection.EmbedRelsProjection;
 import org.dspace.app.rest.projection.Projection;
 import org.dspace.app.rest.repository.DSpaceRestRepository;
-import org.dspace.app.rest.repository.FindableObjectRepository;
 import org.dspace.app.rest.repository.LinkRestRepository;
+import org.dspace.app.rest.repository.ReloadableEntityObjectRepository;
 import org.dspace.content.BitstreamFormat;
 import org.dspace.content.DSpaceObject;
 import org.dspace.content.service.BitstreamFormatService;
@@ -829,14 +828,14 @@ public class Utils {
      * @param pkStr
      * @return
      */
-    public Serializable castToPKClass(FindableObjectRepository repository, String pkStr) {
+    public Serializable castToPKClass(ReloadableEntityObjectRepository repository, String pkStr) {
         return (Serializable) conversionService.convert(pkStr, repository.getPKClass());
     }
 
     /**
      * Return the dspace api model object corresponding to the provided, not null, rest object. This only works when the
      * rest object is supported by a {@link DSpaceRestRepository} that also implement the
-     * {@link FindableObjectRepository} interface. If this is not the case the method will throw an
+     * {@link ReloadableEntityObjectRepository} interface. If this is not the case the method will throw an
      * IllegalArgumentException
      * 
      * @param context
@@ -846,7 +845,7 @@ public class Utils {
      * @return the dspace api model object corresponding to the provided, not null, rest object
      * @throws IllegalArgumentException
      *             if the restObj is not supported by a {@link DSpaceRestRepository} that also implement the
-     *             {@link FindableObjectRepository} interface
+     *             {@link ReloadableEntityObjectRepository} interface
      * @throws SQLException
      *             if a database error occur
      */
@@ -854,8 +853,8 @@ public class Utils {
             throws IllegalArgumentException, SQLException {
         DSpaceRestRepository repository = getResourceRepositoryByCategoryAndModel(restObj.getCategory(),
                 restObj.getType());
-        Serializable pk = castToPKClass((FindableObjectRepository) repository, restObj.getId().toString());
-        return ((FindableObjectRepository) repository).findDomainObjectByPk(context, pk);
+        Serializable pk = castToPKClass((ReloadableEntityObjectRepository) repository, restObj.getId().toString());
+        return ((ReloadableEntityObjectRepository) repository).findDomainObjectByPk(context, pk);
     }
 
     /**
@@ -884,7 +883,7 @@ public class Utils {
         DSpaceRestRepository repository;
         try {
             repository = getResourceRepository(uriParts[0], uriParts[1]);
-            if (!(repository instanceof FindableObjectRepository)) {
+            if (!(repository instanceof ReloadableEntityObjectRepository)) {
                 throw new IllegalArgumentException("the supplied uri is not valid: " + uri);
             }
         } catch (RepositoryNotFoundException e) {
@@ -894,7 +893,7 @@ public class Utils {
         Serializable pk;
         try {
             // cast the string id in the uriParts to the real pk class
-            pk = castToPKClass((FindableObjectRepository) repository, uriParts[2]);
+            pk = castToPKClass((ReloadableEntityObjectRepository) repository, uriParts[2]);
         } catch (Exception e) {
             throw new IllegalArgumentException("the supplied uri is not valid: " + uri, e);
         }

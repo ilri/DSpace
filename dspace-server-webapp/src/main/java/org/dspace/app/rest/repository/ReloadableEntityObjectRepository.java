@@ -20,10 +20,10 @@ import org.dspace.core.ReloadableEntity;
  * 
  * @author Andrea Bollini (andrea.bollini at 4science.it)
  *
- * @param <F> the ReloadableEntity type
+ * @param <T> the ReloadableEntity type
  * @param <PK> the primary key type
  */
-public interface FindableObjectRepository<T extends ReloadableEntity<PK>,
+public interface ReloadableEntityObjectRepository<T extends ReloadableEntity<PK>,
     PK extends Serializable> {
 
     /**
