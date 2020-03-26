@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <node id="CGIAR author ORCID iDs" label="">
   <isComposedBy>
+    <node label="Veerle Fievez: 0000-0001-5042-6200" />
     <node label="ABASSE: 0000-0001-5828-4104" />
     <node label="ADEKUNLE ADEDEJI: 0000-0002-1934-9996" />
     <node label="ADESOJI ADESINA: 0000-0001-9653-969X" />
@@ -141,6 +142,7 @@
     <node label="Batkhishig Baival: 0000-0001-9681-7450" />
     <node label="Beata Dedicova: 0000-0001-8565-4676" />
     <node label="Beatrice Aighewi: 0000-0002-9398-1674" />
+    <node label="Beatrice Ekesa: 0000-0002-2630-258X" />
     <node label="Bedru: 0000-0002-7344-5743" />
     <node label="Bekele Hundie Kotu: 0000-0001-5788-6461" />
     <node label="Bekele Shiferaw: 0000-0002-3645-320X" />
@@ -151,6 +153,7 @@
     <node label="Benjamin Schiek: 0000-0002-2933-793X" />
     <node label="Berhanu Abera: 0000-0002-6930-6054" />
     <node label="Berhanu Gebremedhin: 0000-0002-3168-2783" />
+    <node label="Berta Ortiz-Crespo: 0000-0002-6664-0815" />
     <node label="Bettina Heider: 0000-0002-9792-8512" />
     <node label="Beverly McIntyre: 0000-0001-6984-6459" />
     <node label="Bezaiet Dessalegn: 0000-0001-9406-1389" />
@@ -165,6 +168,7 @@
     <node label="Boubaker Dhehibi: 0000-0003-3854-6669" />
     <node label="Boudy van Schagen: 0000-0002-3804-379X" />
     <node label="Brian DeRenzi: 0000-0001-7752-6965" />
+    <node label="Brian King: 0000-0002-7056-9214" />
     <node label="Brigitte L. Maass: 0000-0002-6164-3515" />
     <node label="Brigitte Laliberte: 0000-0003-4546-4047" />
     <node label="Brigitte Uwimana: 0000-0001-7460-9001" />
@@ -381,6 +385,7 @@
     <node label="Froukje Kruijssen: 0000-0002-9804-3038" />
     <node label="Frozan Darwish: 0000-0001-7440-9608" />
     <node label="Gabriela Burgos Zapata: 0000-0002-0268-6785" />
+    <node label="Gaia Gullotta: 0000-0002-2240-3869" />
     <node label="Gaia Lochetti: 0000-0001-7695-7667" />
     <node label="Garcia-Oliveira AL: 0000-0001-8561-4172" />
     <node label="Gbenga Akinwale: 0000-0001-7330-2825" />
@@ -878,7 +883,6 @@
     <node label="OMOTAYO KAYODE ADENIYI: 0000-0002-6196-5805" />
     <node label="Oghaiki Asaah Ndambi: 0000-0001-8563-2805" />
     <node label="Ojango J.M.K.: 0000-0003-0224-5370" />
-    <node label="Olabisi Onasanya: 0000-0003-0559-6723" />
     <node label="Olaf Westermann: 0000-0002-3278-8846" />
     <node label="Olivier Hanotte: 0000-0002-2877-4767" />
     <node label="Olivier Kamana: 0000-0003-4462-1629" />
@@ -888,6 +892,7 @@
     <node label="Oluwaseun Omikunle: 0000-0002-8300-4159" />
     <node label="Omar Alsoudani: 0000-0003-0700-6918" />
     <node label="Omowumi Adewuyi: 0000-0002-3062-2885" />
+    <node label="Onasanya O.O.: 0000-0003-0559-6723" />
     <node label="Onyebuchim Evelyn Ohanwusi: 0000-0001-9449-3990" />
     <node label="Opeyemi Agbeleye: 0000-0002-7847-3356" />
     <node label="Osamu Ito: 0000-0001-6358-8970" />
@@ -1105,7 +1110,6 @@
     <node label="Sonja Vermeulen: 0000-0001-6242-9513" />
     <node label="Sophia Huyer: 0000-0001-6267-8667" />
     <node label="Soroush Parsa: 0000-0002-6891-6352" />
-    <node label="Souaibou Yaouba: 0000-0002-2046-4844" />
     <node label="Soumya Balasubramanya: 0000-0001-8035-7306" />
     <node label="Srinivas Tavva: 0000-0001-7416-7397" />
     <node label="Stacy Philpott: 0000-0002-8338-3806" />
@@ -1192,7 +1196,6 @@
     <node label="Valerie Flax: 0000-0003-0200-3355" />
     <node label="Valerio Graziano: 0000-0002-2025-3449" />
     <node label="Vanessa Meadu: 0000-0002-4199-0341" />
-    <node label="Veerle Fievez: 0000-0001-5042-6200" />
     <node label="Veronica N.E Uzokwe: 0000-0002-5563-9210" />
     <node label="Veronique Alary: 0000-0003-4844-5423" />
     <node label="Victor Manyong: 0000-0003-2477-7132" />
@@ -1221,6 +1224,7 @@
     <node label="Xavier Blaes: 0000-0002-9341-6210" />
     <node label="Xianrui Zheng: 0000-0002-1784-7393" />
     <node label="Yamini Jha: 0000-0001-9623-0561" />
+    <node label="Yaouba Souaibou: 0000-0002-2046-4844" />
     <node label="Yashpal Singh Saharawat: 0000-0002-5987-4429" />
     <node label="Yichun Dong: 0000-0002-6850-3830" />
     <node label="Yigezu A. Yigezu: 0000-0002-9156-7082" />
