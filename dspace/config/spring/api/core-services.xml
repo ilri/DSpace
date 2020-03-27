@@ -15,7 +15,7 @@
     <bean class="org.dspace.app.itemimport.ItemImportServiceImpl" scope="prototype"/>
 
     <!--Ensure that bean remains prototype ! -->
-    <bean class="org.dspace.app.mediafilter.MediaFilterServiceImpl" scope="prototype"/>
+    <bean class="com.atmire.dspace.app.mediafilter.AtmireMediaFilterServiceImpl" scope="prototype"/>
 
     <bean class="org.dspace.app.sfx.SFXFileReaderServiceImpl" scope="prototype"/>
 
@@ -38,14 +38,14 @@
 
     <bean class="org.dspace.content.CollectionServiceImpl"/>
     <bean class="org.dspace.content.BitstreamFormatServiceImpl"/>
-    <bean class="org.dspace.content.BitstreamServiceImpl"/>
+    <bean class="com.atmire.dspace.content.AtmireBitstreamServiceImpl"/>
     <bean class="org.dspace.content.BundleServiceImpl"/>
     <bean class="org.dspace.content.CommunityServiceImpl"/>
     <bean class="org.dspace.content.InstallItemServiceImpl"/>
-    <bean class="org.dspace.content.ItemServiceImpl"/>
+    <bean class="com.atmire.dspace.content.AtmireItemServiceImpl"/>
     <bean class="org.dspace.content.MetadataFieldServiceImpl"/>
     <bean class="org.dspace.content.MetadataSchemaServiceImpl"/>
-    <bean class="org.dspace.content.MetadataValueServiceImpl"/>
+    <bean class="com.atmire.dspace.content.AtmireMetadataValueServiceImpl"/>
     <bean class="org.dspace.content.SiteServiceImpl"/>
     <bean class="org.dspace.content.SupervisedItemServiceImpl"/>
     <bean class="org.dspace.content.WorkspaceItemServiceImpl"/>
@@ -74,8 +74,8 @@
     <bean class="org.dspace.embargo.EmbargoServiceImpl" init-method="init"/>
 
     <bean class="org.dspace.eperson.AccountServiceImpl"/>
-    <bean class="org.dspace.eperson.EPersonServiceImpl"/>
-    <bean class="org.dspace.eperson.GroupServiceImpl"/>
+    <bean class="com.atmire.dspace.cua.AtmireEPersonServiceImpl"/>
+    <bean class="com.atmire.dspace.cua.AtmireGroupServiceImpl"/>
     <bean class="org.dspace.eperson.RegistrationDataServiceImpl"/>
     <bean class="org.dspace.eperson.SubscribeServiceImpl"/>
     <bean class="org.dspace.eperson.SupervisorServiceImpl"/>
@@ -94,7 +94,7 @@
 
     <!-- Statistics services are both lazy loaded (by name), as you are likely just using ONE of them and not both -->
     <bean id="elasticSearchLoggerService" class="org.dspace.statistics.ElasticSearchLoggerServiceImpl" lazy-init="true"/>
-    <bean id="solrLoggerService" class="org.dspace.statistics.SolrLoggerServiceImpl" lazy-init="true"/>
+    <bean id="solrLoggerService" class="com.atmire.dspace.cua.CUASolrLoggerServiceImpl" lazy-init="true"/>
 
     <bean id="spiderDetectorService" class="org.dspace.statistics.util.SpiderDetectorServiceImpl"/>
 
@@ -103,7 +103,7 @@
     <!--Basic workflow services, comment or remove when switching to the configurable workflow -->
     <bean class="org.dspace.workflowbasic.TaskListItemServiceImpl"/>
     <bean class="org.dspace.workflowbasic.BasicWorkflowItemServiceImpl"/>
-    <bean class="org.dspace.workflowbasic.BasicWorkflowServiceImpl"/>
+    <bean class="com.atmire.dspace.workflow.CUABasicWorkflowServiceImpl"/>
 
     <!--Configurable workflow services, uncomment the xml workflow beans below to enable the configurable workflow-->
     <!--<bean class="org.dspace.xmlworkflow.storedcomponents.ClaimedTaskServiceImpl"/>
@@ -112,7 +112,7 @@
     <bean class="org.dspace.xmlworkflow.storedcomponents.PoolTaskServiceImpl"/>
     <bean class="org.dspace.xmlworkflow.storedcomponents.WorkflowItemRoleServiceImpl"/>
     <bean class="org.dspace.xmlworkflow.storedcomponents.XmlWorkflowItemServiceImpl"/>
-    <bean class="org.dspace.xmlworkflow.XmlWorkflowServiceImpl"/>
+    <bean class="com.atmire.dspace.xmlworkflow.CUAXmlWorkflowServiceImpl"/>
     <bean class="org.dspace.xmlworkflow.WorkflowRequirementsServiceImpl"/>
     <bean class="org.dspace.xmlworkflow.XmlWorkflowFactoryImpl"/>-->
 

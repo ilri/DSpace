@@ -531,12 +531,16 @@
     <!-- All Items/Communities/Collections placed in Discovery should have an handle -->
    <field name="handle" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
 
+     <field name="handle_unversioned" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
+
    <field name="withdrawn" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
 
    <field name="discoverable" type="string" indexed="true" stored="true" omitNorms="true" docValues="true" />
       
    <field name="read" type="string" indexed="true" stored="true" omitNorms="true" multiValued="true" docValues="true" />
-   
+
+   <field name="bundleName" type="string" indexed="true" stored="true" omitNorms="true" multiValued="true" docValues="true" />
+
    <field name="has_content_in_original_bundle" type="string" indexed="true" stored="true" omitNorms="true" multiValued="true" docValues="true" />
    
     <!-- Community and collection hierarchy of the Item of interest (candidate for hierarchical facetting ) -->

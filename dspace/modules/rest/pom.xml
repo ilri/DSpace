@@ -74,8 +74,8 @@
                            next. the order is unpredictable.
                         -->
                         <overlay>
-                            <groupId>org.dspace</groupId>
-                            <artifactId>dspace-rest</artifactId>
+                            <groupId>com.atmire</groupId>
+                            <artifactId>atmire-cua-rest-webapp</artifactId>
                         </overlay>
                     </overlays>
                 </configuration>
@@ -128,12 +128,24 @@
             </exclusions>
         </dependency>
 
+        <dependency>
+            <groupId>com.atmire</groupId>
+            <artifactId>atmire-cua-rest-webapp</artifactId>
+            <type>war</type>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atmire</groupId>
+            <artifactId>atmire-cua-rest-api</artifactId>
+        </dependency>
+
         <!-- DSpace REST Webapp -->
         <dependency>
             <groupId>org.dspace</groupId>
             <artifactId>dspace-rest</artifactId>
             <type>war</type>
         </dependency>
+
         <dependency>
             <groupId>org.dspace</groupId>
             <artifactId>dspace-rest</artifactId>

@@ -72,6 +72,12 @@
            <type>jar</type>
        </dependency>
 
+       <!--<dependency>-->
+           <!--<groupId>org.apache.solr</groupId>-->
+           <!--<artifactId>solr-dataimporthandler</artifactId>-->
+           <!--<version>${solr.version}</version>-->
+       <!--</dependency>-->
+
        <!-- add dependencies for support of ICU extra analyzer -->
        <dependency>
            <groupId>org.apache.solr</groupId>
@@ -163,6 +169,12 @@
        <dependency>
            <groupId>xalan</groupId>
            <artifactId>xalan</artifactId>
+       </dependency>
+
+       <dependency>
+           <groupId>org.apache.solr</groupId>
+           <artifactId>solr-dataimporthandler</artifactId>
+           <version>${solr.version}</version>
        </dependency>
 
    </dependencies>

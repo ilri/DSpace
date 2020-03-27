@@ -26,7 +26,7 @@
         <sass.version>3.3.14</sass.version>
         <compass.version>1.0.1</compass.version>
         <node.version>6.5.0</node.version>
-        <npm.version>3.10.8</npm.version>
+        <yarn.version>0.21.3</yarn.version>
     </properties>
 
     <build>
@@ -58,7 +58,9 @@
                                 WEB-INF/**,META-INF/**
                             </excludes>
                             <includeArtifactIds>
-                                dspace-xmlui-mirage2
+                                dspace-xmlui-mirage2,
+                                atmire-cua-xmlui-mirage2,
+                                atmire-cua-xmlui-webapp
                             </includeArtifactIds>
                         </configuration>
                     </execution>
@@ -151,7 +153,6 @@
                             <directory>${project.build.directory}/themes</directory>
                             <targetPath>themes</targetPath>
                             <excludes>
-                                <exclude>**/node_modules/**</exclude>
                                 <exclude>**/.sass-cache/**</exclude>
                                 <exclude>**/.tmp/**</exclude>
                             </excludes>
@@ -230,6 +231,26 @@
                                                 <overwrite>false</overwrite>
                                                 <resources>
                                                     <resource>
+                                                        <directory>${basedir}/src/main/webapp/themes/0_CGIAR</directory>
+                                                        <filtering>false</filtering>
+                                                        <excludes>
+                                                            <exclude>sitemap.xmap</exclude>
+                                                        </excludes>
+                                                    </resource>
+                                                </resources>
+                                            </configuration>
+                                        </pluginExecutor>
+                                        <pluginExecutor>
+                                            <plugin>
+                                                <groupId>org.apache.maven.plugins</groupId>
+                                                <artifactId>maven-resources-plugin</artifactId>
+                                            </plugin>
+                                            <goal>copy-resources</goal>
+                                            <configuration>
+                                                <outputDirectory>${project.build.directory}/themes/@item@</outputDirectory>
+                                                <overwrite>false</overwrite>
+                                                <resources>
+                                                    <resource>
                                                         <directory>${project.build.directory}/mirage2-source-extracted</directory>
                                                         <filtering>false</filtering>
                                                         <excludes>
@@ -266,7 +287,7 @@
                                             </plugin>
                                             <goal>exec</goal>
                                             <configuration>
-                                                <executable>npm</executable>
+                                                <executable>yarn</executable>
                                                 <arguments>
                                                     <argument>install</argument>
                                                 </arguments>
@@ -339,6 +360,12 @@
                     <version>${compass.version}</version>
                     <type>gem</type>
                 </dependency>
+                <dependency>
+                    <groupId>rubygems</groupId>
+                    <artifactId>rb-inotify</artifactId>
+                    <version>0.9.8</version>
+                    <type>gem</type>
+                </dependency>
             </dependencies>
             <build>
                 <!-- Centrally manage the versions of all plugins used by this profile -->
@@ -352,7 +379,7 @@
                         <plugin>
                             <groupId>com.github.eirslett</groupId>
                             <artifactId>frontend-maven-plugin</artifactId>
-                            <version>1.0</version>
+                            <version>1.3</version>
                         </plugin>
                     </plugins>
                 </pluginManagement>
@@ -381,6 +408,26 @@
                                     <folder>${basedir}/src/main/webapp/themes/</folder>
                                     <pluginExecutors>
 
+                                        <pluginExecutor>
+                                            <plugin>
+                                                <groupId>org.apache.maven.plugins</groupId>
+                                                <artifactId>maven-resources-plugin</artifactId>
+                                            </plugin>
+                                            <goal>copy-resources</goal>
+                                            <configuration>
+                                                <outputDirectory>${project.build.directory}/themes/@item@</outputDirectory>
+                                                <overwrite>false</overwrite>
+                                                <resources>
+                                                    <resource>
+                                                        <directory>${basedir}/src/main/webapp/themes/0_CGIAR</directory>
+                                                        <filtering>false</filtering>
+                                                        <excludes>
+                                                            <exclude>sitemap.xmap</exclude>
+                                                        </excludes>
+                                                    </resource>
+                                                </resources>
+                                            </configuration>
+                                        </pluginExecutor>
                                         <pluginExecutor>
                                             <plugin>
                                                 <groupId>org.apache.maven.plugins</groupId>
@@ -427,12 +474,13 @@
                                                 <groupId>com.github.eirslett</groupId>
                                                 <artifactId>frontend-maven-plugin</artifactId>
                                             </plugin>
-                                            <goal>install-node-and-npm</goal>
+                                            <goal>install-node-and-yarn</goal>
                                             <!--<phase>process-resources</phase>-->
                                             <configuration>
                                                 <workingDirectory>${project.build.directory}/themes/@item@</workingDirectory>
                                                 <nodeVersion>v${node.version}</nodeVersion>
-                                                <npmVersion>${npm.version}</npmVersion>
+                                                <!--yarn needs the 'v' before the version, otherwise frontend-maven-plugin can't download it-->
+                                                <yarnVersion>v${yarn.version}</yarnVersion>
                                             </configuration>
                                         </pluginExecutor>
                                         <pluginExecutor>
@@ -441,7 +489,7 @@
                                                 <groupId>com.github.eirslett</groupId>
                                                 <artifactId>frontend-maven-plugin</artifactId>
                                             </plugin>
-                                            <goal>npm</goal>
+                                            <goal>yarn</goal>
                                             <!--<phase>prepare-package</phase>-->
                                             <configuration>
                                                 <arguments>install</arguments>
@@ -475,6 +523,20 @@
                                                 </execArgs>
                                             </configuration>
                                         </pluginExecutor>
+                                        <pluginExecutor>
+                                            <!--<id>grunt</id>-->
+                                            <plugin>
+                                                <groupId>com.github.eirslett</groupId>
+                                                <artifactId>frontend-maven-plugin</artifactId>
+                                            </plugin>
+                                            <goal>grunt</goal>
+                                            <!--<phase>prepare-package</phase>-->
+                                            <configuration>
+                                                <arguments>postcss:${grunt.environment}
+                                                </arguments>
+                                                <workingDirectory>${project.build.directory}/themes/@item@</workingDirectory>
+                                            </configuration>
+                                        </pluginExecutor>
                                     </pluginExecutors>
                                 </configuration>
                             </execution>
@@ -500,11 +562,24 @@
     <dependencies>
 
         <dependency>
+            <groupId>com.atmire</groupId>
+            <artifactId>atmire-cua-xmlui-mirage2</artifactId>
+            <type>war</type>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atmire</groupId>
+            <artifactId>atmire-cua-xmlui-webapp</artifactId>
+            <type>war</type>
+        </dependency>
+
+        <dependency>
             <groupId>org.dspace</groupId>
             <artifactId>dspace-xmlui-mirage2</artifactId>
             <version>${project.version}</version>
             <type>war</type>
         </dependency>
+
     </dependencies>
 
 </project>

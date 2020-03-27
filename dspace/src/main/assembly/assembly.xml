@@ -70,6 +70,25 @@
          <directory>solr</directory>
          <outputDirectory>solr</outputDirectory>
       </fileSet>
+       <fileSet>
+           <directory>target/atmire-modules</directory>
+           <outputDirectory>.</outputDirectory>
+           <includes>
+               <include>**</include>
+           </includes>
+           <excludes>
+               <exclude>**/fop/**</exclude>
+           </excludes>
+           <filtered>true</filtered>
+       </fileSet>
+       <fileSet>
+           <directory>target/atmire-modules</directory>
+           <outputDirectory>.</outputDirectory>
+           <includes>
+               <include>**/fop/**</include>
+           </includes>
+           <filtered>false</filtered>
+       </fileSet>
    </fileSets>
 
    <!--

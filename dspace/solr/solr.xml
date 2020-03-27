@@ -30,9 +30,12 @@
   -->
   <cores adminPath="/admin/cores">
     <core name="search" instanceDir="search" />
+      <core name="datatables" instanceDir="datatables" />
     <core name="statistics" instanceDir="statistics" />
+      <core name="cached_statistics" instanceDir="cached_statistics" />
     <core name="oai" instanceDir="oai" />
     <core name="authority" instanceDir="authority" />
+      <core name="versioning" instanceDir="versioning"/>
   </cores>
   
 </solr>

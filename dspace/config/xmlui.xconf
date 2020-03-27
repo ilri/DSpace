@@ -85,7 +85,8 @@
              Usage Statistics Engines
              ======================== -->
         <!-- By default, DSpace uses a Statistics engine based on SOLR -->
-        <aspect name="Statistics" path="resource://aspects/Statistics/" />
+        <!--<aspect name="Statistics" path="resource://aspects/Statistics/" />-->
+        <aspect name="CUA" path="resource://aspects/Statistics/" />
 
         <!--
              If you prefer to use "Elastic Search" Statistics, you can uncomment the below
@@ -123,6 +124,11 @@
             It's accessible for admins in the XMLTest menu or via the /XMLTest/ URL.
         -->
         <!-- <aspect name="XML Tests" path="resource://aspects/XMLTest/"/> -->
+        <aspect name="Datatables" path="resource://aspects/Datatables/" />
+        <aspect name="Atmire Modules Aspect" path="resource://aspects/AtmireModules/" />
+        <aspect name="ListingsAndReports" path="resource://aspects/ListingsAndReports/"/>
+        <aspect name="QualityAssurance" path="resource://aspects/MetadataQuality/"/>
+
     </aspects>
 
     <!--
@@ -156,8 +162,17 @@
         <!-- <theme name="Test Theme 1" handle="123456789/1" path="theme1/"/>    -->
         <!-- <theme name="Test Theme 2" regex="community-list" path="theme2/"/> -->
 
+        <!--for Mirage 2 based themes, use this line-->
+        <theme name="ReportingSuite" regex="(reporting-suite/(graph-editor|content-editor)/)" path="ReportingSuite/" />
+
+        <!--for non Mirage 2 based themes, use this line-->
+        <!-- <theme name="ReportingSuite" regex="(reporting-suite/(graph-editor|content-editor)/)|(statlet/em/).*" path="ReportingSuite/" /> -->
+
+        <theme name="Atmire Modules Theme" regex="atmire/.*" path="AtmireModules/" />
+
         <!-- Mirage theme, @mire contributed theme, default since DSpace 3.0 -->
         <!-- <theme name="Atmire Mirage Theme" regex=".*" path="Mirage/" /> -->
+
         <!-- Community themes -->
         <theme name="AfricaRising" handle="10568/16498" path="AfricaRising/" />
         <theme name="AgriFood" handle="10568/24754" path="AgriFood/" />

@@ -84,11 +84,23 @@
                         </resource>
                     </webResources>
                     <overlays>
-                        <overlay />
+                        <overlay>
+                            <groupId>com.atmire</groupId>
+                            <artifactId>atmire-listings-and-reports-webapp</artifactId>
+                            <type>war</type>
+                        </overlay>
+                        <overlay>
+                            <groupId>com.atmire</groupId>
+                            <artifactId>atmire-metadata-quality-jspui-webapp</artifactId>
+                            <type>war</type>
+                        </overlay>
                         <overlay>
                             <groupId>org.dspace</groupId>
                             <artifactId>dspace-jspui</artifactId>
                             <type>war</type>
+                            <excludes>
+                                <exclude>WEB-INF/classes/**</exclude>
+                            </excludes>
                         </overlay>
                     </overlays>
                 </configuration>
@@ -109,9 +121,25 @@
         </dependency>
 
         <dependency>
-            <groupId>org.dspace</groupId>
-            <artifactId>dspace-jspui</artifactId>
+            <groupId>com.atmire</groupId>
+            <artifactId>atmire-listings-and-reports-webapp</artifactId>
             <type>war</type>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atmire</groupId>
+            <artifactId>atmire-listings-and-reports-jspui-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atmire</groupId>
+            <artifactId>atmire-metadata-quality-jspui-webapp</artifactId>
+            <type>war</type>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atmire</groupId>
+            <artifactId>atmire-metadata-quality-jspui-api</artifactId>
         </dependency>
 
         <dependency>
@@ -122,10 +150,17 @@
         </dependency>
 
         <dependency>
+            <groupId>org.dspace</groupId>
+            <artifactId>dspace-jspui</artifactId>
+            <type>war</type>
+        </dependency>
+
+        <dependency>
            <groupId>javax.servlet</groupId>
            <artifactId>servlet-api</artifactId>
            <scope>provided</scope>
         </dependency>
+
     </dependencies>
 
 </project>

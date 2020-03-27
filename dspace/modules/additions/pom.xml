@@ -48,6 +48,30 @@
    Runtime and Compile Time dependencies for DSpace.
    -->
    <dependencies>
+       <dependency>
+           <groupId>com.atmire</groupId>
+           <artifactId>atmire-listings-and-reports-api</artifactId>
+       </dependency>
+      <dependency>
+         <groupId>com.atmire</groupId>
+         <artifactId>atmire-cua-api</artifactId>
+      </dependency>
+       <dependency>
+           <groupId>com.atmire</groupId>
+           <artifactId>atmire-metadata-quality-api</artifactId>
+       </dependency>
+      <dependency>
+         <groupId>com.atmire</groupId>
+         <artifactId>datatables-api</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>com.atmire</groupId>
+         <artifactId>atmire-dspace-api</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>com.atmire</groupId>
+         <artifactId>atmire-tracing</artifactId>
+      </dependency>
       <dependency>
          <groupId>org.dspace</groupId>
          <artifactId>dspace-api</artifactId>

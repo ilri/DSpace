@@ -58,6 +58,31 @@
             </activation>
             <build>
                 <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <version>2.6</version>
+                        <executions>
+                            <execution>
+                                <id>unpack</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>unpack-dependencies</goal>
+                                </goals>
+                                <configuration>
+                                    <includeArtifactIds>
+                                        atmire-cua-common,
+                                        atmire-metadata-quality-common,
+                                        atmire-datatables-common,
+                                        atmire-listings-and-reports-common
+                                    </includeArtifactIds>
+                                    <overWriteReleases>true</overWriteReleases>
+                                    <overWriteSnapshots>true</overWriteSnapshots>
+                                    <outputDirectory>${project.build.directory}/atmire-modules</outputDirectory>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
                    <!-- Assemble 'target/dspace-installer' using 'assembly.xml' -->
                    <plugin>
                         <artifactId>maven-assembly-plugin</artifactId>
@@ -150,6 +175,32 @@
     </profiles>
 
     <dependencies>
+
+        <dependency>
+            <groupId>org.dspace.modules</groupId>
+            <artifactId>additions</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atmire</groupId>
+            <artifactId>atmire-cua-common</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atmire</groupId>
+            <artifactId>atmire-metadata-quality-common</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atmire</groupId>
+            <artifactId>atmire-datatables-common</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atmire</groupId>
+            <artifactId>atmire-listings-and-reports-common</artifactId>
+        </dependency>
+
     	<!-- This dependency ensures DSpace OAI JAR is added to [dspace]/lib/,
              so that the 'dspace oai' launcher.xml command works.  -->
     	<dependency>
@@ -168,6 +219,7 @@
                 </exclusion>
             </exclusions>
     	</dependency>
+
         <dependency>
             <groupId>com.lyncode</groupId>
             <artifactId>builder-commons</artifactId>
@@ -179,6 +231,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
@@ -191,5 +244,6 @@
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
     	</dependency>
+
     </dependencies>
 </project>

@@ -103,6 +103,34 @@
                                    next. the order is unpredictable.
                                 -->
                                 <overlay>
+                                    <groupId>com.atmire</groupId>
+                                    <artifactId>atmire-cua-xmlui-webapp</artifactId>
+                                    <type>war</type>
+                                </overlay>
+                                <overlay>
+                                    <groupId>com.atmire</groupId>
+                                    <artifactId>atmire-metadata-quality-webapp</artifactId>
+                                    <type>war</type>
+                                </overlay>
+                                <overlay>
+                                    <groupId>com.atmire</groupId>
+                                    <artifactId>datatables-xmlui-webapp</artifactId>
+                                    <type>war</type>
+                                </overlay>
+                                <overlay>
+                                    <groupId>com.atmire</groupId>
+                                    <artifactId>modules-theme</artifactId>
+                                    <type>war</type>
+                                </overlay>
+                                <overlay>
+                                    <groupId>com.atmire</groupId>
+                                    <artifactId>atmire-dspace-xmlui</artifactId>
+                                    <type>war</type>
+                                    <excludes>
+                                        <exclude>WEB-INF/classes/**</exclude>
+                                    </excludes>
+                                </overlay>
+                                <overlay>
                                     <groupId>org.dspace</groupId>
                                     <artifactId>dspace-xmlui-lang</artifactId>
                                     <type>war</type>
@@ -174,6 +202,34 @@
                                     <type>war</type>
                                 </overlay>
                                 <overlay>
+                                    <groupId>com.atmire</groupId>
+                                    <artifactId>atmire-cua-xmlui-webapp</artifactId>
+                                    <type>war</type>
+                                </overlay>
+                                <overlay>
+                                    <groupId>com.atmire</groupId>
+                                    <artifactId>atmire-metadata-quality-webapp</artifactId>
+                                    <type>war</type>
+                                </overlay>
+                                <overlay>
+                                    <groupId>com.atmire</groupId>
+                                    <artifactId>datatables-xmlui-webapp</artifactId>
+                                    <type>war</type>
+                                </overlay>
+                                <overlay>
+                                    <groupId>com.atmire</groupId>
+                                    <artifactId>modules-theme</artifactId>
+                                    <type>war</type>
+                                </overlay>
+                                <overlay>
+                                    <groupId>com.atmire</groupId>
+                                    <artifactId>atmire-dspace-xmlui</artifactId>
+                                    <type>war</type>
+                                    <excludes>
+                                        <exclude>WEB-INF/classes/**</exclude>
+                                    </excludes>
+                                </overlay>
+                                <overlay>
                                     <groupId>org.dspace</groupId>
                                     <artifactId>dspace-xmlui-lang</artifactId>
                                     <type>war</type>
@@ -226,6 +282,67 @@
                     <artifactId>xml-apis</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atmire</groupId>
+            <artifactId>atmire-cua-xmlui-webapp</artifactId>
+            <type>war</type>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atmire</groupId>
+            <artifactId>atmire-cua-xmlui-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>it.ipzs</groupId>
+            <artifactId>fins-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atmire</groupId>
+            <artifactId>atmire-metadata-quality-webapp</artifactId>
+            <type>war</type>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atmire</groupId>
+            <artifactId>atmire-metadata-quality-xmlui-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atmire</groupId>
+            <artifactId>datatables-xmlui-webapp</artifactId>
+            <type>war</type>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atmire</groupId>
+            <artifactId>datatables-xmlui-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atmire</groupId>
+            <artifactId>modules-theme</artifactId>
+            <type>war</type>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atmire</groupId>
+            <artifactId>atmire-listings-and-reports-xmlui-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atmire</groupId>
+            <artifactId>atmire-dspace-xmlui</artifactId>
+            <type>war</type>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atmire</groupId>
+            <artifactId>atmire-dspace-xmlui</artifactId>
+            <classifier>classes</classifier>
         </dependency>
 
         <!-- DSpace XMLUI Languages -->

@@ -38,6 +38,7 @@
 	<xsl:import href="preprocess/itemview.xsl"/>
 	<xsl:import href="preprocess/navigation.xsl"/>
 	<xsl:import href="preprocess/custom/communitylist.xsl"/>
+	<xsl:import href="preprocess_additions_atmire_cua.xsl"/>
 	<xsl:output indent="yes"/>
 
 </xsl:stylesheet>
