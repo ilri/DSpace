@@ -26,7 +26,7 @@
         <sass.version>3.3.14</sass.version>
         <compass.version>1.0.1</compass.version>
         <node.version>6.5.0</node.version>
-        <npm.version>3.10.8</npm.version>
+        <yarn.version>0.21.3</yarn.version>
     </properties>
 
     <build>
@@ -151,7 +151,6 @@
                             <directory>${project.build.directory}/themes</directory>
                             <targetPath>themes</targetPath>
                             <excludes>
-                                <exclude>**/node_modules/**</exclude>
                                 <exclude>**/.sass-cache/**</exclude>
                                 <exclude>**/.tmp/**</exclude>
                             </excludes>
@@ -266,7 +265,7 @@
                                             </plugin>
                                             <goal>exec</goal>
                                             <configuration>
-                                                <executable>npm</executable>
+                                                <executable>yarn</executable>
                                                 <arguments>
                                                     <argument>install</argument>
                                                 </arguments>
@@ -352,7 +351,7 @@
                         <plugin>
                             <groupId>com.github.eirslett</groupId>
                             <artifactId>frontend-maven-plugin</artifactId>
-                            <version>1.0</version>
+                            <version>1.3</version>
                         </plugin>
                     </plugins>
                 </pluginManagement>
@@ -427,12 +426,13 @@
                                                 <groupId>com.github.eirslett</groupId>
                                                 <artifactId>frontend-maven-plugin</artifactId>
                                             </plugin>
-                                            <goal>install-node-and-npm</goal>
+                                            <goal>install-node-and-yarn</goal>
                                             <!--<phase>process-resources</phase>-->
                                             <configuration>
                                                 <workingDirectory>${project.build.directory}/themes/@item@</workingDirectory>
                                                 <nodeVersion>v${node.version}</nodeVersion>
-                                                <npmVersion>${npm.version}</npmVersion>
+                                                <!--yarn needs the 'v' before the version, otherwise frontend-maven-plugin can't download it-->
+                                                <yarnVersion>v${yarn.version}</yarnVersion>
                                             </configuration>
                                         </pluginExecutor>
                                         <pluginExecutor>
@@ -441,7 +441,7 @@
                                                 <groupId>com.github.eirslett</groupId>
                                                 <artifactId>frontend-maven-plugin</artifactId>
                                             </plugin>
-                                            <goal>npm</goal>
+                                            <goal>yarn</goal>
                                             <!--<phase>prepare-package</phase>-->
                                             <configuration>
                                                 <arguments>install</arguments>
@@ -473,6 +473,20 @@
                                                 <execArgs>${project.build.directory}/rubygems/bin/compass compile -c
                                                     config-${grunt.environment}.rb
                                                 </execArgs>
+                                            </configuration>
+                                        </pluginExecutor>
+                                        <pluginExecutor>
+                                            <!--<id>grunt</id>-->
+                                            <plugin>
+                                                <groupId>com.github.eirslett</groupId>
+                                                <artifactId>frontend-maven-plugin</artifactId>
+                                            </plugin>
+                                            <goal>grunt</goal>
+                                            <!--<phase>prepare-package</phase>-->
+                                            <configuration>
+                                                <arguments>postcss:${grunt.environment}
+                                                </arguments>
+                                                <workingDirectory>${project.build.directory}/themes/@item@</workingDirectory>
                                             </configuration>
                                         </pluginExecutor>
                                     </pluginExecutors>

@@ -45,7 +45,7 @@
     <script src="scripts/templates.js">&#160;</script>
 
     <!-- authorLookup and its dependencies -->
-    <script src="vendor/datatables/media/js/jquery.dataTables.js">&#160;</script>
+    <script src="node_modules/datatables/media/js/jquery.dataTables.js">&#160;</script>
     <script src="scripts/person-lookup.js">&#160;</script>
 
     <!-- endbuild -->

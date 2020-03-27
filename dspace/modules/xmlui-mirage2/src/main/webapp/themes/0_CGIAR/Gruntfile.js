@@ -9,6 +9,9 @@
 'use strict';
 
 module.exports = function (grunt) {
+    grunt.loadNpmTasks('grunt-postcss');
+    grunt.loadNpmTasks('grunt-contrib-watch');
+
     // show elapsed time at the end
     require('time-grunt')(grunt);
     // load all grunt tasks
@@ -55,6 +58,28 @@ module.exports = function (grunt) {
 
             }
         },
+        postcss: {
+            prod: {
+                options: {
+                    processors: [
+                        require('pixrem')(), // add fallbacks for rem units
+                        require('autoprefixer')({browsers: 'last 2 versions'}), // add vendor prefixes
+                        require('cssnano')() // minify the result
+                    ]
+                },
+                src: 'styles/*.css'
+            },
+            dev: {
+                options: {
+                    map: true, // inline sourcemaps
+                    processors: [
+                        require('pixrem')(), // add fallbacks for rem units
+                        require('autoprefixer')({browsers: 'last 2 versions'}), // add vendor prefixes
+                    ]
+                },
+                src: 'styles/*.css'
+            }
+        },
         coffee: {
             glob_to_multiple: {
                 expand: true,
@@ -89,6 +114,22 @@ module.exports = function (grunt) {
         } ,
         usemin: {
             html:'scripts-dist.xml'
+        },
+        watch: {
+            css: {
+                files: ['**/*.scss', '!**/node_modules/**'],
+                tasks: ['compass:dev', 'postcss:dev'],
+                options: {
+                    livereload: true
+                }
+            },
+            scripts: {
+                files: ['scripts.xml', '**/*.js', '**/*.hbs', '**/*.coffee', '!**/node_modules/**', '!scripts/templates.js', '!scripts/theme.js'],
+                tasks: ['no-compass-dev'],
+                options: {
+                    livereload: true
+                }
+            }
         }
     });
 
@@ -109,10 +150,10 @@ module.exports = function (grunt) {
         'shared-steps','uglify:generated'
     ]);
     grunt.registerTask('prod', [
-        'compass:prod', 'no-compass-prod'
+        'compass:prod', 'postcss:prod', 'no-compass-prod'
     ]);
     grunt.registerTask('dev', [
-        'compass:dev', 'no-compass-dev'
+        'compass:dev', 'postcss:dev', 'no-compass-dev'
     ]);
     grunt.registerTask('default', [
         'classic_mirage_color_scheme',

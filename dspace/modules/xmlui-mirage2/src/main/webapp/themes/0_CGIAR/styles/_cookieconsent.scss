@@ -1,6 +1,6 @@
-@import "../vendor/cookieconsent/src/styles/base.css";
-@import "../vendor/cookieconsent/src/styles/layout.css";
-@import "../vendor/cookieconsent/src/styles/media.css";
+@import "../node_modules/cookieconsent/src/styles/base.css";
+@import "../node_modules/cookieconsent/src/styles/layout.css";
+@import "../node_modules/cookieconsent/src/styles/media.css";
 
 .cc-window {
   background-color: $brand-primary;
