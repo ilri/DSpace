@@ -17,21 +17,21 @@
     <bean class="org.dspace.checker.dao.impl.MostRecentChecksumDAOImpl"/>
 
 
-    <bean class="org.dspace.content.dao.impl.CollectionDAOImpl"/>
-    <bean class="org.dspace.content.dao.impl.BitstreamDAOImpl"/>
+    <bean class="com.atmire.dspace.content.dao.impl.AtmireCollectionDAOImpl"/>
+    <bean class="com.atmire.dspace.content.dao.impl.AtmireBitstreamDAOImpl"/>
     <bean class="org.dspace.content.dao.impl.BitstreamFormatDAOImpl"/>
-    <bean class="org.dspace.content.dao.impl.BundleDAOImpl"/>
-    <bean class="org.dspace.content.dao.impl.CommunityDAOImpl"/>
-    <bean class="org.dspace.content.dao.impl.ItemDAOImpl"/>
+    <bean class="com.atmire.dspace.content.dao.impl.AtmireBundleDAOImpl"/>
+    <bean class="com.atmire.dspace.content.dao.impl.AtmireCommunityDAOImpl"/>
+    <bean class="com.atmire.dspace.content.dao.impl.AtmireItemDAOImpl"/>
     <bean class="org.dspace.content.dao.impl.MetadataFieldDAOImpl"/>
     <bean class="org.dspace.content.dao.impl.MetadataSchemaDAOImpl"/>
-    <bean class="org.dspace.content.dao.impl.MetadataValueDAOImpl"/>
+    <bean class="com.atmire.dspace.content.dao.impl.AtmireMetadataValueDAOImpl"/>
     <bean class="org.dspace.content.dao.impl.SiteDAOImpl"/>
     <bean class="org.dspace.content.dao.impl.WorkspaceItemDAOImpl"/>
 
-    <bean class="org.dspace.eperson.dao.impl.EPersonDAOImpl"/>
+    <bean class="com.atmire.dspace.cua.dao.impl.AtmireEPersonDAOImpl"/>
     <bean class="org.dspace.eperson.dao.impl.Group2GroupCacheDAOImpl"/>
-    <bean class="org.dspace.eperson.dao.impl.GroupDAOImpl"/>
+    <bean class="com.atmire.dspace.cua.dao.impl.AtmireGroupDAOImpl"/>
     <bean class="org.dspace.eperson.dao.impl.RegistrationDataDAOImpl"/>
     <bean class="org.dspace.eperson.dao.impl.SubscriptionDAOImpl"/>
 

@@ -80,5 +80,7 @@
         <mapping class="org.dspace.xmlworkflow.storedcomponents.WorkflowItemRole"/>
         <mapping class="org.dspace.xmlworkflow.storedcomponents.XmlWorkflowItem"/>-->
 
+        <mapping class="com.atmire.dspace.cua.EmailReport"/>
+
     </session-factory>
 </hibernate-configuration>

@@ -70,6 +70,14 @@
          <directory>solr</directory>
          <outputDirectory>solr</outputDirectory>
       </fileSet>
+       <fileSet>
+           <directory>target/atmire-modules</directory>
+           <outputDirectory>.</outputDirectory>
+           <includes>
+               <include>**</include>
+           </includes>
+           <filtered>true</filtered>
+       </fileSet>
    </fileSets>
 
    <!--

@@ -1,6 +1,19 @@
-$fa-font-path: "../vendor/fontawesome/fonts";
+$fa-font-path: "../node_modules/font-awesome/fonts";
 
-@import "../node_modules/fontawesome/scss/font-awesome";
+@import "atmire-cua";
+
+//example mixin to set the text-selection style
+@mixin selection {
+  ::-moz-selection { @content; }
+  ::selection { @content; }
+}
+
+@include selection {
+  color: white;
+  background: hotpink;
+}
+
+@import "../node_modules/font-awesome/scss/font-awesome";
 @import "../node_modules/academicons/css/academicons.css";
 @import "cookieconsent";
 

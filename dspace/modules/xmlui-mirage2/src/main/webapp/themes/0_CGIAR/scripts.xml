@@ -44,6 +44,7 @@
     <!-- authorLookup and its dependencies -->
     <script src="node_modules/datatables/media/js/jquery.dataTables.js">&#160;</script>
     <script src="scripts/person-lookup.js">&#160;</script>
+    <script src="scripts/most-popular.js">&#160;</script>
 
     <!-- endbuild -->
 

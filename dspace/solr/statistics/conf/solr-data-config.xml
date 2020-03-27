@@ -1,0 +1,9 @@
+<dataConfig>
+    <dataSource type="URLDataSource"  encoding="UTF-8" connectionTimeout="5000" readTimeout="10000" />
+    <document>
+        <entity name="import-dspace-1x-core" processor="SolrEntityProcessor" query="*:*" url="http://localhost:9999/solr/statistics"
+                rows="10000" wt="xml"></entity>
+        <entity name="import-dspace-4x-core" processor="SolrEntityProcessor" query="*:*" url="http://localhost:9999/solr/statistics"
+                rows="10000" wt="csv"></entity>
+    </document>
+</dataConfig>

@@ -1649,6 +1649,13 @@
     </arr>
   </requestHandler>
 
+    <requestHandler name="/dataimport" class="org.apache.solr.handler.dataimport.DataImportHandler">
+        <lst name="defaults">
+            <str name="config">solr-data-config.xml</str>
+            <str name="update.chain">suppressversion</str>
+        </lst>
+    </requestHandler>
+
   <!-- Highlighting Component
 
        http://wiki.apache.org/solr/HighlightingParameters
@@ -1830,6 +1837,15 @@
   <updateRequestProcessorChain name="uuid">    
     <processor class="solr.UUIDUpdateProcessorFactory">
       <str name="fieldName">uid</str>
+    </processor><processor class="solr.RunUpdateProcessorFactory" />
+  </updateRequestProcessorChain>
+
+    <updateRequestProcessorChain name="suppressversion">
+        <processor class="solr.UUIDUpdateProcessorFactory">
+            <str name="fieldName">uid</str>
+        </processor>
+        <processor class="solr.IgnoreFieldUpdateProcessorFactory">
+            <str name="fieldRegex">_version_</str>
     </processor>    
     <processor class="solr.RunUpdateProcessorFactory" />
   </updateRequestProcessorChain>

@@ -51,6 +51,7 @@
     <xsl:import href="aspect/artifactbrowser/item-list-alterations.xsl"/>
     <xsl:import href="aspect/discovery/discovery-item-list-alterations.xsl"/>
     <xsl:import href="core/page-structure-alterations.xsl"/>
+    <xsl:import href="theme_additions_atmire_cua.xsl"/>
     <xsl:output indent="yes"/>
 
 
