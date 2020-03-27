@@ -101,6 +101,7 @@ public class WorkflowItemRestRepository extends DSpaceRestRepository<WorkflowIte
     @Autowired
     WorkflowService<XmlWorkflowItem> wfs;
 
+    @Autowired
     ClaimedTaskService claimedTaskService;
 
     @Autowired
