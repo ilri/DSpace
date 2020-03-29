@@ -377,6 +377,7 @@ such as authors, subject, citation, description, etc
         or dim:field[@mdschema='cg' and @element='subject' and @qualifier='cpwf']
         or dim:field[@mdschema='cg' and @element='subject' and @qualifier='ilri']
         or dim:field[@mdschema='cg' and @element='subject' and @qualifier='iwmi']
+        or dim:field[@mdschema='cg' and @element='subject' and @qualifier='alliancebiovciat']
         or dim:field[@mdschema='cg' and @element='subject' and @qualifier='bioversity']
         or dim:field[@mdschema='cg' and @element='subject' and @qualifier='ciat']
         or dim:field[@mdschema='cg' and @element='subject' and @qualifier='cip']
@@ -394,6 +395,7 @@ such as authors, subject, citation, description, etc
                     <i18n:text>xmlui.dri2xhtml.METS-1.0.item-subject</i18n:text>
                 </h5>
                 <span class="cgiar-subjects">
+                    <xsl:call-template name="alliancebiovciatsubject"/>
                     <xsl:call-template name="bioversitysubject"/>
                     <xsl:call-template name="ccafsubject"/>
                     <xsl:call-template name="ciatsubject"/>
@@ -515,6 +517,16 @@ such as authors, subject, citation, description, etc
             <xsl:for-each select="dim:field[@mdschema='cg' and @element='subject' and @qualifier='icarda']">
                 <xsl:call-template name="discovery-link">
                     <xsl:with-param name="filtertype" select="'icardasubject'"/>
+                </xsl:call-template>
+                    <xsl:text>; </xsl:text>
+            </xsl:for-each>
+        </xsl:if>
+    </xsl:template>
+    <xsl:template name="alliancebiovciatsubject">
+        <xsl:if test="dim:field[@mdschema='cg' and @element='subject' and @qualifier='alliancebiovciat']">
+            <xsl:for-each select="dim:field[@mdschema='cg' and @element='subject' and @qualifier='alliancebiovciat']">
+                <xsl:call-template name="discovery-link">
+                    <xsl:with-param name="filtertype" select="'alliancebiovciatsubject'"/>
                 </xsl:call-template>
                     <xsl:text>; </xsl:text>
             </xsl:for-each>

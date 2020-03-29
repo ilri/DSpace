@@ -106,6 +106,7 @@
                 <ref bean="searchFilterRegion" />
                 <ref bean="searchFilterCountry" />
                 <ref bean="searchFilterSubject" />
+                <ref bean="searchFilterAllianceBioversityCiat"/>
                 <ref bean="searchFilterBioversity"/>
                 <ref bean="searchFilterCcafSubject"/>
                 <ref bean="searchFilterCiatSubject"/>
@@ -139,6 +140,7 @@
                 <ref bean="searchFilterCountry" />
                 <ref bean="searchFilterSubject" />
                 <ref bean="searchFilterSpecies" />
+                <ref bean="searchFilterAllianceBioversityCiat"/>
                 <ref bean="searchFilterBioversity"/>
                 <ref bean="searchFilterCcafSubject"/>
                 <ref bean="searchFilterCiatSubject"/>
@@ -251,6 +253,7 @@
                 <ref bean="searchFilterCountry" />
                 <ref bean="searchFilterSubject" />
                 <ref bean="searchFilterBreed" />
+                <ref bean="searchFilterAllianceBioversityCiat"/>
                 <ref bean="searchFilterBioversity"/>
                 <ref bean="searchFilterCcafSubject"/>
                 <ref bean="searchFilterCiatSubject"/>
@@ -285,6 +288,7 @@
                 <ref bean="searchFilterSubject" />
                 <ref bean="searchFilterSpecies" />
                 <ref bean="searchFilterBreed" />
+                <ref bean="searchFilterAllianceBioversityCiat"/>
                 <ref bean="searchFilterBioversity"/>
                 <ref bean="searchFilterCcafSubject"/>
                 <ref bean="searchFilterCiatSubject"/>
@@ -722,6 +726,18 @@
         <property name="metadataFields">
             <list>
                 <value>cg.subject.bioversity</value>
+            </list>
+        </property>
+        <property name="facetLimit" value="5"/>
+        <property name="sortOrderSidebar" value="COUNT"/>
+        <property name="sortOrderFilterPage" value="COUNT"/>
+    </bean>
+
+    <bean id="searchFilterAllianceBioversityCiat" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
+        <property name="indexFieldName" value="alliancebiovciatsubject"/>
+        <property name="metadataFields">
+            <list>
+                <value>cg.subject.alliancebiovciat</value>
             </list>
         </property>
         <property name="facetLimit" value="5"/>

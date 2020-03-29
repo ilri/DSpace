@@ -142,6 +142,7 @@
     <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_type">Output types</message>
     <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_ctasubject">CTA subjects</message>
     <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_wlesubject">WLE subjects</message>
+    <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_alliancebiovciatsubject">Alliance Bioversity–CIAT subjects</message>
     <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_bioversity">Bioversity subjects</message>
     <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_ciatsubject">CIAT subjects</message>
     <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_humidtropics">Humidtropics subjects</message>
@@ -207,6 +208,7 @@
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.iwmisubject.column_heading">IWMI subject</message>
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.ctasubject.column_heading">CTA subject</message>
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.wlesubject.column_heading">WLE subject</message>
+	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.alliancebiovciatsubject.column_heading">Alliance Bioversity–CIAT subject</message>
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.bioversity.column_heading">Bioversity subject</message>
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.ciatsubject.column_heading">CIAT subject</message>
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.crpsubject.column_heading">CGIAR Research Program</message>
@@ -265,6 +267,8 @@
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.trail.metadata.ctasubject">Browsing {0} by CTA Subject</message>
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.title.metadata.wlesubject">Browsing {0} WLE subject {1}</message>
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.trail.metadata.wlesubject">Browsing {0} by WLE subject</message>
+	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.title.metadata.alliancebiovciatsubject">Browsing {0} by Alliance of Bioversity–CIAT subject {1}</message>
+	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.trail.metadata.alliancebiovciatsubject">Browsing {0} by Alliance of Bioversity–CIAT subject</message>
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.title.metadata.bioversity">Browsing {0} by Bioversity subject {1}</message>
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.trail.metadata.bioversity">Browsing {0} by Bioversity subject</message>
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.title.metadata.ciatsubject">Browsing {0} by CIAT subject {1}</message>
@@ -381,6 +385,7 @@
 	<message key="xmlui.ArtifactBrowser.Navigation.browse_iwmisubject">By IWMI subject</message>
 	<message key="xmlui.ArtifactBrowser.Navigation.browse_ctasubject">By CTA subject</message>
 	<message key="xmlui.ArtifactBrowser.Navigation.browse_wlesubject">By WLE subject</message>
+	<message key="xmlui.ArtifactBrowser.Navigation.browse_alliancebiovciatsubject">By Alliance Bioversity–CIAT subject</message>
 	<message key="xmlui.ArtifactBrowser.Navigation.browse_bioversity">By Bioversity subject</message>
 	<message key="xmlui.ArtifactBrowser.Navigation.browse_ciatsubject">By CIAT subject</message>
 	<message key="xmlui.ArtifactBrowser.Navigation.browse_subregion">By Subregion</message>
@@ -403,6 +408,7 @@
 	<message key="xmlui.ArtifactBrowser.SimpleSearch.filter.icardasubject">ICARDA subject</message>
 	<message key="xmlui.ArtifactBrowser.SimpleSearch.filter.affiliation">Author affiliation</message>
 	<message key="xmlui.ArtifactBrowser.SimpleSearch.filter.type">Output type</message>
+	<message key="xmlui.ArtifactBrowser.SimpleSearch.filter.alliancebiovciatsubject">Alliance Bioversity–CIAT subject</message>
 	<message key="xmlui.ArtifactBrowser.SimpleSearch.filter.bioversity">Bioversity subject</message>
 	<message key="xmlui.ArtifactBrowser.SimpleSearch.filter.ccafsubject">CCAFS subject</message>
 	<message key="xmlui.ArtifactBrowser.SimpleSearch.filter.ciatsubject">CIAT subject</message>

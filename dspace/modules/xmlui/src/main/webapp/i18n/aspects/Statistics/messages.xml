@@ -603,6 +603,7 @@ DAMAGE.
     <message key="xmlui.reporting-suite.statistics.graph-editor.data-source.dataset.option.basin">River basin (cg.river.basin)</message>
     <message key="xmlui.reporting-suite.statistics.graph-editor.data-source.dataset.option.cta">CTA subject (cg.subject.cta)</message>
     <message key="xmlui.reporting-suite.statistics.graph-editor.data-source.dataset.option.wlesubject">WLE subject (cg.subject.wle)</message>
+    <message key="xmlui.reporting-suite.statistics.graph-editor.data-source.dataset.option.alliancebiovciatsubject">Alliance of Bioversity–CIAT subject (cg.subject.alliancebiovciat)</message>
     <message key="xmlui.reporting-suite.statistics.graph-editor.data-source.dataset.option.bioversity">Bioversity subject (cg.subject.bioversity)</message>
     <message key="xmlui.reporting-suite.statistics.graph-editor.data-source.dataset.option.ciat">CIAT subject (cg.subject.ciat)</message>
     <message key="xmlui.reporting-suite.statistics.graph-editor.data-source.dataset.option.humidtropics">Humidtropics subject (cg.subject.humidtropics)</message>
@@ -814,6 +815,7 @@ DAMAGE.
     <message key="xmlui.reporting-suite.statistics.contentanalysis.basin">River basin</message>
     <message key="xmlui.reporting-suite.statistics.contentanalysis.cta">CTA subject</message>
     <message key="xmlui.reporting-suite.statistics.contentanalysis.wlesubject">WLE subject</message>
+    <message key="xmlui.reporting-suite.statistics.contentanalysis.alliancebiovciatsubject">Alliance Bioversity–CIAT subject</message>
     <message key="xmlui.reporting-suite.statistics.contentanalysis.bioversity">Bioversity subject</message>
     <message key="xmlui.reporting-suite.statistics.contentanalysis.ciat">CIAT subject</message>
     <message key="xmlui.reporting-suite.statistics.contentanalysis.humidtropics">Humitropics subject</message>
