@@ -71,7 +71,7 @@ public class ScriptRestRepository extends DSpaceRestRepository<ScriptRest, Strin
     @Override
     public Page<ScriptRest> findAll(Context context, Pageable pageable) {
         List<DSpaceRunnable> dSpaceRunnables = scriptService.getDSpaceRunnables(context);
-        return converter.toRestPage(utils.getPage(dSpaceRunnables, pageable), utils.obtainProjection());
+        return converter.toRestPage(dSpaceRunnables, pageable, utils.obtainProjection());
     }
 
     @Override
@@ -87,9 +87,9 @@ public class ScriptRestRepository extends DSpaceRestRepository<ScriptRest, Strin
      * @throws SQLException If something goes wrong
      * @throws IOException  If something goes wrong
      */
-    public ProcessRest startProcess(String scriptName,
-                                    List<MultipartFile> files) throws SQLException, IOException, AuthorizeException {
-        Context context = obtainContext();
+    public ProcessRest startProcess(Context context, String scriptName,
+                                    List<MultipartFile> files) throws SQLException,
+        IOException, AuthorizeException {
         String properties = requestService.getCurrentRequest().getServletRequest().getParameter("properties");
         List<DSpaceCommandLineParameter> dSpaceCommandLineParameters =
             processPropertiesToDSpaceCommandLineParameters(properties);
@@ -107,16 +107,8 @@ public class ScriptRestRepository extends DSpaceRestRepository<ScriptRest, Strin
         RestDSpaceRunnableHandler restDSpaceRunnableHandler = new RestDSpaceRunnableHandler(
             context.getCurrentUser(), scriptName, dSpaceCommandLineParameters);
         List<String> args = constructArgs(dSpaceCommandLineParameters);
-        try {
-            runDSpaceScript(files, context, scriptToExecute, restDSpaceRunnableHandler, args);
-            context.complete();
-            return converter.toRest(restDSpaceRunnableHandler.getProcess(), utils.obtainProjection());
-        } catch (SQLException e) {
-            log.error("Failed to create a process with user: " + context.getCurrentUser() +
-                          " scriptname: " + scriptName + " and parameters " + DSpaceCommandLineParameter
-                .concatenate(dSpaceCommandLineParameters), e);
-        }
-        return null;
+        runDSpaceScript(files, scriptToExecute, restDSpaceRunnableHandler, args);
+        return converter.toRest(restDSpaceRunnableHandler.getProcess(), utils.obtainProjection());
     }
 
     private List<DSpaceCommandLineParameter> processPropertiesToDSpaceCommandLineParameters(String propertiesJson)

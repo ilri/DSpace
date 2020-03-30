@@ -814,7 +814,7 @@ public class RestResourceController implements InitializingBean {
                     }
 
                     return new Resource(new EmbeddedPage(link.getHref(),
-                            pageResult.map(converter::toResource), null, subpath));
+                                                         pageResult.map(converter::toResource), null, subpath));
                 } else {
                     RestModel object = (RestModel) linkMethod.invoke(linkRepository, request, uuid, page,
                             utils.obtainProjection());
@@ -894,6 +894,17 @@ public class RestResourceController implements InitializingBean {
             return (ResourceSupport) resource.getEmbeddedResources().get(rel);
         }
 
+    }
+
+    private Page<? extends RestModel> getRestModelsWithoutNullValues(Pageable page,
+                                                                     Page<? extends RestModel> pageResult) {
+        ArrayList<RestModel> content = new ArrayList<>();
+        pageResult.getContent().forEach(o -> {
+            if (o != null) {
+                content.add(o);
+            }
+        });
+        return (Page<? extends RestModel>) new PageImpl(content, page, pageResult.getTotalElements());
     }
 
     /**

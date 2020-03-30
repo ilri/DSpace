@@ -10,6 +10,7 @@ package org.dspace.app.rest.converter;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -19,11 +20,13 @@ import javax.annotation.PostConstruct;
 import org.apache.log4j.Logger;
 import org.dspace.app.rest.link.HalLinkFactory;
 import org.dspace.app.rest.link.HalLinkService;
+import org.dspace.app.rest.model.BaseObjectRest;
 import org.dspace.app.rest.model.RestAddressableModel;
 import org.dspace.app.rest.model.RestModel;
 import org.dspace.app.rest.model.hateoas.HALResource;
 import org.dspace.app.rest.projection.DefaultProjection;
 import org.dspace.app.rest.projection.Projection;
+import org.dspace.app.rest.security.DSpacePermissionEvaluator;
 import org.dspace.app.rest.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -34,6 +37,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.Resource;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -64,6 +68,9 @@ public class ConverterService {
     @Autowired
     private List<Projection> projections;
 
+    @Autowired
+    private DSpacePermissionEvaluator dSpacePermissionEvaluator;
+
     /**
      * Converts the given model object to a rest object, using the appropriate {@link DSpaceConverter} and
      * the given projection.
@@ -86,6 +93,13 @@ public class ConverterService {
         M transformedModel = projection.transformModel(modelObject);
         DSpaceConverter<M, R> converter = requireConverter(modelObject.getClass());
         R restObject = converter.convert(transformedModel, projection);
+        if (restObject instanceof BaseObjectRest) {
+            if (!dSpacePermissionEvaluator.hasPermission(SecurityContextHolder.getContext().getAuthentication(),
+                                                         restObject, "READ")) {
+                log.info("Access denied on " + restObject.getClass());
+                return null;
+            }
+        }
         if (restObject instanceof RestModel) {
             return (R) projection.transformRest((RestModel) restObject);
         }
@@ -97,7 +111,6 @@ public class ConverterService {
      *
      * @param modelObjects the list of model objects.
      * @param pageable the pageable.
-     * @param total the total number of items.
      * @param projection the projection to use.
      * @param <M> the model object class.
      * @param <R> the rest object class.
@@ -105,24 +118,34 @@ public class ConverterService {
      * @throws IllegalArgumentException if there is no compatible converter.
      * @throws ClassCastException if the converter's return type is not compatible with the inferred return type.
      */
-    public <M, R> Page<R> toRestPage(List<M> modelObjects, Pageable pageable, long total, Projection projection) {
-        return new PageImpl<>(modelObjects, pageable, total).map((object) -> toRest(object, projection));
+    public <M, R> Page<R> toRestPage(List<M> modelObjects, Pageable pageable, Projection projection) {
+        List<R> transformedList = new LinkedList<>();
+        for (M modelObject : modelObjects) {
+            R transformedObject = toRest(modelObject, projection);
+            if (transformedObject != null) {
+                transformedList.add(transformedObject);
+            }
+        }
+        if (pageable == null) {
+            pageable = utils.getPageable(pageable);
+        }
+        return utils.getPage(transformedList, pageable);
     }
 
-    /**
-     * Converts a list of model objects to a page of rest objects using the given {@link Projection}.
-     *
-     * @param modelObjects the page of model objects.
-     * @param projection the projection to use.
-     * @param <M> the model object class.
-     * @param <R> the rest object class.
-     * @return the page.
-     * @throws IllegalArgumentException if there is no compatible converter.
-     * @throws ClassCastException if the converter's return type is not compatible with the inferred return type.
-     */
-    public <M, R> Page<R> toRestPage(Page<M> modelObjects, Projection projection) {
-        return modelObjects.map((object) -> toRest(object, projection));
+    public <M, R> Page<R> toRestPage(List<M> modelObjects, Pageable pageable, long total, Projection projection) {
+        List<R> transformedList = new LinkedList<>();
+        for (M modelObject : modelObjects) {
+            R transformedObject = toRest(modelObject, projection);
+            if (transformedObject != null) {
+                transformedList.add(transformedObject);
+            }
+        }
+        if (pageable == null) {
+            pageable = utils.getPageable(pageable);
+        }
+        return new PageImpl(transformedList, pageable, total);
     }
+
 
     /**
      * Gets the converter supporting the given class as input.
@@ -177,6 +200,9 @@ public class ConverterService {
      * @return the fully converted resource, with all automatic links and embeds applied.
      */
     public <T extends HALResource> T toResource(RestModel restObject, Link... oldLinks) {
+        if (restObject == null) {
+            return null;
+        }
         T halResource = getResource(restObject);
         if (restObject instanceof RestAddressableModel) {
             utils.embedOrLinkClassLevelRels(halResource, oldLinks);
