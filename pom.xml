@@ -23,7 +23,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
-        
+
         <!--  See https://jira.duraspace.org/browse/DS-3903 for a discussion of the version of jackson that is needed -->
         <jackson.version>2.8.11</jackson.version>
         <jersey.version>2.22.1</jersey.version>
@@ -45,6 +45,7 @@
         <!-- 'root.basedir' is the path to the root [dspace-src] dir. It must be redefined by each child POM,
              as it is used to reference the LICENSE_HEADER and *.properties file(s) in that directory. -->
         <root.basedir>${basedir}</root.basedir>
+        <listings-and-reports.version.number>6.x-2.10.7-0</listings-and-reports.version.number>
     </properties>
 
     <build>
@@ -923,6 +924,32 @@
                 <artifactId>modules-theme</artifactId>
                 <type>war</type>
                 <version>6.x-1.9.3-0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.atmire</groupId>
+                <artifactId>atmire-listings-and-reports-api</artifactId>
+                <version>${listings-and-reports.version.number}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.atmire</groupId>
+                <artifactId>atmire-listings-and-reports-xmlui-api</artifactId>
+                <version>${listings-and-reports.version.number}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.atmire</groupId>
+                <artifactId>atmire-listings-and-reports-webapp</artifactId>
+                <type>war</type>
+                <version>${listings-and-reports.version.number}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.atmire</groupId>
+                <artifactId>atmire-listings-and-reports-jspui-api</artifactId>
+                <version>${listings-and-reports.version.number}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.atmire</groupId>
+                <artifactId>atmire-listings-and-reports-common</artifactId>
+                <version>${listings-and-reports.version.number}</version>
             </dependency>
             <dependency>
                 <groupId>com.atmire</groupId>

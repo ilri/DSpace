@@ -126,6 +126,8 @@
         <!-- <aspect name="XML Tests" path="resource://aspects/XMLTest/"/> -->
         <aspect name="Datatables" path="resource://aspects/Datatables/" />
         <aspect name="Atmire Modules Aspect" path="resource://aspects/AtmireModules/" />
+        <aspect name="ListingsAndReports" path="resource://aspects/ListingsAndReports/"/>
+
     </aspects>
 
     <!--

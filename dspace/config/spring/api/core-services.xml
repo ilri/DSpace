@@ -74,7 +74,6 @@
     <bean class="org.dspace.embargo.EmbargoServiceImpl" init-method="init"/>
 
     <bean class="org.dspace.eperson.AccountServiceImpl"/>
-
     <bean class="com.atmire.dspace.cua.AtmireEPersonServiceImpl"/>
     <bean class="com.atmire.dspace.cua.AtmireGroupServiceImpl"/>
     <bean class="org.dspace.eperson.RegistrationDataServiceImpl"/>

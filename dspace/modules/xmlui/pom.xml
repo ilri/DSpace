@@ -319,6 +319,23 @@
             <classifier>classes</classifier>
         </dependency>
 
+        <dependency>
+            <groupId>com.atmire</groupId>
+            <artifactId>atmire-listings-and-reports-xmlui-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atmire</groupId>
+            <artifactId>atmire-dspace-xmlui</artifactId>
+            <type>war</type>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atmire</groupId>
+            <artifactId>atmire-dspace-xmlui</artifactId>
+            <classifier>classes</classifier>
+        </dependency>
+
         <!-- DSpace XMLUI Languages -->
         <dependency>
             <groupId>org.dspace</groupId>

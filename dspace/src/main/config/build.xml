@@ -360,10 +360,19 @@ Common usage:
                 <include name="default.context.xml"/>
                 <!-- Filter RDF configs as these are TTL files -->
                 <include name="modules/rdf/*.ttl"/>
+                <!-- Filter fop.xconf -->
+                <include name="**/fop/fop.xconf"/>
             </fileset>
             <filterchain>
                 <expandproperties />
             </filterchain>
+        </copy>
+
+        <!--
+        Prepare binary files
+    -->
+        <copy todir="config-temp" preservelastmodified="true" overwrite="true" failonerror="false">
+            <fileset dir="config" includes="**/fonts/**,**/docbook**" />
         </copy>
 
         <echo file='config-temp/ant.properties' message='ant.version = ${ant.version}'/>
