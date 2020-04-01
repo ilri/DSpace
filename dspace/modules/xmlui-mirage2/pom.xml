@@ -360,6 +360,12 @@
                     <version>${compass.version}</version>
                     <type>gem</type>
                 </dependency>
+                <dependency>
+                    <groupId>rubygems</groupId>
+                    <artifactId>rb-inotify</artifactId>
+                    <version>0.9.8</version>
+                    <type>gem</type>
+                </dependency>
             </dependencies>
             <build>
                 <!-- Centrally manage the versions of all plugins used by this profile -->
