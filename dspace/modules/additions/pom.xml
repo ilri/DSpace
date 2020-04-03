@@ -56,6 +56,10 @@
          <groupId>com.atmire</groupId>
          <artifactId>atmire-cua-api</artifactId>
       </dependency>
+       <dependency>
+           <groupId>com.atmire</groupId>
+           <artifactId>atmire-metadata-quality-api</artifactId>
+       </dependency>
       <dependency>
          <groupId>com.atmire</groupId>
          <artifactId>datatables-api</artifactId>

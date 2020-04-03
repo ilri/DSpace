@@ -109,6 +109,11 @@
                                 </overlay>
                                 <overlay>
                                     <groupId>com.atmire</groupId>
+                                    <artifactId>atmire-metadata-quality-webapp</artifactId>
+                                    <type>war</type>
+                                </overlay>
+                                <overlay>
+                                    <groupId>com.atmire</groupId>
                                     <artifactId>datatables-xmlui-webapp</artifactId>
                                     <type>war</type>
                                 </overlay>
@@ -203,6 +208,11 @@
                                 </overlay>
                                 <overlay>
                                     <groupId>com.atmire</groupId>
+                                    <artifactId>atmire-metadata-quality-webapp</artifactId>
+                                    <type>war</type>
+                                </overlay>
+                                <overlay>
+                                    <groupId>com.atmire</groupId>
                                     <artifactId>datatables-xmlui-webapp</artifactId>
                                     <type>war</type>
                                 </overlay>
@@ -288,6 +298,17 @@
         <dependency>
             <groupId>it.ipzs</groupId>
             <artifactId>fins-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atmire</groupId>
+            <artifactId>atmire-metadata-quality-webapp</artifactId>
+            <type>war</type>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atmire</groupId>
+            <artifactId>atmire-metadata-quality-xmlui-api</artifactId>
         </dependency>
 
         <dependency>

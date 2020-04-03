@@ -33,13 +33,14 @@
         <jena.version>2.13.0</jena.version>
         <slf4j.version>1.7.14</slf4j.version>
         <cua.version.number>6.x-4.1.10-0</cua.version.number>
-        <datatables.version.number>6.x-2.0.11-0</datatables.version.number>
+        <mqm.version.number>6.x-2.11.1-0-RC4 </mqm.version.number>
+        <datatables.version.number>6.x-2.0.12-0-RC1</datatables.version.number>
         <atmire-dspace-api.version.number>6.x-16.0.7-0</atmire-dspace-api.version.number>
         <atmire-dspace-xmlui.version.number>6.x-16.0.2-0</atmire-dspace-xmlui.version.number>
         <!--
-            Hibernate version pinned to 4.2, 4.3 does not work with the spring version we are currently using
-            Upgrading the spring version will make the XMLUI crash
-        -->
+                    Hibernate version pinned to 4.2, 4.3 does not work with the spring version we are currently using
+                    Upgrading the spring version will make the XMLUI crash
+                -->
         <hibernate.version>4.2.21.Final</hibernate.version>
         <spring.version>3.2.16.RELEASE</spring.version>
         <!-- 'root.basedir' is the path to the root [dspace-src] dir. It must be redefined by each child POM,
@@ -897,6 +898,38 @@
                 <groupId>it.ipzs</groupId>
                 <artifactId>fins-core</artifactId>
                 <version>6.x-1.7.4-0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.atmire</groupId>
+                <artifactId>atmire-metadata-quality-api</artifactId>
+                <version>${mqm.version.number}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.atmire</groupId>
+                <artifactId>atmire-metadata-quality-webapp</artifactId>
+                <type>war</type>
+                <version>${mqm.version.number}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.atmire</groupId>
+                <artifactId>atmire-metadata-quality-xmlui-api</artifactId>
+                <version>${mqm.version.number}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.atmire</groupId>
+                <artifactId>atmire-metadata-quality-jspui-webapp</artifactId>
+                <type>war</type>
+                <version>${mqm.version.number}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.atmire</groupId>
+                <artifactId>atmire-metadata-quality-jspui-api</artifactId>
+                <version>${mqm.version.number}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.atmire</groupId>
+                <artifactId>atmire-metadata-quality-common</artifactId>
+                <version>${mqm.version.number}</version>
             </dependency>
             <dependency>
                 <groupId>com.atmire</groupId>
