@@ -247,6 +247,16 @@
        </step>
        -->
 
+       <!--
+              <step>
+                  <heading>duplicatecheck.submission.check</heading>
+                  <processing-class>com.atmire.duplicate.submit.DuplicateCheckerStep</processing-class>
+                  <jspui-binding>com.atmire.app.webui.submit.step.JSPDuplicateCheckerStep</jspui-binding>
+                  <xmlui-binding>com.atmire.app.xmlui.aspect.duplicatechecker.submission.DuplicateCheckerStep</xmlui-binding>
+                  <workflow-editable>true</workflow-editable>
+              </step>
+       -->
+
  	  <!--Step 5 will be to Verify/Review everything -->
  	  <step>
         <heading>submit.progressbar.verify</heading>

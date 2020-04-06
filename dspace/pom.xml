@@ -72,6 +72,7 @@
                                 <configuration>
                                     <includeArtifactIds>
                                         atmire-cua-common,
+                                        atmire-metadata-quality-common,
                                         atmire-datatables-common,
                                         atmire-listings-and-reports-common
                                     </includeArtifactIds>
@@ -183,6 +184,11 @@
         <dependency>
             <groupId>com.atmire</groupId>
             <artifactId>atmire-cua-common</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atmire</groupId>
+            <artifactId>atmire-metadata-quality-common</artifactId>
         </dependency>
 
         <dependency>

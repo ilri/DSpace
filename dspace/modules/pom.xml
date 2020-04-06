@@ -62,6 +62,17 @@
             </modules>
         </profile>
         <profile>
+            <id>mqm</id>
+            <activation>
+                <file>
+                    <exists>mqm/pom.xml</exists>
+                </file>
+            </activation>
+            <modules>
+                <module>mqm</module>
+            </modules>
+        </profile>
+        <profile>
             <id>dspace-xmlui</id>
             <activation>
                 <file>

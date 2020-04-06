@@ -90,6 +90,11 @@
                             <type>war</type>
                         </overlay>
                         <overlay>
+                            <groupId>com.atmire</groupId>
+                            <artifactId>atmire-metadata-quality-jspui-webapp</artifactId>
+                            <type>war</type>
+                        </overlay>
+                        <overlay>
                             <groupId>org.dspace</groupId>
                             <artifactId>dspace-jspui</artifactId>
                             <type>war</type>
@@ -127,9 +132,14 @@
         </dependency>
 
         <dependency>
-            <groupId>org.dspace</groupId>
-            <artifactId>dspace-jspui</artifactId>
+            <groupId>com.atmire</groupId>
+            <artifactId>atmire-metadata-quality-jspui-webapp</artifactId>
             <type>war</type>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atmire</groupId>
+            <artifactId>atmire-metadata-quality-jspui-api</artifactId>
         </dependency>
 
         <dependency>
@@ -137,6 +147,12 @@
             <artifactId>dspace-jspui</artifactId>
             <type>jar</type>
             <classifier>classes</classifier>
+        </dependency>
+
+        <dependency>
+            <groupId>org.dspace</groupId>
+            <artifactId>dspace-jspui</artifactId>
+            <type>war</type>
         </dependency>
 
         <dependency>
