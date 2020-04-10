@@ -8,16 +8,25 @@
 package org.dspace.app.rest.security;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.UUID;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.dspace.app.rest.utils.ContextUtil;
+import org.dspace.authorize.factory.AuthorizeServiceFactory;
+import org.dspace.authorize.service.AuthorizeService;
 import org.dspace.core.Context;
 import org.dspace.eperson.EPerson;
+import org.dspace.eperson.factory.EPersonServiceFactory;
+import org.dspace.eperson.service.EPersonService;
+import org.dspace.services.ConfigurationService;
 import org.dspace.services.RequestService;
+import org.dspace.services.factory.DSpaceServicesFactory;
+import org.dspace.util.UUIDUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -37,11 +46,21 @@ public class StatelessAuthenticationFilter extends BasicAuthenticationFilter {
 
     private static final Logger log = LoggerFactory.getLogger(StatelessAuthenticationFilter.class);
 
+    private static final String ON_BEHALF_OF_REQUEST_PARAM = "X-On-Behalf-Of";
+
     private RestAuthenticationService restAuthenticationService;
 
     private EPersonRestAuthenticationProvider authenticationProvider;
 
     private RequestService requestService;
+
+    private AuthorizeService authorizeService = AuthorizeServiceFactory.getInstance().getAuthorizeService();
+
+    private EPersonService ePersonService = EPersonServiceFactory.getInstance().getEPersonService();
+
+    private ConfigurationService configurationService = DSpaceServicesFactory.getInstance().getConfigurationService();
+
+    private boolean inErrorOnBehalfOf = false;
 
     public StatelessAuthenticationFilter(AuthenticationManager authenticationManager,
                                          RestAuthenticationService restAuthenticationService,
@@ -58,16 +77,19 @@ public class StatelessAuthenticationFilter extends BasicAuthenticationFilter {
                                     HttpServletResponse res,
                                     FilterChain chain) throws IOException, ServletException {
 
-        Authentication authentication = getAuthentication(req);
+        inErrorOnBehalfOf = false;
+        Authentication authentication = getAuthentication(req, res);
         if (authentication != null) {
             SecurityContextHolder.getContext().setAuthentication(authentication);
             restAuthenticationService.invalidateAuthenticationCookie(res);
         }
-
+        if (inErrorOnBehalfOf) {
+            return;
+        }
         chain.doFilter(req, res);
     }
 
-    private Authentication getAuthentication(HttpServletRequest request) {
+    private Authentication getAuthentication(HttpServletRequest request, HttpServletResponse res) throws IOException {
 
         if (restAuthenticationService.hasAuthenticationData(request)) {
             // parse the token.
@@ -81,15 +103,76 @@ public class StatelessAuthenticationFilter extends BasicAuthenticationFilter {
 
                 //Get the Spring authorities for this eperson
                 List<GrantedAuthority> authorities = authenticationProvider.getGrantedAuthorities(context, eperson);
+                String onBehalfOfParameterValue = request.getHeader(ON_BEHALF_OF_REQUEST_PARAM);
+                if (onBehalfOfParameterValue != null) {
+                    if (configurationService.getBooleanProperty("webui.user.assumelogin")) {
+                        return getOnBehalfOfAuthentication(context, onBehalfOfParameterValue, res);
+                    } else {
+                        inErrorOnBehalfOf = true;
+                        res.sendError(HttpServletResponse.SC_BAD_REQUEST, "The login as feature is not allowed" +
+                            " due to the current configuration");
+                        return null;
+                    }
+                }
 
                 //Return the Spring authentication object
                 return new DSpaceAuthentication(eperson.getEmail(), authorities);
             } else {
                 return null;
             }
+        } else {
+            if (request.getHeader(ON_BEHALF_OF_REQUEST_PARAM) != null) {
+                inErrorOnBehalfOf = true;
+                res.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Only admins are allowed to use the" +
+                    " login as feature");
+
+            }
         }
 
         return null;
+    }
+
+    private Authentication getOnBehalfOfAuthentication(Context context, String onBehalfOfParameterValue,
+                                                       HttpServletResponse res) throws IOException {
+
+        try {
+            if (!authorizeService.isAdmin(context)) {
+                inErrorOnBehalfOf = true;
+                res.sendError(HttpServletResponse.SC_FORBIDDEN, "Only admins are allowed to use the" +
+                    " login as feature");
+                return null;
+            }
+            UUID epersonUuid = UUIDUtils.fromString(onBehalfOfParameterValue);
+            if (epersonUuid == null) {
+                inErrorOnBehalfOf = true;
+                res.sendError(HttpServletResponse.SC_BAD_REQUEST, "The given UUID in the X-On-Behalf-Of header " +
+                    "was not a proper UUID");
+                return null;
+            }
+            EPerson onBehalfOfEPerson = ePersonService.find(context, epersonUuid);
+            if (onBehalfOfEPerson == null) {
+                inErrorOnBehalfOf = true;
+                res.sendError(HttpServletResponse.SC_BAD_REQUEST, "The given UUID in the X-On-Behalf-Of header " +
+                    "was not a proper EPerson UUID");
+                return null;
+            }
+            if (!authorizeService.isAdmin(context, onBehalfOfEPerson)) {
+                requestService.setCurrentUserId(epersonUuid);
+                context.switchContextUser(onBehalfOfEPerson);
+                return new DSpaceAuthentication(onBehalfOfEPerson.getEmail(),
+                                                authenticationProvider.getGrantedAuthorities(context,
+                                                                                             onBehalfOfEPerson));
+            } else {
+                inErrorOnBehalfOf = true;
+                res.sendError(HttpServletResponse.SC_BAD_REQUEST, "You're unable to use the login as feature to log " +
+                    "in as another admin");
+                return null;
+            }
+
+        } catch (SQLException e) {
+            log.error(e.getMessage(), e);
+            return null;
+        }
     }
 
 }
