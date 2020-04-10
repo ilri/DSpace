@@ -41,7 +41,7 @@ public class SubmissionCCLicenseRestRepository extends DSpaceRestRepository<Subm
     public Page<SubmissionCCLicenseRest> findAll(final Context context, final Pageable pageable) {
 
         List<CCLicense> allCCLicenses = creativeCommonsService.findAllCCLicenses();
-        return converter.toRestPage(utils.getPage(allCCLicenses, pageable), utils.obtainProjection());
+        return converter.toRestPage(allCCLicenses, pageable, utils.obtainProjection());
     }
 
     @Override
