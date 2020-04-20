@@ -3974,6 +3974,18 @@
         <stored-value>PII-LAM_CSV</stored-value>
       </pair>
       <pair>
+        <displayed-value>PII-LAM_CSVCauca</displayed-value>
+        <stored-value>PII-LAM_CSVCauca</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PII-LAM_CSVOlopa</displayed-value>
+        <stored-value>PII-LAM_CSVOlopa</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PII-LAM_CSVSantaRita</displayed-value>
+        <stored-value>PII-LAM_CSVSantaRita</stored-value>
+      </pair>
+      <pair>
         <displayed-value>PII-LAM_Engagement</displayed-value>
         <stored-value>PII-LAM_Engagement</stored-value>
       </pair>
@@ -3988,6 +4000,14 @@
       <pair>
         <displayed-value>PII-SA_BigDataCSA</displayed-value>
         <stored-value>PII-SA_BigDataCSA</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PII-SA_BFIPFR</displayed-value>
+        <stored-value>PII-SA_BFIPFR</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PII-SA_CaFFSA</displayed-value>
+        <stored-value>PII-SA_CaFFSA</stored-value>
       </pair>
       <pair>
         <displayed-value>PII-SA_CSA</displayed-value>
