@@ -1139,6 +1139,10 @@
         <stored-value>CONSUMPTION</stored-value>
       </pair>
       <pair>
+        <displayed-value>COVID19</displayed-value>
+        <stored-value>COVID19</stored-value>
+      </pair>
+      <pair>
         <displayed-value>CROP RESIDUES</displayed-value>
         <stored-value>CROP RESIDUES</stored-value>
       </pair>
