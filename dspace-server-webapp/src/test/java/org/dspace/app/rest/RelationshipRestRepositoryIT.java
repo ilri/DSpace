@@ -35,6 +35,7 @@ import org.dspace.app.rest.builder.CollectionBuilder;
 import org.dspace.app.rest.builder.CommunityBuilder;
 import org.dspace.app.rest.builder.EPersonBuilder;
 import org.dspace.app.rest.builder.ItemBuilder;
+import org.dspace.app.rest.builder.MetadataFieldBuilder;
 import org.dspace.app.rest.builder.RelationshipBuilder;
 import org.dspace.app.rest.matcher.PageMatcher;
 import org.dspace.app.rest.matcher.RelationshipMatcher;
@@ -43,12 +44,16 @@ import org.dspace.app.rest.test.AbstractEntityIntegrationTest;
 import org.dspace.authorize.service.AuthorizeService;
 import org.dspace.content.Collection;
 import org.dspace.content.Community;
+import org.dspace.content.EntityType;
 import org.dspace.content.Item;
+import org.dspace.content.MetadataSchema;
 import org.dspace.content.MetadataValue;
 import org.dspace.content.Relationship;
 import org.dspace.content.RelationshipType;
 import org.dspace.content.service.EntityTypeService;
 import org.dspace.content.service.ItemService;
+import org.dspace.content.service.MetadataFieldService;
+import org.dspace.content.service.MetadataSchemaService;
 import org.dspace.content.service.RelationshipTypeService;
 import org.dspace.core.Constants;
 import org.dspace.core.I18nUtil;
@@ -73,6 +78,11 @@ public class RelationshipRestRepositoryIT extends AbstractEntityIntegrationTest 
     @Autowired
     private ItemService itemService;
 
+    @Autowired
+    private MetadataFieldService metadataFieldService;
+
+    @Autowired
+    private MetadataSchemaService metadataSchemaService;
 
     private Community parentCommunity;
     private Community child1;
@@ -87,6 +97,7 @@ public class RelationshipRestRepositoryIT extends AbstractEntityIntegrationTest 
 
     private Item orgUnit1;
     private Item orgUnit2;
+    private Item orgUnit3;
     private Item project1;
 
     private Item publication1;
@@ -164,6 +175,13 @@ public class RelationshipRestRepositoryIT extends AbstractEntityIntegrationTest 
                 .withIssueDate("2015-01-01")
                 .withRelationshipType("OrgUnit")
                 .build();
+
+        orgUnit3 = ItemBuilder.createItem(context, col3)
+                              .withTitle("OrgUnit3")
+                              .withAuthor("Test, Testy")
+                              .withIssueDate("2015-02-01")
+                              .withRelationshipType("OrgUnit")
+                              .build();
 
         project1 = ItemBuilder.createItem(context, col3)
                               .withTitle("Project1")
@@ -2511,5 +2529,105 @@ public class RelationshipRestRepositoryIT extends AbstractEntityIntegrationTest 
 
     }
 
+    @Test
+    public void orgUnitAndOrgUnitRelationshipVirtualMetadataTest() throws Exception {
+        context.turnOffAuthorisationSystem();
+        EntityType orgUnit = entityTypeService.findByEntityType(context, "OrgUnit");
+        RelationshipType isParentOrgUnitOf = relationshipTypeService
+            .findbyTypesAndTypeName(context, orgUnit, orgUnit, "isParentOrgUnitOf", "isChildOrgUnitOf");
 
+        MetadataSchema metadataSchema = metadataSchemaService.find(context, "relation");
+        MetadataFieldBuilder.createMetadataField(context, metadataSchema, "isParentOrgUnitOf", null, null).build();
+        MetadataFieldBuilder.createMetadataField(context, metadataSchema, "isChildOrgUnitOf", null, null).build();
+
+        String adminToken = getAuthToken(admin.getEmail(), password);
+
+        context.restoreAuthSystemState();
+        // Here we create our first Relationship to the Publication to give it a dc.contributor.author virtual
+        // metadata field.
+        MvcResult mvcResult = getClient(adminToken).perform(post("/api/core/relationships")
+                                                                .param("relationshipType",
+                                                                       isParentOrgUnitOf.getID().toString())
+                                                                .contentType(MediaType.parseMediaType
+                                                                    (org.springframework.data.rest.webmvc.RestMediaTypes
+                                                                         .TEXT_URI_LIST_VALUE))
+                                                                .content(
+                                                                    "https://localhost:8080/server/api/core/items/" + orgUnit1
+                                                                        .getID() + "\n" +
+                                                                        "https://localhost:8080/server/api/core/items" +
+                                                                        "/" + orgUnit2
+                                                                        .getID()))
+                                                   .andExpect(status().isCreated())
+                                                   .andReturn();
+
+
+        itemService.getMetadata(orgUnit1, "*", "*", "*", "*", true);
+
+        getClient(adminToken).perform(get("/api/core/items/" + orgUnit1.getID()))
+                             .andExpect(status().isOk())
+                             .andExpect(jsonPath("$.metadata['relation.isParentOrgUnitOf'][0].value",
+                                                 is(String.valueOf(orgUnit2.getID()))));
+        getClient(adminToken).perform(get("/api/core/items/" + orgUnit2.getID()))
+                             .andExpect(status().isOk())
+                             .andExpect(jsonPath("$.metadata['relation.isChildOrgUnitOf'][0].value",
+                                                 is(String.valueOf(orgUnit1.getID()))));
+
+
+
+    }
+
+    @Test
+    public void orgUnitFindByLabelParentChildOfCountTest() throws Exception {
+        context.turnOffAuthorisationSystem();
+        EntityType orgUnit = entityTypeService.findByEntityType(context, "OrgUnit");
+        RelationshipType isParentOrgUnitOf = relationshipTypeService
+            .findbyTypesAndTypeName(context, orgUnit, orgUnit, "isParentOrgUnitOf", "isChildOrgUnitOf");
+
+        MetadataSchema metadataSchema = metadataSchemaService.find(context, "relation");
+        MetadataFieldBuilder.createMetadataField(context, metadataSchema, "isParentOrgUnitOf", null, null).build();
+        MetadataFieldBuilder.createMetadataField(context, metadataSchema, "isChildOrgUnitOf", null, null).build();
+
+        String adminToken = getAuthToken(admin.getEmail(), password);
+
+        context.restoreAuthSystemState();
+        // Here we create our first Relationship to the Publication to give it a dc.contributor.author virtual
+        // metadata field.
+        getClient(adminToken).perform(post("/api/core/relationships")
+                                                                .param("relationshipType",
+                                                                       isParentOrgUnitOf.getID().toString())
+                                                                .contentType(MediaType.parseMediaType
+                                                                    (org.springframework.data.rest.webmvc.RestMediaTypes
+                                                                         .TEXT_URI_LIST_VALUE))
+                                                                .content(
+                                                                    "https://localhost:8080/server/api/core/items/" + orgUnit1
+                                                                        .getID() + "\n" +
+                                                                        "https://localhost:8080/server/api/core/items" +
+                                                                        "/" + orgUnit2
+                                                                        .getID()))
+                                                   .andExpect(status().isCreated());
+
+        getClient(adminToken).perform(post("/api/core/relationships")
+                                                                .param("relationshipType",
+                                                                       isParentOrgUnitOf.getID().toString())
+                                                                .contentType(MediaType.parseMediaType
+                                                                    (org.springframework.data.rest.webmvc.RestMediaTypes
+                                                                         .TEXT_URI_LIST_VALUE))
+                                                                .content(
+                                                                    "https://localhost:8080/server/api/core/items/" + orgUnit2
+                                                                        .getID() + "\n" +
+                                                                        "https://localhost:8080/server/api/core/items" +
+                                                                        "/" + orgUnit3
+                                                                        .getID()))
+                                                   .andExpect(status().isCreated());
+
+        getClient().perform(get("/api/core/relationships/search/byLabel")
+                                .param("label", "isChildOrgUnitOf")
+                                .param("dso", String.valueOf(orgUnit2.getID()))
+                                .param("page", "0")
+                                .param("size", "1"))
+                    .andExpect(status().isOk())
+                    .andExpect(jsonPath("$.page", PageMatcher.pageEntryWithTotalPagesAndElements(0, 1, 1, 1)));
+
+
+    }
 }
