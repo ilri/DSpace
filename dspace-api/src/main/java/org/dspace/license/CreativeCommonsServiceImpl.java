@@ -181,8 +181,17 @@ public class CreativeCommonsServiceImpl implements CreativeCommonsService, Initi
     }
 
 
+    /**
+     * Removes the license file from the item
+     *
+     * @param context   - The relevant DSpace Context
+     * @param item      - The item from which the license file needs to be removed
+     * @throws SQLException
+     * @throws IOException
+     * @throws AuthorizeException
+     */
     @Override
-    public void removeLicense(Context context, Item item)
+    public void removeLicenseFile(Context context, Item item)
             throws SQLException, IOException, AuthorizeException {
         // remove CC license bundle if one exists
         List<Bundle> bundles = itemService.getBundles(item, CC_BUNDLE_NAME);
@@ -235,13 +244,49 @@ public class CreativeCommonsServiceImpl implements CreativeCommonsService, Initi
 
     @Override
     public String getLicenseURL(Context context, Item item) throws SQLException, IOException, AuthorizeException {
-        String licenseUri = getCCField("uri").ccItemValue(item);
+        String licenseUri = getCCField("uri");
         if (StringUtils.isNotBlank(licenseUri)) {
-            return licenseUri;
+            return getLicenseURI(item);
         }
 
         // JSPUI backward compatibility see https://jira.duraspace.org/browse/DS-2604
         return getStringFromBitstream(context, item, BSN_LICENSE_URL);
+    }
+
+    /**
+     * Returns the stored license uri of the item
+     *
+     * @param item  - The item for which to retrieve the stored license uri
+     * @return the stored license uri of the item
+     */
+    @Override
+    public String getLicenseURI(Item item) {
+        String licenseUriField = getCCField("uri");
+        if (StringUtils.isNotBlank(licenseUriField)) {
+            String metadata = itemService.getMetadata(item, licenseUriField);
+            if (StringUtils.isNotBlank(metadata)) {
+                return metadata;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Returns the stored license name of the item
+     *
+     * @param item  - The item for which to retrieve the stored license name
+     * @return the stored license name of the item
+     */
+    @Override
+    public String getLicenseName( Item item) {
+        String licenseNameField = getCCField("name");
+        if (StringUtils.isNotBlank(licenseNameField)) {
+            String metadata = itemService.getMetadata(item, licenseNameField);
+            if (StringUtils.isNotBlank(metadata)) {
+                return metadata;
+            }
+        }
+        return null;
     }
 
     @Override
@@ -374,26 +419,51 @@ public class CreativeCommonsServiceImpl implements CreativeCommonsService, Initi
      * Returns a metadata field handle for given field Id
      */
     @Override
-    public LicenseMetadataValue getCCField(String fieldId) {
-        return new LicenseMetadataValue(configurationService.getProperty("cc.license." + fieldId));
+    public String getCCField(String fieldId) {
+        return configurationService.getProperty("cc.license." + fieldId);
     }
 
+    /**
+     * Remove license information, delete also the bitstream
+     *
+     * @param context   - DSpace Context
+     * @param item      - the item
+     * @throws AuthorizeException Exception indicating the current user of the context does not have permission
+     *                            to perform a particular action.
+     * @throws IOException        A general class of exceptions produced by failed or interrupted I/O operations.
+     * @throws SQLException       An exception that provides information on a database access error or other errors.
+     */
     @Override
-    public void removeLicense(Context context, LicenseMetadataValue uriField,
-                              LicenseMetadataValue nameField, Item item)
+    public void removeLicense(Context context, Item item)
             throws AuthorizeException, IOException, SQLException {
+
+        String uriField = getCCField("uri");
+        String nameField = getCCField("name");
+
+        String licenseUri = itemService.getMetadata(item, uriField);
+
         // only remove any previous licenses
-        String licenseUri = uriField.ccItemValue(item);
         if (licenseUri != null) {
-            uriField.removeItemValue(context, item, licenseUri);
+            removeLicenseField(context, item, uriField);
             if (configurationService.getBooleanProperty("cc.submit.setname")) {
-                String licenseName = nameField.keyedItemValue(item, licenseUri);
-                nameField.removeItemValue(context, item, licenseName);
+                removeLicenseField(context, item, nameField);
             }
             if (configurationService.getBooleanProperty("cc.submit.addbitstream")) {
-                removeLicense(context, item);
+                removeLicenseFile(context, item);
             }
         }
+    }
+
+    private void removeLicenseField(Context context, Item item, String field) throws SQLException {
+        String[] params = splitField(field);
+        itemService.clearMetadata(context, item, params[0], params[1], params[2], params[3]);
+
+    }
+
+    private void addLicenseField(Context context, Item item, String field, String value) throws SQLException {
+        String[] params = splitField(field);
+        itemService.addMetadata(context, item, params[0], params[1], params[2], params[3], value);
+
     }
 
     /**
@@ -401,6 +471,7 @@ public class CreativeCommonsServiceImpl implements CreativeCommonsService, Initi
      *
      * @return A list of available CC Licenses
      */
+    @Override
     public List<CCLicense> findAllCCLicenses() {
         return findAllCCLicenses(defaultLanguage);
     }
@@ -411,6 +482,7 @@ public class CreativeCommonsServiceImpl implements CreativeCommonsService, Initi
      * @param language - the language for which to find the CC Licenses
      * @return A list of available CC Licenses for the provided language
      */
+    @Override
     public List<CCLicense> findAllCCLicenses(String language) {
 
         if (!ccLicenses.containsKey(language)) {
@@ -425,6 +497,7 @@ public class CreativeCommonsServiceImpl implements CreativeCommonsService, Initi
      * @param id - the ID of the license to be found
      * @return the corresponding license if found or null when not found
      */
+    @Override
     public CCLicense findOne(String id) {
         return findOne(id, defaultLanguage);
     }
@@ -436,6 +509,7 @@ public class CreativeCommonsServiceImpl implements CreativeCommonsService, Initi
      * @param language - the language for which to find the CC License
      * @return the corresponding license if found or null when not found
      */
+    @Override
     public CCLicense findOne(String id, String language) {
         if (!ccLicenses.containsKey(language)) {
             initLicenses(language);
@@ -465,6 +539,7 @@ public class CreativeCommonsServiceImpl implements CreativeCommonsService, Initi
      * @param answerMap - the answers to the different field questions
      * @return the corresponding license URI
      */
+    @Override
     public String retrieveLicenseUri(String licenseId, Map<String, String> answerMap) {
         return retrieveLicenseUri(licenseId, defaultLanguage, answerMap);
 
@@ -478,6 +553,7 @@ public class CreativeCommonsServiceImpl implements CreativeCommonsService, Initi
      * @param answerMap - the answers to the different field questions
      * @return the corresponding license URI
      */
+    @Override
     public String retrieveLicenseUri(String licenseId, String language, Map<String, String> answerMap) {
         return ccLicenseConnectorService.retrieveRightsByQuestion(licenseId, language, answerMap);
 
@@ -491,6 +567,7 @@ public class CreativeCommonsServiceImpl implements CreativeCommonsService, Initi
      * @param fullAnswerMap - the answers to the different field questions
      * @return whether the information is valid
      */
+    @Override
     public boolean verifyLicenseInformation(String licenseId, Map<String, String> fullAnswerMap) {
         return verifyLicenseInformation(licenseId, defaultLanguage, fullAnswerMap);
     }
@@ -504,6 +581,7 @@ public class CreativeCommonsServiceImpl implements CreativeCommonsService, Initi
      * @param fullAnswerMap - the answers to the different field questions
      * @return whether the information is valid
      */
+    @Override
     public boolean verifyLicenseInformation(String licenseId, String language, Map<String, String> fullAnswerMap) {
         CCLicense ccLicense = findOne(licenseId, language);
 
@@ -529,6 +607,7 @@ public class CreativeCommonsServiceImpl implements CreativeCommonsService, Initi
      * @param answerMap - the answers to the different field questions
      * @return the answerMap supplemented with all other license fields with a blank answer
      */
+    @Override
     public Map<String, String> retrieveFullAnswerMap(String licenseId, Map<String, String> answerMap) {
         return retrieveFullAnswerMap(licenseId, defaultLanguage, answerMap);
     }
@@ -542,6 +621,7 @@ public class CreativeCommonsServiceImpl implements CreativeCommonsService, Initi
      * @param answerMap - the answers to the different field questions
      * @return the answerMap supplemented with all other license fields with a blank answer for the provided language
      */
+    @Override
     public Map<String, String> retrieveFullAnswerMap(String licenseId, String language, Map<String, String> answerMap) {
         CCLicense ccLicense = findOne(licenseId, language);
         if (ccLicense == null) {
@@ -575,6 +655,77 @@ public class CreativeCommonsServiceImpl implements CreativeCommonsService, Initi
         }
 
         return null;
+    }
+
+    /**
+     * Update the license of the item with a new one based on the provided license URI
+     *
+     * @param context       - The relevant DSpace context
+     * @param licenseUri    - The license URI to be used in the update
+     * @param item          - The item for which to update the license
+     * @return true when the update was successful, false when not
+     * @throws AuthorizeException
+     * @throws SQLException
+     */
+    @Override
+    public boolean updateLicense(final Context context, final String licenseUri, final Item item)
+            throws AuthorizeException, SQLException {
+        try {
+            Document doc = ccLicenseConnectorService.retrieveLicenseRDFDoc(licenseUri);
+            if (doc == null) {
+                return false;
+            }
+            String licenseName = ccLicenseConnectorService.retrieveLicenseName(doc);
+            if (StringUtils.isBlank(licenseName)) {
+                return false;
+            }
+
+            removeLicense(context, item);
+            addLicense(context, item, licenseUri, licenseName, doc);
+
+            return true;
+
+        } catch (IOException e) {
+            log.error("Error while updating the license of item: " + item.getID(), e);
+        }
+        return false;
+    }
+
+    /**
+     * Add a new license to the item
+     *
+     * @param context       - The relevant Dspace context
+     * @param item          - The item to which the license will be added
+     * @param licenseUri    - The license URI to add
+     * @param licenseName   - The license name to add
+     * @param doc           - The license to document to add
+     * @throws SQLException
+     * @throws IOException
+     * @throws AuthorizeException
+     */
+    @Override
+    public void addLicense(Context context, Item item, String licenseUri, String licenseName, Document doc)
+            throws SQLException, IOException, AuthorizeException {
+        String uriField = getCCField("uri");
+        String nameField = getCCField("name");
+
+        addLicenseField(context, item, uriField, licenseUri);
+        if (configurationService.getBooleanProperty("cc.submit.addbitstream")) {
+            setLicenseRDF(context, item, fetchLicenseRDF(doc));
+        }
+        if (configurationService.getBooleanProperty("cc.submit.setname")) {
+            addLicenseField(context, item, nameField, licenseName);
+        }
+    }
+
+    private String[] splitField(String fieldName) {
+        String[] params = new String[4];
+        String[] fParams = fieldName.split("\\.");
+        for (int i = 0; i < fParams.length; i++) {
+            params[i] = fParams[i];
+        }
+        params[3] = Item.ANY;
+        return params;
     }
 
 }

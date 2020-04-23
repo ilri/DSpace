@@ -18,7 +18,6 @@ import org.dspace.content.Bitstream;
 import org.dspace.content.Item;
 import org.dspace.core.Context;
 import org.dspace.license.CCLicense;
-import org.dspace.license.LicenseMetadataValue;
 import org.jdom.Document;
 
 /**
@@ -77,7 +76,16 @@ public interface CreativeCommonsService {
                            InputStream licenseStm, String mimeType)
             throws SQLException, IOException, AuthorizeException;
 
-    public void removeLicense(Context context, Item item)
+    /**
+     * Removes the license file from the item
+     *
+     * @param context   - The relevant DSpace Context
+     * @param item      - The item from which the license file needs to be removed
+     * @throws SQLException
+     * @throws IOException
+     * @throws AuthorizeException
+     */
+    public void removeLicenseFile(Context context, Item item)
             throws SQLException, IOException, AuthorizeException;
 
     public boolean hasLicense(Context context, Item item)
@@ -85,6 +93,24 @@ public interface CreativeCommonsService {
 
     public String getLicenseURL(Context context, Item item)
             throws SQLException, IOException, AuthorizeException;
+
+
+    /**
+     * Returns the stored license uri of the item
+     *
+     * @param item  - The item for which to retrieve the stored license uri
+     * @return the stored license uri of the item
+     */
+    public String getLicenseURI(Item item);
+
+    /**
+     * Returns the stored license name of the item
+     *
+     * @param item  - The item for which to retrieve the stored license name
+     * @return the stored license name of the item
+     */
+    public String getLicenseName(Item item);
+
 
     public String getLicenseRDF(Context context, Item item)
             throws SQLException, IOException, AuthorizeException;
@@ -124,7 +150,7 @@ public interface CreativeCommonsService {
      * @param fieldId name of the property.
      * @return its value.
      */
-    public LicenseMetadataValue getCCField(String fieldId);
+    public String getCCField(String fieldId);
 
     /**
      * Apply same transformation on the document to retrieve only the most
@@ -141,16 +167,13 @@ public interface CreativeCommonsService {
      * Remove license information, delete also the bitstream
      *
      * @param context   - DSpace Context
-     * @param uriField  - the metadata field for license uri
-     * @param nameField - the metadata field for license name
      * @param item      - the item
      * @throws AuthorizeException Exception indicating the current user of the context does not have permission
      *                            to perform a particular action.
      * @throws IOException        A general class of exceptions produced by failed or interrupted I/O operations.
      * @throws SQLException       An exception that provides information on a database access error or other errors.
      */
-    public void removeLicense(Context context, LicenseMetadataValue uriField,
-                              LicenseMetadataValue nameField, Item item)
+    public void removeLicense(Context context, Item item)
             throws AuthorizeException, IOException, SQLException;
 
     /**
@@ -247,4 +270,31 @@ public interface CreativeCommonsService {
      */
     public boolean verifyLicenseInformation(String licenseId, String language, Map<String, String> fullAnswerMap);
 
+    /**
+     * Update the license of the item with a new one based on the provided license URI
+     *
+     * @param context       - The relevant DSpace context
+     * @param licenseUri    - The license URI to be used in the update
+     * @param item          - The item for which to update the license
+     * @return true when the update was successful, false when not
+     * @throws AuthorizeException
+     * @throws SQLException
+     */
+    public boolean updateLicense(final Context context, String licenseUri, final Item item)
+            throws AuthorizeException, SQLException;
+
+    /**
+     * Add a new license to the item
+     *
+     * @param context       - The relevant Dspace context
+     * @param item          - The item to which the license will be added
+     * @param licenseUri    - The license URI to add
+     * @param licenseName   - The license name to add
+     * @param doc           - The license to document to add
+     * @throws SQLException
+     * @throws IOException
+     * @throws AuthorizeException
+     */
+    public void addLicense(Context context, Item item, String licenseUri, String licenseName, Document doc)
+            throws SQLException, IOException, AuthorizeException;
 }
