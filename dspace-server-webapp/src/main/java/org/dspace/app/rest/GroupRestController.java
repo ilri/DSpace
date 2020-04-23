@@ -311,4 +311,5 @@ public class GroupRestController {
 
         throw new AuthorizeException("not authorized to manage this group");
     }
+
 }
