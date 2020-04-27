@@ -257,7 +257,8 @@ public class ItemRestRepositoryIT extends AbstractControllerIntegrationTest {
                         "Public item 1", "2017-10-17");
 
         String token = getAuthToken(admin.getEmail(), password);
-
+        // We want to test a full projection here, but only admins should expect for it to never cause
+        // authorization issues
         // When full projection is requested, response should include expected properties, links, and embeds.
         getClient(token).perform(get("/api/core/items/" + publicItem1.getID())
                 .param("projection", "full"))
@@ -2575,10 +2576,8 @@ public class ItemRestRepositoryIT extends AbstractControllerIntegrationTest {
         context.restoreAuthSystemState();
 
 
-        getClient().perform(get("/api/core/items/" + item.getID())
-                                    .param("projection", "full"))
+        getClient().perform(get("/api/core/items/" + item.getID()))
                    .andExpect(status().isOk())
-                   .andExpect(jsonPath("$", ItemMatcher.matchFullEmbeds()))
                    .andExpect(jsonPath("$", ItemMatcher.matchItemProperties(item)))
                    .andExpect(jsonPath("$.metadata", matchMetadata("dc.title", "Public item 1")))
                    .andExpect(jsonPath("$.metadata", matchMetadataDoesNotExist("dc.description.provenance")));
@@ -2602,10 +2601,8 @@ public class ItemRestRepositoryIT extends AbstractControllerIntegrationTest {
 
         String token = getAuthToken(admin.getEmail(), password);
 
-        getClient(token).perform(get("/api/core/items/" + item.getID())
-                                    .param("projection", "full"))
+        getClient(token).perform(get("/api/core/items/" + item.getID()))
                    .andExpect(status().isOk())
-                   .andExpect(jsonPath("$", ItemMatcher.matchFullEmbeds()))
                    .andExpect(jsonPath("$", ItemMatcher.matchItemProperties(item)))
                    .andExpect(jsonPath("$.metadata", matchMetadata("dc.title", "Public item 1")))
                    .andExpect(jsonPath("$.metadata", matchMetadata("dc.description.provenance", "Provenance data")));
@@ -2636,10 +2633,8 @@ public class ItemRestRepositoryIT extends AbstractControllerIntegrationTest {
 
         String token = getAuthToken(eperson.getEmail(), password);
 
-        getClient(token).perform(get("/api/core/items/" + item.getID())
-                                         .param("projection", "full"))
+        getClient(token).perform(get("/api/core/items/" + item.getID()))
                         .andExpect(status().isOk())
-                        .andExpect(jsonPath("$", ItemMatcher.matchFullEmbeds()))
                         .andExpect(jsonPath("$", ItemMatcher.matchItemProperties(item)))
                         .andExpect(jsonPath("$.metadata", matchMetadata("dc.title", "Public item 1")))
                         .andExpect(jsonPath("$.metadata", matchMetadataDoesNotExist("dc.description.provenance")));

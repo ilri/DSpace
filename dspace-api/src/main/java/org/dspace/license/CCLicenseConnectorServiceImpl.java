@@ -8,7 +8,12 @@
 package org.dspace.license;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.StringReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.text.MessageFormat;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -17,8 +22,11 @@ import java.util.Map;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
@@ -27,6 +35,7 @@ import org.dspace.services.ConfigurationService;
 import org.jaxen.JaxenException;
 import org.jaxen.jdom.JDOMXPath;
 import org.jdom.Attribute;
+import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
@@ -43,7 +52,16 @@ public class CCLicenseConnectorServiceImpl implements CCLicenseConnectorService,
     private Logger log = org.apache.logging.log4j.LogManager.getLogger(CCLicenseConnectorServiceImpl.class);
 
     private CloseableHttpClient client;
-    private SAXBuilder parser = new SAXBuilder();
+    protected SAXBuilder parser = new SAXBuilder();
+
+    private String postArgument = "answers";
+    private String postAnswerFormat =
+            "<answers> " +
+                    "<locale>{1}</locale>" +
+                    "<license-{0}>" +
+                    "{2}" +
+                    "</license-{0}>" +
+                    "</answers>";
 
 
     @Autowired
@@ -219,6 +237,135 @@ public class CCLicenseConnectorServiceImpl implements CCLicenseConnectorService,
         Object singleNode = xpath.selectSingleNode(t);
 
         return getNodeValue(singleNode);
+    }
+
+    /**
+     * Retrieve the CC License URI based on the provided license id, language and answers to the field questions from
+     * the CC License API
+     *
+     * @param licenseId - the ID of the license
+     * @param language  - the language for which to retrieve the full answerMap
+     * @param answerMap - the answers to the different field questions
+     * @return the CC License URI
+     */
+    public String retrieveRightsByQuestion(String licenseId,
+                                           String language,
+                                           Map<String, String> answerMap) {
+
+        String ccLicenseUrl = configurationService.getProperty("cc.api.rooturl");
+
+
+        HttpPost httpPost = new HttpPost(ccLicenseUrl + "/license/" + licenseId + "/issue");
+
+
+        String answers = createAnswerString(answerMap);
+        MultipartEntityBuilder builder = MultipartEntityBuilder.create();
+        String text = MessageFormat.format(postAnswerFormat, licenseId, language, answers);
+        builder.addTextBody(postArgument, text);
+
+        HttpEntity multipart = builder.build();
+
+        httpPost.setEntity(multipart);
+
+        try (CloseableHttpResponse response = client.execute(httpPost)) {
+            return retrieveLicenseUri(response);
+        } catch (JDOMException | JaxenException | IOException e) {
+            log.error("Error while retrieving the license uri for license : " + licenseId + " with answers "
+                              + answerMap.toString(), e);
+        }
+        return null;
+    }
+
+    /**
+     * Parse the response for the CC License URI request and return the corresponding CC License URI
+     *
+     * @param response for a specific CC License URI response
+     * @return the corresponding CC License URI as a string
+     * @throws IOException
+     * @throws JaxenException
+     * @throws JDOMException
+     */
+    private String retrieveLicenseUri(final CloseableHttpResponse response)
+            throws IOException, JaxenException, JDOMException {
+
+        String responseString = EntityUtils.toString(response.getEntity());
+        JDOMXPath licenseClassXpath = new JDOMXPath("//result/license-uri");
+
+
+        try (StringReader stringReader = new StringReader(responseString)) {
+            InputSource is = new InputSource(stringReader);
+            org.jdom.Document classDoc = this.parser.build(is);
+
+            Object node = licenseClassXpath.selectSingleNode(classDoc);
+            String nodeValue = getNodeValue(node);
+
+            if (StringUtils.isNotBlank(nodeValue)) {
+                return nodeValue;
+            }
+        }
+        return null;
+    }
+
+    private String createAnswerString(final Map<String, String> parameterMap) {
+        StringBuilder sb = new StringBuilder();
+        for (String key : parameterMap.keySet()) {
+            sb.append("<");
+            sb.append(key);
+            sb.append(">");
+            sb.append(parameterMap.get(key));
+            sb.append("</");
+            sb.append(key);
+            sb.append(">");
+        }
+        return sb.toString();
+    }
+
+    /**
+     * Retrieve the license RDF document based on the license URI
+     *
+     * @param licenseURI - The license URI for which to retrieve the license RDF document
+     * @return the license RDF document
+     * @throws IOException
+     */
+    @Override
+    public Document retrieveLicenseRDFDoc(String licenseURI) throws IOException {
+        String ccLicenseUrl = configurationService.getProperty("cc.api.rooturl");
+
+        String issueUrl = ccLicenseUrl + "/details?license-uri=" + licenseURI;
+
+        URL request_url;
+        try {
+            request_url = new URL(issueUrl);
+        } catch (MalformedURLException e) {
+            return null;
+        }
+        URLConnection connection = request_url.openConnection();
+        connection.setDoOutput(true);
+        try {
+            // parsing document from input stream
+            InputStream stream = connection.getInputStream();
+            Document doc = parser.build(stream);
+            return doc;
+
+        } catch (Exception e) {
+            log.error("Error while retrieving the license document for URI: " + licenseURI, e);
+        }
+        return null;
+    }
+
+    /**
+     * Retrieve the license Name from the license document
+     *
+     * @param doc - The license document from which to retrieve the license name
+     * @return the license name
+     */
+    public String retrieveLicenseName(final Document doc) {
+        try {
+            return getSingleNodeValue(doc, "//result/license-name");
+        } catch (JaxenException e) {
+            log.error("Error while retrieving the license name from the license document", e);
+        }
+        return null;
     }
 
 }
