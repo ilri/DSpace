@@ -49,6 +49,7 @@ cfnetwork
 checklink
 checkprivacy
 China\sLocal\sBrowse\s2\.6
+Citoid
 cloakDetect
 coccoc\/1\.0
 Code\sSample\sWeb\sClient
@@ -78,6 +79,7 @@ DTS Agent
 EasyBib[\+\s]AutoCite[\+\s]
 easydl
 EBSCO\sEJS\sContent\sServer
+ecointernet
 ELinks\/
 EmailSiphon
 EmailWolf
@@ -103,6 +105,7 @@ Funnelback
 Genieo
 GetRight
 geturl
+GigablastOpenSource
 G-i-g-a-b-o-t
 GLMSLinkAnalysis
 Goldfire(\s|\+)Server
@@ -193,12 +196,14 @@ nutch
 ^oaDOI$
 ocelli
 Offline(\s|\+)Navigator
-^okhttp$
+OgScrper
+okhttp
 onetszukaj
 ^Opera\/4$
 OurBrowser
 panscient
 parsijoo
+^Pattern\/\d
 Pcore-HTTP
 pear.php.net
 perman
@@ -233,6 +238,7 @@ SkypeUriPreview
 slurp
 sogou
 speedy
+sqlmap
 Strider
 summify
 sunrise
@@ -246,6 +252,7 @@ titan
 ^Traackr\.com$
 Trove
 twiceler
+Typhoeus
 ucsd
 ultraseek
 ^undefined$
@@ -289,3 +296,4 @@ yandex
 Yeti\/\d
 zeus
 zyborg
+7siters
