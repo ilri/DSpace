@@ -91,6 +91,8 @@ public class CreativeCommonsServiceImpl implements CreativeCommonsService, Initi
     protected ConfigurationService configurationService = DSpaceServicesFactory.getInstance().getConfigurationService();
 
     private String defaultLanguage;
+    private String jurisdiction;
+    private static final String JURISDICTION_KEY = "jurisdiction";
 
 
     private Map<String, Map<String, CCLicense>> ccLicenses;
@@ -113,6 +115,7 @@ public class CreativeCommonsServiceImpl implements CreativeCommonsService, Initi
 
         ccLicenses = new HashMap<>();
         defaultLanguage = configurationService.getProperty("cc.license.locale", "en");
+        jurisdiction = configurationService.getProperty("cc.license.jurisdiction", "");
 
         try {
             templates = TransformerFactory.newInstance().newTemplates(
@@ -123,11 +126,6 @@ public class CreativeCommonsServiceImpl implements CreativeCommonsService, Initi
         }
 
 
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
     }
 
     // create the CC bundle if it doesn't exist
@@ -199,34 +197,6 @@ public class CreativeCommonsServiceImpl implements CreativeCommonsService, Initi
         if ((bundles.size() > 0) && (bundles.get(0) != null)) {
             itemService.removeBundle(context, item, bundles.get(0));
         }
-    }
-
-    @Override
-    public boolean hasLicense(Context context, Item item)
-            throws SQLException, IOException {
-        // try to find CC license bundle
-        List<Bundle> bundles = itemService.getBundles(item, CC_BUNDLE_NAME);
-
-        if (bundles.size() == 0) {
-            return false;
-        }
-
-        // verify it has correct contents
-        try {
-            if ((getLicenseURL(context, item) == null)) {
-                return false;
-            }
-        } catch (AuthorizeException ae) {
-            return false;
-        }
-
-        return true;
-    }
-
-    @Override
-    public String getLicenseRDF(Context context, Item item) throws SQLException,
-            IOException, AuthorizeException {
-        return getStringFromBitstream(context, item, BSN_LICENSE_RDF);
     }
 
     @Override
@@ -634,7 +604,16 @@ public class CreativeCommonsServiceImpl implements CreativeCommonsService, Initi
                 fullParamMap.put(ccLicenseField.getId(), "");
             }
         }
+
+        updateJurisdiction(fullParamMap);
+
         return fullParamMap;
+    }
+
+    private void updateJurisdiction(final Map<String, String> fullParamMap) {
+        if (fullParamMap.containsKey(JURISDICTION_KEY)) {
+            fullParamMap.put(JURISDICTION_KEY, jurisdiction);
+        }
     }
 
     private boolean containsAnswerEnum(final String enumAnswer, final CCLicenseField ccLicenseField) {
