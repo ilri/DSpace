@@ -32,7 +32,7 @@ import org.dspace.eperson.service.AccountService;
 import org.dspace.eperson.service.EPersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ControllerUtils;
-import org.springframework.hateoas.ResourceSupport;
+import org.springframework.hateoas.RepresentationModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
@@ -60,7 +60,7 @@ public class RegistrationRestController {
     private EPersonService ePersonService;
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<ResourceSupport> register(HttpServletRequest request, HttpServletResponse response)
+    public ResponseEntity<RepresentationModel<?>> register(HttpServletRequest request, HttpServletResponse response)
         throws SQLException, IOException, MessagingException, AuthorizeException {
 
         Context context = ContextUtil.obtainContext(request);
