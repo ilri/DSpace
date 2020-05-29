@@ -37,6 +37,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -55,6 +56,7 @@ public class ScriptRestRepository extends DSpaceRestRepository<ScriptRest, Strin
     private DSpaceRunnableParameterConverter dSpaceRunnableParameterConverter;
 
     @Override
+    @PreAuthorize("permitAll()")
     public ScriptRest findOne(Context context, String name) {
 
         DSpaceRunnable dSpaceRunnable = scriptService.getScriptForName(name);
@@ -108,7 +110,7 @@ public class ScriptRestRepository extends DSpaceRestRepository<ScriptRest, Strin
             context.getCurrentUser(), scriptName, dSpaceCommandLineParameters);
         List<String> args = constructArgs(dSpaceCommandLineParameters);
         runDSpaceScript(files, context, scriptToExecute, restDSpaceRunnableHandler, args);
-        return converter.toRest(restDSpaceRunnableHandler.getProcess(), utils.obtainProjection());
+        return converter.toRest(restDSpaceRunnableHandler.getProcess(context), utils.obtainProjection());
     }
 
     private List<DSpaceCommandLineParameter> processPropertiesToDSpaceCommandLineParameters(String propertiesJson)

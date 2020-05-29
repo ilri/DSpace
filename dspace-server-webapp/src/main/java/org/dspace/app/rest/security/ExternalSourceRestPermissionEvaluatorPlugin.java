@@ -14,8 +14,12 @@ import org.dspace.app.rest.model.ExternalSourceRest;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
+/**
+ * This class will handle calls made to ExternalSourceRest endpoints.
+ * It will return true because access can be granted anytime it's linked from another resource
+ */
 @Component
-public class ExternalSourceRestPermissionEvaluator extends RestObjectPermissionEvaluatorPlugin {
+public class ExternalSourceRestPermissionEvaluatorPlugin extends RestObjectPermissionEvaluatorPlugin {
     @Override
     public boolean hasDSpacePermission(Authentication authentication, Serializable targetId, String targetType,
                                        DSpaceRestPermission restPermission) {

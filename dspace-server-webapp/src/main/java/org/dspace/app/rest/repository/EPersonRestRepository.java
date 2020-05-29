@@ -27,9 +27,8 @@ import org.dspace.app.rest.model.MetadataValueRest;
 import org.dspace.app.rest.model.SiteRest;
 import org.dspace.app.rest.model.patch.Operation;
 import org.dspace.app.rest.model.patch.Patch;
-import org.dspace.app.rest.projection.Projection;
-import org.dspace.app.rest.repository.patch.operation.DSpaceObjectMetadataPatchUtils;
 import org.dspace.authorize.AuthorizeException;
+import org.dspace.app.rest.projection.Projection;
 import org.dspace.authorize.service.AuthorizeService;
 import org.dspace.content.Site;
 import org.dspace.content.service.SiteService;
@@ -62,9 +61,6 @@ public class EPersonRestRepository extends DSpaceObjectRestRepository<EPerson, E
     AuthorizeService authorizeService;
 
     @Autowired
-    DSpaceObjectMetadataPatchUtils metadataPatchUtils;
-
-    @Autowired
     private AccountService accountService;
 
     @Autowired
@@ -86,7 +82,7 @@ public class EPersonRestRepository extends DSpaceObjectRestRepository<EPerson, E
 
     @Override
     protected EPersonRest createAndReturn(Context context)
-        throws AuthorizeException {
+            throws AuthorizeException {
         // this need to be revisited we should receive an EPersonRest as input
         HttpServletRequest req = getRequestService().getCurrentRequest().getHttpServletRequest();
         ObjectMapper mapper = new ObjectMapper();
@@ -208,7 +204,7 @@ public class EPersonRestRepository extends DSpaceObjectRestRepository<EPerson, E
         try {
             long total = es.countTotal(context);
             List<EPerson> epersons = es.findAll(context, EPerson.EMAIL, pageable.getPageSize(),
-                                                Math.toIntExact(pageable.getOffset()));
+                    Math.toIntExact(pageable.getOffset()));
             return converter.toRestPage(epersons, pageable, total, utils.obtainProjection());
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage(), e);
@@ -251,7 +247,7 @@ public class EPersonRestRepository extends DSpaceObjectRestRepository<EPerson, E
     @PreAuthorize("hasAuthority('ADMIN')")
     @SearchRestMethod(name = "byMetadata")
     public Page<EPersonRest> findByMetadata(@Parameter(value = "query", required = true) String query,
-                                            Pageable pageable) {
+            Pageable pageable) {
 
         try {
             Context context = obtainContext();
@@ -291,8 +287,8 @@ public class EPersonRestRepository extends DSpaceObjectRestRepository<EPerson, E
             List<String> constraints = es.getDeleteConstraints(context, eperson);
             if (constraints != null && constraints.size() > 0) {
                 throw new UnprocessableEntityException(
-                    "The eperson cannot be deleted due to the following constraints: "
-                    + StringUtils.join(constraints, ", "));
+                        "The eperson cannot be deleted due to the following constraints: "
+                                + StringUtils.join(constraints, ", "));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage(), e);

@@ -35,8 +35,8 @@ import org.springframework.core.type.filter.AssignableTypeFilter;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.Link;
-import org.springframework.hateoas.Resource;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -96,7 +96,8 @@ public class ConverterService {
         if (restObject instanceof BaseObjectRest) {
             if (!dSpacePermissionEvaluator.hasPermission(SecurityContextHolder.getContext().getAuthentication(),
                                                          restObject, "READ")) {
-                log.info("Access denied on " + restObject.getClass());
+                log.debug("Access denied on " + restObject.getClass() + " with id: " +
+                              ((BaseObjectRest) restObject).getId());
                 return null;
             }
         }
@@ -132,6 +133,19 @@ public class ConverterService {
         return utils.getPage(transformedList, pageable);
     }
 
+    /**
+     * Converts a list of ModelObjects to a page of Rest Objects using the given {@link Projection}
+     * This method differences in the sense that we define a total here instead of the size of the list because
+     * this method will be called if the list is limited through a DB call already and thus we need to give the
+     * total amount of records in the DB; not the size of the given list
+     * @param modelObjects the list of model objects.
+     * @param pageable the pageable.
+     * @param total The total amount of objects
+     * @param projection the projection to use.
+     * @param <M> the model object class.
+     * @param <R> the rest object class.
+     * @return the page.
+     */
     public <M, R> Page<R> toRestPage(List<M> modelObjects, Pageable pageable, long total, Projection projection) {
         List<R> transformedList = new LinkedList<>();
         for (M modelObject : modelObjects) {
@@ -312,7 +326,7 @@ public class ConverterService {
         // scan all resource classes and look for compatible rest classes (by naming convention),
         // creating a map of resource constructors keyed by rest class, for later use.
         ClassPathScanningCandidateComponentProvider provider = new ClassPathScanningCandidateComponentProvider(false);
-        provider.addIncludeFilter(new AssignableTypeFilter(Resource.class));
+        provider.addIncludeFilter(new AssignableTypeFilter(EntityModel.class));
         Set<BeanDefinition> beanDefinitions = provider.findCandidateComponents(
                 HALResource.class.getPackage().getName().replaceAll("\\.", "/"));
         for (BeanDefinition beanDefinition : beanDefinitions) {
