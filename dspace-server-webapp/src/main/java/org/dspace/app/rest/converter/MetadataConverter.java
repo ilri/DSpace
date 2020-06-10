@@ -51,7 +51,13 @@ public class MetadataConverter implements DSpaceConverter<MetadataValueList, Met
             String key = metadataValue.getMetadataField().toString('.');
             SortedSet<MetadataValueRest> set = mapOfSortedSets.get(key);
             if (set == null) {
-                set = new TreeSet<>(Comparator.comparingInt(MetadataValueRest::getPlace));
+                set = new TreeSet<>((o1, o2) -> {
+                    if (o1.getPlace() != o2.getPlace()) {
+                        return o1.getPlace() - o2.getPlace();
+                    } else {
+                        return o1.getValue().compareTo(o2.getValue());
+                    }
+                });
                 mapOfSortedSets.put(key, set);
             }
             set.add(converter.toRest(metadataValue, projection));
