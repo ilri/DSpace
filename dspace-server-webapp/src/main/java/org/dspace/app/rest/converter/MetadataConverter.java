@@ -8,6 +8,7 @@
 package org.dspace.app.rest.converter;
 
 import java.sql.SQLException;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,6 +47,7 @@ public class MetadataConverter implements DSpaceConverter<MetadataValueList, Met
                                 Projection projection) {
         // Convert each value to a DTO while retaining place order in a map of key -> SortedSet
         Map<String, SortedSet<MetadataValueRest>> mapOfSortedSets = new HashMap<>();
+        Comparator<MetadataValueRest> valueComparison = Comparator.comparing(MetadataValueRest::getValue);
         for (MetadataValue metadataValue : metadataValues) {
             String key = metadataValue.getMetadataField().toString('.');
             SortedSet<MetadataValueRest> set = mapOfSortedSets.get(key);
@@ -54,7 +56,7 @@ public class MetadataConverter implements DSpaceConverter<MetadataValueList, Met
                     if (o1.getPlace() != o2.getPlace()) {
                         return o1.getPlace() - o2.getPlace();
                     } else {
-                        return o1.getValue().compareTo(o2.getValue());
+                        return valueComparison.compare(o1, o2);
                     }
                 });
                 mapOfSortedSets.put(key, set);
