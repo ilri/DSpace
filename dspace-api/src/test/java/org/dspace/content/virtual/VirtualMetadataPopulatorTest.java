@@ -29,7 +29,7 @@ public class VirtualMetadataPopulatorTest {
     @Test
     public void testSetMap() {
         // Setup objects utilized in unit test
-        Map<String, HashMap<String, VirtualMetadataConfiguration>> map = new HashMap<>();
+        Map<String, Map<String, VirtualMetadataConfiguration>> map = new HashMap<>();
         HashMap<String, VirtualMetadataConfiguration> mapExt = new HashMap<>();
         VirtualMetadataConfiguration virtualMetadataConfiguration = mock(VirtualMetadataConfiguration.class);
         mapExt.put("hashKey", virtualMetadataConfiguration);
@@ -43,7 +43,7 @@ public class VirtualMetadataPopulatorTest {
     @Test
     public void testGetMap() {
         // Setup objects utilized in unit test
-        Map<String, HashMap<String, VirtualMetadataConfiguration>> map = new HashMap<>();
+        Map<String, Map<String, VirtualMetadataConfiguration>> map = new HashMap<>();
         HashMap<String, VirtualMetadataConfiguration> mapExt = new HashMap<>();
         VirtualMetadataConfiguration virtualMetadataConfiguration = mock(VirtualMetadataConfiguration.class);
         mapExt.put("hashKey", virtualMetadataConfiguration);
@@ -58,7 +58,7 @@ public class VirtualMetadataPopulatorTest {
     public void testIsUseForPlaceTrueForRelationshipType() {
         // Setup objects utilized in unit test
         RelationshipType relationshipType = mock(RelationshipType.class);
-        Map<String, HashMap<String, VirtualMetadataConfiguration>> map = new HashMap<>();
+        Map<String, Map<String, VirtualMetadataConfiguration>> map = new HashMap<>();
         HashMap<String, VirtualMetadataConfiguration> mapExt = new HashMap<>();
         VirtualMetadataConfiguration virtualMetadataConfiguration = mock(VirtualMetadataConfiguration.class);
         mapExt.put("hashKey", virtualMetadataConfiguration);
