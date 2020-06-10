@@ -47,7 +47,8 @@ public class MetadataConverter implements DSpaceConverter<MetadataValueList, Met
                                 Projection projection) {
         // Convert each value to a DTO while retaining place order in a map of key -> SortedSet
         Map<String, SortedSet<MetadataValueRest>> mapOfSortedSets = new HashMap<>();
-        Comparator<MetadataValueRest> valueComparison = Comparator.comparing(MetadataValueRest::getValue);
+        Comparator<MetadataValueRest> valueComparison =
+                Comparator.comparing(MetadataValueRest::getValue, Comparator.nullsFirst(Comparator.naturalOrder()));
         for (MetadataValue metadataValue : metadataValues) {
             String key = metadataValue.getMetadataField().toString('.');
             SortedSet<MetadataValueRest> set = mapOfSortedSets.get(key);
