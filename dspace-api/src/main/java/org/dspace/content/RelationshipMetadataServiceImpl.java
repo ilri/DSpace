@@ -80,7 +80,7 @@ public class RelationshipMetadataServiceImpl implements RelationshipMetadataServ
         throws SQLException {
         List<RelationshipMetadataValue> resultingMetadataValueList = new LinkedList<>();
         RelationshipType relationshipType = relationship.getRelationshipType();
-        HashMap<String, VirtualMetadataConfiguration> hashMaps;
+        Map<String, VirtualMetadataConfiguration> hashMaps;
         String relationName;
         Item otherItem;
         int place = 0;
@@ -135,7 +135,7 @@ public class RelationshipMetadataServiceImpl implements RelationshipMetadataServ
      * @return                      The list of virtual metadata values
      */
     private List<RelationshipMetadataValue> findVirtualMetadataFromConfiguration(Context context, Item item,
-        HashMap<String, VirtualMetadataConfiguration> hashMaps, Item otherItem, String relationName,
+        Map<String, VirtualMetadataConfiguration> hashMaps, Item otherItem, String relationName,
         Relationship relationship, int place, boolean isLeftwards) throws SQLException {
 
         List<RelationshipMetadataValue> resultingMetadataValueList = new LinkedList<>();
