@@ -7,7 +7,6 @@
  */
 package org.dspace.content.virtual;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import org.dspace.content.RelationshipType;
