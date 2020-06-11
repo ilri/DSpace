@@ -16,7 +16,9 @@ import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.nullValue;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -30,7 +32,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicReference;
 import javax.ws.rs.core.MediaType;
@@ -59,13 +60,13 @@ import org.dspace.content.Item;
 import org.dspace.eperson.EPerson;
 import org.dspace.eperson.Group;
 import org.dspace.eperson.PasswordHash;
+import org.dspace.eperson.dao.RegistrationDataDAO;
 import org.dspace.eperson.service.AccountService;
 import org.dspace.eperson.service.EPersonService;
 import org.dspace.eperson.service.RegistrationDataService;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.web.servlet.MvcResult;
 
 
 public class EPersonRestRepositoryIT extends AbstractControllerIntegrationTest {
@@ -78,6 +79,9 @@ public class EPersonRestRepositoryIT extends AbstractControllerIntegrationTest {
 
     @Autowired
     private EPersonService ePersonService;
+
+    @Autowired
+    private RegistrationDataDAO registrationDataDAO;
 
     @Test
     public void createTest() throws Exception {
@@ -164,11 +168,16 @@ public class EPersonRestRepositoryIT extends AbstractControllerIntegrationTest {
         dataFull.setCanLogIn(true);
         dataFull.setMetadata(metadataRest);
 
+        context.restoreAuthSystemState();
+
         getClient().perform(post("/api/eperson/epersons")
                                          .content(mapper.writeValueAsBytes(data))
                                          .contentType(contentType)
                                          .param("projection", "full"))
                             .andExpect(status().isUnauthorized());
+        getClient().perform(get("/api/eperson/epersons/search/byEmail")
+                                .param("email", data.getEmail()))
+                   .andExpect(status().isNoContent());
     }
 
     @Test
@@ -1856,18 +1865,19 @@ public class EPersonRestRepositoryIT extends AbstractControllerIntegrationTest {
         String patchBody = getPatchContent(ops);
         accountService.sendRegistrationInfo(context, ePerson.getEmail());
         String tokenForEPerson = registrationDataService.findByEmail(context, ePerson.getEmail()).getToken();
-        String token = getAuthToken(admin.getEmail(), password);
         PasswordHash oldPassword = ePersonService.getPasswordHash(ePerson);
         // updates password
-        getClient(token).perform(patch("/api/eperson/epersons/" + ePerson.getID())
+        getClient().perform(patch("/api/eperson/epersons/" + ePerson.getID())
                                      .content(patchBody)
                                      .contentType(MediaType.APPLICATION_JSON_PATCH_JSON)
                                      .param("token", tokenForEPerson))
                         .andExpect(status().isOk());
 
         PasswordHash newPasswordHash = ePersonService.getPasswordHash(ePerson);
-        assertFalse(oldPassword.equals(newPasswordHash));
+        assertNotEquals(oldPassword, newPasswordHash);
         assertTrue(registrationDataService.findByEmail(context, ePerson.getEmail()) == null);
+
+        assertNull(registrationDataService.findByToken(context, tokenForEPerson));
     }
 
 
@@ -1891,20 +1901,22 @@ public class EPersonRestRepositoryIT extends AbstractControllerIntegrationTest {
         String patchBody = getPatchContent(ops);
         accountService.sendRegistrationInfo(context, ePerson.getEmail());
         String tokenForEPerson = registrationDataService.findByEmail(context, ePerson.getEmail()).getToken();
-        String token = getAuthToken(admin.getEmail(), password);
         PasswordHash oldPassword = ePersonService.getPasswordHash(ePerson);
         // updates password
-        getClient(token).perform(patch("/api/eperson/epersons/" + ePerson.getID())
+        getClient().perform(patch("/api/eperson/epersons/" + ePerson.getID())
                                      .content(patchBody)
                                      .contentType(MediaType.APPLICATION_JSON_PATCH_JSON)
                                      .param("token", "RandomToken"))
-                        .andExpect(status().isForbidden());
+                        .andExpect(status().isUnauthorized());
 
         PasswordHash newPasswordHash = ePersonService.getPasswordHash(ePerson);
-        assertTrue(StringUtils.equalsIgnoreCase(oldPassword.getHashString(),newPasswordHash.getHashString()));
-        assertFalse(registrationDataService.findByEmail(context, ePerson.getEmail()) == null);
-        assertTrue(StringUtils.equals(registrationDataService.findByEmail(context, ePerson.getEmail()).getToken(),
-                                      tokenForEPerson));
+        assertEquals(oldPassword.getHashString(),newPasswordHash.getHashString());
+        assertNotNull(registrationDataService.findByEmail(context, ePerson.getEmail()));
+        assertEquals(registrationDataService.findByEmail(context, ePerson.getEmail()).getToken(), tokenForEPerson);
+
+        context.turnOffAuthorisationSystem();
+        registrationDataService.deleteByToken(context, tokenForEPerson);
+        context.restoreAuthSystemState();
     }
 
     @Test
@@ -1937,25 +1949,29 @@ public class EPersonRestRepositoryIT extends AbstractControllerIntegrationTest {
         String tokenForEPerson = registrationDataService.findByEmail(context, ePerson.getEmail()).getToken();
         String tokenForEPersonTwo = registrationDataService.findByEmail(context, ePersonTwo.getEmail()).getToken();
 
-        String token = getAuthToken(admin.getEmail(), password);
         PasswordHash oldPassword = ePersonService.getPasswordHash(ePerson);
         // updates password
-        getClient(token).perform(patch("/api/eperson/epersons/" + ePerson.getID())
+        getClient().perform(patch("/api/eperson/epersons/" + ePerson.getID())
                                      .content(patchBody)
                                      .contentType(MediaType.APPLICATION_JSON_PATCH_JSON)
                                      .param("token", tokenForEPersonTwo))
-                        .andExpect(status().isForbidden());
+                        .andExpect(status().isUnauthorized());
 
         PasswordHash newPasswordHash = ePersonService.getPasswordHash(ePerson);
-        assertTrue(StringUtils.equalsIgnoreCase(oldPassword.getHashString(),newPasswordHash.getHashString()));
-        assertFalse(registrationDataService.findByEmail(context, ePerson.getEmail()) == null);
+        assertEquals(oldPassword.getHashString(),newPasswordHash.getHashString());
+        assertNotNull(registrationDataService.findByEmail(context, ePerson.getEmail()));
+
+        context.turnOffAuthorisationSystem();
+        registrationDataService.deleteByToken(context, tokenForEPerson);
+        registrationDataService.deleteByToken(context, tokenForEPersonTwo);
+        context.restoreAuthSystemState();
     }
 
     @Test
     public void patchReplaceEmailWithTokenFail() throws Exception {
         context.turnOffAuthorisationSystem();
 
-        String originalEmail = "Johndoe@fake-email.com";
+        String originalEmail = "johndoe@fake-email.com";
         EPerson ePerson = EPersonBuilder.createEPerson(context)
                                         .withNameInMetadata("John", "Doe")
                                         .withEmail(originalEmail)
@@ -1972,19 +1988,24 @@ public class EPersonRestRepositoryIT extends AbstractControllerIntegrationTest {
         String patchBody = getPatchContent(ops);
         accountService.sendRegistrationInfo(context, ePerson.getEmail());
         String tokenForEPerson = registrationDataService.findByEmail(context, ePerson.getEmail()).getToken();
-        String token = getAuthToken(admin.getEmail(), password);
         PasswordHash oldPassword = ePersonService.getPasswordHash(ePerson);
         // updates password
-        getClient(token).perform(patch("/api/eperson/epersons/" + ePerson.getID())
+        getClient().perform(patch("/api/eperson/epersons/" + ePerson.getID())
                                      .content(patchBody)
                                      .contentType(MediaType.APPLICATION_JSON_PATCH_JSON)
                                      .param("token", tokenForEPerson))
-                        .andExpect(status().isForbidden());
+                        .andExpect(status().isUnauthorized());
 
         PasswordHash newPasswordHash = ePersonService.getPasswordHash(ePerson);
-        assertTrue(StringUtils.equalsIgnoreCase(oldPassword.getHashString(),newPasswordHash.getHashString()));
-        assertFalse(registrationDataService.findByEmail(context, ePerson.getEmail()) == null);
-        assertTrue(StringUtils.equalsIgnoreCase(ePerson.getEmail(), originalEmail));
+        assertEquals(oldPassword.getHashString(),newPasswordHash.getHashString());
+        assertNotNull(registrationDataService.findByEmail(context, ePerson.getEmail()));
+        assertEquals(ePerson.getEmail(), originalEmail);
+
+        context.turnOffAuthorisationSystem();
+        registrationDataService.delete(context, registrationDataService.findByEmail(context, ePerson.getEmail()));
+        registrationDataService.deleteByToken(context, tokenForEPerson);
+        context.restoreAuthSystemState();
+
     }
 
     @Test
@@ -2016,19 +2037,23 @@ public class EPersonRestRepositoryIT extends AbstractControllerIntegrationTest {
         String patchBody = getPatchContent(ops);
         accountService.sendRegistrationInfo(context, ePerson.getEmail());
         String newRegisterToken = registrationDataService.findByEmail(context, newRegisterEmail).getToken();
-        String token = getAuthToken(admin.getEmail(), password);
         PasswordHash oldPassword = ePersonService.getPasswordHash(ePerson);
         // updates password
-        getClient(token).perform(patch("/api/eperson/epersons/" + ePerson.getID())
+        getClient().perform(patch("/api/eperson/epersons/" + ePerson.getID())
                                      .content(patchBody)
                                      .contentType(MediaType.APPLICATION_JSON_PATCH_JSON)
                                      .param("token", newRegisterToken))
-                        .andExpect(status().isForbidden());
+                        .andExpect(status().isUnauthorized());
 
         PasswordHash newPasswordHash = ePersonService.getPasswordHash(ePerson);
         assertTrue(StringUtils.equalsIgnoreCase(oldPassword.getHashString(),newPasswordHash.getHashString()));
         assertFalse(registrationDataService.findByEmail(context, ePerson.getEmail()) == null);
         assertFalse(registrationDataService.findByEmail(context, newRegisterEmail) == null);
+
+        context.turnOffAuthorisationSystem();
+        registrationDataService.delete(context, registrationDataService.findByEmail(context, ePerson.getEmail()));
+        registrationDataService.deleteByToken(context, newRegisterToken);
+        context.restoreAuthSystemState();
     }
 
     @Test
@@ -2045,37 +2070,47 @@ public class EPersonRestRepositoryIT extends AbstractControllerIntegrationTest {
                    .andExpect(status().isCreated());
         String newRegisterToken = registrationDataService.findByEmail(context, newRegisterEmail).getToken();
 
+        // We need to create this json manually to support actually setting the password to a value.
+        // When using the mapper to write an EPersonRest object to JSON to pass it along, the password gets lost
         String json = "{\"metadata\":{\"eperson.firstname\":[{\"value\":\"John\"}]," +
             "\"eperson.lastname\":[{\"value\":\"Doe\"}]},\"password\":\"somePassword\"," +
             "\"type\":\"eperson\"}";
 
-        String token = getAuthToken(admin.getEmail(), password);
-        MvcResult mvcResult = getClient(token).perform(post("/api/eperson/epersons")
-                                .param("token", newRegisterToken)
-                                .content(json)
-                                .contentType(MediaType.APPLICATION_JSON))
-                                  .andExpect(status().isCreated())
-                                  .andExpect(jsonPath("$", Matchers.allOf(
-                            hasJsonPath("$.uuid", not(empty())),
-                            // is it what you expect? EPerson.getName() returns the email...
-                            //hasJsonPath("$.name", is("Doe John")),
-                            hasJsonPath("$.type", is("eperson")),
-                            hasJsonPath("$._links.self.href", not(empty())),
-                            hasJsonPath("$.metadata", Matchers.allOf(
-                                matchMetadata("eperson.firstname", "John"),
-                                matchMetadata("eperson.lastname", "Doe")
-                            ))))).andReturn();
+        AtomicReference<UUID> idRef = new AtomicReference<UUID>();
 
-        String content = mvcResult.getResponse().getContentAsString();
-        Map<String,Object> map = mapper.readValue(content, Map.class);
-        String epersonUuid = String.valueOf(map.get("uuid"));
-        EPerson createdEPerson = ePersonService.find(context, UUID.fromString(epersonUuid));
-        assertTrue(ePersonService.checkPassword(context, createdEPerson, "somePassword"));
+        try {
+            getClient().perform(post("/api/eperson/epersons")
+                                    .param("token", newRegisterToken)
+                                    .content(json)
+                                    .contentType(MediaType.APPLICATION_JSON))
+                                      .andExpect(status().isCreated())
+                                      .andExpect(jsonPath("$", Matchers.allOf(
+                                hasJsonPath("$.uuid", not(empty())),
+                                // is it what you expect? EPerson.getName() returns the email...
+                                //hasJsonPath("$.name", is("Doe John")),
+                                hasJsonPath("$.type", is("eperson")),
+                                hasJsonPath("$._links.self.href", not(empty())),
+                                hasJsonPath("$.metadata", Matchers.allOf(
+                                    matchMetadata("eperson.firstname", "John"),
+                                    matchMetadata("eperson.lastname", "Doe")
+                                )))))
+                                .andDo(result -> idRef
+                                    .set(UUID.fromString(read(result.getResponse().getContentAsString(), "$.id"))));
 
-        assertNull(registrationDataService.findByToken(context, newRegisterToken));
-        context.turnOffAuthorisationSystem();
-        ePersonService.delete(context, createdEPerson);
-        context.restoreAuthSystemState();
+
+
+            String epersonUuid = String.valueOf(idRef.get());
+            EPerson createdEPerson = ePersonService.find(context, UUID.fromString(epersonUuid));
+            assertTrue(ePersonService.checkPassword(context, createdEPerson, "somePassword"));
+
+            assertNull(registrationDataService.findByToken(context, newRegisterToken));
+
+            context.turnOffAuthorisationSystem();
+            registrationDataService.deleteByToken(context, newRegisterToken);
+            context.restoreAuthSystemState();
+        } finally {
+            EPersonBuilder.deleteEPerson(idRef.get());
+        }
     }
 
     @Test
@@ -2092,38 +2127,45 @@ public class EPersonRestRepositoryIT extends AbstractControllerIntegrationTest {
                    .andExpect(status().isCreated());
         String newRegisterToken = registrationDataService.findByEmail(context, newRegisterEmail).getToken();
 
+        // We need to create this json manually to support actually setting the password to a value.
+        // When using the mapper to write an EPersonRest object to JSON to pass it along, the password gets lost
         String json = "{\"metadata\":{\"eperson.firstname\":[{\"value\":\"John\"}]," +
             "\"eperson.lastname\":[{\"value\":\"Doe\"}]},\"email\":\"" + newRegisterEmail +
             "\",\"password\":\"somePassword\",\"type\":\"eperson\"}";
 
-        String token = getAuthToken(admin.getEmail(), password);
-        MvcResult mvcResult = getClient(token).perform(post("/api/eperson/epersons")
-                                                           .param("token", newRegisterToken)
-                                                           .content(json)
-                                                           .contentType(MediaType.APPLICATION_JSON))
-                                              .andExpect(status().isCreated())
-                                              .andExpect(jsonPath("$", Matchers.allOf(
-                                                  hasJsonPath("$.uuid", not(empty())),
-                                                  // is it what you expect? EPerson.getName() returns the email...
-                                                  //hasJsonPath("$.name", is("Doe John")),
-                                                  hasJsonPath("$.email", is(newRegisterEmail)),
-                                                  hasJsonPath("$.type", is("eperson")),
-                                                  hasJsonPath("$._links.self.href", not(empty())),
-                                                  hasJsonPath("$.metadata", Matchers.allOf(
-                                                      matchMetadata("eperson.firstname", "John"),
-                                                      matchMetadata("eperson.lastname", "Doe")
-                                                  ))))).andReturn();
+        AtomicReference<UUID> idRef = new AtomicReference<UUID>();
 
-        String content = mvcResult.getResponse().getContentAsString();
-        Map<String,Object> map = mapper.readValue(content, Map.class);
-        String epersonUuid = String.valueOf(map.get("uuid"));
-        EPerson createdEPerson = ePersonService.find(context, UUID.fromString(epersonUuid));
-        assertTrue(ePersonService.checkPassword(context, createdEPerson, "somePassword"));
-        assertNull(registrationDataService.findByToken(context, newRegisterToken));
+        try {
+            getClient().perform(post("/api/eperson/epersons")
+                                                               .param("token", newRegisterToken)
+                                                               .content(json)
+                                                               .contentType(MediaType.APPLICATION_JSON))
+                                                  .andExpect(status().isCreated())
+                                                  .andExpect(jsonPath("$", Matchers.allOf(
+                                                      hasJsonPath("$.uuid", not(empty())),
+                                                      // is it what you expect? EPerson.getName() returns the email...
+                                                      //hasJsonPath("$.name", is("Doe John")),
+                                                      hasJsonPath("$.email", is(newRegisterEmail)),
+                                                      hasJsonPath("$.type", is("eperson")),
+                                                      hasJsonPath("$._links.self.href", not(empty())),
+                                                      hasJsonPath("$.metadata", Matchers.allOf(
+                                                          matchMetadata("eperson.firstname", "John"),
+                                                          matchMetadata("eperson.lastname", "Doe")
+                                                      ))))).andDo(result -> idRef
+                            .set(UUID.fromString(read(result.getResponse().getContentAsString(), "$.id"))));
 
-        context.turnOffAuthorisationSystem();
-        ePersonService.delete(context, createdEPerson);
-        context.restoreAuthSystemState();
+            String epersonUuid = String.valueOf(idRef.get());
+            EPerson createdEPerson = ePersonService.find(context, UUID.fromString(epersonUuid));
+            assertTrue(ePersonService.checkPassword(context, createdEPerson, "somePassword"));
+            assertNull(registrationDataService.findByToken(context, newRegisterToken));
+
+            context.turnOffAuthorisationSystem();
+            registrationDataService.deleteByToken(context, newRegisterToken);
+            context.restoreAuthSystemState();
+        } finally {
+            EPersonBuilder.deleteEPerson(idRef.get());
+        }
+
     }
 
     @Test
@@ -2140,38 +2182,49 @@ public class EPersonRestRepositoryIT extends AbstractControllerIntegrationTest {
                    .andExpect(status().isCreated());
         String newRegisterToken = registrationDataService.findByEmail(context, newRegisterEmail).getToken();
 
+        // We need to create this json manually to support actually setting the password to a value.
+        // When using the mapper to write an EPersonRest object to JSON to pass it along, the password gets lost
         String json = "{\"metadata\":{\"eperson.firstname\":[{\"value\":\"John\"}]," +
             "\"eperson.lastname\":[{\"value\":\"Doe\"}]},\"selfRegistered\":true,\"email\":\"" + newRegisterEmail +
             "\",\"password\":\"somePassword\",\"type\":\"eperson\"}";
 
-        String token = getAuthToken(admin.getEmail(), password);
-        MvcResult mvcResult = getClient(token).perform(post("/api/eperson/epersons")
-                                                           .param("token", newRegisterToken)
-                                                           .content(json)
-                                                           .contentType(MediaType.APPLICATION_JSON))
-                                              .andExpect(status().isCreated())
-                                              .andExpect(jsonPath("$", Matchers.allOf(
-                                                  hasJsonPath("$.uuid", not(empty())),
-                                                  // is it what you expect? EPerson.getName() returns the email...
-                                                  //hasJsonPath("$.name", is("Doe John")),
-                                                  hasJsonPath("$.email", is(newRegisterEmail)),
-                                                  hasJsonPath("$.type", is("eperson")),
-                                                  hasJsonPath("$._links.self.href", not(empty())),
-                                                  hasJsonPath("$.metadata", Matchers.allOf(
-                                                      matchMetadata("eperson.firstname", "John"),
-                                                      matchMetadata("eperson.lastname", "Doe")
-                                                  ))))).andReturn();
+        AtomicReference<UUID> idRef = new AtomicReference<UUID>();
 
-        String content = mvcResult.getResponse().getContentAsString();
-        Map<String,Object> map = mapper.readValue(content, Map.class);
-        String epersonUuid = String.valueOf(map.get("uuid"));
-        EPerson createdEPerson = ePersonService.find(context, UUID.fromString(epersonUuid));
-        assertTrue(ePersonService.checkPassword(context, createdEPerson, "somePassword"));
-        assertNull(registrationDataService.findByToken(context, newRegisterToken));
+        try {
+            getClient().perform(post("/api/eperson/epersons")
+                                                               .param("token", newRegisterToken)
+                                                               .content(json)
+                                                               .contentType(MediaType.APPLICATION_JSON))
+                                                  .andExpect(status().isCreated())
+                                                  .andExpect(jsonPath("$", Matchers.allOf(
+                                                      hasJsonPath("$.uuid", not(empty())),
+                                                      // is it what you expect? EPerson.getName() returns the email...
+                                                      //hasJsonPath("$.name", is("Doe John")),
+                                                      hasJsonPath("$.email", is(newRegisterEmail)),
+                                                      hasJsonPath("$.type", is("eperson")),
+                                                      hasJsonPath("$._links.self.href", not(empty())),
+                                                      hasJsonPath("$.metadata", Matchers.allOf(
+                                                          matchMetadata("eperson.firstname", "John"),
+                                                          matchMetadata("eperson.lastname", "Doe")
+                                                      ))))).andDo(result -> idRef
+                    .set(UUID.fromString(read(result.getResponse().getContentAsString(), "$.id"))));
 
-        context.turnOffAuthorisationSystem();
-        ePersonService.delete(context, createdEPerson);
-        context.restoreAuthSystemState();
+
+            String epersonUuid = String.valueOf(idRef.get());
+            EPerson createdEPerson = ePersonService.find(context, UUID.fromString(epersonUuid));
+            assertTrue(ePersonService.checkPassword(context, createdEPerson, "somePassword"));
+            assertNull(registrationDataService.findByToken(context, newRegisterToken));
+
+            context.turnOffAuthorisationSystem();
+            context.restoreAuthSystemState();
+
+            context.turnOffAuthorisationSystem();
+            registrationDataService.deleteByToken(context, newRegisterToken);
+            context.restoreAuthSystemState();
+        } finally {
+            EPersonBuilder.deleteEPerson(idRef.get());
+        }
+
     }
 
     @Test
@@ -2197,22 +2250,27 @@ public class EPersonRestRepositoryIT extends AbstractControllerIntegrationTest {
                    .andExpect(status().isCreated());
         String newRegisterTokenTwo = registrationDataService.findByEmail(context, newRegisterEmailTwo).getToken();
 
-
+        // We need to create this json manually to support actually setting the password to a value.
+        // When using the mapper to write an EPersonRest object to JSON to pass it along, the password gets lost
         String json = "{\"metadata\":{\"eperson.firstname\":[{\"value\":\"John\"}]," +
             "\"eperson.lastname\":[{\"value\":\"Doe\"}]},\"email\":\"" + newRegisterEmailTwo +
             "\",\"password\":\"somePassword\",\"type\":\"eperson\"}";
 
-        String token = getAuthToken(admin.getEmail(), password);
-        getClient(token).perform(post("/api/eperson/epersons")
+        getClient().perform(post("/api/eperson/epersons")
                                                            .param("token", newRegisterToken)
                                                            .content(json)
                                                            .contentType(MediaType.APPLICATION_JSON))
-                                              .andExpect(status().isForbidden());
+                                              .andExpect(status().isBadRequest());
 
         EPerson createdEPerson = ePersonService.findByEmail(context, newRegisterEmailTwo);
         assertNull(createdEPerson);
         assertNotNull(registrationDataService.findByToken(context, newRegisterToken));
         assertNotNull(registrationDataService.findByToken(context, newRegisterTokenTwo));
+
+        context.turnOffAuthorisationSystem();
+        registrationDataService.deleteByToken(context, newRegisterToken);
+        registrationDataService.deleteByToken(context, newRegisterTokenTwo);
+        context.restoreAuthSystemState();
     }
 
     @Test
@@ -2229,20 +2287,25 @@ public class EPersonRestRepositoryIT extends AbstractControllerIntegrationTest {
                    .andExpect(status().isCreated());
         String newRegisterToken = registrationDataService.findByEmail(context, newRegisterEmail).getToken();
 
+        // We need to create this json manually to support actually setting the password to a value.
+        // When using the mapper to write an EPersonRest object to JSON to pass it along, the password gets lost
         String json = "{\"metadata\":{\"eperson.firstname\":[{\"value\":\"John\"}]," +
             "\"eperson.lastname\":[{\"value\":\"Doe\"}]},\"email\":\"" + newRegisterEmail +
             "\",\"password\":\"somePassword\",\"type\":\"eperson\"}";
 
-        String token = getAuthToken(admin.getEmail(), password);
-        getClient(token).perform(post("/api/eperson/epersons")
+        getClient().perform(post("/api/eperson/epersons")
                                      .param("token", "randomToken")
                                      .content(json)
                                      .contentType(MediaType.APPLICATION_JSON))
-                        .andExpect(status().isForbidden());
+                        .andExpect(status().isBadRequest());
 
         EPerson createdEPerson = ePersonService.findByEmail(context, newRegisterEmail);
         assertNull(createdEPerson);
         assertNotNull(registrationDataService.findByToken(context, newRegisterToken));
+
+        context.turnOffAuthorisationSystem();
+        registrationDataService.deleteByToken(context, newRegisterToken);
+        context.restoreAuthSystemState();
     }
 
     @Test
@@ -2259,20 +2322,25 @@ public class EPersonRestRepositoryIT extends AbstractControllerIntegrationTest {
                    .andExpect(status().isCreated());
         String newRegisterToken = registrationDataService.findByEmail(context, newRegisterEmail).getToken();
 
+        // We need to create this json manually to support actually setting the password to a value.
+        // When using the mapper to write an EPersonRest object to JSON to pass it along, the password gets lost
         String json = "{\"metadata\":{\"eperson.firstname\":[{\"value\":\"John\"}]," +
             "\"eperson.lastname\":[{\"value\":\"Doe\"}]},\"selfRegistered\":false,\"email\":\"" + newRegisterEmail +
             "\",\"password\":\"somePassword\",\"type\":\"eperson\"}";
 
-        String token = getAuthToken(admin.getEmail(), password);
-        getClient(token).perform(post("/api/eperson/epersons")
+        getClient().perform(post("/api/eperson/epersons")
                                                            .param("token", newRegisterToken)
                                                            .content(json)
                                                            .contentType(MediaType.APPLICATION_JSON))
-                                              .andExpect(status().isForbidden());
+                                              .andExpect(status().isBadRequest());
 
         EPerson createdEPerson = ePersonService.findByEmail(context, newRegisterEmail);
         assertNull(createdEPerson);
         assertNotNull(registrationDataService.findByToken(context, newRegisterToken));
+
+        context.turnOffAuthorisationSystem();
+        registrationDataService.deleteByToken(context, newRegisterToken);
+        context.restoreAuthSystemState();
     }
 
     @Test
@@ -2289,19 +2357,24 @@ public class EPersonRestRepositoryIT extends AbstractControllerIntegrationTest {
                    .andExpect(status().isCreated());
         String newRegisterToken = registrationDataService.findByEmail(context, newRegisterEmail).getToken();
 
+        // We need to create this json manually to support actually setting the password to a value.
+        // When using the mapper to write an EPersonRest object to JSON to pass it along, the password gets lost
         String json = "{\"metadata\":{\"eperson.firstname\":[{\"value\":\"John\"}]},\"selfRegistered\":true," +
             "\"email\":\"" + newRegisterEmail + "\",\"password\":\"somePassword\",\"type\":\"eperson\"}";
 
-        String token = getAuthToken(admin.getEmail(), password);
-        getClient(token).perform(post("/api/eperson/epersons")
+        getClient().perform(post("/api/eperson/epersons")
                                      .param("token", newRegisterToken)
                                      .content(json)
                                      .contentType(MediaType.APPLICATION_JSON))
-                        .andExpect(status().isForbidden());
+                        .andExpect(status().isBadRequest());
 
         EPerson createdEPerson = ePersonService.findByEmail(context, newRegisterEmail);
         assertNull(createdEPerson);
         assertNotNull(registrationDataService.findByToken(context, newRegisterToken));
+
+        context.turnOffAuthorisationSystem();
+        registrationDataService.deleteByToken(context, newRegisterToken);
+        context.restoreAuthSystemState();
     }
 
     @Test
@@ -2318,19 +2391,24 @@ public class EPersonRestRepositoryIT extends AbstractControllerIntegrationTest {
                    .andExpect(status().isCreated());
         String newRegisterToken = registrationDataService.findByEmail(context, newRegisterEmail).getToken();
 
+        // We need to create this json manually to support actually setting the password to a value.
+        // When using the mapper to write an EPersonRest object to JSON to pass it along, the password gets lost
         String json = "{\"metadata\":{\"eperson.lastname\":[{\"value\":\"Doe\"}]},\"selfRegistered\":true," +
             "\"email\":\"" + newRegisterEmail + "\",\"password\":\"somePassword\",\"type\":\"eperson\"}";
 
-        String token = getAuthToken(admin.getEmail(), password);
-        getClient(token).perform(post("/api/eperson/epersons")
+        getClient().perform(post("/api/eperson/epersons")
                                      .param("token", newRegisterToken)
                                      .content(json)
                                      .contentType(MediaType.APPLICATION_JSON))
-                        .andExpect(status().isForbidden());
+                        .andExpect(status().isBadRequest());
 
         EPerson createdEPerson = ePersonService.findByEmail(context, newRegisterEmail);
         assertNull(createdEPerson);
         assertNotNull(registrationDataService.findByToken(context, newRegisterToken));
+
+        context.turnOffAuthorisationSystem();
+        registrationDataService.deleteByToken(context, newRegisterToken);
+        context.restoreAuthSystemState();
     }
 
     @Test
@@ -2347,20 +2425,26 @@ public class EPersonRestRepositoryIT extends AbstractControllerIntegrationTest {
                    .andExpect(status().isCreated());
         String newRegisterToken = registrationDataService.findByEmail(context, newRegisterEmail).getToken();
 
+        // We need to create this json manually to support actually setting the password to a value.
+        // When using the mapper to write an EPersonRest object to JSON to pass it along, the password gets lost
         String json = "{\"metadata\":{\"eperson.firstname\":[{\"value\":\"John\"}]," +
             "\"eperson.lastname\":[{\"value\":\"Doe\"}]}," +
             "\"type\":\"eperson\"}";
 
-        String token = getAuthToken(admin.getEmail(), password);
-        getClient(token).perform(post("/api/eperson/epersons")
+        getClient().perform(post("/api/eperson/epersons")
                                      .param("token", newRegisterToken)
                                      .content(json)
                                      .contentType(MediaType.APPLICATION_JSON))
-                        .andExpect(status().isForbidden());
+                        .andExpect(status().isBadRequest());
 
         EPerson createdEPerson = ePersonService.findByEmail(context, newRegisterEmail);
         assertNull(createdEPerson);
         assertNotNull(registrationDataService.findByToken(context, newRegisterToken));
+
+        context.turnOffAuthorisationSystem();
+        registrationDataService.deleteByToken(context, newRegisterToken);
+        context.restoreAuthSystemState();
+
     }
 
     @Test
@@ -2377,20 +2461,26 @@ public class EPersonRestRepositoryIT extends AbstractControllerIntegrationTest {
                    .andExpect(status().isCreated());
         String forgotPasswordToken = registrationDataService.findByEmail(context, eperson.getEmail()).getToken();
 
+        // We need to create this json manually to support actually setting the password to a value.
+        // When using the mapper to write an EPersonRest object to JSON to pass it along, the password gets lost
         String json = "{\"metadata\":{\"eperson.firstname\":[{\"value\":\"John\"}]," +
             "\"eperson.lastname\":[{\"value\":\"Doe\"}]},\"selfRegistered\":true,\"password\":\"somePassword\"," +
             "\"type\":\"eperson\"}";
 
-        String token = getAuthToken(admin.getEmail(), password);
-        getClient(token).perform(post("/api/eperson/epersons")
+        getClient().perform(post("/api/eperson/epersons")
                                      .param("token", forgotPasswordToken)
                                      .content(json)
                                      .contentType(MediaType.APPLICATION_JSON))
-                        .andExpect(status().isForbidden());
+                        .andExpect(status().isBadRequest());
 
         EPerson createdEPerson = ePersonService.findByEmail(context, newEmail);
         assertNull(createdEPerson);
         assertNotNull(registrationDataService.findByToken(context, forgotPasswordToken));
+
+        context.turnOffAuthorisationSystem();
+        registrationDataService.deleteByToken(context, forgotPasswordToken);
+        context.restoreAuthSystemState();
+
     }
 
     @Test
@@ -2407,36 +2497,57 @@ public class EPersonRestRepositoryIT extends AbstractControllerIntegrationTest {
                    .andExpect(status().isCreated());
         String newRegisterToken = registrationDataService.findByEmail(context, newRegisterEmail).getToken();
 
+        // We need to create this json manually to support actually setting the password to a value.
+        // When using the mapper to write an EPersonRest object to JSON to pass it along, the password gets lost
         String json = "{\"metadata\":{\"eperson.firstname\":[{\"value\":\"John\"}]," +
             "\"eperson.lastname\":[{\"value\":\"Doe\"}]},\"email\":\"" + newRegisterEmail +
             "\",\"password\":\"somePassword\",\"type\":\"eperson\"}";
 
-        MvcResult mvcResult = getClient().perform(post("/api/eperson/epersons")
-                                                           .param("token", newRegisterToken)
-                                                           .content(json)
-                                                           .contentType(MediaType.APPLICATION_JSON))
-                                              .andExpect(status().isCreated())
-                                              .andExpect(jsonPath("$", Matchers.allOf(
-                                                  hasJsonPath("$.uuid", not(empty())),
-                                                  // is it what you expect? EPerson.getName() returns the email...
-                                                  //hasJsonPath("$.name", is("Doe John")),
-                                                  hasJsonPath("$.email", is(newRegisterEmail)),
-                                                  hasJsonPath("$.type", is("eperson")),
-                                                  hasJsonPath("$._links.self.href", not(empty())),
-                                                  hasJsonPath("$.metadata", Matchers.allOf(
-                                                      matchMetadata("eperson.firstname", "John"),
-                                                      matchMetadata("eperson.lastname", "Doe")
-                                                  ))))).andReturn();
+        AtomicReference<UUID> idRef = new AtomicReference<UUID>();
 
-        String content = mvcResult.getResponse().getContentAsString();
-        Map<String,Object> map = mapper.readValue(content, Map.class);
-        String epersonUuid = String.valueOf(map.get("uuid"));
-        EPerson createdEPerson = ePersonService.find(context, UUID.fromString(epersonUuid));
-        assertTrue(ePersonService.checkPassword(context, createdEPerson, "somePassword"));
-        assertNull(registrationDataService.findByToken(context, newRegisterToken));
+        try {
+            getClient().perform(post("/api/eperson/epersons")
+                                                               .param("token", newRegisterToken)
+                                                               .content(json)
+                                                               .contentType(MediaType.APPLICATION_JSON))
+                                                  .andExpect(status().isCreated())
+                                                  .andExpect(jsonPath("$", Matchers.allOf(
+                                                      hasJsonPath("$.uuid", not(empty())),
+                                                      // is it what you expect? EPerson.getName() returns the email...
+                                                      //hasJsonPath("$.name", is("Doe John")),
+                                                      hasJsonPath("$.email", is(newRegisterEmail)),
+                                                      hasJsonPath("$.type", is("eperson")),
+                                                      hasJsonPath("$._links.self.href", not(empty())),
+                                                      hasJsonPath("$.metadata", Matchers.allOf(
+                                                          matchMetadata("eperson.firstname", "John"),
+                                                          matchMetadata("eperson.lastname", "Doe")
+                                                      ))))).andDo(result -> idRef
+                    .set(UUID.fromString(read(result.getResponse().getContentAsString(), "$.id"))));
 
-        context.turnOffAuthorisationSystem();
-        ePersonService.delete(context, createdEPerson);
-        context.restoreAuthSystemState();
+            String epersonUuid = String.valueOf(idRef.get());
+            EPerson createdEPerson = ePersonService.find(context, UUID.fromString(epersonUuid));
+            assertTrue(ePersonService.checkPassword(context, createdEPerson, "somePassword"));
+            assertNull(registrationDataService.findByToken(context, newRegisterToken));
+
+            context.turnOffAuthorisationSystem();
+            registrationDataService.deleteByToken(context, newRegisterToken);
+            context.restoreAuthSystemState();
+        } finally {
+            EPersonBuilder.deleteEPerson(idRef.get());
+        }
     }
+
+    @Test
+    public void discoverableNestedLinkTest() throws Exception {
+        String token = getAuthToken(eperson.getEmail(), password);
+        getClient(token).perform(get("/api"))
+                        .andExpect(status().isOk())
+                        .andExpect(jsonPath("$._links",Matchers.allOf(
+                                hasJsonPath("$.epersons.href",
+                                         is("http://localhost/api/eperson/epersons")),
+                                hasJsonPath("$.eperson-registration.href",
+                                         is("http://localhost/api/eperson/registrations"))
+                        )));
+    }
+
 }

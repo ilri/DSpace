@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.Locale;
 import javax.mail.MessagingException;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.Logger;
 import org.dspace.authorize.AuthorizeException;
 import org.dspace.core.ConfigurationManager;
@@ -161,6 +162,14 @@ public class AccountServiceImpl implements AccountService {
         registrationDataService.deleteByToken(context, token);
     }
 
+    @Override
+    public boolean verifyPasswordStructure(String password) {
+        if (StringUtils.length(password) < 6) {
+            return false;
+        }
+        return true;
+    }
+
     /**
      * THIS IS AN INTERNAL METHOD. THE SEND PARAMETER ALLOWS IT TO BE USED FOR
      * TESTING PURPOSES.
@@ -239,8 +248,8 @@ public class AccountServiceImpl implements AccountService {
         //  Note change from "key=" to "token="
         String specialLink = new StringBuffer().append(base).append(
             base.endsWith("/") ? "" : "/").append(
-            isRegister ? "register" : "forgot").append("?")
-                                               .append("token=").append(rd.getToken())
+            isRegister ? "register" : "forgot").append("/")
+                                               .append(rd.getToken())
                                                .toString();
         Locale locale = context.getCurrentLocale();
         Email bean = Email.getEmail(I18nUtil.getEmailFilename(locale, isRegister ? "register"

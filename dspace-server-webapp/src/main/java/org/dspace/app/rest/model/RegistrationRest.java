@@ -10,9 +10,14 @@ package org.dspace.app.rest.model;
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.dspace.app.rest.RegistrationRestController;
+import org.dspace.app.rest.RestResourceController;
 
 
+/**
+ * This class acts as the REST representation of the RegistrationData model class.
+ * This class acts as a data holder for the RegistrationResource
+ * Refer to {@link org.dspace.eperson.RegistrationData} for explanation about the properties
+ */
 public class RegistrationRest extends RestAddressableModel {
 
     public static final String NAME = "registration";
@@ -61,7 +66,7 @@ public class RegistrationRest extends RestAddressableModel {
 
     @Override
     public Class getController() {
-        return RegistrationRestController.class;
+        return RestResourceController.class;
     }
 
     @Override
