@@ -66,7 +66,9 @@ public class Bitstream extends DSpaceObject {
         description = bitstream.getDescription();
         format = bitstream.getFormatDescription();
         sizeBytes = bitstream.getSize();
-        retrieveLink = "/bitstreams/" + bitstream.getID() + "/retrieve";
+        // dirty hack for DS-3193, bitstream links are missing the REST context
+        // path. Since we deploy REST on /rest I will just hard code it here.
+        retrieveLink = "/rest/bitstreams/" + bitstream.getID() + "/retrieve";
         mimeType = bitstream.getFormat().getMIMEType();
         sequenceId = bitstream.getSequenceID();
         CheckSum checkSum = new CheckSum();
