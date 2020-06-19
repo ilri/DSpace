@@ -27,7 +27,7 @@ public class ProcessResourceHalLinkFactory extends ProcessHalLinkFactory<Process
         String dspaceRestUrl = configurationService.getProperty("dspace.server.url");
         list.add(buildLink("files", getMethodOn().listFilesFromProcess(halResource.getContent().getProcessId())));
         list.add(
-            buildLink("script", dspaceRestUrl + "/api/system/scripts/" + halResource.getContent().getScriptName()));
+            buildLink("script", dspaceServerUrl + "/api/system/scripts/" + halResource.getContent().getScriptName()));
 
     }
 
