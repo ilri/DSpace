@@ -46,6 +46,16 @@ public class UsageReportRestPermissionEvaluatorPlugin extends RestObjectPermissi
     @Autowired
     AuthorizeService authorizeService;
 
+
+
+    /**
+     * Responsible for checking whether or not the user has used a valid request (valid UUID in /usagereports/{
+     * UUID_ReportID} or in /usagereports/search/object?uri={uri-ending-in/UUID} and whether or not the used has the
+     * given (READ) rights on the corresponding DSO.
+     *
+     * @param targetType usagereport or usagereportsearch, so we know how to extract the UUID
+     * @param targetId   string to extract uuid from
+     */
     @Override
     public boolean hasDSpacePermission(Authentication authentication, Serializable targetId, String targetType,
                                        DSpaceRestPermission restPermission) {
@@ -53,6 +63,10 @@ public class UsageReportRestPermissionEvaluatorPlugin extends RestObjectPermissi
         Context context = ContextUtil.obtainContext(request.getServletRequest());
         UUID uuidObject = null;
         if (StringUtils.equalsIgnoreCase(UsageReportRest.NAME, targetType)) {
+            if (StringUtils.countMatches(targetId.toString(), "_") != 1) {
+                throw new IllegalArgumentException("Must end in objectUUID_reportId, example: " +
+                                                   "1911e8a4-6939-490c-b58b-a5d70f8d91fb_TopCountries");
+            }
             // Get uuid from uuidDSO_reportId pathParam
             uuidObject = UUID.fromString(StringUtils.substringBefore(targetId.toString(), "_"));
         } else if (StringUtils.equalsIgnoreCase(UsageReportRest.NAME + "search", targetType)) {

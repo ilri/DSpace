@@ -23,6 +23,7 @@ import org.dspace.app.rest.model.UsageReportPointDateRest;
 import org.dspace.app.rest.model.UsageReportPointDsoTotalVisitsRest;
 import org.dspace.app.rest.model.UsageReportRest;
 import org.dspace.app.rest.utils.DSpaceObjectUtils;
+import org.dspace.authorize.service.AuthorizeService;
 import org.dspace.content.Bitstream;
 import org.dspace.content.DSpaceObject;
 import org.dspace.content.Item;
@@ -37,22 +38,28 @@ import org.dspace.statistics.content.DatasetTypeGenerator;
 import org.dspace.statistics.content.StatisticsDataVisits;
 import org.dspace.statistics.content.StatisticsListing;
 import org.dspace.statistics.content.StatisticsTable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Component;
 
 /**
- * This is the REST repository dealing with the {@link UsageReportRest} logic
+ * This is the Service dealing with the {@link UsageReportRest} logic
  *
  * @author Maria Verdonck (Atmire) on 08/06/2020
  */
-@Component(UsageReportRest.CATEGORY + "." + UsageReportRest.NAME)
-public class UsageReportRestRepository extends AbstractDSpaceRestRepository {
+@Component
+public class UsageReportService extends AbstractDSpaceRestRepository {
 
+    private static final Logger log = LoggerFactory.getLogger(UsageReportService.class);
+
+    @Autowired
+    private AuthorizeService authorizeService;
     @Autowired
     private DSpaceObjectUtils dspaceObjectUtil;
     @Autowired
-    protected HandleService handleService;
+    private HandleService handleService;
 
     public static final String TOTAL_VISITS_REPORT_ID = "TotalVisits";
     public static final String TOTAL_VISITS_PER_MONTH_REPORT_ID = "TotalVisitsPerMonth";
