@@ -8,6 +8,7 @@
 package org.dspace.app.rest.security;
 
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
@@ -65,8 +66,9 @@ public class EPersonRestPermissionEvaluatorPlugin extends RestObjectPermissionEv
 
         EPerson ePerson = null;
 
-        ePerson = context.getCurrentUser();
-        UUID dsoId = UUID.fromString(targetId.toString());
+        try {
+            ePerson = context.getCurrentUser();
+            UUID dsoId = UUID.fromString(targetId.toString());
 
             // anonymous user
             if (ePerson == null) {
@@ -81,6 +83,9 @@ public class EPersonRestPermissionEvaluatorPlugin extends RestObjectPermissionEv
                 return true;
             }
 
+        } catch (SQLException e) {
+            log.error(e.getMessage(), e);
+        }
 
         return false;
     }
