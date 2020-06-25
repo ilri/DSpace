@@ -157,15 +157,21 @@ public interface ProcessService {
     public Bitstream getBitstreamByName(Context context, Process process, String bitstreamName);
 
     /**
-     * This method will return all the Bitstreams for a given process if the type is defined as null. If type is
-     * different than null, the bitstreams with metadata process.type equal to the given type from that process
-     * are returned
+     * This method will return the Bitstream for a given process with a given type
      * @param context   The relevant DSpace context
      * @param process   The process that holds the Bitstreams to be searched in
      * @param type      The type that the Bitstream must have
-     * @return          The list of Bitstreams of the given type for the given Process
+     * @return          The Bitstream of the given type for the given Process
      */
-    public List<Bitstream> getBitstreams(Context context, Process process, String type);
+    public Bitstream getBitstream(Context context, Process process, String type);
+
+    /**
+     * This method will return all the Bitstreams for a given process
+     * @param context   The relevant DSpace context
+     * @param process   The process that holds the Bitstreams to be searched in
+     * @return          The list of Bitstreams
+     */
+    public List<Bitstream> getBitstreams(Context context, Process process);
 
     /**
      * Returns the total amount of Process objects in the dataase
@@ -174,5 +180,13 @@ public interface ProcessService {
      * @throws SQLException If something goes wrong
      */
     int countTotal(Context context) throws SQLException;
+
+    /**
+     * This will return a list of Strings where each String represents the type of a Bitstream in the Process given
+     * @param context   The DSpace context
+     * @param process   The Process object that we'll use to find the bitstreams
+     * @return          A list of Strings where each String represents a fileType that is in the Process
+     */
+    public List<String> getFileTypesForProcessBitstreams(Context context, Process process);
 
 }

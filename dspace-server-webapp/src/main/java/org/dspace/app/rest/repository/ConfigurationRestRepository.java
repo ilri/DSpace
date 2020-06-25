@@ -7,9 +7,8 @@
  */
 package org.dspace.app.rest.repository;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import javax.annotation.Resource;
+import java.util.List;
 
 import org.dspace.app.rest.exception.RepositoryMethodNotImplementedException;
 import org.dspace.app.rest.model.PropertyRest;
@@ -19,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
 
 /**
@@ -26,11 +26,15 @@ import org.springframework.stereotype.Component;
  */
 @Component(PropertyRest.CATEGORY + "." + PropertyRest.NAME)
 public class ConfigurationRestRepository extends DSpaceRestRepository<PropertyRest, String> {
-    @Autowired
-    private ConfigurationService configurationService;
 
-    @Resource(name = "exposedConfigurationProperties")
-    private ArrayList<String> exposedProperties;
+    private ConfigurationService configurationService;
+    private List<String> exposedProperties;
+
+    @Autowired
+    public ConfigurationRestRepository(ConfigurationService configurationService) {
+        this.configurationService = configurationService;
+        this.exposedProperties = Arrays.asList(configurationService.getArrayProperty("rest.properties.exposed"));
+    }
 
     /**
      * Gets the value of a configuration property if it is exposed via REST
@@ -48,8 +52,9 @@ public class ConfigurationRestRepository extends DSpaceRestRepository<PropertyRe
      * @return
      */
     @Override
+    @PreAuthorize("permitAll()")
     public PropertyRest findOne(Context context, String property) {
-        if (!exposedProperties.contains(property) || configurationService.getArrayProperty(property).length == 0) {
+        if (!exposedProperties.contains(property) || !configurationService.hasProperty(property)) {
             throw new ResourceNotFoundException("No such configuration property: " + property);
         }
 

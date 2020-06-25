@@ -7,78 +7,68 @@
  */
 package org.dspace.app.bulkedit;
 
-import java.io.OutputStream;
 import java.sql.SQLException;
 
-import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.dspace.content.service.MetadataDSpaceCsvExportService;
 import org.dspace.core.Context;
+import org.dspace.eperson.factory.EPersonServiceFactory;
 import org.dspace.eperson.service.EPersonService;
 import org.dspace.scripts.DSpaceRunnable;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.dspace.utils.DSpace;
 
 /**
  * Metadata exporter to allow the batch export of metadata into a file
  *
  * @author Stuart Lewis
  */
-public class MetadataExport extends DSpaceRunnable {
+public class MetadataExport extends DSpaceRunnable<MetadataExportScriptConfiguration> {
 
-    private Context context = null;
     private boolean help = false;
     private String filename = null;
     private String handle = null;
     private boolean exportAllMetadata = false;
     private boolean exportAllItems = false;
 
-    @Autowired
-    private MetadataDSpaceCsvExportService metadataDSpaceCsvExportService;
+    private static final String EXPORT_CSV = "exportCSV";
 
-    @Autowired
-    private EPersonService ePersonService;
+    private MetadataDSpaceCsvExportService metadataDSpaceCsvExportService = new DSpace().getServiceManager()
+                .getServicesByType(MetadataDSpaceCsvExportService.class).get(0);
 
-    private MetadataExport() {
-        this.options = constructOptions();
-    }
+    private EPersonService ePersonService = EPersonServiceFactory.getInstance().getEPersonService();
 
-    private Options constructOptions() {
-        Options options = new Options();
-
-        options.addOption("i", "id", true, "ID or handle of thing to export (item, collection, or community)");
-        options.getOption("i").setType(String.class);
-        options.addOption("f", "file", true, "destination where you want file written");
-        options.getOption("f").setType(OutputStream.class);
-        options.getOption("f").setRequired(true);
-        options.addOption("a", "all", false,
-                          "include all metadata fields that are not normally changed (e.g. provenance)");
-        options.getOption("a").setType(boolean.class);
-        options.addOption("h", "help", false, "help");
-        options.getOption("h").setType(boolean.class);
-
-
-        return options;
-    }
-
+    @Override
     public void internalRun() throws Exception {
+
         if (help) {
             handler.logInfo("\nfull export: metadata-export -f filename");
             handler.logInfo("partial export: metadata-export -i handle -f filename");
             printHelp();
             return;
         }
-
+        Context context = new Context();
+        context.turnOffAuthorisationSystem();
+        try {
+            context.setCurrentUser(ePersonService.find(context, this.getEpersonIdentifier()));
+        } catch (SQLException e) {
+            handler.handleException(e);
+        }
         DSpaceCSV dSpaceCSV = metadataDSpaceCsvExportService
             .handleExport(context, exportAllItems, exportAllMetadata, handle,
                           handler);
-        handler.writeFilestream(context, filename, dSpaceCSV.getInputStream(), "exportCSV");
+        handler.writeFilestream(context, filename, dSpaceCSV.getInputStream(), EXPORT_CSV);
         context.restoreAuthSystemState();
         context.complete();
     }
 
+    @Override
+    public MetadataExportScriptConfiguration getScriptConfiguration() {
+        return new DSpace().getServiceManager().getServiceByName("metadata-export",
+                                                                 MetadataExportScriptConfiguration.class);
+    }
+
+    @Override
     public void setup() throws ParseException {
-        context = new Context();
-        context.turnOffAuthorisationSystem();
 
         if (commandLine.hasOption('h')) {
             help = true;
@@ -97,11 +87,5 @@ public class MetadataExport extends DSpaceRunnable {
             exportAllItems = true;
         }
         handle = commandLine.getOptionValue('i');
-
-        try {
-            context.setCurrentUser(ePersonService.find(context, getEpersonIdentifier()));
-        } catch (SQLException e) {
-            handler.handleException(e);
-        }
     }
 }

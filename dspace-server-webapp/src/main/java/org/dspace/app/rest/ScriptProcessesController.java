@@ -61,7 +61,7 @@ public class ScriptProcessesController {
     @RequestMapping(method = RequestMethod.POST)
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<RepresentationModel<?>> startProcess(@PathVariable(name = "name") String scriptName,
-                                                               @RequestParam(name = "file") List<MultipartFile> files)
+                                                        @RequestParam(name = "file") List<MultipartFile> files)
         throws Exception {
         if (log.isTraceEnabled()) {
             log.trace("Starting Process for Script with name: " + scriptName);

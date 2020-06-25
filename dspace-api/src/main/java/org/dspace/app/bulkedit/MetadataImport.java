@@ -22,11 +22,11 @@ import java.util.Set;
 import java.util.UUID;
 import javax.annotation.Nullable;
 
-import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.Logger;
 import org.dspace.authority.AuthorityValue;
+import org.dspace.authority.factory.AuthorityServiceFactory;
 import org.dspace.authority.service.AuthorityValueService;
 import org.dspace.authorize.AuthorizeException;
 import org.dspace.content.Collection;
@@ -57,26 +57,22 @@ import org.dspace.core.Context;
 import org.dspace.core.LogManager;
 import org.dspace.eperson.EPerson;
 import org.dspace.eperson.factory.EPersonServiceFactory;
+import org.dspace.handle.factory.HandleServiceFactory;
 import org.dspace.handle.service.HandleService;
 import org.dspace.scripts.DSpaceRunnable;
 import org.dspace.scripts.handler.DSpaceRunnableHandler;
+import org.dspace.utils.DSpace;
 import org.dspace.workflow.WorkflowException;
 import org.dspace.workflow.WorkflowItem;
 import org.dspace.workflow.WorkflowService;
 import org.dspace.workflow.factory.WorkflowServiceFactory;
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Metadata importer to allow the batch import of metadata from a file
  *
  * @author Stuart Lewis
  */
-public class MetadataImport extends DSpaceRunnable implements InitializingBean {
-    /**
-     * The Context
-     */
-    Context c;
+public class MetadataImport extends DSpaceRunnable<MetadataImportScriptConfiguration> {
 
     /**
      * The DSpaceCSV object we're processing
@@ -150,32 +146,23 @@ public class MetadataImport extends DSpaceRunnable implements InitializingBean {
      */
     protected static final Logger log = org.apache.logging.log4j.LogManager.getLogger(MetadataImport.class);
 
-    @Autowired
-    protected ItemService itemService;
-    @Autowired
-    protected InstallItemService installItemService;
-    @Autowired
-    protected CollectionService collectionService;
-    @Autowired
-    protected HandleService handleService;
-    @Autowired
-    protected WorkspaceItemService workspaceItemService;
-    @Autowired
-    protected RelationshipTypeService relationshipTypeService;
-    @Autowired
-    protected RelationshipService relationshipService;
-    @Autowired
-    protected EntityTypeService entityTypeService;
-    @Autowired
-    protected EntityService entityService;
-    @Autowired
-    protected AuthorityValueService authorityValueService;
+    protected ItemService itemService = ContentServiceFactory.getInstance().getItemService();
+    protected InstallItemService installItemService = ContentServiceFactory.getInstance().getInstallItemService();
+    protected CollectionService collectionService = ContentServiceFactory.getInstance().getCollectionService();
+    protected HandleService handleService = HandleServiceFactory.getInstance().getHandleService();
+    protected WorkspaceItemService workspaceItemService = ContentServiceFactory.getInstance().getWorkspaceItemService();
+    protected RelationshipTypeService relationshipTypeService = ContentServiceFactory.getInstance()
+                                                                                     .getRelationshipTypeService();
+    protected RelationshipService relationshipService = ContentServiceFactory.getInstance().getRelationshipService();
+    protected EntityTypeService entityTypeService = ContentServiceFactory.getInstance().getEntityTypeService();
+    protected EntityService entityService = ContentServiceFactory.getInstance().getEntityService();
+    protected AuthorityValueService authorityValueService = AuthorityServiceFactory.getInstance()
+                                                                                   .getAuthorityValueService();
 
     /**
      * Create an instance of the metadata importer. Requires a context and an array of CSV lines
      * to examine.
      *
-     * @param c        The context
      * @param toImport An array of CSV lines to examine
      */
     public void initMetadataImport(DSpaceCSV toImport) {
@@ -188,6 +175,34 @@ public class MetadataImport extends DSpaceRunnable implements InitializingBean {
         if (help) {
             printHelp();
             return;
+        }
+        // Create a context
+        Context c = null;
+        c = new Context();
+        c.turnOffAuthorisationSystem();
+
+        // Find the EPerson, assign to context
+        try {
+            if (commandLine.hasOption('e')) {
+                EPerson eperson;
+                String e = commandLine.getOptionValue('e');
+                if (e.indexOf('@') != -1) {
+                    eperson = EPersonServiceFactory.getInstance().getEPersonService().findByEmail(c, e);
+                } else {
+                    eperson = EPersonServiceFactory.getInstance().getEPersonService().find(c, UUID.fromString(e));
+                }
+
+                if (eperson == null) {
+                    throw new ParseException("Error, eperson cannot be found: " + e);
+                }
+                c.setCurrentUser(eperson);
+            }
+        } catch (Exception e) {
+            throw new ParseException("Unable to find DSpace user: " + e.getMessage());
+        }
+
+        if (authorityControlled == null) {
+            setAuthorizedMetadataFields();
         }
         // Read commandLines from the CSV file
         try {
@@ -212,7 +227,7 @@ public class MetadataImport extends DSpaceRunnable implements InitializingBean {
         if (!commandLine.hasOption('s') || validateOnly) {
             // See what has changed
             try {
-                changes = runImport(false, useWorkflow, workflowNotify, useTemplate);
+                changes = runImport(c, false, useWorkflow, workflowNotify, useTemplate);
             } catch (MetadataImportException mie) {
                 throw mie;
             }
@@ -242,7 +257,7 @@ public class MetadataImport extends DSpaceRunnable implements InitializingBean {
             if (change && !validateOnly) {
                 try {
                     // Make the changes
-                    changes = runImport(true, useWorkflow, workflowNotify, useTemplate);
+                    changes = runImport(c, true, useWorkflow, workflowNotify, useTemplate);
                 } catch (MetadataImportException mie) {
                     throw mie;
                 }
@@ -274,6 +289,13 @@ public class MetadataImport extends DSpaceRunnable implements InitializingBean {
         return true;
     }
 
+    @Override
+    public MetadataImportScriptConfiguration getScriptConfiguration() {
+        return new DSpace().getServiceManager().getServiceByName("metadata-import",
+                                                                 MetadataImportScriptConfiguration.class);
+    }
+
+
     public void setup() throws ParseException {
         useTemplate = false;
         filename = null;
@@ -290,6 +312,9 @@ public class MetadataImport extends DSpaceRunnable implements InitializingBean {
             throw new ParseException("Required parameter -f missing!");
         }
         filename = commandLine.getOptionValue('f');
+        if (!commandLine.hasOption('e')) {
+            throw new ParseException("Required parameter -e missing!");
+        }
 
         // Option to apply template to new items
         if (commandLine.hasOption('t')) {
@@ -308,71 +333,8 @@ public class MetadataImport extends DSpaceRunnable implements InitializingBean {
         }
         validateOnly = commandLine.hasOption('v');
 
-
-        // Create a context
-        try {
-            c = new Context();
-            c.turnOffAuthorisationSystem();
-        } catch (Exception e) {
-            throw new ParseException("Unable to create a new DSpace Context: " + e.getMessage());
-        }
-
-        // Find the EPerson, assign to context
-        try {
-            if (commandLine.hasOption('e')) {
-                EPerson eperson;
-                String e = commandLine.getOptionValue('e');
-                if (e.indexOf('@') != -1) {
-                    eperson = EPersonServiceFactory.getInstance().getEPersonService().findByEmail(c, e);
-                } else {
-                    eperson = EPersonServiceFactory.getInstance().getEPersonService().find(c, UUID.fromString(e));
-                }
-
-                if (eperson == null) {
-                    throw new ParseException("Error, eperson cannot be found: " + e);
-                }
-                c.setCurrentUser(eperson);
-            }
-        } catch (Exception e) {
-            throw new ParseException("Unable to find DSpace user: " + e.getMessage());
-        }
-
         // Is this a silent run?
         change = false;
-    }
-
-    public MetadataImport() {
-        Options options = constructOptions();
-        this.options = options;
-    }
-
-    private Options constructOptions() {
-        Options options = new Options();
-
-        options.addOption("f", "file", true, "source file");
-        options.getOption("f").setType(InputStream.class);
-        options.getOption("f").setRequired(true);
-        options.addOption("e", "email", true, "email address or user id of user (required if adding new items)");
-        options.getOption("e").setType(String.class);
-        options.getOption("e").setRequired(true);
-        options.addOption("s", "silent", false,
-                          "silent operation - doesn't request confirmation of changes USE WITH CAUTION");
-        options.getOption("s").setType(boolean.class);
-        options.addOption("w", "workflow", false, "workflow - when adding new items, use collection workflow");
-        options.getOption("w").setType(boolean.class);
-        options.addOption("n", "notify", false,
-                          "notify - when adding new items using a workflow, send notification emails");
-        options.getOption("n").setType(boolean.class);
-        options.addOption("v", "validate-only", false,
-                          "validate - just validate the csv, don't run the import");
-        options.getOption("v").setType(boolean.class);
-        options.addOption("t", "template", false,
-                          "template - when adding new items, use the collection template (if it exists)");
-        options.getOption("t").setType(boolean.class);
-        options.addOption("h", "help", false, "help");
-        options.getOption("h").setType(boolean.class);
-
-        return options;
     }
 
     /**
@@ -386,7 +348,7 @@ public class MetadataImport extends DSpaceRunnable implements InitializingBean {
      * @return An array of BulkEditChange elements representing the items that have changed
      * @throws MetadataImportException  if something goes wrong
      */
-    public List<BulkEditChange> runImport(boolean change,
+    public List<BulkEditChange> runImport(Context c, boolean change,
                                           boolean useWorkflow,
                                           boolean workflowNotify,
                                           boolean useTemplate)
@@ -403,7 +365,7 @@ public class MetadataImport extends DSpaceRunnable implements InitializingBean {
         for (DSpaceCSVLine line : toImport) {
             // Resolve target references to other items
             populateRefAndRowMap(line, line.getID());
-            line = resolveEntityRefs(line);
+            line = resolveEntityRefs(c, line);
             // Get the DSpace item to compare with
             UUID id = line.getID();
 
@@ -435,7 +397,7 @@ public class MetadataImport extends DSpaceRunnable implements InitializingBean {
                         throw new MetadataImportException("Missing collection from item " + item.getHandle());
                     }
                     List<Collection> actualCollections = item.getCollections();
-                    compare(item, collections, actualCollections, whatHasChanged, change);
+                    compare(c, item, collections, actualCollections, whatHasChanged, change);
                 }
 
                 // Iterate through each metadata element in the csv line
@@ -454,7 +416,7 @@ public class MetadataImport extends DSpaceRunnable implements InitializingBean {
                             }
                         }
                         // Compare
-                        compareAndUpdate(item, fromCSV, change, md, whatHasChanged, line);
+                        compareAndUpdate(c, item, fromCSV, change, md, whatHasChanged, line);
                     }
                 }
 
@@ -530,7 +492,7 @@ public class MetadataImport extends DSpaceRunnable implements InitializingBean {
                         }
 
                         // Add all the values from the CSV line
-                        add(fromCSV, md, whatHasChanged);
+                        add(c, fromCSV, md, whatHasChanged);
                     }
                 }
 
@@ -656,7 +618,7 @@ public class MetadataImport extends DSpaceRunnable implements InitializingBean {
 
         // Return the changes
         if (!change) {
-            validateExpressedRelations();
+            validateExpressedRelations(c);
         }
         return changes;
     }
@@ -674,7 +636,7 @@ public class MetadataImport extends DSpaceRunnable implements InitializingBean {
      * @throws AuthorizeException if there is an authorization problem with permissions
      * @throws MetadataImportException custom exception for error handling within metadataimport
      */
-    protected void compareAndUpdate(Item item, String[] fromCSV, boolean change,
+    protected void compareAndUpdate(Context c, Item item, String[] fromCSV, boolean change,
                                     String md, BulkEditChange changes, DSpaceCSVLine line)
         throws SQLException, AuthorizeException, MetadataImportException {
         // Log what metadata element we're looking at
@@ -752,7 +714,7 @@ public class MetadataImport extends DSpaceRunnable implements InitializingBean {
         // Compare from current->csv
         for (int v = 0; v < fromCSV.length; v++) {
             String value = fromCSV[v];
-            BulkEditMetadataValue dcv = getBulkEditValueFromCSV(language, schema, element, qualifier, value,
+            BulkEditMetadataValue dcv = getBulkEditValueFromCSV(c, language, schema, element, qualifier, value,
                                                                 fromAuthority);
             if (fromAuthority != null) {
                 value = dcv.getValue() + csv.getAuthoritySeparator() + dcv.getAuthority() + csv
@@ -989,7 +951,7 @@ public class MetadataImport extends DSpaceRunnable implements InitializingBean {
      * @throws IOException             Can be thrown when moving items in communities
      * @throws MetadataImportException If something goes wrong to be reported back to the user
      */
-    protected void compare(Item item,
+    protected void compare(Context c, Item item,
                            List<String> collections,
                            List<Collection> actualCollections,
                            BulkEditChange bechange,
@@ -1086,8 +1048,8 @@ public class MetadataImport extends DSpaceRunnable implements InitializingBean {
             // Remove from old owned collection (if still a member)
             if (bechange.getOldOwningCollection() != null) {
                 boolean found = false;
-                for (Collection c : item.getCollections()) {
-                    if (c.getID().equals(bechange.getOldOwningCollection().getID())) {
+                for (Collection collection : item.getCollections()) {
+                    if (collection.getID().equals(bechange.getOldOwningCollection().getID())) {
                         found = true;
                     }
                 }
@@ -1114,7 +1076,7 @@ public class MetadataImport extends DSpaceRunnable implements InitializingBean {
      * @throws SQLException       when an SQL error has occurred (querying DSpace)
      * @throws AuthorizeException If the user can't make the changes
      */
-    protected void add(String[] fromCSV, String md, BulkEditChange changes)
+    protected void add(Context c, String[] fromCSV, String md, BulkEditChange changes)
         throws SQLException, AuthorizeException {
         // Don't add owning collection or action
         if (("collection".equals(md)) || ("action".equals(md))) {
@@ -1152,7 +1114,7 @@ public class MetadataImport extends DSpaceRunnable implements InitializingBean {
 
         // Add all the values
         for (String value : fromCSV) {
-            BulkEditMetadataValue dcv = getBulkEditValueFromCSV(language, schema, element, qualifier, value,
+            BulkEditMetadataValue dcv = getBulkEditValueFromCSV(c, language, schema, element, qualifier, value,
                                                                 fromAuthority);
             if (fromAuthority != null) {
                 value = dcv.getValue() + csv.getAuthoritySeparator() + dcv.getAuthority() + csv
@@ -1166,7 +1128,7 @@ public class MetadataImport extends DSpaceRunnable implements InitializingBean {
         }
     }
 
-    protected BulkEditMetadataValue getBulkEditValueFromCSV(String language, String schema, String element,
+    protected BulkEditMetadataValue getBulkEditValueFromCSV(Context c, String language, String schema, String element,
                                                             String qualifier, String value,
                                                             AuthorityValue fromAuthority) {
         // Look to see if it should be removed
@@ -1433,7 +1395,7 @@ public class MetadataImport extends DSpaceRunnable implements InitializingBean {
      * @return a copy, with all references resolved.
      * @throws MetadataImportException if there is an error resolving any entity target reference.
      */
-    public DSpaceCSVLine resolveEntityRefs(DSpaceCSVLine line) throws MetadataImportException {
+    public DSpaceCSVLine resolveEntityRefs(Context c, DSpaceCSVLine line) throws MetadataImportException {
         DSpaceCSVLine newLine = new DSpaceCSVLine(line.getID());
         UUID originId = evaluateOriginId(line.getID());
         for (String key : line.keys()) {
@@ -1674,7 +1636,7 @@ public class MetadataImport extends DSpaceRunnable implements InitializingBean {
      * Validate every relation modification expressed in the CSV.
      *
      */
-    private void validateExpressedRelations() throws MetadataImportException {
+    private void validateExpressedRelations(Context c) throws MetadataImportException {
         for (String targetUUID : entityRelationMap.keySet()) {
             String targetType = null;
             try {
@@ -1728,7 +1690,7 @@ public class MetadataImport extends DSpaceRunnable implements InitializingBean {
                         // Attempt lookup in processed map first before looking in archive.
                         if (entityTypeMap.get(UUID.fromString(originRefererUUID)) != null) {
                             originType = entityTypeMap.get(UUID.fromString(originRefererUUID));
-                            validateTypesByTypeByTypeName(targetType, originType, typeName, originRow);
+                            validateTypesByTypeByTypeName(c, targetType, originType, typeName, originRow);
                         } else {
                             // Origin item may be archived; check there.
                             // Add to errors if Realtionship.type cannot be derived.
@@ -1742,7 +1704,7 @@ public class MetadataImport extends DSpaceRunnable implements InitializingBean {
                                 if (relTypes.size() > 0) {
                                     relTypeValue = relTypes.get(0).getValue();
                                     originType = entityTypeService.findByEntityType(c, relTypeValue).getLabel();
-                                    validateTypesByTypeByTypeName(targetType, originType, typeName, originRow);
+                                    validateTypesByTypeByTypeName(c, targetType, originType, typeName, originRow);
                                 } else {
                                     relationValidationErrors.add("Error on CSV row " + originRow + ":" + "\n" +
                                                                      "Cannot resolve Entity type for reference: "
@@ -1781,7 +1743,8 @@ public class MetadataImport extends DSpaceRunnable implements InitializingBean {
      * @param typeName left or right typeName of the respective Relationship.
      * @return the UUID of the item.
      */
-    private void validateTypesByTypeByTypeName(String targetType, String originType, String typeName, String originRow)
+    private void validateTypesByTypeByTypeName(Context c,
+                                               String targetType, String originType, String typeName, String originRow)
         throws MetadataImportException {
         try {
             RelationshipType foundRelationshipType = null;
@@ -1844,7 +1807,4 @@ public class MetadataImport extends DSpaceRunnable implements InitializingBean {
         return foundRelationshipType;
     }
 
-    public void afterPropertiesSet() throws Exception {
-        setAuthorizedMetadataFields();
-    }
 }
