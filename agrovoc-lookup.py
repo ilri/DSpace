@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# agrovoc-lookup.py 0.2.2
+# agrovoc-lookup.py 0.2.3
 #
 # Copyright 2019 Alan Orth.
 #
