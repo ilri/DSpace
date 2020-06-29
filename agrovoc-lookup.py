@@ -20,7 +20,7 @@
 # ---
 #
 # Queries the public AGROVOC API for subjects read from a text file. Text file
-# should have one subject per line (comments and invalid lines are skipped).
+# should have one subject per line.
 #
 # This script is written for Python 3.6+ and requires several modules that you
 # can install with pip (I recommend using a Python virtual environment):
@@ -36,6 +36,7 @@ import requests
 import requests_cache
 import signal
 import sys
+import urllib.parse
 
 
 # read subjects from a text file, one per line
@@ -47,26 +48,6 @@ def read_subjects_from_file():
     for line in args.input_file:
         # trim any leading or trailing whitespace (including newlines)
         line = line.strip()
-
-        # match lines beginning with words, paying attention to subjects with
-        # special characters like spaces, quotes, dashes, parentheses, etc:
-        # SUBJECT
-        # ANOTHER SUBJECT
-        # XANTHOMONAS CAMPESTRIS PV. MANIHOTIS
-        # WOMEN'S PARTICIPATION
-        # COMMUNITY-BASED FOREST MANAGEMENT
-        # INTERACCIÓN GENOTIPO AMBIENTE
-        # COCOA (PLANT)
-        pattern = re.compile(r'^[\w\-\.\'\(\)]+?[\w\s\-\.\'\(\)]+$')
-
-        # skip the line if it doesn't match the pattern
-        if not pattern.match(line):
-            if args.debug:
-                sys.stderr.write(Fore.YELLOW + f'Skipping invalid subject term: {line}\n' + Fore.RESET)
-
-            args.output_rejects_file.write(line + '\n')
-
-            continue
 
         # iterate over results and add subjects that aren't already present
         if line not in subjects:
@@ -84,7 +65,13 @@ def resolve_subjects(subjects):
         if args.debug:
             sys.stderr.write(Fore.GREEN + f'Looking up the subject: {subject} ({args.language})\n' + Fore.RESET)
 
-        request_url = f'http://agrovoc.uniroma2.it/agrovoc/rest/v1/agrovoc/search?query={subject}&lang={args.language}'
+        # We urlencode the subject before adding it to the request URL to handle
+        # URLs with special characters, for example:
+        # WOMEN'S PARTICIPATION
+        # COMMUNITY-BASED FOREST MANAGEMENT
+        # INTERACCIÓN GENOTIPO AMBIENTE
+        # COCOA (PLANT)
+        request_url = f"http://agrovoc.uniroma2.it/agrovoc/rest/v1/agrovoc/search?query={urllib.parse.quote(subject)}&lang={args.language}"
 
         # enable transparent request cache with seven days expiry
         expire_after = timedelta(days=30)
