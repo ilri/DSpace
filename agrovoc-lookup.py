@@ -63,7 +63,11 @@ def resolve_subjects(subjects):
 
     for subject in subjects:
         if args.debug:
-            sys.stderr.write(Fore.GREEN + f'Looking up the subject: {subject} ({args.language})\n' + Fore.RESET)
+            sys.stderr.write(
+                Fore.GREEN
+                + f"Looking up the subject: {subject} ({args.language})\n"
+                + Fore.RESET
+            )
 
         # We urlencode the subject before adding it to the request URL to handle
         # URLs with special characters, for example:
@@ -75,7 +79,9 @@ def resolve_subjects(subjects):
 
         # enable transparent request cache with seven days expiry
         expire_after = timedelta(days=30)
-        requests_cache.install_cache('agrovoc-response-cache', expire_after=expire_after)
+        requests_cache.install_cache(
+            "agrovoc-response-cache", expire_after=expire_after
+        )
 
         request = requests.get(request_url)
 
@@ -86,15 +92,19 @@ def resolve_subjects(subjects):
             data = request.json()
 
             # check if there is 1 result, ie an exact subject term match
-            if len(data['results']) == 1:
-                print(f'Exact match for {subject!r} in AGROVOC {args.language}')
+            if len(data["results"]) == 1:
+                print(f"Exact match for {subject!r} in AGROVOC {args.language}")
 
-                args.output_matches_file.write(subject + '\n')
+                args.output_matches_file.write(subject + "\n")
             else:
                 if args.debug:
-                    sys.stderr.write(Fore.YELLOW + f'No exact match for {subject!r} in AGROVOC {args.language}\n' + Fore.RESET)
+                    sys.stderr.write(
+                        Fore.YELLOW
+                        + f"No exact match for {subject!r} in AGROVOC {args.language}\n"
+                        + Fore.RESET
+                    )
 
-                args.output_rejects_file.write(subject + '\n')
+                args.output_rejects_file.write(subject + "\n")
 
     # close output files before we exit
     args.output_matches_file.close()
@@ -109,12 +119,39 @@ def signal_handler(signal, frame):
     sys.exit(1)
 
 
-parser = argparse.ArgumentParser(description='Query the AGROVOC REST API to validate subject terms from a text file.')
-parser.add_argument('-d', '--debug', help='Print debug messages to standard error (stderr).', action='store_true')
-parser.add_argument('-i', '--input-file', help='File name containing subject terms to look up.', required=True, type=argparse.FileType('r'))
-parser.add_argument('-l', '--language', help='Language to query terms (default en).', default='en')
-parser.add_argument('-om', '--output-matches-file', help='Name of output file to write matched subjects to.', required=True, type=argparse.FileType('w', encoding='UTF-8'))
-parser.add_argument('-or', '--output-rejects-file', help='Name of output file to write rejected subjects to.', required=True, type=argparse.FileType('w', encoding='UTF-8'))
+parser = argparse.ArgumentParser(
+    description="Query the AGROVOC REST API to validate subject terms from a text file."
+)
+parser.add_argument(
+    "-d",
+    "--debug",
+    help="Print debug messages to standard error (stderr).",
+    action="store_true",
+)
+parser.add_argument(
+    "-i",
+    "--input-file",
+    help="File name containing subject terms to look up.",
+    required=True,
+    type=argparse.FileType("r"),
+)
+parser.add_argument(
+    "-l", "--language", help="Language to query terms (default en).", default="en"
+)
+parser.add_argument(
+    "-om",
+    "--output-matches-file",
+    help="Name of output file to write matched subjects to.",
+    required=True,
+    type=argparse.FileType("w", encoding="UTF-8"),
+)
+parser.add_argument(
+    "-or",
+    "--output-rejects-file",
+    help="Name of output file to write rejected subjects to.",
+    required=True,
+    type=argparse.FileType("w", encoding="UTF-8"),
+)
 args = parser.parse_args()
 
 # set the signal handler for SIGINT (^C) so we can exit cleanly
