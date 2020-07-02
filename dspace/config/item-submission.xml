@@ -44,7 +44,7 @@
     <!-- -->
     <step-definitions>
         <!-- The "collection" step is a "special step" which is *REQUIRED* -->
-        <!-- In DSpace, all submitted items must be immediately assigned --> 
+        <!-- In DSpace, all submitted items must be immediately assigned -->
         <!-- to a collection. This step ensures that a collection is always selected. -->
         <step id="collection">
             <heading></heading>
@@ -106,33 +106,33 @@
             <scope visibilityOutside="read-only">submission</scope>
         </step>
 
-        <!-- Step Upload Item with Embargo Features to enable this step, please 
-            make sure to comment-out the previous step "UploadStep" <step id="upload-with-embargo"> 
-            <heading>submit.progressbar.upload</heading> <processing-class>org.dspace.submit.step.UploadWithEmbargoStep</processing-class> 
+        <!-- Step Upload Item with Embargo Features to enable this step, please
+            make sure to comment-out the previous step "UploadStep" <step id="upload-with-embargo">
+            <heading>submit.progressbar.upload</heading> <processing-class>org.dspace.submit.step.UploadWithEmbargoStep</processing-class>
             <type>uploadWithEmbargo</type> </step> -->
 
 
         <!--Step will be to select a Creative Commons License -->
-        <!-- Uncomment this step to allow the user to select a Creative Commons 
+        <!-- Uncomment this step to allow the user to select a Creative Commons
             license -->
-         <!-- <step id="cclicense"> <heading>submit.progressbar.CClicense</heading>
+         <step id="cclicense"> <heading>submit.progressbar.CClicense</heading>
             <processing-class>org.dspace.app.rest.submit.step.CCLicenseStep</processing-class>
-	       <type>cclicense</type> </step> -->
+	       <type>cclicense</type> </step>
 
         <!--Step will be to Check for potential duplicate -->
-        <!-- <step id="detect-duplicate"> <heading>submit.progressbar.detect.duplicate</heading> 
-            <processing-class>org.dspace.submit.step.DetectPotentialDuplicate</processing-class> 
+        <!-- <step id="detect-duplicate"> <heading>submit.progressbar.detect.duplicate</heading>
+            <processing-class>org.dspace.submit.step.DetectPotentialDuplicate</processing-class>
             <type>duplicate</type> </step> -->
 
         <!--Step will be to Verify/Review everything -->
-        <!-- <step id="verify"> <heading>submit.progressbar.verify</heading> <processing-class>org.dspace.submit.step.VerifyStep</processing-class> 
+        <!-- <step id="verify"> <heading>submit.progressbar.verify</heading> <processing-class>org.dspace.submit.step.VerifyStep</processing-class>
             <type>verify</type> </step> -->
 
         <!-- Fake Steps to test parsing of all options -->
-        <!-- <step mandatory="false"> <heading>fake.submission.readonly</heading> 
-            <processing-class>org.dspace.submit.step.SampleStep</processing-class> <type>sample</type> 
-            <scope visibility="read-only">submission</scope> </step> <step mandatory="false"> 
-            <heading>fake.workflow.readonly</heading> <processing-class>org.dspace.submit.step.SampleStep</processing-class> 
+        <!-- <step mandatory="false"> <heading>fake.submission.readonly</heading>
+            <processing-class>org.dspace.submit.step.SampleStep</processing-class> <type>sample</type>
+            <scope visibility="read-only">submission</scope> </step> <step mandatory="false">
+            <heading>fake.workflow.readonly</heading> <processing-class>org.dspace.submit.step.SampleStep</processing-class>
             <type>sample</type> <scope visibility="read-only">workflow</scope> </step> -->
 
         <!-- OpenAIRE submission steps/forms -->
@@ -205,7 +205,7 @@
 
             <!--Step will be to select a Creative Commons License -->
             <!-- Uncomment this step to allow the user to select a Creative Commons -->
-            <!-- <step id="cclicense"/> -->
+            <step id="cclicense"/>
 
             <!--Step will be to Sign off on the License -->
             <step id="license"/>
