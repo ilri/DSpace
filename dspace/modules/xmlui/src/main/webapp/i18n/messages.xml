@@ -158,6 +158,7 @@
    <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_journaltitle">Journal title</message>
    <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_ISI_Journal">ISI Journal status</message>
     <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_usageRights">Usage rights</message>
+    <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_targetaudience">Target audiences</message>
 
    <!--  some common other possibilities for Advanced Search Fields -->
    <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_contributor">Contributor</message>
@@ -434,6 +435,7 @@
 	<message key="xmlui.ArtifactBrowser.SimpleSearch.filter.usageRights">Usage rights</message>
 	<message key="xmlui.ArtifactBrowser.SimpleSearch.filter.publisher">Publisher</message>
 	<message key="xmlui.ArtifactBrowser.SimpleSearch.filter.iitatheme">IITA research theme</message>
+	<message key="xmlui.ArtifactBrowser.SimpleSearch.filter.targetaudience">Target audiences</message>
 
 	<!-- org.dspace.app.xmlui.artifactbrowser.RestrictedItem.java -->
 	<message key="xmlui.ArtifactBrowser.RestrictedItem.title">This resource is restricted</message>
@@ -2702,6 +2704,7 @@
     <message key="xmlui.Discovery.AbstractSearch.type_status">Filter by: Status</message>
     <message key="xmlui.Discovery.AbstractSearch.type_crpsubject">Filter by: CRP subject</message>
     <message key="xmlui.Discovery.AbstractSearch.type_usageRights">Filter by: Usage rights</message>
+    <message key="xmlui.Discovery.AbstractSearch.type_targetaudience">Filter by: Target audiences</message>
 
     <!-- overridden from dspace-xmlui/src/main/resources/aspects/Discovery/i18n/messages.xml -->
     <message key="xmlui.Discovery.AbstractSearch.type_subject">Filter by: AGROVOC keyword</message>
