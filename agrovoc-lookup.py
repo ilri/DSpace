@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 #
-# agrovoc-lookup.py 0.2.3
+# agrovoc-lookup.py 0.3.0
 #
-# Copyright 2019 Alan Orth.
+# Copyright 2019–2020 Alan Orth.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
