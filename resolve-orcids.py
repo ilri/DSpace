@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 #
-# resolve-orcids.py 1.2.1
+# resolve-orcids.py 1.2.2
 #
-# Copyright 2018–2019 Alan Orth.
+# Copyright 2018–2020 Alan Orth.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
