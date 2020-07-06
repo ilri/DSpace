@@ -119,24 +119,24 @@ def resolve_orcid_identifiers(orcids):
     orcid_api_base_url = 'https://pub.orcid.org/v2.1/'
     orcid_api_endpoint = '/person'
 
+    # enable transparent request cache with 24 hour expiry
+    expire_after = timedelta(hours=72)
+    # cache HTTP 200 and 404 responses, because ORCID uses HTTP 404 when an identifier doesn't exist
+    requests_cache.install_cache('orcid-response-cache', expire_after=expire_after, allowable_codes=(200, 404))
+
+    # prune old cache entries
+    requests_cache.core.remove_expired_responses()
+
     # iterate through our ORCID iDs and fetch their names from the ORCID API
     for orcid in orcids:
         if args.debug:
             sys.stderr.write(Fore.GREEN + 'Looking up the names associated with ORCID iD: {0}\n'.format(orcid) + Fore.RESET)
-
-        # enable transparent request cache with 24 hour expiry
-        expire_after = timedelta(hours=72)
-        # cache HTTP 200 and 404 responses, because ORCID uses HTTP 404 when an identifier doesn't exist
-        requests_cache.install_cache('orcid-response-cache', expire_after=expire_after, allowable_codes=(200, 404))
 
         # build request URL for current ORCID ID
         request_url = orcid_api_base_url + orcid.strip() + orcid_api_endpoint
 
         # ORCID's API defaults to some custom format, so tell it to give us JSON
         request = requests.get(request_url, headers={'Accept': 'application/json'})
-
-        # prune old cache entries
-        requests_cache.core.remove_expired_responses()
 
         # Check the request status
         if request.status_code == requests.codes.ok:

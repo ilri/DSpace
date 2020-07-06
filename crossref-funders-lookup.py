@@ -61,6 +61,15 @@ def read_funders_from_file():
 
 def resolve_funders(funders):
 
+    # enable transparent request cache with seven days expiry
+    expire_after = timedelta(days=30)
+    requests_cache.install_cache(
+        "crossref-response-cache", expire_after=expire_after
+    )
+
+    # prune old cache entries
+    requests_cache.core.remove_expired_responses()
+
     for funder in funders:
 
         if args.debug:
@@ -72,19 +81,10 @@ def resolve_funders(funders):
         if args.email:
             request_url = f"{request_url}&mailto={args.email}"
 
-        # enable transparent request cache with seven days expiry
-        expire_after = timedelta(days=30)
-        requests_cache.install_cache(
-            "crossref-response-cache", expire_after=expire_after
-        )
-
         try:
             request = requests.get(request_url)
         except requests.exceptions.ConnectionError:
             sys.stderr.write(Fore.RED + f"Connection error.\n" + Fore.RESET)
-
-        # prune old cache entries
-        requests_cache.core.remove_expired_responses()
 
         if request.status_code == requests.codes.ok:
             data = request.json()

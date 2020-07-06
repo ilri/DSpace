@@ -61,6 +61,15 @@ def read_subjects_from_file():
 
 def resolve_subjects(subjects):
 
+    # enable transparent request cache with seven days expiry
+    expire_after = timedelta(days=30)
+    requests_cache.install_cache(
+        "agrovoc-response-cache", expire_after=expire_after
+    )
+
+    # prune old cache entries
+    requests_cache.core.remove_expired_responses()
+
     for subject in subjects:
         if args.debug:
             sys.stderr.write(
@@ -76,17 +85,8 @@ def resolve_subjects(subjects):
         # INTERACCIÓN GENOTIPO AMBIENTE
         # COCOA (PLANT)
         request_url = f"http://agrovoc.uniroma2.it/agrovoc/rest/v1/agrovoc/search?query={urllib.parse.quote(subject)}&lang={args.language}"
-
-        # enable transparent request cache with seven days expiry
-        expire_after = timedelta(days=30)
-        requests_cache.install_cache(
-            "agrovoc-response-cache", expire_after=expire_after
-        )
-
         request = requests.get(request_url)
 
-        # prune old cache entries
-        requests_cache.core.remove_expired_responses()
 
         if request.status_code == requests.codes.ok:
             data = request.json()
