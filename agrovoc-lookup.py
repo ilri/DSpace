@@ -77,12 +77,6 @@ def resolve_subjects(subjects):
                 + Fore.RESET
             )
 
-        # We urlencode the subject before adding it to the request URL to handle
-        # URLs with special characters, for example:
-        # WOMEN'S PARTICIPATION
-        # COMMUNITY-BASED FOREST MANAGEMENT
-        # INTERACCIÓN GENOTIPO AMBIENTE
-        # COCOA (PLANT)
         request_url = "http://agrovoc.uniroma2.it/agrovoc/rest/v1/agrovoc/search"
         request_params = {"query": subject}
 
