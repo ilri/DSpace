@@ -64,9 +64,7 @@ def resolve_subjects(subjects):
     # enable transparent request cache with thirty days expiry, as AGROVOC only
     # makes new releases monthly so this should be safe.
     expire_after = timedelta(days=30)
-    requests_cache.install_cache(
-        "agrovoc-response-cache", expire_after=expire_after
-    )
+    requests_cache.install_cache("agrovoc-response-cache", expire_after=expire_after)
 
     # prune old cache entries
     requests_cache.core.remove_expired_responses()
@@ -86,7 +84,7 @@ def resolve_subjects(subjects):
         # INTERACCIÓN GENOTIPO AMBIENTE
         # COCOA (PLANT)
         request_url = "http://agrovoc.uniroma2.it/agrovoc/rest/v1/agrovoc/search"
-        request_params = {'query': subject, 'lang': args.language}
+        request_params = {"query": subject, "lang": args.language}
 
         request = requests.get(request_url, params=request_params)
 
@@ -95,7 +93,9 @@ def resolve_subjects(subjects):
 
             # check if there is 1 result, ie an exact subject term match
             if len(data["results"]) == 1:
-                print(f"Exact match for {subject!r} in AGROVOC {args.language} (cached: {request.from_cache})")
+                print(
+                    f"Exact match for {subject!r} in AGROVOC {args.language} (cached: {request.from_cache})"
+                )
 
                 args.output_matches_file.write(subject + "\n")
             else:
