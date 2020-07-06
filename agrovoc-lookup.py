@@ -95,14 +95,14 @@ def resolve_subjects(subjects):
 
             # check if there is 1 result, ie an exact subject term match
             if len(data["results"]) == 1:
-                print(f"Exact match for {subject!r} in AGROVOC {args.language}")
+                print(f"Exact match for {subject!r} in AGROVOC {args.language} (cached: {request.from_cache})")
 
                 args.output_matches_file.write(subject + "\n")
             else:
                 if args.debug:
                     sys.stderr.write(
                         Fore.YELLOW
-                        + f"No exact match for {subject!r} in AGROVOC {args.language}\n"
+                        + f"No exact match for {subject!r} in AGROVOC {args.language} (cached: {request.from_cache})\n"
                         + Fore.RESET
                     )
 
