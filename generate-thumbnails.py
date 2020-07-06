@@ -44,13 +44,43 @@ def signal_handler(signal, frame):
     sys.exit(1)
 
 
-parser = argparse.ArgumentParser(description='Download PDFs and generate thumbnails from files in a CSV.')
-parser.add_argument('-i', '--csv-file', help='Path to CSV file', required=True, type=argparse.FileType('r', encoding='UTF-8'))
-parser.add_argument('-d', '--debug', help='Print debug messages to standard error (stderr).', action='store_true')
-parser.add_argument('-n', '--dry-run', help='Only print changes that would be made.', action='store_true')
-parser.add_argument('-f', '--filename-field-name', help='Name of column with thumbnail filenames.', default='filename')
-parser.add_argument('-u', '--url-field-name', help='Name of column with URLs for the PDFs.', default='dc.description.url')
-parser.add_argument('-w', '--download-only', help='Only download the PDFs.', action='store_true')
+parser = argparse.ArgumentParser(
+    description="Download PDFs and generate thumbnails from files in a CSV."
+)
+parser.add_argument(
+    "-i",
+    "--csv-file",
+    help="Path to CSV file",
+    required=True,
+    type=argparse.FileType("r", encoding="UTF-8"),
+)
+parser.add_argument(
+    "-d",
+    "--debug",
+    help="Print debug messages to standard error (stderr).",
+    action="store_true",
+)
+parser.add_argument(
+    "-n",
+    "--dry-run",
+    help="Only print changes that would be made.",
+    action="store_true",
+)
+parser.add_argument(
+    "-f",
+    "--filename-field-name",
+    help="Name of column with thumbnail filenames.",
+    default="filename",
+)
+parser.add_argument(
+    "-u",
+    "--url-field-name",
+    help="Name of column with URLs for the PDFs.",
+    default="dc.description.url",
+)
+parser.add_argument(
+    "-w", "--download-only", help="Only download the PDFs.", action="store_true"
+)
 args = parser.parse_args()
 
 # open the CSV
@@ -58,10 +88,22 @@ reader = csv.DictReader(args.csv_file)
 
 # check if the filename and URL fields specified by the user exist in the CSV
 if args.filename_field_name not in reader.fieldnames:
-    sys.stderr.write(Fore.RED + 'Specified field "{}" does not exist in the CSV.\n'.format(args.filename_field_name) + Fore.RESET)
+    sys.stderr.write(
+        Fore.RED
+        + 'Specified field "{}" does not exist in the CSV.\n'.format(
+            args.filename_field_name
+        )
+        + Fore.RESET
+    )
     sys.exit(1)
 if args.url_field_name not in reader.fieldnames:
-    sys.stderr.write(Fore.RED + 'Specified field "{0}" does not exist in the CSV.\n'.format(args.url_field_name) + Fore.RESET)
+    sys.stderr.write(
+        Fore.RED
+        + 'Specified field "{0}" does not exist in the CSV.\n'.format(
+            args.url_field_name
+        )
+        + Fore.RESET
+    )
     sys.exit(1)
 
 # Process thumbnails from filename.pdf to filename.jpg using GraphicsMagick
@@ -72,13 +114,31 @@ if args.url_field_name not in reader.fieldnames:
 def create_thumbnail(row):
 
     filename = row[args.filename_field_name]
-    thumbnail = os.path.splitext(filename)[0] + '.jpg'
+    thumbnail = os.path.splitext(filename)[0] + ".jpg"
     # check if we already have a thumbnail
     if os.path.isfile(thumbnail) and args.debug:
-        print(Fore.YELLOW + '> Thumbnail for {} already exists.\n'.format(filename) + Fore.RESET)
+        print(
+            Fore.YELLOW
+            + "> Thumbnail for {} already exists.\n".format(filename)
+            + Fore.RESET
+        )
     else:
-        print(Fore.Green + '> Creating thumbnail for {}...'.format(filename) + Fore.RESET)
-        subprocess.run(["gm", "convert", "-quality", "85", "-thumbnail", "x400", "-flatten", filename + "[0]", thumbnail])
+        print(
+            Fore.Green + "> Creating thumbnail for {}...".format(filename) + Fore.RESET
+        )
+        subprocess.run(
+            [
+                "gm",
+                "convert",
+                "-quality",
+                "85",
+                "-thumbnail",
+                "x400",
+                "-flatten",
+                filename + "[0]",
+                thumbnail,
+            ]
+        )
 
     return
 
@@ -91,24 +151,32 @@ def download_bitstream(row):
     filenames = pattern.split(row[args.filename_field_name])
     for url, filename in zip(urls, filenames):
         if args.debug:
-            print('URL: {}'.format(url))
-            print('File: {}'.format(filename))
+            print("URL: {}".format(url))
+            print("File: {}".format(filename))
 
         # check if file exists
         if os.path.isfile(filename):
             if args.debug:
-                print(Fore.YELLOW + '> {} already downloaded.'.format(filename) + Fore.RESET)
+                print(
+                    Fore.YELLOW
+                    + "> {} already downloaded.".format(filename)
+                    + Fore.RESET
+                )
         else:
             if args.debug:
-                print(Fore.GREEN + '> Downloading {}...'.format(filename) + Fore.RESET)
+                print(Fore.GREEN + "> Downloading {}...".format(filename) + Fore.RESET)
 
             response = requests.get(url, stream=True)
             if response.status_code == 200:
-                with open(filename, 'wb') as fd:
+                with open(filename, "wb") as fd:
                     for chunk in response:
                         fd.write(chunk)
             else:
-                print(Fore.RED + '> Download failed, I will try again next time.' + Fore.RESET)
+                print(
+                    Fore.RED
+                    + "> Download failed, I will try again next time."
+                    + Fore.RESET
+                )
 
     return
 
