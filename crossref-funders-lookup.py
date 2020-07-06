@@ -64,9 +64,7 @@ def resolve_funders(funders):
     # enable transparent request cache with two weeks expiry because I don't
     # know how often CrossRef is updated.
     expire_after = timedelta(days=14)
-    requests_cache.install_cache(
-        "crossref-response-cache", expire_after=expire_after
-    )
+    requests_cache.install_cache("crossref-response-cache", expire_after=expire_after)
 
     # prune old cache entries
     requests_cache.core.remove_expired_responses()
@@ -77,10 +75,10 @@ def resolve_funders(funders):
             sys.stderr.write(Fore.GREEN + f"Looking up funder: {funder}\n" + Fore.RESET)
 
         request_url = "https://api.crossref.org/funders"
-        request_params = {'query': funder}
+        request_params = {"query": funder}
 
         if args.email:
-            request_params.update(mailto = args.email)
+            request_params.update(mailto=args.email)
 
         try:
             request = requests.get(request_url, params=request_params)
