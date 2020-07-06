@@ -61,7 +61,8 @@ def read_subjects_from_file():
 
 def resolve_subjects(subjects):
 
-    # enable transparent request cache with seven days expiry
+    # enable transparent request cache with thirty days expiry, as AGROVOC only
+    # makes new releases monthly so this should be safe.
     expire_after = timedelta(days=30)
     requests_cache.install_cache(
         "agrovoc-response-cache", expire_after=expire_after
