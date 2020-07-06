@@ -108,14 +108,14 @@ def resolve_subjects(subjects):
                         + Fore.RESET
                     )
 
-                    writer.writerow(
-                        {
-                            "subject": subject,
-                            "language": "",
-                            "match type": "",
-                            "number of matches": number_of_matches,
-                        }
-                    )
+                writer.writerow(
+                    {
+                        "subject": subject,
+                        "language": "",
+                        "match type": "",
+                        "number of matches": number_of_matches,
+                    }
+                )
             elif number_of_matches >= 1:
                 for result in request.json()["results"]:
                     # if there is more than one result we need to check each for
