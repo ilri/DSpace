@@ -101,7 +101,7 @@ def resolve_funders(funders):
                         matched = True
 
                         print(
-                            f"Exact match for {funder} in CrossRef (matched: {matched})"
+                            f"Exact match for {funder} in CrossRef (cached: {request.from_cache})"
                         )
 
                         args.output_matches_file.write(funder + "\n")
@@ -115,7 +115,7 @@ def resolve_funders(funders):
                             matched = True
 
                             print(
-                                f"Alt-name match for {funder} in CrossRef (matched: {matched})"
+                                f"Alt-name match for {funder} in CrossRef (cached: {request.from_cache})"
                             )
 
                             args.output_matches_file.write(funder + "\n")
@@ -127,7 +127,7 @@ def resolve_funders(funders):
                 if args.debug:
                     sys.stderr.write(
                         Fore.YELLOW
-                        + f"No match for {funder} in CrossRef\n"
+                        + f"No match for {funder} in CrossRef (cached: {request.from_cache})\n"
                         + Fore.RESET
                     )
 
