@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# agrovoc-lookup.py 0.3.0
+# agrovoc-lookup.py 0.4.0
 #
 # Copyright 2019–2020 Alan Orth.
 #
@@ -19,8 +19,9 @@
 #
 # ---
 #
-# Queries the public AGROVOC API for subjects read from a text file. Text file
-# should have one subject per line.
+# Queries the public AGROVOC REST API for subjects read from a text file. Text
+# file should have one subject per line. Results are saved to a CSV including
+# the subject, the language, the match type, and the total number of matches.
 #
 # This script is written for Python 3.6+ and requires several modules that you
 # can install with pip (I recommend using a Python virtual environment):
@@ -30,6 +31,7 @@
 
 import argparse
 from colorama import Fore
+import csv
 from datetime import timedelta
 import re
 import requests
@@ -60,6 +62,9 @@ def read_subjects_from_file():
 
 
 def resolve_subjects(subjects):
+    fieldnames = ["subject", "language", "match type", "number of matches"]
+    writer = csv.DictWriter(args.output_file, fieldnames=fieldnames)
+    writer.writeheader()
 
     # enable transparent request cache with thirty days expiry, as AGROVOC only
     # makes new releases monthly so this should be safe.
@@ -89,39 +94,137 @@ def resolve_subjects(subjects):
         if request.status_code == requests.codes.ok:
             data = request.json()
 
-            # check if there is 1 result, ie an exact subject term match
-            if len(data["results"]) == 1:
-                language = request.json()["results"][0]["lang"]
-                print(
-                    f"Exact match for {subject!r} in AGROVOC {language} (cached: {request.from_cache})"
-                )
+            # Assume no match
+            matched = False
 
-                args.output_matches_file.write(subject + "\n")
-            else:
+            number_of_matches = len(data["results"])
+
+            # no results means no match
+            if number_of_matches == 0:
                 if args.debug:
                     sys.stderr.write(
                         Fore.YELLOW
-                        + f"No exact match for {subject!r} in AGROVOC (cached: {request.from_cache})\n"
+                        + f"No match for {subject!r} in AGROVOC (cached: {request.from_cache})\n"
                         + Fore.RESET
                     )
 
-                args.output_rejects_file.write(subject + "\n")
+                    writer.writerow(
+                        {
+                            "subject": subject,
+                            "language": "",
+                            "match type": "",
+                            "number of matches": number_of_matches,
+                        }
+                    )
+            elif number_of_matches >= 1:
+                for result in request.json()["results"]:
+                    # if there is more than one result we need to check each for
+                    # a preferred or matchedPreLabel match first. If there are
+                    # none then we can check each result again for an altLabel
+                    # matches.alternate match. Note that we need to make sure
+                    # they actually exist before attempting to reference them.
+                    # If they don't exist then we'll catch the exception and set
+                    # the values to None.
+                    try:
+                        result["prefLabel"]
+                    except KeyError:
+                        result["prefLabel"] = None
+
+                    try:
+                        result["matchedPrefLabel"]
+                    except KeyError:
+                        result["matchedPrefLabel"] = None
+
+                    # upper case our subject and the AGROVOC result to make sure
+                    # we're comparing the same thing because AGROVOC returns the
+                    # title case like "Iran" no matter whether you search for
+                    # "IRAN" or "iran".
+                    if (
+                        result["prefLabel"]
+                        and subject.upper() == result["prefLabel"].upper()
+                    ):
+                        matched = True
+                        language = result["lang"]
+                        print(
+                            f"Match for {subject!r} in AGROVOC {language} (cached: {request.from_cache})"
+                        )
+
+                        writer.writerow(
+                            {
+                                "subject": subject,
+                                "language": language,
+                                "match type": "prefLabel",
+                                "number of matches": number_of_matches,
+                            }
+                        )
+
+                        break
+                    elif (
+                        result["matchedPrefLabel"]
+                        and subject.upper() == result["matchedPrefLabel"].upper()
+                    ):
+                        matched = True
+                        language = result["lang"]
+                        print(
+                            f"Match for {subject!r} in AGROVOC {language} (cached: {request.from_cache})"
+                        )
+
+                        writer.writerow(
+                            {
+                                "subject": subject,
+                                "language": language,
+                                "match type": "matchedPrefLabel",
+                                "number of matches": number_of_matches,
+                            }
+                        )
+
+                        break
+
+                # If we're here we assume there were no matches for prefLabel or
+                # matchedPrefLabel in the results, so now we will check for an
+                # altLabel match.
+                if not matched:
+                    for result in request.json()["results"]:
+                        # make sure key exists before trying to access it
+                        try:
+                            result["altLabel"]
+                        except KeyError:
+                            result["altLabel"] = None
+
+                        if (
+                            result["altLabel"]
+                            and subject.upper() == result["altLabel"].upper()
+                        ):
+                            matched = True
+                            language = result["lang"]
+                            print(
+                                f"Match for {subject!r} in AGROVOC {language} (cached: {request.from_cache})"
+                            )
+
+                            writer.writerow(
+                                {
+                                    "subject": subject,
+                                    "language": language,
+                                    "match type": "altLabel",
+                                    "number of matches": number_of_matches,
+                                }
+                            )
+
+                            break
 
     # close output files before we exit
-    args.output_matches_file.close()
-    args.output_rejects_file.close()
+    args.output_file.close()
 
 
 def signal_handler(signal, frame):
     # close output files before we exit
-    args.output_matches_file.close()
-    args.output_rejects_file.close()
+    args.output_file.close()
 
     sys.exit(1)
 
 
 parser = argparse.ArgumentParser(
-    description="Query the AGROVOC REST API to validate subject terms from a text file."
+    description="Query the AGROVOC REST API to validate subject terms from a text file and save results in a CSV."
 )
 parser.add_argument(
     "-d",
@@ -136,18 +239,13 @@ parser.add_argument(
     required=True,
     type=argparse.FileType("r"),
 )
-parser.add_argument("-l", "--language", help="Language to query terms (default any).")
 parser.add_argument(
-    "-om",
-    "--output-matches-file",
-    help="Name of output file to write matched subjects to.",
-    required=True,
-    type=argparse.FileType("w", encoding="UTF-8"),
+    "-l", "--language", help="Language to query terms (example en, default any)."
 )
 parser.add_argument(
-    "-or",
-    "--output-rejects-file",
-    help="Name of output file to write rejected subjects to.",
+    "-o",
+    "--output-file",
+    help="Name of output file to write results to (CSV).",
     required=True,
     type=argparse.FileType("w", encoding="UTF-8"),
 )
