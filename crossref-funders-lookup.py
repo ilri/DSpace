@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# crossref-funders-lookup.py 0.1.0
+# crossref-funders-lookup.py 0.2.0
 #
 # Copyright 2020 Alan Orth.
 #
