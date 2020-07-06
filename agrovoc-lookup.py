@@ -85,9 +85,10 @@ def resolve_subjects(subjects):
         # COMMUNITY-BASED FOREST MANAGEMENT
         # INTERACCIÓN GENOTIPO AMBIENTE
         # COCOA (PLANT)
-        request_url = f"http://agrovoc.uniroma2.it/agrovoc/rest/v1/agrovoc/search?query={urllib.parse.quote(subject)}&lang={args.language}"
-        request = requests.get(request_url)
+        request_url = "http://agrovoc.uniroma2.it/agrovoc/rest/v1/agrovoc/search"
+        request_params = {'query': subject, 'lang': args.language}
 
+        request = requests.get(request_url, params=request_params)
 
         if request.status_code == requests.codes.ok:
             data = request.json()
