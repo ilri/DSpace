@@ -76,14 +76,14 @@ def resolve_funders(funders):
         if args.debug:
             sys.stderr.write(Fore.GREEN + f"Looking up funder: {funder}\n" + Fore.RESET)
 
-        request_url = (
-            f"https://api.crossref.org/funders?query={urllib.parse.quote(funder)}"
-        )
+        request_url = "https://api.crossref.org/funders"
+        request_params = {'query': funder}
+
         if args.email:
-            request_url = f"{request_url}&mailto={args.email}"
+            request_params.update(mailto = args.email)
 
         try:
-            request = requests.get(request_url)
+            request = requests.get(request_url, params=request_params)
         except requests.exceptions.ConnectionError:
             sys.stderr.write(Fore.RED + f"Connection error.\n" + Fore.RESET)
 
