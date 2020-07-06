@@ -125,6 +125,11 @@ def resolve_subjects(subjects):
                     # they actually exist before attempting to reference them.
                     # If they don't exist then we'll catch the exception and set
                     # the values to None.
+                    #
+                    # Note that matchedPrefLabel is not a property in the SKOS/
+                    # SKOSXL vocabulary. It seems to be a hint returned by the
+                    # SKOSMOS server to indicate that the search term matched
+                    # the prefLabel of some language.
                     try:
                         result["prefLabel"]
                     except KeyError:
@@ -173,7 +178,7 @@ def resolve_subjects(subjects):
                             {
                                 "subject": subject,
                                 "language": language,
-                                "match type": "matchedPrefLabel",
+                                "match type": "prefLabel",
                                 "number of matches": number_of_matches,
                             }
                         )
