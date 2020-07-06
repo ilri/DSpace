@@ -73,7 +73,7 @@ def resolve_subjects(subjects):
         if args.debug:
             sys.stderr.write(
                 Fore.GREEN
-                + f"Looking up the subject: {subject} ({args.language})\n"
+                + f"Looking up the subject: {subject} ({'any' or args.language})\n"
                 + Fore.RESET
             )
 
@@ -84,7 +84,11 @@ def resolve_subjects(subjects):
         # INTERACCIÓN GENOTIPO AMBIENTE
         # COCOA (PLANT)
         request_url = "http://agrovoc.uniroma2.it/agrovoc/rest/v1/agrovoc/search"
-        request_params = {"query": subject, "lang": args.language}
+        request_params = {"query": subject}
+
+        if args.language:
+            # use user specified language
+            request_params.update(lang=args.language)
 
         request = requests.get(request_url, params=request_params)
 
@@ -93,8 +97,9 @@ def resolve_subjects(subjects):
 
             # check if there is 1 result, ie an exact subject term match
             if len(data["results"]) == 1:
+                language = request.json()["results"][0]["lang"]
                 print(
-                    f"Exact match for {subject!r} in AGROVOC {args.language} (cached: {request.from_cache})"
+                    f"Exact match for {subject!r} in AGROVOC {language} (cached: {request.from_cache})"
                 )
 
                 args.output_matches_file.write(subject + "\n")
@@ -102,7 +107,7 @@ def resolve_subjects(subjects):
                 if args.debug:
                     sys.stderr.write(
                         Fore.YELLOW
-                        + f"No exact match for {subject!r} in AGROVOC {args.language} (cached: {request.from_cache})\n"
+                        + f"No exact match for {subject!r} in AGROVOC (cached: {request.from_cache})\n"
                         + Fore.RESET
                     )
 
@@ -137,9 +142,7 @@ parser.add_argument(
     required=True,
     type=argparse.FileType("r"),
 )
-parser.add_argument(
-    "-l", "--language", help="Language to query terms (default en).", default="en"
-)
+parser.add_argument("-l", "--language", help="Language to query terms (default any).")
 parser.add_argument(
     "-om",
     "--output-matches-file",
