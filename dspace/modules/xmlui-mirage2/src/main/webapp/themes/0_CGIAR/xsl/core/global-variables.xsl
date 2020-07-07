@@ -101,7 +101,7 @@
 
     <!-- item metadata reference -->
     <xsl:variable name='identifier_doi'
-                  select='//dri:meta/dri:pageMeta/dri:metadata[@mdschema="cg" and @element="identifier" and @qualifier="doi"]'/>
+                  select='//dri:meta/dri:pageMeta/dri:metadata[@element="citation_doi"]'/>
     <xsl:variable name='identifier_handle'
                   select='//dri:meta/dri:pageMeta/dri:metadata[@element="identifier" and @qualifier="handle"]'/>
 
