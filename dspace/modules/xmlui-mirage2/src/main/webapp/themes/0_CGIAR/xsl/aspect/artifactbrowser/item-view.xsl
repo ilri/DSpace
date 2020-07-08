@@ -120,10 +120,6 @@
                         </div>
                      </div>
 
-                    <xsl:if test="confman:getProperty('altmetrics', 'altmetric.enabled') and ($identifier_doi or $identifier_handle)">
-                        <xsl:call-template name='impact-altmetric'/>
-                    </xsl:if>
-
                     <xsl:call-template name="itemSummaryView-DIM-authors"/>
                     <xsl:call-template name="itemSummaryView-DIM-date"/>
                     <xsl:call-template name="itemSummaryView-DIM-language"/>
@@ -140,9 +136,30 @@
 
                 </div>
                 <div class="col-sm-8">
-                    <xsl:if test="dim:field[@element='identifier' and @qualifier='uri']">
-                        <xsl:call-template name='itemSummaryView-sharing'/>
-                    </xsl:if>
+                    <!-- set the row to flex and vertically align items -->
+                    <div class="row" style="display: flex; align-items: center;">
+                        <div class="col-sm-4">
+                            <xsl:if test="dim:field[@element='identifier' and @qualifier='uri']">
+                                <xsl:call-template name='itemSummaryView-sharing'/>
+                            </xsl:if>
+                        </div>
+
+                        <xsl:if test="confman:getProperty('altmetrics', 'altmetric.enabled') and ($identifier_doi or $identifier_handle)">
+                        <!-- center align the Altmetric badge (PNG file) -->
+                        <div class="col-sm-4" style="text-align: center;">
+                            <xsl:call-template name='impact-altmetric'/>
+                        </div>
+                        </xsl:if>
+
+                        <xsl:if test="$identifier_doi">
+                        <!-- dimensions badge is an SVG and needs to be centered
+                             a different way, but anyways it looks better if we
+                             don't center it... for now -->
+                        <div class="col-sm-4">
+                            <xsl:call-template name='impact-dimensions'/>
+                        </div>
+                        </xsl:if>
+                    </div>
 
                     <xsl:call-template name="itemSummaryView-DIM-citation"/>
                     <xsl:call-template name="itemSummaryView-DIM-identifiers"/>
@@ -703,7 +720,7 @@
 
 
     <xsl:template name='impact-altmetric'>
-        <div id='impact-altmetric' class="item-page-field-wrapper">
+        <div id='impact-altmetric'>
 
             <!-- Altmetric.com -->
             <script type="text/javascript" src="{concat($scheme, 'd1bxh8uas1mnw7.cloudfront.net/assets/embed.js')}">&#160;</script>
@@ -749,6 +766,42 @@
                 </xsl:choose>
                 &#xFEFF;
             </div>
+        </div>
+    </xsl:template>
+
+    <xsl:template name='impact-dimensions'>
+        <div id='impact-dimensions'>
+            <xsl:variable name="doi">
+                <!-- extract the DOI portion of the URI -->
+                <xsl:choose>
+                    <xsl:when test="contains($identifier_doi, 'https://doi.org/')">
+                        <xsl:call-template name="replace-string">
+                            <xsl:with-param name="text" select="$identifier_doi"/>
+                            <xsl:with-param name="replace" select="'https://doi.org/'" />
+                            <xsl:with-param name="with" select="''"/>
+                        </xsl:call-template>
+                    </xsl:when>
+                    <xsl:when test="contains($identifier_doi, 'https://dx.doi.org/')">
+                        <xsl:call-template name="replace-string">
+                            <xsl:with-param name="text" select="$identifier_doi"/>
+                            <xsl:with-param name="replace" select="'https://dx.doi.org/'" />
+                            <xsl:with-param name="with" select="''"/>
+                        </xsl:call-template>
+                    </xsl:when>
+                    <xsl:when test="contains($identifier_doi, 'http://dx.doi.org/')">
+                        <xsl:call-template name="replace-string">
+                            <xsl:with-param name="text" select="$identifier_doi"/>
+                            <xsl:with-param name="replace" select="'http://dx.doi.org/'" />
+                            <xsl:with-param name="with" select="''"/>
+                        </xsl:call-template>
+                    </xsl:when>
+                </xsl:choose>
+            </xsl:variable>
+            <!-- badge.dimensions.ai -->
+            <span class="__dimensions_badge_embed__" data-hide-zero-citations="true" data-style="small_circle">
+                <xsl:attribute name='data-doi'><xsl:value-of select="$doi"/></xsl:attribute>
+            </span>
+            <script async="true" src="https://badge.dimensions.ai/badge.js" charset="utf-8"></script>
         </div>
     </xsl:template>
 
