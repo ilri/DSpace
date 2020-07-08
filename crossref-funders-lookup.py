@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# crossref-funders-lookup.py 0.2.0
+# crossref-funders-lookup.py 0.2.1
 #
 # Copyright 2020 Alan Orth.
 #
@@ -31,12 +31,10 @@
 import argparse
 from colorama import Fore
 from datetime import timedelta
-import re
 import requests
 import requests_cache
 import signal
 import sys
-import urllib.parse
 
 
 # read funders from a text file, one per line
