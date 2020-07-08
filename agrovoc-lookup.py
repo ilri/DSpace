@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# agrovoc-lookup.py 0.4.1
+# agrovoc-lookup.py 0.4.2
 #
 # Copyright 2019–2020 Alan Orth.
 #
@@ -33,12 +33,10 @@ import argparse
 from colorama import Fore
 import csv
 from datetime import timedelta
-import re
 import requests
 import requests_cache
 import signal
 import sys
-import urllib.parse
 
 
 # read subjects from a text file, one per line
