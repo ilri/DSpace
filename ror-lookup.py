@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 #
-# ror-lookup.py 0.0.1
+# ror-lookup.py 0.0.2
 #
-# Copyright 2019–2020 Alan Orth.
+# Copyright 2020 Alan Orth.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -71,7 +71,7 @@ def resolve_organizations(organizations, ror):
             )
 
         # check for exact match
-        if organization in ror_names:
+        if organization.lower() in ror_names:
             print(f"Match for {organization!r} in ROR)")
 
             writer.writerow(
@@ -140,7 +140,7 @@ if args.input_file and args.ror_json:
     ror = json.load(args.ror_json)
 
     # list comprehension instead of a for loop to extract all names
-    ror_names = [org["name"] for org in ror]
+    ror_names = [org["name"].lower() for org in ror]
 
     read_organizations_from_file()
 
