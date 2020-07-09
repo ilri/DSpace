@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# crossref-funders-lookup.py 0.3.0
+# crossref-funders-lookup.py 0.3.1
 #
 # Copyright 2020 Alan Orth.
 #
@@ -97,7 +97,7 @@ def resolve_funders(funders):
             if data["message"]["total-results"] > 0:
                 # iterate over each search result (item)
                 for item in data["message"]["items"]:
-                    if item["name"] == funder and not matched:
+                    if item["name"].lower() == funder.lower() and not matched:
                         matched = True
 
                         print(
@@ -113,7 +113,7 @@ def resolve_funders(funders):
 
                     # check the alt-names for each search result
                     for altname in item["alt-names"]:
-                        if altname == funder and not matched:
+                        if altname.lower() == funder.lower() and not matched:
                             matched = True
 
                             print(
