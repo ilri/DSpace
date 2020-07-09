@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# crossref-funders-lookup.py 0.2.1
+# crossref-funders-lookup.py 0.3.0
 #
 # Copyright 2020 Alan Orth.
 #
@@ -30,6 +30,7 @@
 
 import argparse
 from colorama import Fore
+import csv
 from datetime import timedelta
 import requests
 import requests_cache
@@ -58,6 +59,9 @@ def read_funders_from_file():
 
 
 def resolve_funders(funders):
+    fieldnames = ["funder", "match type", "matched"]
+    writer = csv.DictWriter(args.output_file, fieldnames=fieldnames)
+    writer.writeheader()
 
     # enable transparent request cache with two weeks expiry because I don't
     # know how often CrossRef is updated.
@@ -100,7 +104,9 @@ def resolve_funders(funders):
                             f"Exact match for {funder} in CrossRef (cached: {request.from_cache})"
                         )
 
-                        args.output_matches_file.write(funder + "\n")
+                        writer.writerow(
+                            {"funder": funder, "match type": "name", "matched": "true",}
+                        )
 
                         # break out of the items loop because we have a match
                         break
@@ -114,9 +120,15 @@ def resolve_funders(funders):
                                 f"Alt-name match for {funder} in CrossRef (cached: {request.from_cache})"
                             )
 
-                            args.output_matches_file.write(funder + "\n")
+                            writer.writerow(
+                                {
+                                    "funder": funder,
+                                    "match type": "alt-name",
+                                    "matched": "true",
+                                }
+                            )
 
-                            # break out of the altname loop because we have a match
+                            # break out of the alt-name loop because we have a match
                             break
 
             if data["message"]["total-results"] == 0 or not matched:
@@ -127,17 +139,17 @@ def resolve_funders(funders):
                         + Fore.RESET
                     )
 
-                args.output_rejects_file.write(funder + "\n")
+                writer.writerow(
+                    {"funder": funder, "match type": "", "matched": "false",}
+                )
 
-    # close output files before we exit
-    args.output_matches_file.close()
-    args.output_rejects_file.close()
+    # close output file before we exit
+    args.output_file.close()
 
 
 def signal_handler(signal, frame):
-    # close output files before we exit
-    args.output_matches_file.close()
-    args.output_rejects_file.close()
+    # close output file before we exit
+    args.output_file.close()
 
     sys.exit(1)
 
@@ -164,16 +176,9 @@ parser.add_argument(
     type=argparse.FileType("r"),
 )
 parser.add_argument(
-    "-om",
-    "--output-matches-file",
-    help="Name of output file to write matched funders to.",
-    required=True,
-    type=argparse.FileType("w", encoding="UTF-8"),
-)
-parser.add_argument(
-    "-or",
-    "--output-rejects-file",
-    help="Name of output file to write rejected funders to.",
+    "-o",
+    "--output-file",
+    help="Name of output file (CSV) to write results to.",
     required=True,
     type=argparse.FileType("w", encoding="UTF-8"),
 )
@@ -182,7 +187,7 @@ args = parser.parse_args()
 # set the signal handler for SIGINT (^C) so we can exit cleanly
 signal.signal(signal.SIGINT, signal_handler)
 
-# if the user specified an input file, get the addresses from there
+# if the user specified an input file, get the funders from there
 if args.input_file:
     read_funders_from_file()
 
