@@ -54,11 +54,11 @@ def read_organizations_from_file():
     # close input file before we exit
     args.input_file.close()
 
-    resolve_organizations(organizations, ror)
+    resolve_organizations(organizations)
 
 
-def resolve_organizations(organizations, ror):
     fieldnames = ["organization", "matched"]
+def resolve_organizations(organizations):
     writer = csv.DictWriter(args.output_file, fieldnames=fieldnames)
     writer.writeheader()
 
