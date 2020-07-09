@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# ror-lookup.py 0.0.2
+# ror-lookup.py 0.1.0
 #
 # Copyright 2020 Alan Orth.
 #
@@ -57,8 +57,8 @@ def read_organizations_from_file():
     resolve_organizations(organizations)
 
 
-    fieldnames = ["organization", "matched"]
 def resolve_organizations(organizations):
+    fieldnames = ["organization", "match type", "matched"]
     writer = csv.DictWriter(args.output_file, fieldnames=fieldnames)
     writer.writeheader()
 
@@ -72,10 +72,30 @@ def resolve_organizations(organizations):
 
         # check for exact match
         if organization.lower() in ror_names:
-            print(f"Match for {organization!r} in ROR)")
+            print(f"Name match for {organization!r} in ROR)")
 
             writer.writerow(
-                {"organization": organization, "matched": "true",}
+                {"organization": organization, "match type": "name", "matched": "true",}
+            )
+        elif organization.lower() in ror_aliases:
+            print(f"Alias match for {organization!r} in ROR)")
+
+            writer.writerow(
+                {
+                    "organization": organization,
+                    "match type": "alias",
+                    "matched": "true",
+                }
+            )
+        elif organization.lower() in ror_acronyms:
+            print(f"Acronym match for {organization!r} in ROR)")
+
+            writer.writerow(
+                {
+                    "organization": organization,
+                    "match type": "acronym",
+                    "matched": "true",
+                }
             )
         else:
             if args.debug:
@@ -86,7 +106,7 @@ def resolve_organizations(organizations):
                 )
 
             writer.writerow(
-                {"organization": organization, "matched": "false",}
+                {"organization": organization, "match type": "", "matched": "false",}
             )
 
     # close output file before we exit
@@ -141,6 +161,25 @@ if args.input_file and args.ror_json:
 
     # list comprehension instead of a for loop to extract all names
     ror_names = [org["name"].lower() for org in ror]
+
+    # nested list comprehension to extract aliases, think of it like:
+    #     ror_aliases_all = []
+    #     for org in ror:
+    #         for alias in org['aliases']:
+    #             ror_aliases_all.append(alias)
+    #
+    # See: https://stackoverflow.com/questions/18072759/list-comprehension-on-a-nested-list
+    ror_aliases_all = [alias.lower() for org in ror for alias in org["aliases"]]
+    # dedupe the list by converting it to a dict and back to a list (dicts can't
+    # have any duplicate items)
+    ror_aliases = list(dict.fromkeys(ror_aliases_all))
+    # delete the list of all aliases
+    del ror_aliases_all
+
+    # same for acronyms
+    ror_acronyms_all = [acronym.lower() for org in ror for acronym in org["acronyms"]]
+    ror_acronyms = list(dict.fromkeys(ror_acronyms_all))
+    del ror_acronyms_all
 
     read_organizations_from_file()
 
