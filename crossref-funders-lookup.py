@@ -143,7 +143,7 @@ def signal_handler(signal, frame):
 
 
 parser = argparse.ArgumentParser(
-    description="Query the CrossRef REST API to validate fundersfrom a text file."
+    description="Query the CrossRef REST API to validate funders from a text file."
 )
 parser.add_argument(
     "-e",
