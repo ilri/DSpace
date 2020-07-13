@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# resolve-addresses.py 0.3.2
+# resolve-addresses.py 0.4.0
 #
 # Copyright 2019—2020 Alan Orth.
 #
@@ -21,7 +21,8 @@
 #
 # Queries the IPAPI.co API for information about IP addresses read from a text
 # file. The text file should have one address per line (comments and invalid
-# lines are skipped).
+# lines are skipped). Optionally looks up IPs in the AbuseIPDB.com if you pro-
+# vide an API key.
 #
 # This script is written for Python 3.6+ and requires several modules that you
 # can install with pip (I recommend using a Python virtual environment):
@@ -77,23 +78,29 @@ def read_addresses_from_file():
 
 def resolve_addresses(addresses):
 
-    fieldnames = ["ip", "org", "asn", "country"]
+    if args.abuseipdb_api_key:
+        fieldnames = ["ip", "org", "asn", "country", "abuseConfidenceScore"]
+    else:
+        fieldnames = ["ip", "org", "asn", "country"]
+
     writer = csv.DictWriter(args.output_file, fieldnames=fieldnames)
     writer.writeheader()
 
     # enable transparent request cache with thirty day expiry
     expire_after = timedelta(days=30)
     # cache HTTP 200 responses
-    requests_cache.install_cache("ipapi-response-cache", expire_after=expire_after)
+    requests_cache.install_cache(
+        "resolve-addresses-response-cache", expire_after=expire_after
+    )
 
     # prune old cache entries
     requests_cache.core.remove_expired_responses()
 
     # iterate through our addresses
     for address in addresses:
-        print(f"Looking up the address: {address}")
+        print(f"Looking up {address} in IPAPI")
 
-        # build request URL for current address
+        # build IPAPI request URL for current address
         request_url = f"https://ipapi.co/{address}/json"
 
         request = requests.get(request_url)
@@ -109,14 +116,40 @@ def resolve_addresses(addresses):
             address_asn = data["asn"]
             address_country = data["country"]
 
-            writer.writerow(
-                {
-                    "ip": address,
-                    "org": address_org,
-                    "asn": address_asn,
-                    "country": address_country,
-                }
-            )
+            row = {
+                "ip": address,
+                "org": address_org,
+                "asn": address_asn,
+                "country": address_country,
+            }
+
+            if args.abuseipdb_api_key:
+                print(f"→ Looking up {address} in AbuseIPDB")
+
+                # build AbuseIPDB.com request URL for current address
+                # see: https://docs.abuseipdb.com/#check-endpoint
+                request_url = "https://api.abuseipdb.com/api/v2/check"
+                request_headers = {"Key": args.abuseipdb_api_key}
+                request_params = {"ipAddress": address, "maxAgeInDays": 90}
+
+                request = requests.get(
+                    request_url, headers=request_headers, params=request_params
+                )
+
+                if args.debug and request.from_cache:
+                    sys.stderr.write(Fore.GREEN + "→ Request in cache.\n" + Fore.RESET)
+
+                # if request status 200 OK
+                if request.status_code == requests.codes.ok:
+                    data = request.json()
+
+                    abuseConfidenceScore = data["data"]["abuseConfidenceScore"]
+
+                    print(f"→ {address} has score: {abuseConfidenceScore}")
+
+                    row.update({"abuseConfidenceScore": abuseConfidenceScore})
+
+            writer.writerow(row)
 
         # if request status not 200 OK
         else:
@@ -149,6 +182,11 @@ parser.add_argument(
     help="File name containing IP addresses to resolve.",
     required=True,
     type=argparse.FileType("r"),
+)
+parser.add_argument(
+    "-k",
+    "--abuseipdb-api-key",
+    help="AbuseIPDB.com API key if you want to check whether IPs have been reported.",
 )
 parser.add_argument(
     "-o",
