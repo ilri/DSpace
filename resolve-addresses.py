@@ -90,10 +90,7 @@ def resolve_addresses(addresses):
 
     # iterate through our addresses
     for address in addresses:
-        if args.debug:
-            sys.stderr.write(
-                Fore.GREEN + f"Looking up the address: {address}\n" + Fore.RESET
-            )
+        print(f"Looking up the address: {address}")
 
         # build request URL for current address
         request_url = f"https://ipapi.co/{address}/json"
