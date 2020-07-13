@@ -161,8 +161,6 @@ args = parser.parse_args()
 # set the signal handler for SIGINT (^C) so we can exit cleanly
 signal.signal(signal.SIGINT, signal_handler)
 
-# if the user specified an input file, get the addresses from there
-if args.input_file:
-    read_addresses_from_file()
+read_addresses_from_file()
 
 exit()
