@@ -19,7 +19,7 @@
 #
 # ---
 #
-# Queries the public CrossRef API for funders read from a text file. Text file
+# Queries the public Crossref API for funders read from a text file. Text file
 # should have one subject per line.
 #
 # This script is written for Python 3.6+ and requires several modules that you
@@ -64,7 +64,7 @@ def resolve_funders(funders):
     writer.writeheader()
 
     # enable transparent request cache with two weeks expiry because I don't
-    # know how often CrossRef is updated.
+    # know how often Crossref is updated.
     expire_after = timedelta(days=14)
     requests_cache.install_cache("crossref-response-cache", expire_after=expire_after)
 
@@ -101,7 +101,7 @@ def resolve_funders(funders):
                         matched = True
 
                         print(
-                            f"Exact match for {funder} in CrossRef (cached: {request.from_cache})"
+                            f"Exact match for {funder} in Crossref (cached: {request.from_cache})"
                         )
 
                         writer.writerow(
@@ -117,7 +117,7 @@ def resolve_funders(funders):
                             matched = True
 
                             print(
-                                f"Alt-name match for {funder} in CrossRef (cached: {request.from_cache})"
+                                f"Alt-name match for {funder} in Crossref (cached: {request.from_cache})"
                             )
 
                             writer.writerow(
@@ -135,7 +135,7 @@ def resolve_funders(funders):
                 if args.debug:
                     sys.stderr.write(
                         Fore.YELLOW
-                        + f"No match for {funder} in CrossRef (cached: {request.from_cache})\n"
+                        + f"No match for {funder} in Crossref (cached: {request.from_cache})\n"
                         + Fore.RESET
                     )
 
@@ -155,12 +155,12 @@ def signal_handler(signal, frame):
 
 
 parser = argparse.ArgumentParser(
-    description="Query the CrossRef REST API to validate funders from a text file."
+    description="Query the Crossref REST API to validate funders from a text file."
 )
 parser.add_argument(
     "-e",
     "--email",
-    help="Contact email to use in API requests so CrossRef is more lenient with our request rate.",
+    help="Contact email to use in API requests so Crossref is more lenient with our request rate.",
 )
 parser.add_argument(
     "-d",
