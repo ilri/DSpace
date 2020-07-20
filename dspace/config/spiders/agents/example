@@ -78,6 +78,7 @@ DTS Agent
 EasyBib[\+\s]AutoCite[\+\s]
 easydl
 EBSCO\sEJS\sContent\sServer
+EcoSearch
 ELinks\/
 EmailSiphon
 EmailWolf
@@ -103,6 +104,7 @@ Funnelback
 Genieo
 GetRight
 geturl
+GigablastOpenSource
 G-i-g-a-b-o-t
 GLMSLinkAnalysis
 Goldfire(\s|\+)Server
@@ -133,6 +135,7 @@ iSiloX
 iskanie
 ^java\/\d{1,2}.\d
 jeeves
+Jersey\/\d
 jobo
 kyluka
 larbin
@@ -156,7 +159,7 @@ ltx71
 lwp
 lycos[_+]
 mail.ru
-MarcEdit.5.2.Web.Client
+MarcEdit
 mediapartners-google
 megite
 MetaURI[\+\s]API\/\d\.\d
@@ -192,6 +195,7 @@ nutch
 ^oaDOI$
 ocelli
 Offline(\s|\+)Navigator
+OgScrper
 ^okhttp$
 onetszukaj
 ^Opera\/4$
@@ -213,6 +217,7 @@ PycURL
 python
 Qwantify
 rambler
+ReactorNetty\/\d
 Readpaper
 redalert
 Riddler
