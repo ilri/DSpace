@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# check-spider-ip-hits.sh v0.0.1
+# check-spider-ip-hits.sh v0.0.2
 #
 # Copyright (C) 2020 Alan Orth
 #
@@ -113,8 +113,9 @@ envsetup
 
 [[ $DEBUG ]] && echo "(DEBUG) Using spider IPs file: $SPIDER_IPS_FILE"
 
-# Read list of spider IPs, skipping blank links and comments (#).
-IPS=$(grep -v '#' $SPIDER_IPS_FILE | grep -v -E '^$')
+# Read list of spider IPs, escaping colons in IPv6 address and skipping blank
+# lines and comments (#).
+IPS=$(sed -e 's/\:/\\:/g' $SPIDER_IPS_FILE | grep -v -E '^$' | grep -v '#')
 
 # Start a tally of bot hits so we can report the total at the end
 BOT_HITS=0
