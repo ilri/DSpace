@@ -119,6 +119,8 @@ envsetup
 # and that Solr supports (ie, patterns are anchored by ^ and $ implicitly, and
 # some character types like \d are not supported).
 #
+# See: https://1opensourcelover.wordpress.com/2013/09/29/solr-regex-tutorial/
+#
 # For now this seems to be enough:
 #   - Replace spaces with \s
 #   - Replace \d with [0-9] character class
