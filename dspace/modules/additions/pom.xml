@@ -120,6 +120,11 @@
          </exclusions>
       </dependency>
 
+      <dependency>
+          <groupId>io.github.ilri.cgspace</groupId>
+          <artifactId>dspace-curation-tasks</artifactId>
+          <version>1.0-SNAPSHOT</version>
+      </dependency>
    </dependencies>
 
 </project>
