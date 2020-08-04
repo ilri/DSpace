@@ -5482,8 +5482,8 @@
         <stored-value>CANADA</stored-value>
       </pair>
       <pair>
-        <displayed-value>CAPE VERDE</displayed-value>
-        <stored-value>CAPE VERDE</stored-value>
+        <displayed-value>CABO VERDE</displayed-value>
+        <stored-value>CABO VERDE</stored-value>
       </pair>
       <pair>
         <displayed-value>CENTRAL AFRICAN REPUBLIC</displayed-value>
@@ -5502,6 +5502,10 @@
         <stored-value>CHINA</stored-value>
       </pair>
       <pair>
+        <displayed-value>COCOS (KEELING) ISLANDS</displayed-value>
+        <stored-value>COCOS (KEELING) ISLANDS</stored-value>
+      </pair>
+      <pair>
         <displayed-value>COLOMBIA</displayed-value>
         <stored-value>COLOMBIA</stored-value>
       </pair>
@@ -5514,8 +5518,8 @@
         <stored-value>CONGO</stored-value>
       </pair>
       <pair>
-        <displayed-value>CONGO, DR</displayed-value>
-        <stored-value>CONGO, DR</stored-value>
+        <displayed-value>CONGO, DEMOCRATIC REPUBLIC OF</displayed-value>
+        <stored-value>CONGO, DEMOCRATIC REPUBLIC OF</stored-value>
       </pair>
       <pair>
         <displayed-value>COOK ISLANDS</displayed-value>
@@ -5526,8 +5530,8 @@
         <stored-value>COSTA RICA</stored-value>
       </pair>
       <pair>
-        <displayed-value>COTE D'IVOIRE</displayed-value>
-        <stored-value>COTE D'IVOIRE</stored-value>
+        <displayed-value>CÔTE D'IVOIRE</displayed-value>
+        <stored-value>CÔTE D'IVOIRE</stored-value>
       </pair>
       <pair>
         <displayed-value>CROATIA</displayed-value>
@@ -5722,8 +5726,8 @@
         <stored-value>KOREA,DPR</stored-value>
       </pair>
       <pair>
-        <displayed-value>KOREA, REPUBLIC</displayed-value>
-        <stored-value>KOREA, REPUBLIC</stored-value>
+        <displayed-value>KOREA, REPUBLIC OF</displayed-value>
+        <stored-value>KOREA, REPUBLIC OF</stored-value>
       </pair>
       <pair>
         <displayed-value>KUWAIT</displayed-value>
@@ -5868,6 +5872,10 @@
       <pair>
         <displayed-value>PAKISTAN</displayed-value>
         <stored-value>PAKISTAN</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PALESTINE, STATE OF</displayed-value>
+        <stored-value>PALESTINE, STATE OF</stored-value>
       </pair>
       <pair>
         <displayed-value>PANAMA</displayed-value>
