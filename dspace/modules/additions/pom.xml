@@ -122,8 +122,8 @@
 
       <dependency>
           <groupId>io.github.ilri.cgspace</groupId>
-          <artifactId>dspace-curation-tasks</artifactId>
-          <version>5.0-SNAPSHOT</version>
+          <artifactId>cgspace-java-helpers</artifactId>
+          <version>5.3</version>
       </dependency>
    </dependencies>
 
