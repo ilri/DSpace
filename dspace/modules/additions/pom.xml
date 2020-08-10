@@ -123,7 +123,7 @@
       <dependency>
           <groupId>io.github.ilri.cgspace</groupId>
           <artifactId>cgspace-java-helpers</artifactId>
-          <version>5.3</version>
+          <version>5.4-SNAPSHOT</version>
       </dependency>
    </dependencies>
 
