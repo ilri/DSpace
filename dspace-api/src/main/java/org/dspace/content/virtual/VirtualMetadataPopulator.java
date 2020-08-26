@@ -7,7 +7,6 @@
  */
 package org.dspace.content.virtual;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import org.dspace.content.RelationshipType;
@@ -22,13 +21,13 @@ public class VirtualMetadataPopulator {
     /**
      * The map that holds this representation
      */
-    private Map<String, HashMap<String, VirtualMetadataConfiguration>> map;
+    private Map<String, Map<String, VirtualMetadataConfiguration>> map;
 
     /**
      * Standard setter for the map
      * @param map   The map to be used in the VirtualMetadataPopulator
      */
-    public void setMap(Map<String, HashMap<String, VirtualMetadataConfiguration>> map) {
+    public void setMap(Map<String, Map<String, VirtualMetadataConfiguration>> map) {
         this.map = map;
     }
 
@@ -36,7 +35,7 @@ public class VirtualMetadataPopulator {
      * Standard getter for the map
      * @return  The map that is used in the VirtualMetadataPopulator
      */
-    public Map<String, HashMap<String, VirtualMetadataConfiguration>> getMap() {
+    public Map<String, Map<String, VirtualMetadataConfiguration>> getMap() {
         return map;
     }
 
@@ -48,7 +47,7 @@ public class VirtualMetadataPopulator {
      * @return                  A boolean indicating whether the useForPlace is true or not for the given parameters
      */
     public boolean isUseForPlaceTrueForRelationshipType(RelationshipType relationshipType, boolean isLeft) {
-        HashMap<String, VirtualMetadataConfiguration> hashMaps;
+        Map<String, VirtualMetadataConfiguration> hashMaps;
         if (isLeft) {
             hashMaps = this.getMap().get(relationshipType.getLeftwardType());
         } else {
