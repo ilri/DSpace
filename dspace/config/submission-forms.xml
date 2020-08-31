@@ -1241,6 +1241,16 @@
                     <!--    <language value-pairs-name="common_iso_languages">true</language> -->
                 </field>
             </row>
+
+            <row>
+                <relation-field>
+                    <relationship-type>isDataPackageOfDataFile</relationship-type>
+                    <search-configuration>dataPackage</search-configuration>
+                    <label>Data Package</label>
+                    <hint>Select the Data Package related to this Data File.</hint>
+                </relation-field>
+            </row>
+
             <row>
                 <field>
                     <dc-schema>dc</dc-schema>
