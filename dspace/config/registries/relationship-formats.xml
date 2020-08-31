@@ -146,4 +146,36 @@
         <scope_note></scope_note>
     </dc-type>
 
+    <!--Dataset-->
+    <dc-type>
+        <schema>relation</schema>
+        <element>isDataPackageOfPublication</element>
+        <scope_note></scope_note>
+    </dc-type>
+    <dc-type>
+        <schema>relation</schema>
+        <element>isPublicationOfDataPackage</element>
+        <scope_note></scope_note>
+    </dc-type>
+    <dc-type>
+        <schema>relation</schema>
+        <element>isDataFileOfDataPackage</element>
+        <scope_note></scope_note>
+    </dc-type>
+    <dc-type>
+        <schema>relation</schema>
+        <element>isDataPackageOfDataFile</element>
+        <scope_note></scope_note>
+    </dc-type>
+    <dc-type>
+        <schema>relation</schema>
+        <element>isDataPackageOfOrgUnit</element>
+        <scope_note></scope_note>
+    </dc-type>
+    <dc-type>
+        <schema>relation</schema>
+        <element>isOrgUnitOfDataPackage</element>
+        <scope_note></scope_note>
+    </dc-type>
+
 </dspace-dc-types>

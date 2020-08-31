@@ -132,4 +132,47 @@
         </rightCardinality>
         <copyToRight>true</copyToRight>
     </type>
+    <type>
+        <leftType>Publication</leftType>
+        <rightType>DataPackage</rightType>
+        <leftwardType>isDataPackageOfPublication</leftwardType>
+        <rightwardType>isPublicationOfDataPackage</rightwardType>
+        <leftCardinality>
+            <min>0</min>
+        </leftCardinality>
+        <rightCardinality>
+            <min>0</min>
+            <max>1</max>
+        </rightCardinality>
+        <copyToLeft>true</copyToLeft>
+        <copyToRight>true</copyToRight>
+    </type>
+    <type>
+        <leftType>DataPackage</leftType>
+        <rightType>DataFile</rightType>
+        <leftwardType>isDataFileOfDataPackage</leftwardType>
+        <rightwardType>isDataPackageOfDataFile</rightwardType>
+        <leftCardinality>
+            <min>0</min>
+        </leftCardinality>
+        <rightCardinality>
+            <min>0</min>
+            <max>1</max>
+        </rightCardinality>
+        <copyToRight>true</copyToRight>
+    </type>
+    <type>
+        <leftType>OrgUnit</leftType>
+        <rightType>DataPackage</rightType>
+        <leftwardType>isDataPackageOfOrgUnit</leftwardType>
+        <rightwardType>isOrgUnitOfDataPackage</rightwardType>
+        <leftCardinality>
+            <min>0</min>
+        </leftCardinality>
+        <rightCardinality>
+            <min>0</min>
+        </rightCardinality>
+        <copyToLeft>true</copyToLeft>
+        <copyToRight>true</copyToRight>
+    </type>
 </relationships>

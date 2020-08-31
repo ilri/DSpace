@@ -200,6 +200,14 @@
 
         <form name="traditionalpagetwo">
             <row>
+                <relation-field>
+                    <relationship-type>isDataPackageOfPublication</relationship-type>
+                    <search-configuration>dataPackage</search-configuration>
+                    <label>Data Package</label>
+                    <hint>Select the Data Package related to this Publication.</hint>
+                </relation-field>
+            </row>
+            <row>
                 <field>
                     <dc-schema>dc</dc-schema>
                     <dc-element>subject</dc-element>
@@ -1185,6 +1193,23 @@
         </form>
 
         <form name="datapackagepagetwo">
+            <row>
+                <relation-field>
+                    <relationship-type>isPublicationOfDataPackage</relationship-type>
+                    <search-configuration>publication</search-configuration>
+                    <label>Publication</label>
+                    <hint>Select the Publication related to this Data Package.</hint>
+                </relation-field>
+            </row>
+            <row>
+                <relation-field>
+                    <relationship-type>isOrgUnitOfDataPackage</relationship-type>
+                    <search-configuration>orgunit</search-configuration>
+                    <label>Organization</label>
+                    <hint>Select the Organizational Unit related to this Data Package.</hint>
+                </relation-field>
+            </row>
+
             <row>
                 <field>
                     <dc-schema>dc</dc-schema>
