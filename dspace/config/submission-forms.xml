@@ -1193,6 +1193,16 @@
         </form>
 
         <form name="datapackagepagetwo">
+
+            <row>
+                <relation-field>
+                    <relationship-type>isDataFileOfDataPackage</relationship-type>
+                    <search-configuration>dataFile</search-configuration>
+                    <label>Data File</label>
+                    <hint>Select the Data File related to this Data Package.</hint>
+                </relation-field>
+            </row>
+
             <row>
                 <relation-field>
                     <relationship-type>isPublicationOfDataPackage</relationship-type>
