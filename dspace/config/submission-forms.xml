@@ -1198,6 +1198,7 @@
                 <relation-field>
                     <relationship-type>isDataFileOfDataPackage</relationship-type>
                     <search-configuration>dataFile</search-configuration>
+                    <repeatable>true</repeatable>
                     <label>Data File</label>
                     <hint>Select the Data File related to this Data Package.</hint>
                 </relation-field>
