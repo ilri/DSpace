@@ -396,6 +396,16 @@
         </field>
         <field>
           <dc-schema>cg</dc-schema>
+          <dc-element>identifier</dc-element>
+          <dc-qualifier>iwmilibrary</dc-qualifier>
+          <repeatable>false</repeatable>
+          <label>IWMI Library ID</label>
+          <input-type>onebox</input-type>
+          <hint>IWMI Library internal reference (eg H049940)</hint>
+          <required></required>
+        </field>
+        <field>
+          <dc-schema>cg</dc-schema>
           <dc-element>subject</dc-element>
           <dc-qualifier>alliancebiovciat</dc-qualifier>
           <repeatable>true</repeatable>
