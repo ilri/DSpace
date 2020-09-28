@@ -46,7 +46,7 @@
         <!-- 'root.basedir' is the path to the root [dspace-src] dir. It must be redefined by each child POM,
              as it is used to reference the LICENSE_HEADER and *.properties file(s) in that directory. -->
         <root.basedir>${basedir}</root.basedir>
-        <listings-and-reports.version.number>6.x-2.10.8-0-SNAPSHOT</listings-and-reports.version.number>
+        <listings-and-reports.version.number>6.x-2.10.9-0-SNAPSHOT</listings-and-reports.version.number>
     </properties>
 
     <build>

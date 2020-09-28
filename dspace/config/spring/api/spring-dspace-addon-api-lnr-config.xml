@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    The contents of this file are subject to the license and copyright
+    detailed in the LICENSE and NOTICE files at the root of the source
+    tree and available online at
+
+    http://www.dspace.org/license/
+
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/util
+           http://www.springframework.org/schema/util/spring-util.xsd"
+>
+
+    <!-- Default Layout -->
+
+    <bean class="com.atmire.content.biblio.LayoutGroup" id="defaultLayout">
+        <property name="layoutFields">
+            <util:list value-type="com.atmire.content.biblio.LayoutField">
+                <bean class="com.atmire.content.biblio.LayoutField">
+                    <property name="layoutType" ref="dateType"/>
+                    <property name="formatter" value="YYYY"/>
+                </bean>
+                <bean class="com.atmire.content.biblio.LayoutField">
+                    <property name="layoutType" ref="titleType"/>
+                    <property name="italics" value="true"/>
+                </bean>
+                <bean class="com.atmire.content.biblio.LayoutField">
+                    <property name="layoutType" ref="authorType"/>
+                    <property name="formatter" value="Last, init."/>
+                    <property name="bold" value="true"/>
+                </bean>
+            </util:list>
+        </property>
+        <property name="lastPostfix" value="."/>
+    </bean>
+
+    <!-- Filter Types -->
+
+    <bean class="com.atmire.content.biblio.filter.ValuePairFilterType">
+        <property name="id" value="common_types"/>
+        <property name="labelPropertyKey" value="jsp.export.filter-categories.type"/>
+        <property name="metadataField" value="dc.type"/>
+        <property name="useAsGroupType" value="true"/>
+        <property name="discoveryField" value="type"/>
+        <property name="allowSearchAll" value="true"/>
+    </bean>
+
+    <bean class="com.atmire.content.biblio.filter.InputFilterType">
+        <property name="id" value="contributor_author"/>
+        <property name="labelPropertyKey" value="jsp.export.filter-categories.people"/>
+        <property name="metadataField" value="dc.contributor.author"/>
+        <property name="useAsGroupType" value="false"/>
+        <property name="discoveryField" value="author"/>
+    </bean>
+
+    <!-- Order Types -->
+
+    <!-- default order type (required) -->
+    <bean name="defaultOrderType" class="com.atmire.content.biblio.OrderType">
+        <property name="id" value="issued"/>
+        <property name="metadataField" value="dc.date.issued"/>
+        <property name="labelPropertyKey" value="jsp.export.sort.sort-box.date"/>
+    </bean>
+
+    <bean class="com.atmire.content.biblio.OrderType">
+        <property name="id" value="title"/>
+        <property name="metadataField" value="dc.title"/>
+        <property name="labelPropertyKey" value="jsp.export.sort.sort-box.by-title"/>
+    </bean>
+
+    <bean class="com.atmire.content.biblio.OrderType">
+        <property name="id" value="author"/>
+        <property name="labelPropertyKey" value="jsp.search.advanced.type.author"/>
+        <property name="metadataField" value="dc.contributor.author"/>
+    </bean>
+
+    <!-- Layout Field Types -->
+
+    <bean id="dateType" class="com.atmire.content.biblio.LayoutType">
+        <property name="id" value="date"/>
+        <property name="metadataField" value="dc.date.issued"/>
+        <property name="formatType" ref="dateFormat"/>
+        <property name="previewValues">
+            <list>
+                <value>1988-04-07</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="titleType" class="com.atmire.content.biblio.LayoutType">
+        <property name="id" value="title"/>
+        <property name="metadataField" value="dc.title"/>
+        <property name="previewValues">
+            <list>
+                <value>Rat hemoglobin interferes with DNA migration in agarose gels</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="authorType" class="com.atmire.content.biblio.LayoutType">
+        <property name="id" value="author"/>
+        <property name="metadataField" value="dc.contributor.author"/>
+        <property name="formatType" ref="nameFormat"/>
+        <property name="previewValues">
+            <list>
+                <value>Deichmann, Klaus</value>
+                <value>Marynen, Peter</value>
+                <value>Van den Berghe, Herman</value>
+                <value>Cassiman, Jean-Jacques</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean class="com.atmire.content.biblio.LayoutType">
+        <property name="id" value="editor"/>
+        <property name="metadataField" value="dc.contributor.editor"/>
+        <property name="formatType" ref="nameFormat"/>
+        <property name="previewValues">
+            <list>
+                <value>Froyen, Guy</value>
+                <value>Hollanders, Karen</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean class="com.atmire.content.biblio.LayoutType">
+        <property name="id" value="othercontributor"/>
+        <property name="metadataField" value="dc.contributor.othercontributor"/>
+        <property name="formatType" ref="nameFormat"/>
+        <property name="previewValues">
+            <list>
+                <value>Lamberigts, Mathijs</value>
+                <value>Leemans, Herlinde</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean class="com.atmire.content.biblio.LayoutType">
+        <property name="id" value="issn"/>
+        <property name="metadataField" value="dc.identifier.issn"/>
+        <property name="previewValues">
+            <list>
+                <value>0305-1048</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean class="com.atmire.content.biblio.LayoutType">
+        <property name="id" value="isbn"/>
+        <property name="metadataField" value="dc.identifier.isbn"/>
+        <property name="previewValues">
+            <list>
+                <value>9781151014382</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean class="com.atmire.content.biblio.LayoutType">
+        <property name="id" value="publisher"/>
+        <property name="previewValues">
+            <list>
+                <value>Nature Publishing Group</value>
+            </list>
+        </property>
+        <property name="metadataField" value="dc.publisher"/>
+    </bean>
+
+    <bean class="com.atmire.content.biblio.LayoutType">
+        <property name="id" value="location"/>
+        <property name="previewValues">
+            <list>
+                <value>Vienna</value>
+            </list>
+        </property>
+        <property name="metadataField" value="dcTitle.publisher.location"/>
+    </bean>
+
+    <bean class="com.atmire.content.biblio.LayoutType">
+        <property name="id" value="abstract"/>
+        <property name="previewValues">
+            <list>
+                <value>DNA from white blood cells of the rat, embedded in agarose blocks for subsequent digestion and PFGE separation, repeatedly showed poor migration when small amounts of red blood cells were present in the blocks.</value>
+            </list>
+        </property>
+        <property name="metadataField" value="dc.description.abstract"/>
+    </bean>
+
+    <bean class="com.atmire.content.biblio.LayoutType">
+        <property name="id" value="subject"/>
+        <property name="previewValues">
+            <list>
+                <value>Cloning</value>
+                <value>Molecular</value>
+                <value>Animals</value>
+            </list>
+        </property>
+        <property name="metadataField" value="dc.subject"/>
+    </bean>
+
+    <bean class="com.atmire.content.biblio.LayoutType">
+        <property name="id" value="URI"/>
+        <property name="previewValues">
+            <list>
+                <value>http://handle.net/123456789/123</value>
+            </list>
+        </property>
+        <property name="metadataField" value="dc.identifier.uri"/>
+    </bean>
+
+    <bean class="com.atmire.content.biblio.LayoutType">
+        <property name="id" value="journal"/>
+        <property name="metadataField" ref="journal"/>
+        <property name="formatType" ref="journalFormat"/>
+        <property name="previewValues">
+            <list>
+                <value>27-41</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Format Types -->
+
+    <bean id="nameFormat" class="com.atmire.content.biblio.format.NameFormat"/>
+    <bean id="dateFormat" class="com.atmire.content.biblio.format.DateFormat"/>
+    <bean id="journalFormat" class="com.atmire.content.biblio.format.JournalFormat"/>
+
+    <!-- Metadata Types -->
+
+    <!-- Standard way to declare a metadata type -->
+    <bean name="journal" class="com.atmire.content.biblio.MetadataType">
+        <property name="schema" value="dc"/>
+        <property name="element" value="journal"/>
+    </bean>
+
+    <!-- This converter provides a way to declare metadata types as a string (e.g. dc.title) -->
+    <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <bean class="com.atmire.content.biblio.MetadataType$StringConverter"/>
+            </set>
+        </property>
+    </bean>
+
+</beans>
