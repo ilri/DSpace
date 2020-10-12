@@ -114,6 +114,13 @@ envsetup
 
 [[ $DEBUG ]] && echo "(DEBUG) Using spiders pattern file: $SPIDERS_PATTERN_FILE"
 
+
+# Make a temporary copy of the spider file so we can do pattern replacement
+# inside it with sed rather than using stdout from sed and having to deal
+# with spaces and newlines in bash.
+SPIDERS_PATTERN_FILE_TEMP=$(mktemp)
+cp "$SPIDERS_PATTERN_FILE" "$SPIDERS_PATTERN_FILE_TEMP"
+
 # Read list of spider user agents from the patterns file, converting PCRE-style
 # regular expressions to a format that is easier to deal with in bash (spaces!)
 # and that Solr supports (ie, patterns are anchored by ^ and $ implicitly, and
@@ -122,23 +129,29 @@ envsetup
 # See: https://1opensourcelover.wordpress.com/2013/09/29/solr-regex-tutorial/
 #
 # For now this seems to be enough:
-#   - Replace spaces with \s
+#   - Replace \s with a literal space
 #   - Replace \d with [0-9] character class
 #   - Unescape dashes
 #   - Escape @
-#   - Apply percent encoding to %
 #
-# Also, skip patterns that contain a plus or percent sign (+ or %) because they
-# are tricky to deal with in Solr. For some reason escaping them seems to work
-# for searches, but not for deletes. I don't have time to figure it out.
-SPIDERS=$(sed -e 's/ /\\s/g' -e 's/\\d/[0-9]/g' -e 's/\\-/-/g' -e 's/@/\\@/g' -e 's/\\%/%25/g' $SPIDERS_PATTERN_FILE | grep -v -E '(\+|\%)')
+sed -i -e 's/\\s/ /g' -e 's/\\d/[0-9]/g' -e 's/\\-/-/g' -e 's/@/\\@/g' $SPIDERS_PATTERN_FILE_TEMP
 
 # Start a tally of bot hits so we can report the total at the end
 BOT_HITS=0
 
-for spider in $SPIDERS; do
+while read -r spider; do
     # Save the original pattern so we can inform the user later
     original_spider=$spider
+
+    # Skip patterns that contain a plus or percent sign (+ or %) because they
+    # are tricky to deal with in Solr. For some reason escaping them seems to
+    # work for searches, but not for deletes. I don't have time to figure it
+    # out.
+    if [[ $spider =~ [%\+] ]]; then
+        [[ $DEBUG ]] && echo "(DEBUG) Skipping spider: $original_spider"
+        continue
+    fi
+
 
     unset has_beginning_anchor
     unset has_end_anchor
@@ -202,7 +215,7 @@ for spider in $SPIDERS; do
 
         BOT_HITS=$((BOT_HITS+numFound))
     fi
-done
+done < "$SPIDERS_PATTERN_FILE_TEMP"
 
 if [[ $BOT_HITS -gt 0 ]]; then
     if [[ $PURGE_SPIDER_HITS ]]; then
@@ -215,6 +228,10 @@ if [[ $BOT_HITS -gt 0 ]]; then
         echo
         echo "Total number of hits from bots: $BOT_HITS"
     fi
+fi
+
+if [[ -f "$SPIDERS_PATTERN_FILE_TEMP" ]]; then
+    rm "$SPIDERS_PATTERN_FILE_TEMP"
 fi
 
 # vim: set expandtab:ts=4:sw=4:bs=2
