@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 #
-# check-spider-hits.sh v1.1.1
+# check-spider-hits.sh v1.2.0
 #
-# Copyright (C) 2019 Alan Orth
+# Copyright (C) 2019-2020 Alan Orth
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
