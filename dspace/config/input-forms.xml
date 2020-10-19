@@ -1535,16 +1535,16 @@
         <stored-value>Image</stored-value>
       </pair>
       <pair>
+        <displayed-value>Internal Document</displayed-value>
+        <stored-value>Internal Document</stored-value>
+      </pair>
+      <pair>
         <displayed-value>Journal Article</displayed-value>
         <stored-value>Journal Article</stored-value>
       </pair>
       <pair>
         <displayed-value>Journal Item</displayed-value>
         <stored-value>Journal Item</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>Internal Document</displayed-value>
-        <stored-value>Internal Document</stored-value>
       </pair>
       <pair>
         <displayed-value>Logo</displayed-value>
