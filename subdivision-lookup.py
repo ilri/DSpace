@@ -26,7 +26,7 @@
 # This script is written for Python 3.6+ and requires several modules that you
 # can install with pip (I recommend using a Python virtual environment):
 #
-#   $ pip install colorama requests requests-cache pycountry
+#   $ pip install colorama pycountry
 #
 
 import argparse
