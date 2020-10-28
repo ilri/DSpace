@@ -319,7 +319,7 @@
           <dc-qualifier></dc-qualifier>
           <vocabulary>dc-subject</vocabulary>
           <input-type>onebox</input-type>
-          <hint>Click below to see a pre-populated list of AGROVOC keywords, or enter the valid subject terms manually (enter each individually).</hint>
+          <hint>Click below to see a pre-populated list of AGROVOC keywords, or enter the valid subject terms manually (enter each individually in lower case).</hint>
           <repeatable>true</repeatable>
           <label>AGROVOC keywords</label>
           <required></required>
