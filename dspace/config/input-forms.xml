@@ -5188,8 +5188,8 @@
         <stored-value>Africa</stored-value>
       </pair>
       <pair>
-        <displayed-value>Africa South of Sahara</displayed-value>
-        <stored-value>Africa South of Sahara</stored-value>
+        <displayed-value>Sub-Saharan Africa</displayed-value>
+        <stored-value>Sub-Saharan Africa</stored-value>
       </pair>
       <pair>
         <displayed-value>Asia</displayed-value>
@@ -5216,8 +5216,8 @@
         <stored-value>East Asia</stored-value>
       </pair>
       <pair>
-        <displayed-value>East Africa</displayed-value>
-        <stored-value>East Africa</stored-value>
+        <displayed-value>Eastern Africa</displayed-value>
+        <stored-value>Eastern Africa</stored-value>
       </pair>
       <pair>
         <displayed-value>Europe</displayed-value>
@@ -5232,8 +5232,8 @@
         <stored-value>Middle East</stored-value>
       </pair>
       <pair>
-        <displayed-value>North Africa</displayed-value>
-        <stored-value>North Africa</stored-value>
+        <displayed-value>Northern Africa</displayed-value>
+        <stored-value>Northern Africa</stored-value>
       </pair>
       <pair>
         <displayed-value>North America</displayed-value>
@@ -5244,12 +5244,12 @@
         <stored-value>Pacific</stored-value>
       </pair>
       <pair>
-        <displayed-value>South Asia</displayed-value>
-        <stored-value>South Asia</stored-value>
+        <displayed-value>Southern Asia</displayed-value>
+        <stored-value>Southern Asia</stored-value>
       </pair>
       <pair>
-        <displayed-value>Southeast Asia</displayed-value>
-        <stored-value>Southeast Asia</stored-value>
+        <displayed-value>South-eastern Asia</displayed-value>
+        <stored-value>South-eastern Asia</stored-value>
       </pair>
       <pair>
         <displayed-value>Southern Africa</displayed-value>
@@ -5264,12 +5264,12 @@
         <stored-value>South America</stored-value>
       </pair>
       <pair>
-        <displayed-value>West Africa</displayed-value>
-        <stored-value>West Africa</stored-value>
+        <displayed-value>Western Africa</displayed-value>
+        <stored-value>Western Africa</stored-value>
       </pair>
       <pair>
-        <displayed-value>West Asia</displayed-value>
-        <stored-value>West Asia</stored-value>
+        <displayed-value>Western Asia</displayed-value>
+        <stored-value>Western Asia</stored-value>
       </pair>
       <pair>
         <displayed-value>West and Central Africa</displayed-value>
