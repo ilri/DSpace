@@ -160,6 +160,7 @@
     <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_usageRights">Usage rights</message>
     <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_targetaudience">Target audiences</message>
     <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_systemsubject">System subjects</message>
+    <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_rtbsubject">RTB subjects</message>
 
    <!--  some common other possibilities for Advanced Search Fields -->
    <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_contributor">Contributor</message>
@@ -438,6 +439,7 @@
 	<message key="xmlui.ArtifactBrowser.SimpleSearch.filter.iitatheme">IITA research theme</message>
 	<message key="xmlui.ArtifactBrowser.SimpleSearch.filter.targetaudience">Target audiences</message>
 	<message key="xmlui.ArtifactBrowser.SimpleSearch.filter.systemsubject">System subject</message>
+	<message key="xmlui.ArtifactBrowser.SimpleSearch.filter.rtbsubject">RTB subject</message>
 
 	<!-- org.dspace.app.xmlui.artifactbrowser.RestrictedItem.java -->
 	<message key="xmlui.ArtifactBrowser.RestrictedItem.title">This resource is restricted</message>
@@ -2708,6 +2710,7 @@
     <message key="xmlui.Discovery.AbstractSearch.type_usageRights">Filter by: Usage rights</message>
     <message key="xmlui.Discovery.AbstractSearch.type_targetaudience">Filter by: Target audiences</message>
     <message key="xmlui.Discovery.AbstractSearch.type_systemsubject">Filter by: System subject</message>
+    <message key="xmlui.Discovery.AbstractSearch.type_rtbsubject">Filter by: RTB subject</message>
 
     <!-- overridden from dspace-xmlui/src/main/resources/aspects/Discovery/i18n/messages.xml -->
     <message key="xmlui.Discovery.AbstractSearch.type_subject">Filter by: AGROVOC keyword</message>
