@@ -386,6 +386,7 @@ such as authors, subject, citation, description, etc
         or dim:field[@mdschema='cg' and @element='subject' and @qualifier='humidtropics']
         or dim:field[@mdschema='cg' and @element='subject' and @qualifier='icarda']
         or dim:field[@mdschema='cg' and @element='subject' and @qualifier='iita']
+        or dim:field[@mdschema='cg' and @element='subject' and @qualifier='system']
         or dim:field[@mdschema='cg' and @element='subject' and @qualifier='wle']"/>
         </xsl:variable>
 
@@ -409,6 +410,7 @@ such as authors, subject, citation, description, etc
                     <xsl:call-template name="iitasubject"/>
                     <xsl:call-template name="ilrisubject"/>
                     <xsl:call-template name="iwmisubject"/>
+                    <xsl:call-template name="systemsubject"/>
                     <!-- the last template called should not output ";" at the end -->
                     <xsl:call-template name="wlesubject"/>
                 </span>
@@ -581,6 +583,16 @@ such as authors, subject, citation, description, etc
                 <xsl:if test="count(following-sibling::dim:field[@mdschema='cg' and @element='subject' and @qualifier='iita']) != 0">
                     <xsl:text>; </xsl:text>
                 </xsl:if>
+            </xsl:for-each>
+        </xsl:if>
+    </xsl:template>
+    <xsl:template name="systemsubject">
+        <xsl:if test="dim:field[@mdschema='cg' and @element='subject' and @qualifier='system']">
+            <xsl:for-each select="dim:field[@mdschema='cg' and @element='subject' and @qualifier='system']">
+                <xsl:call-template name="discovery-link">
+                    <xsl:with-param name="filtertype" select="'systemsubject'"/>
+                </xsl:call-template>
+                    <xsl:text>; </xsl:text>
             </xsl:for-each>
         </xsl:if>
     </xsl:template>
