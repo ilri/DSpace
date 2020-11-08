@@ -118,7 +118,6 @@
                 <ref bean="searchFilterIitaSubject"/>
                 <ref bean="searchFilterIlriSubject"/>
                 <ref bean="searchFilterIwmiSubject"/>
-                <ref bean="searchFilterRtbSubject"/>
                 <ref bean="searchFilterSystemSubject"/>
                 <ref bean="searchFilterWleSubject"/>
                 <ref bean="searchFilterStatus" />
@@ -159,7 +158,6 @@
                 <ref bean="searchFilterIitaSubject"/>
                 <ref bean="searchFilterIlriSubject"/>
                 <ref bean="searchFilterIwmiSubject"/>
-                <ref bean="searchFilterRtbSubject"/>
                 <ref bean="searchFilterSystemSubject"/>
                 <ref bean="searchFilterWleSubject"/>
                 <ref bean="searchFilterStatus" />
@@ -271,7 +269,6 @@
                 <ref bean="searchFilterIitaSubject"/>
                 <ref bean="searchFilterIlriSubject"/>
                 <ref bean="searchFilterIwmiSubject"/>
-                <ref bean="searchFilterRtbSubject"/>
                 <ref bean="searchFilterSystemSubject"/>
                 <ref bean="searchFilterWleSubject"/>
                 <ref bean="searchFilterStatus" />
@@ -312,7 +309,6 @@
                 <ref bean="searchFilterIitaSubject"/>
                 <ref bean="searchFilterIlriSubject"/>
                 <ref bean="searchFilterIwmiSubject"/>
-                <ref bean="searchFilterRtbSubject"/>
                 <ref bean="searchFilterSystemSubject"/>
                 <ref bean="searchFilterWleSubject"/>
                 <ref bean="searchFilterStatus" />
@@ -901,18 +897,6 @@
         <property name="sortOrderFilterPage" value="COUNT"/>
     </bean>
 
-    <bean id="searchFilterRtbSubject" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
-        <property name="indexFieldName" value="rtbsubject"/>
-        <property name="metadataFields">
-            <list>
-                <value>cg.subject.rtb</value>
-            </list>
-        </property>
-        <property name="facetLimit" value="5"/>
-        <property name="sortOrderSidebar" value="COUNT"/>
-        <property name="sortOrderFilterPage" value="COUNT"/>
-    </bean>
-
     <!--Sort properties-->
     <bean id="sortTitle" class="org.dspace.discovery.configuration.DiscoverySortFieldConfiguration">
         <property name="metadataField" value="dc.title"/>
@@ -977,7 +961,6 @@
                 <ref bean="searchFilterIcardaSubject"/>
                 <ref bean="searchFilterSystemSubject"/>
                 <ref bean="searchFilterIitaTheme"/>
-                <ref bean="searchFilterRtbSubject"/>
             </list>
         </property>
         <!--The sort filters for the discovery search-->
