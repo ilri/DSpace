@@ -118,8 +118,8 @@
                 <ref bean="searchFilterIitaSubject"/>
                 <ref bean="searchFilterIlriSubject"/>
                 <ref bean="searchFilterIwmiSubject"/>
-                <ref bean="searchFilterWleSubject"/>
                 <ref bean="searchFilterSystemSubject"/>
+                <ref bean="searchFilterWleSubject"/>
                 <ref bean="searchFilterStatus" />
                 <ref bean="searchFilterUsageRights" />
             </list>
@@ -157,8 +157,8 @@
                 <ref bean="searchFilterIitaSubject"/>
                 <ref bean="searchFilterIlriSubject"/>
                 <ref bean="searchFilterIwmiSubject"/>
-                <ref bean="searchFilterWleSubject"/>
                 <ref bean="searchFilterSystemSubject"/>
+                <ref bean="searchFilterWleSubject"/>
                 <ref bean="searchFilterStatus" />
                 <ref bean="searchFilterUsageRights" />
                 <ref bean="searchFilterOrcid" />
@@ -269,8 +269,8 @@
                 <ref bean="searchFilterIitaSubject"/>
                 <ref bean="searchFilterIlriSubject"/>
                 <ref bean="searchFilterIwmiSubject"/>
-                <ref bean="searchFilterWleSubject"/>
                 <ref bean="searchFilterSystemSubject"/>
+                <ref bean="searchFilterWleSubject"/>
                 <ref bean="searchFilterStatus" />
                 <ref bean="searchFilterUsageRights" />
             </list>
@@ -309,8 +309,8 @@
                 <ref bean="searchFilterIitaSubject"/>
                 <ref bean="searchFilterIlriSubject"/>
                 <ref bean="searchFilterIwmiSubject"/>
-                <ref bean="searchFilterWleSubject"/>
                 <ref bean="searchFilterSystemSubject"/>
+                <ref bean="searchFilterWleSubject"/>
                 <ref bean="searchFilterStatus" />
                 <ref bean="searchFilterUsageRights" />
                 <ref bean="searchFilterOrcid" />
