@@ -1523,6 +1523,10 @@
         <stored-value>Conference Proceedings</stored-value>
       </pair>
       <pair>
+        <displayed-value>Data Paper</displayed-value>
+        <stored-value>Data Paper</stored-value>
+      </pair>
+      <pair>
         <displayed-value>Dataset</displayed-value>
         <stored-value>Dataset</stored-value>
       </pair>
