@@ -927,6 +927,10 @@
     </value-pairs>
     <value-pairs value-pairs-name="cipsubject" dc-term="subject_cip">
       <pair>
+        <displayed-value>ANDEAN ROOTS AND TUBERS</displayed-value>
+        <stored-value>ANDEAN ROOTS AND TUBERS</stored-value>
+      </pair>
+      <pair>
         <displayed-value>BIGDATA</displayed-value>
         <stored-value>BIGDATA</stored-value>
       </pair>
