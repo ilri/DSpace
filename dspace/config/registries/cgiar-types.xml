@@ -209,7 +209,7 @@
 
     <dc-type>
         <schema>cg</schema>
-        <element>fulltextstatus</element>
+        <element>howPublished</element>
     </dc-type>
 
     <dc-type>
