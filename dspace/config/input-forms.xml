@@ -544,7 +544,7 @@
         </field>
         <field>
           <dc-schema>cg</dc-schema>
-          <dc-element>howpublished</dc-element>
+          <dc-element>howPublished</dc-element>
           <dc-qualifier></dc-qualifier>
           <repeatable>false</repeatable>
           <label>Grey literature</label>
@@ -553,7 +553,7 @@
         </field>
         <field>
           <dc-schema>cg</dc-schema>
-          <dc-element>review-status</dc-element>
+          <dc-element>reviewStatus</dc-element>
           <dc-qualifier></dc-qualifier>
           <repeatable>false</repeatable>
           <label>Review status</label>
@@ -6045,7 +6045,7 @@
         <stored-value>ISI Journal</stored-value>
       </pair>
     </value-pairs>
-    <value-pairs value-pairs-name="GREY_LITERATURE" dc-term="fulltextstatus">
+    <value-pairs value-pairs-name="GREY_LITERATURE" dc-term="howPublished">
       <pair>
         <displayed-value>N/A</displayed-value>
         <stored-value></stored-value>
