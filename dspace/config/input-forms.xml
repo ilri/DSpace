@@ -6059,7 +6059,7 @@
         <stored-value>Formally Published</stored-value>
       </pair>
     </value-pairs>
-    <value-pairs value-pairs-name="TARGET_AUDIENCE" dc-term="targetaudience">
+    <value-pairs value-pairs-name="TARGET_AUDIENCE" dc-term="audience">
       <pair>
         <displayed-value>SCIENTISTS</displayed-value>
         <stored-value>SCIENTISTS</stored-value>
