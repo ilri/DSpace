@@ -2369,7 +2369,7 @@
 	<message key="xmlui.dri2xhtml.METS-1.0.item-regions">Regions</message>
 	<message key="xmlui.dri2xhtml.METS-1.0.item-language">Language</message>
 	<message key="xmlui.dri2xhtml.METS-1.0.item-type">Type</message>
-	<message key="xmlui.dri2xhtml.METS-1.0.item-review-status">Review status</message>
+	<message key="xmlui.dri2xhtml.METS-1.0.item-reviewStatus">Review status</message>
 	<message key="xmlui.dri2xhtml.METS-1.0.item-accessibility">Accessibility</message>
 	<message key="xmlui.dri2xhtml.METS-1.0.item-usage-rights">Usage rights</message>
 	<message key="xmlui.dri2xhtml.METS-1.0.item-citation">Citation</message>
