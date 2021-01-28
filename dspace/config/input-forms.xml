@@ -217,7 +217,7 @@
           <repeatable>false</repeatable>
           <label>ISBN</label>
           <input-type>onebox</input-type>
-          <hint>Enter the ISBN for the the item, for example: 978-3-16-148410-0</hint>
+          <hint>Enter the ISBN for the item, for example: 978-3-16-148410-0</hint>
           <required></required>
         </field>
         <field>
