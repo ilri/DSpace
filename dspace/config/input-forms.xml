@@ -216,7 +216,7 @@
           <dc-qualifier></dc-qualifier>
           <repeatable>true</repeatable>
           <label>Series/Report name</label>
-          <input-type>series</input-type>
+          <input-type>onebox</input-type>
           <hint>Enter the full official series/report name.</hint>
           <required></required>
         </field>
@@ -226,7 +226,7 @@
           <dc-qualifier></dc-qualifier>
           <repeatable>true</repeatable>
           <label>Series/Report No.</label>
-          <input-type>series</input-type>
+          <input-type>onebox</input-type>
           <hint>Enter the series/report number.</hint>
           <required></required>
         </field>
