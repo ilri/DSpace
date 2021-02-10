@@ -154,18 +154,7 @@
             <!-- Mobile viewport optimized: h5bp.com/viewport -->
             <meta name="viewport" content="width=device-width,initial-scale=1"/>
 
-            <link rel="shortcut icon">
-                <xsl:attribute name="href">
-                    <xsl:value-of select="$theme-path"/>
-                    <xsl:text>images/favicon.ico</xsl:text>
-                </xsl:attribute>
-            </link>
-            <link rel="apple-touch-icon">
-                <xsl:attribute name="href">
-                    <xsl:value-of select="$theme-path"/>
-                    <xsl:text>images/apple-touch-icon.png</xsl:text>
-                </xsl:attribute>
-            </link>
+            <xsl:call-template name="favicons"/>
 
             <meta name="Generator">
                 <xsl:attribute name="content">

@@ -111,6 +111,8 @@
 	<message key="xmlui.ArtifactBrowser.AdvancedSearch.type_iwmisubject">IWMI subjects</message>
 	<message key="xmlui.ArtifactBrowser.AdvancedSearch.type_subregion">Subregions</message>
     <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_crpsubject">CGIAR Research Programs</message>
+    <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_sdg">SDG contributions</message>
+    <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_impactarea">CGIAR Impact Areas</message>
     <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_basin">River basins</message>
     <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_type">Output types</message>
     <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_ctasubject">CTA subjects</message>
@@ -183,6 +185,8 @@
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.bioversity.column_heading">Bioversity subject</message>
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.ciatsubject.column_heading">CIAT subject</message>
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.crpsubject.column_heading">CGIAR Research Program</message>
+	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.sdg.column_heading">Sustainable Development Goal</message>
+	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.impactarea.column_heading">CGIAR Impact Area</message>
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.basin.column_heading">River basin</message>
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.cipsubject.column_heading">CIP subject</message>
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.breed.column_heading">Animal breed</message>
@@ -230,6 +234,10 @@
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.trail.metadata.subregion">Browsing {0} by Subregion</message>
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.title.metadata.crpsubject">Browsing {0} by CGIAR Research Program {1}</message>
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.trail.metadata.crpsubject">Browsing {0} by CGIAR Research Program</message>
+	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.title.metadata.sdg">Browsing {0} by Sustainable Development Goal {1}</message>
+	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.trail.metadata.sdg">Browsing {0} by Sustainable Development Goal</message>
+	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.title.metadata.impactarea">Browsing {0} by CGIAR Impact Area {1}</message>
+	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.trail.metadata.impactarea">Browsing {0} by CGIAR Impact Area</message>
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.title.metadata.basin">Browsing {0} by River basin {1}</message>
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.trail.metadata.basin">Browsing {0} by River basin</message>
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.title.metadata.type">Browsing {0} by Output type {1}</message>
@@ -380,6 +388,8 @@
 	<message key="xmlui.ArtifactBrowser.SimpleSearch.search_scope">Search Scope</message>
 	<message key="xmlui.ArtifactBrowser.SimpleSearch.full_text_search">Full Text Search</message>
 	<message key="xmlui.ArtifactBrowser.SimpleSearch.filter.crpsubject">CRP subject</message>
+	<message key="xmlui.ArtifactBrowser.SimpleSearch.filter.sdg">Sustainable Development Goal</message>
+	<message key="xmlui.ArtifactBrowser.SimpleSearch.filter.impactarea">CGIAR Impact Area</message>
 	<message key="xmlui.ArtifactBrowser.SimpleSearch.filter.cipsubject">CIP subject</message>
 	<message key="xmlui.ArtifactBrowser.SimpleSearch.filter.drylandssubject">Dryland Systems subject</message>
 	<message key="xmlui.ArtifactBrowser.SimpleSearch.filter.icardasubject">ICARDA subject</message>
@@ -2365,6 +2375,8 @@
 	<message key="xmlui.dri2xhtml.METS-1.0.item-citation">Citation</message>
 	<message key="xmlui.dri2xhtml.METS-1.0.item-notes">Notes</message>
 	<message key="xmlui.dri2xhtml.METS-1.0.item-affiliations">CGIAR Affiliations</message>
+	<message key="xmlui.dri2xhtml.METS-1.0.item-sdg">Contributes to SDGs</message>
+	<message key="xmlui.dri2xhtml.METS-1.0.item-impactarea">CGIAR Impact Areas</message>
 	<message key="xmlui.dri2xhtml.METS-1.0.item-investors-sponsors">Investors/sponsors</message>
 	<message key="xmlui.dri2xhtml.METS-1.0.item-identifiers">Identifiers</message>
 	<message key="xmlui.dri2xhtml.METS-1.0.item-identifier-googleurl">Google URL: </message>
@@ -2690,6 +2702,8 @@
     <message key="xmlui.Discovery.AbstractSearch.type_sponsorship">Filter by: Investor</message>
     <message key="xmlui.Discovery.AbstractSearch.type_status">Filter by: Status</message>
     <message key="xmlui.Discovery.AbstractSearch.type_crpsubject">Filter by: CRP subject</message>
+    <message key="xmlui.Discovery.AbstractSearch.type_sdg">Filter by: Sustainable Development Goal</message>
+    <message key="xmlui.Discovery.AbstractSearch.type_impactarea">Filter by: CGIAR Impact Area</message>
     <message key="xmlui.Discovery.AbstractSearch.type_usageRights">Filter by: Usage rights</message>
     <message key="xmlui.Discovery.AbstractSearch.type_targetaudience">Filter by: Target audiences</message>
     <message key="xmlui.Discovery.AbstractSearch.type_systemsubject">Filter by: System subject</message>
@@ -2720,6 +2734,8 @@
     <message key="xmlui.reporting-suite.statistics.graph-editor.data-source.dataset.option.country">Country</message>
     <message key="xmlui.reporting-suite.statistics.graph-editor.data-source.dataset.option.subregion">Subregion</message>
     <message key="xmlui.reporting-suite.statistics.graph-editor.data-source.dataset.option.crpsubject">CRP subject</message>
+    <message key="xmlui.reporting-suite.statistics.graph-editor.data-source.dataset.option.sdg">Sustainable Development Goal</message>
+    <message key="xmlui.reporting-suite.statistics.graph-editor.data-source.dataset.option.impactarea">CGIAR Impact Area</message>
     <message key="xmlui.reporting-suite.statistics.graph-editor.data-source.dataset.option.basin">Basin</message>
     <message key="xmlui.reporting-suite.statistics.graph-editor.data-source.dataset.option.cta">CTA subject</message>
     <message key="xmlui.reporting-suite.statistics.graph-editor.data-source.dataset.option.wlesubject">WLE subject</message>

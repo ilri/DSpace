@@ -46,4 +46,52 @@
         </xsl:if>
     </xsl:template>
 
+    <!-- Add a favicons, from https://realfavicongenerator.net -->
+    <xsl:template name="favicons">
+		<link rel="shortcut icon">
+			<xsl:attribute name="href">
+				<xsl:value-of select="$theme-path"/>
+				<xsl:text>images/favicon.ico</xsl:text>
+			</xsl:attribute>
+		</link>
+		<link rel="apple-touch-icon" sizes="180x180">
+			<xsl:attribute name="href">
+				<xsl:value-of select="$theme-path"/>
+				<xsl:text>images/apple-touch-icon.png</xsl:text>
+			</xsl:attribute>
+		</link>
+		<link rel="icon" type="image/png" sizes="32x32">
+			<xsl:attribute name="href">
+				<xsl:value-of select="$theme-path"/>
+				<xsl:text>images/favicon-32x32.png</xsl:text>
+			</xsl:attribute>
+		</link>
+		<link rel="icon" type="image/png" sizes="16x16">
+			<xsl:attribute name="href">
+				<xsl:value-of select="$theme-path"/>
+				<xsl:text>images/favicon-16x16.png</xsl:text>
+			</xsl:attribute>
+		</link>
+		<link rel="manifest">
+			<xsl:attribute name="href">
+				<xsl:value-of select="$theme-path"/>
+				<xsl:text>images/site.webmanifest</xsl:text>
+			</xsl:attribute>
+		</link>
+		<link rel="mask-icon" color="#682622">
+			<xsl:attribute name="href">
+				<xsl:value-of select="$theme-path"/>
+				<xsl:text>images/safari-pinned-tab.svg</xsl:text>
+			</xsl:attribute>
+		</link>
+        <meta name="msapplication-TileColor" content="#00aba9"/>
+		<meta name="msapplication-config">
+			<xsl:attribute name="href">
+				<xsl:value-of select="$theme-path"/>
+				<xsl:text>images/browserconfig.xml</xsl:text>
+			</xsl:attribute>
+		</meta>
+        <meta name="theme-color" content="#ffffff"/>
+    </xsl:template>
+
 </xsl:stylesheet>

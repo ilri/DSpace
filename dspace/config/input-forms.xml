@@ -273,6 +273,26 @@
         </field>
         <field>
           <dc-schema>cg</dc-schema>
+          <dc-element>subject</dc-element>
+          <dc-qualifier>sdg</dc-qualifier>
+          <repeatable>true</repeatable>
+          <label>UN Sustainable Development Goals (SDGs)</label>
+          <input-type value-pairs-name="sdgs">dropdown</input-type>
+          <hint>Select any UN Sustainable Development Goals associated with this item.</hint>
+          <required></required>
+        </field>
+        <field>
+          <dc-schema>cg</dc-schema>
+          <dc-element>subject</dc-element>
+          <dc-qualifier>impactArea</dc-qualifier>
+          <repeatable>true</repeatable>
+          <label>CGIAR Impact Areas</label>
+          <input-type value-pairs-name="impactAreas">dropdown</input-type>
+          <hint>Select any CGIAR Impact Areas associated with this item.</hint>
+          <required></required>
+        </field>
+        <field>
+          <dc-schema>cg</dc-schema>
           <dc-element>coverage</dc-element>
           <dc-qualifier>country</dc-qualifier>
           <repeatable>true</repeatable>
@@ -441,26 +461,6 @@
           <repeatable>true</repeatable>
           <label>CIP subject</label>
           <input-type value-pairs-name="cipsubject">dropdown</input-type>
-          <hint></hint>
-          <required></required>
-        </field>
-        <field>
-          <dc-schema>cg</dc-schema>
-          <dc-element>subject</dc-element>
-          <dc-qualifier>cpwf</dc-qualifier>
-          <repeatable>true</repeatable>
-          <label>CPWF subject</label>
-          <input-type value-pairs-name="cpwfsubject">dropdown</input-type>
-          <hint></hint>
-          <required></required>
-        </field>
-        <field>
-          <dc-schema>cg</dc-schema>
-          <dc-element>subject</dc-element>
-          <dc-qualifier>cta</dc-qualifier>
-          <repeatable>true</repeatable>
-          <label>CTA subject</label>
-          <input-type value-pairs-name="cta">dropdown</input-type>
           <hint></hint>
           <required></required>
         </field>
@@ -670,26 +670,6 @@
           <label>Animal breed type</label>
           <input-type>onebox</input-type>
           <vocabulary>cg-species-breed</vocabulary>
-          <required></required>
-        </field>
-        <field>
-          <dc-schema>cg</dc-schema>
-          <dc-element>message</dc-element>
-          <dc-qualifier>voice</dc-qualifier>
-          <repeatable>false</repeatable>
-          <label>Voice message</label>
-          <input-type>textarea</input-type>
-          <hint>Enter a voice message text that would be recorded for extension.</hint>
-          <required></required>
-        </field>
-        <field>
-          <dc-schema>cg</dc-schema>
-          <dc-element>message</dc-element>
-          <dc-qualifier>sms</dc-qualifier>
-          <repeatable>false</repeatable>
-          <label>SMS message</label>
-          <input-type>textarea</input-type>
-          <hint>Enter an SMS message that would be distributed on mobile services.</hint>
           <required></required>
         </field>
       </page>
@@ -1367,6 +1347,10 @@
       <pair>
         <displayed-value>NUTRITION</displayed-value>
         <stored-value>NUTRITION</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>ONE HEALTH</displayed-value>
+        <stored-value>ONE HEALTH</stored-value>
       </pair>
       <pair>
         <displayed-value>PARTICIPATION</displayed-value>
@@ -2466,52 +2450,6 @@
         <stored-value>WATER</stored-value>
       </pair>
     </value-pairs>
-    <value-pairs value-pairs-name="cta" dc-term="subject_cta">
-      <pair>
-        <displayed-value>AGRICULTURE - GENERAL</displayed-value>
-        <stored-value>AGRICULTURE - GENERAL</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>ANIMAL PRODUCTION AND HEALTH</displayed-value>
-        <stored-value>ANIMAL PRODUCTION AND HEALTH</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>CROP PRODUCTION AND PROTECTION</displayed-value>
-        <stored-value>CROP PRODUCTION AND PROTECTION</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>ENVIRONMENTAL PROTECTION AND NATURAL RESOURCES MANAGEMENT</displayed-value>
-        <stored-value>ENVIRONMENTAL PROTECTION AND NATURAL RESOURCES MANAGEMENT</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>FISHERIES AND AQUACULTURE</displayed-value>
-        <stored-value>FISHERIES AND AQUACULTURE</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>FORESTRY</displayed-value>
-        <stored-value>FORESTRY</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>INSTITUTIONS AND SERVICES</displayed-value>
-        <stored-value>INSTITUTIONS AND SERVICES</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>MARKETING AND TRADE</displayed-value>
-        <stored-value>MARKETING AND TRADE</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>MISCELLANEOUS</displayed-value>
-        <stored-value>MISCELLANEOUS</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>POST-HARVESTING TECHNOLOGY AND PROCESSING</displayed-value>
-        <stored-value>POST-HARVESTING TECHNOLOGY AND PROCESSING</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>RURAL DYNAMICS</displayed-value>
-        <stored-value>RURAL DYNAMICS</stored-value>
-      </pair>
-    </value-pairs>
     <value-pairs value-pairs-name="wle" dc-term="subject_wle">
       <pair>
         <displayed-value>AGRICULTURAL POLICIES</displayed-value>
@@ -2830,208 +2768,6 @@
         <stored-value>WATERSHEDS</stored-value>
       </pair>
     </value-pairs>
-    <value-pairs value-pairs-name="cpwfsubject" dc-term="cpwfsubject">
-      <pair>
-        <displayed-value>AGRICULTURE</displayed-value>
-        <stored-value>AGRICULTURE</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>AQUACULTURE</displayed-value>
-        <stored-value>AQUACULTURE</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>BENEFIT SHARING MECHANISMS</displayed-value>
-        <stored-value>BENEFIT SHARING MECHANISMS</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>BIODIVERSITY</displayed-value>
-        <stored-value>BIODIVERSITY</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>CAPACITY DEVELOPMENT</displayed-value>
-        <stored-value>CAPACITY DEVELOPMENT</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>CLIMATE CHANGE</displayed-value>
-        <stored-value>CLIMATE CHANGE</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>DECISON SUPPORT SYSTEMS</displayed-value>
-        <stored-value>DECISON SUPPORT SYSTEMS</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>DEVELOPMENT</displayed-value>
-        <stored-value>DEVELOPMENT</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>ECOSYSTEM SERVICES</displayed-value>
-        <stored-value>ECOSYSTEM SERVICES</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>ENVIRONMENT</displayed-value>
-        <stored-value>ENVIRONMENT</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>EXTENSION</displayed-value>
-        <stored-value>EXTENSION</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>FARMING SYSTEMS</displayed-value>
-        <stored-value>FARMING SYSTEMS</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>FODDER</displayed-value>
-        <stored-value>FODDER</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>FOOD SAFETY</displayed-value>
-        <stored-value>FOOD SAFETY</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>FOOD SECURITY</displayed-value>
-        <stored-value>FOOD SECURITY</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>GENDER</displayed-value>
-        <stored-value>GENDER</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>GOVERNANCE</displayed-value>
-        <stored-value>GOVERNANCE</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>GROUNDWATER</displayed-value>
-        <stored-value>GROUNDWATER</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>HYDROPOWER</displayed-value>
-        <stored-value>HYDROPOWER</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>IMPACT ASSESSMENT</displayed-value>
-        <stored-value>IMPACT ASSESSMENT</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>INNOVATION SYSTEMS</displayed-value>
-        <stored-value>INNOVATION SYSTEMS</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>INSTITUTIONS</displayed-value>
-        <stored-value>INSTITUTIONS</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>INTEGRATED WATER RESOURCE</displayed-value>
-        <stored-value>INTEGRATED WATER RESOURCE</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>MANAGEMENT</displayed-value>
-        <stored-value>MANAGEMENT</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>IRRIGATION</displayed-value>
-        <stored-value>IRRIGATION</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>KNOWLEDGE AND INFORMATION</displayed-value>
-        <stored-value>KNOWLEDGE AND INFORMATION</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>LAND MANAGEMENT</displayed-value>
-        <stored-value>LAND MANAGEMENT</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>LIVELIHOODS</displayed-value>
-        <stored-value>LIVELIHOODS</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>LIVESTOCK SYSTEMS</displayed-value>
-        <stored-value>LIVESTOCK SYSTEMS</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>LIVESTOCK-WATER</displayed-value>
-        <stored-value>LIVESTOCK-WATER</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>MARKETS</displayed-value>
-        <stored-value>MARKETS</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>MULTIPLE USE</displayed-value>
-        <stored-value>MULTIPLE USE</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>POLICY RESEARCH</displayed-value>
-        <stored-value>POLICY RESEARCH</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>POVERTY</displayed-value>
-        <stored-value>POVERTY</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>RAINFED SYSTEMS</displayed-value>
-        <stored-value>RAINFED SYSTEMS</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>RAINWATER MANAGEMENT</displayed-value>
-        <stored-value>RAINWATER MANAGEMENT</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>RESEARCH</displayed-value>
-        <stored-value>RESEARCH</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>RIVER BASIN</displayed-value>
-        <stored-value>RIVER BASIN</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>SEEDS</displayed-value>
-        <stored-value>SEEDS</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>SOILS</displayed-value>
-        <stored-value>SOILS</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>SPATIAL ANALYSIS</displayed-value>
-        <stored-value>SPATIAL ANALYSIS</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>TRADE</displayed-value>
-        <stored-value>TRADE</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>TREES</displayed-value>
-        <stored-value>TREES</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>WATER ALLOCATION</displayed-value>
-        <stored-value>WATER ALLOCATION</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>WATER MANAGEMENT</displayed-value>
-        <stored-value>WATER MANAGEMENT</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>WATER PRODUCTIVITY</displayed-value>
-        <stored-value>WATER PRODUCTIVITY</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>WATER RESOURCES</displayed-value>
-        <stored-value>WATER RESOURCES</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>WATER USE</displayed-value>
-        <stored-value>WATER USE</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>WETLANDS</displayed-value>
-        <stored-value>WETLANDS</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>WOMEN</displayed-value>
-        <stored-value>WOMEN</stored-value>
-      </pair>
-    </value-pairs>
     <value-pairs value-pairs-name="ciforsubject" dc-term="ciforsubject">
       <pair>
         <displayed-value>FOREST MANAGEMENT</displayed-value>
@@ -3138,6 +2874,98 @@
       <pair>
         <displayed-value>Livestock and Fish</displayed-value>
         <stored-value>Livestock and Fish</stored-value>
+      </pair>
+    </value-pairs>
+    <value-pairs value-pairs-name="sdgs">
+      <pair>
+        <displayed-value>SDG 1 - No poverty</displayed-value>
+        <stored-value>SDG 1 - No poverty</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SDG 2 - Zero hunger</displayed-value>
+        <stored-value>SDG 2 - Zero hunger</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SDG 3 - Good health and well-being</displayed-value>
+        <stored-value>SDG 3 - Good health and well-being</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SDG 4 - Quality education</displayed-value>
+        <stored-value>SDG 4 - Quality education</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SDG 5 - Gender equality</displayed-value>
+        <stored-value>SDG 5 - Gender equality</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SDG 6 - Clean water and sanitation</displayed-value>
+        <stored-value>SDG 6 - Clean water and sanitation</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SDG 7 - Affordable and clean energy</displayed-value>
+        <stored-value>SDG 7 - Affordable and clean energy</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SDG 8 - Decent work and economic growth</displayed-value>
+        <stored-value>SDG 8 - Decent work and economic growth</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SDG 9 - Industry, innovation and infrastructure</displayed-value>
+        <stored-value>SDG 9 - Industry, innovation and infrastructure</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SDG 10 - Reduce inequalities</displayed-value>
+        <stored-value>SDG 10 - Reduce inequalities</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SDG 11 - Sustainable cities and communities</displayed-value>
+        <stored-value>SDG 11 - Sustainable cities and communities</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SDG 12 - Responsible production and consumption</displayed-value>
+        <stored-value>SDG 12 - Responsible production and consumption</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SDG 13 - Climate action</displayed-value>
+        <stored-value>SDG 13 - Climate action</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SDG 14 - Life below water</displayed-value>
+        <stored-value>SDG 14 - Life below water</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SDG 15 - Life on land</displayed-value>
+        <stored-value>SDG 15 - Life on land</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SDG 16 - Peace, justice and strong institutions</displayed-value>
+        <stored-value>SDG 16 - Peace, justice and strong institutions</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SDG 17 - Partnerships for the goals</displayed-value>
+        <stored-value>SDG 17 - Partnerships for the goals</stored-value>
+      </pair>
+    </value-pairs>
+    <value-pairs value-pairs-name="impactAreas">
+      <pair>
+        <displayed-value>Climate adaptation and mitigation</displayed-value>
+        <stored-value>Climate adaptation and mitigation</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Environmental health and biodiversity</displayed-value>
+        <stored-value>Environmental health and biodiversity</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Gender equality, youth and social inclusion</displayed-value>
+        <stored-value>Gender equality, youth and social inclusion</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Nutrition, health and food security</displayed-value>
+        <stored-value>Nutrition, health and food security</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Poverty reduction, livelihoods and jobs</displayed-value>
+        <stored-value>Poverty reduction, livelihoods and jobs</stored-value>
       </pair>
     </value-pairs>
     <value-pairs value-pairs-name="ccafsubject" dc-term="ccafsubject">

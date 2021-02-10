@@ -270,17 +270,5 @@
         <qualifier>breed</qualifier>
     </dc-type>
 
-    <dc-type>
-        <schema>cg</schema>
-        <element>message</element>
-        <qualifier>voice</qualifier>
-    </dc-type>
-
-    <dc-type>
-        <schema>cg</schema>
-        <element>message</element>
-        <qualifier>sms</qualifier>
-    </dc-type>
-
 
 </dspace-dc-types>
