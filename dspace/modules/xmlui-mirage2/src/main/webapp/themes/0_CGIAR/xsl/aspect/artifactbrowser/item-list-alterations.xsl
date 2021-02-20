@@ -118,27 +118,27 @@
                 </span>
             </div>
             <div>
-                <xsl:if test="dim:field[@element='date' and @qualifier='issued']">
+                <xsl:if test="dim:field[@mdschema='dcterms' and @element='issued']">
                     <div>
                         <span class="descriptionlabel">Date:</span>
 
                         <span class="date">
                             <xsl:value-of
-                                    select="substring(dim:field[@element='date' and @qualifier='issued']/node(),1,10)"/>
+                                    select="substring(dim:field[@mdschema='dcterms' and @element='issued']/node(),1,10)"/>
                         </span>
 
                     </div>
                 </xsl:if>
-                <xsl:if test="dim:field[@element = 'type']">
-                    <xsl:variable name="type" select="dim:field[@element = 'type']/node()"/>
+                <xsl:if test="dim:field[@mdschema='dcterms' and @element = 'type']">
+                    <xsl:variable name="type" select="dim:field[@mdschema='dcterms' and @element = 'type']/node()"/>
                     <div class="artifact-type">
                         <span class="descriptionlabel">Type:</span>
                         <xsl:value-of select="$type"/>
                     </div>
                 </xsl:if>
-                <xsl:if test="dim:field[@mdschema='cg' and @element = 'identifier' and @qualifier='status']">
+                <xsl:if test="dim:field[@mdschema='dcterms' and @element = 'accessRights']">
                     <xsl:variable name="status"
-                                  select="dim:field[@mdschema='cg' and @element = 'identifier' and @qualifier='status']/node()"/>
+                                  select="dim:field[@mdschema='dcterms' and @element = 'accessRights']/node()"/>
                     <div class="artifact-type">
                         <span class="descriptionlabel">Status:</span>
                         <xsl:value-of select="$status"/>

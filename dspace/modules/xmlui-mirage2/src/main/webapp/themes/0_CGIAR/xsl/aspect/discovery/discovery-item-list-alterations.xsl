@@ -147,26 +147,26 @@
                     <div>
 
 
-                        <xsl:if test="dri:list[@n=(concat($handle, ':dc.date.issued'))]">
+                        <xsl:if test="dri:list[@n=(concat($handle, ':dcterms.issued'))]">
                             <div>
                                 <span class="descriptionlabel">Date:</span>
 
                                 <span class="date">
                                     <xsl:value-of
-                                            select="substring(dri:list[@n=(concat($handle, ':dc.date.issued'))]/dri:item,1,10)"/>
+                                            select="substring(dri:list[@n=(concat($handle, ':dcterms.issued'))]/dri:item,1,10)"/>
                                 </span>
 
                             </div>
                         </xsl:if>
-                        <xsl:if test="dri:list[@n=(concat($handle, ':dc.type'))]">
-                            <xsl:variable name="type" select="dri:list[@n=(concat($handle, ':dc.type'))]/dri:item"/>
+                        <xsl:if test="dri:list[@n=(concat($handle, ':dcterms.type'))]">
+                            <xsl:variable name="type" select="dri:list[@n=(concat($handle, ':dcterms.type'))]/dri:item"/>
                             <div class="artifact-type">
                                 <span class="descriptionlabel">Type:</span>
                                 <xsl:value-of select="$type"/>
                             </div>
                         </xsl:if>
-                        <xsl:if test="dri:list[@n=(concat($handle, ':cg.identifier.status'))]">
-                            <xsl:variable name="status" select="dri:list[@n=(concat($handle, ':cg.identifier.status'))]/dri:item"/>
+                        <xsl:if test="dri:list[@n=(concat($handle, ':dcterms.accessRights'))]">
+                            <xsl:variable name="status" select="dri:list[@n=(concat($handle, ':dcterms.accessRights'))]/dri:item"/>
                             <div class="artifact-type">
                                 <span class="descriptionlabel">Status:</span>
                                 <xsl:value-of select="$status"/>
