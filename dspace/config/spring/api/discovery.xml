@@ -228,7 +228,7 @@
                             <property name="snippets" value="5"/>
                         </bean>
                         <bean class="org.dspace.discovery.configuration.DiscoveryHitHighlightFieldConfiguration">
-                            <property name="field" value="dc.description.abstract"/>
+                            <property name="field" value="dcterms.abstract"/>
                             <property name="maxSize" value="250"/>
                             <property name="snippets" value="2"/>
                         </bean>
@@ -253,7 +253,7 @@
                         <value>dc.title</value>
                         <value>dc.contributor.author</value>
                         <value>dc.creator</value>
-                        <value>dc.subject</value>
+                        <value>dcterms.subject</value>
                     </list>
                 </property>
                 <!--The minimum number of matching terms across the metadata fields above before an item is found as related -->
@@ -540,7 +540,7 @@
         <property name="indexFieldName" value="dateIssued"/>
         <property name="metadataFields">
             <list>
-                <value>dc.date.issued</value>
+                <value>dcterms.issued</value>
             </list>
         </property>
         <property name="type" value="date"/>
@@ -577,7 +577,7 @@
         <property name="indexFieldName" value="status"/>
         <property name="metadataFields">
             <list>
-                <value>cg.identifier.status</value>
+                <value>dcterms.accessRights</value>
             </list>
         </property>
         <property name="facetLimit" value="2"/>
@@ -587,7 +587,7 @@
         <property name="indexFieldName" value="usageRights"/>
         <property name="metadataFields">
             <list>
-                <value>dc.rights</value>
+                <value>dcterms.license</value>
             </list>
         </property>
         <property name="facetLimit" value="6"/>
@@ -620,7 +620,7 @@
         <property name="indexFieldName" value="journaltitle"/>
         <property name="metadataFields">
             <list>
-                <value>dc.source</value>
+                <value>cg.journal</value>
             </list>
         </property>
     </bean>
@@ -734,7 +734,7 @@
         <property name="indexFieldName" value="sponsorship"/>
         <property name="metadataFields">
             <list>
-                <value>dc.description.sponsorship</value>
+                <value>cg.contributor.donor</value>
             </list>
         </property>
         <property name="facetLimit" value="10"/>
@@ -929,7 +929,7 @@
         <property name="indexFieldName" value="orcid"/>
         <property name="metadataFields">
             <list>
-                <value>cg.creator.id</value>
+                <value>cg.creator.identifier</value>
             </list>
         </property>
     </bean>
@@ -938,7 +938,7 @@
         <property name="indexFieldName" value="publisher"/>
         <property name="metadataFields">
             <list>
-                <value>dc.publisher</value>
+                <value>dcterms.publisher</value>
             </list>
         </property>
     </bean>
@@ -956,7 +956,7 @@
         <property name="indexFieldName" value="iso"/>
         <property name="metadataFields">
             <list>
-                <value>dc.language.iso</value>
+                <value>dcterms.language</value>
             </list>
         </property>
         <property name="facetLimit" value="10"/>
@@ -968,7 +968,7 @@
         <property name="indexFieldName" value="targetaudience"/>
         <property name="metadataFields">
             <list>
-                <value>cg.targetaudience</value>
+                <value>dcterms.audience</value>
             </list>
         </property>
         <property name="facetLimit" value="10"/>
@@ -1006,7 +1006,7 @@
     </bean>
 
     <bean id="sortDateIssued" class="org.dspace.discovery.configuration.DiscoverySortFieldConfiguration">
-        <property name="metadataField" value="dc.date.issued"/>
+        <property name="metadataField" value="dcterms.issued"/>
         <property name="type" value="date"/>
     </bean>
 
