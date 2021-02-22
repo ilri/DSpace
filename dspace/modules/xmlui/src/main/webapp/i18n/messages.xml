@@ -2712,6 +2712,8 @@
     <message key="xmlui.Discovery.AbstractSearch.type_subject">Filter by: AGROVOC keyword</message>
     <message key="xmlui.ArtifactBrowser.SimpleSearch.filter.subject">AGROVOC keyword</message>
     <message key="xmlui.ArtifactBrowser.SimpleSearch.filter.subject_filter">AGROVOC keyword</message>
+    <message key="xmlui.Discovery.AbstractSearch.sort_by.dcterms.issued_dt_desc">Issue Date Desc</message>
+    <message key="xmlui.Discovery.AbstractSearch.sort_by.dcterms.issued_dt_asc">Issue Date Asc</message>
 
 
     <!-- org.dspace.app.xmlui.Submission.submit.StartSubmissionLookupStep -->
