@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# add-orcid-identifiers-csv.py 1.0.1
+# add-orcid-identifiers-csv.py 1.0.2
 #
 # Copyright 2021 Alan Orth.
 #
@@ -22,20 +22,21 @@
 # Add ORCID identifiers to items for a given author name from CSV.
 #
 # We had previously migrated the ORCID identifiers from CGSpace's authority Solr
-# core to cg.creator.id fields in matching items, but now we want to add them to
-# other matching items in a more arbitrary fashion. Items that are older or were
-# uploaded in batch did not have matching authors in the authority core, so they
-# did not benefit from that migration, for example.
+# core to cg.creator.identifier fields in matching items, but now we want to add
+# them to # other matching items in a more arbitrary fashion. Items that are ol-
+# der or were uploaded in batch did not have matching authors in the authority
+# core, so they did not benefit from that migration, for example.
 #
-# This script searches for items by author name and adds a cg.creator.id field
-# to each (assuming one does not exist). The format of the CSV file should be:
+# This script searches for items by author name and adds a cg.creator.identifier
+# field to each (assuming one does not exist). The format of the CSV file should
+# be:
 #
-# dc.contributor.author,cg.creator.id
+# dc.contributor.author,cg.creator.identifier
 # "Orth, Alan",Alan S. Orth: 0000-0002-1735-7458
 # "Orth, A.",Alan S. Orth: 0000-0002-1735-7458
 #
 # The order of authors in dc.contributor.author is respected and mirrored in the
-# new cg.creator.id fields.
+# new cg.creator.identifier fields.
 #
 # This script is written for Python 3 and requires several modules that you can
 # install with pip (I recommend setting up a Python virtual environment first):
@@ -94,7 +95,7 @@ def main():
         "--orcid-field-name",
         "-o",
         help='Name of column with creators in "Name: 0000-0000-0000-0000" format.',
-        default="cg.creator.id",
+        default="cg.creator.identifier",
     )
     args = parser.parse_args()
 
@@ -151,15 +152,15 @@ def main():
                             + Fore.RESET
                         )
 
-                    # extract cg.creator.id text to add from CSV and strip leading/trailing whitespace
+                    # extract cg.creator.identifier text to add from CSV and strip leading/trailing whitespace
                     text_value = row[args.orcid_field_name].strip()
-                    # extract the ORCID identifier from the cg.creator.id text field in the CSV
+                    # extract the ORCID identifier from the cg.creator.identifier text field in the CSV
                     orcid_identifier_pattern = re.compile(
                         r"[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}"
                     )
                     orcid_identifier_match = orcid_identifier_pattern.search(text_value)
 
-                    # sanity check to make sure we extracted the ORCID identifier from the cg.creator.id text in the CSV
+                    # sanity check to make sure we extracted the ORCID identifier from the cg.creator.identifier text in the CSV
                     if orcid_identifier_match is None:
                         if args.debug:
                             sys.stderr.write(
@@ -175,19 +176,19 @@ def main():
                     # see: https://docs.python.org/3/library/re.html
                     orcid_identifier = orcid_identifier_match.group(0)
 
-                    # iterate over results for current author name to add cg.creator.id metadata
+                    # iterate over results for current author name to add cg.creator.identifier metadata
                     for record in records_with_author_name:
                         dspace_object_id = record[0]
-                        # "place" is the order of a metadata value so we can add the cg.creator.id metadata matching the author order
+                        # "place" is the order of a metadata value so we can add the cg.creator.identifier metadata matching the author order
                         place = record[1]
                         confidence = -1
 
-                        # get the metadata_field_id for the cg.creator.id field
-                        sql = "SELECT metadata_field_id FROM metadatafieldregistry WHERE metadata_schema_id=2 AND element='creator' AND qualifier='id'"
+                        # get the metadata_field_id for the cg.creator.identifier field
+                        sql = "SELECT metadata_field_id FROM metadatafieldregistry WHERE metadata_schema_id=2 AND element='creator' AND qualifier='identifier'"
                         cursor.execute(sql)
                         metadata_field_id = cursor.fetchall()[0]
 
-                        # check if there is an existing cg.creator.id with this author's ORCID identifier for this item (without restricting the "place")
+                        # check if there is an existing cg.creator.identifier with this author's ORCID identifier for this item (without restricting the "place")
                         # note that the SQL here is quoted differently to allow us to use LIKE with % wildcards with our paremeter subsitution
                         sql = "SELECT * from metadatavalue WHERE dspace_object_id=%s AND metadata_field_id=%s AND text_value LIKE '%%' || %s || '%%' AND confidence=%s AND dspace_object_id IN (SELECT uuid FROM item)"
 
