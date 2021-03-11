@@ -1831,6 +1831,14 @@
         <stored-value>OGL-UK-3.0</stored-value>
       </pair>
       <pair>
+        <displayed-value>GNU General Public License v3.0 (GPL-3.0-only)</displayed-value>
+        <stored-value>GPL-3.0-only</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>MIT License</displayed-value>
+        <stored-value>MIT</stored-value>
+      </pair>
+      <pair>
         <displayed-value>Copyrighted; all rights reserved</displayed-value>
         <stored-value>Copyrighted; all rights reserved</stored-value>
       </pair>
