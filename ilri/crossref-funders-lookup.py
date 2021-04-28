@@ -105,7 +105,11 @@ def resolve_funders(funders):
                         )
 
                         writer.writerow(
-                            {"funder": funder, "match type": "name", "matched": "true",}
+                            {
+                                "funder": funder,
+                                "match type": "name",
+                                "matched": "true",
+                            }
                         )
 
                         # break out of the items loop because we have a match
@@ -140,7 +144,11 @@ def resolve_funders(funders):
                     )
 
                 writer.writerow(
-                    {"funder": funder, "match type": "", "matched": "false",}
+                    {
+                        "funder": funder,
+                        "match type": "",
+                        "matched": "false",
+                    }
                 )
 
     # close output file before we exit

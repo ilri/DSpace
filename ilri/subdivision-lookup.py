@@ -74,7 +74,10 @@ def resolve_subdivisions(subdivisions):
             print(f"Match for {subdivision!r}")
 
             writer.writerow(
-                {"subdivision": subdivision, "matched": "true",}
+                {
+                    "subdivision": subdivision,
+                    "matched": "true",
+                }
             )
         else:
             if args.debug:
@@ -83,7 +86,10 @@ def resolve_subdivisions(subdivisions):
                 )
 
             writer.writerow(
-                {"subdivision": subdivision, "matched": "false",}
+                {
+                    "subdivision": subdivision,
+                    "matched": "false",
+                }
             )
 
     # close output file before we exit

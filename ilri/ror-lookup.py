@@ -75,7 +75,11 @@ def resolve_organizations(organizations):
             print(f"Name match for {organization!r} in ROR)")
 
             writer.writerow(
-                {"organization": organization, "match type": "name", "matched": "true",}
+                {
+                    "organization": organization,
+                    "match type": "name",
+                    "matched": "true",
+                }
             )
         elif organization.lower() in ror_aliases:
             print(f"Alias match for {organization!r} in ROR)")
@@ -106,7 +110,11 @@ def resolve_organizations(organizations):
                 )
 
             writer.writerow(
-                {"organization": organization, "match type": "", "matched": "false",}
+                {
+                    "organization": organization,
+                    "match type": "",
+                    "matched": "false",
+                }
             )
 
     # close output file before we exit

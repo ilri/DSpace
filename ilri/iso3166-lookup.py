@@ -86,7 +86,11 @@ def resolve_countries(countries):
             print(f"Common name match for {country!r}")
 
             writer.writerow(
-                {"country": country, "match type": "common_name", "matched": "true",}
+                {
+                    "country": country,
+                    "match type": "common_name",
+                    "matched": "true",
+                }
             )
         else:
             if args.debug:
@@ -95,7 +99,11 @@ def resolve_countries(countries):
                 )
 
             writer.writerow(
-                {"country": country, "match type": "", "matched": "false",}
+                {
+                    "country": country,
+                    "match type": "",
+                    "matched": "false",
+                }
             )
 
     # close output file before we exit

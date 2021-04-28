@@ -79,7 +79,12 @@ def resolve_issns(issns):
             sys.stderr.write(Fore.GREEN + f"Looking up ISSN: {issn}\n" + Fore.RESET)
 
         request_url = "https://v2.sherpa.ac.uk/cgi/retrieve_by_id"
-        request_params = {"item-type": "publication", "format": "Json", "api-key": args.api_key, "identifier": issn}
+        request_params = {
+            "item-type": "publication",
+            "format": "Json",
+            "api-key": args.api_key,
+            "identifier": issn,
+        }
 
         try:
             request = requests.get(request_url, params=request_params)
@@ -90,13 +95,11 @@ def resolve_issns(issns):
 
         # CrossRef responds 404 if a journal isn't found, so we check for an
         # HTTP 2xx response here
-        if request.status_code == requests.codes.ok and len(data['items']) == 1:
-            print(
-                f"Exact match for {issn} in Sherpa (cached: {request.from_cache})"
-            )
+        if request.status_code == requests.codes.ok and len(data["items"]) == 1:
+            print(f"Exact match for {issn} in Sherpa (cached: {request.from_cache})")
 
             writer.writerow(
-                {"issn": issn, "journal title": data['items'][0]['title'][0]['title']}
+                {"issn": issn, "journal title": data["items"][0]["title"][0]["title"]}
             )
         else:
             if args.debug:
