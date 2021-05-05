@@ -247,7 +247,7 @@ such as authors, subject, citation, description, etc
         </xsl:if>
     </xsl:template>
     <xsl:template name="itemSummaryView-DIM-related-material">
-        <xsl:if test="dim:field[@mdschema='cg' and @element='link' ] or dim:field[@mdschema='cg' and @element='identifier' and @qualifier='dataurl' ]">
+        <xsl:if test="dim:field[@mdschema='cg' and @element='link' ] or dim:field[@mdschema='cg' and @element='identifier' and @qualifier='dataurl' ] or dim:field[@mdschema='dcterms' and @element='relation']">
             <div class="simple-item-view-description item-page-field-wrapper table">
                 <h5 class="bold">
                     <i18n:text>xmlui.dri2xhtml.METS-1.0.item-related-material</i18n:text>
@@ -1007,14 +1007,14 @@ such as authors, subject, citation, description, etc
         </xsl:if>
     </xsl:template>
     <xsl:template name="itemSummaryView-DIM-referencelink">
-        <xsl:if test="dim:field[@mdschema='cg' and @element='link' and @qualifier='reference' ]">
+        <xsl:if test="dim:field[@mdschema='dcterms' and @element='relation' ]">
             <div>
                 <span>
                     <i18n:text>xmlui.dri2xhtml.METS-1.0.item-related-reference</i18n:text>
                 </span>
 
                 <span >
-                    <xsl:for-each select="dim:field[@mdschema='cg' and @element='link' and @qualifier='reference']">
+                    <xsl:for-each select="dim:field[@mdschema='dcterms' and @element='relation']">
                         <xsl:choose>
                             <xsl:when test="node()">
                                 <a target="_blank">
@@ -1028,11 +1028,11 @@ such as authors, subject, citation, description, etc
                                 <xsl:text>&#160;</xsl:text>
                             </xsl:otherwise>
                         </xsl:choose>
-                        <xsl:if test="count(following-sibling::dim:field[@mdschema='cg' and  @element='link' and @qualifier='reference']) != 0">
+                        <xsl:if test="count(following-sibling::dim:field[@mdschema='dcterms' and  @element='relation']) != 0">
                             <xsl:text>; </xsl:text>
                         </xsl:if>
                     </xsl:for-each>
-                    <xsl:if test="count(dim:field[@mdschema='cg' and @element='link' and @qualifier='reference'] ) &gt; 1">
+                    <xsl:if test="count(dim:field[@mdschema='dcterms' and @element='relation'] ) &gt; 1">
                         <div class="spacer">&#160;</div>
                     </xsl:if>
                 </span>
