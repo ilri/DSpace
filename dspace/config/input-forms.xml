@@ -3607,6 +3607,10 @@
         <stored-value>PII-EA_CRAFT</stored-value>
       </pair>
       <pair>
+        <displayed-value>PII_EA_CSLanscapes_EU-IFAD</displayed-value>
+        <stored-value>PII_EA_CSLanscapes_EU-IFAD</stored-value>
+      </pair>
+      <pair>
         <displayed-value>PII-EA_CSV</displayed-value>
         <stored-value>PII-EA_CSV</stored-value>
       </pair>
@@ -3651,6 +3655,10 @@
         <stored-value>PII-EA_Partnerships</stored-value>
       </pair>
       <pair>
+        <displayed-value>PII_EA&amp;WA_EU-IFAD</displayed-value>
+        <stored-value>PII_EA&amp;WA_EU-IFAD</stored-value>
+      </pair>
+      <pair>
         <displayed-value>PII-FP1_CIATLAM</displayed-value>
         <stored-value>PII-FP1_CIATLAM</stored-value>
       </pair>
@@ -3675,6 +3683,10 @@
         <stored-value>PII-FP1_IMPACT</stored-value>
       </pair>
       <pair>
+        <displayed-value>PII-FP1_LP1</displayed-value>
+        <stored-value>PII-FP1_LP1</stored-value>
+      </pair>
+      <pair>
         <displayed-value>PII-FP1_PACCA</displayed-value>
         <stored-value>PII-FP1_PACCA</stored-value>
       </pair>
@@ -3683,8 +3695,16 @@
         <stored-value>PII-FP1_PACCA2</stored-value>
       </pair>
       <pair>
+        <displayed-value>PII-FP1_PCSL</displayed-value>
+        <stored-value>PII-FP1_PCSL</stored-value>
+      </pair>
+      <pair>
         <displayed-value>PII-FP1_PIRCCA</displayed-value>
         <stored-value>PII-FP1_PIRCCA</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PII-FP1_SADC</displayed-value>
+        <stored-value>PII-FP1_SADC</stored-value>
       </pair>
       <pair>
         <displayed-value>PII-FP1_Scenarios</displayed-value>
@@ -3699,6 +3719,10 @@
         <stored-value>PII-FP2_BigData</stored-value>
       </pair>
       <pair>
+        <displayed-value>PII-FP2_CitizenScience</displayed-value>
+        <stored-value>PII-FP2_CitizenScience</stored-value>
+      </pair>
+      <pair>
         <displayed-value>PII-FP2_CSAPartnerships</displayed-value>
         <stored-value>PII-FP2_CSAPartnerships</stored-value>
       </pair>
@@ -3707,16 +3731,20 @@
         <stored-value>PII-FP2_CSAScaling</stored-value>
       </pair>
       <pair>
-        <displayed-value>PII-FP2_CitizenScience</displayed-value>
-        <stored-value>PII-FP2_CitizenScience</stored-value>
-      </pair>
-      <pair>
         <displayed-value>PII-FP2_Finance</displayed-value>
         <stored-value>PII-FP2_Finance</stored-value>
       </pair>
       <pair>
+        <displayed-value>PII_FP2_LAM_D-CSA</displayed-value>
+        <stored-value>PII_FP2_LAM_D-CSA</stored-value>
+      </pair>
+      <pair>
         <displayed-value>PII-FP2_MSCCCAFS</displayed-value>
         <stored-value>PII-FP2_MSCCCAFS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PII_FP2_P4S</displayed-value>
+        <stored-value>PII_FP2_P4S</stored-value>
       </pair>
       <pair>
         <displayed-value>PII-FP2_ValueChains</displayed-value>
@@ -3791,8 +3819,20 @@
         <stored-value>PII-FP4_ClimateServicesRwanda</stored-value>
       </pair>
       <pair>
+        <displayed-value>PII_FP4_Core</displayed-value>
+        <stored-value>PII_FP4_Core</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PII-FP4_CSRD</displayed-value>
+        <stored-value>PII-FP4_CSRD</stored-value>
+      </pair>
+      <pair>
         <displayed-value>PII-FP4_ForecastingEastAfrica</displayed-value>
         <stored-value>PII-FP4_ForecastingEastAfrica</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PII-FP4_Gender_CS</displayed-value>
+        <stored-value>PII-FP4_Gender_CS</stored-value>
       </pair>
       <pair>
         <displayed-value>PII-FP4_IBFI</displayed-value>
@@ -3863,12 +3903,12 @@
         <stored-value>PII-LAM_POLITICAS</stored-value>
       </pair>
       <pair>
-        <displayed-value>PII-SA_BigDataCSA</displayed-value>
-        <stored-value>PII-SA_BigDataCSA</stored-value>
-      </pair>
-      <pair>
         <displayed-value>PII-SA_BFIPFR</displayed-value>
         <stored-value>PII-SA_BFIPFR</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PII-SA_BigDataCSA</displayed-value>
+        <stored-value>PII-SA_BigDataCSA</stored-value>
       </pair>
       <pair>
         <displayed-value>PII-SA_CaFFSA</displayed-value>
@@ -3879,12 +3919,12 @@
         <stored-value>PII-SA_CSA</stored-value>
       </pair>
       <pair>
-        <displayed-value>PII-SA_CSATool</displayed-value>
-        <stored-value>PII-SA_CSATool</stored-value>
-      </pair>
-      <pair>
         <displayed-value>PII-SA_CSA_Scale</displayed-value>
         <stored-value>PII-SA_CSA_Scale</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PII-SA_CSATool</displayed-value>
+        <stored-value>PII-SA_CSATool</stored-value>
       </pair>
       <pair>
         <displayed-value>PII-SA_IndexInsurance</displayed-value>
@@ -3919,16 +3959,16 @@
         <stored-value>PII_SEA_CSVscaling</stored-value>
       </pair>
       <pair>
-        <displayed-value>PII-SEA_EWSdiseases</displayed-value>
-        <stored-value>PII-SEA_EWSdiseases</stored-value>
-      </pair>
-      <pair>
         <displayed-value>PII-SEA_Engagement</displayed-value>
         <stored-value>PII-SEA_Engagement</stored-value>
       </pair>
       <pair>
         <displayed-value>PII-SEA_Evidenceforupscaling</displayed-value>
         <stored-value>PII-SEA_Evidenceforupscaling</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PII-SEA_EWSdiseases</displayed-value>
+        <stored-value>PII-SEA_EWSdiseases</stored-value>
       </pair>
       <pair>
         <displayed-value>PII_SEA_FoodSystems</displayed-value>
@@ -3971,12 +4011,20 @@
         <stored-value>PII-WA_AgroSylvopastoralSystems</stored-value>
       </pair>
       <pair>
+        <displayed-value>PII_WA_BigData_EU-IFAD</displayed-value>
+        <stored-value>PII_WA_BigData_EU-IFAD</stored-value>
+      </pair>
+      <pair>
         <displayed-value>PII-WA_CASCAID</displayed-value>
         <stored-value>PII-WA_CASCAID</stored-value>
       </pair>
       <pair>
         <displayed-value>PII-WA_CINSERE</displayed-value>
         <stored-value>PII-WA_CINSERE</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PII-WA_Cowpeas</displayed-value>
+        <stored-value>PII-WA_Cowpeas</stored-value>
       </pair>
       <pair>
         <displayed-value>PII-WA_CSA</displayed-value>
@@ -3991,8 +4039,8 @@
         <stored-value>PII-WA_CSV</stored-value>
       </pair>
       <pair>
-        <displayed-value>PII-WA_Cowpeas</displayed-value>
-        <stored-value>PII-WA_Cowpeas</stored-value>
+        <displayed-value>PII-WA_FAO_SIDS</displayed-value>
+        <stored-value>PII-WA_FAO_SIDS</stored-value>
       </pair>
       <pair>
         <displayed-value>PII-WA_fodderbank</displayed-value>
@@ -4003,28 +4051,12 @@
         <stored-value>PII-WA_PPP</stored-value>
       </pair>
       <pair>
+        <displayed-value>PII_WA_ValueChain_EU-IFAD</displayed-value>
+        <stored-value>PII_WA_ValueChain_EU-IFAD</stored-value>
+      </pair>
+      <pair>
         <displayed-value>PII-WA_valuechains</displayed-value>
         <stored-value>PII-WA_valuechains</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>PII-FP1_LP1</displayed-value>
-        <stored-value>PII-FP1_LP1</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>PII-FP1_PCSL</displayed-value>
-        <stored-value>PII-FP1_PCSL</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>PII-FP4_CSRD</displayed-value>
-        <stored-value>PII-FP4_CSRD</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>PII-WA_FAO_SIDS</displayed-value>
-        <stored-value>PII-WA_FAO_SIDS</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>PII-FP4_Gender_CS</displayed-value>
-        <stored-value>PII-FP4_Gender_CS</stored-value>
       </pair>
     </value-pairs>
     <value-pairs value-pairs-name="ciatproject" dc-term="ciatproject">
