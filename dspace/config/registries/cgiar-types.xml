@@ -186,12 +186,6 @@
     <dc-type>
         <schema>cg</schema>
         <element>subject</element>
-        <qualifier>iwmi</qualifier>
-    </dc-type>
-
-    <dc-type>
-        <schema>cg</schema>
-        <element>subject</element>
         <qualifier>pabra</qualifier>
         <scope_note>Pan-Africa Bean Research Alliance (PABRA) subject.</scope_note>
     </dc-type>

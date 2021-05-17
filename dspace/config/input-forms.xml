@@ -526,16 +526,6 @@
         <field>
           <dc-schema>cg</dc-schema>
           <dc-element>subject</dc-element>
-          <dc-qualifier>iwmi</dc-qualifier>
-          <repeatable>true</repeatable>
-          <label>IWMI subject</label>
-          <input-type value-pairs-name="iwmisubject">dropdown</input-type>
-          <hint></hint>
-          <required></required>
-        </field>
-        <field>
-          <dc-schema>cg</dc-schema>
-          <dc-element>subject</dc-element>
           <dc-qualifier>pabra</dc-qualifier>
           <repeatable>true</repeatable>
           <label>PABRA subject</label>
@@ -1861,24 +1851,6 @@
       <pair>
         <displayed-value>Other</displayed-value>
         <stored-value>Other</stored-value>
-      </pair>
-    </value-pairs>
-    <value-pairs value-pairs-name="iwmisubject" dc-term="iwmisubject">
-      <pair>
-        <displayed-value>WELLS</displayed-value>
-        <stored-value>WELLS</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>IRRIGATED FARMING</displayed-value>
-        <stored-value>IRRIGATED FARMING</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>CROP PRODUCTION</displayed-value>
-        <stored-value>CROP PRODUCTION</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>DRILLING</displayed-value>
-        <stored-value>DRILLING</stored-value>
       </pair>
     </value-pairs>
     <value-pairs value-pairs-name="pabrasubject" dc-term="pabrasubject">
