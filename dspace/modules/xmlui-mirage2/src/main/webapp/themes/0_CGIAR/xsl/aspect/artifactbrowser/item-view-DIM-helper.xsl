@@ -420,7 +420,6 @@ such as authors, subject, citation, description, etc
         or dim:field[@mdschema='cg' and @element='subject' and @qualifier='cifor']
         or dim:field[@mdschema='cg' and @element='subject' and @qualifier='cpwf']
         or dim:field[@mdschema='cg' and @element='subject' and @qualifier='ilri']
-        or dim:field[@mdschema='cg' and @element='subject' and @qualifier='iwmi']
         or dim:field[@mdschema='cg' and @element='subject' and @qualifier='alliancebiovciat']
         or dim:field[@mdschema='cg' and @element='subject' and @qualifier='bioversity']
         or dim:field[@mdschema='cg' and @element='subject' and @qualifier='ciat']
@@ -453,7 +452,6 @@ such as authors, subject, citation, description, etc
                     <xsl:call-template name="icardasubject"/>
                     <xsl:call-template name="iitasubject"/>
                     <xsl:call-template name="ilrisubject"/>
-                    <xsl:call-template name="iwmisubject"/>
                     <xsl:call-template name="systemsubject"/>
                     <!-- the last template called should not output ";" at the end -->
                     <xsl:call-template name="wlesubject"/>
@@ -511,16 +509,6 @@ such as authors, subject, citation, description, etc
             <xsl:for-each select="dim:field[@mdschema='cg' and @element='subject' and @qualifier='ilri']">
                 <xsl:call-template name="discovery-link">
                     <xsl:with-param name="filtertype" select="'ilrisubject'"/>
-                </xsl:call-template>
-                    <xsl:text>; </xsl:text>
-            </xsl:for-each>
-        </xsl:if>
-    </xsl:template>
-    <xsl:template name="iwmisubject">
-        <xsl:if test="dim:field[@mdschema='cg' and @element='subject' and @qualifier='iwmi']">
-            <xsl:for-each select="dim:field[@mdschema='cg' and @element='subject' and @qualifier='iwmi']">
-                <xsl:call-template name="discovery-link">
-                    <xsl:with-param name="filtertype" select="'iwmisubject'"/>
                 </xsl:call-template>
                     <xsl:text>; </xsl:text>
             </xsl:for-each>

@@ -108,7 +108,6 @@
 	<message key="xmlui.ArtifactBrowser.AdvancedSearch.type_cpwfsubject">CPWF subjects</message>
 	<message key="xmlui.ArtifactBrowser.AdvancedSearch.type_ccafsubject">CCAFS subjects</message>
 	<message key="xmlui.ArtifactBrowser.AdvancedSearch.type_ciforsubject">CIFOR subjects</message>
-	<message key="xmlui.ArtifactBrowser.AdvancedSearch.type_iwmisubject">IWMI subjects</message>
 	<message key="xmlui.ArtifactBrowser.AdvancedSearch.type_subregion">Subregions</message>
     <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_crpsubject">CGIAR Research Programs</message>
     <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_sdg">SDG contributions</message>
@@ -178,7 +177,6 @@
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.cpwfsubject.column_heading">CPWF subject</message>
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.ccafsubject.column_heading">CCAFS subject</message>
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.ciforsubject.column_heading">CIFOR subject</message>
-	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.iwmisubject.column_heading">IWMI subject</message>
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.ctasubject.column_heading">CTA subject</message>
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.wlesubject.column_heading">WLE subject</message>
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.alliancebiovciatsubject.column_heading">Alliance Bioversity–CIAT subject</message>
@@ -228,8 +226,6 @@
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.trail.metadata.ciforsubject">Browsing {0} by CIFOR subject</message>
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.title.metadata.ciforsubject">Browsing {0} by CIFOR subject {1}</message>
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.trail.metadata.ciforsubject">Browsing {0} by CIFOR subject</message>
-	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.title.metadata.iwmisubject">Browsing {0} by IWMI subject{1}</message>
-	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.trail.metadata.iwmisubject">Browsing {0} by IWMI subject</message>
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.title.metadata.subregion">Browsing {0} by Subregion {1}</message>
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.trail.metadata.subregion">Browsing {0} by Subregion</message>
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.title.metadata.crpsubject">Browsing {0} by CGIAR Research Program {1}</message>
@@ -364,7 +360,6 @@
 	<message key="xmlui.ArtifactBrowser.Navigation.browse_cpwfsubject">By CPWF subject</message>
 	<message key="xmlui.ArtifactBrowser.Navigation.browse_ccafsubject">By CCAFS subject</message>
 	<message key="xmlui.ArtifactBrowser.Navigation.browse_ciforsubject">By CIFOR subject</message>
-	<message key="xmlui.ArtifactBrowser.Navigation.browse_iwmisubject">By IWMI subject</message>
 	<message key="xmlui.ArtifactBrowser.Navigation.browse_ctasubject">By CTA subject</message>
 	<message key="xmlui.ArtifactBrowser.Navigation.browse_wlesubject">By WLE subject</message>
 	<message key="xmlui.ArtifactBrowser.Navigation.browse_alliancebiovciatsubject">By Alliance Bioversity–CIAT subject</message>
@@ -404,7 +399,6 @@
 	<message key="xmlui.ArtifactBrowser.SimpleSearch.filter.ctasubject">CTA subject</message>
 	<message key="xmlui.ArtifactBrowser.SimpleSearch.filter.humidtropics">Humidtropics subject</message>
 	<message key="xmlui.ArtifactBrowser.SimpleSearch.filter.ilrisubject">ILRI subject</message>
-	<message key="xmlui.ArtifactBrowser.SimpleSearch.filter.iwmisubject">IWMI subject</message>
 	<message key="xmlui.ArtifactBrowser.SimpleSearch.filter.wlesubject">WLE subject</message>
 	<message key="xmlui.ArtifactBrowser.SimpleSearch.filter.iitasubject">IITA subject</message>
 	<message key="xmlui.ArtifactBrowser.SimpleSearch.filter.status">Status</message>
@@ -2685,7 +2679,6 @@
     <!-- CGSpace custom XMLUI strings -->
     <!-- Discovery filter headings (after "View more") -->
     <message key="xmlui.Discovery.AbstractSearch.type_wlesubject">Filter by: WLE subject</message>
-    <message key="xmlui.Discovery.AbstractSearch.type_iwmisubject">Filter by: IWMI subject</message>
     <message key="xmlui.Discovery.AbstractSearch.type_ilrisubject">Filter by: ILRI subject</message>
     <message key="xmlui.Discovery.AbstractSearch.type_ctasubject">Filter by: CTA subject</message>
     <message key="xmlui.Discovery.AbstractSearch.type_cpwfsubject">Filter by: CPWF subject</message>
@@ -2731,7 +2724,6 @@
     <message key="xmlui.reporting-suite.statistics.graph-editor.data-source.dataset.option.cpwfsubject">CPWF subject</message>
     <message key="xmlui.reporting-suite.statistics.graph-editor.data-source.dataset.option.ccafsubject">CCAFS subject</message>
     <message key="xmlui.reporting-suite.statistics.graph-editor.data-source.dataset.option.ciforsubject">CIFOR subject</message>
-    <message key="xmlui.reporting-suite.statistics.graph-editor.data-source.dataset.option.iwmisubject">IWMI subject</message>
     <message key="xmlui.reporting-suite.statistics.graph-editor.data-source.dataset.option.region">Region</message>
     <message key="xmlui.reporting-suite.statistics.graph-editor.data-source.dataset.option.country">Country</message>
     <message key="xmlui.reporting-suite.statistics.graph-editor.data-source.dataset.option.subregion">Subregion</message>
