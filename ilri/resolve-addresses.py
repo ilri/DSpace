@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 #
-# resolve-addresses.py 0.4.0
+# resolve-addresses.py 0.4.1
 #
-# Copyright 2019—2020 Alan Orth.
+# Copyright 2019—2021 Alan Orth.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
