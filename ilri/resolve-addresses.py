@@ -151,9 +151,13 @@ def resolve_addresses(addresses):
 
             writer.writerow(row)
 
+        # check if we hit IPAPI's rate limit
+        elif request.status_code == 429:
+            sys.stderr.write(Fore.RED + "Error: hit IPAPI rate limit.\n" + Fore.RESET)
+            exit(1)
         # if request status not 200 OK
         else:
-            sys.stderr.write(Fore.RED + "Error: request failed.\n" + Fore.RESET)
+            sys.stderr.write(Fore.RED + f"Error: request failed ({request.status_code}).\n" + Fore.RESET)
             exit(1)
 
     # close output file before we exit
