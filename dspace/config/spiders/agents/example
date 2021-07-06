@@ -63,11 +63,12 @@ convera
 core
 Cortana
 CoverScout
+crusty\/\d
 curl\/
 cursor
 custo
 DataCha0s\/2\.0
-daumoa
+daum(oa)?
 ^\%?default\%?$
 DeuSu\/
 Dispatch\/\d
@@ -189,6 +190,7 @@ nagios
 ^NetAnts\/\d
 netcraft
 netluchs
+newspaper\/\d
 ng\/2\.
 ^Ning\/\d
 no_user_agent
@@ -235,11 +237,13 @@ ScoutJet
 ^scrutiny\/\d
 SearchBloxIntra
 shoutcast
+Site24x7
 SkypeUriPreview
 slurp
 sogou
 speedy
 sqlmap
+SrceDAMP
 Strider
 summify
 sunrise
@@ -251,6 +255,7 @@ Teoma
 The\+Knowledge\+AI
 titan
 ^Traackr\.com$
+Trello
 Trove
 Turnitin
 twiceler
@@ -286,6 +291,7 @@ webreaper
 WebStripper
 WebZIP
 Wget
+WhatsApp
 wordpress
 worm
 www\.gnip\.com
