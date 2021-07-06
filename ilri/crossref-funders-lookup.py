@@ -69,7 +69,7 @@ def resolve_funders(funders):
     requests_cache.install_cache("crossref-response-cache", expire_after=expire_after)
 
     # prune old cache entries
-    requests_cache.core.remove_expired_responses()
+    requests_cache.remove_expired_responses()
 
     for funder in funders:
 

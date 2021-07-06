@@ -138,7 +138,7 @@ def resolve_orcid_identifiers(orcids):
     )
 
     # prune old cache entries
-    requests_cache.core.remove_expired_responses()
+    requests_cache.remove_expired_responses()
 
     # iterate through our ORCID iDs and fetch their names from the ORCID API
     for orcid in orcids:

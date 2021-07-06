@@ -98,7 +98,7 @@ def resolve_addresses(addresses):
     )
 
     # prune old cache entries
-    requests_cache.core.remove_expired_responses()
+    requests_cache.remove_expired_responses()
 
     # iterate through our addresses
     for address in addresses:
