@@ -106,16 +106,22 @@ def resolve_addresses(addresses):
 
         # Look up IP information in the City database
         with geoip2.database.Reader("/var/lib/GeoIP/GeoLite2-City.mmdb") as reader:
-            response = reader.city(address)
+            try:
+                response = reader.city(address)
 
-            address_country = response.country.iso_code
+                address_country = response.country.iso_code
+            except geoip2.errors.AddressNotFoundError:
+                pass
 
         # Look up organization information in the ASN database
         with geoip2.database.Reader("/var/lib/GeoIP/GeoLite2-ASN.mmdb") as reader:
-            response = reader.asn(address)
+            try:
+                response = reader.asn(address)
 
-            address_org = response.autonomous_system_organization
-            address_asn = response.autonomous_system_number
+                address_org = response.autonomous_system_organization
+                address_asn = response.autonomous_system_number
+            except geoip2.errors.AddressNotFoundError:
+                pass
 
         row = {
             "ip": address,
