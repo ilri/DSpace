@@ -83,9 +83,9 @@ def read_addresses_from_file():
 def resolve_addresses(addresses):
 
     if args.abuseipdb_api_key:
-        fieldnames = ["ip", "org", "asn", "country", "abuseConfidenceScore"]
+        fieldnames = ["ip", "org", "network", "asn", "country", "abuseConfidenceScore"]
     else:
-        fieldnames = ["ip", "org", "asn", "country"]
+        fieldnames = ["ip", "org", "network", "asn", "country"]
 
     writer = csv.DictWriter(args.output_file, fieldnames=fieldnames)
     writer.writeheader()
@@ -119,13 +119,18 @@ def resolve_addresses(addresses):
                 response = reader.asn(address)
 
                 address_org = response.autonomous_system_organization
+                address_net = response.network
                 address_asn = response.autonomous_system_number
             except geoip2.errors.AddressNotFoundError:
+                if args.debug:
+                    sys.stderr.write(Fore.YELLOW + "→ IP not in database.\n" + Fore.RESET)
+
                 pass
 
         row = {
             "ip": address,
             "org": address_org,
+            "network": address_net,
             "asn": address_asn,
             "country": address_country,
         }
