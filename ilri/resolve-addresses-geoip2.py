@@ -123,7 +123,9 @@ def resolve_addresses(addresses):
                 address_asn = response.autonomous_system_number
             except geoip2.errors.AddressNotFoundError:
                 if args.debug:
-                    sys.stderr.write(Fore.YELLOW + "→ IP not in database.\n" + Fore.RESET)
+                    sys.stderr.write(
+                        Fore.YELLOW + "→ IP not in database.\n" + Fore.RESET
+                    )
 
                 pass
 

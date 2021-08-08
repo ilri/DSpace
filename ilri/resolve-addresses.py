@@ -157,7 +157,11 @@ def resolve_addresses(addresses):
             exit(1)
         # if request status not 200 OK
         else:
-            sys.stderr.write(Fore.RED + f"Error: request failed ({request.status_code}).\n" + Fore.RESET)
+            sys.stderr.write(
+                Fore.RED
+                + f"Error: request failed ({request.status_code}).\n"
+                + Fore.RESET
+            )
             exit(1)
 
     # close output file before we exit
