@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# generate-thumbnails.py 1.1.2
+# generate-thumbnails.py 1.1.3
 #
 # Copyright 2018–2021 Alan Orth.
 #
@@ -20,24 +20,26 @@
 # ---
 
 # Reads the filename and URL fields from a CSV, fetches the PDF, and generates
-# a thumbnail using GraphicsMagick (must be installed on the host).
+# a thumbnail using pyvips (libvips must be installed on the host).
 #
 # This script is written for Python 3 and requires several modules that you can
 # install with pip (I recommend setting up a Python virtual environment first):
 #
-#   $ pip install colorama requests
+#   $ pip install colorama requests pyvips
 #
 # See: https://requests.readthedocs.org/en/master
 
 import argparse
-from colorama import Fore
 import csv
 import os.path
 import re
-import requests
 import signal
 import subprocess
 import sys
+
+import pyvips
+import requests
+from colorama import Fore
 
 
 def signal_handler(signal, frame):
@@ -106,11 +108,17 @@ if args.url_field_name not in reader.fieldnames:
     )
     sys.exit(1)
 
-# Process thumbnails from filename.pdf to filename.jpg using GraphicsMagick
-# and Ghostscript. Equivalent to the following shell invocation:
+# Process thumbnails from filename.pdf to filename.jpg using libvips. Equivalent
+# to the following shell invocation:
 #
-#   gm convert -quality 85 -thumbnail x400 -flatten 64661.pdf\[0\] cover.jpg
+#    vipsthumbnail 64661.pdf -s 600 -o '%s.jpg[Q=85,optimize_coding,strip]'
 #
+# vips is faster than GraphicsMagick/ImageMagick, uses less memory, and seems
+# to generate better quality images. Note that libvips uses poppler instead of
+# Ghostscript, which means that CMYK colorspace is not supported. We might need
+# to do something about that...
+#
+# See: https://github.com/libvips/libvips/issues/379
 def create_thumbnail(row):
 
     filename = row[args.filename_field_name]
@@ -129,19 +137,10 @@ def create_thumbnail(row):
             )
     else:
         print(Fore.GREEN + f"> Creating thumbnail for {filename}..." + Fore.RESET)
-        subprocess.run(
-            [
-                "gm",
-                "convert",
-                "-quality",
-                "85",
-                "-thumbnail",
-                "x400",
-                "-flatten",
-                filename + "[0]",
-                thumbnail,
-            ]
-        )
+        vips_image = pyvips.Image.new_from_file(filename, access="sequential")
+        # Set max height to 600px
+        vips_thumbnail = vips_image.thumbnail_image(600)
+        vips_thumbnail.jpegsave(thumbnail, Q=85, optimize_coding=True, strip=True)
 
     return
 
