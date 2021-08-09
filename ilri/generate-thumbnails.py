@@ -115,6 +115,7 @@ def create_thumbnail(row):
 
     filename = row[args.filename_field_name]
     thumbnail = os.path.splitext(filename)[0] + ".jpg"
+    # check if the file has been downloaded
     if not os.path.isfile(filename):
         if args.debug:
             print(Fore.YELLOW + "> Missing {}.\n".format(filename) + Fore.RESET)
