@@ -115,13 +115,17 @@ def create_thumbnail(row):
 
     filename = row[args.filename_field_name]
     thumbnail = os.path.splitext(filename)[0] + ".jpg"
+    if not os.path.isfile(filename):
+        if args.debug:
+            print(Fore.YELLOW + "> Missing {}.\n".format(filename) + Fore.RESET)
     # check if we already have a thumbnail
-    if os.path.isfile(thumbnail) and args.debug:
-        print(
-            Fore.YELLOW
-            + "> Thumbnail for {} already exists.\n".format(filename)
-            + Fore.RESET
-        )
+    elif os.path.isfile(thumbnail):
+        if args.debug:
+            print(
+                Fore.YELLOW
+                + "> Thumbnail for {} already exists.\n".format(filename)
+                + Fore.RESET
+            )
     else:
         print(
             Fore.GREEN + "> Creating thumbnail for {}...".format(filename) + Fore.RESET
