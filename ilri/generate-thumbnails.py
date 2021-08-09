@@ -173,7 +173,7 @@ def download_bitstream(row):
             else:
                 print(
                     Fore.RED
-                    + "> Download failed, I will try again next time."
+                    + f"> Download failed (HTTP {response.status_code}), I will try again next time."
                     + Fore.RESET
                 )
 
