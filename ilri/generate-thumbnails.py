@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 #
-# generate-thumbnails.py 1.1.1
+# generate-thumbnails.py 1.1.2
 #
-# Copyright 2018 Alan Orth.
+# Copyright 2018–2021 Alan Orth.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -124,7 +124,7 @@ def create_thumbnail(row):
         )
     else:
         print(
-            Fore.Green + "> Creating thumbnail for {}...".format(filename) + Fore.RESET
+            Fore.GREEN + "> Creating thumbnail for {}...".format(filename) + Fore.RESET
         )
         subprocess.run(
             [
