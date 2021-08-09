@@ -147,6 +147,7 @@ def create_thumbnail(row):
 
 
 def download_bitstream(row):
+    request_headers = {"user-agent": "CGSpace PDF bot"}
 
     # some records have multiple URLs separated by "||"
     pattern = re.compile(r"\|\|")
@@ -165,7 +166,7 @@ def download_bitstream(row):
             if args.debug:
                 print(Fore.GREEN + f"> Downloading {filename}..." + Fore.RESET)
 
-            response = requests.get(url, stream=True)
+            response = requests.get(url, headers=request_headers, stream=True)
             if response.status_code == 200:
                 with open(filename, "wb") as fd:
                     for chunk in response:
