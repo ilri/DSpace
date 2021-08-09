@@ -124,13 +124,11 @@ def create_thumbnail(row):
         if args.debug:
             print(
                 Fore.YELLOW
-                + "> Thumbnail for {} already exists.\n".format(filename)
+                + f"> Thumbnail for {filename} already exists.\n"
                 + Fore.RESET
             )
     else:
-        print(
-            Fore.GREEN + "> Creating thumbnail for {}...".format(filename) + Fore.RESET
-        )
+        print(Fore.GREEN + f"> Creating thumbnail for {filename}..." + Fore.RESET)
         subprocess.run(
             [
                 "gm",
@@ -156,20 +154,16 @@ def download_bitstream(row):
     filenames = pattern.split(row[args.filename_field_name])
     for url, filename in zip(urls, filenames):
         if args.debug:
-            print("URL: {}".format(url))
-            print("File: {}".format(filename))
+            print(f"URL: {url}")
+            print(f"File: {filename}")
 
         # check if file exists
         if os.path.isfile(filename):
             if args.debug:
-                print(
-                    Fore.YELLOW
-                    + "> {} already downloaded.".format(filename)
-                    + Fore.RESET
-                )
+                print(Fore.YELLOW + f"> {filename} already downloaded." + Fore.RESET)
         else:
             if args.debug:
-                print(Fore.GREEN + "> Downloading {}...".format(filename) + Fore.RESET)
+                print(Fore.GREEN + f"> Downloading {filename}..." + Fore.RESET)
 
             response = requests.get(url, stream=True)
             if response.status_code == 200:
