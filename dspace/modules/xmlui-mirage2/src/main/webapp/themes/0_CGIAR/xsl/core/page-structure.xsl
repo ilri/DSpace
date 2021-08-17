@@ -279,6 +279,9 @@
                     <xsl:when test="starts-with($request-uri, 'page/privacy')">
                         <i18n:text>xmlui.mirage2.page-structure.privacyStatement</i18n:text>
                     </xsl:when>
+                    <xsl:when test="starts-with($request-uri, 'page/policies')">
+                        <i18n:text>xmlui.mirage2.page-structure.policy-statements</i18n:text>
+                    </xsl:when>
                     <xsl:when test="not($page_title)">
                         <xsl:text>  </xsl:text>
                     </xsl:when>
@@ -713,6 +716,15 @@
                             <xsl:attribute name="href">
                                 <xsl:value-of
                                         select="/dri:document/dri:meta/dri:pageMeta/dri:metadata[@element='contextPath'][not(@qualifier)]"/>
+                                <xsl:text>/page/policies</xsl:text>
+                            </xsl:attribute>
+
+                            <i18n:text>xmlui.dri2xhtml.structural.policies-link</i18n:text>
+                        </a>
+                        <a>
+                            <xsl:attribute name="href">
+                                <xsl:value-of
+                                        select="/dri:document/dri:meta/dri:pageMeta/dri:metadata[@element='contextPath'][not(@qualifier)]"/>
                                 <xsl:text>/feedback</xsl:text>
                             </xsl:attribute>
                             <i18n:text>xmlui.dri2xhtml.structural.feedback-link</i18n:text>
@@ -901,6 +913,73 @@ International Livestock Research Institute (ILRI)<br />
 Headquarters Nairobi Kenya P.O Box 30709-00100<br />
 <a href="mailto:ILRIdataprivacysupport@cgiar.org">ILRIdataprivacysupport@cgiar.org</a>
                         </address>
+                    </div>
+                </xsl:when>
+                <xsl:when test="starts-with($request-uri, 'page/policies')">
+                    <div class="hero-unit">
+                    <h2>Policy Statements</h2>
+                    <ul>
+                        <li>
+                            <strong>Metadata Policy</strong> (for information describing items in the repository)
+                            <ul>
+                                <li>Anyone may access the metadata free of charge.</li>
+                                <li>The metadata may be re-used in any medium without prior permission for not-for-profit purposes provided the OAI Identifier or a link to the original metadata record are given.</li>
+                                <li>The metadata must not be re-used in any medium for commercial purposes without formal permission.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Data Policy</strong> (for full-text and other full data items)
+                            <ul>
+                                <li>Anyone may access full items free of charge.</li>
+                                <li>Single copies of full items can be reproduced, and displayed or performed in any format or medium for personal research or study, educational, or not-for-profit purposes without prior permission or charge.</li>
+                                <li>Full items must not be sold commercially in any format or medium without formal permission of the copyright holders.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Content Policy</strong> (for document types and datasets)
+                            <ul>
+                                <li>This is an institutional or departmental repository OR Multi-institution subject-based repository [list subjects]:</li>
+                                <li>The repository holds all types of items OR The repository only permits the following item types [list]</li>
+                                <li>All items are individually tagged with their peer-review status and publication status.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Submission Policy</strong> (concerning depositors, quality and copyright)
+                            <ul>
+                                <li>Items may only be deposited by accredited members of the organisation, or their delegated agents.</li>
+                                <li>Authors may only submit their own work for archiving.</li>
+                                <li>The administrator only vets items for the exclusion of spam</li>
+                                <li>The validity and authenticity of the content of submissions is the sole responsibility of the depositor.</li>
+                                <li>Items may not be deposited until any publishers' or funders' embargo period has expired.</li>
+                                <li>Any copyright violations are entirely the responsibility of the authors/depositors.</li>
+                                <li>If the repository receives proof of copyright violation, the relevant item will be removed immediately.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Preservation Policy</strong>
+                            <ul>
+                                <li>Items will be retained indefinitely.</li>
+                                <li>The repository will try to ensure continued readability and accessibility.</li>
+                                <li>The repository regularly backs up its files according to current best practice.</li>
+                                <li>Items may not normally be removed from the repository.</li>
+                                <li>
+                                    Acceptable reasons for withdrawal include:
+                                    <ul>
+                                        <li>Proven copyright violation or plagiarism</li>
+                                        <li>Legal requirements and proven violations</li>
+                                        <li>National Security</li>
+                                        <li>Falsified research</li>
+                                    </ul>
+                                </li>
+                                <li>Withdrawn items are not deleted per se, but are removed from public view.</li>
+                                <li>Withdrawn items' identifiers/URLs are retained indefinitely.</li>
+                                <li>URLs will continue to point to 'tombstone' citations, to avoid broken links and to retain item histories.</li>
+                                <li>Changes to deposited items are not permitted.</li>
+                                <li>If necessary, an updated version may be deposited.</li>
+                                <li>In the event of the repository being closed down, the database will be transferred to another appropriate archive.</li>
+                            </ul>
+                        </li>
+                    </ul>
                     </div>
                 </xsl:when>
                 <!-- Otherwise use default handling of body -->
