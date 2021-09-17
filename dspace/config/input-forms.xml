@@ -76,7 +76,7 @@
           <repeatable>true</repeatable>
           <label>Authorship types</label>
           <input-type value-pairs-name="Authorship_types">dropdown</input-type>
-          <hint>Characterize the entire authorship based on author affilations.</hint>
+          <hint>Characterize the entire authorship based on author affiliations.</hint>
           <required></required>
         </field>
         <field>
