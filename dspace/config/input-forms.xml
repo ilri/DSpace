@@ -275,9 +275,9 @@
           <dc-element>identifier</dc-element>
           <dc-qualifier>googleurl</dc-qualifier>
           <repeatable>false</repeatable>
-          <label>Google book URL</label>
+          <label>Google Books URL</label>
           <input-type>onebox</input-type>
-          <hint>Enter a full URL for the item.</hint>
+          <hint>Please enter the full URL, for example: https://books.google.com/books?id=_2pXvT6SMSMC</hint>
           <required></required>
         </field>
         <field>
