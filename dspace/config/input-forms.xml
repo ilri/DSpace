@@ -688,7 +688,7 @@
           <repeatable>true</repeatable>
           <label>Species</label>
           <input-type>twobox</input-type>
-          <hint>Enter scientific name of organism, plant, animal, etc if it is a main focus of the item, for example: Lablab purpureus; Bos Taurus; Oryza sativa; Theileria parva)</hint>
+          <hint>Enter scientific name of organism, plant, animal, etc if it is a main focus of the item, for example: Lablab purpureus, Bos Taurus, Oryza sativa, Theileria parva</hint>
           <required></required>
         </field>
         <field>
@@ -696,7 +696,7 @@
           <dc-element>species</dc-element>
           <dc-qualifier>breed</dc-qualifier>
           <repeatable>true</repeatable>
-          <label>Animal breed type</label>
+          <label>Animal breed</label>
           <input-type>onebox</input-type>
           <vocabulary>cg-species-breed</vocabulary>
           <required></required>
