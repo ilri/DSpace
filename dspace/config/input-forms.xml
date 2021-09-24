@@ -6351,44 +6351,48 @@
     </value-pairs>
     <value-pairs value-pairs-name="TARGET_AUDIENCE" dc-term="audience">
       <pair>
-        <displayed-value>SCIENTISTS</displayed-value>
-        <stored-value>SCIENTISTS</stored-value>
+        <displayed-value>Academicians</displayed-value>
+        <stored-value>Academicians</stored-value>
       </pair>
       <pair>
-        <displayed-value>ACADEMICS</displayed-value>
-        <stored-value>ACADEMICS</stored-value>
+        <displayed-value>Academics</displayed-value>
+        <stored-value>Academics</stored-value>
       </pair>
       <pair>
         <displayed-value>CGIAR</displayed-value>
         <stored-value>CGIAR</stored-value>
       </pair>
       <pair>
-        <displayed-value>DEVELOPMENT PRACTITIONERS</displayed-value>
-        <stored-value>DEVELOPMENT PRACTITIONERS</stored-value>
+        <displayed-value>Development Practitioners</displayed-value>
+        <stored-value>Development Practitioners</stored-value>
       </pair>
       <pair>
-        <displayed-value>DONORS</displayed-value>
-        <stored-value>DONORS</stored-value>
+        <displayed-value>Donors</displayed-value>
+        <stored-value>Donors</stored-value>
       </pair>
       <pair>
-        <displayed-value>EXTENSION</displayed-value>
-        <stored-value>EXTENSION</stored-value>
+        <displayed-value>Extension</displayed-value>
+        <stored-value>Extension</stored-value>
       </pair>
       <pair>
-        <displayed-value>FARMERS</displayed-value>
-        <stored-value>FARMERS</stored-value>
+        <displayed-value>Farmers</displayed-value>
+        <stored-value>Farmers</stored-value>
       </pair>
       <pair>
-        <displayed-value>NGOS</displayed-value>
-        <stored-value>NGOS</stored-value>
+        <displayed-value>General Public</displayed-value>
+        <stored-value>General Public</stored-value>
       </pair>
       <pair>
-        <displayed-value>POLICY MAKERS</displayed-value>
-        <stored-value>POLICY MAKERS</stored-value>
+        <displayed-value>NGOs</displayed-value>
+        <stored-value>NGOs</stored-value>
       </pair>
       <pair>
-        <displayed-value>GENERAL PUBLIC</displayed-value>
-        <stored-value>GENERAL PUBLIC</stored-value>
+        <displayed-value>Policy Makers</displayed-value>
+        <stored-value>Policy Makers</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Scientists</displayed-value>
+        <stored-value>Scientists</stored-value>
       </pair>
     </value-pairs>
   </form-value-pairs>
