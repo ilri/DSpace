@@ -297,7 +297,7 @@
           <repeatable>false</repeatable>
           <label>Document Object Identifier (DOI)</label>
           <input-type>onebox</input-type>
-          <hint>Enter the full address (append https://dx.doi.org/ before the DOI).</hint>
+          <hint>Enter the full address (append https://doi.org/ before the DOI).</hint>
           <required></required>
         </field>
         <field>
