@@ -332,6 +332,16 @@
         </field>
         <field>
           <dc-schema>cg</dc-schema>
+          <dc-element>subject</dc-element>
+          <dc-qualifier>actionArea</dc-qualifier>
+          <repeatable>true</repeatable>
+          <label>CGIAR Action Areas</label>
+          <input-type value-pairs-name="actionAreas">dropdown</input-type>
+          <hint>Select any CGIAR Action Areas associated with this item.</hint>
+          <required></required>
+        </field>
+        <field>
+          <dc-schema>cg</dc-schema>
           <dc-element>coverage</dc-element>
           <dc-qualifier>country</dc-qualifier>
           <repeatable>true</repeatable>
@@ -2977,6 +2987,20 @@
       <pair>
         <displayed-value>Poverty reduction, livelihoods and jobs</displayed-value>
         <stored-value>Poverty reduction, livelihoods and jobs</stored-value>
+      </pair>
+    </value-pairs>
+    <value-pairs value-pairs-name="actionAreas">
+      <pair>
+        <displayed-value>Genetic Innovation</displayed-value>
+        <stored-value>Genetic Innovation</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Resilient Agrifood Systems</displayed-value>
+        <stored-value>Resilient Agrifood Systems</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Systems Transformation</displayed-value>
+        <stored-value>Systems Transformation</stored-value>
       </pair>
     </value-pairs>
     <value-pairs value-pairs-name="ccafsubject" dc-term="ccafsubject">
