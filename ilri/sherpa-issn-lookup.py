@@ -65,10 +65,9 @@ def resolve_issns(issns):
     writer = csv.DictWriter(args.output_file, fieldnames=fieldnames)
     writer.writeheader()
 
-    # enable transparent request cache with two weeks expiry because I don't
-    # know how often Crossref is updated.
+    # enable transparent request cache with two weeks expiry
     expire_after = timedelta(days=14)
-    requests_cache.install_cache("sherpa-response-cache", expire_after=expire_after)
+    requests_cache.install_cache("requests-cache", expire_after=expire_after)
 
     # prune old cache entries
     requests_cache.remove_expired_responses()

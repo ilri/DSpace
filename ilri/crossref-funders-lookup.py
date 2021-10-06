@@ -66,7 +66,7 @@ def resolve_funders(funders):
     # enable transparent request cache with two weeks expiry because I don't
     # know how often Crossref is updated.
     expire_after = timedelta(days=14)
-    requests_cache.install_cache("crossref-response-cache", expire_after=expire_after)
+    requests_cache.install_cache("requests-cache", expire_after=expire_after)
 
     # prune old cache entries
     requests_cache.remove_expired_responses()

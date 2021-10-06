@@ -130,11 +130,11 @@ def resolve_orcid_identifiers(orcids):
     orcid_api_base_url = "https://pub.orcid.org/v2.1/"
     orcid_api_endpoint = "/person"
 
-    # enable transparent request cache with 24 hour expiry
-    expire_after = timedelta(hours=72)
+    # enable transparent request cache with thirty-day expiry
+    expire_after = timedelta(days=30)
     # cache HTTP 200 and 404 responses, because ORCID uses HTTP 404 when an identifier doesn't exist
     requests_cache.install_cache(
-        "orcid-response-cache", expire_after=expire_after, allowable_codes=(200, 404)
+        "requests-cache", expire_after=expire_after, allowable_codes=(200, 404)
     )
 
     # prune old cache entries

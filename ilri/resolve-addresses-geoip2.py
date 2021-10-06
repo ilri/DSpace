@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# resolve-addresses-geoip2.py 0.0.1
+# resolve-addresses-geoip2.py 0.0.2
 #
 # Copyright 2019—2021 Alan Orth.
 #
@@ -106,11 +106,11 @@ def resolve_addresses(addresses):
     writer = csv.DictWriter(args.output_file, fieldnames=fieldnames)
     writer.writeheader()
 
-    # enable transparent request cache with thirty day expiry
+    # enable transparent request cache with thirty-day expiry
     expire_after = timedelta(days=30)
     # cache HTTP 200 responses
     requests_cache.install_cache(
-        "resolve-addresses-response-cache",
+        "requests-cache",
         expire_after=expire_after,
         allowable_codes=(200, 404),
     )

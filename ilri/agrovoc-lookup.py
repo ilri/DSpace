@@ -67,7 +67,7 @@ def resolve_subjects(subjects):
     # enable transparent request cache with thirty days expiry, as AGROVOC only
     # makes new releases monthly so this should be safe.
     expire_after = timedelta(days=30)
-    requests_cache.install_cache("agrovoc-response-cache", expire_after=expire_after)
+    requests_cache.install_cache("requests-cache", expire_after=expire_after)
 
     # prune old cache entries
     requests_cache.remove_expired_responses()

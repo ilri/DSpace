@@ -119,12 +119,12 @@ def resolve_orcid_identifier(args, orcid):
             + Fore.RESET
         )
 
-    # enable transparent request cache with 36 hour expiry
-    expire_after = timedelta(hours=36)
+    # enable transparent request cache with thirty-day expiry
+    expire_after = timedelta(days=30)
 
     # cache HTTP 200 and 404 responses, because ORCID uses HTTP 404 when an identifier doesn't exist
     requests_cache.install_cache(
-        "orcid-response-cache", expire_after=expire_after, allowable_codes=(200, 404)
+        "requests-cache", expire_after=expire_after, allowable_codes=(200, 404)
     )
 
     # build request URL for current ORCID ID

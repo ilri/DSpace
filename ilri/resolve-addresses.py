@@ -86,11 +86,11 @@ def resolve_addresses(addresses):
     writer = csv.DictWriter(args.output_file, fieldnames=fieldnames)
     writer.writeheader()
 
-    # enable transparent request cache with thirty day expiry
+    # enable transparent request cache with thirty-day expiry
     expire_after = timedelta(days=30)
     # cache HTTP 200 responses
     requests_cache.install_cache(
-        "resolve-addresses-response-cache", expire_after=expire_after
+        "requests-cache", expire_after=expire_after
     )
 
     # prune old cache entries
