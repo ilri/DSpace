@@ -21,8 +21,9 @@
 #
 # Queries the local GeoIP DB for information about IP addresses read from a text
 # file. The text file should have one address per line (comments and invalid li-
-# nes are skipped). Optionally looks up IPs in the AbuseIPDB.com if you provide
-# an API key. GeoIP databases are expected to be here:
+# nes are skipped). Consults GreyNoise to see if an IP address is known, and can
+# optionally look up IPs in the AbuseIPDB.com if you provide an API key. GeoIP
+# databases are expected to be here:
 #
 # - /var/lib/GeoIP/GeoLite2-City.mmdb
 # - /var/lib/GeoIP/GeoLite2-ASN.mmdb
@@ -83,9 +84,24 @@ def read_addresses_from_file():
 def resolve_addresses(addresses):
 
     if args.abuseipdb_api_key:
-        fieldnames = ["ip", "org", "network", "asn", "country", "abuseConfidenceScore"]
+        fieldnames = [
+            "ip",
+            "org",
+            "network",
+            "asn",
+            "country",
+            "greyNoiseClassification",
+            "abuseConfidenceScore",
+        ]
     else:
-        fieldnames = ["ip", "org", "network", "asn", "country"]
+        fieldnames = [
+            "ip",
+            "org",
+            "network",
+            "asn",
+            "country",
+            "greyNoiseClassification",
+        ]
 
     writer = csv.DictWriter(args.output_file, fieldnames=fieldnames)
     writer.writeheader()
@@ -94,7 +110,9 @@ def resolve_addresses(addresses):
     expire_after = timedelta(days=30)
     # cache HTTP 200 responses
     requests_cache.install_cache(
-        "resolve-addresses-response-cache", expire_after=expire_after
+        "resolve-addresses-response-cache",
+        expire_after=expire_after,
+        allowable_codes=(200, 404),
     )
 
     # prune old cache entries
@@ -136,6 +154,33 @@ def resolve_addresses(addresses):
             "asn": address_asn,
             "country": address_country,
         }
+
+        # Only look up IPv4 addresses in GreyNoise
+        if isinstance(ipaddress.ip_address(address), ipaddress.IPv4Address):
+            print(f"→ Looking up {address} in GreyNoise")
+
+            # build greynoise.io request URL for current address
+            # see: https://docs.greynoise.io/reference/get_v3-community-ip
+            request_url = f"https://api.greynoise.io/v3/community/{address}"
+            request_headers = {"Accept": "application/json"}
+
+            request = requests.get(request_url, headers=request_headers)
+
+            if args.debug and request.from_cache:
+                sys.stderr.write(Fore.GREEN + "→ Request in cache.\n" + Fore.RESET)
+
+            # if request status 200 OK
+            if request.status_code == requests.codes.ok:
+                data = request.json()
+
+                greyNoiseClassification = data["classification"]
+
+                print(f"→ {address} has classification: {greyNoiseClassification}")
+            else:
+                # GreyNoise has not seen this address, so let's just say unknown
+                greyNoiseClassification = "unknown"
+
+            row.update({"greyNoiseClassification": greyNoiseClassification})
 
         if args.abuseipdb_api_key:
             print(f"→ Looking up {address} in AbuseIPDB")
