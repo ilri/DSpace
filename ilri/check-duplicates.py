@@ -81,7 +81,7 @@ parser.add_argument(
     "-s",
     "--similarity-threshold",
     type=float,
-    help="Similarity threshold, between 0.0 and 1.0 (default 0.6)",
+    help="Similarity threshold, between 0.0 and 1.0 (default 0.6).",
     default=0.6,
 )
 args = parser.parse_args()
