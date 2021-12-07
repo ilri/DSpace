@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# check-duplicates.py 0.2.0
+# check-duplicates.py 0.3.0
 #
 # Copyright 2021 Alan Orth.
 #
