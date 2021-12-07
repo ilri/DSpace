@@ -19,9 +19,10 @@
 #
 # ---
 #
-# Expects a CSV with at least two columns containing item titles and types to be
-# checked against the DSpace PostgreSQL database for potential duplicates. The
-# database must have the trgm extention created in order for this to work:
+# Expects a CSV with at least three columns containing item titles, types, and
+# issue dates to be checked against the DSpace PostgreSQL database for potential
+# duplicates. The database must have the trgm extention created in order for
+# this to work:
 #
 #   localhost/database= > CREATE EXTENSION pg_trgm;
 #
@@ -38,20 +39,47 @@ import argparse
 import csv
 import signal
 import sys
+from datetime import datetime
 
 import psycopg2
 from colorama import Fore
 
 # Column names in the CSV
-criteria1_column_name = "dc.title[en_US]"
-criteria2_column_name = "dcterms.type[en_US]"
+criteria1_column_name = "dc.title"
+criteria2_column_name = "dcterms.type"
+criteria3_column_name = "dcterms.issued"
 # Field IDs from the metadatafieldregistry table
 criteria1_field_id = 64
 criteria2_field_id = 191
+criteria3_field_id = 170
 
 
 def signal_handler(signal, frame):
     sys.exit(1)
+
+
+# Compare the item's date issued to that of the potential duplicate
+def compare_date_strings(item_date, duplicate_date):
+    # Split the item date on "-" to see what format we need to
+    # use to create the datetime object.
+    if len(item_date.split("-")) == 1:
+        date1 = datetime.strptime(item_date, "%Y")
+    elif len(item_date.split("-")) == 2:
+        date1 = datetime.strptime(item_date, "%Y-%m")
+    elif len(item_date.split("-")) == 3:
+        date1 = datetime.strptime(item_date, "%Y-%m-%d")
+
+    # Do the same for the potential duplicate's date
+    if len(duplicate_date.split("-")) == 1:
+        date2 = datetime.strptime(duplicate_date, "%Y")
+    elif len(duplicate_date.split("-")) == 2:
+        date2 = datetime.strptime(duplicate_date, "%Y-%m")
+    elif len(duplicate_date.split("-")) == 3:
+        date2 = datetime.strptime(duplicate_date, "%Y-%m-%d")
+
+    # Return the difference between the two dates. Doesn't matter which comes
+    # first here because we are getting the absolute to avoid negative days!
+    return abs((date1 - date2).days)
 
 
 parser = argparse.ArgumentParser(description="Find duplicate titles.")
@@ -70,6 +98,12 @@ parser.add_argument(
     "--debug",
     help="Print debug messages to standard error (stderr).",
     action="store_true",
+)
+parser.add_argument(
+    "--days-threshold",
+    type=float,
+    help="Threshold for difference of days between item and potential duplicates (default 365).",
+    default=365,
 )
 parser.add_argument(
     "-q",
@@ -105,6 +139,15 @@ if criteria2_column_name not in reader.fieldnames:
         + Fore.RESET
     )
     sys.exit(1)
+# check if the date issued column exists in the CSV
+if criteria3_column_name not in reader.fieldnames:
+    sys.stderr.write(
+        Fore.RED
+        + f'Specified criteria three column "{criteria3_column_name}" does not exist in the CSV.'
+        + Fore.RESET
+    )
+    sys.exit(1)
+
 
 # set the signal handler for SIGINT (^C)
 signal.signal(signal.SIGINT, signal_handler)
@@ -178,11 +221,46 @@ with conn:
                         ),
                     )
 
-                    # More than zero results means we have at least one poten-
-                    # tial duplicate, but can we have more than that? Should I
-                    # do something for that here?
+                    # This means we didn't match on item type, so let's skip to
+                    # the next item title.
+                    if cursor.rowcount == 0:
+                        continue
+
+                    # Get the date of this potential duplicate. (If we are here
+                    # then we already confirmed above that the item is both in
+                    # the archive and not withdrawn, so we don't need to check
+                    # that again).
+                    sql = "SELECT text_value FROM metadatavalue M JOIN item I ON M.dspace_object_id = I.uuid WHERE M.dspace_object_id=%s AND M.metadata_field_id=%s"
+
+                    cursor.execute(
+                        sql,
+                        (dspace_object_id, criteria3_field_id),
+                    )
+
+                    # This means that we successfully extracted the date for the
+                    # potential duplicate.
                     if cursor.rowcount > 0:
-                        # Probably a duplicate, so get the handle
+                        duplicate_item_date = cursor.fetchone()[0]
+                    # If rowcount is not > 0 then the potential duplicate does
+                    # not have a date and we have bigger problems. Skip!
+                    else:
+                        continue
+
+                    # Get the number of days between the issue dates
+                    days_difference = compare_date_strings(
+                        row[criteria3_column_name], duplicate_item_date
+                    )
+
+                    # Items with a similar title, same type, and issue dates
+                    # within a year or so are likely duplicates. Otherwise,
+                    # it's possible that items with a similar name could be
+                    # like Annual Reports where most metadata is the same
+                    # except the date issued.
+                    if days_difference <= args.days_threshold:
+                        # By this point if we have any matches then they are
+                        # similar in title and have an exact match for the type
+                        # and an issue date within the threshold. Now we are
+                        # reasonably sure it's a duplicate, so get the handle.
                         sql = "SELECT handle FROM handle WHERE resource_id=%s"
                         cursor.execute(sql, (dspace_object_id,))
                         handle = cursor.fetchone()[0]
