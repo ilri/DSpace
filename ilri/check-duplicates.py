@@ -194,9 +194,6 @@ with conn:
                             f"{Fore.YELLOW}→ Title:{Fore.RESET} {row[criteria1_column_name]}\n"
                         )
                         sys.stdout.write(
-                            f"{Fore.YELLOW}→ Type:{Fore.RESET} {row[criteria2_column_name]}\n"
-                        )
-                        sys.stdout.write(
                             f"{Fore.YELLOW}→ Handle:{Fore.RESET} {handle}\n\n"
                         )
 
