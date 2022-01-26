@@ -272,7 +272,7 @@ with conn:
                             f"{Fore.YELLOW}→ Title:{Fore.RESET} {row[criteria1_column_name]}\n"
                         )
                         sys.stdout.write(
-                            f"{Fore.YELLOW}→ Handle:{Fore.RESET} {handle}\n\n"
+                            f"{Fore.YELLOW}→ Handle:{Fore.RESET} https://hdl.handle.net/{handle}\n\n"
                         )
 
 # close database connection before we exit
