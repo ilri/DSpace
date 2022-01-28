@@ -45,6 +45,7 @@ import psycopg2
 from colorama import Fore
 
 # Column names in the CSV
+id_column_name = "id"
 criteria1_column_name = "dc.title"
 criteria2_column_name = "dcterms.type"
 criteria3_column_name = "dcterms.issued"
@@ -85,8 +86,8 @@ def compare_date_strings(item_date, duplicate_date):
 parser = argparse.ArgumentParser(description="Find duplicate titles.")
 parser.add_argument(
     "-i",
-    "--csv-file",
-    help="Path to CSV file",
+    "--input-file",
+    help="Path to input CSV file.",
     required=True,
     type=argparse.FileType("r", encoding="UTF-8"),
 )
@@ -106,6 +107,13 @@ parser.add_argument(
     default=365,
 )
 parser.add_argument(
+    "-o",
+    "--output-file",
+    help="Path to output CSV file.",
+    required=True,
+    type=argparse.FileType("w"),
+)
+parser.add_argument(
     "-q",
     "--quiet",
     help="Do not print progress messages to the screen.",
@@ -121,7 +129,7 @@ parser.add_argument(
 args = parser.parse_args()
 
 # open the CSV
-reader = csv.DictReader(args.csv_file)
+reader = csv.DictReader(args.input_file)
 
 # check if the title column exists in the CSV
 if criteria1_column_name not in reader.fieldnames:
@@ -184,7 +192,21 @@ with conn:
             "SET pg_trgm.similarity_threshold = %s", (args.similarity_threshold,)
         )
 
-        for row in reader:
+        # Fields for the output CSV
+        fieldnames = [
+            "id",
+            "Your Title",
+            "Their Title",
+            "Your Date",
+            "Their Date",
+            "Handle",
+        ]
+
+        # Write the CSV header
+        writer = csv.DictWriter(args.output_file, fieldnames=fieldnames)
+        writer.writeheader()
+
+        for input_row in reader:
             # Check for items with similarity to criteria one (title). Note that
             # this is the fastest variation of this query: using the similarity
             # operator (%, written below twice for escaping) instead of the sim-
@@ -196,7 +218,7 @@ with conn:
                 sql,
                 (
                     criteria1_field_id,
-                    row[criteria1_column_name],
+                    input_row[criteria1_column_name],
                 ),
             )
 
@@ -217,7 +239,7 @@ with conn:
                         (
                             dspace_object_id,
                             criteria2_field_id,
-                            row[criteria2_column_name],
+                            input_row[criteria2_column_name],
                         ),
                     )
 
@@ -248,7 +270,7 @@ with conn:
 
                     # Get the number of days between the issue dates
                     days_difference = compare_date_strings(
-                        row[criteria3_column_name], duplicate_item_date
+                        input_row[criteria3_column_name], duplicate_item_date
                     )
 
                     # Items with a similar title, same type, and issue dates
@@ -269,16 +291,31 @@ with conn:
                             f"{Fore.YELLOW}Found potential duplicate:{Fore.RESET}\n"
                         )
                         sys.stdout.write(
-                            f"{Fore.YELLOW}→ Title:{Fore.RESET} {row[criteria1_column_name]}\n"
+                            f"{Fore.YELLOW}→ Title:{Fore.RESET} {input_row[criteria1_column_name]}\n"
                         )
                         sys.stdout.write(
                             f"{Fore.YELLOW}→ Handle:{Fore.RESET} {handle}\n\n"
                         )
 
+                        output_row = {
+                            "id": input_row[id_column_name],
+                            "Your Title": input_row[criteria1_column_name],
+                            "Their Title": duplicate_title[0],
+                            "Your Date": input_row[criteria3_column_name],
+                            "Their Date": duplicate_item_date,
+                            "Handle": handle,
+                        }
+
+                        writer.writerow(output_row)
+
+        # close output file before we exit
+        args.output_file.close()
+
+
 # close database connection before we exit
 conn.close()
 
 # close input file
-args.csv_file.close()
+args.input_file.close()
 
 sys.exit(0)
