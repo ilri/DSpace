@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# check-duplicates.py 0.3.0
+# check-duplicates.py 0.4.0
 #
 # Copyright 2021 Alan Orth.
 #
@@ -19,7 +19,7 @@
 #
 # ---
 #
-# Expects a CSV with at least three columns containing item titles, types, and
+# Expects a CSV with at least four columns containing id, item titles, types,and
 # issue dates to be checked against the DSpace PostgreSQL database for potential
 # duplicates. The database must have the trgm extention created in order for
 # this to work:
