@@ -263,7 +263,7 @@ with conn:
                         # reasonably sure it's a duplicate, so get the handle.
                         sql = "SELECT handle FROM handle WHERE resource_id=%s"
                         cursor.execute(sql, (dspace_object_id,))
-                        handle = cursor.fetchone()[0]
+                        handle = f"https://hdl.handle.net/{cursor.fetchone()[0]}"
 
                         sys.stdout.write(
                             f"{Fore.YELLOW}Found potential duplicate:{Fore.RESET}\n"
