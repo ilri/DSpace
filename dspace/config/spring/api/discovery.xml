@@ -121,8 +121,6 @@
                 <ref bean="searchFilterCiatSubject"/>
                 <ref bean="searchFilterCiforSubject"/>
                 <ref bean="searchFilterCipSubject" />
-                <ref bean="searchFilterCpwfSubject"/>
-                <ref bean="searchFilterCtaSubject"/>
                 <ref bean="searchFilterIitaSubject"/>
                 <ref bean="searchFilterIlriSubject"/>
                 <ref bean="searchFilterSystemSubject"/>
@@ -290,8 +288,6 @@
                 <ref bean="searchFilterCiatSubject"/>
                 <ref bean="searchFilterCiforSubject"/>
                 <ref bean="searchFilterCipSubject" />
-                <ref bean="searchFilterCpwfSubject"/>
-                <ref bean="searchFilterCtaSubject"/>
                 <ref bean="searchFilterIitaSubject"/>
                 <ref bean="searchFilterIlriSubject"/>
                 <ref bean="searchFilterSystemSubject"/>
