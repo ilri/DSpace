@@ -13,3 +13,13 @@ GARDIAN
 HeadlessChrome
 randint
 Koha
+scalaj-http
+scpitspi-rs
+lua-resty-http
+AHC
+acebookexternalhit
+Iframely
+qbhttp
+^got
+^colly
+article-parser
