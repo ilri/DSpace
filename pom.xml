@@ -41,7 +41,7 @@
                     Hibernate version pinned to 4.2, 4.3 does not work with the spring version we are currently using
                     Upgrading the spring version will make the XMLUI crash
                 -->
-        <hibernate.version>4.2.21.Final</hibernate.version>
+        <hibernate.version>5.4.24.Final</hibernate.version>
         <spring.version>3.2.16.RELEASE</spring.version>
         <!-- 'root.basedir' is the path to the root [dspace-src] dir. It must be redefined by each child POM,
              as it is used to reference the LICENSE_HEADER and *.properties file(s) in that directory. -->
