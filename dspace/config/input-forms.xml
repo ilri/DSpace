@@ -1602,6 +1602,10 @@
         <stored-value>Newsletter</stored-value>
       </pair>
       <pair>
+        <displayed-value>Opinion Piece</displayed-value>
+        <stored-value>Opinion Piece</stored-value>
+      </pair>
+      <pair>
         <displayed-value>Photo Report</displayed-value>
         <stored-value>Photo Report</stored-value>
       </pair>
