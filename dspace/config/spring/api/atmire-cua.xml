@@ -10,8 +10,8 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 
     <util:map id="defaultipranges" key-type="java.lang.String" value-type="java.lang.String">
         <entry key="127.0.0.1" value="local"/>
-        <entry key="41.204.190.40/32" value="ILRI Nairobi"/>
-        <entry key="213.55.99.121/32" value="ILRI Ethiopia"/>
+        <entry key="41.204.190.18" value="ILRI Nairobi"/>
+        <entry key="213.55.99.121" value="ILRI Ethiopia"/>
     </util:map>
 
     <bean class="com.atmire.statistics.util.MostPopularLocationConfiguration">
