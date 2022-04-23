@@ -10,9 +10,7 @@ cortex
 FlipboardProxy
 nettle
 GARDIAN
-HeadlessChrome
 randint
-Koha
 scalaj-http
 scpitspi-rs
 lua-resty-http
@@ -24,13 +22,9 @@ qbhttp
 ^colly
 article-parser
 1science
-axios\/\d
-Faveeo\/\d
 Moreover\/\d
 Nutch-\d
 Exploratodo\/\d
-GroupHigh\/\d
 Crowsnest\/\d
 metha\/\d
-ZoteroTranslationServer
 FullStoryBot
