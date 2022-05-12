@@ -174,7 +174,6 @@
 
         <!-- Community themes -->
         <theme name="AfricaRising" handle="10568/16498" path="AfricaRising/" />
-        <theme name="AgriFood" handle="10568/24754" path="AgriFood/" />
         <theme name="Bioversity" handle="10568/35442" path="Bioversity/" />
         <theme name="CCAFS" handle="10568/3530" path="CCAFS/" />
         <theme name="CIAT" handle="10568/35697" path="CIAT/" />
@@ -183,18 +182,12 @@
         <theme name="CPWF" handle="10568/2983" path="CPWF/" />
         <theme name="CRP3.7" handle="10568/3112" path="CRP3.7/" />
         <theme name="CTA" handle="10568/42211" path="CTA/" />
-        <theme name="DrylandSystems" handle="10568/51670" path="DrylandSystems/" />
-        <theme name="EADD" handle="10568/2347" path="EADD/" />
-        <theme name="FeedTheFuture" handle="10568/35730" path="FeedTheFuture/" />
         <theme name="Humidtropics" handle="10568/35409" path="Humidtropics/" />
         <theme name="ICARDA" handle="10568/51669" path="ICARDA/" />
         <theme name="IITA" handle="10568/68616" path="IITA/" />
         <theme name="ILRI" handle="10568/1" path="ILRI/" />
         <theme name="IWMI" handle="10568/16814" path="IWMI/" />
-        <theme name="LIVES" handle="10568/25101" path="LIVES/" />
-        <theme name="TechnicalConsortium" handle="10568/25209" path="TechnicalConsortium/" />
         <theme name="WLE" handle="10568/34494" path="WLE/" />
-        <theme name="AVCD" handle="10568/72600" path="AVCD/" />
         <theme name="Livestock" handle="10568/80099" path="Livestock/" />
         <theme name="PABRA" handle="10568/80211" path="PABRA/" />
         <theme name="RTB" handle="10568/80100" path="RTB/" />
