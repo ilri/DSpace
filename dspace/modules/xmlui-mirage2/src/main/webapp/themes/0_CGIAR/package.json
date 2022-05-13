@@ -1,6 +1,9 @@
 {
   "name": "Mirage2",
   "version": "0.1.2",
+  "browserslist": [
+      "last 2 versions"
+  ],
   "dependencies": {
     "@chiiya/haven": "^0.5.11",
     "bootstrap-sass": "3.3.0",
