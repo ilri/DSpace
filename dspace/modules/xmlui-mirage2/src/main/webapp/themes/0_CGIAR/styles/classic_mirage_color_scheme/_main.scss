@@ -10,7 +10,7 @@
  * 2020-04-26: hack to be able to use compass mixins without compass,
  * which allows us to use a newer SASS processor instead of ruby sass.
  */
-@import "../node_modules/compass-sass-mixins/lib/compass";
+@import "../node_modules/compass-mixins/lib/compass";
 // variables
 @import "classic_mirage_color_scheme/bootstrap_variables";
 

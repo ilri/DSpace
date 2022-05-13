@@ -9,9 +9,10 @@
 'use strict';
 
 module.exports = function (grunt) {
+    const sass = require('node-sass');
+
     grunt.loadNpmTasks('grunt-postcss');
     grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-node-sass');
     grunt.loadNpmTasks('grunt-string-replace');
     grunt.loadNpmTasks('grunt-webpack');
 
@@ -74,8 +75,8 @@ module.exports = function (grunt) {
         },
         'string-replace': {
             // Dirty hack to modify Atmire's statlets so they don't require
-            // compass. Instead, we use the compass-sass-mixins from npm so
-            // we can compile our stylesheets with node-sass, which is much
+            // compass. Instead, we use the compass-mixins from npm so we
+            // can compile our stylesheets with node-sass, which is much
             // more modern than Ruby sass.
             dist: {
                 files: {
@@ -85,16 +86,20 @@ module.exports = function (grunt) {
                     replacements: [
                         {
                             pattern: '@import "compass"',
-                            replacement: '@import "../node_modules/compass-sass-mixins/lib/compass"'
+                            replacement: '@import "../node_modules/compass-mixins/lib/compass"'
                         }
                     ]
                 }
             }
         },
         sass: {
+            options: {
+                    implementation: sass
+                },
             dist: {
-                src: 'styles/main.scss',
-                dest: 'styles/main.css',
+                files: {
+                    'styles/main.css': 'styles/main.scss'
+                }
             }
         },
         // Compile Font Awesome JS to something that UglifyJS can use (the
