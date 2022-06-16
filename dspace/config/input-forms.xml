@@ -303,6 +303,16 @@
         <field>
           <dc-schema>cg</dc-schema>
           <dc-element>contributor</dc-element>
+          <dc-qualifier>initiative</dc-qualifier>
+          <repeatable>true</repeatable>
+          <label>CGIAR Initiatives</label>
+          <input-type value-pairs-name="cgiar-initiatives">dropdown</input-type>
+          <hint>Select any CGIAR Initiatives(s) associated with this item. Use this to show that an Initiative funded this item.</hint>
+          <required></required>
+        </field>
+        <field>
+          <dc-schema>cg</dc-schema>
+          <dc-element>contributor</dc-element>
           <dc-qualifier>crp</dc-qualifier>
           <repeatable>true</repeatable>
           <label>CGIAR Research Programs and Platforms</label>
@@ -2805,6 +2815,136 @@
       <pair>
         <displayed-value>PLANTATIONS AND REHABILITATION</displayed-value>
         <stored-value>PLANTATIONS AND REHABILITATION</stored-value>
+      </pair>
+    </value-pairs>
+    <value-pairs value-pairs-name="cgiar-initiatives">
+      <pair>
+        <displayed-value>Accelerated Breeding: Meeting Farmers Needs with Nutritious, Climate-Resilient Crops</displayed-value>
+        <stored-value>Accelerated Breeding: Meeting Farmers Needs with Nutritious, Climate-Resilient Crops</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Accelerating Crop Improvement Through Genome Editing</displayed-value>
+        <stored-value>Accelerating Crop Improvement Through Genome Editing</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Building Systemic Resilience against Climate Variability and Extremes</displayed-value>
+        <stored-value>Building Systemic Resilience against Climate Variability and Extremes</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Conservation and Use of Genetic Resources</displayed-value>
+        <stored-value>Conservation and Use of Genetic Resources</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Delivering Genetic Gains in Farmers Fields</displayed-value>
+        <stored-value>Delivering Genetic Gains in Farmers Fields</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Excellence in Agronomy for Sustainable Intensification and Climate Change Adaptation</displayed-value>
+        <stored-value>Excellence in Agronomy for Sustainable Intensification and Climate Change Adaptation</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Foresight and Metrics to Accelerate Food, Land, and Water Systems Transformation</displayed-value>
+        <stored-value>Foresight and Metrics to Accelerate Food, Land, and Water Systems Transformation</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>From Fragility to Resilience in Central and West Asia and North Africa</displayed-value>
+        <stored-value>From Fragility to Resilience in Central and West Asia and North Africa</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Fruit and Vegetables for Sustainable Healthy Diets</displayed-value>
+        <stored-value>Fruit and Vegetables for Sustainable Healthy Diets</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Harnessing Digital Technologies for Timely Decision-Making across Food, Land, and Water Systems</displayed-value>
+        <stored-value>Harnessing Digital Technologies for Timely Decision-Making across Food, Land, and Water Systems</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Harnessing Gender and Social Equality for Resilience in Agrifood Systems</displayed-value>
+        <stored-value>Harnessing Gender and Social Equality for Resilience in Agrifood Systems</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Livestock, Climate and System Resilience</displayed-value>
+        <stored-value>Livestock, Climate and System Resilience</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Market Intelligence and Product Profiling</displayed-value>
+        <stored-value>Market Intelligence and Product Profiling</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Mitigate plus Research for Low-emission Food Systems</displayed-value>
+        <stored-value>Mitigate plus Research for Low-emission Food Systems</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>National Policies and Strategies for Food, Land and Water Systems Transformation</displayed-value>
+        <stored-value>National Policies and Strategies for Food, Land and Water Systems Transformation</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Nature-positive Solutions for Shifting Agrifood Systems to More Resilient and Sustainable Pathways</displayed-value>
+        <stored-value>Nature-positive Solutions for Shifting Agrifood Systems to More Resilient and Sustainable Pathways</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Network 4 Enabling Tools, Technology and Shared Services</displayed-value>
+        <stored-value>Network 4 Enabling Tools, Technology and Shared Services</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Plant Health and Rapid Response to Protect Food Security and Livelihoods</displayed-value>
+        <stored-value>Plant Health and Rapid Response to Protect Food Security and Livelihoods</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Protecting Human Health Through a One Health Approach</displayed-value>
+        <stored-value>Protecting Human Health Through a One Health Approach</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Realizing Multiple Benefits Across Water, Energy, Food and Ecosystem (Forest, Biodiversity)</displayed-value>
+        <stored-value>Realizing Multiple Benefits Across Water, Energy, Food and Ecosystem (Forest, Biodiversity)</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Resilient Agrifood Innovation Systems Driving Food Security, Inclusive Growth, and Reduced Out-Migration in Latin America and the Caribbean</displayed-value>
+        <stored-value>Resilient Agrifood Innovation Systems Driving Food Security, Inclusive Growth, and Reduced Out-Migration in Latin America and the Caribbean</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Resilient Aquatic Food Systems for Healthy People and Planet</displayed-value>
+        <stored-value>Resilient Aquatic Food Systems for Healthy People and Planet</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Resilient Cities through Sustainable Urban and Peri-urban Agrifood Systems</displayed-value>
+        <stored-value>Resilient Cities through Sustainable Urban and Peri-urban Agrifood Systems</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Rethinking Food Markets and Value Chains for Inclusion and Sustainability</displayed-value>
+        <stored-value>Rethinking Food Markets and Value Chains for Inclusion and Sustainability</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Securing the Food Systems of Asian Mega-Deltas for Climate and Livelihood Resilience</displayed-value>
+        <stored-value>Securing the Food Systems of Asian Mega-Deltas for Climate and Livelihood Resilience</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Sustainable Animal Productivity for Livelihoods, Nutrition and Gender Inclusion</displayed-value>
+        <stored-value>Sustainable Animal Productivity for Livelihoods, Nutrition and Gender Inclusion</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Sustainable Healthy Diets through Food Systems Transformation</displayed-value>
+        <stored-value>Sustainable Healthy Diets through Food Systems Transformation</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Sustainable Intensification of Mixed Farming Systems</displayed-value>
+        <stored-value>Sustainable Intensification of Mixed Farming Systems</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Transformational Agroecology across Food, Land, and Water systems</displayed-value>
+        <stored-value>Transformational Agroecology across Food, Land, and Water systems</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Transforming Agrifood Systems in South Asia</displayed-value>
+        <stored-value>Transforming Agrifood Systems in South Asia</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Transforming AgriFood Systems in West and Central Africa</displayed-value>
+        <stored-value>Transforming AgriFood Systems in West and Central Africa</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Ukama Ustawi: Diversification for Resilient Agribusiness Ecosystems in East and Southern Africa</displayed-value>
+        <stored-value>Ukama Ustawi: Diversification for Resilient Agribusiness Ecosystems in East and Southern Africa</stored-value>
       </pair>
     </value-pairs>
     <value-pairs value-pairs-name="crpsubject" dc-term="crsubject_crpsubject">
