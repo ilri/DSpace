@@ -1813,6 +1813,31 @@
         <stored-value>CC-BY-NC-ND-3.0</stored-value>
       </pair>
       <pair>
+        <displayed-value>Creative Commons Attribution 3.0 IGO (CC BY 3.0 IGO)</displayed-value>
+        <stored-value>CC-BY-3.0-IGO</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Creative Commons Attribution-ShareAlike 3.0 IGO (CC BY-SA 3.0 IGO)</displayed-value>
+        <stored-value>CC-BY-SA-3.0-IGO</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Creative Commons Attribution-NoDerivs 3.0 IGO (CC BY-ND 3.0 IGO)</displayed-value>
+        <stored-value>CC-BY-ND-3.0-IGO</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Creative Commons Attribution-NonCommercial 3.0 IGO (CC BY-NC 3.0 IGO)</displayed-value>
+        <stored-value>CC-BY-NC-3.0-IGO</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Creative Commons Attribution-NonCommercial-ShareAlike 3.0 IGO (CC BY-NC-SA 3.0 IGO)</displayed-value>
+        <stored-value>CC-BY-NC-SA-3.0-IGO</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Creative Commons Attribution-NonCommercial-NoDerivs 3.0 IGO (CC BY-NC-ND 3.0 IGO)</displayed-value>
+        <stored-value>CC-BY-NC-ND-3.0-IGO</stored-value>
+      </pair>
+
+      <pair>
         <displayed-value>Creative Commons Zero Public Domain Dedication 1.0 (CC0 1.0)</displayed-value>
         <stored-value>CC0-1.0</stored-value>
       </pair>
