@@ -113,6 +113,7 @@
     <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_sdg">SDG contributions</message>
     <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_actionarea">CGIAR Action Areas</message>
     <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_impactarea">CGIAR Impact Areas</message>
+    <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_initiative">CGIAR Initiatives</message>
     <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_basin">River basins</message>
     <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_type">Output types</message>
     <message key="xmlui.ArtifactBrowser.AdvancedSearch.type_ctasubject">CTA subjects</message>
@@ -187,6 +188,7 @@
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.sdg.column_heading">Sustainable Development Goal</message>
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.actionarea.column_heading">CGIAR Action Area</message>
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.impactarea.column_heading">CGIAR Impact Area</message>
+	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.initiative.column_heading">CGIAR Initiative</message>
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.basin.column_heading">River basin</message>
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.cipsubject.column_heading">CIP subject</message>
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.breed.column_heading">Animal breed</message>
@@ -238,6 +240,8 @@
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.trail.metadata.actionarea">Browsing {0} by CGIAR Action Area</message>
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.title.metadata.impactarea">Browsing {0} by CGIAR Impact Area {1}</message>
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.trail.metadata.impactarea">Browsing {0} by CGIAR Impact Area</message>
+	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.title.metadata.initiative">Browsing {0} by CGIAR Initiative {1}</message>
+	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.trail.metadata.initiative">Browsing {0} by CGIAR Initiative</message>
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.title.metadata.basin">Browsing {0} by River basin {1}</message>
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.trail.metadata.basin">Browsing {0} by River basin</message>
 	<message key="xmlui.ArtifactBrowser.ConfigurableBrowse.title.metadata.type">Browsing {0} by Output type {1}</message>
@@ -390,6 +394,7 @@
 	<message key="xmlui.ArtifactBrowser.SimpleSearch.filter.sdg">Sustainable Development Goal</message>
 	<message key="xmlui.ArtifactBrowser.SimpleSearch.filter.actionarea">CGIAR Action Area</message>
 	<message key="xmlui.ArtifactBrowser.SimpleSearch.filter.impactarea">CGIAR Impact Area</message>
+	<message key="xmlui.ArtifactBrowser.SimpleSearch.filter.initiative">CGIAR Initiative</message>
 	<message key="xmlui.ArtifactBrowser.SimpleSearch.filter.cipsubject">CIP subject</message>
 	<message key="xmlui.ArtifactBrowser.SimpleSearch.filter.drylandssubject">Dryland Systems subject</message>
 	<message key="xmlui.ArtifactBrowser.SimpleSearch.filter.icardasubject">ICARDA subject</message>
@@ -2377,6 +2382,7 @@
 	<message key="xmlui.dri2xhtml.METS-1.0.item-sdg">Contributes to SDGs</message>
 	<message key="xmlui.dri2xhtml.METS-1.0.item-actionarea">CGIAR Action Areas</message>
 	<message key="xmlui.dri2xhtml.METS-1.0.item-impactarea">CGIAR Impact Areas</message>
+	<message key="xmlui.dri2xhtml.METS-1.0.item-initiative">CGIAR Initiatives</message>
 	<message key="xmlui.dri2xhtml.METS-1.0.item-investors-sponsors">Investors/sponsors</message>
 	<message key="xmlui.dri2xhtml.METS-1.0.item-identifiers">Identifiers</message>
 	<message key="xmlui.dri2xhtml.METS-1.0.item-identifier-googleurl">Google URL: </message>
@@ -2704,6 +2710,7 @@
     <message key="xmlui.Discovery.AbstractSearch.type_sdg">Filter by: Sustainable Development Goal</message>
     <message key="xmlui.Discovery.AbstractSearch.type_actionarea">Filter by: CGIAR Action Area</message>
     <message key="xmlui.Discovery.AbstractSearch.type_impactarea">Filter by: CGIAR Impact Area</message>
+    <message key="xmlui.Discovery.AbstractSearch.type_initiative">Filter by: CGIAR Initiative</message>
     <message key="xmlui.Discovery.AbstractSearch.type_usageRights">Filter by: Usage rights</message>
     <message key="xmlui.Discovery.AbstractSearch.type_targetaudience">Filter by: Target audiences</message>
     <message key="xmlui.Discovery.AbstractSearch.type_systemsubject">Filter by: System subject</message>
