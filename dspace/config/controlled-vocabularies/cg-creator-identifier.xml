@@ -286,7 +286,6 @@
     <node label="Danilo Pezo: 0000-0001-5345-5314" />
     <node label="Danny Hunter: 0000-0002-4267-595X" />
     <node label="Daryakhan Akbarzai: 0000-0002-6566-9501" />
-    <node label="David Ramirez: 0000-0003-4546-9745" />
     <node label="David Abreu: 0000-0002-5495-6900" />
     <node label="David Brown: 0000-0003-2859-1618" />
     <node label="David Chikoye: 0000-0002-6047-9821" />
@@ -298,6 +297,7 @@
     <node label="David Parsons: 0000-0002-1393-8431" />
     <node label="David Pelster: 0000-0002-0461-7855" />
     <node label="David Puerta: 0000-0001-5992-1697" />
+    <node label="David Ramirez: 0000-0003-4546-9745" />
     <node label="David Shearer: 0000-0001-7334-4208" />
     <node label="David Shoch: 0000-0003-0213-761X" />
     <node label="David Wiberg: 0000-0001-9515-1538" />
@@ -344,9 +344,9 @@
     <node label="EBENEZER OBENG-BIO: 0000-0002-7796-0419" />
     <node label="Edgar Twine: 0000-0001-7561-1584" />
     <node label="Edidah Ampaire: 0000-0003-3679-8360" />
-    <node label="Edward Carey: 0000-0003-1007-2529" />
     <node label="Edward Baars: 0000-0003-3015-1291" />
     <node label="Edward Boamah: 0000-0001-7912-7909" />
+    <node label="Edward Carey: 0000-0003-1007-2529" />
     <node label="Edward Kanju: 0000-0002-0413-1302" />
     <node label="Ehsan Dulloo: 0000-0001-5567-8220" />
     <node label="Eileen Bogweh Nchanji: 0000-0002-6859-0962" />
@@ -906,10 +906,10 @@
     <node label="Monica Carvajal-Yepes: 0000-0003-2709-7909" />
     <node label="Morag Ferguson: 0000-0002-7763-5173" />
     <node label="Morufat Balogun: 0000-0001-8770-5529" />
-    <node label="Moses Thuita: 0000-0002-6731-9492" />
     <node label="Moses Adeolu Adebayo: 0000-0001-8192-3883" />
     <node label="Moses Matovu: 0000-0001-7019-1015" />
     <node label="Moses Nyine: 0000-0002-8409-7588" />
+    <node label="Moses Thuita: 0000-0002-6731-9492" />
     <node label="Moses Waswa: 0000-0002-1520-8416" />
     <node label="Mouldi Gamoun: 0000-0003-3714-7674" />
     <node label="Mounir Louhaichi: 0000-0002-4543-7631" />
@@ -1042,7 +1042,6 @@
     <node label="Pepijn van Oort: 0000-0001-7617-5382" />
     <node label="Perle LATRE DE LATE: 0000-0003-3871-6277" />
     <node label="Pete Smith: 0000-0002-3784-1124" />
-    <node label="Peter Setimela: 0000-0001-7316-4514" />
     <node label="Peter Asafo-Adjei: 0000-0002-0441-0627" />
     <node label="Peter Ellis: 0000-0001-7933-8298" />
     <node label="Peter G. Ballantyne: 0000-0001-9346-2893" />
@@ -1050,6 +1049,7 @@
     <node label="Peter Läderach: 0000-0001-8708-6318" />
     <node label="Peter NEUENSCHWANDER: 0000-0003-0580-0376" />
     <node label="Peter Potapov: 0000-0003-3977-0021" />
+    <node label="Peter Setimela: 0000-0001-7316-4514" />
     <node label="Peter Wenzl: 0000-0003-4657-8468" />
     <node label="Peter Woodbury: 0000-0003-3954-7639" />
     <node label="Petra Schmitter: 0000-0002-3826-7224" />
@@ -1108,12 +1108,12 @@
     <node label="Reta Duguma: 0000-0002-5660-7720" />
     <node label="Ricardo Labarta: 0000-0003-3517-8768" />
     <node label="Riccardo Grigoletto: 0000-0001-8502-0200" />
-    <node label="Richard Ogwal-Omara: 0000-0001-6452-416X" />
     <node label="Richard Appoh: 0000-0003-4678-5088" />
     <node label="Richard Asare: 0000-0001-6798-7821" />
     <node label="Richard Coe: 0000-0002-9240-1463" />
     <node label="Richard Conant: 0000-0001-7315-2476" />
     <node label="Richard Houghton: 0000-0002-3298-7028" />
+    <node label="Richard Ogwal-Omara: 0000-0001-6452-416X" />
     <node label="Richard Preziosi: 0000-0003-0468-6655" />
     <node label="Richard Thomas: 0000-0002-8009-5681" />
     <node label="Richardson Okechukwu: 0000-0001-5335-4855" />
@@ -1289,8 +1289,8 @@
     <node label="Tek Sapkota: 0000-0001-5311-0586" />
     <node label="Teodardo Calles: 0000-0003-1929-5534" />
     <node label="Teresa Borelli: 0000-0002-6405-1339" />
-    <node label="Tesfamicheal Wossen: 0000-0003-3793-7078" />
     <node label="Tesfamicheal Wossen Assfaw: 0000-0002-3672-2676" />
+    <node label="Tesfamicheal Wossen: 0000-0003-3793-7078" />
     <node label="Tesfaye Getachew Mengistu: 0000-0002-0544-6314" />
     <node label="tesleem bello: 0000-0002-9657-0504" />
     <node label="Thai Minh: 0000-0002-8345-6825" />
