@@ -122,6 +122,28 @@ such as authors, subject, citation, description, etc
         </xsl:if>
     </xsl:template>
     <xsl:template name="itemSummaryView-DIM-affiliations">
+        <xsl:if test="dim:field[@mdschema='cg' and @element='subject' and @qualifier='actionArea']">
+            <div class="simple-item-view-description item-page-field-wrapper table">
+                <h5 class="bold"><i18n:text>xmlui.dri2xhtml.METS-1.0.item-actionarea</i18n:text></h5>
+                <div>
+                    <xsl:for-each select="dim:field[@mdschema='cg' and @element='subject' and @qualifier='actionArea']">
+                        <xsl:choose>
+                            <xsl:when test="node()">
+                                <xsl:call-template name="discovery-link">
+                                    <xsl:with-param name="filtertype" select="'actionarea'"/>
+                                </xsl:call-template>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:text>&#160;</xsl:text>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                        <xsl:if test="count(following-sibling::dim:field[@mdschema='cg' and @element='subject' and @qualifier='actionArea']) != 0">
+                            <xsl:text>; </xsl:text>
+                        </xsl:if>
+                    </xsl:for-each>
+                </div>
+            </div>
+        </xsl:if>
         <xsl:if test="dim:field[@mdschema='cg' and @element='subject' and @qualifier='impactArea']">
             <div class="simple-item-view-description item-page-field-wrapper table">
                 <h5 class="bold"><i18n:text>xmlui.dri2xhtml.METS-1.0.item-impactarea</i18n:text></h5>
