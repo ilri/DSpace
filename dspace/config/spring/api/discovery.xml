@@ -706,7 +706,7 @@
                 <value>cg.contributor.crp</value>
             </list>
         </property>
-        <property name="facetLimit" value="20"/>
+        <property name="facetLimit" value="5"/>
         <property name="sortOrderSidebar" value="COUNT"/>
         <property name="sortOrderFilterPage" value="COUNT"/>
     </bean>
