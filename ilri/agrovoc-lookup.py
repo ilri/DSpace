@@ -80,7 +80,7 @@ def resolve_subjects(subjects):
                 + Fore.RESET
             )
 
-        request_url = "http://agrovoc.uniroma2.it/agrovoc/rest/v1/agrovoc/search"
+        request_url = "https://agrovoc.uniroma2.it/agrovoc/rest/v1/agrovoc/search"
         request_params = {"query": subject}
 
         if args.language:
