@@ -7224,10 +7224,6 @@
     </value-pairs>
     <value-pairs value-pairs-name="TARGET_AUDIENCE" dc-term="audience">
       <pair>
-        <displayed-value>Academicians</displayed-value>
-        <stored-value>Academicians</stored-value>
-      </pair>
-      <pair>
         <displayed-value>Academics</displayed-value>
         <stored-value>Academics</stored-value>
       </pair>
