@@ -121,7 +121,6 @@
                 <ref bean="searchFilterBioversity"/>
                 <ref bean="searchFilterCcafSubject"/>
                 <ref bean="searchFilterCiatSubject"/>
-                <ref bean="searchFilterCiforSubject"/>
                 <ref bean="searchFilterCipSubject" />
                 <ref bean="searchFilterIitaSubject"/>
                 <ref bean="searchFilterIlriSubject"/>
@@ -292,7 +291,6 @@
                 <ref bean="searchFilterBioversity"/>
                 <ref bean="searchFilterCcafSubject"/>
                 <ref bean="searchFilterCiatSubject"/>
-                <ref bean="searchFilterCiforSubject"/>
                 <ref bean="searchFilterCipSubject" />
                 <ref bean="searchFilterIitaSubject"/>
                 <ref bean="searchFilterIlriSubject"/>
