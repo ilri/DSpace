@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# check-duplicates.py 0.4.0
+# check-duplicates.py 0.4.1
 #
 # Copyright 2021 Alan Orth.
 #
@@ -197,6 +197,7 @@ with conn:
             "id",
             "Your Title",
             "Their Title",
+            "Similarity",
             "Your Date",
             "Their Date",
             "Handle",
@@ -285,13 +286,26 @@ with conn:
                         # reasonably sure it's a duplicate, so get the handle.
                         sql = "SELECT handle FROM handle WHERE resource_id=%s"
                         cursor.execute(sql, (dspace_object_id,))
-                        handle = f"https://hdl.handle.net/{cursor.fetchone()[0]}"
+                        try:
+                            handle = f"https://hdl.handle.net/{cursor.fetchone()[0]}"
+                        except TypeError:
+                            # If we get here then there is no handle for this
+                            # item's UUID. Could be that the item was deleted?
+                            continue
 
                         sys.stdout.write(
                             f"{Fore.YELLOW}Found potential duplicate:{Fore.RESET}\n"
                         )
+
+                        # https://alexklibisz.com/2022/02/18/optimizing-postgres-trigram-search.html
+                        sql = "SELECT round(similarity(%s, %s)::numeric, 3)"
+                        cursor.execute(
+                            sql, (input_row[criteria1_column_name], duplicate_title[0])
+                        )
+                        trgm_similarity = cursor.fetchone()[0]
+
                         sys.stdout.write(
-                            f"{Fore.YELLOW}→ Title:{Fore.RESET} {input_row[criteria1_column_name]}\n"
+                            f"{Fore.YELLOW}→ Title:{Fore.RESET} {input_row[criteria1_column_name]} ({trgm_similarity})\n"
                         )
                         sys.stdout.write(
                             f"{Fore.YELLOW}→ Handle:{Fore.RESET} {handle}\n\n"
@@ -301,6 +315,7 @@ with conn:
                             "id": input_row[id_column_name],
                             "Your Title": input_row[criteria1_column_name],
                             "Their Title": duplicate_title[0],
+                            "Similarity": trgm_similarity,
                             "Your Date": input_row[criteria3_column_name],
                             "Their Date": duplicate_item_date,
                             "Handle": handle,
