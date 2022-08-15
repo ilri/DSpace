@@ -1110,6 +1110,10 @@
         <stored-value>COMMUNICATIONS</stored-value>
       </pair>
       <pair>
+        <displayed-value>CONSERVATION</displayed-value>
+        <stored-value>CONSERVATION</stored-value>
+      </pair>
+      <pair>
         <displayed-value>CONSUMPTION</displayed-value>
         <stored-value>CONSUMPTION</stored-value>
       </pair>
