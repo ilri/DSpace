@@ -267,7 +267,7 @@
           <repeatable>false</repeatable>
           <label>URL</label>
           <input-type>onebox</input-type>
-          <hint>Enter a full URL for the item.</hint>
+          <hint>Enter a full URL for the item (could be a website, blog post, Google Books URL, etc).</hint>
           <required></required>
         </field>
         <field>
