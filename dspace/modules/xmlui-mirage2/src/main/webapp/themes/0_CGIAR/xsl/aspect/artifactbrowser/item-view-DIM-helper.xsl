@@ -304,7 +304,6 @@ such as authors, subject, citation, description, etc
             <div class="simple-item-view-description item-page-field-wrapper table">
                 <xsl:call-template name="itemSummaryView-DIM-permanenturi"/>
                 <xsl:call-template name="itemSummaryView-DIM-interneturl"/>
-                <xsl:call-template name="itemSummaryView-DIM-googleurl"/>
                 <xsl:call-template name="itemSummaryView-DIM-doi"/>
             </div>
 
@@ -1085,39 +1084,6 @@ such as authors, subject, citation, description, etc
                         </xsl:if>
                     </xsl:for-each>
                     <xsl:if test="count(dim:field[@mdschema='dcterms' and @element='relation'] ) &gt; 1">
-                        <div class="spacer">&#160;</div>
-                    </xsl:if>
-                </span>
-            </div>
-        </xsl:if>
-    </xsl:template>
-    <xsl:template name="itemSummaryView-DIM-googleurl">
-        <xsl:if test="dim:field[@mdschema='cg' and @element='identifier' and @qualifier='googleurl' ]">
-            <div class="text-left">
-                <strong>
-                    <i18n:text>xmlui.dri2xhtml.METS-1.0.item-identifier-googleurl</i18n:text>
-                </strong>
-
-                <span >
-                    <xsl:for-each select="dim:field[@mdschema='cg' and @element='identifier' and @qualifier='googleurl']">
-                        <xsl:choose>
-                            <xsl:when test="node()">
-                                <a target="_blank">
-                                    <xsl:attribute name="href">
-                                        <xsl:copy-of select="./node()"/>
-                                    </xsl:attribute>
-                                    <xsl:copy-of select="./node()"/>
-                                </a>
-                            </xsl:when>
-                            <xsl:otherwise>
-                                <xsl:text>&#160;</xsl:text>
-                            </xsl:otherwise>
-                        </xsl:choose>
-                        <xsl:if test="count(following-sibling::dim:field[@mdschema='cg' and @element='identifier' and @qualifier='googleurl']) != 0">
-                            <xsl:text>; </xsl:text>
-                        </xsl:if>
-                    </xsl:for-each>
-                    <xsl:if test="count(dim:field[@mdschema='cg' and @element='identifier' and @qualifier='googleurl'] ) &gt; 1">
                         <div class="spacer">&#160;</div>
                     </xsl:if>
                 </span>

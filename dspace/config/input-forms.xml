@@ -272,16 +272,6 @@
         </field>
         <field>
           <dc-schema>cg</dc-schema>
-          <dc-element>identifier</dc-element>
-          <dc-qualifier>googleurl</dc-qualifier>
-          <repeatable>false</repeatable>
-          <label>Google Books URL</label>
-          <input-type>onebox</input-type>
-          <hint>Please enter the full URL, for example: https://books.google.com/books?id=_2pXvT6SMSMC</hint>
-          <required></required>
-        </field>
-        <field>
-          <dc-schema>cg</dc-schema>
           <dc-element>link</dc-element>
           <dc-qualifier>permalink</dc-qualifier>
           <repeatable>false</repeatable>

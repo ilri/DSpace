@@ -40,12 +40,6 @@
 
     <dc-type>
         <schema>cg</schema>
-        <element>identifier</element>
-        <qualifier>googleurl</qualifier>
-    </dc-type>
-
-    <dc-type>
-        <schema>cg</schema>
         <element>link</element>
         <qualifier>permalink</qualifier>
     </dc-type>
