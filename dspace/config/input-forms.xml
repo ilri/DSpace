@@ -1072,6 +1072,10 @@
         <stored-value>BUFFALO</stored-value>
       </pair>
       <pair>
+        <displayed-value>BUSHMEAT</displayed-value>
+        <stored-value>BUSHMEAT</stored-value>
+      </pair>
+      <pair>
         <displayed-value>CAPACITY STRENGTHENING</displayed-value>
         <stored-value>CAPACITY STRENGTHENING</stored-value>
       </pair>
@@ -1424,8 +1428,16 @@
         <stored-value>WATER</stored-value>
       </pair>
       <pair>
+        <displayed-value>WILD MEAT</displayed-value>
+        <stored-value>WILD MEAT</stored-value>
+      </pair>
+      <pair>
         <displayed-value>WILDLIFE</displayed-value>
         <stored-value>WILDLIFE</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>WILDLIFE CONSERVATION</displayed-value>
+        <stored-value>WILDLIFE CONSERVATION</stored-value>
       </pair>
       <pair>
         <displayed-value>WOMEN</displayed-value>
