@@ -780,16 +780,10 @@
 
 					    <p>Please try to exercise restraint when using these resources. For example, it is a great help to us if your programmatic use of the server can respect our <a href="/robots.txt"><code>robots.txt</code></a>, specify a user agent for its requests, and reuse its <code>JSESSIONID</code> cookie. Also note that we have a public test server at dspacetest.cgiar.org which is running a recent snapshot of the production CGSpace software and data — please use this if you're testing a new integration or harvesting process! Lastly, if you are using our data we would love to <a href="/feedback">hear from you</a>.</p>
 
-					    <p>The CGSpace codebase is managed on <a href="https://github.com/ilri/DSpace">GitHub</a>.</p>
+					    <p>The CGSpace source code is managed on <a href="https://github.com/ilri/DSpace">GitHub</a>.</p>
 
 					  <h2>History and Evolution</h2>
-                              <p>A little history and some credits.</p>
-
-                              <p>CGSpace emerged from work by the <a href="https://www.ilri.org" title="ILRI homepage">International Livestock Research Institute (ILRI)</a> to make its products public in a state of the art repository. Starting in late 2009, ILRI set up a DSpace repository. Looking for ways to capture products of projects hosted by, but not belonging to ILRI, communities were set up for other initiatives, such as the CGIAR System-wide Livestock Program.</p>
-
-								<p>In 2010 and 2011, the <a href="https://waterandfood.org" title="CGIAR Challenge Program on Water and Food homepage">CGIAR Challenge Program on Water and Food</a> and the <a href="https://ccafs.cgiar.org/" title="CGIAR Research Program on Climate Change, Agriculture and Food Security homepage">CGIAR Research Program on Climate Change, Agriculture and Food Security</a> joined this effort and agreed to work on a "co-tenant" application of a single DSpace.</p>
-
-                               <p>With technical assistance and training from <a href="https://www.atmire.com" title="Atmire homepage">Atmire</a>, the collaboration has grown to include other centers and initiatives seeking to have such a repository while sharing costs and achieving synergies. Some of this work has been documented in a series of presentations and blogposts (<a href="http://www.slideshare.net/search/slideshow?searchfrom=header&amp;q=cgspace;">Slideshare</a> and <a href="https://maarifa.ilri.org/category/cgspace">Maarifa</a>).</p>
+                             <p>With technical assistance and training from <a href="https://www.atmire.com/">Atmire</a>, the collaboration has grown to include other centers and initiatives seeking to have such a repository while sharing costs and achieving synergies. Some of this work has been documented in a series of presentations and blogposts (<a href="http://www.slideshare.net/search/slideshow?searchfrom=header&amp;q=cgspace;">Slideshare</a> and <a href="https://maarifa.ilri.org/category/cgspace">Maarifa</a>), in <a href="https://hdl.handle.net/10568/82764">this article</a>, and <a href="https://www.ilri.org/news/celebrating-open-access-cgspace">this ILRI news story</a> and <a href="https://hdl.handle.net/10568/125167">infographic</a>.</p>
 
                               <p>The key individuals involved included:</p>
                               <ul>
@@ -800,13 +794,17 @@
                                 <li>Bram Luyten (Atmire) ― confirmed the technical feasibility of a co-tenant application; provides ongoing state of the art advice and inputs and connections to the core DSpace developers.</li>
                                 <li>Vanessa Meadu (CCAFS) ― joined forces and motivated DSpace to Drupal interface.</li>
                                 <li>Abenet Yabowork (ILRI) ― curates and quality checks the ILRI content; supports partner content.</li>
+                                <li>Jane Poole (ILRI) – helped us cross information-data interfaces and building open access open data synergies.</li>
                                 <li>Tezira Lore (ILRI) ― from the beginning, she systematically published ILRI's food safety and zoonotic disease research through CGSpace.</li>
-                                <li>Chris Addison (CTA) ― identified CGSpace as a suitable platform to host archive, and now also current, content from CTA.</li>
-                                <li>Bizuwork Mulat, Abeba Desta and Goshu Cherinet (ILRI), Megan Zandstra and Leroy Mwanzia (CIAT), Udana Ariyawansa and Chandima Gunadasa (IWMI), Sufiet Erlita (CIFOR), Joel Ranck and Cecilia Ferreyra (CIP), Maria Garruccio (Bioversity), Martin Mueller (IITA), Ryan Miller (IFPRI), Thierry Lewyllie (CTA) and Daniel Haile-Michael and Tsega Tassema (ILRI web team) all brought their specific expertise and dedication to help move the collaboration forward.</li>
+                                <li>Bizuwork Mulat (ILRI) ― dedicated content submissions and editing.</li>
+                                <li>Abeba Desta and Goshu Cherinet (ILRI) – content editors, Megan Zandstra, Simone Staiger, Margarita Ramirez, and Leroy Mwanzia (CIAT), Udana Ariyawansa and Chandima Gunadasa (IWMI), Sufiet Erlita (CIFOR), Joel Ranck, Cecilia Ferreyra and James Stapleton (CIP), Maria Garruccio and Francesca Giampieri (Bioversity), Kathy Lopez, Bosede Ayinla, Bosun Obileye, Soji Oloyede and Jonathan Odhong (IITA), Ryan Miller (IFPRI), Marianne Gadeberg (Gender Platform), Thierry Lewyllie (CTA) and Daniel Haile-Michael and Tsega Tassema (ILRI web team) all brought their specific expertise and dedication to help move the collaboration forward.</li>
+                                <li>Chris Addison (CTA) ― identified CGSpace as a suitable platform to archive and publish content from CTA.</li>
+                                <li>Marie Angelique Laporte (Alliance Bioversity-CIAT) and Martin Mueller (IITA) for moving us all forward on consistent <a href="https://github.com/AgriculturalSemantics/cg-core">"CG Core" metadata</a>.</li>
+                                <li>For our open <a href="https://cgspace.cgiar.org/explorer">explorer interface</a>, credits to Enrico Bonaiuti (ICARDA) and team for being open to collaborate, and the CodeObia team (Mohammad Salem and Moayad Al-Najdawi) for the <a href="https://github.com/ilri/OpenRXV">open-source software</a>.</li>
+                                <li>As we move forward towards a One CGIAR framework, Michael Victor (ILRI), Indira Yerramareddy (IFPRI), Enrico Bonaiuti (ICARDA), Leroy Mwanzia, David Abreu (Alliance Bioversity-CIAT) and Brian King (Alliance Bioversity-CIAT) provide strategic oversight and directions.</li>
                               </ul>
 					  <h2>Disclaimer</h2>
 					    <p>CGSpace content providers and partners accept no liability to any consequence resulting from use of the content or data made available in this repository. Users of this content assume full responsibility for compliance with all relevant national or international regulations and legislation.</p>
-                        
                     </div>
                 </xsl:when>
                 <xsl:when test="starts-with($request-uri, 'page/privacy')">
