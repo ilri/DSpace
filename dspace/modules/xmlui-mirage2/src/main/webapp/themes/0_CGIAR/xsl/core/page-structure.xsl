@@ -783,6 +783,12 @@
 					    <p>The CGSpace source code is managed on <a href="https://github.com/ilri/DSpace">GitHub</a>.</p>
 
 					  <h2>History and Evolution</h2>
+                              <p>A little history and some credits.</p>
+
+                              <p>CGSpace emerged from work by the <a href="https://www.ilri.org" title="ILRI homepage">International Livestock Research Institute (ILRI)</a> to make its products public in a state of the art repository. Starting in late 2009, ILRI set up a DSpace repository. Looking for ways to capture products of projects hosted by, but not belonging to ILRI, communities were set up for other initiatives, such as the CGIAR System-wide Livestock Program.</p>
+
+								<p>In 2010 and 2011, the <a href="https://waterandfood.org" title="CGIAR Challenge Program on Water and Food homepage">CGIAR Challenge Program on Water and Food</a> and the <a href="https://ccafs.cgiar.org/" title="CGIAR Research Program on Climate Change, Agriculture and Food Security homepage">CGIAR Research Program on Climate Change, Agriculture and Food Security</a> joined this effort and agreed to work on a "co-tenant" application of a single DSpace.</p>
+
                              <p>With technical assistance and training from <a href="https://www.atmire.com/">Atmire</a>, the collaboration has grown to include other centers and initiatives seeking to have such a repository while sharing costs and achieving synergies. Some of this work has been documented in a series of presentations and blogposts (<a href="http://www.slideshare.net/search/slideshow?searchfrom=header&amp;q=cgspace;">Slideshare</a> and <a href="https://maarifa.ilri.org/category/cgspace">Maarifa</a>), in <a href="https://hdl.handle.net/10568/82764">this article</a>, and <a href="https://www.ilri.org/news/celebrating-open-access-cgspace">this ILRI news story</a> and <a href="https://hdl.handle.net/10568/125167">infographic</a>.</p>
 
                               <p>The key individuals involved included:</p>
