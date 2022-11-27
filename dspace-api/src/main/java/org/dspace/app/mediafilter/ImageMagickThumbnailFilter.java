@@ -164,7 +164,7 @@ public abstract class ImageMagickThumbnailFilter extends MediaFilter {
                 // CropBox. Note: we don't need to do anything special to detect if
                 // the CropBox is missing or empty because pdfbox will set it to the
                 // same size as the MediaBox if it doesn't exist.
-                PDPage pdfPage = PDDocument.load(f).getPage(1);
+                PDPage pdfPage = PDDocument.load(f).getPage(0);
                 PDRectangle pdfPageMediaBox = pdfPage.getMediaBox();
                 PDRectangle pdfPageCropBox = pdfPage.getCropBox();
 
