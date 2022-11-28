@@ -3842,12 +3842,16 @@
         <stored-value>Africa</stored-value>
       </pair>
       <pair>
-        <displayed-value>Sub-Saharan Africa</displayed-value>
-        <stored-value>Sub-Saharan Africa</stored-value>
+        <displayed-value>Americas</displayed-value>
+        <stored-value>Americas</stored-value>
       </pair>
       <pair>
         <displayed-value>Asia</displayed-value>
         <stored-value>Asia</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Australia and New Zealand</displayed-value>
+        <stored-value>Australia and New Zealand</stored-value>
       </pair>
       <pair>
         <displayed-value>Caribbean</displayed-value>
@@ -3866,12 +3870,24 @@
         <stored-value>Central Asia</stored-value>
       </pair>
       <pair>
+        <displayed-value>Channel Islands</displayed-value>
+        <stored-value>Channel Islands</stored-value>
+      </pair>
+      <pair>
         <displayed-value>East Asia</displayed-value>
         <stored-value>East Asia</stored-value>
       </pair>
       <pair>
         <displayed-value>Eastern Africa</displayed-value>
         <stored-value>Eastern Africa</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Eastern Asia</displayed-value>
+        <stored-value>Eastern Asia</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Eastern Europe</displayed-value>
+        <stored-value>Eastern Europe</stored-value>
       </pair>
       <pair>
         <displayed-value>Europe</displayed-value>
@@ -3882,32 +3898,52 @@
         <stored-value>Latin America</stored-value>
       </pair>
       <pair>
-        <displayed-value>Middle East</displayed-value>
-        <stored-value>Middle East</stored-value>
+        <displayed-value>Latin America and the Caribbean</displayed-value>
+        <stored-value>Latin America and the Caribbean</stored-value>
       </pair>
       <pair>
-        <displayed-value>Northern Africa</displayed-value>
-        <stored-value>Northern Africa</stored-value>
+        <displayed-value>Melanesia</displayed-value>
+        <stored-value>Melanesia</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Micronesia</displayed-value>
+        <stored-value>Micronesia</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Middle Africa</displayed-value>
+        <stored-value>Middle Africa</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Middle East</displayed-value>
+        <stored-value>Middle East</stored-value>
       </pair>
       <pair>
         <displayed-value>North America</displayed-value>
         <stored-value>North America</stored-value>
       </pair>
       <pair>
+        <displayed-value>Northern Africa</displayed-value>
+        <stored-value>Northern Africa</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Northern America</displayed-value>
+        <stored-value>Northern America</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Northern Europe</displayed-value>
+        <stored-value>Northern Europe</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Oceania</displayed-value>
+        <stored-value>Oceania</stored-value>
+      </pair>
+      <pair>
         <displayed-value>Pacific</displayed-value>
         <stored-value>Pacific</stored-value>
       </pair>
       <pair>
-        <displayed-value>Southern Asia</displayed-value>
-        <stored-value>Southern Asia</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>South-eastern Asia</displayed-value>
-        <stored-value>South-eastern Asia</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>Southern Africa</displayed-value>
-        <stored-value>Southern Africa</stored-value>
+        <displayed-value>Polynesia</displayed-value>
+        <stored-value>Polynesia</stored-value>
       </pair>
       <pair>
         <displayed-value>Sahel</displayed-value>
@@ -3918,6 +3954,30 @@
         <stored-value>South America</stored-value>
       </pair>
       <pair>
+        <displayed-value>South-eastern Asia</displayed-value>
+        <stored-value>South-eastern Asia</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Southern Africa</displayed-value>
+        <stored-value>Southern Africa</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Southern Asia</displayed-value>
+        <stored-value>Southern Asia</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Southern Europe</displayed-value>
+        <stored-value>Southern Europe</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Sub-Saharan Africa</displayed-value>
+        <stored-value>Sub-Saharan Africa</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>West and Central Africa</displayed-value>
+        <stored-value>West and Central Africa</stored-value>
+      </pair>
+      <pair>
         <displayed-value>Western Africa</displayed-value>
         <stored-value>Western Africa</stored-value>
       </pair>
@@ -3926,8 +3986,8 @@
         <stored-value>Western Asia</stored-value>
       </pair>
       <pair>
-        <displayed-value>West and Central Africa</displayed-value>
-        <stored-value>West and Central Africa</stored-value>
+        <displayed-value>Western Europe</displayed-value>
+        <stored-value>Western Europe</stored-value>
       </pair>
     </value-pairs>
     <value-pairs value-pairs-name="subregion_types" dc-term="subregion_types">
