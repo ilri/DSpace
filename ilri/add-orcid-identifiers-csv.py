@@ -34,13 +34,14 @@
 #
 
 import argparse
-from colorama import Fore
 import csv
-import psycopg2
-import psycopg2.extras
 import re
 import signal
 import sys
+
+import psycopg2
+import psycopg2.extras
+from colorama import Fore
 
 
 def main():
