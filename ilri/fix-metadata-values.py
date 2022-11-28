@@ -1,23 +1,6 @@
 #!/usr/bin/env python3
-
-# fix-metadata-values.py 1.1.0
 #
-# Copyright 2018–2020 Alan Orth.
-#
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-# ---
+# fix-metadata-values.py v1.1.0
 #
 # Expects a CSV with two columns: one with "bad" metadata values and one with
 # correct values. Basically just a mass search and replace function for DSpace's
@@ -32,6 +15,17 @@
 # See: http://initd.org/psycopg
 # See: http://initd.org/psycopg/docs/usage.html#with-statement
 # See: http://initd.org/psycopg/docs/faq.html#best-practices
+#
+# TODO:
+#   - convert format() to f-strings
+#   - update last_modified date for items when updating metadata values
+#   - look up metadata field IDs automatically
+#
+# ---
+#
+# Copyright 2018–2022 Alan Orth
+#
+# SPDX-License-Identifier: GPL-3.0-only
 
 import argparse
 from colorama import Fore
