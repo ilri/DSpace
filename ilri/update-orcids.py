@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-
-# update-orcids.py 0.0.1
+#
+# update-orcids.py v0.1.0
 #
 # Copyright 2022 Alan Orth.
 #
@@ -21,18 +21,21 @@
 # This script is written for Python 3 and requires several modules that you can
 # install with pip (I recommend setting up a Python virtual environment first):
 #
-#   $ pip install psycopg2-binary colorama
+#   $ pip install psycopg2 colorama
 #
 # See: http://initd.org/psycopg
 # See: http://initd.org/psycopg/docs/usage.html#with-statement
 # See: http://initd.org/psycopg/docs/faq.html#best-practices
+#
 
 import argparse
-from colorama import Fore
-import psycopg2
 import re
 import signal
 import sys
+
+import psycopg2
+import util
+from colorama import Fore
 
 
 def signal_handler(signal, frame):
@@ -123,12 +126,16 @@ for line in args.input_file.read().splitlines():
         # cursor will be closed after this block exits
         # see: http://initd.org/psycopg/docs/usage.html#with-statement
         with conn.cursor() as cursor:
-            if args.dry_run:
-                # note that the SQL here is quoted differently to allow us to use
-                # LIKE with % wildcards with our paremeter subsitution
-                sql = "SELECT text_value FROM metadatavalue WHERE dspace_object_id IN (SELECT uuid FROM item) AND metadata_field_id=%s AND text_value LIKE '%%' || %s || '%%' AND text_value!=%s"
-                cursor.execute(sql, (args.metadata_field_id, orcid_identifier, line))
+            # note that the SQL here is quoted differently to allow us to use
+            # LIKE with % wildcards with our paremeter subsitution
+            sql = "SELECT text_value, dspace_object_id FROM metadatavalue WHERE dspace_object_id IN (SELECT uuid FROM item) AND metadata_field_id=%s AND text_value LIKE '%%' || %s || '%%' AND text_value!=%s"
+            cursor.execute(sql, (args.metadata_field_id, orcid_identifier, line))
 
+            # Get the records for items with matching metadata. We will use the
+            # object IDs to update their last_modified dates.
+            matching_records = cursor.fetchall()
+
+            if args.dry_run:
                 if cursor.rowcount > 0 and not args.quiet:
                     print(
                         Fore.GREEN
@@ -155,6 +162,11 @@ for line in args.input_file.read().splitlines():
                         + "Fixed {0} occurences of: {1}".format(cursor.rowcount, line)
                         + Fore.RESET
                     )
+
+                # Update the last_modified date for each item we've changed
+                for record in matching_records:
+                    util.update_item_last_modified(cursor, record[1])
+
 
 # close database connection before we exit
 conn.close()
