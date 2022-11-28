@@ -206,7 +206,7 @@ for row in reader:
                 for item_row in item_rows:
                     sql = "UPDATE item SET last_modified=NOW() WHERE uuid=%s;"
                     # Syntax looks weird here, but the second argument must always be a sequence
-                    # See:
+                    # See: https://www.psycopg.org/docs/usage.html
                     cursor.execute(sql, [item_row[0]])
 
 # close database connection before we exit
