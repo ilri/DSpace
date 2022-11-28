@@ -28,11 +28,12 @@
 # SPDX-License-Identifier: GPL-3.0-only
 
 import argparse
-from colorama import Fore
 import csv
-import psycopg2
 import signal
 import sys
+
+import psycopg2
+from colorama import Fore
 
 
 def signal_handler(signal, frame):
