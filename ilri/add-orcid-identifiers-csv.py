@@ -238,6 +238,12 @@ def main():
                                     confidence,
                                 ),
                             )
+
+                            # Update the last_modified date for each item
+                            sql = "UPDATE item SET last_modified=NOW() WHERE uuid=%s;"
+                            # Syntax looks weird here, but the second argument must always be a sequence
+                            # See: https://www.psycopg.org/docs/usage.html
+                            cursor.execute(sql, [dspace_object_id])
                         else:
                             if args.debug:
                                 sys.stderr.write(
