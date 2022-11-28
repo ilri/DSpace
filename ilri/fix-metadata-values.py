@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# fix-metadata-values.py v1.1.0
+# fix-metadata-values.py v1.2.0
 #
 # Expects a CSV with two columns: one with "bad" metadata values and one with
 # correct values. Basically just a mass search and replace function for DSpace's
@@ -18,7 +18,6 @@
 #
 # TODO:
 #   - convert format() to f-strings
-#   - update last_modified date for items when updating metadata values
 #   - look up metadata field IDs automatically
 #
 # ---
@@ -163,19 +162,27 @@ for row in reader:
         # cursor will be closed after this block exits
         # see: http://initd.org/psycopg/docs/usage.html#with-statement
         with conn.cursor() as cursor:
-            if args.dry_run:
-                sql = "SELECT text_value FROM metadatavalue WHERE dspace_object_id IN (SELECT uuid FROM item) AND metadata_field_id=%s AND text_value=%s"
-                cursor.execute(sql, (args.metadata_field_id, row[args.from_field_name]))
+            # Get item UUIDs for metadata values that will be updated
+            sql = "SELECT dspace_object_id FROM metadatavalue WHERE dspace_object_id IN (SELECT uuid FROM item) AND metadata_field_id=%s AND text_value=%s"
+            cursor.execute(sql, (args.metadata_field_id, row[args.from_field_name]))
 
-                if cursor.rowcount > 0 and not args.quiet:
-                    print(
-                        Fore.GREEN
-                        + "Would fix {0} occurences of: {1}".format(
-                            cursor.rowcount, row[args.from_field_name]
+            if cursor.rowcount > 0:
+                if args.dry_run:
+                    if not args.quiet:
+                        print(
+                            Fore.GREEN
+                            + "Would fix {0} occurences of: {1}".format(
+                                cursor.rowcount, row[args.from_field_name]
+                            )
+                            + Fore.RESET
                         )
-                        + Fore.RESET
-                    )
-            else:
+
+                    # Since this a dry run we can continue to the next replacement
+                    continue
+
+                # Get the rows of matching items so we can update their last_modified dates
+                item_rows = cursor.fetchall()
+
                 sql = "UPDATE metadatavalue SET text_value=%s WHERE dspace_object_id IN (SELECT uuid FROM item) AND metadata_field_id=%s AND text_value=%s"
                 cursor.execute(
                     sql,
@@ -194,6 +201,13 @@ for row in reader:
                         )
                         + Fore.RESET
                     )
+
+                # Update the last_modified date for each item
+                for item_row in item_rows:
+                    sql = "UPDATE item SET last_modified=NOW() WHERE uuid=%s;"
+                    # Syntax looks weird here, but the second argument must always be a sequence
+                    # See:
+                    cursor.execute(sql, [item_row[0]])
 
 # close database connection before we exit
 conn.close()
