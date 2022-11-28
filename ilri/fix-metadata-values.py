@@ -32,6 +32,7 @@ import signal
 import sys
 
 import psycopg2
+import util
 from colorama import Fore
 
 
@@ -180,8 +181,9 @@ for row in reader:
                     # Since this a dry run we can continue to the next replacement
                     continue
 
-                # Get the rows of matching items so we can update their last_modified dates
-                item_rows = cursor.fetchall()
+                # Get the records for items with matching metadata. We will use the
+                # object IDs to update their last_modified dates.
+                matching_records = cursor.fetchall()
 
                 sql = "UPDATE metadatavalue SET text_value=%s WHERE dspace_object_id IN (SELECT uuid FROM item) AND metadata_field_id=%s AND text_value=%s"
                 cursor.execute(
@@ -202,12 +204,10 @@ for row in reader:
                         + Fore.RESET
                     )
 
-                # Update the last_modified date for each item
-                for item_row in item_rows:
-                    sql = "UPDATE item SET last_modified=NOW() WHERE uuid=%s;"
-                    # Syntax looks weird here, but the second argument must always be a sequence
-                    # See: https://www.psycopg.org/docs/usage.html
-                    cursor.execute(sql, [item_row[0]])
+                # Update the last_modified date for each item we've changed
+                for record in matching_records:
+                    util.update_item_last_modified(cursor, record[0])
+
 
 # close database connection before we exit
 conn.close()
