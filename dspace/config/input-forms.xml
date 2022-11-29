@@ -3858,10 +3858,6 @@
         <stored-value>Caribbean</stored-value>
       </pair>
       <pair>
-        <displayed-value>Central Africa</displayed-value>
-        <stored-value>Central Africa</stored-value>
-      </pair>
-      <pair>
         <displayed-value>Central America</displayed-value>
         <stored-value>Central America</stored-value>
       </pair>
@@ -3936,10 +3932,6 @@
       <pair>
         <displayed-value>Oceania</displayed-value>
         <stored-value>Oceania</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>Pacific</displayed-value>
-        <stored-value>Pacific</stored-value>
       </pair>
       <pair>
         <displayed-value>Polynesia</displayed-value>
