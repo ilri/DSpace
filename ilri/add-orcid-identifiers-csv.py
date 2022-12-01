@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# add-orcid-identifiers-csv.py v1.1.0
+# add-orcid-identifiers-csv.py v1.1.1
 #
 # Copyright 2021 Alan Orth.
 
@@ -200,14 +200,14 @@ def main():
                         if len(records_with_orcid_identifier) == 0:
                             if args.dry_run:
                                 print(
-                                    'Would add ORCID identifier "{0}" to item {1}.'.format(
+                                    'Would add ORCID identifier "{0}" to item {1}'.format(
                                         text_value, dspace_object_id
                                     )
                                 )
                                 continue
 
                             print(
-                                'Adding ORCID identifier "{0}" to item {1}.'.format(
+                                'Adding ORCID identifier "{0}" to item {1}'.format(
                                     text_value, dspace_object_id
                                 )
                             )
