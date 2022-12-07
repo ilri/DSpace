@@ -39,6 +39,7 @@ import csv
 import psycopg2
 import signal
 import sys
+import util
 
 
 def signal_handler(signal, frame):
@@ -126,20 +127,28 @@ for row in reader:
         # cursor will be closed after this block exits
         # see: http://initd.org/psycopg/docs/usage.html#with-statement
         with conn.cursor() as cursor:
-            if args.dry_run:
-                sql = "SELECT text_value FROM metadatavalue WHERE dspace_object_id IN (SELECT uuid FROM item) AND metadata_field_id=%s AND text_value=%s"
-                cursor.execute(sql, (args.metadata_field_id, row[args.from_field_name]))
+            # Get item UUIDs for metadata values that will be updated
+            sql = "SELECT dspace_object_id FROM metadatavalue WHERE dspace_object_id IN (SELECT uuid FROM item) AND metadata_field_id=%s AND text_value=%s"
+            cursor.execute(sql, (args.metadata_field_id, row[args.from_field_name]))
 
-                if cursor.rowcount > 0 and not args.quiet:
-                    print(
-                        Fore.GREEN
-                        + "Would delete {0} occurences of: {1}".format(
-                            cursor.rowcount, row[args.from_field_name]
+            if cursor.rowcount > 0:
+                if args.dry_run:
+                    if not args.quiet:
+                        print(
+                            Fore.GREEN
+                            + "Would delete {0} occurences of: {1}".format(
+                                cursor.rowcount, row[args.from_field_name]
+                            )
+                            + Fore.RESET
                         )
-                        + Fore.RESET
-                    )
 
-            else:
+                    # Since this a dry run we can continue to the next replacement
+                    continue
+
+                # Get the records for items with matching metadata. We will use the
+                # object IDs to update their last_modified dates.
+                matching_records = cursor.fetchall()
+
                 sql = "DELETE from metadatavalue WHERE dspace_object_id IN (SELECT uuid FROM item) AND metadata_field_id=%s AND text_value=%s"
                 cursor.execute(sql, (args.metadata_field_id, row[args.from_field_name]))
 
@@ -151,6 +160,10 @@ for row in reader:
                         )
                         + Fore.RESET
                     )
+
+                # Update the last_modified date for each item we've changed
+                for record in matching_records:
+                    util.update_item_last_modified(cursor, record[0])
 
 # close database connection before we exit
 conn.close()
