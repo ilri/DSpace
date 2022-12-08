@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# fix-metadata-values.py v1.2.0
+# fix-metadata-values.py v1.2.1
 #
 # Copyright 2018–2022 Alan Orth
 #
@@ -23,7 +23,6 @@
 # See: http://initd.org/psycopg/docs/faq.html#best-practices
 #
 # TODO:
-#   - convert format() to f-strings
 #   - look up metadata field IDs automatically
 
 import argparse
@@ -99,18 +98,14 @@ reader = csv.DictReader(args.csv_file)
 if args.from_field_name not in reader.fieldnames:
     sys.stderr.write(
         Fore.RED
-        + 'Specified field "{0}" does not exist in the CSV.\n'.format(
-            args.from_field_name
-        )
+        + f'Specified field "{args.from_field_name}" does not exist in the CSV.\n'
         + Fore.RESET
     )
     sys.exit(1)
 if args.to_field_name not in reader.fieldnames:
     sys.stderr.write(
         Fore.RED
-        + 'Specified field "{0}" does not exist in the CSV.\n'.format(
-            args.to_field_name
-        )
+        + f'Specified field "{args.to_field_name}" does not exist in the CSV.\n'
         + Fore.RESET
     )
     sys.exit(1)
@@ -121,9 +116,7 @@ signal.signal(signal.SIGINT, signal_handler)
 # connect to database
 try:
     conn = psycopg2.connect(
-        "dbname={} user={} password={} host='localhost'".format(
-            args.database_name, args.database_user, args.database_pass
-        )
+        f"dbname={args.database_name} user={args.database_user} password={args.database_pass} host='localhost'"
     )
 
     if args.debug:
@@ -138,9 +131,7 @@ for row in reader:
             # sometimes editors send me corrections with identical search/replace patterns
             sys.stderr.write(
                 Fore.YELLOW
-                + "Skipping identical search and replace for value: {0}\n".format(
-                    row[args.from_field_name]
-                )
+                + f"Skipping identical search and replace for value: {row[args.from_field_name]}\n"
                 + Fore.RESET
             )
 
@@ -151,9 +142,7 @@ for row in reader:
             # sometimes editors send me corrections with multi-value fields, which are supported in DSpace itself, but not here!
             sys.stderr.write(
                 Fore.YELLOW
-                + "Skipping correction with invalid | character: {0}\n".format(
-                    row[args.to_field_name]
-                )
+                + f"Skipping correction with invalid | character: {row[args.to_field_name]}\n"
                 + Fore.RESET
             )
 
@@ -172,9 +161,7 @@ for row in reader:
                     if not args.quiet:
                         print(
                             Fore.GREEN
-                            + "Would fix {0} occurences of: {1}".format(
-                                cursor.rowcount, row[args.from_field_name]
-                            )
+                            + f"Would fix {cursor.rowcount} occurences of: {row[args.from_field_name]}"
                             + Fore.RESET
                         )
 
@@ -198,9 +185,7 @@ for row in reader:
                 if cursor.rowcount > 0 and not args.quiet:
                     print(
                         Fore.GREEN
-                        + "Fixed {0} occurences of: {1}".format(
-                            cursor.rowcount, row[args.from_field_name]
-                        )
+                        + f"Fixed {cursor.rowcount} occurences of: {row[args.from_field_name]}"
                         + Fore.RESET
                     )
 
