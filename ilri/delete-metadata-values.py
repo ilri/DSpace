@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 #
-# delete-metadata-values.py 1.2.0
+# delete-metadata-values.py 1.2.1
 #
-# Copyright 2018–2020 Alan Orth.
+# Copyright 2018–2022 Alan Orth.
 #
 # SPDX-License-Identifier: GPL-3.0-only
 #
@@ -10,10 +10,10 @@
 #
 # Expects a CSV with one column of metadata values to delete, for example:
 #
-# delete
+# cg.contributor.affiliation
 # "some value to delete"
 #
-#   $ ./delete-metadata-values.py -db database -u user -p password -m 3 -f delete -i file.csv
+#   $ ./delete-metadata-values.py -db database -u user -p password -f cg.contributor.affiliation -i file.csv
 #
 # This script is written for Python 3 and DSpace 6+ and requires several modules
 # that you can install with pip (I recommend setting up a Python virtual env
@@ -67,13 +67,6 @@ parser.add_argument(
     required=True,
 )
 parser.add_argument(
-    "-m",
-    "--metadata-field-id",
-    type=int,
-    help="ID of the field in the metadatafieldregistry table",
-    required=True,
-)
-parser.add_argument(
     "-q",
     "--quiet",
     help="Do not print progress messages to the screen.",
@@ -117,9 +110,13 @@ for row in reader:
         # cursor will be closed after this block exits
         # see: http://initd.org/psycopg/docs/usage.html#with-statement
         with conn.cursor() as cursor:
+            metadata_field_id = util.field_name_to_field_id(
+                cursor, args.from_field_name
+            )
+
             # Get item UUIDs for metadata values that will be updated
             sql = "SELECT dspace_object_id FROM metadatavalue WHERE dspace_object_id IN (SELECT uuid FROM item) AND metadata_field_id=%s AND text_value=%s"
-            cursor.execute(sql, (args.metadata_field_id, row[args.from_field_name]))
+            cursor.execute(sql, (metadata_field_id, row[args.from_field_name]))
 
             if cursor.rowcount > 0:
                 if args.dry_run:
@@ -140,7 +137,7 @@ for row in reader:
                 matching_records = cursor.fetchall()
 
                 sql = "DELETE from metadatavalue WHERE dspace_object_id IN (SELECT uuid FROM item) AND metadata_field_id=%s AND text_value=%s"
-                cursor.execute(sql, (args.metadata_field_id, row[args.from_field_name]))
+                cursor.execute(sql, (metadata_field_id, row[args.from_field_name]))
 
                 if cursor.rowcount > 0 and not args.quiet:
                     print(
