@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# fix-metadata-values.py v1.2.1
+# fix-metadata-values.py v1.2.2
 #
 # Copyright 2018–2022 Alan Orth
 #
@@ -22,8 +22,6 @@
 # See: http://initd.org/psycopg/docs/usage.html#with-statement
 # See: http://initd.org/psycopg/docs/faq.html#best-practices
 #
-# TODO:
-#   - look up metadata field IDs automatically
 
 import argparse
 import csv
@@ -68,13 +66,6 @@ parser.add_argument(
     "-f",
     "--from-field-name",
     help="Name of column with values to be replaced.",
-    required=True,
-)
-parser.add_argument(
-    "-m",
-    "--metadata-field-id",
-    type=int,
-    help="ID of the field in the metadatafieldregistry table.",
     required=True,
 )
 parser.add_argument(
@@ -152,9 +143,13 @@ for row in reader:
         # cursor will be closed after this block exits
         # see: http://initd.org/psycopg/docs/usage.html#with-statement
         with conn.cursor() as cursor:
+            metadata_field_id = util.field_name_to_field_id(
+                cursor, args.from_field_name
+            )
+
             # Get item UUIDs for metadata values that will be updated
             sql = "SELECT dspace_object_id FROM metadatavalue WHERE dspace_object_id IN (SELECT uuid FROM item) AND metadata_field_id=%s AND text_value=%s"
-            cursor.execute(sql, (args.metadata_field_id, row[args.from_field_name]))
+            cursor.execute(sql, (metadata_field_id, row[args.from_field_name]))
 
             if cursor.rowcount > 0:
                 if args.dry_run:
@@ -177,7 +172,7 @@ for row in reader:
                     sql,
                     (
                         row[args.to_field_name],
-                        args.metadata_field_id,
+                        metadata_field_id,
                         row[args.from_field_name],
                     ),
                 )
