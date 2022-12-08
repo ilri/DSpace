@@ -4,18 +4,7 @@
 #
 # Copyright 2021 Alan Orth.
 #
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+# SPDX-License-Identifier: GPL-3.0-only
 #
 # ---
 #
@@ -26,7 +15,7 @@
 # This script is written for Python 3 and requires several modules that you can
 # install with pip (I recommend setting up a Python virtual environment first):
 #
-#   $ pip install psycopg2-binary colorama
+#   $ pip install psycopg2 colorama
 #
 # See: http://initd.org/psycopg
 # See: http://initd.org/psycopg/docs/usage.html#with-statement

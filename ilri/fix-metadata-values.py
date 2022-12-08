@@ -2,6 +2,12 @@
 #
 # fix-metadata-values.py v1.2.0
 #
+# Copyright 2018–2022 Alan Orth
+#
+# SPDX-License-Identifier: GPL-3.0-only
+#
+# ---
+#
 # Expects a CSV with two columns: one with "bad" metadata values and one with
 # correct values. Basically just a mass search and replace function for DSpace's
 # PostgreSQL database. This script only works on DSpace 6+. Make sure to do a
@@ -10,7 +16,7 @@
 # This script is written for Python 3 and requires several modules that you can
 # install with pip (I recommend setting up a Python virtual environment first):
 #
-#   $ pip install psycopg2-binary colorama
+#   $ pip install psycopg2 colorama
 #
 # See: http://initd.org/psycopg
 # See: http://initd.org/psycopg/docs/usage.html#with-statement
@@ -19,12 +25,6 @@
 # TODO:
 #   - convert format() to f-strings
 #   - look up metadata field IDs automatically
-#
-# ---
-#
-# Copyright 2018–2022 Alan Orth
-#
-# SPDX-License-Identifier: GPL-3.0-only
 
 import argparse
 import csv
