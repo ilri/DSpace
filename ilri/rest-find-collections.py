@@ -66,7 +66,7 @@ def parse_community(community_id):
         collections = request.json()["collections"]
 
         for subcommunity in subcommunities:
-            subcommunity_id = subcommunity["id"]
+            subcommunity_id = subcommunity["uuid"]
 
             if args.debug:
                 sys.stderr.write(
@@ -86,7 +86,7 @@ def parse_community(community_id):
                 sys.stderr.write(
                     Fore.YELLOW
                     + "Found collection (id: {collection_id}, handle: {collection_handle}): {collection_name}\n".format(
-                        collection_id=str(collection["id"]),
+                        collection_id=str(collection["uuid"]),
                         collection_handle=collection["handle"],
                         collection_name=collection["name"],
                     )
@@ -152,7 +152,7 @@ if request.status_code == requests.codes.ok:
 
     # Make sure the given handle is a community
     if handle_type == "community":
-        community_id = request.json()["id"]
+        community_id = request.json()["uuid"]
         parse_community(community_id)
 
         for collection in all_collections:
