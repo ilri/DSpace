@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# delete-metadata-values.py 1.2.1
+# delete-metadata-values.py 1.2.2
 #
 # Copyright 2018–2022 Alan Orth.
 #
@@ -115,7 +115,7 @@ for row in reader:
             )
 
             # Get item UUIDs for metadata values that will be updated
-            sql = "SELECT dspace_object_id FROM metadatavalue WHERE dspace_object_id IN (SELECT uuid FROM item) AND metadata_field_id=%s AND text_value=%s"
+            sql = "SELECT dspace_object_id FROM metadatavalue WHERE dspace_object_id IN (SELECT uuid FROM item WHERE in_archive AND NOT withdrawn) AND metadata_field_id=%s AND text_value=%s"
             cursor.execute(sql, (metadata_field_id, row[args.from_field_name]))
 
             if cursor.rowcount > 0:
@@ -136,7 +136,7 @@ for row in reader:
                 # object IDs to update their last_modified dates.
                 matching_records = cursor.fetchall()
 
-                sql = "DELETE from metadatavalue WHERE dspace_object_id IN (SELECT uuid FROM item) AND metadata_field_id=%s AND text_value=%s"
+                sql = "DELETE from metadatavalue WHERE dspace_object_id IN (SELECT uuid FROM item WHERE in_archive AND NOT withdrawn) AND metadata_field_id=%s AND text_value=%s"
                 cursor.execute(sql, (metadata_field_id, row[args.from_field_name]))
 
                 if cursor.rowcount > 0 and not args.quiet:

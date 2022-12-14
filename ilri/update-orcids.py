@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# update-orcids.py v0.1.0
+# update-orcids.py v0.1.1
 #
 # Copyright 2022 Alan Orth.
 #
@@ -128,7 +128,7 @@ for line in args.input_file.read().splitlines():
         with conn.cursor() as cursor:
             # note that the SQL here is quoted differently to allow us to use
             # LIKE with % wildcards with our paremeter subsitution
-            sql = "SELECT text_value, dspace_object_id FROM metadatavalue WHERE dspace_object_id IN (SELECT uuid FROM item) AND metadata_field_id=%s AND text_value LIKE '%%' || %s || '%%' AND text_value!=%s"
+            sql = "SELECT text_value, dspace_object_id FROM metadatavalue WHERE dspace_object_id IN (SELECT uuid FROM item WHERE in_archive AND NOT withdrawn) AND metadata_field_id=%s AND text_value LIKE '%%' || %s || '%%' AND text_value!=%s"
             cursor.execute(sql, (args.metadata_field_id, orcid_identifier, line))
 
             # Get the records for items with matching metadata. We will use the
@@ -145,7 +145,7 @@ for line in args.input_file.read().splitlines():
                         + Fore.RESET
                     )
             else:
-                sql = "UPDATE metadatavalue SET text_value=%s WHERE dspace_object_id IN (SELECT uuid FROM item) AND metadata_field_id=%s AND text_value LIKE '%%' || %s || '%%' AND text_value!=%s"
+                sql = "UPDATE metadatavalue SET text_value=%s WHERE dspace_object_id IN (SELECT uuid FROM item WHERE in_archive AND NOT withdrawn) AND metadata_field_id=%s AND text_value LIKE '%%' || %s || '%%' AND text_value!=%s"
                 cursor.execute(
                     sql,
                     (

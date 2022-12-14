@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# check-duplicates.py 0.4.1
+# check-duplicates.py 0.4.2
 #
 # Copyright 2021 Alan Orth.
 #
@@ -202,7 +202,7 @@ with conn:
             # operator (%, written below twice for escaping) instead of the sim-
             # larity function, as indexes are bound to operators, not functions!
             # Also, if I leave off the item query it takes twice as long!
-            sql = "SELECT text_value, dspace_object_id FROM metadatavalue WHERE dspace_object_id IN (SELECT uuid FROM item) AND metadata_field_id=%s AND text_value %% %s"
+            sql = "SELECT text_value, dspace_object_id FROM metadatavalue WHERE dspace_object_id IN (SELECT uuid FROM item WHERE in_archive AND NOT withdrawn) AND metadata_field_id=%s AND text_value %% %s"
 
             cursor.execute(
                 sql,

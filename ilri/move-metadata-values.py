@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# move-metadata-values.py 0.1.0
+# move-metadata-values.py 0.1.1
 #
 # Copyright 2021–2022 Alan Orth.
 #
@@ -112,7 +112,7 @@ for line in args.input_file:
             to_field_id = util.field_name_to_field_id(cursor, args.to_field_name)
 
             # Get item UUIDs for metadata values that will be updated
-            sql = "SELECT dspace_object_id FROM metadatavalue WHERE dspace_object_id IN (SELECT uuid FROM item) AND metadata_field_id=%s AND text_value=%s"
+            sql = "SELECT dspace_object_id FROM metadatavalue WHERE dspace_object_id IN (SELECT uuid FROM item WHERE in_archive AND NOT withdrawn) AND metadata_field_id=%s AND text_value=%s"
             cursor.execute(sql, (from_field_id, line))
 
             if cursor.rowcount > 0:
@@ -129,7 +129,7 @@ for line in args.input_file:
                 # object IDs to update their last_modified dates.
                 matching_records = cursor.fetchall()
 
-                sql = "UPDATE metadatavalue SET metadata_field_id=%s WHERE dspace_object_id IN (SELECT uuid FROM item) AND metadata_field_id=%s AND text_value=%s"
+                sql = "UPDATE metadatavalue SET metadata_field_id=%s WHERE dspace_object_id IN (SELECT uuid FROM item WHERE in_archive AND NOT withdrawn) AND metadata_field_id=%s AND text_value=%s"
                 cursor.execute(
                     sql,
                     (

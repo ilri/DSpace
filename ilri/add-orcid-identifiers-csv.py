@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# add-orcid-identifiers-csv.py v1.1.1
+# add-orcid-identifiers-csv.py v1.1.2
 #
 # Copyright 2021 Alan Orth.
 
@@ -129,7 +129,7 @@ def main():
             with conn.cursor() as cursor:
                 # find all item metadata records with this author name
                 # metadata_field_id 3 is author
-                sql = "SELECT dspace_object_id, place FROM metadatavalue WHERE dspace_object_id IN (SELECT uuid FROM item) AND metadata_field_id=3 AND text_value=%s"
+                sql = "SELECT dspace_object_id, place FROM metadatavalue WHERE dspace_object_id IN (SELECT uuid FROM item WHERE in_archive AND NOT withdrawn) AND metadata_field_id=3 AND text_value=%s"
                 # remember that tuples with one item need a comma after them!
                 cursor.execute(sql, (author_name,))
                 records_with_author_name = cursor.fetchall()
@@ -180,7 +180,7 @@ def main():
 
                         # check if there is an existing cg.creator.identifier with this author's ORCID identifier for this item (without restricting the "place")
                         # note that the SQL here is quoted differently to allow us to use LIKE with % wildcards with our paremeter subsitution
-                        sql = "SELECT * from metadatavalue WHERE dspace_object_id=%s AND metadata_field_id=%s AND text_value LIKE '%%' || %s || '%%' AND confidence=%s AND dspace_object_id IN (SELECT uuid FROM item)"
+                        sql = "SELECT * from metadatavalue WHERE dspace_object_id=%s AND metadata_field_id=%s AND text_value LIKE '%%' || %s || '%%' AND confidence=%s AND dspace_object_id IN (SELECT uuid FROM item WHERE in_archive AND NOT withdrawn)"
 
                         # Adapt Python’s uuid.UUID type to PostgreSQL's uuid
                         # See: https://www.psycopg.org/docs/extras.html
