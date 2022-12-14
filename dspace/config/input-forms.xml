@@ -267,7 +267,7 @@
           <repeatable>false</repeatable>
           <label>URL</label>
           <input-type>onebox</input-type>
-          <hint>Enter a full URL for the item (could be a website, blog post, Google Books URL, etc).</hint>
+          <hint>Enter a full URL for the item (could be a website, blog post, Google Books URL, etc). Use cg.identifier.dataurl for links to repositories.</hint>
           <required></required>
         </field>
         <field>
@@ -628,7 +628,7 @@
           <repeatable>false</repeatable>
           <label>URL for datafile</label>
           <input-type>onebox</input-type>
-          <hint>Enter a URL for any associated datafile, in a repository for example.</hint>
+          <hint>Enter a URL for any associated datafile, for example in a Dataverse repository.</hint>
           <required></required>
         </field>
         <field>
