@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
-# move-metadata-values.py 0.0.1
+# move-metadata-values.py 0.1.0
 #
-# Copyright 2021 Alan Orth.
+# Copyright 2021–2022 Alan Orth.
 #
 # SPDX-License-Identifier: GPL-3.0-only
 #
@@ -22,10 +22,12 @@
 # See: http://initd.org/psycopg/docs/faq.html#best-practices
 
 import argparse
-from colorama import Fore
-import psycopg2
 import signal
 import sys
+
+import psycopg2
+import util
+from colorama import Fore
 
 
 def signal_handler(signal, frame):
@@ -33,7 +35,7 @@ def signal_handler(signal, frame):
 
 
 parser = argparse.ArgumentParser(
-    description="Move metadata values in the DSpace SQL database from one metadata field ID to another."
+    description="Move metadata values in the DSpace SQL database from one metadata field to another."
 )
 parser.add_argument(
     "-i",
@@ -52,29 +54,30 @@ parser.add_argument(
     action="store_true",
 )
 parser.add_argument(
+    "-f",
+    "--from-field-name",
+    type=str,
+    help="Name of metadata field to move values from, for example: cg.identifier.url",
+    required=True,
+)
+parser.add_argument(
     "-n",
     "--dry-run",
     help="Only print changes that would be made.",
     action="store_true",
 )
 parser.add_argument(
-    "-f",
-    "--from-field-id",
-    help="Old metadata field ID.",
-    required=True,
-)
-parser.add_argument(
-    "-t",
-    "--to-field-id",
-    type=int,
-    help="New metadata field ID.",
-    required=True,
-)
-parser.add_argument(
     "-q",
     "--quiet",
     help="Do not print progress messages to the screen.",
     action="store_true",
+)
+parser.add_argument(
+    "-t",
+    "--to-field-name",
+    type=str,
+    help="Name of metadata field to move values to, for example: cg.identifier.dataurl",
+    required=True,
 )
 args = parser.parse_args()
 
@@ -84,15 +87,14 @@ signal.signal(signal.SIGINT, signal_handler)
 # connect to database
 try:
     conn = psycopg2.connect(
-        "dbname={} user={} password={} host='localhost'".format(
-            args.database_name, args.database_user, args.database_pass
-        )
+        f"dbname={args.database_name} user={args.database_user} password={args.database_pass} host='localhost'"
     )
 
     if args.debug:
-        sys.stderr.write(Fore.GREEN + "Connected to database.\n" + Fore.RESET)
+        sys.stderr.write(f"{Fore.GREEN}Connected to database.{Fore.RESET}\n")
 except psycopg2.OperationalError:
-    sys.stderr.write(Fore.RED + "Could not connect to database.\n" + Fore.RESET)
+    sys.stderr.write(f"{Fore.RED}Could not connect to database.{Fore.RESET}\n")
+
     sys.exit(1)
 
 for line in args.input_file:
@@ -105,35 +107,47 @@ for line in args.input_file:
         # cursor will be closed after this block exits
         # see: http://initd.org/psycopg/docs/usage.html#with-statement
         with conn.cursor() as cursor:
-            if args.dry_run:
-                sql = "SELECT text_value FROM metadatavalue WHERE dspace_object_id IN (SELECT uuid FROM item) AND metadata_field_id=%s AND text_value=%s"
-                cursor.execute(sql, (args.from_field_id, line))
+            from_field_id = util.field_name_to_field_id(cursor, args.from_field_name)
 
-                if cursor.rowcount > 0 and not args.quiet:
-                    print(
-                        Fore.GREEN
-                        + "Would move {0} occurences of: {1}".format(
-                            cursor.rowcount, line
+            to_field_id = util.field_name_to_field_id(cursor, args.to_field_name)
+
+            # Get item UUIDs for metadata values that will be updated
+            sql = "SELECT dspace_object_id FROM metadatavalue WHERE dspace_object_id IN (SELECT uuid FROM item) AND metadata_field_id=%s AND text_value=%s"
+            cursor.execute(sql, (from_field_id, line))
+
+            if cursor.rowcount > 0:
+                if args.dry_run:
+                    if not args.quiet:
+                        print(
+                            f"{Fore.GREEN}Would move {cursor.rowcount} occurences of: {line}{Fore.RESET}"
                         )
-                        + Fore.RESET
-                    )
-            else:
+
+                    # Since this a dry run we can continue to the next line
+                    continue
+
+                # Get the records for items with matching metadata. We will use the
+                # object IDs to update their last_modified dates.
+                matching_records = cursor.fetchall()
+
                 sql = "UPDATE metadatavalue SET metadata_field_id=%s WHERE dspace_object_id IN (SELECT uuid FROM item) AND metadata_field_id=%s AND text_value=%s"
                 cursor.execute(
                     sql,
                     (
-                        args.to_field_id,
-                        args.from_field_id,
+                        to_field_id,
+                        from_field_id,
                         line,
                     ),
                 )
 
-                if cursor.rowcount > 0 and not args.quiet:
-                    print(
-                        Fore.GREEN
-                        + "Moved {0} occurences of: {1}".format(cursor.rowcount, line)
-                        + Fore.RESET
-                    )
+                if cursor.rowcount > 0:
+                    if not args.quiet:
+                        print(
+                            f"{Fore.GREEN}Moved {cursor.rowcount} occurences of: {line}{Fore.RESET}"
+                        )
+
+                # Update the last_modified date for each item we've changed
+                for record in matching_records:
+                    util.update_item_last_modified(cursor, record[0])
 
 # close database connection before we exit
 conn.close()
