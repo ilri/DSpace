@@ -104,7 +104,9 @@ parser.add_argument(
     required=True,
     type=argparse.FileType("w", encoding="UTF-8"),
 )
-parser.add_argument("-r", "--remove", help="Remove invalid mappings.", action="store_true")
+parser.add_argument(
+    "-r", "--remove", help="Remove invalid mappings.", action="store_true"
+)
 parser.add_argument(
     "-u",
     "--rest-url",
@@ -301,14 +303,18 @@ for input_row in reader:
     for incorrectly_mapped_collection in incorrectly_mapped_collections:
         item_collections.remove(incorrectly_mapped_collection)
 
-    # We only need to write the IDs and collections to the output file since we
-    # are not modifying any other metadata in the CSV.
-    output_row = {
-        id_column_name: input_row[id_column_name],
-        collection_column_name: "||".join(item_collections),
-    }
+    # We only need to save the item to the output CSV if we have changed its
+    # mappings. Check the mutated item_collections list against the original
+    # from the input CSV.
+    if item_collections != input_row[collection_column_name].split("||"):
+        # We only need to write the IDs and collections to the output file since we
+        # are not modifying any other metadata in the CSV.
+        output_row = {
+            id_column_name: input_row[id_column_name],
+            collection_column_name: "||".join(item_collections),
+        }
 
-    writer.writerow(output_row)
+        writer.writerow(output_row)
 
 # close CSV files before we exit
 args.input_file.close()
