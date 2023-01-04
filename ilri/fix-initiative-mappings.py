@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 #
-# fix-initiative-mappings.py 0.0.1
+# fix-initiative-mappings.py 0.0.2
 #
-# Copyright 2022 Alan Orth.
+# Copyright 2022–2023 Alan Orth.
 #
 # SPDX-License-Identifier: GPL-3.0-only
 #
