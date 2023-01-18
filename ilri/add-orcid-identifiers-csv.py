@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 #
-# add-orcid-identifiers-csv.py v1.1.2
+# add-orcid-identifiers-csv.py v1.1.3
 #
-# Copyright 2021 Alan Orth.
+# Copyright Alan Orth.
 
 # SPDX-License-Identifier: GPL-3.0-only
 #
@@ -41,6 +41,7 @@ import sys
 
 import psycopg2
 import psycopg2.extras
+import util
 from colorama import Fore
 
 
@@ -230,10 +231,7 @@ def main():
                             )
 
                             # Update the last_modified date for each item
-                            sql = "UPDATE item SET last_modified=NOW() WHERE uuid=%s;"
-                            # Syntax looks weird here, but the second argument must always be a sequence
-                            # See: https://www.psycopg.org/docs/usage.html
-                            cursor.execute(sql, [dspace_object_id])
+                            util.update_item_last_modified(cursor, dspace_object_id)
                         else:
                             if args.debug:
                                 sys.stderr.write(
