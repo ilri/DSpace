@@ -237,7 +237,7 @@
           <repeatable>false</repeatable>
           <label>Abstract</label>
           <input-type>textarea</input-type>
-          <hint>Enter the abstract of the item.</hint>
+          <hint>Enter the abstract of the item. If the item is Limited Access please do not enter the abstract, as it may be under copyright.</hint>
           <required></required>
         </field>
         <field>
