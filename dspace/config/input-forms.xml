@@ -187,8 +187,17 @@
           <repeatable>false</repeatable>
           <label>Date of publication (required)</label>
           <input-type>date</input-type>
-          <hint>Enter the date when the item was published or made public.</hint>
+          <hint>Enter the date when the item was officially published or made public. For journal articles, this is the date the article was included in a volume/issue, if known. If the issue date is not known, please use the online first date here.</hint>
           <required>You must enter at least the year.</required>
+        </field>
+        <field>
+          <dc-schema>dcterms</dc-schema>
+          <dc-element>available</dc-element>
+          <dc-qualifier></dc-qualifier>
+          <repeatable>false</repeatable>
+          <label>Date of online publication</label>
+          <input-type>date</input-type>
+          <hint>Enter the date when the item was available online. Use this to indicate a journal article was online first, and use the date above for the issue date.</hint>
         </field>
         <field>
           <dc-schema>dcterms</dc-schema>
