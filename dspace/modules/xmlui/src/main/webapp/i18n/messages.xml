@@ -2366,7 +2366,8 @@
 	<message key="xmlui.dri2xhtml.METS-1.0.item-abstract">Abstract/Description</message>
 	<message key="xmlui.dri2xhtml.METS-1.0.item-description">Description</message>
 	<message key="xmlui.dri2xhtml.METS-1.0.item-uri">URI</message>
-	<message key="xmlui.dri2xhtml.METS-1.0.item-date">Date</message>
+	<message key="xmlui.dri2xhtml.METS-1.0.item-date">Date Issued</message>
+	<message key="xmlui.dri2xhtml.METS-1.0.item-date-online">Date Online</message>
 	<message key="xmlui.dri2xhtml.METS-1.0.item-publisher">Publisher</message>
 	<message key="xmlui.dri2xhtml.METS-1.0.item-subject">Subjects</message>
 	<message key="xmlui.dri2xhtml.METS-1.0.item-countries">Countries</message>

@@ -476,6 +476,30 @@ such as authors, subject, citation, description, etc
                 </xsl:for-each>
             </div>
         </xsl:if>
+        <xsl:if test="dim:field[@mdschema='dcterms' and @element='available' and descendant::text()]">
+            <div class="simple-item-view-date word-break item-page-field-wrapper table">
+                <h5 class="bold">
+                    <i18n:text>xmlui.dri2xhtml.METS-1.0.item-date-online</i18n:text>
+                </h5>
+                <xsl:for-each select="dim:field[@mdschema='dcterms' and @element='available']">
+                    <xsl:variable name="date">
+                        <xsl:value-of
+                                select="substring(./node(),1,10)"/>
+                    </xsl:variable>
+                    <xsl:variable name="year" select="substring($date, 1, 4)"/>
+                    <xsl:variable name="month" select="substring($date, 6, 2)"/>
+                    <xsl:value-of select="$year"/>
+
+                    <xsl:if test="$month">
+                        <xsl:text>-</xsl:text>
+                        <xsl:value-of select="$month"/>
+                    </xsl:if>
+                    <xsl:if test="count(following-sibling::dim:field[@mdschema='dcterms' and @element='available']) != 0">
+                        <br/>
+                    </xsl:if>
+                </xsl:for-each>
+            </div>
+        </xsl:if>
     </xsl:template>
     <xsl:template name="itemSummaryView-DIM-subjects">
         <xsl:variable name="subjectTest">
