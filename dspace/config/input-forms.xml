@@ -4787,6 +4787,10 @@
         <stored-value>Mauritius</stored-value>
       </pair>
       <pair>
+        <displayed-value>Marshall Islands</displayed-value>
+        <stored-value>Marshall Islands</stored-value>
+      </pair>
+      <pair>
         <displayed-value>Mexico</displayed-value>
         <stored-value>Mexico</stored-value>
       </pair>
@@ -4799,8 +4803,16 @@
         <stored-value>Mongolia</stored-value>
       </pair>
       <pair>
+        <displayed-value>Micronesia (Federated States of)</displayed-value>
+        <stored-value>Micronesia (Federated States of)</stored-value>
+      </pair>
+      <pair>
         <displayed-value>Montenegro</displayed-value>
         <stored-value>Montenegro</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Montserrat</displayed-value>
+        <stored-value>Montserrat</stored-value>
       </pair>
       <pair>
         <displayed-value>Morocco</displayed-value>
