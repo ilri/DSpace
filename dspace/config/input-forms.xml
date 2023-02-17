@@ -198,6 +198,7 @@
           <label>Date of online publication</label>
           <input-type>date</input-type>
           <hint>Enter the date when the item was available online. Use this to indicate a journal article was online first, and use the date above for the issue date.</hint>
+          <required></required>
         </field>
         <field>
           <dc-schema>dcterms</dc-schema>
