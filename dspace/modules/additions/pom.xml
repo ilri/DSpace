@@ -96,7 +96,7 @@
       <dependency>
           <groupId>io.github.ilri.cgspace</groupId>
           <artifactId>cgspace-java-helpers</artifactId>
-          <version>6.2</version>
+          <version>6.2-SNAPSHOT</version>
       </dependency>
    </dependencies>
 
