@@ -119,13 +119,10 @@
                 <ref bean="searchFilterSubject" />
                 <ref bean="searchFilterAllianceBioversityCiat"/>
                 <ref bean="searchFilterBioversity"/>
-                <ref bean="searchFilterCcafSubject"/>
                 <ref bean="searchFilterCiatSubject"/>
                 <ref bean="searchFilterCipSubject" />
                 <ref bean="searchFilterIitaSubject"/>
                 <ref bean="searchFilterIlriSubject"/>
-                <ref bean="searchFilterSystemSubject"/>
-                <ref bean="searchFilterWleSubject"/>
                 <ref bean="searchFilterStatus" />
                 <ref bean="searchFilterUsageRights" />
             </list>
@@ -207,7 +204,7 @@
             <bean class="org.dspace.discovery.configuration.DiscoveryRecentSubmissionsConfiguration">
                 <property name="metadataSortField" value="dc.date.accessioned" />
                 <property name="type" value="date"/>
-                <property name="max" value="5"/>
+                <property name="max" value="10"/>
                 <!-- If enabled the collection home page will not display metadata but show a pageable list of recent submissions -->
                 <property name="useAsHomePage" value="false"/>
             </bean>
@@ -289,13 +286,10 @@
                 <ref bean="searchFilterSubject" />
                 <ref bean="searchFilterAllianceBioversityCiat"/>
                 <ref bean="searchFilterBioversity"/>
-                <ref bean="searchFilterCcafSubject"/>
                 <ref bean="searchFilterCiatSubject"/>
                 <ref bean="searchFilterCipSubject" />
                 <ref bean="searchFilterIitaSubject"/>
                 <ref bean="searchFilterIlriSubject"/>
-                <ref bean="searchFilterSystemSubject"/>
-                <ref bean="searchFilterWleSubject"/>
                 <ref bean="searchFilterStatus" />
                 <ref bean="searchFilterUsageRights" />
             </list>
@@ -370,7 +364,7 @@
             <bean class="org.dspace.discovery.configuration.DiscoveryRecentSubmissionsConfiguration">
                 <property name="metadataSortField" value="dc.date.accessioned" />
                 <property name="type" value="date"/>
-                <property name="max" value="10"/>
+                <property name="max" value="5"/>
                 <property name="useAsHomePage" value="false"/>
             </bean>
         </property>
@@ -588,7 +582,7 @@
                 <value>dcterms.license</value>
             </list>
         </property>
-        <property name="facetLimit" value="6"/>
+        <property name="facetLimit" value="3"/>
         <property name="sortOrderSidebar" value="COUNT"/>
         <property name="sortOrderFilterPage" value="COUNT"/>
     </bean>
@@ -630,7 +624,7 @@
                 <value>cg.subject.ilri</value>
             </list>
         </property>
-        <property name="facetLimit" value="5"/>
+        <property name="facetLimit" value="3"/>
         <property name="sortOrderSidebar" value="COUNT"/>
         <property name="sortOrderFilterPage" value="COUNT"/>
     </bean>
@@ -644,16 +638,13 @@
         </property>
     </bean>
 
-    <bean id="searchFilterCcafSubject" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
+    <bean id="searchFilterCcafSubject" class="org.dspace.discovery.configuration.DiscoverySearchFilter">
         <property name="indexFieldName" value="ccafsubject"/>
         <property name="metadataFields">
             <list>
                 <value>cg.subject.ccafs</value>
             </list>
         </property>
-        <property name="facetLimit" value="5"/>
-        <property name="sortOrderSidebar" value="COUNT"/>
-        <property name="sortOrderFilterPage" value="COUNT"/>
     </bean>
 
     <bean id="searchFilterCiforSubject" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
@@ -675,7 +666,7 @@
                 <value>cg.coverage.region</value>
             </list>
         </property>
-        <property name="facetLimit" value="10"/>
+        <property name="facetLimit" value="5"/>
         <property name="sortOrderSidebar" value="COUNT"/>
         <property name="sortOrderFilterPage" value="COUNT"/>
     </bean>
@@ -687,7 +678,7 @@
                 <value>cg.coverage.country</value>
             </list>
         </property>
-        <property name="facetLimit" value="10"/>
+        <property name="facetLimit" value="5"/>
         <property name="sortOrderSidebar" value="COUNT"/>
         <property name="sortOrderFilterPage" value="COUNT"/>
     </bean>
@@ -708,7 +699,7 @@
                 <value>cg.contributor.initiative</value>
             </list>
         </property>
-        <property name="facetLimit" value="5"/>
+        <property name="facetLimit" value="10"/>
         <property name="sortOrderSidebar" value="COUNT"/>
         <property name="sortOrderFilterPage" value="COUNT"/>
     </bean>
@@ -720,7 +711,7 @@
                 <value>cg.contributor.crp</value>
             </list>
         </property>
-        <property name="facetLimit" value="5"/>
+        <property name="facetLimit" value="3"/>
         <property name="sortOrderSidebar" value="COUNT"/>
         <property name="sortOrderFilterPage" value="COUNT"/>
     </bean>
@@ -732,7 +723,7 @@
                 <value>cg.contributor.donor</value>
             </list>
         </property>
-        <property name="facetLimit" value="10"/>
+        <property name="facetLimit" value="5"/>
         <property name="sortOrderSidebar" value="COUNT"/>
         <property name="sortOrderFilterPage" value="COUNT"/>
     </bean>
@@ -753,7 +744,7 @@
                 <value>dcterms.type</value>
             </list>
         </property>
-        <property name="facetLimit" value="10"/>
+        <property name="facetLimit" value="5"/>
         <property name="sortOrderSidebar" value="COUNT"/>
         <property name="sortOrderFilterPage" value="COUNT"/>
     </bean>
@@ -767,16 +758,13 @@
         </property>
     </bean>
 
-    <bean id="searchFilterWleSubject" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
+    <bean id="searchFilterWleSubject" class="org.dspace.discovery.configuration.DiscoverySearchFilter">
         <property name="indexFieldName" value="wlesubject"/>
         <property name="metadataFields">
             <list>
                 <value>cg.subject.wle</value>
             </list>
         </property>
-        <property name="facetLimit" value="5"/>
-        <property name="sortOrderSidebar" value="COUNT"/>
-        <property name="sortOrderFilterPage" value="COUNT"/>
     </bean>
 
     <bean id="searchFilterBioversity" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
@@ -786,7 +774,7 @@
                 <value>cg.subject.bioversity</value>
             </list>
         </property>
-        <property name="facetLimit" value="5"/>
+        <property name="facetLimit" value="3"/>
         <property name="sortOrderSidebar" value="COUNT"/>
         <property name="sortOrderFilterPage" value="COUNT"/>
     </bean>
@@ -798,7 +786,7 @@
                 <value>cg.subject.alliancebiovciat</value>
             </list>
         </property>
-        <property name="facetLimit" value="5"/>
+        <property name="facetLimit" value="3"/>
         <property name="sortOrderSidebar" value="COUNT"/>
         <property name="sortOrderFilterPage" value="COUNT"/>
     </bean>
@@ -810,7 +798,7 @@
                 <value>cg.subject.ciat</value>
             </list>
         </property>
-        <property name="facetLimit" value="5"/>
+        <property name="facetLimit" value="3"/>
         <property name="sortOrderSidebar" value="COUNT"/>
         <property name="sortOrderFilterPage" value="COUNT"/>
     </bean>
@@ -834,7 +822,7 @@
                 <value>cg.subject.cip</value>
             </list>
         </property>
-        <property name="facetLimit" value="5"/>
+        <property name="facetLimit" value="3"/>
         <property name="sortOrderSidebar" value="COUNT"/>
         <property name="sortOrderFilterPage" value="COUNT"/>
     </bean>
@@ -870,21 +858,18 @@
                 <value>cg.subject.iita</value>
             </list>
         </property>
-        <property name="facetLimit" value="5"/>
+        <property name="facetLimit" value="3"/>
         <property name="sortOrderSidebar" value="COUNT"/>
         <property name="sortOrderFilterPage" value="COUNT"/>
     </bean>
 
-    <bean id="searchFilterSystemSubject" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
+    <bean id="searchFilterSystemSubject" class="org.dspace.discovery.configuration.DiscoverySearchFilter">
         <property name="indexFieldName" value="systemsubject"/>
         <property name="metadataFields">
             <list>
                 <value>cg.subject.system</value>
             </list>
         </property>
-        <property name="facetLimit" value="5"/>
-        <property name="sortOrderSidebar" value="COUNT"/>
-        <property name="sortOrderFilterPage" value="COUNT"/>
     </bean>
 
     <bean id="searchFilterAffiliation" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
@@ -894,7 +879,7 @@
                 <value>cg.contributor.affiliation</value>
             </list>
         </property>
-        <property name="facetLimit" value="10"/>
+        <property name="facetLimit" value="5"/>
         <property name="sortOrderSidebar" value="COUNT"/>
         <property name="sortOrderFilterPage" value="COUNT"/>
     </bean>
@@ -963,7 +948,7 @@
                 <value>dcterms.audience</value>
             </list>
         </property>
-        <property name="facetLimit" value="10"/>
+        <property name="facetLimit" value="3"/>
         <property name="sortOrderSidebar" value="COUNT"/>
         <property name="sortOrderFilterPage" value="COUNT"/>
     </bean>
@@ -975,7 +960,7 @@
                 <value>cg.subject.sdg</value>
             </list>
         </property>
-        <property name="facetLimit" value="10"/>
+        <property name="facetLimit" value="5"/>
         <property name="sortOrderSidebar" value="COUNT"/>
         <property name="sortOrderFilterPage" value="COUNT"/>
     </bean>
