@@ -2,86 +2,86 @@
 <!-- Subregions need to be defined both here and in input-forms.xml (for Atmire L&R) -->
 <node id="Subregion" label="">
   <isComposedBy>
-    <node label="Alberta" />
-    <node label="An Giang" />
-    <node label="Andhra Pradesh" />
-    <node label="Ashanti" />
-    <node label="Assam" />
-    <node label="Badulla" />
-    <node label="Bali" />
-    <node label="Balochistan" />
-    <node label="Bamako" />
-    <node label="Bihar" />
-    <node label="British Columbia" />
-    <node label="Cajamarca" />
-    <node label="California" />
-    <node label="Cauca" />
-    <node label="Chhattisgarh" />
-    <node label="Dakar" />
-    <node label="Delaware" />
-    <node label="Florida" />
-    <node label="Gampaha" />
-    <node label="Gandaki" />
-    <node label="Guanajuato" />
-    <node label="Gujarat" />
-    <node label="Haryana" />
-    <node label="Helmand" />
-    <node label="Himachal Pradesh" />
-    <node label="Houaphan" />
-    <node label="Iowa" />
-    <node label="Iringa" />
-    <node label="Jambi" />
-    <node label="Jharkhand" />
-    <node label="Kaabong" />
-    <node label="Kalimantan" />
-    <node label="Kampala" />
-    <node label="Kandal" />
-    <node label="Karnali" />
-    <node label="Karnataka" />
-    <node label="Kasungu" />
-    <node label="Kerala" />
-    <node label="Khon Kaen" />
-    <node label="Kunduz" />
-    <node label="Kwazulu-Natal" />
-    <node label="Lima" />
-    <node label="Limpopo" />
-    <node label="Madhya Pradesh" />
-    <node label="Maharashtra" />
-    <node label="Maputo" />
-    <node label="Masvingo" />
-    <node label="Meghalaya" />
-    <node label="Mendoza" />
-    <node label="Missouri" />
-    <node label="Nabeul" />
-    <node label="Nagaland" />
-    <node label="Nebraska" />
-    <node label="New South Wales" />
-    <node label="New York" />
-    <node label="Odisha" />
-    <node label="Osh" />
-    <node label="Pando" />
-    <node label="Punjab" />
-    <node label="Queensland" />
-    <node label="Rajasthan" />
-    <node label="Rajshahi" />
-    <node label="Riau" />
-    <node label="Sabah" />
-    <node label="Sahel" />
-    <node label="Salyan" />
-    <node label="Sindh" />
-    <node label="South Australia" />
-    <node label="Sulawesi" />
-    <node label="Tamil Nadu" />
-    <node label="Telangana" />
-    <node label="Texas" />
-    <node label="Tigray" />
-    <node label="Turkana" />
-    <node label="Uttar Pradesh" />
-    <node label="Uttarakhand" />
-    <node label="Victoria" />
-    <node label="Washington" />
-    <node label="West Bengal" />
-    <node label="Western Cape" />
-    <node label="Yogyakarta" />
+    <node id="1" label="Alberta" />
+    <node id="2" label="An Giang" />
+    <node id="3" label="Andhra Pradesh" />
+    <node id="4" label="Ashanti" />
+    <node id="5" label="Assam" />
+    <node id="6" label="Badulla" />
+    <node id="7" label="Bali" />
+    <node id="8" label="Balochistan" />
+    <node id="9" label="Bamako" />
+    <node id="10" label="Bihar" />
+    <node id="11" label="British Columbia" />
+    <node id="12" label="Cajamarca" />
+    <node id="13" label="California" />
+    <node id="14" label="Cauca" />
+    <node id="15" label="Chhattisgarh" />
+    <node id="16" label="Dakar" />
+    <node id="17" label="Delaware" />
+    <node id="18" label="Florida" />
+    <node id="19" label="Gampaha" />
+    <node id="20" label="Gandaki" />
+    <node id="21" label="Guanajuato" />
+    <node id="22" label="Gujarat" />
+    <node id="23" label="Haryana" />
+    <node id="24" label="Helmand" />
+    <node id="25" label="Himachal Pradesh" />
+    <node id="26" label="Houaphan" />
+    <node id="27" label="Iowa" />
+    <node id="28" label="Iringa" />
+    <node id="29" label="Jambi" />
+    <node id="30" label="Jharkhand" />
+    <node id="31" label="Kaabong" />
+    <node id="32" label="Kalimantan" />
+    <node id="33" label="Kampala" />
+    <node id="34" label="Kandal" />
+    <node id="35" label="Karnali" />
+    <node id="36" label="Karnataka" />
+    <node id="37" label="Kasungu" />
+    <node id="38" label="Kerala" />
+    <node id="39" label="Khon Kaen" />
+    <node id="40" label="Kunduz" />
+    <node id="41" label="Kwazulu-Natal" />
+    <node id="42" label="Lima" />
+    <node id="43" label="Limpopo" />
+    <node id="44" label="Madhya Pradesh" />
+    <node id="45" label="Maharashtra" />
+    <node id="46" label="Maputo" />
+    <node id="47" label="Masvingo" />
+    <node id="48" label="Meghalaya" />
+    <node id="49" label="Mendoza" />
+    <node id="50" label="Missouri" />
+    <node id="51" label="Nabeul" />
+    <node id="52" label="Nagaland" />
+    <node id="53" label="Nebraska" />
+    <node id="54" label="New South Wales" />
+    <node id="55" label="New York" />
+    <node id="56" label="Odisha" />
+    <node id="57" label="Osh" />
+    <node id="58" label="Pando" />
+    <node id="59" label="Punjab" />
+    <node id="60" label="Queensland" />
+    <node id="61" label="Rajasthan" />
+    <node id="62" label="Rajshahi" />
+    <node id="63" label="Riau" />
+    <node id="64" label="Sabah" />
+    <node id="65" label="Sahel" />
+    <node id="66" label="Salyan" />
+    <node id="67" label="Sindh" />
+    <node id="68" label="South Australia" />
+    <node id="69" label="Sulawesi" />
+    <node id="70" label="Tamil Nadu" />
+    <node id="71" label="Telangana" />
+    <node id="72" label="Texas" />
+    <node id="73" label="Tigray" />
+    <node id="74" label="Turkana" />
+    <node id="75" label="Uttar Pradesh" />
+    <node id="76" label="Uttarakhand" />
+    <node id="77" label="Victoria" />
+    <node id="78" label="Washington" />
+    <node id="79" label="West Bengal" />
+    <node id="80" label="Western Cape" />
+    <node id="81" label="Yogyakarta" />
   </isComposedBy>
 </node>
