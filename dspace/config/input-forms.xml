@@ -526,10 +526,10 @@
           <dc-element>accessRights</dc-element>
           <dc-qualifier></dc-qualifier>
           <repeatable>false</repeatable>
-          <label>Accessibility status (required)</label>
+          <label>Access rights (required)</label>
           <input-type value-pairs-name="common_status_identifier">dropdown</input-type>
-          <hint>Indicate the accessibility of the item.</hint>
-          <required>Accesibility status is required.</required>
+          <hint>ndicate the accessibility of the item. If the item is free to read this should be "Open Access", even if it is copyrighted.</hint>
+          <required>Access rights is required.</required>
         </field>
         <field>
           <dc-schema>dcterms</dc-schema>
