@@ -395,16 +395,6 @@
         </field>
         <field>
           <dc-schema>cg</dc-schema>
-          <dc-element>subject</dc-element>
-          <dc-qualifier>ccafs</dc-qualifier>
-          <repeatable>true</repeatable>
-          <label>CCAFS subject</label>
-          <input-type value-pairs-name="ccafsubject">dropdown</input-type>
-          <hint></hint>
-          <required></required>
-        </field>
-        <field>
-          <dc-schema>cg</dc-schema>
           <dc-element>identifier</dc-element>
           <dc-qualifier>iitatheme</dc-qualifier>
           <repeatable>true</repeatable>
@@ -3458,52 +3448,6 @@
       <pair>
         <displayed-value>Systems Transformation</displayed-value>
         <stored-value>Systems Transformation</stored-value>
-      </pair>
-    </value-pairs>
-    <value-pairs value-pairs-name="ccafsubject" dc-term="ccafsubject">
-      <pair>
-        <displayed-value>PRIORITIES AND POLICIES FOR CSA</displayed-value>
-        <stored-value>PRIORITIES AND POLICIES FOR CSA</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>CLIMATE-SMART TECHNOLOGIES AND PRACTICES</displayed-value>
-        <stored-value>CLIMATE-SMART TECHNOLOGIES AND PRACTICES</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>LOW EMISSIONS DEVELOPMENT</displayed-value>
-        <stored-value>LOW EMISSIONS DEVELOPMENT</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>CLIMATE SERVICES AND SAFETY NETS</displayed-value>
-        <stored-value>CLIMATE SERVICES AND SAFETY NETS</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>GENDER AND SOCIAL INCLUSION</displayed-value>
-        <stored-value>GENDER AND SOCIAL INCLUSION</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>BASELINE SURVEY</displayed-value>
-        <stored-value>BASELINE SURVEY</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>DATA AND TOOLS FOR ANALYSIS AND PLANNING</displayed-value>
-        <stored-value>DATA AND TOOLS FOR ANALYSIS AND PLANNING</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>EDUCATION AND OUTREACH</displayed-value>
-        <stored-value>EDUCATION AND OUTREACH</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>SCENARIOS</displayed-value>
-        <stored-value>SCENARIOS</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>SOCIAL LEARNING</displayed-value>
-        <stored-value>SOCIAL LEARNING</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>SCALING CLIMATE-SMART AGRICULTURE</displayed-value>
-        <stored-value>SCALING CLIMATE-SMART AGRICULTURE</stored-value>
       </pair>
     </value-pairs>
     <value-pairs value-pairs-name="iita-subject" dc-term="iita-subject">
