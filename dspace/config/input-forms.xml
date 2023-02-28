@@ -282,16 +282,6 @@
         </field>
         <field>
           <dc-schema>cg</dc-schema>
-          <dc-element>link</dc-element>
-          <dc-qualifier>permalink</dc-qualifier>
-          <repeatable>false</repeatable>
-          <label>Bioversity publications permanent link</label>
-          <input-type>onebox</input-type>
-          <hint>Enter a full URL for the item.</hint>
-          <required></required>
-        </field>
-        <field>
-          <dc-schema>cg</dc-schema>
           <dc-element>identifier</dc-element>
           <dc-qualifier>doi</dc-qualifier>
           <repeatable>false</repeatable>
