@@ -466,16 +466,6 @@
         <field>
           <dc-schema>cg</dc-schema>
           <dc-element>subject</dc-element>
-          <dc-qualifier>pabra</dc-qualifier>
-          <repeatable>true</repeatable>
-          <label>PABRA subject</label>
-          <input-type value-pairs-name="pabrasubject">dropdown</input-type>
-          <hint></hint>
-          <required></required>
-        </field>
-        <field>
-          <dc-schema>cg</dc-schema>
-          <dc-element>subject</dc-element>
           <dc-qualifier>wle</dc-qualifier>
           <repeatable>true</repeatable>
           <label>WLE subject</label>
@@ -2508,40 +2498,6 @@
       <pair>
         <displayed-value>Other</displayed-value>
         <stored-value>Other</stored-value>
-      </pair>
-    </value-pairs>
-    <value-pairs value-pairs-name="pabrasubject" dc-term="pabrasubject">
-      <pair>
-        <displayed-value>BEAN CORRIDORS</displayed-value>
-        <stored-value>BEAN CORRIDORS</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>BREEDING</displayed-value>
-        <stored-value>BREEDING</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>GENDER</displayed-value>
-        <stored-value>GENDER</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>INTEGRATED CROP MANAGEMENT</displayed-value>
-        <stored-value>INTEGRATED CROP MANAGEMENT</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>LINKING FARMERS TO MARKETS</displayed-value>
-        <stored-value>LINKING FARMERS TO MARKETS</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>MONITORING AND EVALUATION</displayed-value>
-        <stored-value>MONITORING AND EVALUATION</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>NUTRITION</displayed-value>
-        <stored-value>NUTRITION</stored-value>
-      </pair>
-      <pair>
-        <displayed-value>SEED SYSTEMS</displayed-value>
-        <stored-value>SEED SYSTEMS</stored-value>
       </pair>
     </value-pairs>
     <value-pairs value-pairs-name="alliancebiovciat">
