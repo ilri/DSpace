@@ -489,6 +489,7 @@
           <dc-qualifier></dc-qualifier>
           <repeatable>false</repeatable>
           <label>Journal status</label>
+          <hint>Indicate if the item was published in an ISI journal.</hint>
           <input-type value-pairs-name="ISI_Journal">dropdown</input-type>
           <required></required>
         </field>
@@ -507,7 +508,7 @@
           <dc-qualifier></dc-qualifier>
           <repeatable>false</repeatable>
           <label>Review status</label>
-          <hint>Indicate whether it has undergone internal or peer review.</hint>
+          <hint>Indicate whether the item has undergone internal or peer review.</hint>
           <input-type value-pairs-name="Review_status">dropdown</input-type>
           <required></required>
         </field>
