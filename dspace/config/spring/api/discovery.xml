@@ -163,8 +163,10 @@
         <property name="sidebarFacets">
             <list>
                 <ref bean="searchFilterAuthor" />
-                <ref bean="searchFilterSubject" />
+                <ref bean="searchFilterAffiliation" />
                 <ref bean="searchFilterIssued" />
+                <ref bean="searchFilterType" />
+                <ref bean="searchFilterSubject" />
                 <ref bean="searchFilterRegion"/>
                 <ref bean="searchFilterCountry"/>
                 <ref bean="searchFilterAccessRights"/>
@@ -178,8 +180,10 @@
             <list>
                 <ref bean="searchFilterTitle" />
                 <ref bean="searchFilterAuthor" />
-                <ref bean="searchFilterSubject" />
+                <ref bean="searchFilterAffiliation" />
                 <ref bean="searchFilterIssued" />
+                <ref bean="searchFilterType" />
+                <ref bean="searchFilterSubject" />
                 <ref bean="searchFilterRegion"/>
                 <ref bean="searchFilterCountry"/>
                 <ref bean="searchFilterAccessRights"/>
@@ -2379,7 +2383,7 @@
         <property name="indexFieldName" value="itemtype" />
         <property name="metadataFields">
             <list>
-                <value>dc.type</value>
+                <value>dcterms.type</value>
             </list>
         </property>
     </bean>
@@ -2898,6 +2902,36 @@
             </list>
         </property>
         <property name="facetLimit" value="3"/>
+        <property name="sortOrderSidebar" value="COUNT"/>
+        <property name="sortOrderFilterPage" value="COUNT"/>
+        <property name="isOpenByDefault" value="true"/>
+        <property name="pageSize" value="10"/>
+        <property name="exposeMinAndMaxValue" value="true"/>
+    </bean>
+
+    <bean id="searchFilterInitiative" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
+        <property name="indexFieldName" value="initiative"/>
+        <property name="metadataFields">
+            <list>
+                <value>cg.contributor.initiative</value>
+            </list>
+        </property>
+        <property name="facetLimit" value="10"/>
+        <property name="sortOrderSidebar" value="COUNT"/>
+        <property name="sortOrderFilterPage" value="COUNT"/>
+        <property name="isOpenByDefault" value="true"/>
+        <property name="pageSize" value="10"/>
+        <property name="exposeMinAndMaxValue" value="true"/>
+    </bean>
+
+    <bean id="searchFilterAffiliation" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
+        <property name="indexFieldName" value="affiliation"/>
+        <property name="metadataFields">
+            <list>
+                <value>cg.contributor.affiliation</value>
+            </list>
+        </property>
+        <property name="facetLimit" value="5"/>
         <property name="sortOrderSidebar" value="COUNT"/>
         <property name="sortOrderFilterPage" value="COUNT"/>
         <property name="isOpenByDefault" value="true"/>
