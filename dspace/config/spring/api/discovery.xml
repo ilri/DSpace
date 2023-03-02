@@ -647,16 +647,13 @@
         </property>
     </bean>
 
-    <bean id="searchFilterCiforSubject" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
+    <bean id="searchFilterCiforSubject" class="org.dspace.discovery.configuration.DiscoverySearchFilter">
         <property name="indexFieldName" value="ciforsubject"/>
         <property name="metadataFields">
             <list>
                 <value>cg.subject.cifor</value>
             </list>
         </property>
-        <property name="facetLimit" value="5"/>
-        <property name="sortOrderSidebar" value="COUNT"/>
-        <property name="sortOrderFilterPage" value="COUNT"/>
     </bean>
 
     <bean id="searchFilterRegion" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
@@ -803,16 +800,13 @@
         <property name="sortOrderFilterPage" value="COUNT"/>
     </bean>
 
-    <bean id="searchFilterHumidtropics" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
+    <bean id="searchFilterHumidtropics" class="org.dspace.discovery.configuration.DiscoverySearchFilter">
         <property name="indexFieldName" value="humidtropics"/>
         <property name="metadataFields">
             <list>
                 <value>cg.subject.humidtropics</value>
             </list>
         </property>
-        <property name="facetLimit" value="5"/>
-        <property name="sortOrderSidebar" value="COUNT"/>
-        <property name="sortOrderFilterPage" value="COUNT"/>
     </bean>
 
     <bean id="searchFilterCipSubject" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
@@ -827,28 +821,22 @@
         <property name="sortOrderFilterPage" value="COUNT"/>
     </bean>
 
-    <bean id="searchFilterDrylandsSubject" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
+    <bean id="searchFilterDrylandsSubject" class="org.dspace.discovery.configuration.DiscoverySearchFilter">
         <property name="indexFieldName" value="drylandssubject"/>
         <property name="metadataFields">
             <list>
                 <value>cg.subject.drylands</value>
             </list>
         </property>
-        <property name="facetLimit" value="5"/>
-        <property name="sortOrderSidebar" value="COUNT"/>
-        <property name="sortOrderFilterPage" value="COUNT"/>
     </bean>
 
-    <bean id="searchFilterIcardaSubject" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
+    <bean id="searchFilterIcardaSubject" class="org.dspace.discovery.configuration.DiscoverySearchFilter">
         <property name="indexFieldName" value="icardasubject"/>
         <property name="metadataFields">
             <list>
                 <value>cg.subject.icarda</value>
             </list>
         </property>
-        <property name="facetLimit" value="5"/>
-        <property name="sortOrderSidebar" value="COUNT"/>
-        <property name="sortOrderFilterPage" value="COUNT"/>
     </bean>
 
     <bean id="searchFilterIitaSubject" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
@@ -929,16 +917,13 @@
         </property>
     </bean>
 
-    <bean id="searchFilterLanguage" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
+    <bean id="searchFilterLanguage" class="org.dspace.discovery.configuration.DiscoverySearchFilter">
         <property name="indexFieldName" value="iso"/>
         <property name="metadataFields">
             <list>
                 <value>dcterms.language</value>
             </list>
         </property>
-        <property name="facetLimit" value="10"/>
-        <property name="sortOrderSidebar" value="COUNT"/>
-        <property name="sortOrderFilterPage" value="VALUE"/>
     </bean>
 
     <bean id="searchFilterTargetAudience" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
