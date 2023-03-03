@@ -46,6 +46,7 @@ BUbiNG
 bwh3_user_agent
 CakePHP
 celestial
+centuryb
 cfnetwork
 checklink
 checkprivacy
@@ -136,6 +137,7 @@ ichiro
 iktomi
 ilse
 Indy Library
+insomnia
 ^integrity\/\d
 internetseer
 intute
@@ -172,6 +174,7 @@ mail\.ru
 MarcEdit
 mediapartners-google
 megite
+MetaInspector
 MetaURI[\+\s]API\/\d\.\d
 Microsoft(\s|\+)URL(\s|\+)Control
 Microsoft Office Existence Discovery
@@ -197,6 +200,7 @@ nagios
 ^NetAnts\/\d
 netcraft
 netluchs
+nettle
 newspaper\/\d
 ng\/2\.
 ^Ning\/\d
@@ -232,6 +236,7 @@ rambler
 ReactorNetty\/\d
 Readpaper
 redalert
+RestSharp
 Riddler
 robozilla
 rss
