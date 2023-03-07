@@ -129,12 +129,10 @@ def resolve_dois(dois):
 
             data = request.json()
 
-            # Get the journal title. This is interesting, but not very useful
-            # because many of the names I've seen were shortened, truncated,
-            # or abbreviated. Also, I'm not sure if there can be more than one
+            # Get the journal title. I'm not sure if there can be more than one
             # of these because it's a list (and I'm only getting the first).
             try:
-                journal = data["message"]["short-container-title"][0]
+                journal = data["message"]["container-title"][0]
             except IndexError:
                 journal = ""
 
