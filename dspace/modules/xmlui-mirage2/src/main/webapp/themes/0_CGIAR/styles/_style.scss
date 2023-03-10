@@ -182,6 +182,7 @@ width:85%
 }
 .thumbnail>img, .thumbnail a>img{
   max-width: 200px;
+  min-width: 128px;
   border:0;
   margin-left: 0;
 }
