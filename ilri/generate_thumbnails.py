@@ -35,68 +35,6 @@ def signal_handler(signal, frame):
     sys.exit(1)
 
 
-parser = argparse.ArgumentParser(
-    description="Download PDFs and generate thumbnails from files in a CSV."
-)
-parser.add_argument(
-    "-i",
-    "--csv-file",
-    help="Path to CSV file",
-    required=True,
-    type=argparse.FileType("r", encoding="UTF-8"),
-)
-parser.add_argument(
-    "-d",
-    "--debug",
-    help="Print debug messages to standard error (stderr).",
-    action="store_true",
-)
-parser.add_argument(
-    "-n",
-    "--dry-run",
-    help="Only print changes that would be made.",
-    action="store_true",
-)
-parser.add_argument(
-    "-f",
-    "--filename-field-name",
-    help="Name of column with thumbnail filenames.",
-    default="filename",
-)
-parser.add_argument(
-    "-u",
-    "--url-field-name",
-    help="Name of column with URLs for the PDFs.",
-    default="dc.description.url",
-)
-parser.add_argument(
-    "-w", "--download-only", help="Only download the PDFs.", action="store_true"
-)
-args = parser.parse_args()
-
-# open the CSV
-reader = csv.DictReader(args.csv_file)
-
-# check if the filename and URL fields specified by the user exist in the CSV
-if args.filename_field_name not in reader.fieldnames:
-    sys.stderr.write(
-        Fore.RED
-        + 'Specified field "{}" does not exist in the CSV.\n'.format(
-            args.filename_field_name
-        )
-        + Fore.RESET
-    )
-    sys.exit(1)
-if args.url_field_name not in reader.fieldnames:
-    sys.stderr.write(
-        Fore.RED
-        + 'Specified field "{0}" does not exist in the CSV.\n'.format(
-            args.url_field_name
-        )
-        + Fore.RESET
-    )
-    sys.exit(1)
-
 # Process thumbnails from filename.pdf to filename.jpg using libvips. Equivalent
 # to the following shell invocation:
 #
@@ -109,7 +47,6 @@ if args.url_field_name not in reader.fieldnames:
 #
 # See: https://github.com/libvips/libvips/issues/379
 def create_thumbnail(row):
-
     filename = row[args.filename_field_name]
     thumbnail = os.path.splitext(filename)[0] + ".jpg"
     # check if the file has been downloaded
@@ -169,11 +106,74 @@ def download_bitstream(row):
     return
 
 
-# set the signal handler for SIGINT (^C)
-signal.signal(signal.SIGINT, signal_handler)
+if __name__ == "__main__":
+    # set the signal handler for SIGINT (^C)
+    signal.signal(signal.SIGINT, signal_handler)
 
-for row in reader:
-    download_bitstream(row)
+    parser = argparse.ArgumentParser(
+        description="Download PDFs and generate thumbnails from files in a CSV."
+    )
+    parser.add_argument(
+        "-i",
+        "--csv-file",
+        help="Path to CSV file",
+        required=True,
+        type=argparse.FileType("r", encoding="UTF-8"),
+    )
+    parser.add_argument(
+        "-d",
+        "--debug",
+        help="Print debug messages to standard error (stderr).",
+        action="store_true",
+    )
+    parser.add_argument(
+        "-n",
+        "--dry-run",
+        help="Only print changes that would be made.",
+        action="store_true",
+    )
+    parser.add_argument(
+        "-f",
+        "--filename-field-name",
+        help="Name of column with thumbnail filenames.",
+        default="filename",
+    )
+    parser.add_argument(
+        "-u",
+        "--url-field-name",
+        help="Name of column with URLs for the PDFs.",
+        default="dc.description.url",
+    )
+    parser.add_argument(
+        "-w", "--download-only", help="Only download the PDFs.", action="store_true"
+    )
+    args = parser.parse_args()
 
-    if args.download_only is not True:
-        create_thumbnail(row)
+    # open the CSV
+    reader = csv.DictReader(args.csv_file)
+
+    # check if the filename and URL fields specified by the user exist in the CSV
+    if args.filename_field_name not in reader.fieldnames:
+        sys.stderr.write(
+            Fore.RED
+            + 'Specified field "{}" does not exist in the CSV.\n'.format(
+                args.filename_field_name
+            )
+            + Fore.RESET
+        )
+        sys.exit(1)
+    if args.url_field_name not in reader.fieldnames:
+        sys.stderr.write(
+            Fore.RED
+            + 'Specified field "{0}" does not exist in the CSV.\n'.format(
+                args.url_field_name
+            )
+            + Fore.RESET
+        )
+        sys.exit(1)
+
+    for row in reader:
+        download_bitstream(row)
+
+        if args.download_only is not True:
+            create_thumbnail(row)
