@@ -33,7 +33,6 @@ from colorama import Fore
 
 # read DOIs from a text file, one per line
 def read_dois_from_file():
-
     # initialize an empty list for DOIs
     dois = []
 
@@ -86,8 +85,12 @@ def fix_crossref_date(crossref_date):
 
 def resolve_dois(dois):
     fieldnames = [
+        "title",
+        "authors",
         "doi",
         "journal",
+        "issn",
+        "isbn",
         "publisher",
         "volume",
         "issue",
@@ -129,12 +132,78 @@ def resolve_dois(dois):
 
             data = request.json()
 
+            # I don't know why title is an array of strings, but let's just get
+            # the first one.
+            try:
+                title = data["message"]["title"][0]
+            except IndexError:
+                title = ""
+
+            # Create an empty list to keep our authors
+            authors = list()
+
+            try:
+                for author in data["message"]["author"]:
+                    # Some authors have no given name in Crossref
+                    try:
+                        # Crossref given name is often initials like "S. M."
+                        # and we don't want that space!
+                        author_given_name = author["given"].replace(". ", ".")
+                    except KeyError:
+                        author_given_name = None
+
+                    # Some authors have no family name in Crossref
+                    try:
+                        author_family_name = author["family"]
+                    except KeyError:
+                        author_family_name = None
+
+                    # Naive construction of "Last, First Initials" when we have
+                    # both of them.
+                    if author_family_name and author_given_name:
+                        authors.append(f"{author_family_name}, {author_given_name}")
+                    # Otherwise we need to make do with only the family name
+                    elif author_family_name and author_given_name is None:
+                        authors.append(f"{author_family_name}")
+                    # And sometimes we need to make do with only the given name
+                    elif author_given_name and author_family_name is None:
+                        authors.append(f"{author_given_name}")
+            # Believe it or not some items on Crossref have no author (doesn't
+            # mean the DOI itself won't, though).
+            #
+            # See: https://api.crossref.org/works/10.1638/2018-0110
+            # See: https://doi.org/10.1638/2018-0110
+            except KeyError:
+                authors = ""
+
             # Get the journal title. I'm not sure if there can be more than one
             # of these because it's a list (and I'm only getting the first).
             try:
                 journal = data["message"]["container-title"][0]
             except IndexError:
                 journal = ""
+
+            # Create an empty list to hold ISSNs, as there could be more than one
+            issns = list()
+
+            # Get the ISSN. For journal articles there is often a print ISSN and
+            # an electric ISSN.
+            try:
+                for issn in data["message"]["ISSN"]:
+                    issns.append(issn)
+            except KeyError:
+                issns = ""
+
+            # Create an empty list to hold ISBNs, as there could be more than one
+            isbns = list()
+
+            # Get the ISBN. For books and book chapters there is often a print
+            # ISBN and an electric ISBN.
+            try:
+                for isbn in data["message"]["isbn-type"]:
+                    isbns.append(isbn["value"])
+            except KeyError:
+                isbns = ""
 
             try:
                 publisher = data["message"]["publisher"]
@@ -218,8 +287,12 @@ def resolve_dois(dois):
 
             writer.writerow(
                 {
+                    "title": title,
+                    "authors": "||".join(authors),
                     "doi": doi,
                     "journal": journal,
+                    "issn": "||".join(issns),
+                    "isbn": "||".join(isbns),
                     "publisher": publisher,
                     "volume": volume,
                     "issue": issue,
