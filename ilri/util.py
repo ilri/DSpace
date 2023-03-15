@@ -1,4 +1,4 @@
-# util.py v0.0.2
+# util.py v0.0.3
 #
 # Copyright 2022 Alan Orth.
 #
@@ -8,6 +8,11 @@
 #
 # Various helper functions for CGSpace DSpace Python scripts.
 #
+
+import sys
+
+import psycopg2
+from colorama import Fore
 
 
 def field_name_to_field_id(cursor, metadata_field: str):
@@ -62,3 +67,26 @@ def update_item_last_modified(cursor, dspace_object_id: str):
     # Syntax looks weird here, but the second argument must always be a sequence
     # See: https://www.psycopg.org/docs/usage.html
     cursor.execute(sql, [dspace_object_id])
+
+
+def db_connect(
+    database_name: str, database_user: str, database_pass: str, database_host: str
+):
+    """Connect to a PostgreSQL database.
+
+    :param database_name: a string containing the database name.
+    :param database_user: a string containing the database user.
+    :param database_pass: a string containing the database pass.
+    :param database_host: a string containing the database host.
+    :returns psycopg connection
+    """
+
+    try:
+        conn = psycopg2.connect(
+            f"dbname={database_name} user={database_user} password={database_pass} host={database_host}"
+        )
+    except psycopg2.OperationalError:
+        sys.stderr.write(Fore.RED + "Could not connect to database.\n" + Fore.RESET)
+        sys.exit(1)
+
+    return conn
