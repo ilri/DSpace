@@ -68,8 +68,6 @@ def download_pdf(doi):
     else:
         return ""
 
-    #return filename
-
 
 if __name__ == "__main__":
     # set the signal handler for SIGINT (^C)
