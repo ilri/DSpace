@@ -21,11 +21,7 @@
 # This script is written for Python 3 and requires several modules that you can
 # install with pip (I recommend setting up a Python virtual environment first):
 #
-#   $ pip install psycopg2 colorama
-#
-# See: http://initd.org/psycopg
-# See: http://initd.org/psycopg/docs/usage.html#with-statement
-# See: http://initd.org/psycopg/docs/faq.html#best-practices
+#   $ pip install psycopg colorama
 #
 
 import argparse
@@ -33,7 +29,7 @@ import re
 import signal
 import sys
 
-import psycopg2
+import psycopg
 import util
 from colorama import Fore
 
@@ -87,7 +83,7 @@ signal.signal(signal.SIGINT, signal_handler)
 
 # connect to database
 try:
-    conn = psycopg2.connect(
+    conn = psycopg.connect(
         "dbname={} user={} password={} host='localhost'".format(
             args.database_name, args.database_user, args.database_pass
         )
@@ -95,7 +91,7 @@ try:
 
     if args.debug:
         sys.stderr.write(Fore.GREEN + "Connected to database.\n" + Fore.RESET)
-except psycopg2.OperationalError:
+except psycopg.OperationalError:
     sys.stderr.write(Fore.RED + "Could not connect to database.\n" + Fore.RESET)
     sys.exit(1)
 
@@ -122,50 +118,46 @@ for line in args.input_file.read().splitlines():
     # see: https://docs.python.org/3/library/re.html
     orcid_identifier = orcid_identifier_match.group(0)
 
-    with conn:
-        # cursor will be closed after this block exits
-        # see: http://initd.org/psycopg/docs/usage.html#with-statement
-        with conn.cursor() as cursor:
-            # note that the SQL here is quoted differently to allow us to use
-            # LIKE with % wildcards with our paremeter subsitution
-            sql = "SELECT text_value, dspace_object_id FROM metadatavalue WHERE dspace_object_id IN (SELECT uuid FROM item WHERE in_archive AND NOT withdrawn) AND metadata_field_id=%s AND text_value LIKE '%%' || %s || '%%' AND text_value!=%s"
-            cursor.execute(sql, (args.metadata_field_id, orcid_identifier, line))
+    # see: https://www.psycopg.org/psycopg3/docs/basic/transactions.html#transaction-context
+    with conn.cursor() as cursor:
+        # note that the SQL here is quoted differently to allow us to use
+        # LIKE with % wildcards with our paremeter subsitution
+        sql = "SELECT text_value, dspace_object_id FROM metadatavalue WHERE dspace_object_id IN (SELECT uuid FROM item WHERE in_archive AND NOT withdrawn) AND metadata_field_id=%s AND text_value LIKE '%%' || %s || '%%' AND text_value!=%s"
+        cursor.execute(sql, (args.metadata_field_id, orcid_identifier, line))
 
-            # Get the records for items with matching metadata. We will use the
-            # object IDs to update their last_modified dates.
-            matching_records = cursor.fetchall()
+        # Get the records for items with matching metadata. We will use the
+        # object IDs to update their last_modified dates.
+        matching_records = cursor.fetchall()
 
-            if args.dry_run:
-                if cursor.rowcount > 0 and not args.quiet:
-                    print(
-                        Fore.GREEN
-                        + "Would fix {0} occurences of: {1}".format(
-                            cursor.rowcount, line
-                        )
-                        + Fore.RESET
-                    )
-            else:
-                sql = "UPDATE metadatavalue SET text_value=%s WHERE dspace_object_id IN (SELECT uuid FROM item WHERE in_archive AND NOT withdrawn) AND metadata_field_id=%s AND text_value LIKE '%%' || %s || '%%' AND text_value!=%s"
-                cursor.execute(
-                    sql,
-                    (
-                        line,
-                        args.metadata_field_id,
-                        orcid_identifier,
-                        line,
-                    ),
+        if args.dry_run:
+            if cursor.rowcount > 0 and not args.quiet:
+                print(
+                    Fore.GREEN
+                    + "Would fix {0} occurences of: {1}".format(cursor.rowcount, line)
+                    + Fore.RESET
+                )
+        else:
+            sql = "UPDATE metadatavalue SET text_value=%s WHERE dspace_object_id IN (SELECT uuid FROM item WHERE in_archive AND NOT withdrawn) AND metadata_field_id=%s AND text_value LIKE '%%' || %s || '%%' AND text_value!=%s"
+            cursor.execute(
+                sql,
+                (
+                    line,
+                    args.metadata_field_id,
+                    orcid_identifier,
+                    line,
+                ),
+            )
+
+            if cursor.rowcount > 0 and not args.quiet:
+                print(
+                    Fore.GREEN
+                    + "Fixed {0} occurences of: {1}".format(cursor.rowcount, line)
+                    + Fore.RESET
                 )
 
-                if cursor.rowcount > 0 and not args.quiet:
-                    print(
-                        Fore.GREEN
-                        + "Fixed {0} occurences of: {1}".format(cursor.rowcount, line)
-                        + Fore.RESET
-                    )
-
-                # Update the last_modified date for each item we've changed
-                for record in matching_records:
-                    util.update_item_last_modified(cursor, record[1])
+            # Update the last_modified date for each item we've changed
+            for record in matching_records:
+                util.update_item_last_modified(cursor, record[1])
 
 
 # close database connection before we exit
