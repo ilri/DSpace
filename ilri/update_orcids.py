@@ -84,9 +84,7 @@ signal.signal(signal.SIGINT, signal_handler)
 # connect to database
 try:
     conn = psycopg.connect(
-        "dbname={} user={} password={} host='localhost'".format(
-            args.database_name, args.database_user, args.database_pass
-        )
+        f"dbname={args.database_name} user={args.database_user} password={args.database_pass} host='localhost'"
     )
 
     if args.debug:
@@ -109,7 +107,7 @@ for line in args.input_file.read().splitlines():
         if args.debug:
             sys.stderr.write(
                 Fore.YELLOW
-                + 'Skipping invalid ORCID identifier in "{0}".\n'.format(line)
+                + f'Skipping invalid ORCID identifier in "{line}".\n'
                 + Fore.RESET
             )
         continue
@@ -133,7 +131,7 @@ for line in args.input_file.read().splitlines():
             if cursor.rowcount > 0 and not args.quiet:
                 print(
                     Fore.GREEN
-                    + "Would fix {0} occurences of: {1}".format(cursor.rowcount, line)
+                    + f"Would fix {cursor.rowcount} occurences of: {line}"
                     + Fore.RESET
                 )
         else:
@@ -151,7 +149,7 @@ for line in args.input_file.read().splitlines():
             if cursor.rowcount > 0 and not args.quiet:
                 print(
                     Fore.GREEN
-                    + "Fixed {0} occurences of: {1}".format(cursor.rowcount, line)
+                    + f"Fixed {cursor.rowcount} occurences of: {line}"
                     + Fore.RESET
                 )
 
