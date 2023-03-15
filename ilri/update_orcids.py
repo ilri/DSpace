@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 #
-# update-orcids.py v0.1.1
+# update-orcids.py v0.1.2
 #
-# Copyright 2022 Alan Orth.
+# Copyright Alan Orth.
 #
 # SPDX-License-Identifier: GPL-3.0-only
 #
