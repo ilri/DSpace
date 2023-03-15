@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# add-orcid-identifiers-csv.py v1.1.3
+# add-orcid-identifiers-csv.py v1.1.4
 #
 # Copyright Alan Orth.
 
@@ -94,21 +94,9 @@ def main():
     signal.signal(signal.SIGINT, signal_handler)
 
     # connect to database
-    try:
-        conn_string = "dbname={0} user={1} password={2} host=localhost".format(
-            args.database_name, args.database_user, args.database_pass
-        )
-        conn = psycopg2.connect(conn_string)
-
-        if args.debug:
-            sys.stderr.write(Fore.GREEN + "Connected to the database.\n" + Fore.RESET)
-    except psycopg2.OperationalError:
-        sys.stderr.write(Fore.RED + "Unable to connect to the database.\n" + Fore.RESET)
-
-        # close output file before we exit
-        args.csv_file.close()
-
-        exit(1)
+    conn = util.db_connect(
+        args.database_name, args.database_user, args.database_pass, "localhost"
+    )
 
     # open the CSV
     reader = csv.DictReader(args.csv_file)

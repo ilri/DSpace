@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# check-duplicates.py 0.4.2
+# check-duplicates.py 0.4.3
 #
 # Copyright 2021 Alan Orth.
 #
@@ -31,6 +31,7 @@ import sys
 from datetime import datetime
 
 import psycopg2
+import util
 from colorama import Fore
 
 # Column names in the CSV
@@ -150,16 +151,9 @@ if criteria3_column_name not in reader.fieldnames:
 signal.signal(signal.SIGINT, signal_handler)
 
 # connect to database
-try:
-    conn = psycopg2.connect(
-        f"dbname={args.database_name} user={args.database_user} password={args.database_pass} host=localhost"
-    )
-
-    if args.debug:
-        sys.stderr.write(Fore.GREEN + "Connected to database.\n" + Fore.RESET)
-except psycopg2.OperationalError:
-    sys.stderr.write(Fore.RED + "Could not connect to database.\n" + Fore.RESET)
-    sys.exit(1)
+conn = util.db_connect(
+    args.database_name, args.database_user, args.database_pass, "localhost"
+)
 
 with conn:
     # cursor will be closed after this block exits

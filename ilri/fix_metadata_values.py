@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# fix-metadata-values.py v1.2.3
+# fix-metadata-values.py v1.2.4
 #
 # Copyright 2018–2022 Alan Orth
 #
@@ -105,16 +105,9 @@ if args.to_field_name not in reader.fieldnames:
 signal.signal(signal.SIGINT, signal_handler)
 
 # connect to database
-try:
-    conn = psycopg2.connect(
-        f"dbname={args.database_name} user={args.database_user} password={args.database_pass} host='localhost'"
-    )
-
-    if args.debug:
-        sys.stderr.write(Fore.GREEN + "Connected to database.\n" + Fore.RESET)
-except psycopg2.OperationalError:
-    sys.stderr.write(Fore.RED + "Could not connect to database.\n" + Fore.RESET)
-    sys.exit(1)
+conn = util.db_connect(
+    args.database_name, args.database_user, args.database_pass, "localhost"
+)
 
 for row in reader:
     if row[args.from_field_name] == row[args.to_field_name]:

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# delete-metadata-values.py 1.2.2
+# delete-metadata-values.py 1.2.3
 #
 # Copyright 2018–2022 Alan Orth.
 #
@@ -92,18 +92,9 @@ if args.from_field_name not in reader.fieldnames:
 signal.signal(signal.SIGINT, signal_handler)
 
 # connect to database
-try:
-    conn = psycopg2.connect(
-        "dbname={} user={} password={} host='localhost'".format(
-            args.database_name, args.database_user, args.database_pass
-        )
-    )
-
-    if args.debug:
-        sys.stderr.write(Fore.GREEN + "Connected to database.\n" + Fore.RESET)
-except psycopg2.OperationalError:
-    sys.stderr.write(Fore.RED + "Could not connect to database.\n" + Fore.RESET)
-    sys.exit(1)
+conn = util.db_connect(
+    args.database_name, args.database_user, args.database_pass, "localhost"
+)
 
 for row in reader:
     with conn:
