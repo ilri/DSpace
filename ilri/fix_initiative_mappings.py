@@ -2,7 +2,7 @@
 #
 # fix-initiative-mappings.py 0.0.2
 #
-# Copyright 2022–2023 Alan Orth.
+# Copyright Alan Orth.
 #
 # SPDX-License-Identifier: GPL-3.0-only
 #

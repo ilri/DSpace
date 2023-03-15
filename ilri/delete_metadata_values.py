@@ -2,7 +2,7 @@
 #
 # delete-metadata-values.py 1.2.3
 #
-# Copyright 2018–2022 Alan Orth.
+# Copyright Alan Orth.
 #
 # SPDX-License-Identifier: GPL-3.0-only
 #

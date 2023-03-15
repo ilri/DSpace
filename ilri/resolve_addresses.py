@@ -2,7 +2,7 @@
 #
 # resolve-addresses.py 0.4.1
 #
-# Copyright 2019—2021 Alan Orth.
+# Copyright Alan Orth.
 #
 # SPDX-License-Identifier: GPL-3.0-only
 #

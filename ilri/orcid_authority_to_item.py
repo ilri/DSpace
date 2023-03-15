@@ -2,7 +2,7 @@
 #
 # orcid-authority-to-item.py 1.1.1
 #
-# Copyright 2018–2019 Alan Orth.
+# Copyright Alan Orth.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by

@@ -2,7 +2,7 @@
 #
 # iso3166-lookup.py 0.0.1
 #
-# Copyright 2020 Alan Orth.
+# Copyright Alan Orth.
 #
 # SPDX-License-Identifier: GPL-3.0-only
 #

@@ -2,7 +2,7 @@
 #
 # ror-lookup.py 0.1.0
 #
-# Copyright 2020 Alan Orth.
+# Copyright Alan Orth.
 #
 # SPDX-License-Identifier: GPL-3.0-only
 #

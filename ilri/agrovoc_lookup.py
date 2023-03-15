@@ -2,7 +2,7 @@
 #
 # agrovoc-lookup.py 0.4.2
 #
-# Copyright 2019–2020 Alan Orth.
+# Copyright Alan Orth.
 #
 # SPDX-License-Identifier: GPL-3.0-only
 #

@@ -2,7 +2,7 @@
 
 # check-duplicates.py 0.4.3
 #
-# Copyright 2021 Alan Orth.
+# Copyright Alan Orth.
 #
 # SPDX-License-Identifier: GPL-3.0-only
 #

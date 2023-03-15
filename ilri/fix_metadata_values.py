@@ -2,7 +2,7 @@
 #
 # fix-metadata-values.py v1.2.4
 #
-# Copyright 2018–2022 Alan Orth
+# Copyright Alan Orth
 #
 # SPDX-License-Identifier: GPL-3.0-only
 #

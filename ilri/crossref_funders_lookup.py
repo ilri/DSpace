@@ -2,7 +2,7 @@
 #
 # crossref-funders-lookup.py 0.3.1
 #
-# Copyright 2020 Alan Orth.
+# Copyright Alan Orth.
 #
 # SPDX-License-Identifier: GPL-3.0-only
 #

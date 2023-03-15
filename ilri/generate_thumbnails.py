@@ -2,7 +2,7 @@
 #
 # generate-thumbnails.py 1.1.3
 #
-# Copyright 2018–2021 Alan Orth.
+# Copyright Alan Orth.
 #
 # SPDX-License-Identifier: GPL-3.0-only
 #
