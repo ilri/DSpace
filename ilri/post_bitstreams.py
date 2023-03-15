@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# post_bitstreams.py 0.0.1
+# post_bitstreams.py 0.1.0
 #
 # SPDX-License-Identifier: GPL-3.0-only
 #
@@ -24,6 +24,8 @@
 #
 # You can optionally specify the URL of a DSpace REST application (default is to
 # use http://localhost:8080/rest).
+#
+# TODO: allow overwriting by bitstream description
 #
 # This script is written for Python 3 and requires several modules that you can
 # install with pip (I recommend setting up a Python virtual environment first):
@@ -137,7 +139,7 @@ def check_session(jsessionid: str):
     return True
 
 
-def check_item(item_id: str):
+def check_item(item_id: str, bundle: str):
     """Check if the item already has bitstreams.
 
     Equivalent to the following request with httpie or curl:
@@ -145,10 +147,13 @@ def check_item(item_id: str):
        $ http 'http://localhost:8080/rest/items/804351af-64eb-4e4a-968f-4d3be61358a8?expand=bitstreams,metadata' \
             Cookie:JSESSIONID=B3B9C82F257BCE1773E6FB1EA5ACD774
 
-    To be safe, and to save myself from having to write extra logic, we only
-    want to upload files to items that don't already have one.
+    By default this will return True if the item has any bitstreams in the named
+    bundle and False if the bundle is empty. If the user has asked to overwrite
+    bitstreams then we will do that first, and return False once the bundle is
+    empty.
 
     :param item_id: uuid of item in the DSpace repository.
+    :returns: bool
     """
 
     request_url = f"{rest_items_endpoint}/{item_id}"
@@ -174,18 +179,88 @@ def check_item(item_id: str):
     if request.status_code == requests.codes.ok:
         data = request.json()
 
-        if len(data["bitstreams"]) == 0:
-            # Return False, meaning the item does not have a bistream already
+        # List comprehension to filter out bitstreams that belong to the bundle
+        # we're interested in
+        bitstreams_in_bundle = [
+            bitstream
+            for bitstream in data["bitstreams"]
+            if bitstream["bundleName"] == bundle
+        ]
+
+        if len(bitstreams_in_bundle) == 0:
+            # Return False, meaning the item does not have a bitstream in this bundle yet
+            return False
+
+        # We have bitstreams, so let's see if the user wants to overwrite them
+        if args.overwrite_format:
+            bitstreams_to_overwrite = [
+                bitstream
+                for bitstream in bitstreams_in_bundle
+                if bitstream["format"] == args.overwrite_format
+            ]
+
+            for bitstream in bitstreams_to_overwrite:
+                if args.dry_run:
+                    print(
+                        Fore.YELLOW
+                        + f"> (DRY RUN) Deleting bitstream: {bitstream['name']} ({bitstream['uuid']})"
+                        + Fore.RESET
+                    )
+
+                else:
+                    if delete_bitstream(bitstream["uuid"]):
+                        print(
+                            Fore.YELLOW
+                            + f"> Deleted bitstream: {bitstream['name']} ({bitstream['uuid']})"
+                            + Fore.RESET
+                        )
+
+            # Return False, indicating there are no bitstreams in this bundle
             return False
         else:
             if args.debug:
-                sys.stderr.write(f"> Skipping item with existing bitstream(s)\n")
+                sys.stderr.write(
+                    f"> Skipping item with existing bitstream(s) in {bundle} bundle\n"
+                )
 
             return True
 
     # If we get here, assume the item has a bitstream and return True so we
     # don't upload another.
     return True
+
+
+def delete_bitstream(bitstream_id: str):
+    """Delete a bitstream.
+
+    Equivalent to the following request with httpie or curl:
+
+       $ http DELETE 'http://localhost:8080/rest/bitstreams/fca0fd2a-630e-4a34-b260-f645c8f2b027' \
+            Cookie:JSESSIONID=B3B9C82F257BCE1773E6FB1EA5ACD774
+
+    :param bitstream_id: uuid of bitstream in the DSpace repository.
+    :returns: bool
+    """
+
+    request_url = f"{rest_bitstreams_endpoint}/{bitstream_id}"
+    headers = {"user-agent": user_agent}
+    cookies = {"JSESSIONID": jsessionid}
+
+    try:
+        request = requests.delete(request_url, headers=headers, cookies=cookies)
+    except requests.ConnectionError:
+        sys.stderr.write(
+            Fore.RED
+            + f"> Could not connect to REST API: {args.request_url}\n"
+            + Fore.RESET
+        )
+
+        exit(1)
+
+    if request.status_code == requests.codes.ok:
+        return True
+    else:
+        return False
 
 
 def upload_file(item_id: str, bundle: str, filename: str, description):
@@ -260,12 +335,23 @@ if __name__ == "__main__":
         "-d", "--debug", help="Print debug messages.", action="store_true"
     )
     parser.add_argument(
+        "-n",
+        "--dry-run",
+        help="Only print changes that would be made.",
+        action="store_true",
+    )
+    parser.add_argument(
         "-u",
         "--rest-url",
         help="URL of the DSpace 6.x REST API.",
         default="http://localhost:8080/rest",
     )
     parser.add_argument("-e", "--user", help="Email address of administrator user.")
+    parser.add_argument(
+        "--overwrite-format",
+        help="Bitstream formats to overwrite (use this carefully, test with dry run first!).",
+        choices=["PNG", "JPEG", "Adobe PDF"],
+    )
     parser.add_argument("-p", "--password", help="Password of administrator user.")
     parser.add_argument(
         "-i",
@@ -290,6 +376,7 @@ if __name__ == "__main__":
     rest_login_endpoint = f"{rest_base_url}/login"
     rest_status_endpoint = f"{rest_base_url}/status"
     rest_items_endpoint = f"{rest_base_url}/items"
+    rest_bitstreams_endpoint = f"{rest_base_url}/bitstreams"
     user_agent = "Alan Orth (ILRI) Python bot"
 
     # If the user passed a session ID then we should check if it is valid first.
@@ -326,11 +413,13 @@ if __name__ == "__main__":
 
     for row in reader:
         item_id = row["id"]
-        # Check if this item already has a bitstream (check_item returns True if the
-        # item already has a bitstream).
-        print(f"{item_id}: checking for existing bitstreams")
+        bundle = row["bundle"]
 
-        if not check_item(item_id):
+        # Check if this item already has a bitstream in this bundle (check_item
+        # returns True if the bundle already has a bitstream).
+        print(f"{item_id}: checking for existing bitstreams in {bundle} bundle")
+
+        if not check_item(item_id, bundle):
             # Check if there is a description for this filename
             try:
                 filename = row["filename"].split("__description:")[0]
@@ -339,10 +428,14 @@ if __name__ == "__main__":
                 filename = row["filename"].split("__description:")[0]
                 description = False
 
-            if not args.quiet:
-                print(f"> {item_id}, uploading bitstream: {filename}")
-
-            if upload_file(item_id, row["bundle"], filename, description):
+            if args.dry_run:
                 print(
-                    Fore.YELLOW + f"> {item_id}, uploaded file: {filename}" + Fore.RESET
+                    Fore.YELLOW + f"> (DRY RUN) Uploading file: {filename}" + Fore.RESET
                 )
+            else:
+                if upload_file(item_id, bundle, filename, description):
+                    print(
+                        Fore.YELLOW
+                        + f"> Uploaded file: {filename} ({bundle})"
+                        + Fore.RESET
+                    )
