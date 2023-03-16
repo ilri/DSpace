@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# post_bitstreams.py 0.1.0
+# post_bitstreams.py 0.1.1
 #
 # SPDX-License-Identifier: GPL-3.0-only
 #
@@ -350,7 +350,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--overwrite-format",
         help="Bitstream formats to overwrite (use this carefully, test with dry run first!).",
-        choices=["PNG", "JPEG", "Adobe PDF"],
+        choices=["PNG", "JPEG", "GIF", "Adobe PDF"],
     )
     parser.add_argument("-p", "--password", help="Password of administrator user.")
     parser.add_argument(
