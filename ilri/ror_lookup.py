@@ -29,7 +29,6 @@ from colorama import Fore
 
 # read organizations from a text file, one per line
 def read_organizations_from_file():
-
     # initialize an empty list for organization
     organizations = []
 

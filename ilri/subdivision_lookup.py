@@ -29,7 +29,6 @@ from colorama import Fore
 
 # read subdivisions from a text file, one per line
 def read_subdivisions_from_file():
-
     # initialize an empty list for subdivisions
     subdivisions = []
 

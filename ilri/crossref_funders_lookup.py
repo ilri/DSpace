@@ -30,7 +30,6 @@ from colorama import Fore
 
 # read funders from a text file, one per line
 def read_funders_from_file():
-
     # initialize an empty list for funders
     funders = []
 
@@ -62,7 +61,6 @@ def resolve_funders(funders):
     requests_cache.remove_expired_responses()
 
     for funder in funders:
-
         if args.debug:
             sys.stderr.write(Fore.GREEN + f"Looking up funder: {funder}\n" + Fore.RESET)
 

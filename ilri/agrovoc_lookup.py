@@ -31,7 +31,6 @@ from colorama import Fore
 
 # read subjects from a text file, one per line
 def read_subjects_from_file():
-
     # initialize an empty list for subjects
     subjects = []
 

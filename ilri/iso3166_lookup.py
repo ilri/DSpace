@@ -29,7 +29,6 @@ from colorama import Fore
 
 # read countries from a text file, one per line
 def read_countries_from_file():
-
     # initialize an empty list for countries
     countries = []
 

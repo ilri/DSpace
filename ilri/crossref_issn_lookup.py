@@ -30,7 +30,6 @@ from colorama import Fore
 
 # read journals from a text file, one per line
 def read_issns_from_file():
-
     # initialize an empty list for ISSNs
     issns = []
 
@@ -62,7 +61,6 @@ def resolve_issns(issns):
     requests_cache.remove_expired_responses()
 
     for issn in issns:
-
         if args.debug:
             sys.stderr.write(Fore.GREEN + f"Looking up ISSN: {issn}\n" + Fore.RESET)
 

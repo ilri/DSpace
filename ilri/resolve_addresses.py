@@ -43,7 +43,6 @@ def valid_ip(address):
 
 # read IPs from a text file, one per line
 def read_addresses_from_file():
-
     # initialize an empty list for IP addresses
     addresses = []
 
@@ -66,7 +65,6 @@ def read_addresses_from_file():
 
 
 def resolve_addresses(addresses):
-
     if args.abuseipdb_api_key:
         fieldnames = ["ip", "org", "asn", "country", "abuseConfidenceScore"]
     else:
@@ -78,9 +76,7 @@ def resolve_addresses(addresses):
     # enable transparent request cache with thirty-day expiry
     expire_after = timedelta(days=30)
     # cache HTTP 200 responses
-    requests_cache.install_cache(
-        "requests-cache", expire_after=expire_after
-    )
+    requests_cache.install_cache("requests-cache", expire_after=expire_after)
 
     # prune old cache entries
     requests_cache.remove_expired_responses()

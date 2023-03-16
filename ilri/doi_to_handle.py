@@ -31,7 +31,6 @@ from colorama import Fore
 
 # read dois from a text file, one per line
 def read_dois_from_file():
-
     # initialize an empty list for DOIs
     dois = []
 
@@ -50,7 +49,6 @@ def read_dois_from_file():
 
 
 def resolve_dois(dois):
-
     # metadata_field_id for metadata values (from metadatafieldregistry and
     # might differ from site to site).
     title_metadata_field_id = 64

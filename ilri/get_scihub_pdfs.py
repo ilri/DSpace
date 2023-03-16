@@ -59,7 +59,7 @@ def download_pdf(doi):
                 + Fore.RESET
             )
 
-        scihub_download(doi_stripped, paper_type='doi', out=filename)
+        scihub_download(doi_stripped, paper_type="doi", out=filename)
 
     # check if the file was downloaded, since we have no way to know if it was
     # successful.
