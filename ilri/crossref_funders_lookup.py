@@ -18,13 +18,14 @@
 #
 
 import argparse
-from colorama import Fore
 import csv
-from datetime import timedelta
-import requests
-import requests_cache
 import signal
 import sys
+from datetime import timedelta
+
+import requests
+import requests_cache
+from colorama import Fore
 
 
 # read funders from a text file, one per line

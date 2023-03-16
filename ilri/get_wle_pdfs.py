@@ -31,9 +31,10 @@
 #   $ pip install colorama requests
 #
 
-from colorama import Fore
 import os.path
+
 import requests
+from colorama import Fore
 
 
 def resolve_bitstreams(handle):

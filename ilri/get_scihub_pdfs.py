@@ -27,8 +27,8 @@
 import argparse
 import csv
 import os.path
-import signal
 import re
+import signal
 
 from colorama import Fore
 from scidownl import scihub_download

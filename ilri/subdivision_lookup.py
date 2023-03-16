@@ -20,10 +20,10 @@
 
 import argparse
 import csv
-import pycountry
 import signal
 import sys
 
+import pycountry
 from colorama import Fore
 
 

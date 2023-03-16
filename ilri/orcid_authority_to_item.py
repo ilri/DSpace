@@ -29,13 +29,14 @@
 #
 
 import argparse
-from colorama import Fore
+import signal
+import sys
 from datetime import timedelta
+
 import psycopg2
 import requests
 import requests_cache
-import signal
-import sys
+from colorama import Fore
 
 
 def main():

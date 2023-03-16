@@ -21,11 +21,13 @@
 #
 
 import argparse
-from colorama import Fore
 import csv
-import psycopg2
 import signal
 import sys
+
+import psycopg2
+from colorama import Fore
+
 
 # read dois from a text file, one per line
 def read_dois_from_file():

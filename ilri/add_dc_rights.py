@@ -36,10 +36,11 @@
 
 import argparse
 import csv
-from colorama import Fore
-import psycopg2
 import signal
 import sys
+
+import psycopg2
+from colorama import Fore
 
 
 def main():

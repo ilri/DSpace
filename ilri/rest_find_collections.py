@@ -25,10 +25,11 @@
 # See: https://requests.readthedocs.org/en/master
 
 import argparse
-from colorama import Fore
-import requests
 import signal
 import sys
+
+import requests
+from colorama import Fore
 
 
 def signal_handler(signal, frame):

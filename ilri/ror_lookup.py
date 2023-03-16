@@ -19,11 +19,12 @@
 #
 
 import argparse
-from colorama import Fore
 import csv
 import json
 import signal
 import sys
+
+from colorama import Fore
 
 
 # read organizations from a text file, one per line

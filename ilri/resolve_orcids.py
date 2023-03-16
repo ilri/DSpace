@@ -19,13 +19,14 @@
 #
 
 import argparse
-from colorama import Fore
-from datetime import timedelta
 import re
-import requests
-import requests_cache
 import signal
 import sys
+from datetime import timedelta
+
+import requests
+import requests_cache
+from colorama import Fore
 
 
 # read ORCID identifiers from a text file, one per line
