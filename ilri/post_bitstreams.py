@@ -196,7 +196,7 @@ def check_item(item_id: str, bundle: str):
             bitstreams_to_overwrite = [
                 bitstream
                 for bitstream in bitstreams_in_bundle
-                if bitstream["format"] == args.overwrite_format
+                if bitstream["format"] in args.overwrite_format
             ]
 
             for bitstream in bitstreams_to_overwrite:
@@ -349,8 +349,9 @@ if __name__ == "__main__":
     parser.add_argument("-e", "--user", help="Email address of administrator user.")
     parser.add_argument(
         "--overwrite-format",
-        help="Bitstream formats to overwrite (use this carefully, test with dry run first!).",
+        help="Bitstream formats to overwrite. Specify more than once to overwrite multiple formats. Use this carefully, test with dry run first!",
         choices=["PNG", "JPEG", "GIF", "Adobe PDF"],
+        action="extend", nargs="+",
     )
     parser.add_argument("-p", "--password", help="Password of administrator user.")
     parser.add_argument(
