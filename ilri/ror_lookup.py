@@ -29,6 +29,11 @@ import sys
 from colorama import Fore
 
 
+# Create a local logger instance
+logger = logging.getLogger(__name__)
+# Set the global log format
+logging.basicConfig(format="[%(levelname)s] %(message)s")
+
 # read organizations from a text file, one per line
 def read_organizations_from_file():
     # initialize an empty list for organization
@@ -54,11 +59,11 @@ def resolve_organizations(organizations):
     writer.writeheader()
 
     for organization in organizations:
-        log.debug(f"Looking up the organization: {organization}")
+        logger.debug(f"Looking up the organization: {organization}")
 
         # check for exact match
         if organization.lower() in ror_names:
-            log.info(f"{Fore.GREEN}Name match for {organization!r} in ROR{Fore.RESET}")
+            logger.info(f"{Fore.GREEN}Name match for {organization!r} in ROR{Fore.RESET}")
 
             writer.writerow(
                 {
@@ -68,7 +73,7 @@ def resolve_organizations(organizations):
                 }
             )
         elif organization.lower() in ror_aliases:
-            log.info(f"{Fore.GREEN}Alias match for {organization!r} in ROR{Fore.RESET}")
+            logger.info(f"{Fore.GREEN}Alias match for {organization!r} in ROR{Fore.RESET}")
 
             writer.writerow(
                 {
@@ -78,7 +83,7 @@ def resolve_organizations(organizations):
                 }
             )
         elif organization.lower() in ror_acronyms:
-            log.info(
+            logger.info(
                 f"{Fore.GREEN}Acronym match for {organization!r} in ROR{Fore.RESET}"
             )
 
@@ -90,7 +95,7 @@ def resolve_organizations(organizations):
                 }
             )
         else:
-            log.debug(f"{Fore.YELLOW}No match for {organization!r} in ROR{Fore.RESET}")
+            logger.debug(f"{Fore.YELLOW}No match for {organization!r} in ROR{Fore.RESET}")
 
             writer.writerow(
                 {
@@ -110,11 +115,6 @@ def signal_handler(signal, frame):
 
     sys.exit(1)
 
-
-# Create a local logger instance
-log = logging.getLogger(__name__)
-# Set the global log format
-logging.basicConfig(format="[%(levelname)s] %(message)s")
 
 parser = argparse.ArgumentParser(
     description="Query the ROR JSON to validate organizations from a text file and save results in a CSV."
@@ -153,9 +153,9 @@ signal.signal(signal.SIGINT, signal_handler)
 
 # The default log level is WARNING, but we want to set it to DEBUG or INFO
 if args.debug:
-    log.setLevel(logging.DEBUG)
+    logger.setLevel(logging.DEBUG)
 else:
-    log.setLevel(logging.INFO)
+    logger.setLevel(logging.INFO)
 
 # if the user specified an input file, get the organizations from there
 if args.input_file and args.ror_json:
