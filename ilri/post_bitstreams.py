@@ -363,12 +363,6 @@ if __name__ == "__main__":
         type=argparse.FileType("r", encoding="UTF-8"),
     )
     parser.add_argument(
-        "-q",
-        "--quiet",
-        help="Do not print progress messages to the screen.",
-        action="store_true",
-    )
-    parser.add_argument(
         "-s", "--jsessionid", help="JESSIONID, if previously authenticated."
     )
     args = parser.parse_args()
