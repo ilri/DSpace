@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# post_bitstreams.py 0.1.1
+# post_bitstreams.py 0.1.2
 #
 # SPDX-License-Identifier: GPL-3.0-only
 #
@@ -35,12 +35,18 @@
 
 import argparse
 import csv
+import logging
 import os.path
 import signal
 import sys
 
 import requests
 from colorama import Fore
+
+# Create a local logger instance for this module. We don't do any configuration
+# because this module might be used elsewhere that will have its own logging
+# configuration.
+logger = logging.getLogger(__name__)
 
 
 def signal_handler(signal, frame):
@@ -63,40 +69,36 @@ def login(user: str, password: str):
     headers = {"user-agent": user_agent}
     data = {"email": args.user, "password": args.password}
 
-    if not args.quiet:
-        print(f"Logging in...\n")
+    logger.info("Logging in...")
 
     try:
         request = requests.post(rest_login_endpoint, headers=headers, data=data)
     except requests.ConnectionError:
-        sys.stderr.write(
+        logger.error(
             Fore.RED
-            + f"> Could not connect to REST API: {args.request_url}\n"
+            + f"> Could not connect to REST API: {args.request_url}"
             + Fore.RESET
         )
 
         sys.exit(1)
 
     if request.status_code != requests.codes.ok:
-        sys.stderr.write(Fore.RED + "> Login failed.\n" + Fore.RESET)
+        logger.error(Fore.RED + "> Login failed." + Fore.RESET)
 
         sys.exit(1)
 
     try:
         jsessionid = request.cookies["JSESSIONID"]
     except KeyError:
-        sys.stderr.write(
+        logger.error(
             Fore.RED
-            + f"Login failed (HTTP {request.status_code}): missing JESSSIONID cookie in response...?\n"
+            + f"Login failed (HTTP {request.status_code}): missing JESSSIONID cookie in response...?"
             + Fore.RESET
         )
 
         sys.exit(1)
 
-    if args.debug:
-        sys.stderr.write(
-            Fore.GREEN + f"Logged in using JSESSIONID: {jsessionid}\n" + Fore.RESET
-        )
+    logger.debug(Fore.GREEN + f"Logged in using JSESSIONID: {jsessionid}" + Fore.RESET)
 
     return jsessionid
 
@@ -115,9 +117,9 @@ def check_session(jsessionid: str):
     try:
         request = requests.get(request_url, headers=headers, cookies=cookies)
     except requests.ConnectionError:
-        sys.stderr.write(
+        logger.error(
             Fore.RED
-            + f"> Could not connect to REST API: {args.request_url}\n"
+            + f"> Could not connect to REST API: {args.request_url}"
             + Fore.RESET
         )
 
@@ -125,16 +127,15 @@ def check_session(jsessionid: str):
 
     if request.status_code == requests.codes.ok:
         if not request.json()["authenticated"]:
-            sys.stderr.write(Fore.RED + f"Session expired: {jsessionid}\n" + Fore.RESET)
+            logger.warning(Fore.RED + f"Session expired: {jsessionid}" + Fore.RESET)
 
             return False
     else:
-        sys.stderr.write(Fore.RED + "Error checking session status.\n" + Fore.RESET)
+        logger.error(Fore.RED + "Error checking session status." + Fore.RESET)
 
         return False
 
-    if args.debug:
-        sys.stderr.write(Fore.GREEN + f"Session valid: {jsessionid}\n" + Fore.RESET)
+    logger.debug(Fore.GREEN + f"Session valid: {jsessionid}" + Fore.RESET)
 
     return True
 
@@ -168,9 +169,9 @@ def check_item(item_id: str, bundle: str):
             request_url, headers=headers, cookies=cookies, params=request_params
         )
     except requests.ConnectionError:
-        sys.stderr.write(
+        logger.error(
             Fore.RED
-            + f"> Could not connect to REST API: {args.request_url}\n"
+            + f"> Could not connect to REST API: {args.request_url}"
             + Fore.RESET
         )
 
@@ -201,7 +202,7 @@ def check_item(item_id: str, bundle: str):
 
             for bitstream in bitstreams_to_overwrite:
                 if args.dry_run:
-                    print(
+                    logger.info(
                         Fore.YELLOW
                         + f"> (DRY RUN) Deleting bitstream: {bitstream['name']} ({bitstream['uuid']})"
                         + Fore.RESET
@@ -209,7 +210,7 @@ def check_item(item_id: str, bundle: str):
 
                 else:
                     if delete_bitstream(bitstream["uuid"]):
-                        print(
+                        logger.info(
                             Fore.YELLOW
                             + f"> Deleted bitstream: {bitstream['name']} ({bitstream['uuid']})"
                             + Fore.RESET
@@ -218,10 +219,9 @@ def check_item(item_id: str, bundle: str):
             # Return False, indicating there are no bitstreams in this bundle
             return False
         else:
-            if args.debug:
-                sys.stderr.write(
-                    f"> Skipping item with existing bitstream(s) in {bundle} bundle\n"
-                )
+            logger.debug(
+                f"> Skipping item with existing bitstream(s) in {bundle} bundle"
+            )
 
             return True
 
@@ -249,9 +249,9 @@ def delete_bitstream(bitstream_id: str):
     try:
         request = requests.delete(request_url, headers=headers, cookies=cookies)
     except requests.ConnectionError:
-        sys.stderr.write(
+        logger.error(
             Fore.RED
-            + f"> Could not connect to REST API: {args.request_url}\n"
+            + f"> Could not connect to REST API: {args.request_url}"
             + Fore.RESET
         )
 
@@ -306,20 +306,20 @@ def upload_file(item_id: str, bundle: str, filename: str, description):
                 data=file.read(),
             )
     except requests.ConnectionError:
-        sys.stderr.write(
-            Fore.RED + f"> Could not connect to REST API: {request_url}\n" + Fore.RESET
+        logger.error(
+            Fore.RED + f"> Could not connect to REST API: {request_url}" + Fore.RESET
         )
 
         sys.exit(1)
     except FileNotFoundError:
-        sys.stderr.write(Fore.RED + f"> Could not open {filename}\n" + Fore.RESET)
+        logger.error(Fore.RED + f"> Could not open {filename}" + Fore.RESET)
 
         return False
 
     if request.status_code == requests.codes.ok:
         return True
     else:
-        print(Fore.RED + f"> Error uploading file: {filename}" + Fore.RESET)
+        logger.error(Fore.RED + f"> Error uploading file: {filename}" + Fore.RESET)
 
         return False
 
@@ -351,7 +351,8 @@ if __name__ == "__main__":
         "--overwrite-format",
         help="Bitstream formats to overwrite. Specify more than once to overwrite multiple formats. Use this carefully, test with dry run first!",
         choices=["PNG", "JPEG", "GIF", "Adobe PDF"],
-        action="extend", nargs="+",
+        action="extend",
+        nargs="+",
     )
     parser.add_argument("-p", "--password", help="Password of administrator user.")
     parser.add_argument(
@@ -371,6 +372,16 @@ if __name__ == "__main__":
         "-s", "--jsessionid", help="JESSIONID, if previously authenticated."
     )
     args = parser.parse_args()
+
+    # The default log level is WARNING, but we want to set it to DEBUG or INFO
+    if args.debug:
+        logger.setLevel(logging.DEBUG)
+    else:
+        logger.setLevel(logging.INFO)
+
+    # Since we're running interactively we can set the preferred log format for
+    # the logging module during this invocation.
+    logging.basicConfig(format="[%(levelname)s] %(message)s")
 
     # DSpace 6.x REST API base URL and endpoints
     rest_base_url = args.rest_url
@@ -394,19 +405,16 @@ if __name__ == "__main__":
         # Open the CSV
         reader = csv.DictReader(args.csv_file)
 
-        if args.debug:
-            sys.stderr.write(f"Opened {args.csv_file.name}\n")
+        logger.debug(f"Opened {args.csv_file.name}\n")
     except FileNotFoundError:
-        sys.stderr.write(
-            Fore.RED + f"Could not open {args.csv_file.name}\n" + Fore.RESET
-        )
+        logger.error(Fore.RED + f"Could not open {args.csv_file.name}" + Fore.RESET)
 
     # Check if the required fields exist in the CSV
     for field in ["id", "filename", "bundle"]:
         if field not in reader.fieldnames:
-            sys.stderr.write(
+            logger.error(
                 Fore.RED
-                + f"Expected field {field} does not exist in the CSV.\n"
+                + f"Expected field {field} does not exist in the CSV."
                 + Fore.RESET
             )
 
@@ -418,7 +426,7 @@ if __name__ == "__main__":
 
         # Check if this item already has a bitstream in this bundle (check_item
         # returns True if the bundle already has a bitstream).
-        print(f"{item_id}: checking for existing bitstreams in {bundle} bundle")
+        logger.info(f"{item_id}: checking for existing bitstreams in {bundle} bundle")
 
         if not check_item(item_id, bundle):
             # Check if there is a description for this filename
@@ -430,13 +438,11 @@ if __name__ == "__main__":
                 description = False
 
             if args.dry_run:
-                print(
-                    Fore.YELLOW + f"> (DRY RUN) Uploading file: {filename}" + Fore.RESET
+                logger.info(
+                    f"{Fore.YELLOW}> (DRY RUN) Uploading file: {filename}{Fore.RESET}"
                 )
             else:
                 if upload_file(item_id, bundle, filename, description):
-                    print(
-                        Fore.YELLOW
-                        + f"> Uploaded file: {filename} ({bundle})"
-                        + Fore.RESET
+                    logger.info(
+                        f"{Fore.YELLOW}> Uploaded file: {filename} ({bundle}){Fore.RESET}"
                     )
