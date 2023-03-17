@@ -122,7 +122,7 @@ parser = argparse.ArgumentParser(
 parser.add_argument(
     "-d",
     "--debug",
-    help="Print debug messages to standard error (stderr).",
+    help="Set log level to DEBUG.",
     action="store_true",
 )
 parser.add_argument(
