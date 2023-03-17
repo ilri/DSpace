@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# ror-lookup.py 0.1.0
+# ror-lookup.py 0.1.1
 #
 # Copyright Alan Orth.
 #
@@ -21,6 +21,8 @@
 import argparse
 import csv
 import json
+import logging
+import os
 import signal
 import sys
 
@@ -52,16 +54,11 @@ def resolve_organizations(organizations):
     writer.writeheader()
 
     for organization in organizations:
-        if args.debug:
-            sys.stderr.write(
-                Fore.GREEN
-                + f"Looking up the organization: {organization})\n"
-                + Fore.RESET
-            )
+        log.debug(f"Looking up the organization: {organization}")
 
         # check for exact match
         if organization.lower() in ror_names:
-            print(f"Name match for {organization!r} in ROR)")
+            log.info(f"{Fore.GREEN}Name match for {organization!r} in ROR{Fore.RESET}")
 
             writer.writerow(
                 {
@@ -71,7 +68,7 @@ def resolve_organizations(organizations):
                 }
             )
         elif organization.lower() in ror_aliases:
-            print(f"Alias match for {organization!r} in ROR)")
+            log.info(f"{Fore.GREEN}Alias match for {organization!r} in ROR{Fore.RESET}")
 
             writer.writerow(
                 {
@@ -81,7 +78,9 @@ def resolve_organizations(organizations):
                 }
             )
         elif organization.lower() in ror_acronyms:
-            print(f"Acronym match for {organization!r} in ROR)")
+            log.info(
+                f"{Fore.GREEN}Acronym match for {organization!r} in ROR{Fore.RESET}"
+            )
 
             writer.writerow(
                 {
@@ -91,12 +90,7 @@ def resolve_organizations(organizations):
                 }
             )
         else:
-            if args.debug:
-                sys.stderr.write(
-                    Fore.YELLOW
-                    + f"No match for {organization!r} in ROR)\n"
-                    + Fore.RESET
-                )
+            log.debug(f"{Fore.YELLOW}No match for {organization!r} in ROR{Fore.RESET}")
 
             writer.writerow(
                 {
@@ -116,6 +110,11 @@ def signal_handler(signal, frame):
 
     sys.exit(1)
 
+
+# Create a local logger instance
+log = logging.getLogger(__name__)
+# Set the global log format
+logging.basicConfig(format="[%(levelname)s] %(message)s")
 
 parser = argparse.ArgumentParser(
     description="Query the ROR JSON to validate organizations from a text file and save results in a CSV."
@@ -151,6 +150,12 @@ args = parser.parse_args()
 
 # set the signal handler for SIGINT (^C) so we can exit cleanly
 signal.signal(signal.SIGINT, signal_handler)
+
+# The default log level is WARNING, but we want to set it to DEBUG or INFO
+if args.debug:
+    log.setLevel(logging.DEBUG)
+else:
+    log.setLevel(logging.INFO)
 
 # if the user specified an input file, get the organizations from there
 if args.input_file and args.ror_json:
