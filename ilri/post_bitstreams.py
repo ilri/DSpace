@@ -75,12 +75,12 @@ def login(user: str, password: str):
             + Fore.RESET
         )
 
-        exit(1)
+        sys.exit(1)
 
     if request.status_code != requests.codes.ok:
         sys.stderr.write(Fore.RED + "> Login failed.\n" + Fore.RESET)
 
-        exit(1)
+        sys.exit(1)
 
     try:
         jsessionid = request.cookies["JSESSIONID"]
@@ -91,7 +91,7 @@ def login(user: str, password: str):
             + Fore.RESET
         )
 
-        exit(1)
+        sys.exit(1)
 
     if args.debug:
         sys.stderr.write(
@@ -121,7 +121,7 @@ def check_session(jsessionid: str):
             + Fore.RESET
         )
 
-        exit(1)
+        sys.exit(1)
 
     if request.status_code == requests.codes.ok:
         if not request.json()["authenticated"]:
@@ -174,7 +174,7 @@ def check_item(item_id: str, bundle: str):
             + Fore.RESET
         )
 
-        exit(1)
+        sys.exit(1)
 
     if request.status_code == requests.codes.ok:
         data = request.json()
@@ -255,7 +255,7 @@ def delete_bitstream(bitstream_id: str):
             + Fore.RESET
         )
 
-        exit(1)
+        sys.exit(1)
 
     if request.status_code == requests.codes.ok:
         return True
@@ -310,7 +310,7 @@ def upload_file(item_id: str, bundle: str, filename: str, description):
             Fore.RED + f"> Could not connect to REST API: {request_url}\n" + Fore.RESET
         )
 
-        exit(1)
+        sys.exit(1)
     except FileNotFoundError:
         sys.stderr.write(Fore.RED + f"> Could not open {filename}\n" + Fore.RESET)
 
