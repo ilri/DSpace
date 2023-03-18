@@ -98,7 +98,7 @@ def login(user: str, password: str):
 
         sys.exit(1)
 
-    logger.debug(Fore.GREEN + f"Logged in using JSESSIONID: {jsessionid}" + Fore.RESET)
+    logger.debug(Fore.GREEN + f"Login successful, new JSESSIONID: {jsessionid}" + Fore.RESET)
 
     return jsessionid
 
@@ -113,6 +113,8 @@ def check_session(jsessionid: str):
     request_url = rest_status_endpoint
     headers = {"user-agent": user_agent, "Accept": "application/json"}
     cookies = {"JSESSIONID": jsessionid}
+
+    logger.debug(f"Checking status of existing session: {jsessionid}" + Fore.RESET)
 
     try:
         request = requests.get(request_url, headers=headers, cookies=cookies)
@@ -399,7 +401,7 @@ if __name__ == "__main__":
         # Open the CSV
         reader = csv.DictReader(args.csv_file)
 
-        logger.debug(f"Opened {args.csv_file.name}\n")
+        logger.debug(f"Opened {args.csv_file.name}")
     except FileNotFoundError:
         logger.error(Fore.RED + f"Could not open {args.csv_file.name}" + Fore.RESET)
 
