@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# add-orcid-identifiers-csv.py v1.1.4
+# add-orcid-identifiers-csv.py v1.1.5
 #
 # Copyright Alan Orth.
 
@@ -35,6 +35,7 @@
 
 import argparse
 import csv
+import logging
 import re
 import signal
 import sys
@@ -43,6 +44,9 @@ import psycopg2
 import psycopg2.extras
 import util
 from colorama import Fore
+
+# Create a local logger instance
+logger = logging.getLogger(__name__)
 
 
 def main():
@@ -90,6 +94,15 @@ def main():
     )
     args = parser.parse_args()
 
+    # The default log level is WARNING, but we want to set it to DEBUG or INFO
+    if args.debug:
+        logger.setLevel(logging.DEBUG)
+    else:
+        logger.setLevel(logging.INFO)
+
+    # Set the global log format
+    logging.basicConfig(format="[%(levelname)s] %(message)s")
+
     # set the signal handler for SIGINT (^C) so we can exit cleanly
     signal.signal(signal.SIGINT, signal_handler)
 
@@ -105,12 +118,9 @@ def main():
     for row in reader:
         author_name = row[args.author_field_name]
 
-        if args.debug:
-            sys.stderr.write(
-                Fore.GREEN
-                + "Finding items with author name: {0}\n".format(author_name)
-                + Fore.RESET
-            )
+        logger.debug(
+            Fore.GREEN + f"Finding items with author name: {author_name}" + Fore.RESET
+        )
 
         with conn:
             # cursor will be closed after this block exits
@@ -123,13 +133,12 @@ def main():
                 cursor.execute(sql, (author_name,))
                 records_with_author_name = cursor.fetchall()
 
-                if len(records_with_author_name) >= 0:
-                    if args.debug:
-                        sys.stderr.write(
-                            Fore.GREEN
-                            + "Found {0} items.\n".format(len(records_with_author_name))
-                            + Fore.RESET
-                        )
+                if len(records_with_author_name) > 0:
+                    logger.debug(
+                        Fore.GREEN
+                        + f"> Found {len(records_with_author_name)} items."
+                        + Fore.RESET
+                    )
 
                     # extract cg.creator.identifier text to add from CSV and strip leading/trailing whitespace
                     text_value = row[args.orcid_field_name].strip()
@@ -141,14 +150,11 @@ def main():
 
                     # sanity check to make sure we extracted the ORCID identifier from the cg.creator.identifier text in the CSV
                     if orcid_identifier_match is None:
-                        if args.debug:
-                            sys.stderr.write(
-                                Fore.YELLOW
-                                + 'Skipping invalid ORCID identifier in "{0}".\n'.format(
-                                    text_value
-                                )
-                                + Fore.RESET
-                            )
+                        logger.debug(
+                            Fore.YELLOW
+                            + f'Skipping invalid ORCID identifier in "{text_value}".'
+                            + Fore.RESET
+                        )
                         continue
 
                     # we only expect one ORCID identifier, so if it matches it will be group "0"
@@ -188,17 +194,18 @@ def main():
 
                         if len(records_with_orcid_identifier) == 0:
                             if args.dry_run:
-                                print(
-                                    'Would add ORCID identifier "{0}" to item {1}'.format(
-                                        text_value, dspace_object_id
-                                    )
+                                logger.info(
+                                    Fore.YELLOW
+                                    + f'(DRY RUN) Adding ORCID identifier "{text_value}" to item {dspace_object_id}'
+                                    + Fore.RESET
                                 )
+
                                 continue
 
-                            print(
-                                'Adding ORCID identifier "{0}" to item {1}'.format(
-                                    text_value, dspace_object_id
-                                )
+                            logger.info(
+                                Fore.YELLOW
+                                + f'Adding ORCID identifier "{text_value}" to item {dspace_object_id}'
+                                + Fore.RESET
                             )
 
                             # metadatavalue IDs come from a PostgreSQL sequence that increments when you call it
@@ -221,17 +228,13 @@ def main():
                             # Update the last_modified date for each item
                             util.update_item_last_modified(cursor, dspace_object_id)
                         else:
-                            if args.debug:
-                                sys.stderr.write(
-                                    Fore.GREEN
-                                    + "Item {0} already has an ORCID identifier for {1}.\n".format(
-                                        dspace_object_id, text_value
-                                    )
-                                    + Fore.RESET
-                                )
+                            logger.debug(
+                                Fore.GREEN
+                                + f"Item {dspace_object_id} already has an ORCID identifier for {text_value}."
+                                + Fore.RESET
+                            )
 
-    if args.debug:
-        sys.stderr.write(Fore.GREEN + "Disconnecting from database.\n" + Fore.RESET)
+    logger.debug("Disconnecting from database.")
 
     # close the database connection before leaving
     conn.close()
