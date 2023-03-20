@@ -124,24 +124,22 @@ conn = util.db_connect(
 
 for row in reader:
     if row[args.from_field_name] == row[args.to_field_name]:
-        if args.debug:
-            # sometimes editors send me corrections with identical search/replace patterns
-            logger.debug(
-                Fore.YELLOW
-                + f"Skipping identical search and replace for value: {row[args.from_field_name]}"
-                + Fore.RESET
-            )
+        # sometimes editors send me corrections with identical search/replace patterns
+        logger.debug(
+            Fore.YELLOW
+            + f"Skipping identical search and replace for value: {row[args.from_field_name]}"
+            + Fore.RESET
+        )
 
         continue
 
     if "|" in row[args.to_field_name]:
-        if args.debug:
-            # sometimes editors send me corrections with multi-value fields, which are supported in DSpace itself, but not here!
-            logger.debug(
-                Fore.YELLOW
-                + f"Skipping correction with invalid | character: {row[args.to_field_name]}"
-                + Fore.RESET
-            )
+        # sometimes editors send me corrections with multi-value fields, which are supported in DSpace itself, but not here!
+        logger.debug(
+            Fore.YELLOW
+            + f"Skipping correction with invalid | character: {row[args.to_field_name]}"
+            + Fore.RESET
+        )
 
         continue
 
