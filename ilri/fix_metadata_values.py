@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# fix-metadata-values.py v1.2.4
+# fix-metadata-values.py v1.2.5
 #
 # Copyright Alan Orth
 #
@@ -25,12 +25,16 @@
 
 import argparse
 import csv
+import logging
 import signal
 import sys
 
 import psycopg2
 import util
 from colorama import Fore
+
+# Create a local logger instance
+logger = logging.getLogger(__name__)
 
 
 def signal_handler(signal, frame):
@@ -82,21 +86,30 @@ parser.add_argument(
 )
 args = parser.parse_args()
 
+# The default log level is WARNING, but we want to set it to DEBUG or INFO
+if args.debug:
+    logger.setLevel(logging.DEBUG)
+else:
+    logger.setLevel(logging.INFO)
+
+# Set the global log format
+logging.basicConfig(format="[%(levelname)s] %(message)s")
+
 # open the CSV
 reader = csv.DictReader(args.csv_file)
 
 # check if the from/to fields specified by the user exist in the CSV
 if args.from_field_name not in reader.fieldnames:
-    sys.stderr.write(
+    logger.error(
         Fore.RED
-        + f'Specified field "{args.from_field_name}" does not exist in the CSV.\n'
+        + f'Specified field "{args.from_field_name}" does not exist in the CSV.'
         + Fore.RESET
     )
     sys.exit(1)
 if args.to_field_name not in reader.fieldnames:
-    sys.stderr.write(
+    logger.error(
         Fore.RED
-        + f'Specified field "{args.to_field_name}" does not exist in the CSV.\n'
+        + f'Specified field "{args.to_field_name}" does not exist in the CSV.'
         + Fore.RESET
     )
     sys.exit(1)
@@ -113,9 +126,9 @@ for row in reader:
     if row[args.from_field_name] == row[args.to_field_name]:
         if args.debug:
             # sometimes editors send me corrections with identical search/replace patterns
-            sys.stderr.write(
+            logger.debug(
                 Fore.YELLOW
-                + f"Skipping identical search and replace for value: {row[args.from_field_name]}\n"
+                + f"Skipping identical search and replace for value: {row[args.from_field_name]}"
                 + Fore.RESET
             )
 
@@ -124,9 +137,9 @@ for row in reader:
     if "|" in row[args.to_field_name]:
         if args.debug:
             # sometimes editors send me corrections with multi-value fields, which are supported in DSpace itself, but not here!
-            sys.stderr.write(
+            logger.debug(
                 Fore.YELLOW
-                + f"Skipping correction with invalid | character: {row[args.to_field_name]}\n"
+                + f"Skipping correction with invalid | character: {row[args.to_field_name]}"
                 + Fore.RESET
             )
 
@@ -147,9 +160,9 @@ for row in reader:
             if cursor.rowcount > 0:
                 if args.dry_run:
                     if not args.quiet:
-                        print(
+                        logger.info(
                             Fore.GREEN
-                            + f"Would fix {cursor.rowcount} occurences of: {row[args.from_field_name]}"
+                            + f"(DRY RUN) Fixed {cursor.rowcount} occurences of: {row[args.from_field_name]}"
                             + Fore.RESET
                         )
 
@@ -171,7 +184,7 @@ for row in reader:
                 )
 
                 if cursor.rowcount > 0 and not args.quiet:
-                    print(
+                    logger.info(
                         Fore.GREEN
                         + f"Fixed {cursor.rowcount} occurences of: {row[args.from_field_name]}"
                         + Fore.RESET
