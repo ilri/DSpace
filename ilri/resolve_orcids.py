@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 #
-# resolve-orcids.py 1.2.2
+# resolve-orcids.py 1.2.3
 #
-# Copyright 2018–2020 Alan Orth.
+# Copyright Alan Orth.
 #
 # SPDX-License-Identifier: GPL-3.0-only
 #
@@ -19,6 +19,7 @@
 #
 
 import argparse
+import logging
 import re
 import signal
 import sys
@@ -27,6 +28,9 @@ from datetime import timedelta
 import requests
 import requests_cache
 from colorama import Fore
+
+# Create a local logger instance
+logger = logging.getLogger(__name__)
 
 
 # read ORCID identifiers from a text file, one per line
@@ -64,14 +68,12 @@ def read_identifiers_from_solr():
 
     res = requests.get(solr_url, params=solr_query_params)
 
-    if args.debug:
-        numFound = res.json()["response"]["numFound"]
-        sys.stderr.write(
-            Fore.GREEN
-            + "Total number of Solr records with ORCID iDs: {0}\n".format(
-                str(numFound) + Fore.RESET
-            )
-        )
+    numFound = res.json()["response"]["numFound"]
+    logger.debug(
+        Fore.GREEN
+        + f"Total number of Solr records with ORCID iDs: {numFound}"
+        + Fore.RESET
+    )
 
     # initialize an empty list for ORCID iDs
     orcids = []
@@ -90,12 +92,12 @@ def read_identifiers_from_solr():
 
     # exit now if the user requested --extract-only
     if args.extract_only:
-        if args.debug:
-            sys.stderr.write(
-                Fore.GREEN
-                + "Number of unique ORCID iDs: {0}\n".format(str(len(orcids)))
-                + Fore.RESET
-            )
+        orcids_extracted = str(len(orcids))
+        logger.debug(
+            Fore.GREEN
+            + f"Number of unique ORCID identifiers: {orcids_extracted}"
+            + Fore.RESET
+        )
         # close output file before we exit
         args.output_file.close()
         exit()
@@ -107,14 +109,12 @@ def read_identifiers_from_solr():
 # the "credit-name" field if it is present, otherwise will default to using the
 # "given-names" and "family-name" fields.
 def resolve_orcid_identifiers(orcids):
-    if args.debug:
-        sys.stderr.write(
-            Fore.GREEN
-            + "Resolving names associated with {0} unique ORCID iDs.\n\n".format(
-                str(len(orcids))
-            )
-            + Fore.RESET
-        )
+    unique_orcids = str(len(orcids))
+    logger.debug(
+        Fore.GREEN
+        + f"Resolving names associated with {unique_orcids} unique ORCID identifiers.\n"
+        + Fore.RESET
+    )
 
     # ORCID API endpoint, see: https://pub.orcid.org
     orcid_api_base_url = "https://pub.orcid.org/v2.1/"
@@ -132,12 +132,11 @@ def resolve_orcid_identifiers(orcids):
 
     # iterate through our ORCID iDs and fetch their names from the ORCID API
     for orcid in orcids:
-        if args.debug:
-            sys.stderr.write(
-                Fore.GREEN
-                + "Looking up the names associated with ORCID iD: {0}\n".format(orcid)
-                + Fore.RESET
-            )
+        logger.debug(
+            Fore.GREEN
+            + f"Looking up the names associated with ORCID iD: {orcid}"
+            + Fore.RESET
+        )
 
         # build request URL for current ORCID ID
         request_url = orcid_api_base_url + orcid.strip() + orcid_api_endpoint
@@ -168,79 +167,75 @@ def resolve_orcid_identifiers(orcids):
                     ):
                         line = data["name"]["given-names"]["value"]
                     else:
-                        if args.debug:
-                            sys.stderr.write(
-                                Fore.YELLOW
-                                + "Warning: ignoring null or deactivated given-names element.\n"
-                                + Fore.RESET
-                            )
+                        logger.debug(
+                            Fore.YELLOW
+                            + "Ignoring null or deactivated given-names element."
+                            + Fore.RESET
+                        )
                     # make sure family-name is present and not deactivated
                     if (
                         data["name"]["family-name"]
                         and data["name"]["family-name"]["value"]
                         != "Family Name Deactivated"
                     ):
-                        line = line + " " + data["name"]["family-name"]["value"]
+                        line = f'{line} {data["name"]["family-name"]["value"]}'
                     else:
-                        if args.debug:
-                            sys.stderr.write(
-                                Fore.YELLOW
-                                + "Warning: ignoring null or deactivated family-name element.\n"
-                                + Fore.RESET
-                            )
+                        logger.debug(
+                            Fore.YELLOW
+                            + "Ignoring null or deactivated family-name element."
+                            + Fore.RESET
+                        )
                 # check if line has something (a credit-name, given-names, and or family-name)
                 if line and line != "":
                     line = "{0}: {1}".format(line.strip(), orcid)
                 else:
-                    if args.debug:
-                        sys.stderr.write(
-                            Fore.RED
-                            + "Error: skipping identifier with no valid name elements.\n"
-                            + Fore.RESET
-                        )
+                    logger.debug(
+                        Fore.RED
+                        + "Skipping identifier with no valid name elements."
+                        + Fore.RESET
+                    )
+
                     continue
 
-                # output results to screen to show progress
                 if not args.quiet:
-                    print(line)
+                    logger.info(line)
 
                 # write formatted name and ORCID identifier to output file
-                args.output_file.write(line + "\n")
+                args.output_file.write(f"{line}\n")
 
                 # clear line for next iteration
                 line = None
             else:
-                if args.debug:
-                    sys.stderr.write(
-                        Fore.YELLOW
-                        + "Warning: skipping identifier with null name element.\n\n"
-                        + Fore.RESET
-                    )
+                logger.debug(
+                    Fore.YELLOW
+                    + "Skipping identifier with null name element."
+                    + Fore.RESET
+                )
         # HTTP 404 means that the API url or identifier was not found. If the
         # API URL is correct, let's assume that the identifier was not found.
         elif request.status_code == 404:
-            if args.debug:
-                sys.stderr.write(
-                    Fore.YELLOW
-                    + "Warning: skipping missing identifier (API request returned HTTP 404).\n\n"
-                    + Fore.RESET
-                )
-                continue
+            logger.debug(
+                Fore.YELLOW
+                + "Skipping missing identifier (API request returned HTTP 404)."
+                + Fore.RESET
+            )
+
+            continue
         # HTTP 409 means that the identifier is locked for some reason
         # See: https://members.orcid.org/api/resources/error-codes
         elif request.status_code == 409:
-            if args.debug:
-                sys.stderr.write(
-                    Fore.YELLOW
-                    + "Warning: skipping locked identifier (API request returned HTTP 409).\n\n"
-                    + Fore.RESET
-                )
-                continue
+            logger.debug(
+                Fore.YELLOW
+                + "Skipping locked identifier (API request returned HTTP 409)."
+                + Fore.RESET
+            )
+
+            continue
         else:
-            sys.stderr.write(Fore.RED + "Error: request failed.\n" + Fore.RESET)
+            logger.error(Fore.RED + "Request failed." + Fore.RESET)
             # close output file before we exit
             args.output_file.close()
-            exit(1)
+            sys.exit(1)
 
     # close output file before we exit
     args.output_file.close()
@@ -296,6 +291,15 @@ group.add_argument(
 )
 args = parser.parse_args()
 
+# The default log level is WARNING, but we want to set it to DEBUG or INFO
+if args.debug:
+    logger.setLevel(logging.DEBUG)
+else:
+    logger.setLevel(logging.INFO)
+
+# Set the global log format
+logging.basicConfig(format="[%(levelname)s] %(message)s")
+
 # set the signal handler for SIGINT (^C) so we can exit cleanly
 signal.signal(signal.SIGINT, signal_handler)
 
@@ -305,5 +309,3 @@ if args.input_file:
 # otherwise, get the ORCID identifiers from Solr
 elif args.solr_url:
     read_identifiers_from_solr()
-
-exit()
