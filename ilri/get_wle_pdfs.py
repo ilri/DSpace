@@ -52,7 +52,7 @@ def resolve_bitstreams(handle):
 
             for bitstream in bitstreams:
                 if bitstream["format"] == "Adobe PDF":
-                    pdf_bitstream_ids.append(bitstream["id"])
+                    pdf_bitstream_ids.append(bitstream["uuid"])
 
             if len(pdf_bitstream_ids) > 0:
                 download_bitstreams(pdf_bitstream_ids)
