@@ -31,10 +31,14 @@
 #   $ pip install colorama requests
 #
 
+import logging
 import os.path
 
 import requests
 from colorama import Fore
+
+# Create a local logger instance
+logger = logging.getLogger(__name__)
 
 
 def resolve_bitstreams(handle):
@@ -78,17 +82,17 @@ def download_bitstreams(pdf_bitstream_ids):
             filename = re.findall("filename=(.+)", content_disposition)[0]
             # filenames in the header have quotes so let's strip them in a super hacky way
             filename_stripped = filename.strip('"')
-            print(f"filename: {filename_stripped}")
+            logger.info(f"filename: {filename_stripped}")
 
         # check if file exists
         if os.path.isfile(filename_stripped):
-            print(
+            logger.warning(
                 Fore.YELLOW
                 + "> {} already downloaded.".format(filename_stripped)
                 + Fore.RESET
             )
         else:
-            print(
+            logger.info(
                 Fore.GREEN
                 + "> Downloading {}...".format(filename_stripped)
                 + Fore.RESET
@@ -102,7 +106,7 @@ def download_bitstreams(pdf_bitstream_ids):
                     for chunk in response:
                         fd.write(chunk)
             else:
-                print(
+                logger.error(
                     Fore.RED
                     + "> Download failed, I will try again next time."
                     + Fore.RESET
@@ -115,6 +119,8 @@ rest_base_url = "https://cgspace.cgiar.org/rest"
 rest_handle_endpoint = "handle"
 rest_bitstream_endpoint = "bitstreams"
 rest_user_agent = "curl"
+
+logger.setLevel(logging.INFO)
 
 with open("/tmp/handles.txt", "r") as fd:
     handles = fd.readlines()
