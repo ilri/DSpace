@@ -44,8 +44,7 @@ logger = logging.getLogger(__name__)
 
 
 def resolve_bitstreams(handle):
-    # strip the handle because it has a line feed (%0A)
-    url = f"{rest_base_url}/{rest_handle_endpoint}/{handle.strip()}"
+    url = f"{rest_base_url}/{rest_handle_endpoint}/{handle}"
     request_params = {"expand": "bitstreams"}
     request_headers = {"user-agent": rest_user_agent, "Accept": "application/json"}
     response = requests.get(url, params=request_params, headers=request_headers)
@@ -84,11 +83,11 @@ def download_bitstreams(pdf_bitstream_ids):
             filename = re.findall("filename=(.+)", content_disposition)[0]
             # filenames in the header have quotes so let's strip them in a super hacky way
             filename_stripped = filename.strip('"')
-            logger.info(f"filename: {filename_stripped}")
+            logger.debug(f"> filename: {filename_stripped}")
 
         # check if file exists
         if os.path.isfile(filename_stripped):
-            logger.warning(
+            logger.debug(
                 Fore.YELLOW
                 + "> {} already downloaded.".format(filename_stripped)
                 + Fore.RESET
@@ -122,7 +121,10 @@ rest_handle_endpoint = "handle"
 rest_bitstream_endpoint = "bitstreams"
 rest_user_agent = "get_dspace_pdfs.py/0.0.2 (python / curl)"
 
+# Set local logging level to INFO
 logger.setLevel(logging.INFO)
+# Set the global log format to display just the message without the log level
+logging.basicConfig(format="%(message)s")
 
 with open("/tmp/handles.txt", "r") as fd:
     handles = fd.readlines()
@@ -135,4 +137,9 @@ requests_cache.install_cache("requests-cache", expire_after=expire_after)
 requests_cache.remove_expired_responses()
 
 for handle in handles:
+    # strip the handle because it has a line feed (%0A)
+    handle = handle.strip()
+
+    logger.info(f"Checking for PDF bitstreams in {handle}")
+
     resolve_bitstreams(handle)
