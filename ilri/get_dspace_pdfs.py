@@ -15,9 +15,10 @@
 #   10568/93010
 #   10568/75869
 #
-# I generated the list of handles by extracting them from the results of an
-# OpenSearch query where the user had asked for all items matching the term
-# "trade off" in the WLE community:
+# The original use for this was to download a list of PDFs corresponding with
+# a certain search result. I generated the list of handles by extracting them
+# from the results of an OpenSearch query where the user had asked for all the
+# items matching the term "trade off" in the WLE community:
 #
 #   $ http 'https://cgspace.cgiar.org/open-search/discover?scope=10568%2F34494&query=trade+off&rpp=100&start=0' User-Agent:'curl' > /tmp/wle-trade-off-page1.xml
 #   $ xmllint --xpath '//*[local-name()="entry"]/*[local-name()="id"]/text()' /tmp/wle-trade-off-page1.xml >> /tmp/ids.txt
@@ -25,10 +26,10 @@
 #   $ sort -u /tmp/ids.txt > /tmp/ids-sorted.txt
 #   $ grep -oE '[0-9]+/[0-9]+' /tmp/ids.txt > /tmp/handles.txt
 #
-# This script is written for Python 3.6+ and requires several modules that you
+# This script is written for Python 3.7+ and requires several modules that you
 # can install with pip (I recommend using a Python virtual environment):
 #
-#   $ pip install colorama requests
+#   $ pip install colorama requests requests-cache
 #
 
 import logging
