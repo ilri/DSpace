@@ -33,8 +33,10 @@
 
 import logging
 import os.path
+from datetime import timedelta
 
 import requests
+import requests_cache
 from colorama import Fore
 
 # Create a local logger instance
@@ -118,12 +120,19 @@ def download_bitstreams(pdf_bitstream_ids):
 rest_base_url = "https://cgspace.cgiar.org/rest"
 rest_handle_endpoint = "handle"
 rest_bitstream_endpoint = "bitstreams"
-rest_user_agent = "curl"
+rest_user_agent = "get_dspace_pdfs.py/0.0.2 (python / curl)"
 
 logger.setLevel(logging.INFO)
 
 with open("/tmp/handles.txt", "r") as fd:
     handles = fd.readlines()
+
+# Set up a transparent requests cache to be nice to the REST API
+expire_after = timedelta(days=30)
+requests_cache.install_cache("requests-cache", expire_after=expire_after)
+
+# prune old cache entries
+requests_cache.remove_expired_responses()
 
 for handle in handles:
     resolve_bitstreams(handle)
