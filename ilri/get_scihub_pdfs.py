@@ -21,17 +21,21 @@
 # This script is written for Python 3.7+ and requires several modules that you
 # can install with pip (I recommend using a Python virtual environment):
 #
-#   $ pip install colorama requests
+#   $ pip install colorama scidownl
 #
 
 import argparse
 import csv
+import logging
 import os.path
 import re
 import signal
 
 from colorama import Fore
 from scidownl import scihub_download
+
+# Create a local logger instance
+logger = logging.getLogger(__name__)
 
 
 def signal_handler(signal, frame):
@@ -45,19 +49,13 @@ def download_pdf(doi):
     # Set filename based on DOI, ie: 10.3402/iee.v6.31191 → 10.3402-iee.v6.31191.pdf
     filename = doi_stripped.replace("/", "-") + ".pdf"
 
-    print(f"Processing {doi_stripped}")
+    logger.info(f"Processing {doi_stripped}")
 
     # check if file exists already
     if os.path.isfile(filename):
-        if args.debug:
-            print(Fore.GREEN + f"> {filename} already downloaded." + Fore.RESET)
+        logger.debug(Fore.GREEN + f"> {filename} already downloaded." + Fore.RESET)
     else:
-        if args.debug:
-            print(
-                Fore.GREEN
-                + f"> Attempting to download PDF for {doi_stripped}"
-                + Fore.RESET
-            )
+        logger.debug(Fore.GREEN + f"> Attempting to download PDF for {doi_stripped}" + Fore.RESET)
 
         scihub_download(doi_stripped, paper_type="doi", out=filename)
 
@@ -72,6 +70,15 @@ def download_pdf(doi):
 if __name__ == "__main__":
     # set the signal handler for SIGINT (^C)
     signal.signal(signal.SIGINT, signal_handler)
+
+    # The default log level is WARNING, but we want to set it to DEBUG or INFO
+    if args.debug:
+        logger.setLevel(logging.DEBUG)
+    else:
+        logger.setLevel(logging.INFO)
+
+    # Set the global log format
+    logging.basicConfig(format="[%(levelname)s] %(message)s")
 
     parser = argparse.ArgumentParser(description="Download PDFs from Sci-Hub.")
     parser.add_argument(
