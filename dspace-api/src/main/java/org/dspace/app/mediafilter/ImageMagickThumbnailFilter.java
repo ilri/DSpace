@@ -136,9 +136,9 @@ public abstract class ImageMagickThumbnailFilter extends MediaFilter {
                 return f2;
         }
 
-        public File getImageFile(File f, int page, boolean verbose)
+        public File getImageFile(File f, boolean verbose)
                         throws IOException, InterruptedException, IM4JavaException {
-                File f2 = new File(f.getParentFile(), f.getName() + ".jpg");
+                File f2 = new File(f.getParentFile(), f.getName() + ".miff");
                 f2.deleteOnExit();
                 ConvertCmd cmd = new ConvertCmd();
                 IMOperation op = new IMOperation();
@@ -173,7 +173,7 @@ public abstract class ImageMagickThumbnailFilter extends MediaFilter {
                     op.define("pdf:use-cropbox=true");
                 }
 
-                String s = "[" + page + "]";
+                String s = "[0]";
                 op.addImage(f.getAbsolutePath() + s);
                 if (flatten) {
                         op.flatten();
@@ -214,21 +214,21 @@ public abstract class ImageMagickThumbnailFilter extends MediaFilter {
                                 if (description != null) {
                                         if (replaceRegex.matcher(description).matches()) {
                                                 if (verbose) {
-                                                        System.out.println(description + " " + nsrc
-                                                                        + " matches pattern and is replacable.");
+                                                        System.out.println(description + " " + n
+                                                                        + " matches pattern and is replaceable.");
                                                 }
                                                 continue;
                                         }
                                         if (description.equals(bitstreamDescription)) {
                                                 if (verbose) {
-                                                        System.out.println(bitstreamDescription + " " + nsrc
+                                                        System.out.println(bitstreamDescription + " " + n
                                                                         + " is replacable.");
                                                 }
                                                 continue;
                                         }
                                 }
-                                System.out.println("Custom Thumbnail exists for " + nsrc + " for item "
-                                                + item.getHandle() + ".  Thumbnail will not be generated. ");
+                                System.out.println("Custom thumbnail exists for " + nsrc + " for item "
+                                                + item.getHandle() + ". Thumbnail will not be generated. ");
                                 return false;
                         }
                 }
