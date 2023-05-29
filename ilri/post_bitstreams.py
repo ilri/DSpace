@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# post_bitstreams.py 0.1.2
+# post_bitstreams.py 0.1.3
 #
 # SPDX-License-Identifier: GPL-3.0-only
 #
@@ -178,6 +178,12 @@ def check_item(item_id: str, bundle: str):
         )
 
         sys.exit(1)
+
+    # If the item doesn't exist, return True early so we don't try to upload a
+    # bitstream
+    if request.status_code == 404:
+        logger.warning(Fore.RED + "Item not found." + Fore.RESET)
+        return True
 
     if request.status_code == requests.codes.ok:
         data = request.json()
