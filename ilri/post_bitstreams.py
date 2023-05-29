@@ -357,7 +357,7 @@ if __name__ == "__main__":
     parser.add_argument("-e", "--user", help="Email address of administrator user.")
     parser.add_argument(
         "--overwrite-format",
-        help="Bitstream formats to overwrite. Specify more than once to overwrite multiple formats. Use this carefully, test with dry run first!",
+        help="Bitstream formats to overwrite. Specify multiple formats separated by a space. Use this carefully, test with dry run first!",
         choices=["PNG", "JPEG", "GIF", "Adobe PDF"],
         action="extend",
         nargs="+",
