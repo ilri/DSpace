@@ -4075,6 +4075,10 @@
         <stored-value>France</stored-value>
       </pair>
       <pair>
+        <displayed-value>French Guiana</displayed-value>
+        <stored-value>French Guiana</stored-value>
+      </pair>
+      <pair>
         <displayed-value>Gabon</displayed-value>
         <stored-value>Gabon</stored-value>
       </pair>
@@ -4239,6 +4243,10 @@
         <stored-value>Luxembourg</stored-value>
       </pair>
       <pair>
+        <displayed-value>New Caledonia</displayed-value>
+        <stored-value>New Caledonia</stored-value>
+      </pair>
+      <pair>
         <displayed-value>North Macedonia</displayed-value>
         <stored-value>North Macedonia</stored-value>
       </pair>
@@ -4355,6 +4363,10 @@
         <stored-value>Pakistan</stored-value>
       </pair>
       <pair>
+        <displayed-value>Palau</displayed-value>
+        <stored-value>Palau</stored-value>
+      </pair>
+      <pair>
         <displayed-value>Palestine, State of</displayed-value>
         <stored-value>Palestine, State of</stored-value>
       </pair>
@@ -4387,6 +4399,10 @@
         <stored-value>Portugal</stored-value>
       </pair>
       <pair>
+        <displayed-value>Puerto Rico</displayed-value>
+        <stored-value>Puerto Rico</stored-value>
+      </pair>
+      <pair>
         <displayed-value>Qatar</displayed-value>
         <stored-value>Qatar</stored-value>
       </pair>
@@ -4409,6 +4425,10 @@
       <pair>
         <displayed-value>Saint Lucia</displayed-value>
         <stored-value>Saint Lucia</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Saint Vincent and the Grenadines</displayed-value>
+        <stored-value>Saint Vincent and the Grenadines</stored-value>
       </pair>
       <pair>
         <displayed-value>Samoa</displayed-value>
