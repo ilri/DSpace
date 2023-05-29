@@ -208,6 +208,14 @@ def check_item(item_id: str, bundle: str):
                 if bitstream["format"] in args.overwrite_format
             ]
 
+            # Item has bitstreams, but none matching our overwrite format. Let's
+            # err on the side of caution and return True so that we don't upload
+            # another one into the bundle.
+            if len(bitstreams_to_overwrite) == 0:
+                logger.debug("Existing bitstreams, but none matching our overwrite formats.")
+
+                return True
+
             for bitstream in bitstreams_to_overwrite:
                 if args.dry_run:
                     logger.info(
