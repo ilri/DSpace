@@ -1,0 +1,22 @@
+{
+   "$schema" : "https://docs.renovatebot.com/renovate-schema.json",
+   "baseBranches" : [
+      "main-test"
+   ],
+   "enabledManagers" : [
+      "maven"
+   ],
+   "ignoreDeps": ["com.amazonaws:aws-java-sdk-s3"],
+   "extends" : [
+      "config:base"
+   ],
+   "packageRules" : [
+      {
+         "matchCurrentVersion" : "!/^0/",
+         "matchUpdateTypes" : [
+            "minor",
+            "patch"
+         ]
+      }
+   ]
+}
