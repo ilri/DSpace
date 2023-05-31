@@ -38,7 +38,7 @@
         <property name="query" value="/DOI"/>
     </bean>
     <bean id="crossref.id" class="org.dspace.importer.external.metadatamapping.MetadataFieldConfig">
-        <constructor-arg value="dc.identifier.doi"/>
+        <constructor-arg value="cg.identifier.doi"/>
     </bean>
 
     <bean id="crossrefJournalContrib" class="org.dspace.importer.external.metadatamapping.contributor.SimpleJsonPathMetadataContributor">
@@ -46,7 +46,7 @@
         <property name="query" value="/container-title"/>
     </bean>
     <bean id="crossref.journal" class="org.dspace.importer.external.metadatamapping.MetadataFieldConfig">
-        <constructor-arg value="dc.relation.ispartof"/>
+        <constructor-arg value="cg.journal"/>
     </bean>
 
     <bean id="crossrefDoiTypeContrib" class="org.dspace.importer.external.metadatamapping.contributor.SimpleJsonPathMetadataContributor">
@@ -54,7 +54,7 @@
         <property name="query" value="/type"/>
     </bean>
     <bean id="crossref.type" class="org.dspace.importer.external.metadatamapping.MetadataFieldConfig">
-        <constructor-arg value="dc.type"/>
+        <constructor-arg value="dcterms.type"/>
     </bean>
 
     <bean id="crossrefEditorsContrib" class="org.dspace.importer.external.metadatamapping.contributor.SimpleJsonPathMetadataContributor">
@@ -76,7 +76,7 @@
 	    <property name="pathToArray" value="/issued/date-parts"></property>
 	</bean>
     <bean id="crossref.year" class="org.dspace.importer.external.metadatamapping.MetadataFieldConfig">
-        <constructor-arg value="dc.date.issued"/>
+        <constructor-arg value="dcterms.issued"/>
     </bean>
 
     <bean id="crossrefISBNContrib" class="org.dspace.importer.external.metadatamapping.contributor.SimpleJsonPathMetadataContributor">
@@ -84,7 +84,7 @@
         <property name="query" value="/ISBN"/>
     </bean>
     <bean id="crossref.isbn" class="org.dspace.importer.external.metadatamapping.MetadataFieldConfig">
-        <constructor-arg value="dc.identifier.isbn"/>
+        <constructor-arg value="cg.isbn"/>
     </bean>
 
     <bean id="crossrefAuthorContrib" class="org.dspace.importer.external.metadatamapping.contributor.SimpleJsonPathMetadataContributor">
@@ -111,7 +111,7 @@
         <property name="query" value="/ISSN"/>
     </bean>
     <bean id="crossref.issn" class="org.dspace.importer.external.metadatamapping.MetadataFieldConfig">
-        <constructor-arg value="dc.identifier.issn"/>
+        <constructor-arg value="cg.issn"/>
     </bean>
 
     <bean id="crossrefVolume" class="org.dspace.importer.external.metadatamapping.contributor.SimpleJsonPathMetadataContributor">
@@ -119,7 +119,7 @@
         <property name="query" value="/volume"/>
     </bean>
     <bean id="crossref.volume" class="org.dspace.importer.external.metadatamapping.MetadataFieldConfig">
-        <constructor-arg value="oaire.citation.volume"/>
+        <constructor-arg value="cg.volume"/>
     </bean>
 
     <bean id="crossrefIssue" class="org.dspace.importer.external.metadatamapping.contributor.SimpleJsonPathMetadataContributor">
@@ -127,7 +127,7 @@
         <property name="query" value="/journal-issue/issue"/>
     </bean>
     <bean id="crossref.issue" class="org.dspace.importer.external.metadatamapping.MetadataFieldConfig">
-        <constructor-arg value="oaire.citation.issue"/>
+        <constructor-arg value="cg.issue"/>
     </bean>
 
     <bean id="crossrefAbstract" class="org.dspace.importer.external.metadatamapping.contributor.SimpleJsonPathMetadataContributor">
@@ -135,7 +135,7 @@
         <property name="query" value="/abstract"/>
     </bean>
     <bean id="crossref.abstract" class="org.dspace.importer.external.metadatamapping.MetadataFieldConfig">
-        <constructor-arg value="dc.description.abstract"/>
+        <constructor-arg value="dcterms.abstract"/>
     </bean>
 
     <bean id="crossrefPublisher" class="org.dspace.importer.external.metadatamapping.contributor.SimpleJsonPathMetadataContributor">
