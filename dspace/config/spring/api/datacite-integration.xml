@@ -56,7 +56,7 @@
         <property name="query" value="/doi"/>
     </bean>
     <bean id="datacite.id" class="org.dspace.importer.external.metadatamapping.MetadataFieldConfig">
-        <constructor-arg value="dc.identifier.doi"/>
+        <constructor-arg value="cg.identifier.doi"/>
     </bean>
 
 </beans>
