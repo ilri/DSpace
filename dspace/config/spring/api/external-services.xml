@@ -215,7 +215,7 @@
     <bean id="dataciteLiveImportDataProvider" class="org.dspace.external.provider.impl.LiveImportDataProvider">
         <property name="metadataSource" ref="DataCiteImportService"/>
         <property name="sourceIdentifier" value="datacite"/>
-        <property name="recordIdMetadata" value="dc.identifier.doi"/>
+        <property name="recordIdMetadata" value="cg.identifier.doi"/>
         <property name="supportedEntityTypes">
             <list>
                 <value>Publication</value>
