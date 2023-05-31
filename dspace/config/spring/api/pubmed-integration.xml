@@ -18,17 +18,17 @@
             what metadatafield is generated.
         </description>
         <entry key-ref="dc.title" value-ref="titleContrib"/>
-        <entry key-ref="dc.description.abstract" value-ref="abstractContrib"/>
+        <entry key-ref="dcterms.abstract" value-ref="abstractContrib"/>
         <entry key-ref="dc.identifier.other" value-ref="pubmedContrib"/>
         <entry key-ref="dc.contributor.author" value-ref="authorContrib"/>
-        <entry key-ref="dc.date.issued" value-ref="dateContrib"/>
-        <entry key-ref="dc.language.iso" value-ref="pubmedLanguageContrib"/>
-        <entry key-ref="dc.subject" value-ref="keywordContrib"/>
+        <entry key-ref="dcterms.issued" value-ref="dateContrib"/>
+        <entry key-ref="dcterms.language" value-ref="pubmedLanguageContrib"/>
+        <entry key-ref="dcterms.subject" value-ref="keywordContrib"/>
 
     </util:map>
 
     <bean id="pubmedLanguageContrib" class="org.dspace.importer.external.pubmed.metadatamapping.contributor.PubmedLanguageMetadatumContributor">
-        <property name="field" ref="dc.language.iso"/>
+        <property name="field" ref="dcterms.language"/>
         <property name="language" ref="languageContrib"/>
     </bean>
     <bean id="dateContrib" class="org.dspace.importer.external.pubmed.metadatamapping.contributor.PubmedDateMetadatumContributor">
@@ -44,7 +44,7 @@
         <property name="year" ref="yearContrib"/>
         <property name="month" ref="monthContrib"/>
         <property name="day" ref="dayContrib"/>
-        <property name="field" ref="dc.date.issued"/>
+        <property name="field" ref="dcterms.issued"/>
     </bean>
     <bean id="pubmedContrib" class="org.dspace.importer.external.metadatamapping.contributor.SimpleXpathMetadatumContributor">
         <property name="field" ref="dc.identifier.other"/>
@@ -58,7 +58,7 @@
     </bean>
 
     <bean id="abstractContrib" class="org.dspace.importer.external.metadatamapping.contributor.SimpleXpathMetadatumContributor">
-        <property name="field" ref="dc.description.abstract"/>
+        <property name="field" ref="dcterms.abstract"/>
         <property name="query" value="descendant::AbstractText"/>
         <property name="prefixToNamespaceMapping" ref="prefixToNamespaceMapping"/>
     </bean>
@@ -87,30 +87,30 @@
     </bean>
 
     <bean id="keywordContrib" class="org.dspace.importer.external.metadatamapping.contributor.SimpleXpathMetadatumContributor">
-        <property name="field" ref="dc.subject"/>
+        <property name="field" ref="dcterms.subject"/>
         <property name="query" value="descendant::Keyword"/>
         <property name="prefixToNamespaceMapping" ref="prefixToNamespaceMapping"/>
     </bean>
     <bean id="yearContrib" class="org.dspace.importer.external.metadatamapping.contributor.SimpleXpathMetadatumContributor">
-        <property name="field" ref="dc.date.issued"/>
+        <property name="field" ref="dcterms.issued"/>
         <property name="query" value="descendant::PubDate/Year"/>
         <property name="prefixToNamespaceMapping" ref="prefixToNamespaceMapping"/>
     </bean>
 
     <bean id="monthContrib" class="org.dspace.importer.external.metadatamapping.contributor.SimpleXpathMetadatumContributor">
-        <property name="field" ref="dc.date.issued"/>
+        <property name="field" ref="dcterms.issued"/>
         <property name="query" value="descendant::PubDate/Month"/>
         <property name="prefixToNamespaceMapping" ref="prefixToNamespaceMapping"/>
     </bean>
 
     <bean id="dayContrib" class="org.dspace.importer.external.metadatamapping.contributor.SimpleXpathMetadatumContributor">
-        <property name="field" ref="dc.date.issued"/>
+        <property name="field" ref="dcterms.issued"/>
         <property name="query" value="descendant::PubDate/Day"/>
         <property name="prefixToNamespaceMapping" ref="prefixToNamespaceMapping"/>
     </bean>
 
     <bean id="languageContrib" class="org.dspace.importer.external.metadatamapping.contributor.SimpleXpathMetadatumContributor">
-        <property name="field" ref="dc.language.iso"/>
+        <property name="field" ref="dcterms.language"/>
         <property name="query" value="descendant::Language"/>
         <property name="prefixToNamespaceMapping" ref="prefixToNamespaceMapping"/>
     </bean>
@@ -119,8 +119,8 @@
         <constructor-arg value="dc.title"/>
     </bean>
 
-    <bean id="dc.description.abstract" class="org.dspace.importer.external.metadatamapping.MetadataFieldConfig">
-        <constructor-arg value="dc.description.abstract"/>
+    <bean id="dcterms.abstract" class="org.dspace.importer.external.metadatamapping.MetadataFieldConfig">
+        <constructor-arg value="dcterms.abstract"/>
     </bean>
 
 
@@ -128,17 +128,17 @@
         <constructor-arg value="dc.contributor.author"/>
     </bean>
 
-    <bean id="dc.date.issued" class="org.dspace.importer.external.metadatamapping.MetadataFieldConfig">
-        <constructor-arg value="dc.date.issued"/>
+    <bean id="dcterms.issued" class="org.dspace.importer.external.metadatamapping.MetadataFieldConfig">
+        <constructor-arg value="dcterms.issued"/>
     </bean>
 
-    <bean id="dc.language.iso" class="org.dspace.importer.external.metadatamapping.MetadataFieldConfig">
-        <constructor-arg value="dc.language.iso"/>
+    <bean id="dcterms.language" class="org.dspace.importer.external.metadatamapping.MetadataFieldConfig">
+        <constructor-arg value="dcterms.language"/>
     </bean>
 
 
-    <bean id="dc.subject" class="org.dspace.importer.external.metadatamapping.MetadataFieldConfig">
-        <constructor-arg value="dc.subject"/>
+    <bean id="dcterms.subject" class="org.dspace.importer.external.metadatamapping.MetadataFieldConfig">
+        <constructor-arg value="dcterms.subject"/>
     </bean>
 
     <bean id="dc.identifier.other" class="org.dspace.importer.external.metadatamapping.MetadataFieldConfig">
