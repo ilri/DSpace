@@ -366,7 +366,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--overwrite-format",
         help="Bitstream formats to overwrite. Specify multiple formats separated by a space. Use this carefully, test with dry run first!",
-        choices=["PNG", "JPEG", "GIF", "Adobe PDF"],
+        choices=["PNG", "JPEG", "GIF", "Adobe PDF", "WebP"],
         action="extend",
         nargs="+",
     )
