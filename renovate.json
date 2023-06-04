@@ -12,7 +12,6 @@
    ],
    "packageRules" : [
       {
-         "ignoreDeps": ["com.amazonaws:aws-java-sdk-s3"],
          "matchCurrentVersion" : "!/^0/",
          "matchUpdateTypes" : [
             "minor",
