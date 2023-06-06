@@ -21,7 +21,7 @@
 # This script is written for Python 3 and requires several modules that you can
 # install with pip (I recommend setting up a Python virtual environment first):
 #
-#   $ pip install psycopg colorama
+#   $ pip install colorama
 #
 
 import argparse
@@ -29,7 +29,6 @@ import re
 import signal
 import sys
 
-import psycopg
 import util
 from colorama import Fore
 
@@ -82,16 +81,9 @@ args = parser.parse_args()
 signal.signal(signal.SIGINT, signal_handler)
 
 # connect to database
-try:
-    conn = psycopg.connect(
-        f"dbname={args.database_name} user={args.database_user} password={args.database_pass} host='localhost'"
-    )
-
-    if args.debug:
-        sys.stderr.write(Fore.GREEN + "Connected to database.\n" + Fore.RESET)
-except psycopg.OperationalError:
-    sys.stderr.write(Fore.RED + "Could not connect to database.\n" + Fore.RESET)
-    sys.exit(1)
+conn = util.db_connect(
+    args.database_name, args.database_user, args.database_pass, "localhost"
+)
 
 # Use read().splitlines() so we don't get newlines after each line, though I'm
 # not sure if we should also be stripping?
