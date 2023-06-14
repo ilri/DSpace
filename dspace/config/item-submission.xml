@@ -272,7 +272,7 @@
             <!-- <step id="itemAccessConditions"/> -->
 
             <!-- Uncomment this step to show when appropriate publisher policies retrieved from SHERPA/RoMEO -->
-            <!-- <step id="sherpaPolicies"/> -->
+            <step id="sherpaPolicies"/>
 
             <!--Step will be to Upload the item -->
             <step id="upload"/>
