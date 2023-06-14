@@ -54,157 +54,245 @@
             <row>
                 <field>
                     <dc-schema>dc</dc-schema>
-                    <dc-element>contributor</dc-element>
-                    <dc-qualifier>author</dc-qualifier>
-                    <repeatable>true</repeatable>
-                    <label>Author</label>
-                    <input-type>onebox</input-type>
-                    <hint>Enter the author's name (Family name, Given names).</hint>
-                    <required></required>
-                </field>
-            </row>
-            <row>
-                <field>
-                    <dc-schema>dc</dc-schema>
                     <dc-element>title</dc-element>
                     <dc-qualifier></dc-qualifier>
                     <repeatable>false</repeatable>
-                    <label>Title</label>
+                    <label>Title (required)</label>
                     <input-type>onebox</input-type>
-                    <hint>Enter the main title of the item.</hint>
+                    <hint>Enter the full official title of the item (including any subtitles, etc).</hint>
                     <required>You must enter a main title for this item.</required>
                 </field>
             </row>
             <row>
                 <field>
-                    <dc-schema>dc</dc-schema>
-                    <dc-element>title</dc-element>
-                    <dc-qualifier>alternative</dc-qualifier>
+                    <dc-schema>dcterms</dc-schema>
+                    <dc-element>alternative</dc-element>
+                    <dc-qualifier></dc-qualifier>
                     <repeatable>true</repeatable>
                     <label>Other Titles</label>
                     <input-type>onebox</input-type>
-                    <hint>If the item has any alternative titles, please enter them here.</hint>
+                    <hint>Enter any alternative titles for the item (other languages, etc).</hint>
                     <required></required>
                 </field>
             </row>
             <row>
                 <field>
-                    <dc-schema>dc</dc-schema>
-                    <dc-element>date</dc-element>
-                    <dc-qualifier>issued</dc-qualifier>
-                    <repeatable>false</repeatable>
-                    <label>Date of Issue</label>
-                    <style>col-sm-4</style>
-                    <input-type>date</input-type>
-                    <hint>Please give the date of previous publication or public distribution.
-                        You can leave out the day and/or month if they aren't applicable.
-                    </hint>
-                    <required>You must enter at least the year.</required>
-                </field>
-
-                <field>
-                    <dc-schema>dc</dc-schema>
-                    <dc-element>publisher</dc-element>
-                    <dc-qualifier></dc-qualifier>
-                    <repeatable>false</repeatable>
-                    <label>Publisher</label>
-                    <style>col-sm-8</style>
-                    <input-type>onebox</input-type>
-                    <hint>Enter the name of the publisher of the previously issued instance of this item.</hint>
-                    <required></required>
-                </field>
-            </row>
-            <row>
-                <field>
-                    <dc-schema>dc</dc-schema>
-                    <dc-element>identifier</dc-element>
-                    <dc-qualifier>citation</dc-qualifier>
-                    <repeatable>false</repeatable>
-                    <label>Citation</label>
-                    <input-type>onebox</input-type>
-                    <hint>Enter the standard citation for the previously issued instance of this item.</hint>
-                    <required></required>
-                </field>
-            </row>
-            <row>
-                <field>
-                    <dc-schema>dc</dc-schema>
-                    <dc-element>relation</dc-element>
-                    <dc-qualifier>ispartofseries</dc-qualifier>
-                    <repeatable>true</repeatable>
-                    <label>Series/Report No.</label>
-                    <input-type>series</input-type>
-                    <hint>Enter the series and number assigned to this item by your community.</hint>
-                    <required></required>
-                </field>
-            </row>
-            <row>
-                <field>
-                    <dc-schema>dc</dc-schema>
-                    <dc-element>identifier</dc-element>
-                    <dc-qualifier></dc-qualifier>
-                    <!-- An input-type of qualdrop_value MUST be marked as repeatable -->
-                    <repeatable>true</repeatable>
-                    <label>Identifiers</label>
-                    <input-type value-pairs-name="common_identifiers">qualdrop_value</input-type>
-                    <hint>If the item has any identification numbers or codes associated with
-                        it, please enter the types and the actual numbers or codes.
-                    </hint>
-                    <required></required>
-                </field>
-            </row>
-            <row>
-                <field>
-                    <dc-schema>dc</dc-schema>
+                    <dc-schema>dcterms</dc-schema>
                     <dc-element>type</dc-element>
                     <dc-qualifier></dc-qualifier>
-                    <repeatable>true</repeatable>
+                    <repeatable>false</repeatable>
                     <label>Type</label>
                     <input-type value-pairs-name="common_types">dropdown</input-type>
-                    <hint>Select the type of content of the item.
-                    </hint>
-                    <required></required>
-                </field>
-            </row>
-            <row>
-                <field>
-                    <dc-schema>dc</dc-schema>
-                    <dc-element>language</dc-element>
-                    <dc-qualifier>iso</dc-qualifier>
-                    <repeatable>false</repeatable>
-                    <label>Language</label>
-                    <input-type value-pairs-name="common_iso_languages">dropdown</input-type>
-                    <hint>Select the language of the main content of the item. If the language does not appear in the
-                        list, please select 'Other'. If the content does not really have a language (for example, if it
-                        is a dataset or an image) please select 'N/A'.
-                    </hint>
-                    <required></required>
+                    <hint>Select the type of content of the item.</hint>
+                    <required>You must select item type.</required>
                 </field>
             </row>
         </form>
 
-        <!-- Form which defines the second page/section of the "traditional" DSpace submission process,
-             often used when depositing normal Items. -->
         <form name="traditionalpagetwo">
             <row>
                 <field>
                     <dc-schema>dc</dc-schema>
-                    <dc-element>subject</dc-element>
-                    <dc-qualifier></dc-qualifier>
-                    <!-- An input-type of tag MUST be marked as repeatable -->
+                    <dc-element>contributor</dc-element>
+                    <dc-qualifier>author</dc-qualifier>
                     <repeatable>true</repeatable>
-                    <label>Subject Keywords</label>
-                    <input-type>tag</input-type>
-                    <hint>Enter appropriate subject keywords or phrases.</hint>
-                    <required></required>
-                    <vocabulary>srsc</vocabulary>
+                    <label>Authors (required)</label>
+                    <vocabulary>dc-contributor-author</vocabulary>
+                    <input-type>onebox</input-type>
+                    <hint>Enter the names of individual or corporate authors of this item (enter each individually).</hint>
+                    <required>Please enter the author(s).</required>
                 </field>
             </row>
             <row>
                 <field>
-                    <dc-schema>dc</dc-schema>
-                    <dc-element>description</dc-element>
-                    <dc-qualifier>abstract</dc-qualifier>
+                    <dc-schema>cg</dc-schema>
+                    <dc-element>creator</dc-element>
+                    <dc-qualifier>identifier</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>CGIAR author ORCID identifiers</label>
+                    <vocabulary>cg-creator-identifier</vocabulary>
+                    <input-type>onebox</input-type>
+                    <hint>Enter ORCID identifiers for CGIAR authors, one per author. If an identifier is missing from the list, enter a new one in the exact same format (Name: 0000-0002-1735-7458). Use the exact name style the author uses at https://orcid.org</hint>
+                    <required></required>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>cg</dc-schema>
+                    <dc-element>contributor</dc-element>
+                    <dc-qualifier>affiliation</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Author affiliations</label>
+                    <vocabulary>cg-contributor-affiliation</vocabulary>
+                    <input-type>onebox</input-type>
+                    <hint>Enter the full name of the institutions that the author(s) work for (enter each individually).</hint>
+                    <required></required>
+                </field>
+                <field>
+                    <dc-schema>cg</dc-schema>
+                    <dc-element>contributor</dc-element>
+                    <dc-qualifier>donor</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Sponsor</label>
+                    <input-type>onebox</input-type>
+                    <vocabulary>cg-contributor-donor</vocabulary>
+                    <hint>Enter full institution name(s) who sponsored the item. Click below to see a pre-populated list, or add one manually. CGIAR Research Program funding is identified in the field above.</hint>
+                    <required></required>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>cg</dc-schema>
+                    <dc-element>authorship</dc-element>
+                    <dc-qualifier>types</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Authorship types</label>
+                    <input-type value-pairs-name="Authorship_types">dropdown</input-type>
+                    <hint>Characterize the entire authorship based on author affiliations.</hint>
+                    <required></required>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>cg</dc-schema>
+                    <dc-element>journal</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Journal Title</label>
+                    <vocabulary>cg-journal</vocabulary>
+                    <input-type>onebox</input-type>
+                    <hint>Enter the full journal title.</hint>
+                    <type-bind>Journal Article,Data Paper</type-bind>
+                    <required></required>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>cg</dc-schema>
+                    <dc-element>volume</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Journal Volume</label>
+                    <style>col-sm-6</style>
+                    <input-type>onebox</input-type>
+                    <hint>Enter the journal volume. For example, if published in PLoS ONE 16(1), the volume is: 16</hint>
+                    <type-bind>Journal Article,Data Paper</type-bind>
+                    <required></required>
+                </field>
+                <field>
+                    <dc-schema>cg</dc-schema>
+                    <dc-element>issue</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Journal Issue</label>
+                    <input-type>onebox</input-type>
+                    <style>col-sm-6</style>
+                    <hint>Enter the journal issue. For example, if published in PLoS ONE 16(1), the issue number is: 1</hint>
+                    <type-bind>Journal Article,Data Paper</type-bind>
+                    <required></required>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>cg</dc-schema>
+                    <dc-element>edition</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Edition</label>
+                    <style>col-sm-6</style>
+                    <input-type>onebox</input-type>
+                    <hint>Enter the edition of the item (3rd, 17th, Revised).</hint>
+                    <required></required>
+                </field>
+                <field>
+                    <dc-schema>dcterms</dc-schema>
+                    <dc-element>extent</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Pagination</label>
+                    <style>col-sm-6</style>
+                    <input-type>onebox</input-type>
+                    <hint>Enter the page range for an article or chapter (p. 10-17); or the total pages for a report (120 p.).</hint>
+                    <required></required>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>dcterms</dc-schema>
+                    <dc-element>issued</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Date of publication (required)</label>
+                    <input-type>date</input-type>
+                    <hint>Enter the date when the item was officially published or made public. For journal articles, this is the date the article was included in a volume/issue, if known. If the issue date is not known, please use the online first date here.</hint>
+                    <required>You must enter at least the year.</required>
+                </field>
+
+                <field>
+                    <dc-schema>dcterms</dc-schema>
+                    <dc-element>available</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Date of online publication</label>
+                    <input-type>date</input-type>
+                    <hint>Enter the date when the item was available online. Use this to indicate a journal article was online first, and use the publication date for the issue date.</hint>
+                    <type-bind>Journal Article,Data Paper</type-bind>
+                    <required></required>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>dcterms</dc-schema>
+                    <dc-element>publisher</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Publisher</label>
+                    <input-type>onebox</input-type>
+                    <hint>Enter the full name of the publisher.</hint>
+                    <required></required>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>dcterms</dc-schema>
+                    <dc-element>bibliographicCitation</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Citation (required)</label>
+                    <input-type>onebox</input-type>
+                    <hint>Enter the standard citation.</hint>
+                    <required>Standard citation is required.</required>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>dcterms</dc-schema>
+                    <dc-element>isPartOf</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Series/Report Name</label>
+                    <style>col-sm-8</style>
+                    <input-type>onebox</input-type>
+                    <hint>Enter the full official series/report name, for example CCAFS Info Note or ILRI Research Report.</hint>
+                    <required></required>
+                </field>
+                <field>
+                    <dc-schema>cg</dc-schema>
+                    <dc-element>number</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Series/Report No.</label>
+                    <style>col-sm-4</style>
+                    <input-type>onebox</input-type>
+                    <hint>Enter the series/report number.</hint>
+                    <required></required>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>dcterms</dc-schema>
+                    <dc-element>abstract</dc-element>
+                    <dc-qualifier></dc-qualifier>
                     <repeatable>false</repeatable>
                     <label>Abstract</label>
                     <input-type>textarea</input-type>
@@ -214,25 +302,429 @@
             </row>
             <row>
                 <field>
-                    <dc-schema>dc</dc-schema>
-                    <dc-element>description</dc-element>
-                    <dc-qualifier>sponsorship</dc-qualifier>
+                    <dc-schema>dcterms</dc-schema>
+                    <dc-element>accessRights</dc-element>
+                    <dc-qualifier></dc-qualifier>
                     <repeatable>false</repeatable>
-                    <label>Sponsors</label>
-                    <input-type>textarea</input-type>
-                    <hint>Enter the names of any sponsors and/or funding codes in the box.</hint>
+                    <label>Access rights (required)</label>
+                    <input-type value-pairs-name="access-rights">dropdown</input-type>
+                    <hint>Indicate the accessibility of the item. If the item is free to read this should be "Open Access", even if it is copyrighted.</hint>
+                    <required>Access rights is required.</required>
+                </field>
+                <field>
+                    <dc-schema>dcterms</dc-schema>
+                    <dc-element>license</dc-element>
+                    <repeatable>false</repeatable>
+                    <label>Usage rights (required)</label>
+                    <input-type value-pairs-name="usage-rights">dropdown</input-type>
+                    <hint>Indicate the usage rights of the item. For most items this will be a Creative Commons license. Look on the publisher's page or in the PDF itself if available. Choose "Other" if the item does not have a license or none is specified.</hint>
+                    <required>Usage rights is required.</required>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>cg</dc-schema>
+                    <dc-element>isijournal</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Journal Status</label>
+                    <hint>Indicate if the item was published in an ISI journal.</hint>
+                    <input-type value-pairs-name="ISI_Journal">dropdown</input-type>
+                    <required></required>
+                    <type-bind>Journal Article,Data Paper</type-bind>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>cg</dc-schema>
+                    <dc-element>howPublished</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Grey Literature</label>
+                    <hint>Indicate whether the item was formally published or not. In general, any output other than journal articles and books are grey literature.</hint>
+                    <input-type value-pairs-name="GREY_LITERATURE">dropdown</input-type>
+                    <required></required>
+                </field>
+                <field>
+                    <dc-schema>cg</dc-schema>
+                    <dc-element>reviewStatus</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Review Status</label>
+                    <hint>Indicate whether the item has undergone internal or peer review.</hint>
+                    <input-type value-pairs-name="Review_status">dropdown</input-type>
                     <required></required>
                 </field>
             </row>
             <row>
                 <field>
-                    <dc-schema>dc</dc-schema>
+                    <dc-schema>dcterms</dc-schema>
+                    <dc-element>audience</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Target audience</label>
+                    <hint>Indicate the main audience for whom the item is produced.</hint>
+                    <input-type value-pairs-name="TARGET_AUDIENCE">dropdown</input-type>
+                    <required></required>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>cg</dc-schema>
+                    <dc-element>isbn</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>ISBN</label>
+                    <style>col-sm-6</style>
+                    <input-type>onebox</input-type>
+                    <hint>Enter the ISBN for the item, for example: 978-3-16-148410-0</hint>
+                    <required></required>
+                </field>
+                <field>
+                    <dc-schema>cg</dc-schema>
+                    <dc-element>issn</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>ISSN</label>
+                    <style>col-sm-6</style>
+                    <input-type>onebox</input-type>
+                    <hint>Enter the ISSN for the serial publication where this item appears, for example: 2049-3630</hint>
+                    <required></required>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>cg</dc-schema>
+                    <dc-element>identifier</dc-element>
+                    <dc-qualifier>url</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>External URL</label>
+                    <style>col-sm-4</style>
+                    <input-type>onebox</input-type>
+                    <hint>Enter a full URL for the item, for example a website, blog post, Google Books URL, etc (do not use this for links to datasets, use data URL instead).</hint>
+                    <required></required>
+                </field>
+                <field>
+                    <dc-schema>cg</dc-schema>
+                    <dc-element>identifier</dc-element>
+                    <dc-qualifier>doi</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Document Object Identifier (DOI)</label>
+                    <style>col-sm-4</style>
+                    <input-type>onebox</input-type>
+                    <hint>Enter the full address in format: https://doi.org/10.1038/s41598-019-43406-0</hint>
+                    <required></required>
+                </field>
+                <field>
+                    <dc-schema>cg</dc-schema>
+                    <dc-element>identifier</dc-element>
+                    <dc-qualifier>dataurl</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>URL for data file</label>
+                    <style>col-sm-4</style>
+                    <input-type>onebox</input-type>
+                    <hint>A URL for any associated data file(s), in a repository for example.</hint>
+                    <required></required>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>dcterms</dc-schema>
+                    <dc-element>language</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Language</label>
+                    <input-type value-pairs-name="common_iso_languages">dropdown</input-type>
+                    <hint>Select the language of the main content of the item. If the language does not appear in the
+                        list, please select 'Other'. If the content does not really have a language (for example, if it
+                        is a dataset or an image) please leave this blank.
+                    </hint>
+                    <required></required>
+                </field>
+            </row>
+        </form>
+
+        <!-- Form which defines the second page/section of the "traditional" DSpace submission process,
+             often used when depositing normal Items. -->
+        <form name="traditionalpagethree">
+            <row>
+                <field>
+                    <dc-schema>cg</dc-schema>
+                    <dc-element>contributor</dc-element>
+                    <dc-qualifier>initiative</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>CGIAR Initiatives</label>
+                    <input-type value-pairs-name="cgiar-initiatives">dropdown</input-type>
+                    <hint>Select any CGIAR Initiatives(s) associated with this item. Use this to show that an Initiative funded this item.</hint>
+                    <required></required>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>cg</dc-schema>
+                    <dc-element>contributor</dc-element>
+                    <dc-qualifier>crp</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>CGIAR Research Programs and Platforms</label>
+                    <input-type value-pairs-name="crpsubject">dropdown</input-type>
+                    <hint>Select any CGIAR Research Program(s) and Platform(s) associated with this item. Use this to show that a CRP funded this item.</hint>
+                    <required></required>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>cg</dc-schema>
+                    <dc-element>subject</dc-element>
+                    <dc-qualifier>sdg</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>UN Sustainable Development Goals (SDGs)</label>
+                    <input-type value-pairs-name="sdgs">dropdown</input-type>
+                    <hint>Select any UN Sustainable Development Goals associated with this item.</hint>
+                    <required></required>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>cg</dc-schema>
+                    <dc-element>subject</dc-element>
+                    <dc-qualifier>impactArea</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>CGIAR Impact Areas</label>
+                    <input-type value-pairs-name="impactAreas">dropdown</input-type>
+                    <hint>Select any CGIAR Impact Areas associated with this item.</hint>
+                    <required></required>
+                </field>
+                <field>
+                    <dc-schema>cg</dc-schema>
+                    <dc-element>subject</dc-element>
+                    <dc-qualifier>actionArea</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>CGIAR Action Areas</label>
+                    <input-type value-pairs-name="actionAreas">dropdown</input-type>
+                    <hint>Select any CGIAR Action Areas associated with this item.</hint>
+                    <required></required>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>cg</dc-schema>
+                    <dc-element>coverage</dc-element>
+                    <dc-qualifier>country</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Country</label>
+                    <input-type value-pairs-name="countrylist">dropdown</input-type>
+                    <hint>Select a country or countries within the scope of the item.</hint>
+                    <required></required>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>cg</dc-schema>
+                    <dc-element>coverage</dc-element>
+                    <dc-qualifier>region</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Region</label>
+                    <input-type value-pairs-name="region_types">dropdown</input-type>
+                    <hint>Select a region or regions within the scope of the item.</hint>
+                    <required></required>
+                </field>
+                <field>
+                    <dc-schema>cg</dc-schema>
+                    <dc-element>coverage</dc-element>
+                    <dc-qualifier>subregion</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Subregion</label>
+                    <input-type>onebox</input-type>
+                    <vocabulary>cg-coverage-subregion</vocabulary>
+                    <hint>Enter the subregion. Normally provinces, states, regions, etc WITHIN a country according to ISO 3166-2 subdivisions.</hint>
+                  <required></required>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>cg</dc-schema>
+                    <dc-element>river</dc-element>
+                    <dc-qualifier>basin</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>River basin</label>
+                    <input-type value-pairs-name="riverbasin">dropdown</input-type>
+                    <hint>Select the focus basin(s).</hint>
+                    <required></required>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>dcterms</dc-schema>
+                    <dc-element>subject</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>AGROVOC Keywords</label>
+                    <input-type>tag</input-type>
+                    <hint>Enter AGROVOC subjects in lower case.</hint>
+                    <required></required>
+                    <vocabulary>dcterms-subject</vocabulary>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>cg</dc-schema>
+                    <dc-element>identifier</dc-element>
+                    <dc-qualifier>iitatheme</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>IITA research theme</label>
+                    <input-type value-pairs-name="iitatheme">dropdown</input-type>
+                    <hint></hint>
+                    <required></required>
+                </field>
+                <field>
+                    <dc-schema>cg</dc-schema>
+                    <dc-element>subject</dc-element>
+                    <dc-qualifier>iita</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>IITA subject</label>
+                    <input-type value-pairs-name="iita-subject">dropdown</input-type>
+                    <hint></hint>
+                    <required></required>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>cg</dc-schema>
+                    <dc-element>identifier</dc-element>
+                    <dc-qualifier>iwmilibrary</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>IWMI Library ID</label>
+                    <input-type>onebox</input-type>
+                    <hint>IWMI Library internal reference (eg H049940)</hint>
+                    <required></required>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>cg</dc-schema>
+                    <dc-element>subject</dc-element>
+                    <dc-qualifier>alliancebiovciat</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Alliance of Bioversity and CIAT subject</label>
+                    <input-type value-pairs-name="alliancebiovciat">dropdown</input-type>
+                    <hint></hint>
+                    <required></required>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>cg</dc-schema>
+                    <dc-element>subject</dc-element>
+                    <dc-qualifier>cip</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>CIP subject</label>
+                    <input-type value-pairs-name="cipsubject">dropdown</input-type>
+                    <hint></hint>
+                    <required></required>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>cg</dc-schema>
+                    <dc-element>subject</dc-element>
+                    <dc-qualifier>ilri</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>ILRI subject</label>
+                    <input-type value-pairs-name="ilrisubject">dropdown</input-type>
+                    <hint></hint>
+                    <required></required>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>dcterms</dc-schema>
                     <dc-element>description</dc-element>
                     <dc-qualifier></dc-qualifier>
                     <repeatable>false</repeatable>
-                    <label>Description</label>
+                    <label>Notes</label>
                     <input-type>textarea</input-type>
                     <hint>Enter any other description or comments in this box.</hint>
+                    <required></required>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>cg</dc-schema>
+                    <dc-element>link</dc-element>
+                    <dc-qualifier>video</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Related video</label>
+                    <style>col-sm-4</style>
+                    <input-type>onebox</input-type>
+                    <hint>Enter related video link (eg a video about this item).</hint>
+                    <required></required>
+                </field>
+                <field>
+                    <dc-schema>cg</dc-schema>
+                    <dc-element>link</dc-element>
+                    <dc-qualifier>audio</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Related audio</label>
+                    <style>col-sm-4</style>
+                    <input-type>onebox</input-type>
+                    <hint>Enter related audio link (eg an audio about this item).</hint>
+                    <required></required>
+                </field>
+                <field>
+                    <dc-schema>cg</dc-schema>
+                    <dc-element>link</dc-element>
+                    <dc-qualifier>photo</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Related photo</label>
+                    <style>col-sm-4</style>
+                    <input-type>onebox</input-type>
+                    <hint>Enter related photo link (eg a photo or image associated with this item).</hint>
+                    <required></required>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>dcterms</dc-schema>
+                    <dc-element>relation</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Related reference</label>
+                    <input-type>onebox</input-type>
+                    <hint>Enter related reference link (normally a URL to another item).</hint>
+                    <required></required>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>cg</dc-schema>
+                    <dc-element>link</dc-element>
+                    <dc-qualifier>citation</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Related citation</label>
+                    <input-type>onebox</input-type>
+                    <hint>Enter related reference citation (normally a full citation, not a URL).</hint>
+                    <required></required>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>cg</dc-schema>
+                    <dc-element>species</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Species</label>
+                    <input-type>onebox</input-type>
+                    <hint>Enter scientific name of organism, plant, animal, etc if it is a main focus of the item, for example: Lablab purpureus, Bos Taurus, Oryza sativa, Theileria parva</hint>
+                    <required></required>
+                </field>
+                <field>
+                    <dc-schema>cg</dc-schema>
+                    <dc-element>species</dc-element>
+                    <dc-qualifier>breed</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Animal breed</label>
+                    <input-type>onebox</input-type>
+                    <vocabulary>cg-species-breed</vocabulary>
                     <required></required>
                 </field>
             </row>
@@ -1394,88 +1886,164 @@
 
         <value-pairs value-pairs-name="common_types" dc-term="type">
             <pair>
-                <displayed-value>Animation</displayed-value>
-                <stored-value>Animation</stored-value>
+                <displayed-value>Abstract</displayed-value>
+                <stored-value>Abstract</stored-value>
             </pair>
             <pair>
-                <displayed-value>Article</displayed-value>
-                <stored-value>Article</stored-value>
+                <displayed-value>Audio</displayed-value>
+                <stored-value>Audio</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Blog Post</displayed-value>
+                <stored-value>Blog Post</stored-value>
             </pair>
             <pair>
                 <displayed-value>Book</displayed-value>
                 <stored-value>Book</stored-value>
             </pair>
             <pair>
-                <displayed-value>Book chapter</displayed-value>
-                <stored-value>Book chapter</stored-value>
+                <displayed-value>Book Chapter</displayed-value>
+                <stored-value>Book Chapter</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Brief</displayed-value>
+                <stored-value>Brief</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Brochure</displayed-value>
+                <stored-value>Brochure</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Case Study</displayed-value>
+                <stored-value>Case Study</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Conference Paper</displayed-value>
+                <stored-value>Conference Paper</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Conference Proceedings</displayed-value>
+                <stored-value>Conference Proceedings</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Data Paper</displayed-value>
+                <stored-value>Data Paper</stored-value>
             </pair>
             <pair>
                 <displayed-value>Dataset</displayed-value>
                 <stored-value>Dataset</stored-value>
             </pair>
             <pair>
-                <displayed-value>Learning Object</displayed-value>
-                <stored-value>Learning Object</stored-value>
+                <displayed-value>Equation</displayed-value>
+                <stored-value>Equation</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Extension Material</displayed-value>
+                <stored-value>Extension Material</stored-value>
             </pair>
             <pair>
                 <displayed-value>Image</displayed-value>
                 <stored-value>Image</stored-value>
             </pair>
             <pair>
-                <displayed-value>Image, 3-D</displayed-value>
-                <stored-value>Image, 3-D</stored-value>
+                <displayed-value>Infographic</displayed-value>
+                <stored-value>Infographic</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Internal Document</displayed-value>
+                <stored-value>Internal Document</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Journal Article</displayed-value>
+                <stored-value>Journal Article</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Journal Item</displayed-value>
+                <stored-value>Journal Item</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Logo</displayed-value>
+                <stored-value>Logo</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Manual</displayed-value>
+                <stored-value>Manual</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Manuscript-unpublished</displayed-value>
+                <stored-value>Manuscript-unpublished</stored-value>
             </pair>
             <pair>
                 <displayed-value>Map</displayed-value>
                 <stored-value>Map</stored-value>
             </pair>
             <pair>
-                <displayed-value>Musical Score</displayed-value>
-                <stored-value>Musical Score</stored-value>
+                <displayed-value>News Item</displayed-value>
+                <stored-value>News Item</stored-value>
             </pair>
             <pair>
-                <displayed-value>Plan or blueprint</displayed-value>
-                <stored-value>Plan or blueprint</stored-value>
+                <displayed-value>Newsletter</displayed-value>
+                <stored-value>Newsletter</stored-value>
             </pair>
             <pair>
-                <displayed-value>Preprint</displayed-value>
-                <stored-value>Preprint</stored-value>
+                <displayed-value>Opinion Piece</displayed-value>
+                <stored-value>Opinion Piece</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Photo Report</displayed-value>
+                <stored-value>Photo Report</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Poster</displayed-value>
+                <stored-value>Poster</stored-value>
             </pair>
             <pair>
                 <displayed-value>Presentation</displayed-value>
                 <stored-value>Presentation</stored-value>
             </pair>
             <pair>
-                <displayed-value>Recording, acoustical</displayed-value>
-                <stored-value>Recording, acoustical</stored-value>
+                <displayed-value>Press Item</displayed-value>
+                <stored-value>Press Item</stored-value>
             </pair>
             <pair>
-                <displayed-value>Recording, musical</displayed-value>
-                <stored-value>Recording, musical</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Recording, oral</displayed-value>
-                <stored-value>Recording, oral</stored-value>
+                <displayed-value>Report</displayed-value>
+                <stored-value>Report</stored-value>
             </pair>
             <pair>
                 <displayed-value>Software</displayed-value>
                 <stored-value>Software</stored-value>
             </pair>
             <pair>
-                <displayed-value>Technical Report</displayed-value>
-                <stored-value>Technical Report</stored-value>
+                <displayed-value>Source Code</displayed-value>
+                <stored-value>Source Code</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Template</displayed-value>
+                <stored-value>Template</stored-value>
             </pair>
             <pair>
                 <displayed-value>Thesis</displayed-value>
                 <stored-value>Thesis</stored-value>
             </pair>
             <pair>
+                <displayed-value>Training Material</displayed-value>
+                <stored-value>Training Material</stored-value>
+            </pair>
+            <pair>
                 <displayed-value>Video</displayed-value>
                 <stored-value>Video</stored-value>
             </pair>
             <pair>
+                <displayed-value>Website</displayed-value>
+                <stored-value>Website</stored-value>
+            </pair>
+            <pair>
                 <displayed-value>Working Paper</displayed-value>
                 <stored-value>Working Paper</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Wiki</displayed-value>
+                <stored-value>Wiki</stored-value>
             </pair>
             <pair>
                 <displayed-value>Other</displayed-value>
@@ -1487,55 +2055,3762 @@
              "en_US", "en", "es", "de", "fr", "it", "ja", "zh", "other", ""
           -->
         <value-pairs value-pairs-name="common_iso_languages" dc-term="language_iso">
-            <pair>
-                <displayed-value>N/A</displayed-value>
-                <stored-value></stored-value>
-            </pair>
-            <pair>
-                <displayed-value>English (United States)</displayed-value>
-                <stored-value>en_US</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>English</displayed-value>
-                <stored-value>en</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Spanish</displayed-value>
-                <stored-value>es</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>German</displayed-value>
-                <stored-value>de</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>French</displayed-value>
-                <stored-value>fr</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Italian</displayed-value>
-                <stored-value>it</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Japanese</displayed-value>
-                <stored-value>ja</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Chinese</displayed-value>
-                <stored-value>zh</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Portuguese</displayed-value>
-                <stored-value>pt</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Turkish</displayed-value>
-                <stored-value>tr</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>(Other)</displayed-value>
-                <stored-value>other</stored-value>
-            </pair>
-        </value-pairs>
+        <pair>
+            <displayed-value>Afar</displayed-value>
+            <stored-value>aa</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Abkhazian</displayed-value>
+            <stored-value>ab</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Afrikaans</displayed-value>
+            <stored-value>af</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Akan</displayed-value>
+            <stored-value>ak</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Amharic</displayed-value>
+            <stored-value>am</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Arabic</displayed-value>
+            <stored-value>ar</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Aragonese</displayed-value>
+            <stored-value>an</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Assamese</displayed-value>
+            <stored-value>as</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Avaric</displayed-value>
+            <stored-value>av</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Avestan</displayed-value>
+            <stored-value>ae</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Aymara</displayed-value>
+            <stored-value>ay</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Azerbaijani</displayed-value>
+            <stored-value>az</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Bashkir</displayed-value>
+            <stored-value>ba</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Bambara</displayed-value>
+            <stored-value>bm</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Belarusian</displayed-value>
+            <stored-value>be</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Bengali</displayed-value>
+            <stored-value>bn</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Bislama</displayed-value>
+            <stored-value>bi</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Tibetan</displayed-value>
+            <stored-value>bo</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Bosnian</displayed-value>
+            <stored-value>bs</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Breton</displayed-value>
+            <stored-value>br</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Bulgarian</displayed-value>
+            <stored-value>bg</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Catalan</displayed-value>
+            <stored-value>ca</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Czech</displayed-value>
+            <stored-value>cs</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Chamorro</displayed-value>
+            <stored-value>ch</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Chechen</displayed-value>
+            <stored-value>ce</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Church Slavic</displayed-value>
+            <stored-value>cu</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Chuvash</displayed-value>
+            <stored-value>cv</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Cornish</displayed-value>
+            <stored-value>kw</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Corsican</displayed-value>
+            <stored-value>co</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Cree</displayed-value>
+            <stored-value>cr</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Welsh</displayed-value>
+            <stored-value>cy</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Danish</displayed-value>
+            <stored-value>da</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>German</displayed-value>
+            <stored-value>de</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Dhivehi</displayed-value>
+            <stored-value>dv</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Dzongkha</displayed-value>
+            <stored-value>dz</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Modern Greek (1453-)</displayed-value>
+            <stored-value>el</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>English</displayed-value>
+            <stored-value>en</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Esperanto</displayed-value>
+            <stored-value>eo</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Estonian</displayed-value>
+            <stored-value>et</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Basque</displayed-value>
+            <stored-value>eu</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Ewe</displayed-value>
+            <stored-value>ee</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Faroese</displayed-value>
+            <stored-value>fo</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Persian</displayed-value>
+            <stored-value>fa</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Fijian</displayed-value>
+            <stored-value>fj</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Finnish</displayed-value>
+            <stored-value>fi</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>French</displayed-value>
+            <stored-value>fr</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Western Frisian</displayed-value>
+            <stored-value>fy</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Fulah</displayed-value>
+            <stored-value>ff</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Scottish Gaelic</displayed-value>
+            <stored-value>gd</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Irish</displayed-value>
+            <stored-value>ga</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Galician</displayed-value>
+            <stored-value>gl</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Manx</displayed-value>
+            <stored-value>gv</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Guarani</displayed-value>
+            <stored-value>gn</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Gujarati</displayed-value>
+            <stored-value>gu</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Haitian</displayed-value>
+            <stored-value>ht</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Hausa</displayed-value>
+            <stored-value>ha</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Serbo-Croatian</displayed-value>
+            <stored-value>sh</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Hebrew</displayed-value>
+            <stored-value>he</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Herero</displayed-value>
+            <stored-value>hz</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Hindi</displayed-value>
+            <stored-value>hi</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Hiri Motu</displayed-value>
+            <stored-value>ho</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Croatian</displayed-value>
+            <stored-value>hr</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Hungarian</displayed-value>
+            <stored-value>hu</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Armenian</displayed-value>
+            <stored-value>hy</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Igbo</displayed-value>
+            <stored-value>ig</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Ido</displayed-value>
+            <stored-value>io</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Sichuan Yi</displayed-value>
+            <stored-value>ii</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Inuktitut</displayed-value>
+            <stored-value>iu</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Interlingue</displayed-value>
+            <stored-value>ie</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Interlingua (International Auxiliary Language Association)</displayed-value>
+            <stored-value>ia</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Indonesian</displayed-value>
+            <stored-value>id</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Inupiaq</displayed-value>
+            <stored-value>ik</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Icelandic</displayed-value>
+            <stored-value>is</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Italian</displayed-value>
+            <stored-value>it</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Javanese</displayed-value>
+            <stored-value>jv</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Japanese</displayed-value>
+            <stored-value>ja</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Kalaallisut</displayed-value>
+            <stored-value>kl</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Kannada</displayed-value>
+            <stored-value>kn</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Kashmiri</displayed-value>
+            <stored-value>ks</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Georgian</displayed-value>
+            <stored-value>ka</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Kanuri</displayed-value>
+            <stored-value>kr</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Kazakh</displayed-value>
+            <stored-value>kk</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Central Khmer</displayed-value>
+            <stored-value>km</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Kikuyu</displayed-value>
+            <stored-value>ki</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Kinyarwanda</displayed-value>
+            <stored-value>rw</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Kirghiz</displayed-value>
+            <stored-value>ky</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Komi</displayed-value>
+            <stored-value>kv</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Kongo</displayed-value>
+            <stored-value>kg</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Korean</displayed-value>
+            <stored-value>ko</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Kuanyama</displayed-value>
+            <stored-value>kj</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Kurdish</displayed-value>
+            <stored-value>ku</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Lao</displayed-value>
+            <stored-value>lo</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Latin</displayed-value>
+            <stored-value>la</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Latvian</displayed-value>
+            <stored-value>lv</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Limburgan</displayed-value>
+            <stored-value>li</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Lingala</displayed-value>
+            <stored-value>ln</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Lithuanian</displayed-value>
+            <stored-value>lt</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Luxembourgish</displayed-value>
+            <stored-value>lb</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Luba-Katanga</displayed-value>
+            <stored-value>lu</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Ganda</displayed-value>
+            <stored-value>lg</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Marshallese</displayed-value>
+            <stored-value>mh</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Malayalam</displayed-value>
+            <stored-value>ml</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Marathi</displayed-value>
+            <stored-value>mr</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Macedonian</displayed-value>
+            <stored-value>mk</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Malagasy</displayed-value>
+            <stored-value>mg</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Maltese</displayed-value>
+            <stored-value>mt</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Mongolian</displayed-value>
+            <stored-value>mn</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Maori</displayed-value>
+            <stored-value>mi</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Malay (macrolanguage)</displayed-value>
+            <stored-value>ms</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Burmese</displayed-value>
+            <stored-value>my</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Nauru</displayed-value>
+            <stored-value>na</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Navajo</displayed-value>
+            <stored-value>nv</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>South Ndebele</displayed-value>
+            <stored-value>nr</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>North Ndebele</displayed-value>
+            <stored-value>nd</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Ndonga</displayed-value>
+            <stored-value>ng</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Nepali (macrolanguage)</displayed-value>
+            <stored-value>ne</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Dutch</displayed-value>
+            <stored-value>nl</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Norwegian Nynorsk</displayed-value>
+            <stored-value>nn</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Norwegian Bokmål</displayed-value>
+            <stored-value>nb</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Norwegian</displayed-value>
+            <stored-value>no</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Nyanja</displayed-value>
+            <stored-value>ny</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Occitan (post 1500)</displayed-value>
+            <stored-value>oc</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Ojibwa</displayed-value>
+            <stored-value>oj</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Oriya (macrolanguage)</displayed-value>
+            <stored-value>or</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Oromo</displayed-value>
+            <stored-value>om</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Ossetian</displayed-value>
+            <stored-value>os</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Panjabi</displayed-value>
+            <stored-value>pa</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Pali</displayed-value>
+            <stored-value>pi</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Polish</displayed-value>
+            <stored-value>pl</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Portuguese</displayed-value>
+            <stored-value>pt</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Pushto</displayed-value>
+            <stored-value>ps</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Quechua</displayed-value>
+            <stored-value>qu</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Romansh</displayed-value>
+            <stored-value>rm</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Romanian</displayed-value>
+            <stored-value>ro</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Rundi</displayed-value>
+            <stored-value>rn</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Russian</displayed-value>
+            <stored-value>ru</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Sango</displayed-value>
+            <stored-value>sg</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Sanskrit</displayed-value>
+            <stored-value>sa</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Sinhala</displayed-value>
+            <stored-value>si</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Slovak</displayed-value>
+            <stored-value>sk</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Slovenian</displayed-value>
+            <stored-value>sl</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Northern Sami</displayed-value>
+            <stored-value>se</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Samoan</displayed-value>
+            <stored-value>sm</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Shona</displayed-value>
+            <stored-value>sn</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Sindhi</displayed-value>
+            <stored-value>sd</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Somali</displayed-value>
+            <stored-value>so</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Southern Sotho</displayed-value>
+            <stored-value>st</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Spanish</displayed-value>
+            <stored-value>es</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Albanian</displayed-value>
+            <stored-value>sq</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Sardinian</displayed-value>
+            <stored-value>sc</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Serbian</displayed-value>
+            <stored-value>sr</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Swati</displayed-value>
+            <stored-value>ss</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Sundanese</displayed-value>
+            <stored-value>su</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Swahili (macrolanguage)</displayed-value>
+            <stored-value>sw</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Swedish</displayed-value>
+            <stored-value>sv</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Tahitian</displayed-value>
+            <stored-value>ty</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Tamil</displayed-value>
+            <stored-value>ta</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Tatar</displayed-value>
+            <stored-value>tt</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Telugu</displayed-value>
+            <stored-value>te</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Tajik</displayed-value>
+            <stored-value>tg</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Tagalog</displayed-value>
+            <stored-value>tl</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Thai</displayed-value>
+            <stored-value>th</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Tigrinya</displayed-value>
+            <stored-value>ti</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Tonga (Tonga Islands)</displayed-value>
+            <stored-value>to</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Tswana</displayed-value>
+            <stored-value>tn</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Tsonga</displayed-value>
+            <stored-value>ts</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Turkmen</displayed-value>
+            <stored-value>tk</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Turkish</displayed-value>
+            <stored-value>tr</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Twi</displayed-value>
+            <stored-value>tw</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Uighur</displayed-value>
+            <stored-value>ug</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Ukrainian</displayed-value>
+            <stored-value>uk</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Urdu</displayed-value>
+            <stored-value>ur</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Uzbek</displayed-value>
+            <stored-value>uz</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Venda</displayed-value>
+            <stored-value>ve</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Vietnamese</displayed-value>
+            <stored-value>vi</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Volapük</displayed-value>
+            <stored-value>vo</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Walloon</displayed-value>
+            <stored-value>wa</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Wolof</displayed-value>
+            <stored-value>wo</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Xhosa</displayed-value>
+            <stored-value>xh</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Yiddish</displayed-value>
+            <stored-value>yi</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Yoruba</displayed-value>
+            <stored-value>yo</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Zhuang</displayed-value>
+            <stored-value>za</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Chinese</displayed-value>
+            <stored-value>zh</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Zulu</displayed-value>
+            <stored-value>zu</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>(Other)</displayed-value>
+            <stored-value>other</stored-value>
+        </pair>
+    </value-pairs>
+    <value-pairs value-pairs-name="cgiar-initiatives">
+      <pair>
+        <displayed-value>Accelerated Breeding</displayed-value>
+        <stored-value>Accelerated Breeding</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>AgriLAC Resiliente</displayed-value>
+        <stored-value>AgriLAC Resiliente</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Agroecology</displayed-value>
+        <stored-value>Agroecology</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Aquatic Foods</displayed-value>
+        <stored-value>Aquatic Foods</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Asian Mega-Deltas</displayed-value>
+        <stored-value>Asian Mega-Deltas</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Breeding Resources</displayed-value>
+        <stored-value>Breeding Resources</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Climate Resilience</displayed-value>
+        <stored-value>Climate Resilience</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Digital Innovation</displayed-value>
+        <stored-value>Digital Innovation</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Diversification in East and Southern Africa</displayed-value>
+        <stored-value>Diversification in East and Southern Africa</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Excellence in Agronomy</displayed-value>
+        <stored-value>Excellence in Agronomy</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Foresight</displayed-value>
+        <stored-value>Foresight</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Fragility, Conflict, and Migration</displayed-value>
+        <stored-value>Fragility, Conflict, and Migration</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Fragility to Resilience in Central and West Asia and North Africa</displayed-value>
+        <stored-value>Fragility to Resilience in Central and West Asia and North Africa</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Fruits and Vegetables</displayed-value>
+        <stored-value>Fruits and Vegetables</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Gender Equality</displayed-value>
+        <stored-value>Gender Equality</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Genebanks</displayed-value>
+        <stored-value>Genebanks</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Livestock and Climate</displayed-value>
+        <stored-value>Livestock and Climate</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Low-Emission Food Systems</displayed-value>
+        <stored-value>Low-Emission Food Systems</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Market Intelligence</displayed-value>
+        <stored-value>Market Intelligence</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Mixed Farming Systems</displayed-value>
+        <stored-value>Mixed Farming Systems</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>NEXUS Gains</displayed-value>
+        <stored-value>NEXUS Gains</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>National Policies and Strategies</displayed-value>
+        <stored-value>National Policies and Strategies</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Nature-Positive Solutions</displayed-value>
+        <stored-value>Nature-Positive Solutions</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>One Health</displayed-value>
+        <stored-value>One Health</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Plant Health</displayed-value>
+        <stored-value>Plant Health</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Resilient Cities</displayed-value>
+        <stored-value>Resilient Cities</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Rethinking Food Markets</displayed-value>
+        <stored-value>Rethinking Food Markets</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Seed Equal</displayed-value>
+        <stored-value>Seed Equal</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Sustainable Animal Productivity</displayed-value>
+        <stored-value>Sustainable Animal Productivity</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Sustainable Healthy Diets</displayed-value>
+        <stored-value>Sustainable Healthy Diets</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Transforming Agrifood Systems in South Asia</displayed-value>
+        <stored-value>Transforming Agrifood Systems in South Asia</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>West and Central African Food Systems Transformation</displayed-value>
+        <stored-value>West and Central African Food Systems Transformation</stored-value>
+      </pair>
+    </value-pairs>
+    <value-pairs value-pairs-name="crpsubject" dc-term="crsubject_crpsubject">
+      <pair>
+        <displayed-value>Agriculture for Nutrition and Health</displayed-value>
+        <stored-value>Agriculture for Nutrition and Health</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Big Data</displayed-value>
+        <stored-value>Big Data</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Climate Change, Agriculture and Food Security</displayed-value>
+        <stored-value>Climate Change, Agriculture and Food Security</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Excellence in Breeding</displayed-value>
+        <stored-value>Excellence in Breeding</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Fish</displayed-value>
+        <stored-value>Fish</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Forests, Trees and Agroforestry</displayed-value>
+        <stored-value>Forests, Trees and Agroforestry</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Gender</displayed-value>
+        <stored-value>Gender</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Genebanks</displayed-value>
+        <stored-value>Genebanks</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Grain Legumes and Dryland Cereals</displayed-value>
+        <stored-value>Grain Legumes and Dryland Cereals</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Livestock</displayed-value>
+        <stored-value>Livestock</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Maize</displayed-value>
+        <stored-value>Maize</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Policies, Institutions, and Markets</displayed-value>
+        <stored-value>Policies, Institutions, and Markets</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Rice</displayed-value>
+        <stored-value>Rice</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Roots, Tubers and Bananas</displayed-value>
+        <stored-value>Roots, Tubers and Bananas</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Water, Land and Ecosystems</displayed-value>
+        <stored-value>Water, Land and Ecosystems</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Wheat</displayed-value>
+        <stored-value>Wheat</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Aquatic Agricultural Systems</displayed-value>
+        <stored-value>Aquatic Agricultural Systems</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Dryland Cereals</displayed-value>
+        <stored-value>Dryland Cereals</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Dryland Systems</displayed-value>
+        <stored-value>Dryland Systems</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Grain Legumes</displayed-value>
+        <stored-value>Grain Legumes</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Integrated Systems for the Humid Tropics</displayed-value>
+        <stored-value>Integrated Systems for the Humid Tropics</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Livestock and Fish</displayed-value>
+        <stored-value>Livestock and Fish</stored-value>
+      </pair>
+    </value-pairs>
+    <value-pairs value-pairs-name="sdgs">
+      <pair>
+        <displayed-value>SDG 1 - No poverty</displayed-value>
+        <stored-value>SDG 1 - No poverty</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SDG 2 - Zero hunger</displayed-value>
+        <stored-value>SDG 2 - Zero hunger</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SDG 3 - Good health and well-being</displayed-value>
+        <stored-value>SDG 3 - Good health and well-being</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SDG 4 - Quality education</displayed-value>
+        <stored-value>SDG 4 - Quality education</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SDG 5 - Gender equality</displayed-value>
+        <stored-value>SDG 5 - Gender equality</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SDG 6 - Clean water and sanitation</displayed-value>
+        <stored-value>SDG 6 - Clean water and sanitation</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SDG 7 - Affordable and clean energy</displayed-value>
+        <stored-value>SDG 7 - Affordable and clean energy</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SDG 8 - Decent work and economic growth</displayed-value>
+        <stored-value>SDG 8 - Decent work and economic growth</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SDG 9 - Industry, innovation and infrastructure</displayed-value>
+        <stored-value>SDG 9 - Industry, innovation and infrastructure</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SDG 10 - Reduced inequalities</displayed-value>
+        <stored-value>SDG 10 - Reduced inequalities</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SDG 11 - Sustainable cities and communities</displayed-value>
+        <stored-value>SDG 11 - Sustainable cities and communities</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SDG 12 - Responsible consumption and production</displayed-value>
+        <stored-value>SDG 12 - Responsible consumption and production</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SDG 13 - Climate action</displayed-value>
+        <stored-value>SDG 13 - Climate action</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SDG 14 - Life below water</displayed-value>
+        <stored-value>SDG 14 - Life below water</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SDG 15 - Life on land</displayed-value>
+        <stored-value>SDG 15 - Life on land</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SDG 16 - Peace, justice and strong institutions</displayed-value>
+        <stored-value>SDG 16 - Peace, justice and strong institutions</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SDG 17 - Partnerships for the goals</displayed-value>
+        <stored-value>SDG 17 - Partnerships for the goals</stored-value>
+      </pair>
+    </value-pairs>
+    <value-pairs value-pairs-name="impactAreas">
+      <pair>
+        <displayed-value>Climate adaptation and mitigation</displayed-value>
+        <stored-value>Climate adaptation and mitigation</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Environmental health and biodiversity</displayed-value>
+        <stored-value>Environmental health and biodiversity</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Gender equality, youth and social inclusion</displayed-value>
+        <stored-value>Gender equality, youth and social inclusion</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Nutrition, health and food security</displayed-value>
+        <stored-value>Nutrition, health and food security</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Poverty reduction, livelihoods and jobs</displayed-value>
+        <stored-value>Poverty reduction, livelihoods and jobs</stored-value>
+      </pair>
+    </value-pairs>
+    <value-pairs value-pairs-name="actionAreas">
+      <pair>
+        <displayed-value>Genetic Innovation</displayed-value>
+        <stored-value>Genetic Innovation</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Resilient Agrifood Systems</displayed-value>
+        <stored-value>Resilient Agrifood Systems</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Systems Transformation</displayed-value>
+        <stored-value>Systems Transformation</stored-value>
+      </pair>
+    </value-pairs>
+    <value-pairs value-pairs-name="region_types" dc-term="place_region">
+      <pair>
+        <displayed-value>ACP</displayed-value>
+        <stored-value>ACP</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Africa</displayed-value>
+        <stored-value>Africa</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Americas</displayed-value>
+        <stored-value>Americas</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Asia</displayed-value>
+        <stored-value>Asia</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Australia and New Zealand</displayed-value>
+        <stored-value>Australia and New Zealand</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Caribbean</displayed-value>
+        <stored-value>Caribbean</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Central America</displayed-value>
+        <stored-value>Central America</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Central Asia</displayed-value>
+        <stored-value>Central Asia</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Channel Islands</displayed-value>
+        <stored-value>Channel Islands</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Eastern Africa</displayed-value>
+        <stored-value>Eastern Africa</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Eastern Asia</displayed-value>
+        <stored-value>Eastern Asia</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Eastern Europe</displayed-value>
+        <stored-value>Eastern Europe</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Europe</displayed-value>
+        <stored-value>Europe</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Latin America</displayed-value>
+        <stored-value>Latin America</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Latin America and the Caribbean</displayed-value>
+        <stored-value>Latin America and the Caribbean</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Melanesia</displayed-value>
+        <stored-value>Melanesia</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Micronesia</displayed-value>
+        <stored-value>Micronesia</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Middle Africa</displayed-value>
+        <stored-value>Middle Africa</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Middle East</displayed-value>
+        <stored-value>Middle East</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Northern Africa</displayed-value>
+        <stored-value>Northern Africa</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Northern America</displayed-value>
+        <stored-value>Northern America</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Northern Europe</displayed-value>
+        <stored-value>Northern Europe</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Oceania</displayed-value>
+        <stored-value>Oceania</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Polynesia</displayed-value>
+        <stored-value>Polynesia</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Sahel</displayed-value>
+        <stored-value>Sahel</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>South America</displayed-value>
+        <stored-value>South America</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>South-eastern Asia</displayed-value>
+        <stored-value>South-eastern Asia</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Southern Africa</displayed-value>
+        <stored-value>Southern Africa</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Southern Asia</displayed-value>
+        <stored-value>Southern Asia</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Southern Europe</displayed-value>
+        <stored-value>Southern Europe</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Sub-Saharan Africa</displayed-value>
+        <stored-value>Sub-Saharan Africa</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>West and Central Africa</displayed-value>
+        <stored-value>West and Central Africa</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Western Africa</displayed-value>
+        <stored-value>Western Africa</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Western Asia</displayed-value>
+        <stored-value>Western Asia</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Western Europe</displayed-value>
+        <stored-value>Western Europe</stored-value>
+      </pair>
+    </value-pairs>
+    <value-pairs value-pairs-name="subregion_types" dc-term="subregion_types">
+      <pair>
+        <displayed-value>Alberta</displayed-value>
+        <stored-value>Alberta</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>An Giang</displayed-value>
+        <stored-value>An Giang</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Andhra Pradesh</displayed-value>
+        <stored-value>Andhra Pradesh</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Ashanti</displayed-value>
+        <stored-value>Ashanti</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Assam</displayed-value>
+        <stored-value>Assam</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Badulla</displayed-value>
+        <stored-value>Badulla</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Bali</displayed-value>
+        <stored-value>Bali</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Balochistan</displayed-value>
+        <stored-value>Balochistan</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Bamako</displayed-value>
+        <stored-value>Bamako</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Bihar</displayed-value>
+        <stored-value>Bihar</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>British Columbia</displayed-value>
+        <stored-value>British Columbia</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Cajamarca</displayed-value>
+        <stored-value>Cajamarca</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>California</displayed-value>
+        <stored-value>California</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Cauca</displayed-value>
+        <stored-value>Cauca</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Chhattisgarh</displayed-value>
+        <stored-value>Chhattisgarh</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Dakar</displayed-value>
+        <stored-value>Dakar</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Delaware</displayed-value>
+        <stored-value>Delaware</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Florida</displayed-value>
+        <stored-value>Florida</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Gampaha</displayed-value>
+        <stored-value>Gampaha</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Gandaki</displayed-value>
+        <stored-value>Gandaki</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Guanajuato</displayed-value>
+        <stored-value>Guanajuato</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Gujarat</displayed-value>
+        <stored-value>Gujarat</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Haryana</displayed-value>
+        <stored-value>Haryana</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Helmand</displayed-value>
+        <stored-value>Helmand</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Himachal Pradesh</displayed-value>
+        <stored-value>Himachal Pradesh</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Houaphan</displayed-value>
+        <stored-value>Houaphan</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Iowa</displayed-value>
+        <stored-value>Iowa</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Iringa</displayed-value>
+        <stored-value>Iringa</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Jambi</displayed-value>
+        <stored-value>Jambi</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Jharkhand</displayed-value>
+        <stored-value>Jharkhand</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Kaabong</displayed-value>
+        <stored-value>Kaabong</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>kalimantan</displayed-value>
+        <stored-value>kalimantan</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Kampala</displayed-value>
+        <stored-value>Kampala</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Kandal</displayed-value>
+        <stored-value>Kandal</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Karnali</displayed-value>
+        <stored-value>Karnali</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Karnataka</displayed-value>
+        <stored-value>Karnataka</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Kasungu</displayed-value>
+        <stored-value>Kasungu</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Kerala</displayed-value>
+        <stored-value>Kerala</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Khon Kaen</displayed-value>
+        <stored-value>Khon Kaen</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Kunduz</displayed-value>
+        <stored-value>Kunduz</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Kwazulu-Natal</displayed-value>
+        <stored-value>Kwazulu-Natal</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Lima</displayed-value>
+        <stored-value>Lima</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Limpopo</displayed-value>
+        <stored-value>Limpopo</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Madhya Pradesh</displayed-value>
+        <stored-value>Madhya Pradesh</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Maharashtra</displayed-value>
+        <stored-value>Maharashtra</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Maputo</displayed-value>
+        <stored-value>Maputo</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Masvingo</displayed-value>
+        <stored-value>Masvingo</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Meghalaya</displayed-value>
+        <stored-value>Meghalaya</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Mendoza</displayed-value>
+        <stored-value>Mendoza</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Missouri</displayed-value>
+        <stored-value>Missouri</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Nabeul</displayed-value>
+        <stored-value>Nabeul</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Nagaland</displayed-value>
+        <stored-value>Nagaland</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Nebraska</displayed-value>
+        <stored-value>Nebraska</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>New South Wales</displayed-value>
+        <stored-value>New South Wales</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>New York</displayed-value>
+        <stored-value>New York</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Odisha</displayed-value>
+        <stored-value>Odisha</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Osh</displayed-value>
+        <stored-value>Osh</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Pando</displayed-value>
+        <stored-value>Pando</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Punjab</displayed-value>
+        <stored-value>Punjab</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Queensland</displayed-value>
+        <stored-value>Queensland</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Rajasthan</displayed-value>
+        <stored-value>Rajasthan</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Rajshahi</displayed-value>
+        <stored-value>Rajshahi</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Riau</displayed-value>
+        <stored-value>Riau</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Sabah</displayed-value>
+        <stored-value>Sabah</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Sahel</displayed-value>
+        <stored-value>Sahel</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Salyan</displayed-value>
+        <stored-value>Salyan</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Sindh</displayed-value>
+        <stored-value>Sindh</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>South Australia</displayed-value>
+        <stored-value>South Australia</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Sulawesi</displayed-value>
+        <stored-value>Sulawesi</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Tamil Nadu</displayed-value>
+        <stored-value>Tamil Nadu</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Telangana</displayed-value>
+        <stored-value>Telangana</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Texas</displayed-value>
+        <stored-value>Texas</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Tigray</displayed-value>
+        <stored-value>Tigray</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Turkana</displayed-value>
+        <stored-value>Turkana</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Uttar Pradesh</displayed-value>
+        <stored-value>Uttar Pradesh</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Uttarakhand</displayed-value>
+        <stored-value>Uttarakhand</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Victoria</displayed-value>
+        <stored-value>Victoria</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Washington</displayed-value>
+        <stored-value>Washington</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>West Bengal</displayed-value>
+        <stored-value>West Bengal</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Western Cape</displayed-value>
+        <stored-value>Western Cape</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Yogyakarta</displayed-value>
+        <stored-value>Yogyakarta</stored-value>
+      </pair>
+    </value-pairs>
+    <value-pairs value-pairs-name="countrylist" dc-term="cplace_country">
+      <pair>
+        <displayed-value>Afghanistan</displayed-value>
+        <stored-value>Afghanistan</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Albania</displayed-value>
+        <stored-value>Albania</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Algeria</displayed-value>
+        <stored-value>Algeria</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>American Samoa</displayed-value>
+        <stored-value>American Samoa</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Andorra</displayed-value>
+        <stored-value>Andorra</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Angola</displayed-value>
+        <stored-value>Angola</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Anguilla</displayed-value>
+        <stored-value>Anguilla</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Antarctica</displayed-value>
+        <stored-value>Antarctica</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Antigua and Barbuda</displayed-value>
+        <stored-value>Antigua and Barbuda</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Argentina</displayed-value>
+        <stored-value>Argentina</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Armenia</displayed-value>
+        <stored-value>Armenia</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Aruba</displayed-value>
+        <stored-value>Aruba</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Australia</displayed-value>
+        <stored-value>Australia</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Austria</displayed-value>
+        <stored-value>Austria</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Azerbaijan</displayed-value>
+        <stored-value>Azerbaijan</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Bahamas</displayed-value>
+        <stored-value>Bahamas</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Bahrain</displayed-value>
+        <stored-value>Bahrain</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Bangladesh</displayed-value>
+        <stored-value>Bangladesh</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Barbados</displayed-value>
+        <stored-value>Barbados</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Belarus</displayed-value>
+        <stored-value>Belarus</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Belgium</displayed-value>
+        <stored-value>Belgium</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Belize</displayed-value>
+        <stored-value>Belize</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Benin</displayed-value>
+        <stored-value>Benin</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Bermuda</displayed-value>
+        <stored-value>Bermuda</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Bhutan</displayed-value>
+        <stored-value>Bhutan</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Bolivia</displayed-value>
+        <stored-value>Bolivia</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Bosnia and Herzegovina</displayed-value>
+        <stored-value>Bosnia and Herzegovina</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Botswana</displayed-value>
+        <stored-value>Botswana</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Bouvet Island</displayed-value>
+        <stored-value>Bouvet Island</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Brazil</displayed-value>
+        <stored-value>Brazil</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Brunei Darussalam</displayed-value>
+        <stored-value>Brunei Darussalam</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Bulgaria</displayed-value>
+        <stored-value>Bulgaria</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Burkina Faso</displayed-value>
+        <stored-value>Burkina Faso</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Burundi</displayed-value>
+        <stored-value>Burundi</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Cambodia</displayed-value>
+        <stored-value>Cambodia</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Cameroon</displayed-value>
+        <stored-value>Cameroon</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Canada</displayed-value>
+        <stored-value>Canada</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Cabo Verde</displayed-value>
+        <stored-value>Cabo Verde</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Central African Republic</displayed-value>
+        <stored-value>Central African Republic</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Chad</displayed-value>
+        <stored-value>Chad</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Chile</displayed-value>
+        <stored-value>Chile</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>China</displayed-value>
+        <stored-value>China</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Cocos (Keeling) Islands</displayed-value>
+        <stored-value>Cocos (Keeling) Islands</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Colombia</displayed-value>
+        <stored-value>Colombia</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Comoros</displayed-value>
+        <stored-value>Comoros</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Congo</displayed-value>
+        <stored-value>Congo</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Congo, Democratic Republic of</displayed-value>
+        <stored-value>Congo, Democratic Republic of</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Cook Islands</displayed-value>
+        <stored-value>Cook Islands</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Costa Rica</displayed-value>
+        <stored-value>Costa Rica</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Côte d'Ivoire</displayed-value>
+        <stored-value>Côte d'Ivoire</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Croatia</displayed-value>
+        <stored-value>Croatia</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Cuba</displayed-value>
+        <stored-value>Cuba</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Cyprus</displayed-value>
+        <stored-value>Cyprus</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Czech Republic</displayed-value>
+        <stored-value>Czech Republic</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Denmark</displayed-value>
+        <stored-value>Denmark</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Djibouti</displayed-value>
+        <stored-value>Djibouti</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Dominica</displayed-value>
+        <stored-value>Dominica</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Dominican Republic</displayed-value>
+        <stored-value>Dominican Republic</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Ecuador</displayed-value>
+        <stored-value>Ecuador</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Egypt</displayed-value>
+        <stored-value>Egypt</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>El Salvador</displayed-value>
+        <stored-value>El Salvador</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Equatorial Guinea</displayed-value>
+        <stored-value>Equatorial Guinea</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Eritrea</displayed-value>
+        <stored-value>Eritrea</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Estonia</displayed-value>
+        <stored-value>Estonia</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Ethiopia</displayed-value>
+        <stored-value>Ethiopia</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Fiji</displayed-value>
+        <stored-value>Fiji</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Finland</displayed-value>
+        <stored-value>Finland</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>France</displayed-value>
+        <stored-value>France</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Gabon</displayed-value>
+        <stored-value>Gabon</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Gambia</displayed-value>
+        <stored-value>Gambia</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Georgia</displayed-value>
+        <stored-value>Georgia</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Germany</displayed-value>
+        <stored-value>Germany</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Ghana</displayed-value>
+        <stored-value>Ghana</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Greece</displayed-value>
+        <stored-value>Greece</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Grenada</displayed-value>
+        <stored-value>Grenada</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Guadeloupe</displayed-value>
+        <stored-value>Guadeloupe</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Guatemala</displayed-value>
+        <stored-value>Guatemala</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Guinea</displayed-value>
+        <stored-value>Guinea</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Guinea-Bissau</displayed-value>
+        <stored-value>Guinea-Bissau</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Guyana</displayed-value>
+        <stored-value>Guyana</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Haiti</displayed-value>
+        <stored-value>Haiti</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Honduras</displayed-value>
+        <stored-value>Honduras</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Hungary</displayed-value>
+        <stored-value>Hungary</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Iceland</displayed-value>
+        <stored-value>Iceland</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>India</displayed-value>
+        <stored-value>India</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Indonesia</displayed-value>
+        <stored-value>Indonesia</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Iran</displayed-value>
+        <stored-value>Iran</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Iraq</displayed-value>
+        <stored-value>Iraq</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Ireland</displayed-value>
+        <stored-value>Ireland</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Israel</displayed-value>
+        <stored-value>Israel</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Italy</displayed-value>
+        <stored-value>Italy</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Jamaica</displayed-value>
+        <stored-value>Jamaica</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Japan</displayed-value>
+        <stored-value>Japan</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Jordan</displayed-value>
+        <stored-value>Jordan</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Kazakhstan</displayed-value>
+        <stored-value>Kazakhstan</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Kenya</displayed-value>
+        <stored-value>Kenya</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Kiribati</displayed-value>
+        <stored-value>Kiribati</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Korea, DPR</displayed-value>
+        <stored-value>Korea, DPR</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Korea, Republic of</displayed-value>
+        <stored-value>Korea, Republic of</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Kuwait</displayed-value>
+        <stored-value>Kuwait</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Kyrgyzstan</displayed-value>
+        <stored-value>Kyrgyzstan</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Laos</displayed-value>
+        <stored-value>Laos</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Latvia</displayed-value>
+        <stored-value>Latvia</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Lebanon</displayed-value>
+        <stored-value>Lebanon</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Lesotho</displayed-value>
+        <stored-value>Lesotho</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Liberia</displayed-value>
+        <stored-value>Liberia</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Libya</displayed-value>
+        <stored-value>Libya</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Lithuania</displayed-value>
+        <stored-value>Lithuania</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Luxembourg</displayed-value>
+        <stored-value>Luxembourg</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>North Macedonia</displayed-value>
+        <stored-value>North Macedonia</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Madagascar</displayed-value>
+        <stored-value>Madagascar</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Malawi</displayed-value>
+        <stored-value>Malawi</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Malaysia</displayed-value>
+        <stored-value>Malaysia</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Maldives</displayed-value>
+        <stored-value>Maldives</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Mali</displayed-value>
+        <stored-value>Mali</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Malta</displayed-value>
+        <stored-value>Malta</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Mauritania</displayed-value>
+        <stored-value>Mauritania</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Mauritius</displayed-value>
+        <stored-value>Mauritius</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Marshall Islands</displayed-value>
+        <stored-value>Marshall Islands</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Mexico</displayed-value>
+        <stored-value>Mexico</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Moldova</displayed-value>
+        <stored-value>Moldova</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Mongolia</displayed-value>
+        <stored-value>Mongolia</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Micronesia (Federated States of)</displayed-value>
+        <stored-value>Micronesia (Federated States of)</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Montenegro</displayed-value>
+        <stored-value>Montenegro</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Montserrat</displayed-value>
+        <stored-value>Montserrat</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Morocco</displayed-value>
+        <stored-value>Morocco</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Mozambique</displayed-value>
+        <stored-value>Mozambique</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Myanmar</displayed-value>
+        <stored-value>Myanmar</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Namibia</displayed-value>
+        <stored-value>Namibia</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Nepal</displayed-value>
+        <stored-value>Nepal</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Netherlands</displayed-value>
+        <stored-value>Netherlands</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>New Zealand</displayed-value>
+        <stored-value>New Zealand</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Nicaragua</displayed-value>
+        <stored-value>Nicaragua</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Niger</displayed-value>
+        <stored-value>Niger</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Nigeria</displayed-value>
+        <stored-value>Nigeria</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Norway</displayed-value>
+        <stored-value>Norway</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Oman</displayed-value>
+        <stored-value>Oman</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Pakistan</displayed-value>
+        <stored-value>Pakistan</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Palestine, State of</displayed-value>
+        <stored-value>Palestine, State of</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Panama</displayed-value>
+        <stored-value>Panama</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Papua New Guinea</displayed-value>
+        <stored-value>Papua New Guinea</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Paraguay</displayed-value>
+        <stored-value>Paraguay</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Peru</displayed-value>
+        <stored-value>Peru</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Philippines</displayed-value>
+        <stored-value>Philippines</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Poland</displayed-value>
+        <stored-value>Poland</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Portugal</displayed-value>
+        <stored-value>Portugal</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Qatar</displayed-value>
+        <stored-value>Qatar</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Romania</displayed-value>
+        <stored-value>Romania</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Russia</displayed-value>
+        <stored-value>Russia</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Rwanda</displayed-value>
+        <stored-value>Rwanda</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Saint Kitts and Nevis</displayed-value>
+        <stored-value>Saint Kitts and Nevis</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Saint Lucia</displayed-value>
+        <stored-value>Saint Lucia</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Samoa</displayed-value>
+        <stored-value>Samoa</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Sao Tome and Principe</displayed-value>
+        <stored-value>Sao Tome and Principe</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Saudi Arabia</displayed-value>
+        <stored-value>Saudi Arabia</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Senegal</displayed-value>
+        <stored-value>Senegal</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Serbia</displayed-value>
+        <stored-value>Serbia</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Seychelles</displayed-value>
+        <stored-value>Seychelles</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Sierra Leone</displayed-value>
+        <stored-value>Sierra Leone</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Singapore</displayed-value>
+        <stored-value>Singapore</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Slovakia</displayed-value>
+        <stored-value>Slovakia</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Slovenia</displayed-value>
+        <stored-value>Slovenia</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Solomon Islands</displayed-value>
+        <stored-value>Solomon Islands</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Somalia</displayed-value>
+        <stored-value>Somalia</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>South Africa</displayed-value>
+        <stored-value>South Africa</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>South Sudan</displayed-value>
+        <stored-value>South Sudan</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Spain</displayed-value>
+        <stored-value>Spain</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Sri Lanka</displayed-value>
+        <stored-value>Sri Lanka</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Sudan</displayed-value>
+        <stored-value>Sudan</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Suriname</displayed-value>
+        <stored-value>Suriname</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Eswatini</displayed-value>
+        <stored-value>Eswatini</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Sweden</displayed-value>
+        <stored-value>Sweden</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Switzerland</displayed-value>
+        <stored-value>Switzerland</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Syria</displayed-value>
+        <stored-value>Syria</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Taiwan</displayed-value>
+        <stored-value>Taiwan</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Tajikistan</displayed-value>
+        <stored-value>Tajikistan</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Tanzania</displayed-value>
+        <stored-value>Tanzania</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Thailand</displayed-value>
+        <stored-value>Thailand</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Timor-Leste</displayed-value>
+        <stored-value>Timor-Leste</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Togo</displayed-value>
+        <stored-value>Togo</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Tokelau</displayed-value>
+        <stored-value>Tokelau</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Tonga</displayed-value>
+        <stored-value>Tonga</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Trinidad and Tobago</displayed-value>
+        <stored-value>Trinidad and Tobago</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Tunisia</displayed-value>
+        <stored-value>Tunisia</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Türkiye</displayed-value>
+        <stored-value>Türkiye</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Turkmenistan</displayed-value>
+        <stored-value>Turkmenistan</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Uganda</displayed-value>
+        <stored-value>Uganda</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Ukraine</displayed-value>
+        <stored-value>Ukraine</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>United Arab Emirates</displayed-value>
+        <stored-value>United Arab Emirates</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>United Kingdom</displayed-value>
+        <stored-value>United Kingdom</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>United States</displayed-value>
+        <stored-value>United States</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Uruguay</displayed-value>
+        <stored-value>Uruguay</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Uzbekistan</displayed-value>
+        <stored-value>Uzbekistan</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Vanuatu</displayed-value>
+        <stored-value>Vanuatu</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Vatican City State</displayed-value>
+        <stored-value>Vatican City State</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Venezuela</displayed-value>
+        <stored-value>Venezuela</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Vietnam</displayed-value>
+        <stored-value>Vietnam</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Yemen</displayed-value>
+        <stored-value>Yemen</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Zambia</displayed-value>
+        <stored-value>Zambia</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Zimbabwe</displayed-value>
+        <stored-value>Zimbabwe</stored-value>
+      </pair>
+    </value-pairs>
+    <value-pairs value-pairs-name="riverbasin" dc-term="river_basin">
+      <pair>
+        <displayed-value>AMAZON</displayed-value>
+        <stored-value>AMAZON</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>ANDES</displayed-value>
+        <stored-value>ANDES</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>GANGES</displayed-value>
+        <stored-value>GANGES</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>INDUS</displayed-value>
+        <stored-value>INDUS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>KAREKH</displayed-value>
+        <stored-value>KAREKH</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>LIMPOPO</displayed-value>
+        <stored-value>LIMPOPO</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>MEKONG</displayed-value>
+        <stored-value>MEKONG</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>NIGER</displayed-value>
+        <stored-value>NIGER</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>NILE</displayed-value>
+        <stored-value>NILE</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SAO FRANCISCO</displayed-value>
+        <stored-value>SAO FRANCISCO</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>VOLTA</displayed-value>
+        <stored-value>VOLTA</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>YELLOW</displayed-value>
+        <stored-value>YELLOW</stored-value>
+      </pair>
+    </value-pairs>
+    <value-pairs value-pairs-name="Review_status" dc-term="description_version">
+      <pair>
+        <displayed-value>N/A</displayed-value>
+        <stored-value></stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Internal Review</displayed-value>
+        <stored-value>Internal Review</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Peer Review</displayed-value>
+        <stored-value>Peer Review</stored-value>
+      </pair>
+    </value-pairs>
+    <value-pairs value-pairs-name="Authorship_types" dc-term="authorship_types">
+      <pair>
+        <displayed-value>N/A</displayed-value>
+        <stored-value></stored-value>
+      </pair>
+      <pair>
+        <displayed-value>CGIAR single centre</displayed-value>
+        <stored-value>CGIAR single centre</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>CGIAR multi-centre</displayed-value>
+        <stored-value>CGIAR multi-centre</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>CGIAR and developing country institute</displayed-value>
+        <stored-value>CGIAR and developing country institute</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>CGIAR and advanced research institute</displayed-value>
+        <stored-value>CGIAR and advanced research institute</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Consultant</displayed-value>
+        <stored-value>Consultant</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Not CGIAR developing country institute</displayed-value>
+        <stored-value>Not CGIAR developing country institute</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Not CGIAR international institute</displayed-value>
+        <stored-value>Not CGIAR international institute</stored-value>
+      </pair>
+    </value-pairs>
+    <value-pairs value-pairs-name="cipsubject" dc-term="subject_cip">
+      <pair>
+        <displayed-value>ANDEAN ROOTS AND TUBERS</displayed-value>
+        <stored-value>ANDEAN ROOTS AND TUBERS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>BIGDATA</displayed-value>
+        <stored-value>BIGDATA</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>BIODIVERSITY FOR THE FUTURE</displayed-value>
+        <stored-value>BIODIVERSITY FOR THE FUTURE</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>BIOFORTIFICATION</displayed-value>
+        <stored-value>BIOFORTIFICATION</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>BREEDING</displayed-value>
+        <stored-value>BREEDING</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>CLIMATE CHANGE</displayed-value>
+        <stored-value>CLIMATE CHANGE</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>CLIMATE-SMART AGRICULTURE</displayed-value>
+        <stored-value>CLIMATE-SMART AGRICULTURE</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>CROP PROTECTION</displayed-value>
+        <stored-value>CROP PROTECTION</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>CROP AND SYSTEMS SCIENCES CSS</displayed-value>
+        <stored-value>CROP AND SYSTEMS SCIENCES CSS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>CRYOPRESERVATION</displayed-value>
+        <stored-value>CRYOPRESERVATION</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>FOOD SECURITY</displayed-value>
+        <stored-value>FOOD SECURITY</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>FOOD SYSTEMS</displayed-value>
+        <stored-value>FOOD SYSTEMS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>GENDER</displayed-value>
+        <stored-value>GENDER</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>GENEBANK</displayed-value>
+        <stored-value>GENEBANK</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>GENETIC RESOURCES</displayed-value>
+        <stored-value>GENETIC RESOURCES</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>GENETICS, GENOMICS AND CROP IMPROVEMENT SCIENCES GGCI</displayed-value>
+        <stored-value>GENETICS, GENOMICS AND CROP IMPROVEMENT SCIENCES GGCI</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>IMPACT ASSESSMENT</displayed-value>
+        <stored-value>IMPACT ASSESSMENT</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>INCLUSIVE GROWTH</displayed-value>
+        <stored-value>INCLUSIVE GROWTH</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>NUTRITION</displayed-value>
+        <stored-value>NUTRITION</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>NUTRITIONAL SECURITY</displayed-value>
+        <stored-value>NUTRITIONAL SECURITY</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>POTATO AGRI-FOOD SYSTEMS</displayed-value>
+        <stored-value>POTATO AGRI-FOOD SYSTEMS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>POTATOES</displayed-value>
+        <stored-value>POTATOES</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SEED SYSTEMS</displayed-value>
+        <stored-value>SEED SYSTEMS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SOCIAL AND NUTRITIONAL SCIENCES SNS</displayed-value>
+        <stored-value>SOCIAL AND NUTRITIONAL SCIENCES SNS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SWEETPOTATOES</displayed-value>
+        <stored-value>SWEETPOTATOES</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SWEETPOTATO AGRI-FOOD SYSTEMS</displayed-value>
+        <stored-value>SWEETPOTATO AGRI-FOOD SYSTEMS</stored-value>
+      </pair>
+    </value-pairs>
+    <value-pairs value-pairs-name="ilrisubject" dc-term="ilrisubject">
+      <pair>
+        <displayed-value>ADVOCACY</displayed-value>
+        <stored-value>ADVOCACY</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>AGRICULTURE</displayed-value>
+        <stored-value>AGRICULTURE</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>AGRI-HEALTH</displayed-value>
+        <stored-value>AGRI-HEALTH</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>AGROFORESTRY</displayed-value>
+        <stored-value>AGROFORESTRY</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>AFLATOXINS</displayed-value>
+        <stored-value>AFLATOXINS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>AMR</displayed-value>
+        <stored-value>AMR</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>ANIMAL BREEDING</displayed-value>
+        <stored-value>ANIMAL BREEDING</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>ANIMAL CARE</displayed-value>
+        <stored-value>ANIMAL CARE</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>ANIMAL DISEASES</displayed-value>
+        <stored-value>ANIMAL DISEASES</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>ANIMAL FEEDING</displayed-value>
+        <stored-value>ANIMAL FEEDING</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>ANIMAL HEALTH</displayed-value>
+        <stored-value>ANIMAL HEALTH</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>ANIMAL PRODUCTION</displayed-value>
+        <stored-value>ANIMAL PRODUCTION</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>ANIMAL PRODUCTS</displayed-value>
+        <stored-value>ANIMAL PRODUCTS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>ANIMAL WELFARE</displayed-value>
+        <stored-value>ANIMAL WELFARE</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>APICULTURE</displayed-value>
+        <stored-value>APICULTURE</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>ASF</displayed-value>
+        <stored-value>ASF</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>BIODIVERSITY</displayed-value>
+        <stored-value>BIODIVERSITY</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>BIOTECHNOLOGY</displayed-value>
+        <stored-value>BIOTECHNOLOGY</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>BIRD FLU</displayed-value>
+        <stored-value>BIRD FLU</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>BREEDS</displayed-value>
+        <stored-value>BREEDS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>BRUCELLOSIS</displayed-value>
+        <stored-value>BRUCELLOSIS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>BUFFALO</displayed-value>
+        <stored-value>BUFFALO</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>BUSHMEAT</displayed-value>
+        <stored-value>BUSHMEAT</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>CAPACITY STRENGTHENING</displayed-value>
+        <stored-value>CAPACITY STRENGTHENING</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>CAMELS</displayed-value>
+        <stored-value>CAMELS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>CATTLE</displayed-value>
+        <stored-value>CATTLE</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>CBPP</displayed-value>
+        <stored-value>CBPP</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>CHICKENS</displayed-value>
+        <stored-value>CHICKENS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>CLIMATE CHANGE</displayed-value>
+        <stored-value>CLIMATE CHANGE</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>COMMUNICATIONS</displayed-value>
+        <stored-value>COMMUNICATIONS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>CONSUMPTION</displayed-value>
+        <stored-value>CONSUMPTION</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>COVID19</displayed-value>
+        <stored-value>COVID19</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>CROP RESIDUES</displayed-value>
+        <stored-value>CROP RESIDUES</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>CSF</displayed-value>
+        <stored-value>CSF</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>CROP-LIVESTOCK</displayed-value>
+        <stored-value>CROP-LIVESTOCK</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>CROPS</displayed-value>
+        <stored-value>CROPS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>DAIRYING</displayed-value>
+        <stored-value>DAIRYING</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>DATA</displayed-value>
+        <stored-value>DATA</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>DIAGNOSTICS</displayed-value>
+        <stored-value>DIAGNOSTICS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>DIET</displayed-value>
+        <stored-value>DIET</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>DISEASE CONTROL</displayed-value>
+        <stored-value>DISEASE CONTROL</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>DROUGHT</displayed-value>
+        <stored-value>DROUGHT</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>DRYLANDS</displayed-value>
+        <stored-value>DRYLANDS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>ECF</displayed-value>
+        <stored-value>ECF</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>EMERGING DISEASES</displayed-value>
+        <stored-value>EMERGING DISEASES</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>ENVIRONMENT</displayed-value>
+        <stored-value>ENVIRONMENT</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>EPIDEMIOLOGY</displayed-value>
+        <stored-value>EPIDEMIOLOGY</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>EXTENSION</displayed-value>
+        <stored-value>EXTENSION</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>FARM MANAGEMENT</displayed-value>
+        <stored-value>FARM MANAGEMENT</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>FARMING SYSTEMS</displayed-value>
+        <stored-value>FARMING SYSTEMS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>FEEDS</displayed-value>
+        <stored-value>FEEDS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>FISH</displayed-value>
+        <stored-value>FISH</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>FMD</displayed-value>
+        <stored-value>FMD</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>FODDER</displayed-value>
+        <stored-value>FODDER</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>FOOD SAFETY</displayed-value>
+        <stored-value>FOOD SAFETY</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>FOOD SECURITY</displayed-value>
+        <stored-value>FOOD SECURITY</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>FOOD SYSTEMS</displayed-value>
+        <stored-value>FOOD SYSTEMS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>FORAGES</displayed-value>
+        <stored-value>FORAGES</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>FORESTRY</displayed-value>
+        <stored-value>FORESTRY</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>GENETICS</displayed-value>
+        <stored-value>GENETICS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>GENETIC RESOURCES</displayed-value>
+        <stored-value>GENETIC RESOURCES</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>GENDER</displayed-value>
+        <stored-value>GENDER</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>GEODATA</displayed-value>
+        <stored-value>GEODATA</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>GHG EMISSIONS</displayed-value>
+        <stored-value>GHG EMISSIONS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>GOATS</displayed-value>
+        <stored-value>GOATS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>HUMAN HEALTH</displayed-value>
+        <stored-value>HUMAN HEALTH</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>HIV-AIDS</displayed-value>
+        <stored-value>HIV-AIDS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>HUMID TROPICS</displayed-value>
+        <stored-value>HUMID TROPICS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>IMPACT ASSESSMENT</displayed-value>
+        <stored-value>IMPACT ASSESSMENT</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>INDIGENOUS BREEDS</displayed-value>
+        <stored-value>INDIGENOUS BREEDS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>INNOVATION SYSTEMS</displayed-value>
+        <stored-value>INNOVATION SYSTEMS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>INTENSIFICATION</displayed-value>
+        <stored-value>INTENSIFICATION</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>INSURANCE</displayed-value>
+        <stored-value>INSURANCE</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>IRRIGATION</displayed-value>
+        <stored-value>IRRIGATION</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>KNOWLEDGE AND INFORMATION</displayed-value>
+        <stored-value>KNOWLEDGE AND INFORMATION</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>LIVELIHOODS</displayed-value>
+        <stored-value>LIVELIHOODS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>LEGUMES</displayed-value>
+        <stored-value>LEGUMES</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>LIVESTOCK</displayed-value>
+        <stored-value>LIVESTOCK</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>LIVESTOCK SYSTEMS</displayed-value>
+        <stored-value>LIVESTOCK SYSTEMS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>LIVESTOCK-WATER</displayed-value>
+        <stored-value>LIVESTOCK-WATER</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>MARKETS</displayed-value>
+        <stored-value>MARKETS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>MEAT</displayed-value>
+        <stored-value>MEAT</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>MERS</displayed-value>
+        <stored-value>MERS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>NRM</displayed-value>
+        <stored-value>NRM</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>NUTRITION</displayed-value>
+        <stored-value>NUTRITION</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>ONE HEALTH</displayed-value>
+        <stored-value>ONE HEALTH</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PARTICIPATION</displayed-value>
+        <stored-value>PARTICIPATION</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PASTORALISM</displayed-value>
+        <stored-value>PASTORALISM</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PESTS</displayed-value>
+        <stored-value>PESTS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PIGS</displayed-value>
+        <stored-value>PIGS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>POULTRY</displayed-value>
+        <stored-value>POULTRY</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>POLICY</displayed-value>
+        <stored-value>POLICY</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PPR</displayed-value>
+        <stored-value>PPR</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PRO-POOR LIVESTOCK</displayed-value>
+        <stored-value>PRO-POOR LIVESTOCK</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>RANGELANDS</displayed-value>
+        <stored-value>RANGELANDS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>REPRODUCTION</displayed-value>
+        <stored-value>REPRODUCTION</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>RESEARCH</displayed-value>
+        <stored-value>RESEARCH</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>RESILIENCE</displayed-value>
+        <stored-value>RESILIENCE</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>RVF</displayed-value>
+        <stored-value>RVF</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SCALING</displayed-value>
+        <stored-value>SCALING</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SEEDS</displayed-value>
+        <stored-value>SEEDS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SHEEP</displayed-value>
+        <stored-value>SHEEP</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SMALL RUMINANTS</displayed-value>
+        <stored-value>SMALL RUMINANTS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SOCIAL LEARNING</displayed-value>
+        <stored-value>SOCIAL LEARNING</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SOILS</displayed-value>
+        <stored-value>SOILS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>TRADE</displayed-value>
+        <stored-value>TRADE</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>TRYPANOSOMIASIS</displayed-value>
+        <stored-value>TRYPANOSOMIASIS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>VACCINES</displayed-value>
+        <stored-value>VACCINES</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>VALUE CHAINS</displayed-value>
+        <stored-value>VALUE CHAINS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>VULNERABILITY</displayed-value>
+        <stored-value>VULNERABILITY</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>WATER</displayed-value>
+        <stored-value>WATER</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>WILD MEAT</displayed-value>
+        <stored-value>WILD MEAT</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>WILDLIFE</displayed-value>
+        <stored-value>WILDLIFE</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>WILDLIFE CONSERVATION</displayed-value>
+        <stored-value>WILDLIFE CONSERVATION</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>WOMEN</displayed-value>
+        <stored-value>WOMEN</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>ZOONOTIC DISEASES</displayed-value>
+        <stored-value>ZOONOTIC DISEASES</stored-value>
+      </pair>
+    </value-pairs>
+    <value-pairs value-pairs-name="alliancebiovciat">
+      <pair>
+        <displayed-value>AGRICULTURE</displayed-value>
+        <stored-value>AGRICULTURE</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>AGROFORESTRY</displayed-value>
+        <stored-value>AGROFORESTRY</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>BANANA</displayed-value>
+        <stored-value>BANANA</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>BEANS</displayed-value>
+        <stored-value>BEANS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>BIODIVERSITY</displayed-value>
+        <stored-value>BIODIVERSITY</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>BIOFORTIFICATION</displayed-value>
+        <stored-value>BIOFORTIFICATION</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>CACAO</displayed-value>
+        <stored-value>CACAO</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>CASSAVA</displayed-value>
+        <stored-value>CASSAVA</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>CAPACITY DEVELOPMENT</displayed-value>
+        <stored-value>CAPACITY DEVELOPMENT</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>CLIMATE CHANGE</displayed-value>
+        <stored-value>CLIMATE CHANGE</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>CLIMATE CHANGE ADAPTATION</displayed-value>
+        <stored-value>CLIMATE CHANGE ADAPTATION</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>CLIMATE CHANGE MITIGATION</displayed-value>
+        <stored-value>CLIMATE CHANGE MITIGATION</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>COCONUT</displayed-value>
+        <stored-value>COCONUT</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>CONSERVATION AND USE</displayed-value>
+        <stored-value>CONSERVATION AND USE</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>CROP PRODUCTION</displayed-value>
+        <stored-value>CROP PRODUCTION</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>CROP WILD RELATIVES</displayed-value>
+        <stored-value>CROP WILD RELATIVES</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>DOCUMENTATION</displayed-value>
+        <stored-value>DOCUMENTATION</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>ECOSYSTEM SERVICES</displayed-value>
+        <stored-value>ECOSYSTEM SERVICES</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>ECONOMICS</displayed-value>
+        <stored-value>ECONOMICS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>EXTENSION</displayed-value>
+        <stored-value>EXTENSION</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>FARMING SYSTEMS</displayed-value>
+        <stored-value>FARMING SYSTEMS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>FOOD SECURITY</displayed-value>
+        <stored-value>FOOD SECURITY</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>FOOD SYSTEMS</displayed-value>
+        <stored-value>FOOD SYSTEMS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>FORESTRY</displayed-value>
+        <stored-value>FORESTRY</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>GENDER AND EQUITY</displayed-value>
+        <stored-value>GENDER AND EQUITY</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>GENETIC RESOURCES</displayed-value>
+        <stored-value>GENETIC RESOURCES</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>GERMPLASM CONSERVATION</displayed-value>
+        <stored-value>GERMPLASM CONSERVATION</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>GOVERNANCE</displayed-value>
+        <stored-value>GOVERNANCE</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>HEALTH</displayed-value>
+        <stored-value>HEALTH</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>HOME GARDENS</displayed-value>
+        <stored-value>HOME GARDENS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>IMPACT ASSESSMENT</displayed-value>
+        <stored-value>IMPACT ASSESSMENT</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>INDIGENOUS KNOWLEDGE</displayed-value>
+        <stored-value>INDIGENOUS KNOWLEDGE</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>INFORMATICS</displayed-value>
+        <stored-value>INFORMATICS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>INFORMATION SYSTEMS</displayed-value>
+        <stored-value>INFORMATION SYSTEMS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>KNOWLEDGE MANAGEMENT</displayed-value>
+        <stored-value>KNOWLEDGE MANAGEMENT</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>LAND USE</displayed-value>
+        <stored-value>LAND USE</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>LIVELIHOODS</displayed-value>
+        <stored-value>LIVELIHOODS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>LIVESTOCK</displayed-value>
+        <stored-value>LIVESTOCK</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>MARKETS</displayed-value>
+        <stored-value>MARKETS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>MODELING</displayed-value>
+        <stored-value>MODELING</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>MONITORING AND REPORTING</displayed-value>
+        <stored-value>MONITORING AND REPORTING</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>NATURAL RESOURCE MANAGEMENT</displayed-value>
+        <stored-value>NATURAL RESOURCE MANAGEMENT</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>NEGLECTED AND UNDERUTILIZED SPECIES</displayed-value>
+        <stored-value>NEGLECTED AND UNDERUTILIZED SPECIES</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>NUTRITION</displayed-value>
+        <stored-value>NUTRITION</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PARTICIPATORY RESEARCH</displayed-value>
+        <stored-value>PARTICIPATORY RESEARCH</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PESTS AND DISEASES</displayed-value>
+        <stored-value>PESTS AND DISEASES</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PLANT BREEDING</displayed-value>
+        <stored-value>PLANT BREEDING</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PLANT GENETIC RESOURCES</displayed-value>
+        <stored-value>PLANT GENETIC RESOURCES</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>POLICY</displayed-value>
+        <stored-value>POLICY</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>RESILIENCE</displayed-value>
+        <stored-value>RESILIENCE</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>RESTORATION</displayed-value>
+        <stored-value>RESTORATION</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>RICE</displayed-value>
+        <stored-value>RICE</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>RURAL COMMUNITIES</displayed-value>
+        <stored-value>RURAL COMMUNITIES</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SEED SYSTEMS</displayed-value>
+        <stored-value>SEED SYSTEMS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SMALLHOLDER FARMERS</displayed-value>
+        <stored-value>SMALLHOLDER FARMERS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SOIL HEALTH</displayed-value>
+        <stored-value>SOIL HEALTH</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SOIL INFORMATION</displayed-value>
+        <stored-value>SOIL INFORMATION</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SOIL LANDSCAPES</displayed-value>
+        <stored-value>SOIL LANDSCAPES</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>STANDARDS</displayed-value>
+        <stored-value>STANDARDS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SUSTAINABILITY</displayed-value>
+        <stored-value>SUSTAINABILITY</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>TREE CROPS</displayed-value>
+        <stored-value>TREE CROPS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>TROPICAL FORAGES</displayed-value>
+        <stored-value>TROPICAL FORAGES</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>VALUE CHAINS</displayed-value>
+        <stored-value>VALUE CHAINS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>WATER</displayed-value>
+        <stored-value>WATER</stored-value>
+      </pair>
+    </value-pairs>
+    <value-pairs value-pairs-name="iita-subject" dc-term="iita-subject">
+      <pair>
+        <displayed-value>AFLATOXIN</displayed-value>
+        <stored-value>AFLATOXIN</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>AGRIBUSINESS</displayed-value>
+        <stored-value>AGRIBUSINESS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>AGRONOMY</displayed-value>
+        <stored-value>AGRONOMY</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>BANANA</displayed-value>
+        <stored-value>BANANA</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>BASELINE SURVEY</displayed-value>
+        <stored-value>BASELINE SURVEY</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>BIODIVERSITY</displayed-value>
+        <stored-value>BIODIVERSITY</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>BIOFORTIFICATION</displayed-value>
+        <stored-value>BIOFORTIFICATION</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>BIOMETRICS</displayed-value>
+        <stored-value>BIOMETRICS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>BIOSCIENCE</displayed-value>
+        <stored-value>BIOSCIENCE</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>CAPACITY DEVELOPMENT</displayed-value>
+        <stored-value>CAPACITY DEVELOPMENT</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>CASSAVA</displayed-value>
+        <stored-value>CASSAVA</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>CLIMATE CHANGE</displayed-value>
+        <stored-value>CLIMATE CHANGE</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>COCOA</displayed-value>
+        <stored-value>COCOA</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>COWPEA</displayed-value>
+        <stored-value>COWPEA</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>CROP HUSBANDRY</displayed-value>
+        <stored-value>CROP HUSBANDRY</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>CROP SYSTEMS</displayed-value>
+        <stored-value>CROP SYSTEMS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>DISEASE CONTROL</displayed-value>
+        <stored-value>DISEASE CONTROL</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>DOMESTIC TRADE</displayed-value>
+        <stored-value>DOMESTIC TRADE</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>FARM MANAGEMENT</displayed-value>
+        <stored-value>FARM MANAGEMENT</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>FARMING SYSTEMS</displayed-value>
+        <stored-value>FARMING SYSTEMS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>FOOD SCIENCE</displayed-value>
+        <stored-value>FOOD SCIENCE</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>FOOD SECURITY</displayed-value>
+        <stored-value>FOOD SECURITY</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>FOOD SYSTEMS</displayed-value>
+        <stored-value>FOOD SYSTEMS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>FORESTRY</displayed-value>
+        <stored-value>FORESTRY</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>GENDER</displayed-value>
+        <stored-value>GENDER</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>GENETIC IMPROVEMENT</displayed-value>
+        <stored-value>GENETIC IMPROVEMENT</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>GRAIN LEGUMES</displayed-value>
+        <stored-value>GRAIN LEGUMES</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>HANDLING, TRANSPORT, STORAGE AND PROTECTION OF AGRICULTURAL PRODUCTS</displayed-value>
+        <stored-value>HANDLING, TRANSPORT, STORAGE AND PROTECTION OF AGRICULTURAL PRODUCTS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>IMPACT ASSESSMENT</displayed-value>
+        <stored-value>IMPACT ASSESSMENT</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>INTEGRATED SOIL FERTILITY MANAGEMENT</displayed-value>
+        <stored-value>INTEGRATED SOIL FERTILITY MANAGEMENT</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>KNOWLEDGE MANAGEMENT</displayed-value>
+        <stored-value>KNOWLEDGE MANAGEMENT</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>LAND USE</displayed-value>
+        <stored-value>LAND USE</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>LIVELIHOODS</displayed-value>
+        <stored-value>LIVELIHOODS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>MAIZE</displayed-value>
+        <stored-value>MAIZE</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>MARKETS</displayed-value>
+        <stored-value>MARKETS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>METEOROLOGY AND CLIMATOLOGY</displayed-value>
+        <stored-value>METEOROLOGY AND CLIMATOLOGY</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>NATURAL RESOURCE MANAGEMENT</displayed-value>
+        <stored-value>NATURAL RESOURCE MANAGEMENT</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>NUTRITION</displayed-value>
+        <stored-value>NUTRITION</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PESTS OF PLANTS</displayed-value>
+        <stored-value>PESTS OF PLANTS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PLANT BREEDING</displayed-value>
+        <stored-value>PLANT BREEDING</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PLANT DISEASES</displayed-value>
+        <stored-value>PLANT DISEASES</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PLANT ECOLOGY</displayed-value>
+        <stored-value>PLANT ECOLOGY</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PLANT GENETIC RESOURCES</displayed-value>
+        <stored-value>PLANT GENETIC RESOURCES</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PLANT HEALTH</displayed-value>
+        <stored-value>PLANT HEALTH</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PLANT PRODUCTION</displayed-value>
+        <stored-value>PLANT PRODUCTION</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PLANTAIN</displayed-value>
+        <stored-value>PLANTAIN</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>POLICIES AND INSTITUTIONS</displayed-value>
+        <stored-value>POLICIES AND INSTITUTIONS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>POST-HARVESTING TECHNOLOGY</displayed-value>
+        <stored-value>POST-HARVESTING TECHNOLOGY</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>RESEARCH METHOD</displayed-value>
+        <stored-value>RESEARCH METHOD</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SMALLHOLDER FARMERS</displayed-value>
+        <stored-value>SMALLHOLDER FARMERS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SOCIOECONOMY</displayed-value>
+        <stored-value>SOCIOECONOMY</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SOIL FERTILITY</displayed-value>
+        <stored-value>SOIL FERTILITY</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SOIL HEALTH</displayed-value>
+        <stored-value>SOIL HEALTH</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SOIL INFORMATION</displayed-value>
+        <stored-value>SOIL INFORMATION</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SOIL SURVEYS AND MAPPING</displayed-value>
+        <stored-value>SOIL SURVEYS AND MAPPING</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SOYBEAN</displayed-value>
+        <stored-value>SOYBEAN</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>TISSUE CULTURE</displayed-value>
+        <stored-value>TISSUE CULTURE</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>VALUE CHAINS</displayed-value>
+        <stored-value>VALUE CHAINS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>WEEDS</displayed-value>
+        <stored-value>WEEDS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>YAM</displayed-value>
+        <stored-value>YAM</stored-value>
+      </pair>
+    </value-pairs>
+    <value-pairs value-pairs-name="iitatheme" dc-term="iitatheme">
+      <pair>
+        <displayed-value>BIOMETRICS</displayed-value>
+        <stored-value>BIOMETRICS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>BIOTECH &amp; PLANT BREEDING</displayed-value>
+        <stored-value>BIOTECH &amp; PLANT BREEDING</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>NATURAL RESOURCE MANAGEMENT</displayed-value>
+        <stored-value>NATURAL RESOURCE MANAGEMENT</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>NUTRITION &amp; HUMAN HEALTH</displayed-value>
+        <stored-value>NUTRITION &amp; HUMAN HEALTH</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>PLANT PRODUCTION &amp; HEALTH</displayed-value>
+        <stored-value>PLANT PRODUCTION &amp; HEALTH</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>SOCIAL SCIENCE &amp; AGRIBUSINESS</displayed-value>
+        <stored-value>SOCIAL SCIENCE &amp; AGRICUSINESS</stored-value>
+      </pair>
+    </value-pairs>
+    <value-pairs value-pairs-name="access-rights" dc-term="access-rights">
+      <pair>
+        <displayed-value>N/A</displayed-value>
+        <stored-value></stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Open Access</displayed-value>
+        <stored-value>Open Access</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Limited Access</displayed-value>
+        <stored-value>Limited Access</stored-value>
+      </pair>
+    </value-pairs>
+    <value-pairs value-pairs-name="usage-rights" dc-term="usage-rights">
+      <pair>
+        <displayed-value>Choose One</displayed-value>
+        <stored-value></stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Creative Commons Attribution 4.0 (CC BY 4.0)</displayed-value>
+        <stored-value>CC-BY-4.0</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Creative Commons Attribution-ShareAlike 4.0 (CC BY-SA 4.0)</displayed-value>
+        <stored-value>CC-BY-SA-4.0</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Creative Commons Attribution-NoDerivatives 4.0 (CC BY-ND 4.0)</displayed-value>
+        <stored-value>CC-BY-ND-4.0</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Creative Commons Attribution-NonCommercial 4.0 (CC BY-NC 4.0)</displayed-value>
+        <stored-value>CC-BY-NC-4.0</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Creative Commons Attribution-NonCommercial-ShareAlike 4.0 (CC BY-NC-SA 4.0)</displayed-value>
+        <stored-value>CC-BY-NC-SA-4.0</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 (CC BY-NC-ND 4.0)</displayed-value>
+        <stored-value>CC-BY-NC-ND-4.0</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Creative Commons Attribution 3.0 (CC BY 3.0)</displayed-value>
+        <stored-value>CC-BY-3.0</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Creative Commons Attribution-ShareAlike 3.0 (CC BY-SA 3.0)</displayed-value>
+        <stored-value>CC-BY-SA-3.0</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Creative Commons Attribution-NoDerivs 3.0 (CC BY-ND 3.0)</displayed-value>
+        <stored-value>CC-BY-ND-3.0</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Creative Commons Attribution-NonCommercial 3.0 (CC BY-NC 3.0)</displayed-value>
+        <stored-value>CC-BY-NC-3.0</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Creative Commons Attribution-NonCommercial-ShareAlike 3.0 (CC BY-NC-SA 3.0)</displayed-value>
+        <stored-value>CC-BY-NC-SA-3.0</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Creative Commons Attribution-NonCommercial-NoDerivs 3.0 (CC BY-NC-ND 3.0)</displayed-value>
+        <stored-value>CC-BY-NC-ND-3.0</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Creative Commons Attribution 3.0 IGO (CC BY 3.0 IGO)</displayed-value>
+        <stored-value>CC-BY-3.0-IGO</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Creative Commons Attribution-ShareAlike 3.0 IGO (CC BY-SA 3.0 IGO)</displayed-value>
+        <stored-value>CC-BY-SA-3.0-IGO</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Creative Commons Attribution-NoDerivs 3.0 IGO (CC BY-ND 3.0 IGO)</displayed-value>
+        <stored-value>CC-BY-ND-3.0-IGO</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Creative Commons Attribution-NonCommercial 3.0 IGO (CC BY-NC 3.0 IGO)</displayed-value>
+        <stored-value>CC-BY-NC-3.0-IGO</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Creative Commons Attribution-NonCommercial-ShareAlike 3.0 IGO (CC BY-NC-SA 3.0 IGO)</displayed-value>
+        <stored-value>CC-BY-NC-SA-3.0-IGO</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Creative Commons Attribution-NonCommercial-NoDerivs 3.0 IGO (CC BY-NC-ND 3.0 IGO)</displayed-value>
+        <stored-value>CC-BY-NC-ND-3.0-IGO</stored-value>
+      </pair>
+
+      <pair>
+        <displayed-value>Creative Commons Zero Public Domain Dedication 1.0 (CC0 1.0)</displayed-value>
+        <stored-value>CC0-1.0</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Creative Commons Attribution No Version (CC BY)</displayed-value>
+        <stored-value>CC-BY</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Creative Commons Attribution-ShareAlike No Version (CC BY-SA)</displayed-value>
+        <stored-value>CC-BY-SA</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Creative Commons Attribution-NoDerivatives No Version (CC BY-ND)</displayed-value>
+        <stored-value>CC-BY-ND</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Creative Commons Attribution-NonCommercial No Version (CC BY-NC)</displayed-value>
+        <stored-value>CC-BY-NC</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Creative Commons Attribution-NonCommercial-ShareAlike No Version (CC BY-NC-SA)</displayed-value>
+        <stored-value>CC-BY-NC-SA</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Creative Commons Attribution-NonCommercial-NoDerivatives No Version (CC BY-NC-ND)</displayed-value>
+        <stored-value>CC-BY-NC-ND</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Open Government Licence v3.0 (OGL-UK-3.0)</displayed-value>
+        <stored-value>OGL-UK-3.0</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>GNU General Public License v3.0 (GPL-3.0-only)</displayed-value>
+        <stored-value>GPL-3.0-only</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>MIT License</displayed-value>
+        <stored-value>MIT</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Copyrighted; all rights reserved</displayed-value>
+        <stored-value>Copyrighted; all rights reserved</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Copyrighted; Non-commercial educational use only</displayed-value>
+        <stored-value>Copyrighted; Non-commercial educational use only</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Copyrighted; Non-commercial use only</displayed-value>
+        <stored-value>Copyrighted; Non-commercial use only</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>All rights reserved; self-archive copy only</displayed-value>
+        <stored-value>All rights reserved; self-archive copy only</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>All rights reserved; no re-use allowed</displayed-value>
+        <stored-value>All rights reserved; no re-use allowed</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Other</displayed-value>
+        <stored-value>Other</stored-value>
+      </pair>
+    </value-pairs>
+    <value-pairs value-pairs-name="ISI_Journal" dc-term="isijournal">
+      <pair>
+        <displayed-value>Non-ISI Journal</displayed-value>
+        <stored-value></stored-value>
+      </pair>
+      <pair>
+        <displayed-value>ISI Journal</displayed-value>
+        <stored-value>ISI Journal</stored-value>
+      </pair>
+    </value-pairs>
+    <value-pairs value-pairs-name="GREY_LITERATURE" dc-term="howPublished">
+      <pair>
+        <displayed-value>N/A</displayed-value>
+        <stored-value></stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Grey Literature</displayed-value>
+        <stored-value>Grey Literature</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Formally Published</displayed-value>
+        <stored-value>Formally Published</stored-value>
+      </pair>
+    </value-pairs>
+    <value-pairs value-pairs-name="TARGET_AUDIENCE" dc-term="audience">
+      <pair>
+        <displayed-value>Academics</displayed-value>
+        <stored-value>Academics</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>CGIAR</displayed-value>
+        <stored-value>CGIAR</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Development Practitioners</displayed-value>
+        <stored-value>Development Practitioners</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Donors</displayed-value>
+        <stored-value>Donors</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Extension</displayed-value>
+        <stored-value>Extension</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Farmers</displayed-value>
+        <stored-value>Farmers</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>General Public</displayed-value>
+        <stored-value>General Public</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>NGOs</displayed-value>
+        <stored-value>NGOs</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Policy Makers</displayed-value>
+        <stored-value>Policy Makers</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Scientists</displayed-value>
+        <stored-value>Scientists</stored-value>
+      </pair>
+    </value-pairs>
 
         <!-- OpenAIRE specific value pairs -->
 
