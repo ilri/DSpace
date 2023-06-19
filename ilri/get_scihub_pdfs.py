@@ -55,7 +55,9 @@ def download_pdf(doi):
     if os.path.isfile(filename):
         logger.debug(Fore.GREEN + f"> {filename} already downloaded." + Fore.RESET)
     else:
-        logger.debug(Fore.GREEN + f"> Attempting to download PDF for {doi_stripped}" + Fore.RESET)
+        logger.debug(
+            Fore.GREEN + f"> Attempting to download PDF for {doi_stripped}" + Fore.RESET
+        )
 
         scihub_download(doi_stripped, paper_type="doi", out=filename)
 
