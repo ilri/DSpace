@@ -123,6 +123,10 @@ if __name__ == "__main__":
     for doi in dois:
         filename = download_pdf(doi)
 
+        # download_pdf can return an empty filename, so let's skip those
+        if filename == "":
+            continue
+
         writer.writerow(
             {
                 "doi": doi.strip(),
