@@ -71,15 +71,6 @@ if __name__ == "__main__":
     # set the signal handler for SIGINT (^C)
     signal.signal(signal.SIGINT, signal_handler)
 
-    # The default log level is WARNING, but we want to set it to DEBUG or INFO
-    if args.debug:
-        logger.setLevel(logging.DEBUG)
-    else:
-        logger.setLevel(logging.INFO)
-
-    # Set the global log format
-    logging.basicConfig(format="[%(levelname)s] %(message)s")
-
     parser = argparse.ArgumentParser(description="Download PDFs from Sci-Hub.")
     parser.add_argument(
         "-i",
@@ -108,6 +99,15 @@ if __name__ == "__main__":
         action="store_true",
     )
     args = parser.parse_args()
+
+    # The default log level is WARNING, but we want to set it to DEBUG or INFO
+    if args.debug:
+        logger.setLevel(logging.DEBUG)
+    else:
+        logger.setLevel(logging.INFO)
+
+    # Set the global log format
+    logging.basicConfig(format="[%(levelname)s] %(message)s")
 
     dois = args.input_file.readlines()
 
