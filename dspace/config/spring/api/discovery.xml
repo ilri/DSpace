@@ -303,7 +303,7 @@
                         <value>dc.title</value>
                         <value>dc.contributor.author</value>
                         <value>dc.creator</value>
-                        <value>dc.subject</value>
+                        <value>dcterms.subject</value>
                     </list>
                 </property>
                 <!--The minimum number of matching terms across the metadata fields above before an item is found as related -->
@@ -440,7 +440,7 @@
                         <value>dc.title</value>
                         <value>dc.contributor.author</value>
                         <value>dc.creator</value>
-                        <value>dc.subject</value>
+                        <value>dcterms.subject</value>
                     </list>
                 </property>
                 <!--The minimum number of matching terms across the metadata fields above before an item is found as related -->
@@ -579,7 +579,7 @@
                         <value>dc.title</value>
                         <value>dc.contributor.author</value>
                         <value>dc.creator</value>
-                        <value>dc.subject</value>
+                        <value>dcterms.subject</value>
                     </list>
                 </property>
                 <!--The minimum number of matching terms across the metadata fields above before an item is found as related -->
@@ -719,7 +719,7 @@
                         <value>dc.title</value>
                         <value>dc.contributor.author</value>
                         <value>dc.creator</value>
-                        <value>dc.subject</value>
+                        <value>dcterms.subject</value>
                     </list>
                 </property>
                 <!--The minimum number of matching terms across the metadata fields above before an item is found as related -->
