@@ -89,7 +89,7 @@ def fix_crossref_date(crossref_date: list) -> str:
     return issued
 
 
-def resolve_dois(dois: list):
+def resolve_dois(dois: list) -> None:
     fieldnames = [
         "title",
         "authors",
