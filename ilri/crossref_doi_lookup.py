@@ -131,9 +131,12 @@ def resolve_dois(dois: list):
 
         # Only proceed if this DOI is registered at Crossref
         match data["message"]["agency"]["label"]:
-            case "DataCite": continue
-            case "Public": continue
-            case "Crossref": pass
+            case "DataCite":
+                continue
+            case "Public":
+                continue
+            case "Crossref":
+                pass
 
         # Fetch the metadata for this DOI
         request_url = f"https://api.crossref.org/works/{doi}"
