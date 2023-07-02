@@ -21,6 +21,7 @@
 
 import argparse
 import csv
+import logging
 import re
 import signal
 import sys
@@ -29,6 +30,11 @@ from datetime import timedelta
 import requests
 import requests_cache
 from colorama import Fore
+
+# Create a local logger instance for this module. We don't do any configuration
+# because this module might be used elsewhere that will have its own logging
+# configuration.
+logger = logging.getLogger(__name__)
 
 
 # read DOIs from a text file, one per line
@@ -111,8 +117,7 @@ def resolve_dois(dois: list):
     requests_cache.remove_expired_responses()
 
     for doi in dois:
-        if args.debug:
-            sys.stderr.write(Fore.GREEN + f"Looking up DOI: {doi}\n" + Fore.RESET)
+        logger.info(Fore.GREEN + f"Looking up DOI: {doi}" + Fore.RESET)
 
         # First, check if this DOI is registered at Crossref
         request_url = f"https://api.crossref.org/works/{doi}/agency"
@@ -121,7 +126,7 @@ def resolve_dois(dois: list):
         try:
             request = requests.get(request_url, params=request_params)
         except requests.exceptions.ConnectionError:
-            sys.stderr.write(Fore.RED + f"Connection error.\n" + Fore.RESET)
+            logger.error(Fore.RED + f"Connection error." + Fore.RESET)
 
         # HTTP 404 here means the DOI is not registered at Crossref
         if request.status_code != requests.codes.ok:
@@ -145,13 +150,13 @@ def resolve_dois(dois: list):
         try:
             request = requests.get(request_url, params=request_params)
         except requests.exceptions.ConnectionError:
-            sys.stderr.write(Fore.RED + f"Connection error.\n" + Fore.RESET)
+            logger.error(Fore.RED + f"Connection error." + Fore.RESET)
 
         if request.status_code == requests.codes.ok:
             if args.debug:
-                sys.stdout.write(
+                logger.debug(
                     Fore.YELLOW
-                    + f"> DOI in Crossref (cached: {request.from_cache})\n"
+                    + f"> DOI in Crossref (cached: {request.from_cache})"
                     + Fore.RESET
                 )
 
@@ -330,12 +335,11 @@ def resolve_dois(dois: list):
                 }
             )
         else:
-            if args.debug:
-                sys.stderr.write(
-                    Fore.YELLOW
-                    + f"> DOI not in Crossref (cached: {request.from_cache})\n"
-                    + Fore.RESET
-                )
+            logger.debug(
+                Fore.YELLOW
+                + f"> DOI not in Crossref (cached: {request.from_cache})"
+                + Fore.RESET
+            )
 
     # close output file before we exit
     args.output_file.close()
@@ -378,6 +382,16 @@ parser.add_argument(
     type=argparse.FileType("w", encoding="UTF-8"),
 )
 args = parser.parse_args()
+
+# The default log level is WARNING, but we want to set it to DEBUG or INFO
+if args.debug:
+    logger.setLevel(logging.DEBUG)
+else:
+    logger.setLevel(logging.INFO)
+
+# Since we're running interactively we can set the preferred log format for
+# the logging module during this invocation.
+logging.basicConfig(format="[%(levelname)s] %(message)s")
 
 # set the signal handler for SIGINT (^C) so we can exit cleanly
 signal.signal(signal.SIGINT, signal_handler)
