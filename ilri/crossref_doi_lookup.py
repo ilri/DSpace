@@ -32,7 +32,7 @@ from colorama import Fore
 
 
 # read DOIs from a text file, one per line
-def read_dois_from_file():
+def read_dois_from_file() -> list:
     # initialize an empty list for DOIs
     dois = []
 
@@ -50,12 +50,12 @@ def read_dois_from_file():
     # close input file before we exit
     args.input_file.close()
 
-    resolve_dois(dois)
+    return dois
 
 
 # Crossref uses dates with single-digit month and day parts, so we need to pad
 # them with zeros if they are less than 10.
-def fix_crossref_date(crossref_date):
+def fix_crossref_date(crossref_date: list) -> str:
     if len(crossref_date) == 1:
         issued = crossref_date[0]
     elif len(crossref_date) == 2:
@@ -83,7 +83,7 @@ def fix_crossref_date(crossref_date):
     return issued
 
 
-def resolve_dois(dois):
+def resolve_dois(dois: list):
     fieldnames = [
         "title",
         "authors",
@@ -359,6 +359,7 @@ signal.signal(signal.SIGINT, signal_handler)
 
 # if the user specified an input file, get the DOIs from there
 if args.input_file:
-    read_dois_from_file()
+    dois = read_dois_from_file()
+    resolve_dois(dois)
 
 exit()
