@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# crossref-doi-lookup.py 0.0.1
+# crossref-doi-lookup.py 0.1.0
 #
 # Copyright Alan Orth.
 #
