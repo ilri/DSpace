@@ -114,6 +114,28 @@ def resolve_dois(dois: list):
         if args.debug:
             sys.stderr.write(Fore.GREEN + f"Looking up DOI: {doi}\n" + Fore.RESET)
 
+        # First, check if this DOI is registered at Crossref
+        request_url = f"https://api.crossref.org/works/{doi}/agency"
+        request_params = {"mailto": args.email}
+
+        try:
+            request = requests.get(request_url, params=request_params)
+        except requests.exceptions.ConnectionError:
+            sys.stderr.write(Fore.RED + f"Connection error.\n" + Fore.RESET)
+
+        # HTTP 404 here means the DOI is not registered at Crossref
+        if request.status_code != requests.codes.ok:
+            continue
+
+        data = request.json()
+
+        # Only proceed if this DOI is registered at Crossref
+        match data["message"]["agency"]["label"]:
+            case "DataCite": continue
+            case "Public": continue
+            case "Crossref": pass
+
+        # Fetch the metadata for this DOI
         request_url = f"https://api.crossref.org/works/{doi}"
         request_params = {"mailto": args.email}
 
