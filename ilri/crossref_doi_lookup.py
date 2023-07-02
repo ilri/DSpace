@@ -308,7 +308,7 @@ def resolve_dois(dois):
             if args.debug:
                 sys.stderr.write(
                     Fore.YELLOW
-                    + f"DOI not in Crossref (cached: {request.from_cache})\n"
+                    + f"> DOI not in Crossref (cached: {request.from_cache})\n"
                     + Fore.RESET
                 )
 
