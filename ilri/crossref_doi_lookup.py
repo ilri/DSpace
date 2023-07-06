@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# crossref-doi-lookup.py 0.1.0
+# crossref-doi-lookup.py 0.1.1
 #
 # Copyright Alan Orth.
 #
@@ -22,41 +22,19 @@
 import argparse
 import csv
 import logging
-import re
 import signal
 import sys
 from datetime import timedelta
 
 import requests
 import requests_cache
+import util
 from colorama import Fore
 
 # Create a local logger instance for this module. We don't do any configuration
 # because this module might be used elsewhere that will have its own logging
 # configuration.
 logger = logging.getLogger(__name__)
-
-
-# read DOIs from a text file, one per line
-def read_dois_from_file() -> list:
-    # initialize an empty list for DOIs
-    dois = []
-
-    for line in args.input_file:
-        # trim any leading or trailing whitespace (including newlines)
-        line = line.strip()
-
-        # trim http://, https://, etc to make sure we only get the DOI component
-        line = re.sub(r"^https?://(dx\.)?doi\.org/", "", line)
-
-        # iterate over results and add DOIs that aren't already present
-        if line not in dois:
-            dois.append(line)
-
-    # close input file before we exit
-    args.input_file.close()
-
-    return dois
 
 
 # Crossref uses dates with single-digit month and day parts, so we need to pad
@@ -398,7 +376,8 @@ signal.signal(signal.SIGINT, signal_handler)
 
 # if the user specified an input file, get the DOIs from there
 if args.input_file:
-    dois = read_dois_from_file()
+    print(type(args.input_file))
+    dois = util.read_dois_from_file(args.input_file)
     resolve_dois(dois)
 
 exit()

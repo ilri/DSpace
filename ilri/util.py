@@ -1,4 +1,4 @@
-# util.py v0.0.3
+# util.py v0.0.4
 #
 # Copyright Alan Orth.
 #
@@ -9,6 +9,7 @@
 # Various helper functions for CGSpace DSpace Python scripts.
 #
 
+import re
 import sys
 
 import psycopg2
@@ -90,3 +91,33 @@ def db_connect(
         sys.exit(1)
 
     return conn
+
+
+def read_dois_from_file(input_file) -> list:
+    """Read DOIs from a file.
+
+    DOIs should be one per line with either http, https, dx.doi.org, doig.org
+    or just the DOI itself. Anything other than the DOI will be stripped.
+
+    :param input_file: a file handle (class _io.TextIOWrapper ???).
+    :returns list of DOIs
+    """
+
+    # initialize an empty list for DOIs
+    dois = []
+
+    for line in input_file:
+        # trim any leading or trailing whitespace (including newlines)
+        line = line.strip()
+
+        # trim http://, https://, etc to make sure we only get the DOI component
+        line = re.sub(r"^https?://(dx\.)?doi\.org/", "", line)
+
+        # iterate over results and add DOIs that aren't already present
+        if line not in dois:
+            dois.append(line)
+
+    # close input file before we exit
+    input_file.close()
+
+    return dois
