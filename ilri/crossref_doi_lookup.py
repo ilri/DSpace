@@ -376,7 +376,6 @@ signal.signal(signal.SIGINT, signal_handler)
 
 # if the user specified an input file, get the DOIs from there
 if args.input_file:
-    print(type(args.input_file))
     dois = util.read_dois_from_file(args.input_file)
     resolve_dois(dois)
 
