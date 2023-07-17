@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# update-orcids.py v0.1.2
+# update-orcids.py v0.1.3
 #
 # Copyright Alan Orth.
 #
@@ -63,13 +63,6 @@ parser.add_argument(
     action="store_true",
 )
 parser.add_argument(
-    "-m",
-    "--metadata-field-id",
-    type=int,
-    help="ID of the ORCID field in the metadatafieldregistry table.",
-    required=True,
-)
-parser.add_argument(
     "-q",
     "--quiet",
     help="Do not print progress messages to the screen.",
@@ -110,10 +103,14 @@ for line in args.input_file.read().splitlines():
 
     # see: https://www.psycopg.org/psycopg3/docs/basic/transactions.html#transaction-context
     with conn.cursor() as cursor:
+        metadata_field_id = util.field_name_to_field_id(
+            cursor, "cg.creator.identifier"
+        )
+
         # note that the SQL here is quoted differently to allow us to use
         # LIKE with % wildcards with our paremeter subsitution
         sql = "SELECT text_value, dspace_object_id FROM metadatavalue WHERE dspace_object_id IN (SELECT uuid FROM item WHERE in_archive AND NOT withdrawn) AND metadata_field_id=%s AND text_value LIKE '%%' || %s || '%%' AND text_value!=%s"
-        cursor.execute(sql, (args.metadata_field_id, orcid_identifier, line))
+        cursor.execute(sql, (metadata_field_id, orcid_identifier, line))
 
         # Get the records for items with matching metadata. We will use the
         # object IDs to update their last_modified dates.
@@ -132,7 +129,7 @@ for line in args.input_file.read().splitlines():
                 sql,
                 (
                     line,
-                    args.metadata_field_id,
+                    metadata_field_id,
                     orcid_identifier,
                     line,
                 ),
