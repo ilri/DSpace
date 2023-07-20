@@ -302,6 +302,16 @@
         </field>
         <field>
           <dc-schema>cg</dc-schema>
+          <dc-element>subject</dc-element>
+          <dc-qualifier>impactPlatform</dc-qualifier>
+          <repeatable>true</repeatable>
+          <label>CGIAR Impact Platforms</label>
+          <input-type value-pairs-name="impactPlatforms">dropdown</input-type>
+          <hint>Select any CGIAR Impact Platforms(s) associated with this item.</hint>
+          <required></required>
+        </field>
+        <field>
+          <dc-schema>cg</dc-schema>
           <dc-element>contributor</dc-element>
           <dc-qualifier>crp</dc-qualifier>
           <repeatable>true</repeatable>
@@ -2867,6 +2877,16 @@
       <pair>
         <displayed-value>West and Central African Food Systems Transformation</displayed-value>
         <stored-value>West and Central African Food Systems Transformation</stored-value>
+      </pair>
+    </value-pairs>
+    <value-pairs value-pairs-name="impactPlatforms">
+      <pair>
+        <displayed-value>Climate Change</displayed-value>
+        <stored-value>Climate Change</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Gender</displayed-value>
+        <stored-value>Gender</stored-value>
       </pair>
     </value-pairs>
     <value-pairs value-pairs-name="crpsubject" dc-term="crsubject_crpsubject">

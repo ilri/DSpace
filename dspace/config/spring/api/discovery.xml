@@ -108,6 +108,7 @@
                 <ref bean="searchFilterIssued" />
                 <ref bean="searchFilterType" />
                 <ref bean="searchFilterInitiative" />
+                <ref bean="searchFilterImpactPlatform" />
                 <ref bean="searchFilterCrpsubject" />
                 <ref bean="searchFilterActionArea" />
                 <ref bean="searchFilterImpactArea" />
@@ -139,6 +140,7 @@
                 <ref bean="searchFilterTitle"/>
                 <ref bean="searchFilterType" />
                 <ref bean="searchFilterInitiative" />
+                <ref bean="searchFilterImpactPlatform" />
                 <ref bean="searchFilterCrpsubject" />
                 <ref bean="searchFilterActionArea" />
                 <ref bean="searchFilterImpactArea" />
@@ -275,6 +277,7 @@
                 <ref bean="searchFilterIssued" />
                 <ref bean="searchFilterType" />
                 <ref bean="searchFilterInitiative" />
+                <ref bean="searchFilterImpactPlatform" />
                 <ref bean="searchFilterCrpsubject" />
                 <ref bean="searchFilterActionArea" />
                 <ref bean="searchFilterImpactArea" />
@@ -309,6 +312,7 @@
                 <ref bean="searchFilterTitle"/>
                 <ref bean="searchFilterType" />
                 <ref bean="searchFilterInitiative" />
+                <ref bean="searchFilterImpactPlatform" />
                 <ref bean="searchFilterCrpsubject" />
                 <ref bean="searchFilterActionArea" />
                 <ref bean="searchFilterImpactArea" />
@@ -697,6 +701,18 @@
             </list>
         </property>
         <property name="facetLimit" value="10"/>
+        <property name="sortOrderSidebar" value="COUNT"/>
+        <property name="sortOrderFilterPage" value="COUNT"/>
+    </bean>
+
+    <bean id="searchFilterImpactPlatform" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
+        <property name="indexFieldName" value="impactPlatform"/>
+        <property name="metadataFields">
+            <list>
+                <value>cg.subject.impactPlatform</value>
+            </list>
+        </property>
+        <property name="facetLimit" value="2"/>
         <property name="sortOrderSidebar" value="COUNT"/>
         <property name="sortOrderFilterPage" value="COUNT"/>
     </bean>

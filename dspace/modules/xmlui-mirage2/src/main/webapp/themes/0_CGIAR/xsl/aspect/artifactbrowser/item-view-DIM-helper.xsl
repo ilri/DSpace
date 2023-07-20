@@ -188,6 +188,28 @@ such as authors, subject, citation, description, etc
                 </div>
             </div>
         </xsl:if>
+        <xsl:if test="dim:field[@mdschema='cg' and @element='subject' and @qualifier='impactPlatform']">
+            <div class="simple-item-view-description item-page-field-wrapper table">
+                <h5 class="bold"><i18n:text>xmlui.dri2xhtml.METS-1.0.item-impactPlatform</i18n:text></h5>
+                <div>
+                    <xsl:for-each select="dim:field[@mdschema='cg' and @element='subject' and @qualifier='impactPlatform']">
+                        <xsl:choose>
+                            <xsl:when test="node()">
+                                <xsl:call-template name="discovery-link">
+                                    <xsl:with-param name="filtertype" select="'impactPlatform'"/>
+                                </xsl:call-template>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:text>&#160;</xsl:text>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                        <xsl:if test="count(following-sibling::dim:field[@mdschema='cg' and @element='subject' and @qualifier='impactPlatform']) != 0">
+                            <xsl:text>; </xsl:text>
+                        </xsl:if>
+                    </xsl:for-each>
+                </div>
+            </div>
+        </xsl:if>
         <xsl:if test="dim:field[@mdschema='cg' and @element='contributor' and @qualifier='crp']">
             <div class="simple-item-view-description item-page-field-wrapper table">
                 <h5 class="bold"><i18n:text>xmlui.dri2xhtml.METS-1.0.item-crp</i18n:text></h5>
