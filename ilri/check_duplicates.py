@@ -18,11 +18,9 @@
 # This script is written for Python 3 and requires several modules that you can
 # install with pip (I recommend setting up a Python virtual environment first):
 #
-#   $ pip install psycopg2 colorama
+#   $ pip install psycopg colorama
 #
-# See: http://initd.org/psycopg
-# See: http://initd.org/psycopg/docs/usage.html#with-statement
-# See: http://initd.org/psycopg/docs/faq.html#best-practices
+# See: https://www.psycopg.org/psycopg3/docs
 
 import argparse
 import csv
@@ -30,9 +28,10 @@ import signal
 import sys
 from datetime import datetime
 
-import psycopg2
+import psycopg
 import util
 from colorama import Fore
+from psycopg import sql
 
 # Column names in the CSV
 id_column_name = "id"
@@ -155,163 +154,161 @@ conn = util.db_connect(
     args.database_name, args.database_user, args.database_pass, "localhost"
 )
 
-with conn:
-    # cursor will be closed after this block exits
-    # see: http://initd.org/psycopg/docs/usage.html#with-statement
-    with conn.cursor() as cursor:
-        # Make sure the pg_trgm extension is installed in the current database
-        cursor.execute("SELECT extname FROM pg_extension WHERE extname='pg_trgm'")
-        if cursor.rowcount == 0:
-            sys.stderr.write(
-                Fore.RED
-                + f"Database '{args.database_name}' is missing the 'pg_trgm' extension.\n"
-                + Fore.RESET
-            )
-            sys.exit(1)
+cursor = conn.cursor()
 
-        # Set the similarity threshold for this session. PostgreSQL default is
-        # 0.3, which leads to lots of false positives for this use case.
+with conn:
+    # Make sure the pg_trgm extension is installed in the current database
+    cursor.execute("SELECT extname FROM pg_extension WHERE extname='pg_trgm'")
+    if cursor.rowcount == 0:
+        sys.stderr.write(
+            Fore.RED
+            + f"Database '{args.database_name}' is missing the 'pg_trgm' extension.\n"
+            + Fore.RESET
+        )
+        sys.exit(1)
+
+    # Set the similarity threshold for this session. PostgreSQL default is 0.3,
+    # which leads to lots of false positives for this use case. Note that the
+    # weird syntax here is because of SET not working in in psycopg3.
+    #
+    # See: https://www.psycopg.org/psycopg3/docs/basic/from_pg2.html#server-side-binding
+    cursor.execute(
+        sql.SQL(
+            "SET pg_trgm.similarity_threshold = {}".format(args.similarity_threshold)
+        )
+    )
+
+    # Fields for the output CSV
+    fieldnames = [
+        "id",
+        "Your Title",
+        "Their Title",
+        "Similarity",
+        "Your Date",
+        "Their Date",
+        "Handle",
+    ]
+
+    # Write the CSV header
+    writer = csv.DictWriter(args.output_file, fieldnames=fieldnames)
+    writer.writeheader()
+
+    for input_row in reader:
+        # Check for items with similarity to criteria one (title). Note that
+        # this is the fastest variation of this query: using the similarity
+        # operator (%, written below twice for escaping) instead of the sim-
+        # larity function, as indexes are bound to operators, not functions!
+        # Also, if I leave off the item query it takes twice as long!
+        sql = "SELECT text_value, dspace_object_id FROM metadatavalue WHERE dspace_object_id IN (SELECT uuid FROM item WHERE in_archive AND NOT withdrawn) AND metadata_field_id=%s AND text_value %% %s"
+
         cursor.execute(
-            "SET pg_trgm.similarity_threshold = %s", (args.similarity_threshold,)
+            sql,
+            (
+                criteria1_field_id,
+                input_row[criteria1_column_name],
+            ),
         )
 
-        # Fields for the output CSV
-        fieldnames = [
-            "id",
-            "Your Title",
-            "Their Title",
-            "Similarity",
-            "Your Date",
-            "Their Date",
-            "Handle",
-        ]
+        # If we have any similarity in criteria one (title), then check type
+        if cursor.rowcount > 0:
+            duplicate_titles = cursor.fetchall()
 
-        # Write the CSV header
-        writer = csv.DictWriter(args.output_file, fieldnames=fieldnames)
-        writer.writeheader()
+            # Iterate over duplicate titles to check their types
+            for duplicate_title in duplicate_titles:
+                dspace_object_id = duplicate_title[1]
 
-        for input_row in reader:
-            # Check for items with similarity to criteria one (title). Note that
-            # this is the fastest variation of this query: using the similarity
-            # operator (%, written below twice for escaping) instead of the sim-
-            # larity function, as indexes are bound to operators, not functions!
-            # Also, if I leave off the item query it takes twice as long!
-            sql = "SELECT text_value, dspace_object_id FROM metadatavalue WHERE dspace_object_id IN (SELECT uuid FROM item WHERE in_archive AND NOT withdrawn) AND metadata_field_id=%s AND text_value %% %s"
+                # Check type of this duplicate title, also making sure that
+                # the item is in the archive and not withdrawn.
+                sql = "SELECT text_value FROM metadatavalue M JOIN item I ON M.dspace_object_id = I.uuid WHERE M.dspace_object_id=%s AND M.metadata_field_id=%s AND M.text_value=%s AND I.in_archive='t' AND I.withdrawn='f'"
 
-            cursor.execute(
-                sql,
-                (
-                    criteria1_field_id,
-                    input_row[criteria1_column_name],
-                ),
-            )
+                cursor.execute(
+                    sql,
+                    (
+                        dspace_object_id,
+                        criteria2_field_id,
+                        input_row[criteria2_column_name],
+                    ),
+                )
 
-            # If we have any similarity in criteria one (title), then check type
-            if cursor.rowcount > 0:
-                duplicate_titles = cursor.fetchall()
+                # This means we didn't match on item type, so let's skip to
+                # the next item title.
+                if cursor.rowcount == 0:
+                    continue
 
-                # Iterate over duplicate titles to check their types
-                for duplicate_title in duplicate_titles:
-                    dspace_object_id = duplicate_title[1]
+                # Get the date of this potential duplicate. (If we are here
+                # then we already confirmed above that the item is both in
+                # the archive and not withdrawn, so we don't need to check
+                # that again).
+                sql = "SELECT text_value FROM metadatavalue M JOIN item I ON M.dspace_object_id = I.uuid WHERE M.dspace_object_id=%s AND M.metadata_field_id=%s"
 
-                    # Check type of this duplicate title, also making sure that
-                    # the item is in the archive and not withdrawn.
-                    sql = "SELECT text_value FROM metadatavalue M JOIN item I ON M.dspace_object_id = I.uuid WHERE M.dspace_object_id=%s AND M.metadata_field_id=%s AND M.text_value=%s AND I.in_archive='t' AND I.withdrawn='f'"
+                cursor.execute(
+                    sql,
+                    (dspace_object_id, criteria3_field_id),
+                )
 
-                    cursor.execute(
-                        sql,
-                        (
-                            dspace_object_id,
-                            criteria2_field_id,
-                            input_row[criteria2_column_name],
-                        ),
-                    )
+                # This means that we successfully extracted the date for the
+                # potential duplicate.
+                if cursor.rowcount > 0:
+                    duplicate_item_date = cursor.fetchone()[0]
+                # If rowcount is not > 0 then the potential duplicate does
+                # not have a date and we have bigger problems. Skip!
+                else:
+                    continue
 
-                    # This means we didn't match on item type, so let's skip to
-                    # the next item title.
-                    if cursor.rowcount == 0:
+                # Get the number of days between the issue dates
+                days_difference = compare_date_strings(
+                    input_row[criteria3_column_name], duplicate_item_date
+                )
+
+                # Items with a similar title, same type, and issue dates
+                # within a year or so are likely duplicates. Otherwise,
+                # it's possible that items with a similar name could be
+                # like Annual Reports where most metadata is the same
+                # except the date issued.
+                if days_difference <= args.days_threshold:
+                    # By this point if we have any matches then they are
+                    # similar in title and have an exact match for the type
+                    # and an issue date within the threshold. Now we are
+                    # reasonably sure it's a duplicate, so get the handle.
+                    sql = "SELECT handle FROM handle WHERE resource_id=%s"
+                    cursor.execute(sql, (dspace_object_id,))
+                    try:
+                        handle = f"https://hdl.handle.net/{cursor.fetchone()[0]}"
+                    except TypeError:
+                        # If we get here then there is no handle for this
+                        # item's UUID. Could be that the item was deleted?
                         continue
 
-                    # Get the date of this potential duplicate. (If we are here
-                    # then we already confirmed above that the item is both in
-                    # the archive and not withdrawn, so we don't need to check
-                    # that again).
-                    sql = "SELECT text_value FROM metadatavalue M JOIN item I ON M.dspace_object_id = I.uuid WHERE M.dspace_object_id=%s AND M.metadata_field_id=%s"
+                    sys.stdout.write(
+                        f"{Fore.YELLOW}Found potential duplicate:{Fore.RESET}\n"
+                    )
 
+                    # https://alexklibisz.com/2022/02/18/optimizing-postgres-trigram-search.html
+                    sql = "SELECT round(similarity(%s, %s)::numeric, 3)"
                     cursor.execute(
-                        sql,
-                        (dspace_object_id, criteria3_field_id),
+                        sql, (input_row[criteria1_column_name], duplicate_title[0])
                     )
+                    trgm_similarity = cursor.fetchone()[0]
 
-                    # This means that we successfully extracted the date for the
-                    # potential duplicate.
-                    if cursor.rowcount > 0:
-                        duplicate_item_date = cursor.fetchone()[0]
-                    # If rowcount is not > 0 then the potential duplicate does
-                    # not have a date and we have bigger problems. Skip!
-                    else:
-                        continue
-
-                    # Get the number of days between the issue dates
-                    days_difference = compare_date_strings(
-                        input_row[criteria3_column_name], duplicate_item_date
+                    sys.stdout.write(
+                        f"{Fore.YELLOW}→ Title:{Fore.RESET} {input_row[criteria1_column_name]} ({trgm_similarity})\n"
                     )
+                    sys.stdout.write(f"{Fore.YELLOW}→ Handle:{Fore.RESET} {handle}\n\n")
 
-                    # Items with a similar title, same type, and issue dates
-                    # within a year or so are likely duplicates. Otherwise,
-                    # it's possible that items with a similar name could be
-                    # like Annual Reports where most metadata is the same
-                    # except the date issued.
-                    if days_difference <= args.days_threshold:
-                        # By this point if we have any matches then they are
-                        # similar in title and have an exact match for the type
-                        # and an issue date within the threshold. Now we are
-                        # reasonably sure it's a duplicate, so get the handle.
-                        sql = "SELECT handle FROM handle WHERE resource_id=%s"
-                        cursor.execute(sql, (dspace_object_id,))
-                        try:
-                            handle = f"https://hdl.handle.net/{cursor.fetchone()[0]}"
-                        except TypeError:
-                            # If we get here then there is no handle for this
-                            # item's UUID. Could be that the item was deleted?
-                            continue
+                    output_row = {
+                        "id": input_row[id_column_name],
+                        "Your Title": input_row[criteria1_column_name],
+                        "Their Title": duplicate_title[0],
+                        "Similarity": trgm_similarity,
+                        "Your Date": input_row[criteria3_column_name],
+                        "Their Date": duplicate_item_date,
+                        "Handle": handle,
+                    }
 
-                        sys.stdout.write(
-                            f"{Fore.YELLOW}Found potential duplicate:{Fore.RESET}\n"
-                        )
+                    writer.writerow(output_row)
 
-                        # https://alexklibisz.com/2022/02/18/optimizing-postgres-trigram-search.html
-                        sql = "SELECT round(similarity(%s, %s)::numeric, 3)"
-                        cursor.execute(
-                            sql, (input_row[criteria1_column_name], duplicate_title[0])
-                        )
-                        trgm_similarity = cursor.fetchone()[0]
-
-                        sys.stdout.write(
-                            f"{Fore.YELLOW}→ Title:{Fore.RESET} {input_row[criteria1_column_name]} ({trgm_similarity})\n"
-                        )
-                        sys.stdout.write(
-                            f"{Fore.YELLOW}→ Handle:{Fore.RESET} {handle}\n\n"
-                        )
-
-                        output_row = {
-                            "id": input_row[id_column_name],
-                            "Your Title": input_row[criteria1_column_name],
-                            "Their Title": duplicate_title[0],
-                            "Similarity": trgm_similarity,
-                            "Your Date": input_row[criteria3_column_name],
-                            "Their Date": duplicate_item_date,
-                            "Handle": handle,
-                        }
-
-                        writer.writerow(output_row)
-
-        # close output file before we exit
-        args.output_file.close()
-
-
-# close database connection before we exit
-conn.close()
+    # close output file before we exit
+    args.output_file.close()
 
 # close input file
 args.input_file.close()
