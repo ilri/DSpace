@@ -91,6 +91,8 @@ conn = util.db_connect(
     args.database_name, args.database_user, args.database_pass, "localhost"
 )
 
+cursor = conn.cursor()
+
 # Use read().splitlines() so we don't get newlines after each line, though I'm
 # not sure if we should also be stripping?
 for line in args.input_file.read().splitlines():
@@ -114,53 +116,53 @@ for line in args.input_file.read().splitlines():
     # see: https://docs.python.org/3/library/re.html
     orcid_identifier = orcid_identifier_match.group(0)
 
-    # see: https://www.psycopg.org/psycopg3/docs/basic/transactions.html#transaction-context
-    with conn.cursor() as cursor:
-        metadata_field_id = util.field_name_to_field_id(
-            cursor, "cg.creator.identifier"
+    metadata_field_id = util.field_name_to_field_id(
+        cursor, "cg.creator.identifier"
+    )
+
+    # note that the SQL here is quoted differently to allow us to use
+    # LIKE with % wildcards with our paremeter subsitution
+    sql = "SELECT text_value, dspace_object_id FROM metadatavalue WHERE dspace_object_id IN (SELECT uuid FROM item WHERE in_archive AND NOT withdrawn) AND metadata_field_id=%s AND text_value LIKE '%%' || %s || '%%' AND text_value!=%s"
+    cursor.execute(sql, (metadata_field_id, orcid_identifier, line))
+
+    # Get the records for items with matching metadata. We will use the
+    # object IDs to update their last_modified dates.
+    matching_records = cursor.fetchall()
+
+    if args.dry_run:
+        if cursor.rowcount > 0 and not args.quiet:
+            logger.info(
+                Fore.GREEN
+                + f"(DRY RUN) Fixed {cursor.rowcount} occurences of: {line}"
+                + Fore.RESET
+            )
+    else:
+        sql = "UPDATE metadatavalue SET text_value=%s WHERE dspace_object_id IN (SELECT uuid FROM item WHERE in_archive AND NOT withdrawn) AND metadata_field_id=%s AND text_value LIKE '%%' || %s || '%%' AND text_value!=%s"
+        cursor.execute(
+            sql,
+            (
+                line,
+                metadata_field_id,
+                orcid_identifier,
+                line,
+            ),
         )
 
-        # note that the SQL here is quoted differently to allow us to use
-        # LIKE with % wildcards with our paremeter subsitution
-        sql = "SELECT text_value, dspace_object_id FROM metadatavalue WHERE dspace_object_id IN (SELECT uuid FROM item WHERE in_archive AND NOT withdrawn) AND metadata_field_id=%s AND text_value LIKE '%%' || %s || '%%' AND text_value!=%s"
-        cursor.execute(sql, (metadata_field_id, orcid_identifier, line))
-
-        # Get the records for items with matching metadata. We will use the
-        # object IDs to update their last_modified dates.
-        matching_records = cursor.fetchall()
-
-        if args.dry_run:
-            if cursor.rowcount > 0 and not args.quiet:
-                logger.info(
-                    Fore.GREEN
-                    + f"(DRY RUN) Fixed {cursor.rowcount} occurences of: {line}"
-                    + Fore.RESET
-                )
-        else:
-            sql = "UPDATE metadatavalue SET text_value=%s WHERE dspace_object_id IN (SELECT uuid FROM item WHERE in_archive AND NOT withdrawn) AND metadata_field_id=%s AND text_value LIKE '%%' || %s || '%%' AND text_value!=%s"
-            cursor.execute(
-                sql,
-                (
-                    line,
-                    metadata_field_id,
-                    orcid_identifier,
-                    line,
-                ),
+        if cursor.rowcount > 0 and not args.quiet:
+            logger.info(
+                Fore.GREEN
+                + f"Fixed {cursor.rowcount} occurences of: {line}"
+                + Fore.RESET
             )
 
-            conn.commit()
+        # Update the last_modified date for each item we've changed
+        for record in matching_records:
+            util.update_item_last_modified(cursor, record[1])
 
-            if cursor.rowcount > 0 and not args.quiet:
-                logger.info(
-                    Fore.GREEN
-                    + f"Fixed {cursor.rowcount} occurences of: {line}"
-                    + Fore.RESET
-                )
 
-            # Update the last_modified date for each item we've changed
-            for record in matching_records:
-                util.update_item_last_modified(cursor, record[1])
-
+# commit changes when we're done
+if not args.dry_run:
+    conn.commit()
 
 # close database connection before we exit
 conn.close()
