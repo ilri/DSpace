@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# delete-metadata-values.py 1.2.3
+# delete-metadata-values.py 1.2.4
 #
 # Copyright Alan Orth.
 #
@@ -19,7 +19,7 @@
 # that you can install with pip (I recommend setting up a Python virtual env
 # first):
 #
-#   $ pip install psycopg2 colorama
+#   $ pip install psycopg colorama
 #
 
 import argparse
@@ -27,7 +27,7 @@ import csv
 import signal
 import sys
 
-import psycopg2
+import psycopg
 import util
 from colorama import Fore
 
@@ -96,52 +96,53 @@ conn = util.db_connect(
     args.database_name, args.database_user, args.database_pass, "localhost"
 )
 
+cursor = conn.cursor()
+
 for row in reader:
-    with conn:
-        # cursor will be closed after this block exits
-        # see: http://initd.org/psycopg/docs/usage.html#with-statement
-        with conn.cursor() as cursor:
-            metadata_field_id = util.field_name_to_field_id(
-                cursor, args.from_field_name
+    metadata_field_id = util.field_name_to_field_id(cursor, args.from_field_name)
+
+    # Get item UUIDs for metadata values that will be updated
+    sql = "SELECT dspace_object_id FROM metadatavalue WHERE dspace_object_id IN (SELECT uuid FROM item WHERE in_archive AND NOT withdrawn) AND metadata_field_id=%s AND text_value=%s"
+    cursor.execute(sql, (metadata_field_id, row[args.from_field_name]))
+
+    if cursor.rowcount > 0:
+        if args.dry_run:
+            if not args.quiet:
+                print(
+                    Fore.GREEN
+                    + "Would delete {0} occurences of: {1}".format(
+                        cursor.rowcount, row[args.from_field_name]
+                    )
+                    + Fore.RESET
+                )
+
+            # Since this a dry run we can continue to the next replacement
+            continue
+
+        # Get the records for items with matching metadata. We will use the
+        # object IDs to update their last_modified dates.
+        matching_records = cursor.fetchall()
+
+        sql = "DELETE from metadatavalue WHERE dspace_object_id IN (SELECT uuid FROM item WHERE in_archive AND NOT withdrawn) AND metadata_field_id=%s AND text_value=%s"
+        cursor.execute(sql, (metadata_field_id, row[args.from_field_name]))
+
+        if cursor.rowcount > 0 and not args.quiet:
+            print(
+                Fore.GREEN
+                + "Deleted {0} occurences of: {1}".format(
+                    cursor.rowcount, row[args.from_field_name]
+                )
+                + Fore.RESET
             )
 
-            # Get item UUIDs for metadata values that will be updated
-            sql = "SELECT dspace_object_id FROM metadatavalue WHERE dspace_object_id IN (SELECT uuid FROM item WHERE in_archive AND NOT withdrawn) AND metadata_field_id=%s AND text_value=%s"
-            cursor.execute(sql, (metadata_field_id, row[args.from_field_name]))
+        # Update the last_modified date for each item we've changed
+        for record in matching_records:
+            util.update_item_last_modified(cursor, record[0])
 
-            if cursor.rowcount > 0:
-                if args.dry_run:
-                    if not args.quiet:
-                        print(
-                            Fore.GREEN
-                            + "Would delete {0} occurences of: {1}".format(
-                                cursor.rowcount, row[args.from_field_name]
-                            )
-                            + Fore.RESET
-                        )
 
-                    # Since this a dry run we can continue to the next replacement
-                    continue
-
-                # Get the records for items with matching metadata. We will use the
-                # object IDs to update their last_modified dates.
-                matching_records = cursor.fetchall()
-
-                sql = "DELETE from metadatavalue WHERE dspace_object_id IN (SELECT uuid FROM item WHERE in_archive AND NOT withdrawn) AND metadata_field_id=%s AND text_value=%s"
-                cursor.execute(sql, (metadata_field_id, row[args.from_field_name]))
-
-                if cursor.rowcount > 0 and not args.quiet:
-                    print(
-                        Fore.GREEN
-                        + "Deleted {0} occurences of: {1}".format(
-                            cursor.rowcount, row[args.from_field_name]
-                        )
-                        + Fore.RESET
-                    )
-
-                # Update the last_modified date for each item we've changed
-                for record in matching_records:
-                    util.update_item_last_modified(cursor, record[0])
+# commit the changes when we are done
+if not args.dry_run:
+    conn.commit()
 
 # close database connection before we exit
 conn.close()
