@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# add-orcid-identifiers-csv.py v1.1.5
+# add-orcid-identifiers-csv.py v1.1.6
 #
 # Copyright Alan Orth.
 
@@ -30,7 +30,7 @@
 # This script is written for Python 3 and requires several modules that you can
 # install with pip (I recommend setting up a Python virtual environment first):
 #
-#   $ pip install colorama psycopg2
+#   $ pip install colorama psycopg
 #
 
 import argparse
@@ -40,8 +40,8 @@ import re
 import signal
 import sys
 
-import psycopg2
-import psycopg2.extras
+import psycopg
+
 import util
 from colorama import Fore
 
@@ -111,6 +111,8 @@ def main():
         args.database_name, args.database_user, args.database_pass, "localhost"
     )
 
+    cursor = conn.cursor()
+
     # open the CSV
     reader = csv.DictReader(args.csv_file)
 
@@ -122,119 +124,115 @@ def main():
             Fore.GREEN + f"Finding items with author name: {author_name}" + Fore.RESET
         )
 
-        with conn:
-            # cursor will be closed after this block exits
-            # see: http://initd.org/psycopg/docs/usage.html#with-statement
-            with conn.cursor() as cursor:
-                # find all item metadata records with this author name
-                # metadata_field_id 3 is author
-                sql = "SELECT dspace_object_id, place FROM metadatavalue WHERE dspace_object_id IN (SELECT uuid FROM item WHERE in_archive AND NOT withdrawn) AND metadata_field_id=3 AND text_value=%s"
-                # remember that tuples with one item need a comma after them!
-                cursor.execute(sql, (author_name,))
-                records_with_author_name = cursor.fetchall()
+        # find all item metadata records with this author name
+        # metadata_field_id 3 is author
+        sql = "SELECT dspace_object_id, place FROM metadatavalue WHERE dspace_object_id IN (SELECT uuid FROM item WHERE in_archive AND NOT withdrawn) AND metadata_field_id=3 AND text_value=%s"
+        # remember that tuples with one item need a comma after them!
+        cursor.execute(sql, (author_name,))
+        records_with_author_name = cursor.fetchall()
 
-                if len(records_with_author_name) > 0:
-                    logger.debug(
-                        Fore.GREEN
-                        + f"> Found {len(records_with_author_name)} items."
+        if len(records_with_author_name) > 0:
+            logger.debug(
+                Fore.GREEN
+                + f"> Found {len(records_with_author_name)} items."
+                + Fore.RESET
+            )
+
+            # extract cg.creator.identifier text to add from CSV and strip leading/trailing whitespace
+            text_value = row[args.orcid_field_name].strip()
+            # extract the ORCID identifier from the cg.creator.identifier text field in the CSV
+            orcid_identifier_pattern = re.compile(
+                r"[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}"
+            )
+            orcid_identifier_match = orcid_identifier_pattern.search(text_value)
+
+            # sanity check to make sure we extracted the ORCID identifier from the cg.creator.identifier text in the CSV
+            if orcid_identifier_match is None:
+                logger.debug(
+                    Fore.YELLOW
+                    + f'Skipping invalid ORCID identifier in "{text_value}".'
+                    + Fore.RESET
+                )
+                continue
+
+            # we only expect one ORCID identifier, so if it matches it will be group "0"
+            # see: https://docs.python.org/3/library/re.html
+            orcid_identifier = orcid_identifier_match.group(0)
+
+            # iterate over results for current author name to add cg.creator.identifier metadata
+            for record in records_with_author_name:
+                dspace_object_id = record[0]
+                # "place" is the order of a metadata value so we can add the cg.creator.identifier metadata matching the author order
+                place = record[1]
+                confidence = -1
+
+                # get the metadata_field_id for the cg.creator.identifier field
+                metadata_field_id = util.field_name_to_field_id(
+                    cursor, "cg.creator.identifier"
+                )
+
+                # check if there is an existing cg.creator.identifier with this author's ORCID identifier for this item (without restricting the "place")
+                # note that the SQL here is quoted differently to allow us to use LIKE with % wildcards with our paremeter subsitution
+                sql = "SELECT * from metadatavalue WHERE dspace_object_id=%s AND metadata_field_id=%s AND text_value LIKE '%%' || %s || '%%' AND confidence=%s AND dspace_object_id IN (SELECT uuid FROM item WHERE in_archive AND NOT withdrawn)"
+
+                cursor.execute(
+                    sql,
+                    (
+                        dspace_object_id,
+                        metadata_field_id,
+                        orcid_identifier,
+                        confidence,
+                    ),
+                )
+                records_with_orcid_identifier = cursor.fetchall()
+
+                if len(records_with_orcid_identifier) == 0:
+                    if args.dry_run:
+                        logger.info(
+                            Fore.YELLOW
+                            + f'(DRY RUN) Adding ORCID identifier "{text_value}" to item {dspace_object_id}'
+                            + Fore.RESET
+                        )
+
+                        continue
+
+                    logger.info(
+                        Fore.YELLOW
+                        + f'Adding ORCID identifier "{text_value}" to item {dspace_object_id}'
                         + Fore.RESET
                     )
 
-                    # extract cg.creator.identifier text to add from CSV and strip leading/trailing whitespace
-                    text_value = row[args.orcid_field_name].strip()
-                    # extract the ORCID identifier from the cg.creator.identifier text field in the CSV
-                    orcid_identifier_pattern = re.compile(
-                        r"[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}"
+                    # metadatavalue IDs come from a PostgreSQL sequence that increments when you call it
+                    cursor.execute("SELECT nextval('metadatavalue_seq')")
+                    metadata_value_id = cursor.fetchone()[0]
+
+                    sql = "INSERT INTO metadatavalue (metadata_value_id, dspace_object_id, metadata_field_id, text_value, place, confidence) VALUES (%s, %s, %s, %s, %s, %s)"
+                    cursor.execute(
+                        sql,
+                        (
+                            metadata_value_id,
+                            dspace_object_id,
+                            metadata_field_id,
+                            text_value,
+                            place,
+                            confidence,
+                        ),
                     )
-                    orcid_identifier_match = orcid_identifier_pattern.search(text_value)
 
-                    # sanity check to make sure we extracted the ORCID identifier from the cg.creator.identifier text in the CSV
-                    if orcid_identifier_match is None:
-                        logger.debug(
-                            Fore.YELLOW
-                            + f'Skipping invalid ORCID identifier in "{text_value}".'
-                            + Fore.RESET
-                        )
-                        continue
-
-                    # we only expect one ORCID identifier, so if it matches it will be group "0"
-                    # see: https://docs.python.org/3/library/re.html
-                    orcid_identifier = orcid_identifier_match.group(0)
-
-                    # iterate over results for current author name to add cg.creator.identifier metadata
-                    for record in records_with_author_name:
-                        dspace_object_id = record[0]
-                        # "place" is the order of a metadata value so we can add the cg.creator.identifier metadata matching the author order
-                        place = record[1]
-                        confidence = -1
-
-                        # get the metadata_field_id for the cg.creator.identifier field
-                        sql = "SELECT metadata_field_id FROM metadatafieldregistry WHERE metadata_schema_id=2 AND element='creator' AND qualifier='identifier'"
-                        cursor.execute(sql)
-                        metadata_field_id = cursor.fetchall()[0]
-
-                        # check if there is an existing cg.creator.identifier with this author's ORCID identifier for this item (without restricting the "place")
-                        # note that the SQL here is quoted differently to allow us to use LIKE with % wildcards with our paremeter subsitution
-                        sql = "SELECT * from metadatavalue WHERE dspace_object_id=%s AND metadata_field_id=%s AND text_value LIKE '%%' || %s || '%%' AND confidence=%s AND dspace_object_id IN (SELECT uuid FROM item WHERE in_archive AND NOT withdrawn)"
-
-                        # Adapt Python’s uuid.UUID type to PostgreSQL's uuid
-                        # See: https://www.psycopg.org/docs/extras.html
-                        psycopg2.extras.register_uuid()
-
-                        cursor.execute(
-                            sql,
-                            (
-                                dspace_object_id,
-                                metadata_field_id,
-                                orcid_identifier,
-                                confidence,
-                            ),
-                        )
-                        records_with_orcid_identifier = cursor.fetchall()
-
-                        if len(records_with_orcid_identifier) == 0:
-                            if args.dry_run:
-                                logger.info(
-                                    Fore.YELLOW
-                                    + f'(DRY RUN) Adding ORCID identifier "{text_value}" to item {dspace_object_id}'
-                                    + Fore.RESET
-                                )
-
-                                continue
-
-                            logger.info(
-                                Fore.YELLOW
-                                + f'Adding ORCID identifier "{text_value}" to item {dspace_object_id}'
-                                + Fore.RESET
-                            )
-
-                            # metadatavalue IDs come from a PostgreSQL sequence that increments when you call it
-                            cursor.execute("SELECT nextval('metadatavalue_seq')")
-                            metadata_value_id = cursor.fetchone()[0]
-
-                            sql = "INSERT INTO metadatavalue (metadata_value_id, dspace_object_id, metadata_field_id, text_value, place, confidence) VALUES (%s, %s, %s, %s, %s, %s)"
-                            cursor.execute(
-                                sql,
-                                (
-                                    metadata_value_id,
-                                    dspace_object_id,
-                                    metadata_field_id,
-                                    text_value,
-                                    place,
-                                    confidence,
-                                ),
-                            )
-
-                            # Update the last_modified date for each item
-                            util.update_item_last_modified(cursor, dspace_object_id)
-                        else:
-                            logger.debug(
-                                Fore.GREEN
-                                + f"Item {dspace_object_id} already has an ORCID identifier for {text_value}."
-                                + Fore.RESET
-                            )
+                    # Update the last_modified date for each item
+                    util.update_item_last_modified(cursor, dspace_object_id)
+                else:
+                    logger.debug(
+                        Fore.GREEN
+                        + f"Item {dspace_object_id} already has an ORCID identifier for {text_value}."
+                        + Fore.RESET
+                    )
 
     logger.debug("Disconnecting from database.")
+
+    # commit the changes
+    if not args.dry_run:
+        conn.commit()
 
     # close the database connection before leaving
     conn.close()
