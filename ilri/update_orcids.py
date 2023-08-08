@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# update-orcids.py v0.1.3
+# update-orcids.py v0.1.4
 #
 # Copyright Alan Orth.
 #
@@ -25,12 +25,16 @@
 #
 
 import argparse
+import logging
 import re
 import signal
 import sys
 
 import util
 from colorama import Fore
+
+# Create a local logger instance
+logger = logging.getLogger(__name__)
 
 
 def signal_handler(signal, frame):
@@ -69,6 +73,15 @@ parser.add_argument(
     action="store_true",
 )
 args = parser.parse_args()
+
+# The default log level is WARNING, but we want to set it to DEBUG or INFO
+if args.debug:
+    logger.setLevel(logging.DEBUG)
+else:
+    logger.setLevel(logging.INFO)
+
+# Set the global log format
+logging.basicConfig(format="[%(levelname)s] %(message)s")
 
 # set the signal handler for SIGINT (^C)
 signal.signal(signal.SIGINT, signal_handler)
@@ -118,9 +131,9 @@ for line in args.input_file.read().splitlines():
 
         if args.dry_run:
             if cursor.rowcount > 0 and not args.quiet:
-                print(
+                logger.info(
                     Fore.GREEN
-                    + f"Would fix {cursor.rowcount} occurences of: {line}"
+                    + f"(DRY RUN) Fixed {cursor.rowcount} occurences of: {line}"
                     + Fore.RESET
                 )
         else:
@@ -136,7 +149,7 @@ for line in args.input_file.read().splitlines():
             )
 
             if cursor.rowcount > 0 and not args.quiet:
-                print(
+                logger.info(
                     Fore.GREEN
                     + f"Fixed {cursor.rowcount} occurences of: {line}"
                     + Fore.RESET
