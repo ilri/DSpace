@@ -40,7 +40,7 @@ def field_name_to_field_id(cursor, metadata_field: str):
     cursor.execute(sql, [schema])
 
     if cursor.rowcount > 0:
-        metadata_schema_id = cursor.fetchall()[0]
+        metadata_schema_id = cursor.fetchone()[0]
 
         # Now we can get the metadata field ID, paying attention to whether the
         # field has a qualifier or not.
@@ -52,7 +52,7 @@ def field_name_to_field_id(cursor, metadata_field: str):
             cursor.execute(sql, [metadata_schema_id, element])
 
         if cursor.rowcount > 0:
-            metadata_field_id = cursor.fetchall()[0]
+            metadata_field_id = cursor.fetchone()[0]
 
     return metadata_field_id
 
