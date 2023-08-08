@@ -148,6 +148,8 @@ for line in args.input_file.read().splitlines():
                 ),
             )
 
+            conn.commit()
+
             if cursor.rowcount > 0 and not args.quiet:
                 logger.info(
                     Fore.GREEN
