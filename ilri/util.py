@@ -12,7 +12,7 @@
 import re
 import sys
 
-import psycopg2
+import psycopg
 from colorama import Fore
 
 
@@ -22,7 +22,7 @@ def field_name_to_field_id(cursor, metadata_field: str):
     TODO: handle case where schema doesn't exist
     TODO: handle case where metadata field doesn't exist
 
-    :param cursor: a psycop2 cursor with an active database session.
+    :param cursor: a psycopg cursor with an active database session.
     :param metadata_field: the metadata field, for example "dcterms.title".
     :returns int
     """
@@ -60,7 +60,7 @@ def field_name_to_field_id(cursor, metadata_field: str):
 def update_item_last_modified(cursor, dspace_object_id: str):
     """Update an item's last_modified timestamp.
 
-    :param cursor: a psycop2 cursor with an active database session.
+    :param cursor: a psycopg cursor with an active database session.
     :param dspace_object_id: dspace_object_id of the item to update.
     """
 
@@ -83,10 +83,10 @@ def db_connect(
     """
 
     try:
-        conn = psycopg2.connect(
+        conn = psycopg.connect(
             f"dbname={database_name} user={database_user} password={database_pass} host={database_host}"
         )
-    except psycopg2.OperationalError:
+    except psycopg.OperationalError:
         sys.stderr.write(Fore.RED + "Could not connect to database.\n" + Fore.RESET)
         sys.exit(1)
 
