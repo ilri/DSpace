@@ -443,7 +443,7 @@ public class ItemsResource extends Resource {
     @POST
     @Path("/{item_id}/bitstreams")
     public Bitstream addItemBitstream(@PathParam("item_id") String itemId, InputStream inputStream,
-                                      @QueryParam("name") String name, @QueryParam("description") String description,
+                                      @QueryParam("name") String name, @QueryParam("description") String description, @QueryParam("bundleName") String bundleName,
                                       @QueryParam("groupId") String groupId, @QueryParam("year") Integer year,
                                       @QueryParam("month") Integer month,
                                       @QueryParam("day") Integer day, @QueryParam("userIP") String user_ip,
@@ -467,15 +467,29 @@ public class ItemsResource extends Resource {
             log.trace("Creating bitstream in item.");
             org.dspace.content.Bundle bundle = null;
             org.dspace.content.Bitstream dspaceBitstream = null;
-            List<Bundle> bundles = itemService.getBundles(dspaceItem, org.dspace.core.Constants.CONTENT_BUNDLE_NAME);
+            List<Bundle> bundles = dspaceItem.getBundles();
+
+            // add bitstream to specified bundle
+            if (bundleName == null) {
+                bundleName = "ORIGINAL";
+            }
+            for (Bundle existingBundle : bundles)
+            {
+                if (existingBundle.getName().equals(bundleName))
+                {
+                    bundle = existingBundle;
+                    break;
+                }
+            }
 
             if (bundles != null && bundles.size() != 0) {
                 bundle = bundles.get(0); // There should be only one bundle ORIGINAL.
             }
             if (bundle == null) {
-                log.trace("Creating bundle in item.");
-                dspaceBitstream = itemService.createSingleBitstream(context, inputStream, dspaceItem);
+                log.trace("Creating bundle "+bundleName+" in item.");
+                dspaceBitstream = itemService.createSingleBitstream(context, inputStream, dspaceItem, bundleName);
             } else {
+
                 log.trace("Getting bundle from item.");
                 dspaceBitstream = bitstreamService.create(context, bundle, inputStream);
             }
