@@ -168,6 +168,7 @@
                 <ref bean="searchFilterType" />
                 <ref bean="searchFilterInitiative" />
                 <ref bean="searchFilterCrpSubject" />
+                <ref bean="searchFilterSubject"/>
                 <ref bean="searchFilterActionArea" />
                 <ref bean="searchFilterImpactArea" />
                 <ref bean="searchFilterSDG" />
@@ -190,11 +191,11 @@
                 <ref bean="searchFilterType" />
                 <ref bean="searchFilterInitiative" />
                 <ref bean="searchFilterCrpSubject" />
+                <ref bean="searchFilterSubject"/>
                 <ref bean="searchFilterActionArea" />
                 <ref bean="searchFilterImpactArea" />
                 <ref bean="searchFilterSDG" />
                 <ref bean="searchFilterSponsorship" />
-                <ref bean="searchFilterSubject" />
                 <ref bean="searchFilterRegion"/>
                 <ref bean="searchFilterCountry"/>
                 <ref bean="searchFilterAccessRights"/>
