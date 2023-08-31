@@ -166,6 +166,7 @@
                 <ref bean="searchFilterAffiliation" />
                 <ref bean="searchFilterIssued" />
                 <ref bean="searchFilterType" />
+                <ref bean="searchFilterPublisher" />
                 <ref bean="searchFilterInitiative" />
                 <ref bean="searchFilterCrpSubject" />
                 <ref bean="searchFilterSubject"/>
@@ -189,6 +190,7 @@
                 <ref bean="searchFilterAffiliation" />
                 <ref bean="searchFilterIssued" />
                 <ref bean="searchFilterType" />
+                <ref bean="searchFilterPublisher" />
                 <ref bean="searchFilterInitiative" />
                 <ref bean="searchFilterCrpSubject" />
                 <ref bean="searchFilterSubject"/>
@@ -3007,6 +3009,18 @@
             </list>
         </property>
         <property name="facetLimit" value="3"/>
+        <property name="sortOrderSidebar" value="COUNT"/>
+        <property name="sortOrderFilterPage" value="COUNT"/>
+    </bean>
+
+    <bean id="searchFilterPublisher" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
+        <property name="indexFieldName" value="publisher"/>
+        <property name="metadataFields">
+            <list>
+                <value>dcterms.publisher</value>
+            </list>
+        </property>
+        <property name="facetLimit" value="5"/>
         <property name="sortOrderSidebar" value="COUNT"/>
         <property name="sortOrderFilterPage" value="COUNT"/>
     </bean>
