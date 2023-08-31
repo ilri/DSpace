@@ -119,8 +119,6 @@
                 <ref bean="searchFilterTargetAudience"/>
                 <ref bean="searchFilterSubject" />
                 <ref bean="searchFilterAllianceBioversityCiat"/>
-                <ref bean="searchFilterBioversity"/>
-                <ref bean="searchFilterCiatSubject"/>
                 <ref bean="searchFilterCipSubject" />
                 <ref bean="searchFilterIitaSubject"/>
                 <ref bean="searchFilterIlriSubject"/>
@@ -154,9 +152,7 @@
                 <ref bean="searchFilterSpecies" />
                 <ref bean="searchFilterBreed" />
                 <ref bean="searchFilterAllianceBioversityCiat"/>
-                <ref bean="searchFilterBioversity"/>
                 <ref bean="searchFilterCcafSubject"/>
-                <ref bean="searchFilterCiatSubject"/>
                 <ref bean="searchFilterCiforSubject"/>
                 <ref bean="searchFilterCipSubject" />
                 <ref bean="searchFilterCpwfSubject"/>
@@ -288,8 +284,6 @@
                 <ref bean="searchFilterTargetAudience"/>
                 <ref bean="searchFilterSubject" />
                 <ref bean="searchFilterAllianceBioversityCiat"/>
-                <ref bean="searchFilterBioversity"/>
-                <ref bean="searchFilterCiatSubject"/>
                 <ref bean="searchFilterCipSubject" />
                 <ref bean="searchFilterIitaSubject"/>
                 <ref bean="searchFilterIlriSubject"/>
@@ -326,9 +320,7 @@
                 <ref bean="searchFilterSpecies" />
                 <ref bean="searchFilterBreed" />
                 <ref bean="searchFilterAllianceBioversityCiat"/>
-                <ref bean="searchFilterBioversity"/>
                 <ref bean="searchFilterCcafSubject"/>
-                <ref bean="searchFilterCiatSubject"/>
                 <ref bean="searchFilterCiforSubject"/>
                 <ref bean="searchFilterCipSubject" />
                 <ref bean="searchFilterCpwfSubject"/>
@@ -780,35 +772,11 @@
         </property>
     </bean>
 
-    <bean id="searchFilterBioversity" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
-        <property name="indexFieldName" value="bioversity"/>
-        <property name="metadataFields">
-            <list>
-                <value>cg.subject.bioversity</value>
-            </list>
-        </property>
-        <property name="facetLimit" value="3"/>
-        <property name="sortOrderSidebar" value="COUNT"/>
-        <property name="sortOrderFilterPage" value="COUNT"/>
-    </bean>
-
     <bean id="searchFilterAllianceBioversityCiat" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
         <property name="indexFieldName" value="alliancebiovciatsubject"/>
         <property name="metadataFields">
             <list>
                 <value>cg.subject.alliancebiovciat</value>
-            </list>
-        </property>
-        <property name="facetLimit" value="3"/>
-        <property name="sortOrderSidebar" value="COUNT"/>
-        <property name="sortOrderFilterPage" value="COUNT"/>
-    </bean>
-
-    <bean id="searchFilterCiatSubject" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
-        <property name="indexFieldName" value="ciatsubject"/>
-        <property name="metadataFields">
-            <list>
-                <value>cg.subject.ciat</value>
             </list>
         </property>
         <property name="facetLimit" value="3"/>
