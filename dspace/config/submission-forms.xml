@@ -511,7 +511,7 @@
                     <dc-element>contributor</dc-element>
                     <dc-qualifier>crp</dc-qualifier>
                     <repeatable>true</repeatable>
-                    <label>CGIAR Research Programs and Platforms</label>
+                    <label>CGIAR Research Programs and Platforms (2012–2021)</label>
                     <input-type value-pairs-name="crpsubject">tag</input-type>
                     <hint>Select any CGIAR Research Program(s) and Platform(s) associated with this item. Use this to show that a CRP funded this item.</hint>
                     <required></required>
