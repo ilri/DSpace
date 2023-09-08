@@ -463,6 +463,18 @@
                 <field>
                     <dc-schema>cg</dc-schema>
                     <dc-element>subject</dc-element>
+                    <dc-qualifier>impactPlatform</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>CGIAR Impact Platforms</label>
+                    <input-type value-pairs-name="impactPlatforms">dropdown</input-type>
+                    <hint>Select any CGIAR Impact Platforms associated with this item.</hint>
+                    <required></required>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>cg</dc-schema>
+                    <dc-element>subject</dc-element>
                     <dc-qualifier>impactArea</dc-qualifier>
                     <repeatable>true</repeatable>
                     <label>CGIAR Impact Areas</label>
@@ -3083,6 +3095,16 @@
       <pair>
         <displayed-value>SDG 17 - Partnerships for the goals</displayed-value>
         <stored-value>SDG 17 - Partnerships for the goals</stored-value>
+      </pair>
+    </value-pairs>
+    <value-pairs value-pairs-name="impactPlatforms">
+      <pair>
+        <displayed-value>Climate Change</displayed-value>
+        <stored-value>Climate Change</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Gender</displayed-value>
+        <stored-value>Gender</stored-value>
       </pair>
     </value-pairs>
     <value-pairs value-pairs-name="impactAreas">
