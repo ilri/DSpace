@@ -364,7 +364,7 @@
                     <repeatable>true</repeatable>
                     <label>Target audience</label>
                     <hint>Indicate the main audience for whom the item is produced.</hint>
-                    <input-type value-pairs-name="TARGET_AUDIENCE">dropdown</input-type>
+                    <input-type value-pairs-name="TARGET_AUDIENCE">tag</input-type>
                     <required></required>
                 </field>
             </row>
@@ -434,7 +434,7 @@
                     <dc-qualifier></dc-qualifier>
                     <repeatable>true</repeatable>
                     <label>Language</label>
-                    <input-type value-pairs-name="common_iso_languages">dropdown</input-type>
+                    <input-type value-pairs-name="common_iso_languages">tag</input-type>
                     <hint>Select the language of the main content of the item. If the language does not appear in the
                         list, please select 'Other'. If the content does not really have a language (for example, if it
                         is a dataset or an image) please leave this blank.
@@ -454,7 +454,7 @@
                     <dc-qualifier>initiative</dc-qualifier>
                     <repeatable>true</repeatable>
                     <label>CGIAR Initiatives</label>
-                    <input-type value-pairs-name="cgiar-initiatives">dropdown</input-type>
+                    <input-type value-pairs-name="cgiar-initiatives">tag</input-type>
                     <hint>Select any CGIAR Initiatives(s) associated with this item. Use this to show that an Initiative funded this item.</hint>
                     <required></required>
                 </field>
@@ -466,7 +466,7 @@
                     <dc-qualifier>crp</dc-qualifier>
                     <repeatable>true</repeatable>
                     <label>CGIAR Research Programs and Platforms</label>
-                    <input-type value-pairs-name="crpsubject">dropdown</input-type>
+                    <input-type value-pairs-name="crpsubject">tag</input-type>
                     <hint>Select any CGIAR Research Program(s) and Platform(s) associated with this item. Use this to show that a CRP funded this item.</hint>
                     <required></required>
                 </field>
@@ -478,7 +478,7 @@
                     <dc-qualifier>sdg</dc-qualifier>
                     <repeatable>true</repeatable>
                     <label>UN Sustainable Development Goals (SDGs)</label>
-                    <input-type value-pairs-name="sdgs">dropdown</input-type>
+                    <input-type value-pairs-name="sdgs">tag</input-type>
                     <hint>Select any UN Sustainable Development Goals associated with this item.</hint>
                     <required></required>
                 </field>
@@ -512,7 +512,7 @@
                     <dc-qualifier>country</dc-qualifier>
                     <repeatable>true</repeatable>
                     <label>Country</label>
-                    <input-type value-pairs-name="countrylist">dropdown</input-type>
+                    <input-type value-pairs-name="countrylist">tag</input-type>
                     <hint>Select a country or countries within the scope of the item.</hint>
                     <required></required>
                 </field>
@@ -606,7 +606,7 @@
                     <dc-qualifier>alliancebiovciat</dc-qualifier>
                     <repeatable>true</repeatable>
                     <label>Alliance of Bioversity and CIAT subject</label>
-                    <input-type value-pairs-name="alliancebiovciat">dropdown</input-type>
+                    <input-type value-pairs-name="alliancebiovciat">tag</input-type>
                     <hint></hint>
                     <required></required>
                 </field>
@@ -618,7 +618,7 @@
                     <dc-qualifier>cip</dc-qualifier>
                     <repeatable>true</repeatable>
                     <label>CIP subject</label>
-                    <input-type value-pairs-name="cipsubject">dropdown</input-type>
+                    <input-type value-pairs-name="cipsubject">tag</input-type>
                     <hint></hint>
                     <required></required>
                 </field>
@@ -630,7 +630,7 @@
                     <dc-qualifier>ilri</dc-qualifier>
                     <repeatable>true</repeatable>
                     <label>ILRI subject</label>
-                    <input-type value-pairs-name="ilrisubject">dropdown</input-type>
+                    <input-type value-pairs-name="ilrisubject">tag</input-type>
                     <hint></hint>
                     <required></required>
                 </field>
