@@ -463,18 +463,6 @@
                 <field>
                     <dc-schema>cg</dc-schema>
                     <dc-element>subject</dc-element>
-                    <dc-qualifier>sdg</dc-qualifier>
-                    <repeatable>true</repeatable>
-                    <label>UN Sustainable Development Goals (SDGs)</label>
-                    <input-type value-pairs-name="sdgs">tag</input-type>
-                    <hint>Select any UN Sustainable Development Goals associated with this item.</hint>
-                    <required></required>
-                </field>
-            </row>
-            <row>
-                <field>
-                    <dc-schema>cg</dc-schema>
-                    <dc-element>subject</dc-element>
                     <dc-qualifier>impactArea</dc-qualifier>
                     <repeatable>true</repeatable>
                     <label>CGIAR Impact Areas</label>
@@ -490,6 +478,18 @@
                     <label>CGIAR Action Areas</label>
                     <input-type value-pairs-name="actionAreas">dropdown</input-type>
                     <hint>Select any CGIAR Action Areas associated with this item.</hint>
+                    <required></required>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>cg</dc-schema>
+                    <dc-element>subject</dc-element>
+                    <dc-qualifier>sdg</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>UN Sustainable Development Goals (SDGs)</label>
+                    <input-type value-pairs-name="sdgs">tag</input-type>
+                    <hint>Select any UN Sustainable Development Goals associated with this item.</hint>
                     <required></required>
                 </field>
             </row>
