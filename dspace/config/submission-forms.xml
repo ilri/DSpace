@@ -434,7 +434,7 @@
                     <dc-qualifier></dc-qualifier>
                     <repeatable>true</repeatable>
                     <label>Language</label>
-                    <input-type value-pairs-name="common_iso_languages">tag</input-type>
+                    <input-type value-pairs-name="common_iso_languages">dropdown</input-type>
                     <hint>Select the language of the main content of the item. If the language does not appear in the
                         list, please select 'Other'. If the content does not really have a language (for example, if it
                         is a dataset or an image) please leave this blank.
@@ -454,7 +454,7 @@
                     <dc-qualifier>initiative</dc-qualifier>
                     <repeatable>true</repeatable>
                     <label>CGIAR Initiatives</label>
-                    <input-type value-pairs-name="cgiar-initiatives">tag</input-type>
+                    <input-type value-pairs-name="cgiar-initiatives">dropdown</input-type>
                     <hint>Select any CGIAR Initiatives(s) associated with this item. Use this to show that an Initiative funded this item.</hint>
                     <required></required>
                 </field>
@@ -524,7 +524,7 @@
                     <dc-qualifier>country</dc-qualifier>
                     <repeatable>true</repeatable>
                     <label>Country</label>
-                    <input-type value-pairs-name="countrylist">tag</input-type>
+                    <input-type value-pairs-name="countrylist">dropdown</input-type>
                     <hint>Select a country or countries within the scope of the item.</hint>
                     <required></required>
                 </field>
@@ -571,7 +571,7 @@
                     <dc-qualifier></dc-qualifier>
                     <repeatable>true</repeatable>
                     <label>AGROVOC Keywords</label>
-                    <input-type>tag</input-type>
+                    <input-type>dropdown</input-type>
                     <hint>Enter AGROVOC subjects in lower case.</hint>
                     <required></required>
                     <vocabulary>dcterms-subject</vocabulary>
@@ -618,7 +618,7 @@
                     <dc-qualifier>alliancebiovciat</dc-qualifier>
                     <repeatable>true</repeatable>
                     <label>Alliance of Bioversity and CIAT subject</label>
-                    <input-type value-pairs-name="alliancebiovciat">tag</input-type>
+                    <input-type value-pairs-name="alliancebiovciat">dropdown</input-type>
                     <hint></hint>
                     <required></required>
                 </field>
@@ -630,7 +630,7 @@
                     <dc-qualifier>cip</dc-qualifier>
                     <repeatable>true</repeatable>
                     <label>CIP subject</label>
-                    <input-type value-pairs-name="cipsubject">tag</input-type>
+                    <input-type value-pairs-name="cipsubject">dropdown</input-type>
                     <hint></hint>
                     <required></required>
                 </field>
@@ -642,7 +642,7 @@
                     <dc-qualifier>ilri</dc-qualifier>
                     <repeatable>true</repeatable>
                     <label>ILRI subject</label>
-                    <input-type value-pairs-name="ilrisubject">tag</input-type>
+                    <input-type value-pairs-name="ilrisubject">dropdown</input-type>
                     <hint></hint>
                     <required></required>
                 </field>
