@@ -364,7 +364,7 @@
                     <repeatable>true</repeatable>
                     <label>Target audience</label>
                     <hint>Indicate the main audience for whom the item is produced.</hint>
-                    <input-type value-pairs-name="TARGET_AUDIENCE">tag</input-type>
+                    <input-type value-pairs-name="TARGET_AUDIENCE">dropdown</input-type>
                     <required></required>
                 </field>
             </row>
@@ -500,7 +500,7 @@
                     <dc-qualifier>sdg</dc-qualifier>
                     <repeatable>true</repeatable>
                     <label>UN Sustainable Development Goals (SDGs)</label>
-                    <input-type value-pairs-name="sdgs">tag</input-type>
+                    <input-type value-pairs-name="sdgs">dropdown</input-type>
                     <hint>Select any UN Sustainable Development Goals associated with this item.</hint>
                     <required></required>
                 </field>
@@ -512,7 +512,7 @@
                     <dc-qualifier>crp</dc-qualifier>
                     <repeatable>true</repeatable>
                     <label>CGIAR Research Programs and Platforms (2012–2021)</label>
-                    <input-type value-pairs-name="crpsubject">tag</input-type>
+                    <input-type value-pairs-name="crpsubject">dropdown</input-type>
                     <hint>Select any CGIAR Research Program(s) and Platform(s) associated with this item. Use this to show that a CRP funded this item.</hint>
                     <required></required>
                 </field>
