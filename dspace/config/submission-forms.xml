@@ -571,7 +571,7 @@
                     <dc-qualifier></dc-qualifier>
                     <repeatable>true</repeatable>
                     <label>AGROVOC Keywords</label>
-                    <input-type>dropdown</input-type>
+                    <input-type>onebox</input-type>
                     <hint>Enter AGROVOC subjects in lower case.</hint>
                     <required></required>
                     <vocabulary>dcterms-subject</vocabulary>
