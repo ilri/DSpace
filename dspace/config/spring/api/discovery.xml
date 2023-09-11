@@ -166,16 +166,17 @@
                 <ref bean="searchFilterAffiliation" />
                 <ref bean="searchFilterIssued" />
                 <ref bean="searchFilterType" />
-                <ref bean="searchFilterPublisher" />
+                <ref bean="searchFilterRegion"/>
+                <ref bean="searchFilterCountry"/>
                 <ref bean="searchFilterInitiative" />
-                <ref bean="searchFilterCrpSubject" />
+                <ref bean="searchFilterImpactPlatform" />
                 <ref bean="searchFilterSubject"/>
                 <ref bean="searchFilterActionArea" />
                 <ref bean="searchFilterImpactArea" />
+                <ref bean="searchFilterCrpSubject" />
                 <ref bean="searchFilterSDG" />
+                <ref bean="searchFilterPublisher" />
                 <ref bean="searchFilterSponsorship" />
-                <ref bean="searchFilterRegion"/>
-                <ref bean="searchFilterCountry"/>
                 <ref bean="searchFilterAccessRights"/>
                 <ref bean="searchFilterUsageRights"/>
             </list>
@@ -192,6 +193,7 @@
                 <ref bean="searchFilterType" />
                 <ref bean="searchFilterPublisher" />
                 <ref bean="searchFilterInitiative" />
+                <ref bean="searchFilterImpactPlatform" />
                 <ref bean="searchFilterCrpSubject" />
                 <ref bean="searchFilterSubject"/>
                 <ref bean="searchFilterActionArea" />
