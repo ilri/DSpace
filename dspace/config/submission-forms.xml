@@ -3103,8 +3103,20 @@
         <stored-value>Climate Change</stored-value>
       </pair>
       <pair>
+        <displayed-value>Environmental Health and Biodiversity</displayed-value>
+        <stored-value>Environmental Health and Biodiversity</stored-value>
+      </pair>
+      <pair>
         <displayed-value>Gender</displayed-value>
         <stored-value>Gender</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Nutrition, Health and Food Security</displayed-value>
+        <stored-value>Nutrition, Health and Food Security</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Poverty Reduction, Livelihoods and Jobs</displayed-value>
+        <stored-value>Poverty Reduction, Livelihoods and Jobs</stored-value>
       </pair>
     </value-pairs>
     <value-pairs value-pairs-name="impactAreas">
