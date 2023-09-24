@@ -336,3 +336,11 @@ div#file_news_div_news a {
 .statlet .icon {
   font-family: "Font Awesome 5 Free";
 }
+
+// limit size of community/collection logo on medium (tablet) screens and up
+@media screen and (min-width: 768px) {
+  div.ds-logo-wrapper img.logo {
+    max-width: 50%;
+    margin: auto;
+  }
+}
