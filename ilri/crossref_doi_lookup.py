@@ -89,7 +89,9 @@ def resolve_dois(dois: list) -> None:
     writer.writeheader()
 
     expire_after = timedelta(days=30)
-    requests_cache.install_cache("requests-cache", expire_after=expire_after)
+    requests_cache.install_cache(
+        "requests-cache", expire_after=expire_after, allowable_codes=(200, 404)
+    )
 
     # prune old cache entries
     requests_cache.remove_expired_responses()
