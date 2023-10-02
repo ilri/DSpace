@@ -111,15 +111,36 @@ def resolve_dois(dois: list) -> None:
 
         # HTTP 404 here means the DOI is not registered at Crossref
         if request.status_code != requests.codes.ok:
+            if args.debug:
+                logger.debug(
+                    Fore.YELLOW
+                    + f"> DOI not in Crossref (cached: {request.from_cache})"
+                    + Fore.RESET
+                )
+
             continue
 
         data = request.json()
 
-        # Only proceed if this DOI is registered at Crossref
+        # Only proceed if this DOI registration agency is Crossref
         match data["message"]["agency"]["label"]:
             case "DataCite":
+                if args.debug:
+                    logger.debug(
+                        Fore.YELLOW
+                        + f"> Skipping DOI registered to DataCite (cached: {request.from_cache})"
+                        + Fore.RESET
+                    )
+
                 continue
             case "Public":
+                if args.debug:
+                    logger.debug(
+                        Fore.YELLOW
+                        + f'> Skipping DOI registered to "Public" (cached: {request.from_cache})'
+                        + Fore.RESET
+                    )
+
                 continue
             case "Crossref":
                 pass
@@ -319,12 +340,6 @@ def resolve_dois(dois: list) -> None:
                     "published_online": published_online,
                     "license": license_url,
                 }
-            )
-        else:
-            logger.debug(
-                Fore.YELLOW
-                + f"> DOI not in Crossref (cached: {request.from_cache})"
-                + Fore.RESET
             )
 
     # close output file before we exit
