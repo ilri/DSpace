@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# crossref-doi-lookup.py 0.1.1
+# crossref-doi-lookup.py 0.1.2
 #
 # Copyright Alan Orth.
 #
@@ -85,6 +85,7 @@ def resolve_dois(dois: list) -> None:
         "published_print",
         "published_online",
         "license",
+        "subjects",
     ]
     writer = csv.DictWriter(args.output_file, fieldnames=fieldnames)
     writer.writeheader()
@@ -266,6 +267,16 @@ def resolve_dois(dois: list) -> None:
             except KeyError:
                 item_type = ""
 
+            subjects = list()
+
+            # Get the subjects. Still not sure if these are useful. We should
+            # check against AGROVOC before importing.
+            try:
+                for subject in data["message"]["subject"]:
+                    subjects.append(subject)
+            except KeyError:
+                subjects = ""
+
             # It appears that *all* DOIs on Crossref have an "issued" date. This
             # is the earliest of the print and online publishing dates. For now
             # I will capture this so I can explore its implications and relation
@@ -339,6 +350,7 @@ def resolve_dois(dois: list) -> None:
                     "published_print": published_print,
                     "published_online": published_online,
                     "license": license_url,
+                    "subjects": "||".join(subjects),
                 }
             )
 
