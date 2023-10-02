@@ -70,6 +70,7 @@ def fix_crossref_date(crossref_date: list) -> str:
 def resolve_dois(dois: list) -> None:
     fieldnames = [
         "title",
+        "abstract",
         "authors",
         "doi",
         "journal",
@@ -186,8 +187,12 @@ def resolve_dois(dois: list) -> None:
             except KeyError:
                 authors = ""
 
-            # Get the journal title. I'm not sure if there can be more than one
-            # of these because it's a list (and I'm only getting the first).
+            # Get the abstract if it exists
+            try:
+                abstract = data["message"]["abstract"]
+            except KeyError:
+                abstract = ""
+
             try:
                 journal = data["message"]["container-title"][0]
             except IndexError:
@@ -298,6 +303,7 @@ def resolve_dois(dois: list) -> None:
             writer.writerow(
                 {
                     "title": title,
+                    "abstract": abstract,
                     "authors": "||".join(authors),
                     "doi": doi,
                     "journal": journal,
