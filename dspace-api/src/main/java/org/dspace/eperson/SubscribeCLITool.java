@@ -210,6 +210,15 @@ public class SubscribeCLITool {
                             }
                         }
 
+                        // CGSpace customization to show item type in subscription email
+                        List<MetadataValue> item_types = itemService.getMetadata(hii.item, "dcterms", "type", Item.ANY, Item.ANY);
+
+                        if (!item_types.isEmpty()) {
+                            // Type is mandatory and items should only have one,
+                            // but let's get the first just in case.
+                            emailText.append("\n    Type: ").append(item_types.get(0).getValue());
+                        }
+
                         emailText.append("\n         ").append(labels.getString("org.dspace.eperson.Subscribe.id")).append(" ").append(
                                 handleService.getCanonicalForm(hii.handle)).append(
                                 "\n\n");
