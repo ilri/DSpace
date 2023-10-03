@@ -24,7 +24,7 @@
            The VersionedHandleIdentifierProvider creates a new versioned
            handle for every new version.
            -->
-    <bean id="org.dspace.identifier.HandleIdentifierProvider" class="org.dspace.identifier.VersionedHandleIdentifierProvider" scope="singleton">
+    <bean id="org.dspace.identifier.HandleIdentifierProvider" class="org.dspace.identifier.HandleIdentifierProvider" scope="singleton">
         <property name="configurationService" ref="org.dspace.services.ConfigurationService"/>
     </bean>
     <!--
