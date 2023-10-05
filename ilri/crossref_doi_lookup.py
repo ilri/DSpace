@@ -337,7 +337,7 @@ def resolve_dois(dois: list) -> None:
                     "title": title,
                     "abstract": abstract,
                     "authors": "||".join(authors),
-                    "doi": doi,
+                    "doi": f"https://doi.org/{doi}",
                     "journal": journal,
                     "issn": "||".join(issns),
                     "isbn": "||".join(isbns),
