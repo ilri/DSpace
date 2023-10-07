@@ -138,7 +138,7 @@ expire_after = timedelta(days=1)
 requests_cache.install_cache("requests-cache", expire_after=expire_after)
 
 # Prune old cache entries
-requests_cache.remove_expired_responses()
+requests_cache.delete()
 
 # Fetch the controlled vocabulary for Initiatives
 try:

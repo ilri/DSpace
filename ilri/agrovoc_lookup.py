@@ -59,7 +59,7 @@ def resolve_subjects(subjects):
     requests_cache.install_cache("requests-cache", expire_after=expire_after)
 
     # prune old cache entries
-    requests_cache.remove_expired_responses()
+    requests_cache.delete()
 
     for subject in subjects:
         if args.debug:

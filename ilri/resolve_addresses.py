@@ -79,7 +79,7 @@ def resolve_addresses(addresses):
     requests_cache.install_cache("requests-cache", expire_after=expire_after)
 
     # prune old cache entries
-    requests_cache.remove_expired_responses()
+    requests_cache.delete()
 
     # iterate through our addresses
     for address in addresses:

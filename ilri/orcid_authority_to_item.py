@@ -135,7 +135,7 @@ def resolve_orcid_identifier(args, orcid):
     request = requests.get(request_url, headers={"Accept": "application/json"})
 
     # prune old cache entries
-    requests_cache.remove_expired_responses()
+    requests_cache.delete()
 
     # Check the request status
     if request.status_code == requests.codes.ok:
