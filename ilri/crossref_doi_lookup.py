@@ -90,14 +90,6 @@ def resolve_dois(dois: list) -> None:
     writer = csv.DictWriter(args.output_file, fieldnames=fieldnames)
     writer.writeheader()
 
-    expire_after = timedelta(days=30)
-    requests_cache.install_cache(
-        "requests-cache", expire_after=expire_after, allowable_codes=(200, 404)
-    )
-
-    # prune old cache entries
-    requests_cache.remove_expired_responses()
-
     for doi in dois:
         logger.info(Fore.GREEN + f"Looking up DOI: {doi}" + Fore.RESET)
 
@@ -408,6 +400,14 @@ logging.basicConfig(format="[%(levelname)s] %(message)s")
 
 # set the signal handler for SIGINT (^C) so we can exit cleanly
 signal.signal(signal.SIGINT, signal_handler)
+
+# install a transparent requests cache
+expire_after = timedelta(days=30)
+requests_cache.install_cache(
+    "requests-cache", expire_after=expire_after, allowable_codes=(200, 404)
+)
+# prune old cache entries
+requests_cache.remove_expired_responses()
 
 # if the user specified an input file, get the DOIs from there
 if args.input_file:
