@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# get_scihub_pdfs.py 0.0.1
+# get_scihub_pdfs.py 0.0.2
 #
 # Copyright Alan Orth.
 #
@@ -31,6 +31,7 @@ import os.path
 import re
 import signal
 
+import util
 from colorama import Fore
 from scidownl import scihub_download
 
@@ -43,23 +44,19 @@ def signal_handler(signal, frame):
 
 
 def download_pdf(doi):
-    # Extract actual DOI portion from DOI string, just in case it is a URL, and
-    # strip the newline
-    doi_stripped = re.sub(r"https?://(dx.)?doi.org/", "", doi).strip()
-    # Set filename based on DOI, ie: 10.3402/iee.v6.31191 → 10.3402-iee.v6.31191.pdf
-    filename = doi_stripped.replace("/", "-") + ".pdf"
+    filename = doi.replace("/", "-") + ".pdf"
 
-    logger.info(f"Processing {doi_stripped}")
+    logger.info(f"Processing {doi}")
 
     # check if file exists already
     if os.path.isfile(filename):
         logger.debug(Fore.GREEN + f"> {filename} already downloaded." + Fore.RESET)
     else:
         logger.debug(
-            Fore.GREEN + f"> Attempting to download PDF for {doi_stripped}" + Fore.RESET
+            Fore.GREEN + f"> Attempting to download PDF for {doi}" + Fore.RESET
         )
 
-        scihub_download(doi_stripped, paper_type="doi", out=filename)
+        scihub_download(doi, paper_type="doi", out=filename)
 
     # check if the file was downloaded, since we have no way to know if it was
     # successful.
@@ -111,7 +108,7 @@ if __name__ == "__main__":
     # Set the global log format
     logging.basicConfig(format="[%(levelname)s] %(message)s")
 
-    dois = args.input_file.readlines()
+    dois = util.read_dois_from_file(args.input_file)
 
     output_fieldnames = [
         "doi",
@@ -129,7 +126,7 @@ if __name__ == "__main__":
 
         writer.writerow(
             {
-                "doi": doi.strip(),
+                "doi": doi,
                 "filename": filename,
             }
         )
