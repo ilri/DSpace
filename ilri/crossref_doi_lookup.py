@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# crossref-doi-lookup.py 0.1.2
+# crossref-doi-lookup.py 0.2.0
 #
 # Copyright Alan Orth.
 #
@@ -125,9 +125,7 @@ def resolve_doi(doi: str) -> None:
         return
 
     logger.debug(
-        Fore.YELLOW
-        + f"> DOI in Crossref (cached: {request.from_cache})"
-        + Fore.RESET
+        Fore.YELLOW + f"> DOI in Crossref (cached: {request.from_cache})" + Fore.RESET
     )
 
     data = request.json()
