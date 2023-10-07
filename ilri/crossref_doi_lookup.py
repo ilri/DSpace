@@ -81,12 +81,11 @@ def resolve_doi(doi: str) -> None:
 
     # HTTP 404 here means the DOI is not registered at Crossref
     if not request.ok:
-        if args.debug:
-            logger.debug(
-                Fore.YELLOW
-                + f"> DOI not in Crossref (cached: {request.from_cache})"
-                + Fore.RESET
-            )
+        logger.debug(
+            Fore.YELLOW
+            + f"> DOI not in Crossref (cached: {request.from_cache})"
+            + Fore.RESET
+        )
 
         return
 
@@ -95,21 +94,19 @@ def resolve_doi(doi: str) -> None:
     # Only proceed if this DOI registration agency is Crossref
     match data["message"]["agency"]["label"]:
         case "DataCite":
-            if args.debug:
-                logger.debug(
-                    Fore.YELLOW
-                    + f"> Skipping DOI registered to DataCite (cached: {request.from_cache})"
-                    + Fore.RESET
-                )
+            logger.debug(
+                Fore.YELLOW
+                + f"> Skipping DOI registered to DataCite (cached: {request.from_cache})"
+                + Fore.RESET
+            )
 
             return
         case "Public":
-            if args.debug:
-                logger.debug(
-                    Fore.YELLOW
-                    + f'> Skipping DOI registered to "Public" (cached: {request.from_cache})'
-                    + Fore.RESET
-                )
+            logger.debug(
+                Fore.YELLOW
+                + f'> Skipping DOI registered to "Public" (cached: {request.from_cache})'
+                + Fore.RESET
+            )
 
             return
         case "Crossref":
@@ -127,12 +124,11 @@ def resolve_doi(doi: str) -> None:
     if not request.ok:
         return
 
-    if args.debug:
-        logger.debug(
-            Fore.YELLOW
-            + f"> DOI in Crossref (cached: {request.from_cache})"
-            + Fore.RESET
-        )
+    logger.debug(
+        Fore.YELLOW
+        + f"> DOI in Crossref (cached: {request.from_cache})"
+        + Fore.RESET
+    )
 
     data = request.json()
 
