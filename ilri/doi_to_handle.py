@@ -147,6 +147,9 @@ conn = util.db_connect(
     args.database_name, args.database_user, args.database_pass, "localhost"
 )
 
+# Set this connection to be read only since we are not modifying the database
+conn.read_only = True
+
 # field names for the CSV
 fieldnames = ["title", "handle", "doi"]
 
