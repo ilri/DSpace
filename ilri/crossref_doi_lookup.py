@@ -79,6 +79,8 @@ def resolve_doi(doi: str) -> None:
     except requests.exceptions.ConnectionError:
         logger.error(Fore.RED + f"Connection error." + Fore.RESET)
 
+        sys.exit(1)
+
     # HTTP 404 here means the DOI is not registered at Crossref
     if not request.ok:
         logger.debug(
