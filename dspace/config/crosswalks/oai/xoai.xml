@@ -140,7 +140,7 @@
             <Prefix>mods</Prefix>
             <XSLT>metadataFormats/mods.xsl</XSLT>
             <Namespace>http://www.loc.gov/mods/v3</Namespace>
-            <SchemaLocation>http://www.loc.gov/standards/mods/v3/mods-3-8.xsd</SchemaLocation>
+            <SchemaLocation>http://www.loc.gov/standards/mods/v3/mods-3-7.xsd</SchemaLocation>
         </Format>
         <Format id="qdc">
             <Prefix>qdc</Prefix>
