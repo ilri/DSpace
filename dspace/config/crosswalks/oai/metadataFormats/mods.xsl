@@ -17,7 +17,7 @@
 	<xsl:output omit-xml-declaration="yes" method="xml" indent="yes" />
 	
 	<xsl:template match="/">
-		<mods xmlns="http://www.loc.gov/mods/v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="3.8" xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-8.xsd">
+		<mods xmlns="http://www.loc.gov/mods/v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="3.7" xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-7.xsd">
 			<xsl:for-each select="doc:metadata/doc:element[@name='dc']/doc:element[@name='contributor']/doc:element[@name='author']/doc:element/doc:field[@name='value']">
 				<name type="personal">
 					<role>
@@ -58,17 +58,10 @@
 						</edition>
 					</xsl:if>
 
-					<!-- As of MODS 3.8 we should use <agent> with an appropriate <role> instead of <publisher> -->
 					<xsl:if test="doc:metadata/doc:element[@name='dcterms']/doc:element[@name='publisher']/doc:element/doc:field[@name='value']">
-						<agent type="corporate">
-							<namePart>
-								<xsl:value-of select="doc:metadata/doc:element[@name='dcterms']/doc:element[@name='publisher']/doc:element/doc:field[@name='value']/text()"></xsl:value-of>
-							</namePart>
-							<role>
-								<roleTerm type="text" authority="marcrelator">Publisher</roleTerm>
-								<roleTerm type="code" authority="marcrelator">pbl</roleTerm>
-							</role>
-						</agent>
+                        <publisher>
+                            <xsl:value-of select="doc:metadata/doc:element[@name='dcterms']/doc:element[@name='publisher']/doc:element/doc:field[@name='value']/text()"></xsl:value-of>
+                        </publisher>
 					</xsl:if>
 
 					<dateIssued encoding="iso8601">
@@ -168,11 +161,12 @@
 				<abstract displayLabel="Content description"><xsl:value-of select="." /></abstract>
 			</xsl:for-each>
 
+            <!-- Use rfc5645 because we currently have two-letter language codes -->
 			<!-- See: https://www.loc.gov/standards/mods/userguide/language.html -->
 			<!-- See: https://www.loc.gov/standards/sourcelist/language.html -->
 			<xsl:for-each select="doc:metadata/doc:element[@name='dcterms']/doc:element[@name='language']/doc:element/doc:field[@name='value']">
 			<language>
-				<languageTerm type="code" authority="iso639-1"><xsl:value-of select="." /></languageTerm>
+				<languageTerm type="code" authority="rfc5646"><xsl:value-of select="." /></languageTerm>
 			</language>
 			</xsl:for-each>
 
