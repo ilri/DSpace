@@ -91,6 +91,25 @@
             </Description>
         </Context>
 
+        <Context baseurl="agris" name="AGRIS Context">
+            <Filter ref="AGRISFilter"/>
+            <!-- Metadata Formats -->
+            <Format ref="oaidc"/>
+            <Format ref="mets"/>
+            <Format ref="xoai"/>
+            <Format ref="didl"/>
+            <Format ref="dim"/>
+            <Format ref="ore"/>
+            <Format ref="rdf"/>
+            <Format ref="etdms"/>
+            <Format ref="mods"/>
+            <Format ref="qdc"/>
+            <Format ref="marc"/>
+            <Format ref="uketd_dc"/>
+            <Description>
+                This contexts complies with AGRIS Guidelines.
+            </Description>
+        </Context>
     </Contexts>
 
 
@@ -149,7 +168,7 @@
             <Prefix>mods</Prefix>
             <XSLT>metadataFormats/mods.xsl</XSLT>
             <Namespace>http://www.loc.gov/mods/v3</Namespace>
-            <SchemaLocation>http://www.loc.gov/standards/mods/v3/mods-3-1.xsd</SchemaLocation>
+            <SchemaLocation>https://www.loc.gov/standards/mods/v3/mods-3-7.xsd</SchemaLocation>
         </Format>
         <Format id="qdc">
             <Prefix>qdc</Prefix>
@@ -399,6 +418,30 @@
             </Definition>
         </Filter>
 
+        <!-- AGRISFilter filter for records returned by OAI-PMH.
+             By default, return an Item record where dcterms.type is one of AGRIS types
+             This filter is only used in the AGRIS context ([oai]/AGRIS).
+        -->
+        <Filter id="AGRISFilter">
+            <Definition>
+                <And>
+                    <LeftCondition>
+                        <Or>
+                            <LeftCondition>
+                                <Custom ref="itemAccessCondition"/>
+                            </LeftCondition>
+                            <RightCondition>
+                                <Custom ref="itemWithdrawnCondition"/>
+                            </RightCondition>
+                        </Or>
+                    </LeftCondition>
+                    <RightCondition>
+                        <Custom ref="AGRISDocumentTypeCondition"/>
+                    </RightCondition>
+                </And>
+            </Definition>
+        </Filter>
+
         <!-- This condition determines if an Item has a "dc.type" field
              which contains "Thesis". -->
         <CustomCondition id="thesisDocumentTypeCondition">
@@ -516,12 +559,41 @@
             </Configuration>
         </CustomCondition>
 
+        <!-- This condition determines if an Item has a "dcterms.type" field
+             specifying one of the valid AGRIS document types. -->
+        <CustomCondition id="AGRISDocumentTypeCondition">
+            <Class>org.dspace.xoai.filter.DSpaceAtLeastOneMetadataFilter</Class>
+            <Configuration>
+                <string name="field">dcterms.type</string>
+                <string name="operator">equal</string>
+                <list name="values">
+                    <string>Book</string>
+                    <string>Book Chapter</string>
+                    <string>Brief</string>
+                    <string>Conference Paper</string>
+                    <string>Conference Proceedings</string>
+                    <string>Dataset</string>
+                    <string>Journal Article</string>
+                    <string>Manual</string>
+                    <string>Report</string>
+                    <string>Thesis</string>
+                    <string>Training Material</string>
+                    <string>Working Paper</string>
+                </list>
+            </Configuration>
+        </CustomCondition>
+
     </Filters>
 
     <Sets>
         <Set id="driverSet">
             <Spec>driver</Spec>
             <Name>Open Access DRIVERset</Name>
+            <!-- Just an alias -->
+        </Set>
+        <Set id="agrisSet">
+            <Spec>agris</Spec>
+            <Name>AGRIS</Name>
             <!-- Just an alias -->
         </Set>
         <Set id="openaireSet">
