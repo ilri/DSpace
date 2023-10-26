@@ -57,18 +57,17 @@ def login(user: str, password: str):
     :returns: JSESSION value for the session.
     """
 
-    request_url = rest_login_endpoint
     headers = {"user-agent": user_agent}
     data = {"email": args.user, "password": args.password}
 
-    print(f"Logging in...")
+    print("Logging in...")
 
     try:
         request = requests.post(rest_login_endpoint, headers=headers, data=data)
     except requests.ConnectionError:
         sys.stderr.write(
             Fore.RED
-            + f" Could not connect to REST API: {args.request_url}\n"
+            + f" Could not connect to REST API: {rest_login_endpoint}\n"
             + Fore.RESET
         )
 

@@ -75,7 +75,7 @@ def resolve_issns(issns):
                 request = requests.get(request_url, params=request_params)
 
         except requests.exceptions.ConnectionError:
-            sys.stderr.write(Fore.RED + f"Connection error.\n" + Fore.RESET)
+            sys.stderr.write(Fore.RED + "Connection error.\n" + Fore.RESET)
 
         # CrossRef responds 404 if a journal isn't found, so we check for an
         # HTTP 2xx response here

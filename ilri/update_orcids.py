@@ -47,7 +47,7 @@ parser = argparse.ArgumentParser(
 parser.add_argument(
     "-i",
     "--input-file",
-    help=f'Path to input file containing ORCIDs in format "Alan S. Orth: 0000-0002-1735-7458".',
+    help='Path to input file containing ORCIDs in format "Alan S. Orth: 0000-0002-1735-7458".',
     required=True,
     type=argparse.FileType("r", encoding="UTF-8"),
 )

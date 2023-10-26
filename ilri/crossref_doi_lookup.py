@@ -77,7 +77,7 @@ def resolve_doi(doi: str) -> None:
     try:
         request = requests.get(request_url, params=request_params)
     except requests.exceptions.ConnectionError:
-        logger.error(Fore.RED + f"Connection error." + Fore.RESET)
+        logger.error(Fore.RED + "Connection error." + Fore.RESET)
 
         sys.exit(1)
 
@@ -121,7 +121,7 @@ def resolve_doi(doi: str) -> None:
     try:
         request = requests.get(request_url, params=request_params)
     except requests.exceptions.ConnectionError:
-        logger.error(Fore.RED + f"Connection error." + Fore.RESET)
+        logger.error(Fore.RED + "Connection error." + Fore.RESET)
 
     if not request.ok:
         return
