@@ -23,7 +23,6 @@ import csv
 import os.path
 import re
 import signal
-import subprocess
 import sys
 
 import pyvips

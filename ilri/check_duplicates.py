@@ -28,7 +28,6 @@ import signal
 import sys
 from datetime import datetime
 
-import psycopg
 import util
 from colorama import Fore
 from psycopg import sql

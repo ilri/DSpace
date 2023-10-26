@@ -27,7 +27,6 @@ import csv
 import signal
 import sys
 
-import psycopg
 import util
 from colorama import Fore
 

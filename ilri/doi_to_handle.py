@@ -14,10 +14,7 @@
 # the Tweeting of certain items in order to get Altmetric to make the link be-
 # tween the Handle and the DOI.
 #
-# This script is written for Python 3.6+ and requires several modules that you
-# can install with pip (I recommend setting up a Python virtual environment):
-#
-#   $ pip install colorama psycopg
+# This script is written for Python 3.6+.
 #
 
 import argparse
@@ -26,7 +23,6 @@ import signal
 import sys
 
 import util
-from colorama import Fore
 
 
 def resolve_doi(dois):

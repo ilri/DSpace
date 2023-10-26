@@ -30,7 +30,7 @@
 # This script is written for Python 3 and requires several modules that you can
 # install with pip (I recommend setting up a Python virtual environment first):
 #
-#   $ pip install colorama psycopg
+#   $ pip install colorama
 #
 
 import argparse
@@ -39,8 +39,6 @@ import logging
 import re
 import signal
 import sys
-
-import psycopg
 
 import util
 from colorama import Fore

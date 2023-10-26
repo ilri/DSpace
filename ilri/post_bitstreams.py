@@ -36,7 +36,6 @@
 import argparse
 import csv
 import logging
-import os.path
 import signal
 import sys
 

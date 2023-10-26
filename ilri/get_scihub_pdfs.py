@@ -28,8 +28,8 @@ import argparse
 import csv
 import logging
 import os.path
-import re
 import signal
+import sys
 
 import util
 from colorama import Fore
