@@ -165,10 +165,10 @@ def resolve_doi(doi: str) -> None:
                 authors.append(f"{author_family_name}, {author_given_name}")
             # Otherwise we need to make do with only the family name
             elif author_family_name and author_given_name is None:
-                authors.append(f"{author_family_name}")
+                authors.append(author_family_name)
             # And sometimes we need to make do with only the given name
             elif author_given_name and author_family_name is None:
-                authors.append(f"{author_given_name}")
+                authors.append(author_given_name)
 
             # Get any affiliations from the authors (not all have)
             try:
