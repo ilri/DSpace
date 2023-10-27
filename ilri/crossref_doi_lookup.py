@@ -141,6 +141,7 @@ def resolve_doi(doi: str) -> None:
 
     # Create an empty list to keep our authors
     authors = list()
+    affiliations = list()
 
     try:
         for author in data["message"]["author"]:
@@ -168,6 +169,16 @@ def resolve_doi(doi: str) -> None:
             # And sometimes we need to make do with only the given name
             elif author_given_name and author_family_name is None:
                 authors.append(f"{author_given_name}")
+
+            # Get any affiliations from the authors (not all have)
+            try:
+                for affiliation in author['affiliation']:
+                    if affiliation['name'] not in affiliations:
+                        affiliations.append(affiliation['name'])
+            # Not sure what we can except here
+            except:
+                pass
+
     # Believe it or not some items on Crossref have no author (doesn't
     # mean the DOI itself won't, though).
     #
@@ -304,6 +315,7 @@ def resolve_doi(doi: str) -> None:
             "title": title,
             "abstract": abstract,
             "authors": "||".join(authors),
+            "affiliations": "||".join(affiliations),
             "doi": f"https://doi.org/{doi}",
             "journal": journal,
             "issn": "||".join(issns),
@@ -387,6 +399,7 @@ if args.output_file:
         "title",
         "abstract",
         "authors",
+        "affiliations",
         "doi",
         "journal",
         "issn",
