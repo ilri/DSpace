@@ -32,16 +32,6 @@ import util
 from colorama import Fore
 from psycopg import sql
 
-# Column names in the CSV
-id_column_name = "id"
-criteria1_column_name = "dc.title"
-criteria2_column_name = "dcterms.type"
-criteria3_column_name = "dcterms.issued"
-# Field IDs from the metadatafieldregistry table
-criteria1_field_id = 64
-criteria2_field_id = 191
-criteria3_field_id = 170
-
 
 def signal_handler(signal, frame):
     sys.exit(1)
@@ -116,6 +106,12 @@ parser.add_argument(
 )
 args = parser.parse_args()
 
+# Column names in the CSV
+id_column_name = "id"
+criteria1_column_name = "dc.title"
+criteria2_column_name = "dcterms.type"
+criteria3_column_name = "dcterms.issued"
+
 # open the CSV
 reader = csv.DictReader(args.input_file)
 
@@ -154,6 +150,11 @@ conn = util.db_connect(
 )
 
 cursor = conn.cursor()
+
+# Field IDs from the metadatafieldregistry table
+criteria1_field_id = util.field_name_to_field_id(cursor, criteria1_column_name)
+criteria2_field_id = util.field_name_to_field_id(cursor, criteria2_column_name)
+criteria3_field_id = util.field_name_to_field_id(cursor, criteria3_column_name)
 
 with conn:
     # Make sure the pg_trgm extension is installed in the current database
