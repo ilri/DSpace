@@ -187,6 +187,16 @@ def resolve_doi(doi: str) -> None:
     except KeyError:
         authors = ""
 
+    # Create an empty list to keep our funders
+    funders = list()
+
+    try:
+        for funder in data["message"]["funder"]:
+            if funder['name']not in funders:
+                funders.append(funder['name'])
+    except KeyError:
+        pass
+
     # Get the abstract if it exists
     try:
         abstract = data["message"]["abstract"]
@@ -316,6 +326,7 @@ def resolve_doi(doi: str) -> None:
             "abstract": abstract,
             "authors": "||".join(authors),
             "affiliations": "||".join(affiliations),
+            "funders": "||".join(funders),
             "doi": f"https://doi.org/{doi}",
             "journal": journal,
             "issn": "||".join(issns),
@@ -400,6 +411,7 @@ if args.output_file:
         "abstract",
         "authors",
         "affiliations",
+        "funders",
         "doi",
         "journal",
         "issn",
