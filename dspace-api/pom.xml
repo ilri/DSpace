@@ -583,7 +583,7 @@
         <dependency>
             <groupId>org.elasticsearch</groupId>
             <artifactId>elasticsearch</artifactId>
-            <version>1.4.0</version>
+            <version>7.17.13</version>
         </dependency>
 
         <dependency>
