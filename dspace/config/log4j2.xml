@@ -97,6 +97,10 @@
         <!-- Block passwords from being exposed in Axis logs. (DEBUG exposes passwords in Basic Auth) -->
         <Logger name='org.apache.axis.handlers.http.HTTPAuthHandler'
                 level='INFO'/>
+
+        <!-- Turn off chatty "Before request" logs (suggested by mwood on Slack) -->
+        <Logger name='org.dspace.app.rest.utils.DSpaceAPIRequestLoggingFilter'
+            level='WARN'/>
         <!-- Anything not a part of DSpace -->
         <Root level='${loglevel.other}'>
             <AppenderRef ref='A1'/>
