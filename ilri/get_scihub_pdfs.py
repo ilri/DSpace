@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# get_scihub_pdfs.py 0.0.2
+# get_scihub_pdfs.py 0.0.3
 #
 # Copyright Alan Orth.
 #
@@ -44,13 +44,16 @@ def signal_handler(signal, frame):
 
 
 def download_pdf(doi):
-    filename = doi.replace("/", "-") + ".pdf"
-
     logger.info(f"Processing {doi}")
+
+    filename = doi.replace("/", "-") + ".pdf"
+    filename = os.path.join(args.output_directory, filename)
 
     # check if file exists already
     if os.path.isfile(filename):
         logger.debug(Fore.GREEN + f"> {filename} already downloaded." + Fore.RESET)
+
+        return
     else:
         logger.debug(
             Fore.GREEN + f"> Attempting to download PDF for {doi}" + Fore.RESET
@@ -61,9 +64,9 @@ def download_pdf(doi):
     # check if the file was downloaded, since we have no way to know if it was
     # successful.
     if os.path.isfile(filename):
-        return filename
+        logger.info(Fore.YELLOW + f"> Successfully saved to: {filename}" + Fore.RESET)
     else:
-        return ""
+        logger.debug(Fore.RED + "> Download unsuccessful." + Fore.RESET)
 
 
 if __name__ == "__main__":
@@ -86,10 +89,10 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "-o",
-        "--output-file",
-        help="Path to output CSV file.",
-        required=True,
-        type=argparse.FileType("w"),
+        "--output-directory",
+        help="Name of directory to save files.",
+        required=False,
+        default=".",
     )
     parser.add_argument(
         "-q",
@@ -110,23 +113,5 @@ if __name__ == "__main__":
 
     dois = util.read_dois_from_file(args.input_file)
 
-    output_fieldnames = [
-        "doi",
-        "filename",
-    ]
-    writer = csv.DictWriter(args.output_file, fieldnames=output_fieldnames)
-    writer.writeheader()
-
     for doi in dois:
-        filename = download_pdf(doi)
-
-        # download_pdf can return an empty filename, so let's skip those
-        if filename == "":
-            continue
-
-        writer.writerow(
-            {
-                "doi": doi,
-                "filename": filename,
-            }
-        )
+        download_pdf(doi)
