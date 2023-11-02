@@ -36,6 +36,7 @@
 import argparse
 import csv
 import logging
+import os.path
 import signal
 import sys
 
@@ -445,6 +446,11 @@ if __name__ == "__main__":
             except IndexError:
                 filename = row["filename"].split("__description:")[0]
                 description = False
+
+            if not os.path.isfile(filename):
+                logger.info(f"{Fore.YELLOW}> File not found, skipping: {filename}{Fore.RESET}")
+
+                continue
 
             if args.dry_run:
                 logger.info(
