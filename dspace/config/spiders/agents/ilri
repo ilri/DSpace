@@ -40,3 +40,9 @@ Scoop\.it
 WebAPIClient
 RStudio
 ^MEL
+GuzzleHttp
+Owler
+newspaperjs
+^Chrome$
+curl
+^mozilla
