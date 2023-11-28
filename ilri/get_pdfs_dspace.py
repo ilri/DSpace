@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# get_dspace_pdfs.py 0.0.2
+# get_pdfs_dspace.py 0.0.2
 #
 # Copyright Alan Orth.
 #
@@ -8,7 +8,7 @@
 #
 # ---
 #
-# Queries the CGSpace REST API for bitstreams from a list of handles and then
+# Queries a DSpace 6 REST API for bitstreams from a list of handles and then
 # downloads them if they are PDFs. Input file is hardcoded at /tmp/handles.txt
 # and should have one handle per line, for example:
 #
@@ -120,7 +120,7 @@ def download_bitstreams(pdf_bitstream_ids):
 rest_base_url = "https://cgspace.cgiar.org/rest"
 rest_handle_endpoint = "handle"
 rest_bitstream_endpoint = "bitstreams"
-rest_user_agent = "get_dspace_pdfs.py/0.0.2 (python / curl)"
+rest_user_agent = "get_pdfs_dspace.py/0.0.2 (python / curl)"
 
 # Set local logging level to INFO
 logger.setLevel(logging.INFO)
