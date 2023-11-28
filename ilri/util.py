@@ -1,4 +1,4 @@
-# util.py v0.0.4
+# util.py v0.0.5
 #
 # Copyright Alan Orth.
 #
@@ -9,10 +9,15 @@
 # Various helper functions for CGSpace DSpace Python scripts.
 #
 
+import gzip
+import os
 import re
+import shutil
 import sys
 
 import psycopg
+import requests
+import requests_cache
 from colorama import Fore
 
 
@@ -121,3 +126,34 @@ def read_dois_from_file(input_file) -> list:
     input_file.close()
 
     return dois
+
+
+def download_file(url, filename) -> bool:
+    # Disable cache for streaming downloads
+    # See: https://github.com/requests-cache/requests-cache/issues/75
+    with requests_cache.disabled():
+        r = requests.get(url, stream=True, allow_redirects=True)
+
+    # Download failed for some reason
+    if not r.ok:
+        return False
+
+    with open(filename, "wb") as f:
+        # Make sure we handle zipped content. Note: this is not transport
+        # compression, which is handled automatically by requests.
+        try:
+            content_encoding = r.headers["Content-Encoding"]
+        except KeyError:
+            content_encoding = None
+
+        if content_encoding == "gzip":
+            gzip_file = gzip.GzipFile(fileobj=r.raw)
+            shutil.copyfileobj(gzip_file, f)
+        else:
+            shutil.copyfileobj(r.raw, f)
+
+    # Check whether the file was written to disk after downloading
+    if os.path.isfile(filename):
+        return True
+    else:
+        return False
