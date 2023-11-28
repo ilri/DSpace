@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# get_scihub_pdfs.py 0.0.3
+# get_pdfs_scihub.py 0.0.3
 #
 # Copyright Alan Orth.
 #
