@@ -206,8 +206,8 @@
 
 		    	<!-- Only about 600 of these alternative titles in our repository -->
 		   	<xsl:for-each select="doc:metadata/doc:element[@name='dc']/doc:element[@name='title']/doc:element[@name='alternative']/doc:element/doc:field[@name='value']">
-		        <titleInfo>
-		            <title type="alternative"><xsl:value-of select="." /></title>
+		        <titleInfo type="alternative">
+		            <title><xsl:value-of select="." /></title>
 		        </titleInfo>
 			</xsl:for-each>
 
