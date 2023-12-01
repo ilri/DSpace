@@ -109,10 +109,10 @@
                     <dc-element>creator</dc-element>
                     <dc-qualifier>identifier</dc-qualifier>
                     <repeatable>true</repeatable>
-                    <label>CGIAR author ORCID identifiers</label>
+                    <label>Author ORCID identifiers</label>
                     <vocabulary>cg-creator-identifier</vocabulary>
                     <input-type>onebox</input-type>
-                    <hint>Enter ORCID identifiers for CGIAR authors, one per author. If an identifier is missing from the list, enter a new one in the exact same format (Name: 0000-0002-1735-7458). Use the exact name style the author uses at https://orcid.org</hint>
+                    <hint>Enter ORCID identifiers (for CGIAR authors at least). Click below to see a pre-populated list of author ORCID identifiers that you can select from. Enter one per author. If an identifier is missing, enter a new one in the same format (Name: 0000-0002-1735-7458). Use the exact name style the author uses at https://orcid.org</hint>
                     <required></required>
                 </field>
             </row>
