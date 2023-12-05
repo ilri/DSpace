@@ -408,7 +408,7 @@
                     <dc-schema>cg</dc-schema>
                     <dc-element>identifier</dc-element>
                     <dc-qualifier>doi</dc-qualifier>
-                    <repeatable>true</repeatable>
+                    <repeatable>false</repeatable>
                     <label>Document Object Identifier (DOI)</label>
                     <style>col-sm-4</style>
                     <input-type>onebox</input-type>
