@@ -269,7 +269,7 @@
                     <dc-schema>dcterms</dc-schema>
                     <dc-element>isPartOf</dc-element>
                     <dc-qualifier></dc-qualifier>
-                    <repeatable>true</repeatable>
+                    <repeatable>false</repeatable>
                     <label>Series/Report Name</label>
                     <style>col-sm-8</style>
                     <input-type>onebox</input-type>
@@ -280,7 +280,7 @@
                     <dc-schema>cg</dc-schema>
                     <dc-element>number</dc-element>
                     <dc-qualifier></dc-qualifier>
-                    <repeatable>true</repeatable>
+                    <repeatable>false</repeatable>
                     <label>Series/Report No.</label>
                     <style>col-sm-4</style>
                     <input-type>onebox</input-type>
