@@ -699,7 +699,7 @@
                     <dc-schema>dcterms</dc-schema>
                     <dc-element>relation</dc-element>
                     <dc-qualifier></dc-qualifier>
-                    <repeatable>false</repeatable>
+                    <repeatable>true</repeatable>
                     <label>Related reference</label>
                     <input-type>onebox</input-type>
                     <hint>Enter related reference link (normally a URL to another item).</hint>
