@@ -149,6 +149,9 @@ conn = util.db_connect(
     args.database_name, args.database_user, args.database_pass, "localhost"
 )
 
+# set the connection to read only since we are not writing anything
+conn.read_only=True
+
 cursor = conn.cursor()
 
 # Field IDs from the metadatafieldregistry table
