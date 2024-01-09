@@ -59,7 +59,7 @@
 
     <!-- Settings for how Solr will process & respond to queries -->
     <query>
-        <maxBooleanClauses>${solr.max.booleanClauses:1024}</maxBooleanClauses>
+        <maxBooleanClauses>${solr.max.booleanClauses:2048}</maxBooleanClauses>
 
         <!-- Cache used by SolrIndexSearcher for filters (DocSets) for
              unordered sets of *all* documents that match a query. Caches results of 'fq' search param. -->
