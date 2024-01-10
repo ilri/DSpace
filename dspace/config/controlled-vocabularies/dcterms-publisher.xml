@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<node id="Publishers" label="">
+  <isComposedBy>
+    <node id="0" label="Accelerating Impacts of CGIAR Climate Research for Africa" />
+    <node id="1" label="Addis Ababa University" />
+    <node id="2" label="Africa Rice Center" />
+    <node id="3" label="African Journals Online" />
+    <node id="4" label="Alliance of Bioversity International and CIAT" />
+    <node id="5" label="American Association for the Advancement of Science" />
+    <node id="6" label="American Society for Microbiology" />
+    <node id="7" label="Australian Centre for International Agricultural Research" />
+    <node id="8" label="Bioversity International" />
+    <node id="9" label="Brill" />
+    <node id="10" label="Burleigh Dodds Science Publishing Limited" />
+    <node id="11" label="CAB International" />
+    <node id="12" label="Cambridge University Press" />
+    <node id="13" label="Canadian Center of Science and Education" />
+    <node id="14" label="Catholic Relief Services" />
+    <node id="15" label="Center for International Forestry Research" />
+    <node id="16" label="Centre de coopération internationale en recherche agronomique pour le développement" />
+    <node id="17" label="Centro Agronómico Tropical de Investigación y Enseñanza" />
+    <node id="18" label="CGIAR" />
+    <node id="19" label="CGIAR Evaluation Function" />
+    <node id="20" label="CGIAR FOCUS Climate Security" />
+    <node id="21" label="CGIAR GENDER Impact Platform" />
+    <node id="22" label="CGIAR Impact Platform on Climate Change" />
+    <node id="23" label="CGIAR Impact Platform on Environmental Health and Biodiversity" />
+    <node id="24" label="CGIAR Impact Platform on Gender" />
+    <node id="25" label="CGIAR Impact Platform on Nutrition, Health and Food Security" />
+    <node id="26" label="CGIAR Impact Platform on Poverty Reduction, Livelihoods and Jobs" />
+    <node id="27" label="CGIAR Independent Advisory and Evaluation Service" />
+    <node id="28" label="CGIAR Independent Science for Development Council" />
+    <node id="29" label="CGIAR Initiative on Accelerated Breeding" />
+    <node id="30" label="CGIAR Initiative on AgriLAC Resiliente" />
+    <node id="31" label="CGIAR Initiative on Agroecology" />
+    <node id="32" label="CGIAR Initiative on Aquatic Foods" />
+    <node id="33" label="CGIAR Initiative on Asian Mega-Deltas" />
+    <node id="34" label="CGIAR Initiative on Breeding Resources" />
+    <node id="35" label="CGIAR Initiative on Climate Resilience" />
+    <node id="36" label="CGIAR Initiative on Digital Innovation" />
+    <node id="37" label="CGIAR Initiative on Diversification in East and Southern Africa" />
+    <node id="38" label="CGIAR Initiative on Excellence in Agronomy" />
+    <node id="39" label="CGIAR Initiative on Foresight" />
+    <node id="40" label="CGIAR Initiative on Fragility to Resilience in Central and West Asia and North Africa" />
+    <node id="41" label="CGIAR Initiative on Fragility, Conflict, and Migration" />
+    <node id="42" label="CGIAR Initiative on Fruit and Vegetables for Sustainable Healthy Diets" />
+    <node id="43" label="CGIAR Initiative on Gender Equality" />
+    <node id="44" label="CGIAR Initiative on Genebanks" />
+    <node id="45" label="CGIAR Initiative on Livestock and Climate" />
+    <node id="46" label="CGIAR Initiative on Low-Emission Food Systems" />
+    <node id="47" label="CGIAR Initiative on Market Intelligence" />
+    <node id="48" label="CGIAR Initiative on Mixed Farming Systems" />
+    <node id="49" label="CGIAR Initiative on National Policies and Strategies" />
+    <node id="50" label="CGIAR Initiative on Nature-Positive Solutions" />
+    <node id="51" label="CGIAR Initiative on NEXUS Gains" />
+    <node id="52" label="CGIAR Initiative on One Health" />
+    <node id="53" label="CGIAR Initiative on Plant Health" />
+    <node id="54" label="CGIAR Initiative on Resilient Cities" />
+    <node id="55" label="CGIAR Initiative on Rethinking Food Markets" />
+    <node id="56" label="CGIAR Initiative on Seed Equal" />
+    <node id="57" label="CGIAR Initiative on Sustainable Animal Productivity" />
+    <node id="58" label="CGIAR Initiative on Sustainable Healthy Diets" />
+    <node id="59" label="CGIAR Initiative on Transforming Agrifood Systems in South Asia" />
+    <node id="60" label="CGIAR Initiative on West and Central African Food Systems Transformation" />
+    <node id="61" label="CGIAR Research Program on Climate Change, Agriculture and Food Security" />
+    <node id="62" label="CGIAR Research Program on Dryland Systems" />
+    <node id="63" label="CGIAR Research Program on Forests, Trees and Agroforestry" />
+    <node id="64" label="CGIAR Research Program on Livestock" />
+    <node id="65" label="CGIAR Research Program on Roots, Tubers and Bananas" />
+    <node id="66" label="CGIAR Research Program on Water, Land and Ecosystems" />
+    <node id="67" label="CGIAR Secretariat" />
+    <node id="68" label="CGIAR Standing Panel on Impact Assessment" />
+    <node id="69" label="CGIAR System Organization" />
+    <node id="70" label="CIFOR-ICRAF" />
+    <node id="71" label="CONDESAN" />
+    <node id="72" label="Copernicus GmbH" />
+    <node id="73" label="Corporación Colombiana de Investigación Agropecuaria" />
+    <node id="74" label="CSIRO Publishing" />
+    <node id="75" label="Diva Enterprises Private Limited" />
+    <node id="76" label="Earthscan" />
+    <node id="77" label="EDP Sciences" />
+    <node id="78" label="Elsevier" />
+    <node id="79" label="Emerald" />
+    <node id="80" label="Empresa Brasileira de Pesquisa Agropecuária" />
+    <node id="81" label="Food and Agriculture Organization of the United Nations" />
+    <node id="82" label="Frontiers Media" />
+    <node id="83" label="Hindawi Limited" />
+    <node id="84" label="Informa UK Limited" />
+    <node id="85" label="Instituto Colombiano Agropecuario" />
+    <node id="86" label="Inter-American Institute for Cooperation on Agriculture" />
+    <node id="87" label="International Center for Agricultural Research in the Dry Areas" />
+    <node id="88" label="International Center for Tropical Agriculture" />
+    <node id="89" label="International Crops Research Institute for the Semi-Arid Tropics" />
+    <node id="90" label="International Development Research Centre" />
+    <node id="91" label="International Food Policy Research Institute" />
+    <node id="92" label="International Institute of Tropical Agriculture" />
+    <node id="93" label="International Livestock Research Institute" />
+    <node id="94" label="International Maize and Wheat Improvement Center" />
+    <node id="95" label="International Potato Center" />
+    <node id="96" label="International Rice Research Institute" />
+    <node id="97" label="International Society for Horticultural Science" />
+    <node id="98" label="International Symposia for Veterinary Epidemiology and Economics" />
+    <node id="99" label="International Water Management Institute" />
+    <node id="100" label="IOP Publishing" />
+    <node id="101" label="IWA Publishing" />
+    <node id="102" label="MDPI" />
+    <node id="103" label="National Academy of Sciences" />
+    <node id="104" label="Overseas Development Institute" />
+    <node id="105" label="Oxford University Press" />
+    <node id="106" label="Pan-Africa Bean Research Alliance" />
+    <node id="107" label="Public Library of Science" />
+    <node id="108" label="Resilience Alliance, Inc." />
+    <node id="109" label="Routledge" />
+    <node id="110" label="SAGE Publications" />
+    <node id="111" label="Science Alert" />
+    <node id="112" label="Scientific Research Publishing, Inc." />
+    <node id="113" label="Scientific Societies" />
+    <node id="114" label="Springer" />
+    <node id="115" label="Technologies for African Agricultural Transformation" />
+    <node id="116" label="United Nations Development Programme" />
+    <node id="117" label="United States Agency for International Development" />
+    <node id="118" label="United States Department of Agriculture" />
+    <node id="119" label="Universidad del Valle" />
+    <node id="120" label="Universidad Nacional de Colombia" />
+    <node id="121" label="University of Nairobi" />
+    <node id="122" label="Wageningen University &amp; Research" />
+    <node id="123" label="Walter de Gruyter GmbH" />
+    <node id="124" label="WaterNet" />
+    <node id="125" label="Wiley" />
+    <node id="126" label="World Bank" />
+    <node id="127" label="WorldFish" />
+  </isComposedBy>
+</node>
