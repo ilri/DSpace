@@ -245,11 +245,12 @@
                     <dc-schema>dcterms</dc-schema>
                     <dc-element>publisher</dc-element>
                     <dc-qualifier></dc-qualifier>
-                    <repeatable>false</repeatable>
+                    <repeatable>true</repeatable>
                     <label>Publisher</label>
                     <input-type>onebox</input-type>
-                    <hint>Enter the full name of the publisher.</hint>
+                    <hint>Enter the full name of the publisher. Click to see a pre-populated list of common commercial and CGIAR publishers or enter a new one.</hint>
                     <required></required>
+                    <vocabulary>dcterms-publisher</vocabulary>
                 </field>
             </row>
             <row>
