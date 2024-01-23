@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# update-orcids.py v0.1.4
+# update-orcids.py v0.1.5
 #
 # Copyright Alan Orth.
 #
@@ -90,6 +90,9 @@ signal.signal(signal.SIGINT, signal_handler)
 conn = util.db_connect(
     args.database_name, args.database_user, args.database_pass, "localhost"
 )
+
+if args.dry_run:
+    conn.read_only = True
 
 cursor = conn.cursor()
 
