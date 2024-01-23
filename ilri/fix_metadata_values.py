@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# fix-metadata-values.py v1.2.6
+# fix-metadata-values.py v1.2.7
 #
 # Copyright Alan Orth
 #
@@ -118,6 +118,9 @@ signal.signal(signal.SIGINT, signal_handler)
 conn = util.db_connect(
     args.database_name, args.database_user, args.database_pass, "localhost"
 )
+
+if args.dry_run:
+    conn.read_only = True
 
 cursor = conn.cursor()
 
