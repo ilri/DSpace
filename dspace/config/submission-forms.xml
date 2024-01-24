@@ -435,11 +435,23 @@
                     <dc-qualifier></dc-qualifier>
                     <repeatable>true</repeatable>
                     <label>Language</label>
+                    <style>col-sm-6</style>
                     <input-type value-pairs-name="common_iso_languages">dropdown</input-type>
                     <hint>Select the language of the main content of the item. If the language does not appear in the
                         list, please select 'Other'. If the content does not really have a language (for example, if it
                         is a dataset or an image) please leave this blank.
                     </hint>
+                    <required></required>
+                </field>
+                <field>
+                    <dc-schema>cg</dc-schema>
+                    <dc-element>place</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Publication place</label>
+                    <style>col-sm-6</style>
+                    <input-type>onebox</input-type>
+                    <hint>NOT for journal articles. Enter the city and country, for example: Nairobi, Kenya</hint>
                     <required></required>
                 </field>
             </row>
