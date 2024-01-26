@@ -247,10 +247,22 @@
                     <dc-qualifier></dc-qualifier>
                     <repeatable>true</repeatable>
                     <label>Publisher</label>
+                    <style>col-sm-6</style>
                     <input-type>onebox</input-type>
                     <hint>Enter the full name of the publisher. Click to see a pre-populated list of common commercial and CGIAR publishers or enter a new one.</hint>
                     <required></required>
                     <vocabulary>dcterms-publisher</vocabulary>
+                </field>
+                <field>
+                    <dc-schema>cg</dc-schema>
+                    <dc-element>identifier</dc-element>
+                    <dc-qualifier>publicationRank</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>IFPRI publication rank</label>
+                    <style>col-sm-6</style>
+                    <input-type value-pairs-name="publication-rank">dropdown</input-type>
+                    <hint>IFPRI publication rank.</hint>
+                    <required></required>
                 </field>
             </row>
             <row>
@@ -3180,6 +3192,28 @@
       <pair>
         <displayed-value>Systems Transformation</displayed-value>
         <stored-value>Systems Transformation</stored-value>
+      </pair>
+    </value-pairs>
+    <value-pairs value-pairs-name="publication-rank">
+      <pair>
+        <displayed-value>A Plus</displayed-value>
+        <stored-value>A Plus</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>A</displayed-value>
+        <stored-value>A</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>B</displayed-value>
+        <stored-value>B</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>C</displayed-value>
+        <stored-value>C</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Not ranked</displayed-value>
+        <stored-value>Not ranked</stored-value>
       </pair>
     </value-pairs>
     <value-pairs value-pairs-name="region_types" dc-term="place_region">
