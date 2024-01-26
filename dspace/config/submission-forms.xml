@@ -467,6 +467,7 @@
                     <dc-qualifier>initiative</dc-qualifier>
                     <repeatable>true</repeatable>
                     <label>CGIAR Initiatives</label>
+                    <style>col-sm-6</style>
                     <input-type value-pairs-name="cgiar-initiatives">dropdown</input-type>
                     <hint>Select any CGIAR Initiatives(s) associated with this item. Use this to show that an Initiative funded this item.</hint>
                     <required></required>
@@ -479,6 +480,7 @@
                     <dc-qualifier>impactPlatform</dc-qualifier>
                     <repeatable>true</repeatable>
                     <label>CGIAR Impact Platforms</label>
+                    <style>col-sm-6</style>
                     <input-type value-pairs-name="impactPlatforms">dropdown</input-type>
                     <hint>Select any CGIAR Impact Platforms associated with this item.</hint>
                     <required></required>
