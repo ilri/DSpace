@@ -136,7 +136,7 @@
                     <label>Sponsor</label>
                     <input-type>onebox</input-type>
                     <vocabulary>cg-contributor-donor</vocabulary>
-                    <hint>Enter full institution name(s) who sponsored the item. Click below to see a pre-populated list, or add one manually. CGIAR Research Program funding is identified in the field above.</hint>
+                    <hint>Enter full institution name(s) who sponsored the item. Click above to select from a pre-populated list, or add manually. Outputs of CGIAR platforms and initiatives are always sponsored by 'CGIAR Trust Fund'.</hint>
                     <required></required>
                 </field>
             </row>
