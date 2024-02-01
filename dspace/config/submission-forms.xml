@@ -2106,6 +2106,18 @@
           -->
         <value-pairs value-pairs-name="common_iso_languages" dc-term="language_iso">
         <pair>
+            <displayed-value>English</displayed-value>
+            <stored-value>en</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>French</displayed-value>
+            <stored-value>fr</stored-value>
+        </pair>
+        <pair>
+            <displayed-value>Spanish</displayed-value>
+            <stored-value>es</stored-value>
+        </pair>
+        <pair>
             <displayed-value>Afar</displayed-value>
             <stored-value>aa</stored-value>
         </pair>
@@ -2250,10 +2262,6 @@
             <stored-value>el</stored-value>
         </pair>
         <pair>
-            <displayed-value>English</displayed-value>
-            <stored-value>en</stored-value>
-        </pair>
-        <pair>
             <displayed-value>Esperanto</displayed-value>
             <stored-value>eo</stored-value>
         </pair>
@@ -2284,10 +2292,6 @@
         <pair>
             <displayed-value>Finnish</displayed-value>
             <stored-value>fi</stored-value>
-        </pair>
-        <pair>
-            <displayed-value>French</displayed-value>
-            <stored-value>fr</stored-value>
         </pair>
         <pair>
             <displayed-value>Western Frisian</displayed-value>
@@ -2692,10 +2696,6 @@
         <pair>
             <displayed-value>Southern Sotho</displayed-value>
             <stored-value>st</stored-value>
-        </pair>
-        <pair>
-            <displayed-value>Spanish</displayed-value>
-            <stored-value>es</stored-value>
         </pair>
         <pair>
             <displayed-value>Albanian</displayed-value>
