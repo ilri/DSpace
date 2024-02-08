@@ -541,6 +541,7 @@
                     <label>Project identifier</label>
                     <style>col-sm-6</style>
                     <input-type>onebox</input-type>
+                    <vocabulary>cg-identifier-project</vocabulary>
                     <hint>Unique identifier for a project associated with this item.</hint>
                     <required></required>
                 </field>
