@@ -403,6 +403,7 @@
                     <input-type>onebox</input-type>
                     <hint>Enter the ISSN for the serial publication where this item appears, for example: 2049-3630</hint>
                     <required></required>
+                    <type-bind>Journal Article,Data Paper</type-bind>
                 </field>
             </row>
             <row>
