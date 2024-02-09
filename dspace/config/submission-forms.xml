@@ -741,7 +741,7 @@
                     <dc-element>relation</dc-element>
                     <dc-qualifier></dc-qualifier>
                     <repeatable>true</repeatable>
-                    <label>Related reference</label>
+                    <label>Related link</label>
                     <input-type>onebox</input-type>
                     <hint>Enter related reference link (normally a URL to another item).</hint>
                     <required></required>
