@@ -413,9 +413,9 @@
                     <dc-qualifier>url</dc-qualifier>
                     <repeatable>true</repeatable>
                     <label>External URL</label>
-                    <style>col-sm-4</style>
+                    <style>col-sm-6</style>
                     <input-type>onebox</input-type>
-                    <hint>Enter a full URL for the item, for example a website, blog post, Google Books URL, etc (do not use this for links to datasets, use data URL instead).</hint>
+                    <hint>Enter an official external URL for this item. For example: a link to the website, blog post, dataset, etc itself. Do not enter a DOI here.</hint>
                     <required></required>
                 </field>
                 <field>
@@ -424,20 +424,9 @@
                     <dc-qualifier>doi</dc-qualifier>
                     <repeatable>false</repeatable>
                     <label>Document Object Identifier (DOI)</label>
-                    <style>col-sm-4</style>
+                    <style>col-sm-6</style>
                     <input-type>onebox</input-type>
-                    <hint>Enter the full address in format: https://doi.org/10.1038/s41598-019-43406-0</hint>
-                    <required></required>
-                </field>
-                <field>
-                    <dc-schema>cg</dc-schema>
-                    <dc-element>identifier</dc-element>
-                    <dc-qualifier>dataurl</dc-qualifier>
-                    <repeatable>true</repeatable>
-                    <label>URL for data file</label>
-                    <style>col-sm-4</style>
-                    <input-type>onebox</input-type>
-                    <hint>A URL for any associated data file(s), in a repository for example.</hint>
+                    <hint>If this item has a DOI, enter the full address here. For example: https://doi.org/10.1038/s41598-019-43406-0</hint>
                     <required></required>
                 </field>
             </row>
@@ -742,8 +731,20 @@
                     <dc-qualifier></dc-qualifier>
                     <repeatable>true</repeatable>
                     <label>Related link</label>
+                    <style>col-sm-6</style>
                     <input-type>onebox</input-type>
                     <hint>Enter related reference link (normally a URL to another item).</hint>
+                    <required></required>
+                </field>
+                <field>
+                    <dc-schema>cg</dc-schema>
+                    <dc-element>identifier</dc-element>
+                    <dc-qualifier>dataurl</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>URL for related data file</label>
+                    <style>col-sm-6</style>
+                    <input-type>onebox</input-type>
+                    <hint>Enter URL for any associated data file(s), in a repository for example.</hint>
                     <required></required>
                 </field>
             </row>
