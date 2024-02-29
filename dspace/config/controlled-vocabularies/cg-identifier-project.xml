@@ -2,60 +2,60 @@
 <node id="Project identifiers" label="">
   <isComposedBy>
     <node id="1" label="IFPRI - Advancing Research on Nutrition and Agriculture (ARENA)" />
-    <node id="2" label="IFPRI - Africa Region" />
-    <node id="3" label="IFPRI - Africa Regional Integration and the AfCFTA" />
-    <node id="4" label="IFPRI - Africa Rising" />
-    <node id="5" label="IFPRI - African Growth and Development Policy Modeling Consortium (AGRODEP)" />
+    <node id="2" label="IFPRI - African Growth and Development Policy Modeling Consortium (AGRODEP)" />
+    <node id="3" label="IFPRI - Africa Region" />
+    <node id="4" label="IFPRI - Africa Regional Integration and the AfCFTA" />
+    <node id="5" label="IFPRI - Africa Rising" />
     <node id="6" label="IFPRI - AgGDPplus" />
     <node id="7" label="IFPRI - Agricultural Adaptation to Climate Change in Latin America and the Caribbean" />
     <node id="8" label="IFPRI - Agricultural Investment Data Analyzer" />
     <node id="9" label="IFPRI - Agricultural Transformation and Market Integration" />
-    <node id="10" label="IFPRI - Agriculture Science and Technology Indicators (ASTI)" />
-    <node id="11" label="IFPRI - Agriculture, Nutrition, and Gender Linkages (ANGeL)" />
-    <node id="12" label="IFPRI - Alive and Thrive" />
-    <node id="13" label="IFPRI - Bangladesh Agricultural Policy Activity" />
-    <node id="14" label="IFPRI - Bangladesh Policy Research and Strategy Support Program" />
-    <node id="15" label="IFPRI - Banking and microfinance" />
-    <node id="16" label="IFPRI - Cash Transfer and Intimate Partner Violence Research Collaborative" />
-    <node id="17" label="IFPRI - Cereal Systems Initiative for South Asia (CSISA)" />
-    <node id="18" label="IFPRI - Ceres2030" />
-    <node id="19" label="IFPRI - China Strategy Support Program" />
-    <node id="20" label="IFPRI - Communications and Knowledge Management" />
-    <node id="21" label="IFPRI - Communications and Public Affairs" />
-    <node id="22" label="IFPRI - Consortium for Scaling-Up Climate Smart Agriculture in South Asia" />
-    <node id="23" label="IFPRI - COVID-19 Food Trade Policy Tracker" />
-    <node id="24" label="IFPRI - COVID-19 Measuring Impacts and Prioritizing Policies for Recovery" />
-    <node id="25" label="IFPRI - COVID-19 Policy Response (CPR) Portal" />
-    <node id="26" label="IFPRI - DataDENT" />
-    <node id="27" label="IFPRI - Democratic Republic of the Congo Strategy Support Program" />
-    <node id="28" label="IFPRI - Developing Local Extension Capacity (DLEC)" />
-    <node id="29" label="IFPRI - Development Strategies and Governance Unit" />
-    <node id="30" label="IFPRI - Development Strategy and Governance Division" />
-    <node id="31" label="IFPRI - Digital Financial Services Adoption" />
-    <node id="32" label="IFPRI - Director General's Office" />
-    <node id="33" label="IFPRI - East and Central Asia Office" />
-    <node id="34" label="IFPRI - Eastern and Southern Africa Office" />
-    <node id="35" label="IFPRI - Egypt Strategy Support Program" />
-    <node id="36" label="IFPRI - Environment and Production Technology Division" />
-    <node id="37" label="IFPRI - Ethiopia Strategy Support Program" />
+    <node id="10" label="IFPRI - Agriculture, Nutrition, and Gender Linkages (ANGeL)" />
+    <node id="11" label="IFPRI - Agriculture Science and Technology Indicators (ASTI)" />
+    <node id="12" label="IFPRI - Agrifood System Diagnostics" />
+    <node id="13" label="IFPRI - Alive and Thrive" />
+    <node id="14" label="IFPRI - Bangladesh Agricultural Policy Activity" />
+    <node id="15" label="IFPRI - Bangladesh Policy Research and Strategy Support Program" />
+    <node id="16" label="IFPRI - Banking and microfinance" />
+    <node id="17" label="IFPRI - Cash Transfer and Intimate Partner Violence Research Collaborative" />
+    <node id="18" label="IFPRI - Cereal Systems Initiative for South Asia (CSISA)" />
+    <node id="19" label="IFPRI - Ceres2030" />
+    <node id="20" label="IFPRI - China Strategy Support Program" />
+    <node id="21" label="IFPRI - Communications and Knowledge Management" />
+    <node id="22" label="IFPRI - Communications and Public Affairs" />
+    <node id="23" label="IFPRI - Consortium for Scaling-Up Climate Smart Agriculture in South Asia" />
+    <node id="24" label="IFPRI - COVID-19 Food Trade Policy Tracker" />
+    <node id="25" label="IFPRI - COVID-19 Measuring Impacts and Prioritizing Policies for Recovery" />
+    <node id="26" label="IFPRI - COVID-19 Policy Response (CPR) Portal" />
+    <node id="27" label="IFPRI - DataDENT" />
+    <node id="28" label="IFPRI - Democratic Republic of the Congo Strategy Support Program" />
+    <node id="29" label="IFPRI - Developing Local Extension Capacity (DLEC)" />
+    <node id="30" label="IFPRI - Development Strategies and Governance Unit" />
+    <node id="31" label="IFPRI - Development Strategy and Governance Division" />
+    <node id="32" label="IFPRI - Digital Financial Services Adoption" />
+    <node id="33" label="IFPRI - Director General's Office" />
+    <node id="34" label="IFPRI - East and Central Asia Office" />
+    <node id="35" label="IFPRI - Eastern and Southern Africa Office" />
+    <node id="36" label="IFPRI - Egypt Strategy Support Program" />
+    <node id="37" label="IFPRI - Environment and Production Technology Division" />
     <node id="38" label="IFPRI - Ethiopian Energy Development Strategy" />
-    <node id="39" label="IFPRI - Evaluating Impact and Building Capacity (EIBC)" />
-    <node id="40" label="IFPRI - Experimental games for strengthening collective action" />
-    <node id="41" label="IFPRI - Family Farming, Regional Markets and Cross-Border Trade Corridors in the Sahel (FARM-TRAC)" />
-    <node id="42" label="IFPRI - Feed the Future" />
-    <node id="43" label="IFPRI - Food Industries for People and Planet" />
-    <node id="44" label="IFPRI - Food Security Portal" />
-    <node id="45" label="IFPRI - Food Systems for Healthier Diets" />
-    <node id="46" label="IFPRI - Foresight and Policy Modeling Unit" />
-    <node id="47" label="IFPRI - Fresh Food Price Analysis in Papua New Guinea" />
-    <node id="48" label="IFPRI - Gender, Agriculture, and Assets Project (GAAP)" />
-    <node id="49" label="IFPRI - Gender, Climate Change and Nutrition Integration Initiative (GCAN)" />
-    <node id="50" label="IFPRI - Gender-Sensitive ROAD to Support Work in Freedom-2" />
-    <node id="51" label="IFPRI - Ghana Strategy Support Program" />
-    <node id="52" label="IFPRI - Ghana Tilapia Seed Project (TiSeed)" />
-    <node id="53" label="IFPRI - Global Futures and Strategic Foresight" />
-    <node id="54" label="IFPRI - HarvestPlus" />
-    <node id="55" label="IFPRI - Nexus SAMs" />
+    <node id="39" label="IFPRI - Ethiopia Strategy Support Program" />
+    <node id="40" label="IFPRI - Evaluating Impact and Building Capacity (EIBC)" />
+    <node id="41" label="IFPRI - Experimental games for strengthening collective action" />
+    <node id="42" label="IFPRI - Family Farming, Regional Markets and Cross-Border Trade Corridors in the Sahel (FARM-TRAC)" />
+    <node id="43" label="IFPRI - Feed the Future" />
+    <node id="44" label="IFPRI - Food Industries for People and Planet" />
+    <node id="45" label="IFPRI - Food Security Portal" />
+    <node id="46" label="IFPRI - Food Systems for Healthier Diets" />
+    <node id="47" label="IFPRI - Foresight and Policy Modeling Unit" />
+    <node id="48" label="IFPRI - Fresh Food Price Analysis in Papua New Guinea" />
+    <node id="49" label="IFPRI - Gender, Agriculture, and Assets Project (GAAP)" />
+    <node id="50" label="IFPRI - Gender, Climate Change and Nutrition Integration Initiative (GCAN)" />
+    <node id="51" label="IFPRI - Gender-Sensitive ROAD to Support Work in Freedom-2" />
+    <node id="52" label="IFPRI - Ghana Strategy Support Program" />
+    <node id="53" label="IFPRI - Ghana Tilapia Seed Project (TiSeed)" />
+    <node id="54" label="IFPRI - Global Futures and Strategic Foresight" />
+    <node id="55" label="IFPRI - HarvestPlus" />
     <node id="56" label="IFPRI - Impact Evaluation of Integrated Poultry Value Chain and Nutrition Interventions in Burkina Faso" />
     <node id="57" label="IFPRI - IMPACT model" />
     <node id="58" label="IFPRI - Innovation Policy and Scaling Unit" />
@@ -75,53 +75,54 @@
     <node id="72" label="IFPRI - National Agriculture Investment Plans" />
     <node id="73" label="IFPRI - Natural Resources and Resilience Unit" />
     <node id="74" label="IFPRI - New Delhi Office" />
-    <node id="75" label="IFPRI - Nigeria Strategy Support Program" />
-    <node id="76" label="IFPRI - Nudging for Good" />
-    <node id="77" label="IFPRI - Nutrition, Diets, and Health Unit" />
-    <node id="78" label="IFPRI - Operational Research for WFP's Food assistance for Assets (FFA) Program in Sri Lanka" />
-    <node id="79" label="IFPRI - Pakistan Agricultural Capacity Enhancement Program" />
-    <node id="80" label="IFPRI - Pakistan Strategy Support Program" />
-    <node id="81" label="IFPRI - Papua New Guinea Food Policy Strengthening" />
-    <node id="82" label="IFPRI - Partnerships and Opportunities to Strengthen and Harmonize Actions for Nutrition in India (POSHAN)" />
-    <node id="83" label="IFPRI - Picture-Based Insurance" />
-    <node id="84" label="IFPRI - Pluralistic Extension System in Malawi" />
-    <node id="85" label="IFPRI - Policy Reform Initiative Project (PRIP)" />
-    <node id="86" label="IFPRI - Poverty, Gender, and Inclusion Unit" />
-    <node id="87" label="IFPRI - Poverty, Health, and Nutrition Division" />
-    <node id="88" label="IFPRI - Program of Accompanying Research for Agricultural Innovation" />
-    <node id="89" label="IFPRI - Reaching Smallholder Women" />
-    <node id="90" label="IFPRI - Regional Strategic Analysis and Knowledge Support System (ReSAKSS)" />
-    <node id="91" label="IFPRI - Regional Trade and Agricultural Transformation in the Bay of Bengal Countries" />
-    <node id="92" label="IFPRI - Rural Investment and Policy Analysis (RIAPA) data and modeling system" />
-    <node id="93" label="IFPRI - Rwanda Strategy Support Program" />
-    <node id="94" label="IFPRI - Scaling up experiential learning tools for sustainable water governance in India" />
-    <node id="95" label="IFPRI - South Asia Office" />
-    <node id="96" label="IFPRI - South Asia Region" />
-    <node id="97" label="IFPRI - Southern Africa - Towards Inclusive Economic Development (SA-TIED)" />
-    <node id="98" label="IFPRI - Statistics from Space" />
-    <node id="99" label="IFPRI - Statistics on Public Expenditures for Economic Development" />
-    <node id="100" label="IFPRI - Stories of Change in Nutrition" />
-    <node id="101" label="IFPRI - Strengthen PSNP4 Institutions and Resilience (SPIR), Ethiopia" />
+    <node id="75" label="IFPRI - Nexus SAMs" />
+    <node id="76" label="IFPRI - Nigeria Strategy Support Program" />
+    <node id="77" label="IFPRI - Nudging for Good" />
+    <node id="78" label="IFPRI - Nutrition, Diets, and Health Unit" />
+    <node id="79" label="IFPRI - Operational Research for WFP's Food assistance for Assets (FFA) Program in Sri Lanka" />
+    <node id="80" label="IFPRI - Pakistan Agricultural Capacity Enhancement Program" />
+    <node id="81" label="IFPRI - Pakistan Strategy Support Program" />
+    <node id="82" label="IFPRI - Papua New Guinea Food Policy Strengthening" />
+    <node id="83" label="IFPRI - Partnerships and Opportunities to Strengthen and Harmonize Actions for Nutrition in India (POSHAN)" />
+    <node id="84" label="IFPRI - Picture-Based Insurance" />
+    <node id="85" label="IFPRI - Pluralistic Extension System in Malawi" />
+    <node id="86" label="IFPRI - Policy Reform Initiative Project (PRIP)" />
+    <node id="87" label="IFPRI - Poverty, Gender, and Inclusion Unit" />
+    <node id="88" label="IFPRI - Poverty, Health, and Nutrition Division" />
+    <node id="89" label="IFPRI - Program of Accompanying Research for Agricultural Innovation" />
+    <node id="90" label="IFPRI - Reaching Smallholder Women" />
+    <node id="91" label="IFPRI - Regional Strategic Analysis and Knowledge Support System (ReSAKSS)" />
+    <node id="92" label="IFPRI - Regional Trade and Agricultural Transformation in the Bay of Bengal Countries" />
+    <node id="93" label="IFPRI - Rural Investment and Policy Analysis (RIAPA) data and modeling system" />
+    <node id="94" label="IFPRI - Rwanda Strategy Support Program" />
+    <node id="95" label="IFPRI - Scaling up experiential learning tools for sustainable water governance in India" />
+    <node id="96" label="IFPRI - South Asia Office" />
+    <node id="97" label="IFPRI - South Asia Region" />
+    <node id="98" label="IFPRI - Southern Africa - Towards Inclusive Economic Development (SA-TIED)" />
+    <node id="99" label="IFPRI - Statistics from Space" />
+    <node id="100" label="IFPRI - Statistics on Public Expenditures for Economic Development" />
+    <node id="101" label="IFPRI - Stories of Change in Nutrition" />
     <node id="102" label="IFPRI - Strengthening National Capacities" />
-    <node id="103" label="IFPRI - Sudan Strategy Support Program" />
-    <node id="104" label="IFPRI - Systems Transformation" />
-    <node id="105" label="IFPRI - Systems Transformation - Food and Nutrition Policy" />
-    <node id="106" label="IFPRI - Systems Transformation - Transformation Strategies" />
-    <node id="107" label="IFPRI - Tajikistan Evaluation and Analysis Activity" />
-    <node id="108" label="IFPRI - Targeting and Realigning Agriculture for Improved Nutrition (TRAIN)" />
-    <node id="109" label="IFPRI - Technical Assistance and Research for Indian Nutrition and Agriculture (TARINA)" />
-    <node id="110" label="IFPRI - The Water Energy Food Nexus" />
-    <node id="111" label="IFPRI - Titukulane Project" />
-    <node id="112" label="IFPRI - Trade Tensions" />
-    <node id="113" label="IFPRI - Transfer Modality Research Initiative" />
-    <node id="114" label="IFPRI - Transform Nutrition" />
-    <node id="115" label="IFPRI - Transform Nutrition West Africa" />
-    <node id="116" label="IFPRI - Uganda Strategy Support Program" />
-    <node id="117" label="IFPRI - United Nations Food Systems Summit (UNFSS)" />
-    <node id="118" label="IFPRI - Urban food systems for better diets, nutrition, and health" />
-    <node id="119" label="IFPRI - Voice for Change Partnership" />
-    <node id="120" label="IFPRI - West and Central Africa Office" />
-    <node id="121" label="IFPRI - Women Improving Nutrition through Group-based Strategies (WINGS)" />
-    <node id="122" label="IFPRI - Women's Empowerment in Agriculture Index (WEIA)" />
+    <node id="103" label="IFPRI - Strengthen PSNP4 Institutions and Resilience (SPIR), Ethiopia" />
+    <node id="104" label="IFPRI - Sudan Strategy Support Program" />
+    <node id="105" label="IFPRI - Systems Transformation" />
+    <node id="106" label="IFPRI - Systems Transformation - Food and Nutrition Policy" />
+    <node id="107" label="IFPRI - Systems Transformation - Transformation Strategies" />
+    <node id="108" label="IFPRI - Tajikistan Evaluation and Analysis Activity" />
+    <node id="109" label="IFPRI - Targeting and Realigning Agriculture for Improved Nutrition (TRAIN)" />
+    <node id="110" label="IFPRI - Technical Assistance and Research for Indian Nutrition and Agriculture (TARINA)" />
+    <node id="111" label="IFPRI - The Water Energy Food Nexus" />
+    <node id="112" label="IFPRI - Titukulane Project" />
+    <node id="113" label="IFPRI - Trade Tensions" />
+    <node id="114" label="IFPRI - Transfer Modality Research Initiative" />
+    <node id="115" label="IFPRI - Transform Nutrition" />
+    <node id="116" label="IFPRI - Transform Nutrition West Africa" />
+    <node id="117" label="IFPRI - Uganda Strategy Support Program" />
+    <node id="118" label="IFPRI - United Nations Food Systems Summit (UNFSS)" />
+    <node id="119" label="IFPRI - Urban food systems for better diets, nutrition, and health" />
+    <node id="120" label="IFPRI - Voice for Change Partnership" />
+    <node id="121" label="IFPRI - West and Central Africa Office" />
+    <node id="122" label="IFPRI - Women Improving Nutrition through Group-based Strategies (WINGS)" />
+    <node id="123" label="IFPRI - Women's Empowerment in Agriculture Index (WEIA)" />
   </isComposedBy>
 </node>
