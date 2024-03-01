@@ -159,7 +159,6 @@
                     <dc-qualifier></dc-qualifier>
                     <repeatable>false</repeatable>
                     <label>Journal Title</label>
-                    <vocabulary>cg-journal</vocabulary>
                     <input-type>onebox</input-type>
                     <hint>Enter the full journal title.</hint>
                     <type-bind>Journal Article,Data Paper</type-bind>
