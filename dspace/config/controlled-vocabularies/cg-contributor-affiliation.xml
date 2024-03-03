@@ -403,13 +403,11 @@
     <node id="400" label="International Board for Plant Genetic Resources" />
     <node id="401" label="International Center for Agricultural Research in the Dry Areas" />
     <node id="402" label="International Center for Tropical Agriculture" />
-    <node id="403" label="International Centre for Tropical Agriculture" />
     <node id="404" label="International Centre of Insect Physiology and Ecology" />
     <node id="405" label="International Council for Research in Agroforestry" />
     <node id="406" label="International Crops Research Institute for the Semi-Arid Tropics" />
     <node id="407" label="International Development Research Centre" />
     <node id="408" label="International Fertilizer Development Center" />
-    <node id="409" label="International Food Policy Research Initiative" />
     <node id="410" label="International Food Policy Research Institute" />
     <node id="411" label="International Fund for Agricultural Development" />
     <node id="412" label="International Institute for Applied Systems Analysis" />
@@ -428,7 +426,6 @@
     <node id="425" label="International Plant Nutrition Institute" />
     <node id="426" label="International Potato Center" />
     <node id="427" label="International Research Institute for Climate and Society" />
-    <node id="428" label="International Research Institute for Climate and Society, Columbia University" />
     <node id="429" label="International Rice Research Institute" />
     <node id="430" label="International Service for National Agricultural Research" />
     <node id="431" label="International Service for the Acquisition of Agri-biotech Applications AfriCenter" />
