@@ -34,10 +34,10 @@ def signal_handler(signal, frame):
     sys.exit(1)
 
 
-# Process thumbnails from filename.pdf to filename.jpg using libvips. Equivalent
+# Process thumbnails from filename.pdf to filename.webp using libvips. Equivalent
 # to the following shell invocation:
 #
-#    vipsthumbnail 64661.pdf -s 600 -o '%s.jpg[Q=85,optimize_coding,strip]'
+#    vipsthumbnail 64661.pdf -s 600 -o '%s.webp[Q=89,strip]'
 #
 # vips is faster than GraphicsMagick/ImageMagick, uses less memory, and seems
 # to generate better quality images. Note that libvips uses poppler instead of
@@ -47,7 +47,7 @@ def signal_handler(signal, frame):
 # See: https://github.com/libvips/libvips/issues/379
 def create_thumbnail(row):
     filename = row[args.filename_field_name]
-    thumbnail = os.path.splitext(filename)[0] + ".jpg"
+    thumbnail = os.path.splitext(filename)[0] + ".webp"
     # check if the file has been downloaded
     if not os.path.isfile(filename):
         if args.debug:
@@ -65,7 +65,7 @@ def create_thumbnail(row):
         vips_image = pyvips.Image.new_from_file(filename, access="sequential")
         # Set max height to 600px
         vips_thumbnail = vips_image.thumbnail_image(600)
-        vips_thumbnail.jpegsave(thumbnail, Q=85, optimize_coding=True, strip=True)
+        vips_thumbnail.webpsave(thumbnail, Q=89, strip=True)
 
     return
 
