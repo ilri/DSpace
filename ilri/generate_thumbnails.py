@@ -171,7 +171,9 @@ if __name__ == "__main__":
         )
         sys.exit(1)
 
-    for row in reader:
+    rows_to_process = [row for row in reader if row[args.url_field_name] and row[args.filename_field_name]]
+
+    for row in rows_to_process:
         download_bitstream(row)
 
         if args.download_only is not True:
