@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# generate-thumbnails.py 1.1.3
+# generate-thumbnails.py 1.1.4
 #
 # Copyright Alan Orth.
 #
