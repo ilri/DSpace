@@ -51,17 +51,15 @@ def create_thumbnail(row):
     # check if the file has been downloaded
     if not os.path.isfile(filename):
         if args.debug:
-            print(Fore.YELLOW + "> Missing {}.\n".format(filename) + Fore.RESET)
+            print(f"{Fore.YELLOW}> Missing {filename}.{Fore.RESET}")
     # check if we already have a thumbnail
     elif os.path.isfile(thumbnail):
         if args.debug:
             print(
-                Fore.YELLOW
-                + f"> Thumbnail for {filename} already exists.\n"
-                + Fore.RESET
+                f"{Fore.YELLOW}> Thumbnail for {filename} already exists.{Fore.RESET}"
             )
     else:
-        print(Fore.GREEN + f"> Creating thumbnail for {filename}..." + Fore.RESET)
+        print(f"{Fore.GREEN}> Creating thumbnail for {filename}...{Fore.RESET}")
         vips_image = pyvips.Image.new_from_file(filename, access="sequential")
         # Set max height to 600px
         vips_thumbnail = vips_image.thumbnail_image(600)
@@ -154,20 +152,12 @@ if __name__ == "__main__":
     # check if the filename and URL fields specified by the user exist in the CSV
     if args.filename_field_name not in reader.fieldnames:
         sys.stderr.write(
-            Fore.RED
-            + 'Specified field "{}" does not exist in the CSV.\n'.format(
-                args.filename_field_name
-            )
-            + Fore.RESET
+            f"{Fore.RED}Specified field '{args.filename_field_name}' does not exist in the CSV.\n{Fore.RESET}"
         )
         sys.exit(1)
     if args.url_field_name not in reader.fieldnames:
         sys.stderr.write(
-            Fore.RED
-            + 'Specified field "{0}" does not exist in the CSV.\n'.format(
-                args.url_field_name
-            )
-            + Fore.RESET
+            f"{Fore.RED}Specified field '{args.url_field_name}' does not exist in the CSV.\n{Fore.RESET}"
         )
         sys.exit(1)
 
