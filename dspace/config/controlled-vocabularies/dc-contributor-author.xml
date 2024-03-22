@@ -880,7 +880,6 @@
     <node id="879" label="Komarudin, H." />
     <node id="880" label="Konradsen, Flemming" />
     <node id="881" label="Koo, Jawoo" />
-    <node id="882" label="Koppen, Barbara C.M. van" />
     <node id="883" label="Korie, S." />
     <node id="884" label="Kornegay, Julia L." />
     <node id="885" label="Kosec, Katrina" />
@@ -1656,6 +1655,7 @@
     <node id="1655" label="Valentin, Christian" />
     <node id="1656" label="Valin, Hugo" />
     <node id="1657" label="van Asselt, Joanna" />
+    <node id="882" label="van Koppen, Barbara" />
     <node id="1658" label="Van Campenhout, Bjorn" />
     <node id="1659" label="Vanclay, J.K." />
     <node id="1660" label="Vanlauwe, Bernard" />
