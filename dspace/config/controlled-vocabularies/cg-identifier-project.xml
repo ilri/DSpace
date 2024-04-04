@@ -118,11 +118,12 @@
     <node id="115" label="IFPRI - Transform Nutrition" />
     <node id="116" label="IFPRI - Transform Nutrition West Africa" />
     <node id="117" label="IFPRI - Uganda Strategy Support Program" />
-    <node id="118" label="IFPRI - United Nations Food Systems Summit (UNFSS)" />
-    <node id="119" label="IFPRI - Urban food systems for better diets, nutrition, and health" />
-    <node id="120" label="IFPRI - Voice for Change Partnership" />
-    <node id="121" label="IFPRI - West and Central Africa Office" />
-    <node id="122" label="IFPRI - Women Improving Nutrition through Group-based Strategies (WINGS)" />
-    <node id="123" label="IFPRI - Women's Empowerment in Agriculture Index (WEIA)" />
+    <node id="118" label="IFPRI - Ultra-Poor Graduation in Somalia" />
+    <node id="119" label="IFPRI - United Nations Food Systems Summit (UNFSS)" />
+    <node id="120" label="IFPRI - Urban food systems for better diets, nutrition, and health" />
+    <node id="121" label="IFPRI - Voice for Change Partnership" />
+    <node id="122" label="IFPRI - West and Central Africa Office" />
+    <node id="123" label="IFPRI - Women Improving Nutrition through Group-based Strategies (WINGS)" />
+    <node id="124" label="IFPRI - Women's Empowerment in Agriculture Index (WEIA)" />
   </isComposedBy>
 </node>
