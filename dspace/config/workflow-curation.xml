@@ -9,7 +9,7 @@
  <!-- taskset name 'none' indicates that there is no taskset to perform.     -->
 
  <taskset-map>
-   <mapping collection-handle="default" taskset="none" />
+   <mapping collection-handle="default" taskset="cgspace-metadata-curation" />
  </taskset-map>
 
  <!-- Tasksets specify curation tasks to be automatically performed at       -->
@@ -62,7 +62,20 @@
  <!-- administrator if the task encounters an error in processing            -->
 
  <tasksets>
-     
+   <!-- CGSpace-specific metadata curation tasks                             -->
+   <taskset name="cgspace-metadata-curation">
+     <!-- The "editstep" runs on entering the workflow and at step 2 and     -->
+     <!-- step 3, corresponding with the Editors and Final editors steps.    -->
+     <flowstep name="editstep">
+       <task name="normalizedois" />
+     </flowstep>
+     <!-- The "finaleditstep" runs on step 3, just before archiving. We wait -->
+     <!-- to run the countrycodetagger at the end so nobody removes them.    -->
+     <flowstep name="finaleditstep">
+       <task name="countrycodetagger" />
+     </flowstep>
+   </taskset>
+
    <taskset name="cautious">
      <flowstep name="step1">
        <task name="vscan">
