@@ -253,8 +253,23 @@ with conn:
                 # potential duplicate.
                 if cursor.rowcount > 0:
                     duplicate_item_date = cursor.fetchone()[0]
-                # If rowcount is not > 0 then the potential duplicate does
-                # not have a date and we have bigger problems. Skip!
+                # issue date is blank, let's try date available
+                elif cursor.rowcount == 0:
+                    date_available_field_id = util.field_name_to_field_id(
+                        cursor, "dcterms.available"
+                    )
+
+                    sql = "SELECT text_value FROM metadatavalue M JOIN item I ON M.dspace_object_id = I.uuid WHERE M.dspace_object_id=%s AND M.metadata_field_id=%s"
+
+                    cursor.execute(
+                        sql,
+                        (dspace_object_id, date_available_field_id),
+                    )
+
+                    if cursor.rowcount > 0:
+                        duplicate_item_date = cursor.fetchone()[0]
+                # If we don't have either a date issued or available, then we
+                # have bigger problems. Skip!
                 else:
                     continue
 
