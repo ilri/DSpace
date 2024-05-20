@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# check-duplicates.py 0.4.3
+# check-duplicates.py 0.4.4
 #
 # Copyright Alan Orth.
 #
@@ -81,8 +81,8 @@ parser.add_argument(
 parser.add_argument(
     "--days-threshold",
     type=float,
-    help="Threshold for difference of days between item and potential duplicates (default 365).",
-    default=365,
+    help="Threshold for difference of days between item and potential duplicates (default 270).",
+    default=270,
 )
 parser.add_argument(
     "-o",
@@ -101,8 +101,8 @@ parser.add_argument(
     "-s",
     "--similarity-threshold",
     type=float,
-    help="Similarity threshold, between 0.0 and 1.0 (default 0.6).",
-    default=0.6,
+    help="Similarity threshold, between 0.0 and 1.0 (default 0.7).",
+    default=0.7,
 )
 args = parser.parse_args()
 
