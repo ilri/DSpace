@@ -187,6 +187,8 @@ with conn:
         "Your Title",
         "Their Title",
         "Similarity",
+        "Your Type",
+        "Their Type",
         "Your Date",
         "Their Date",
         "Handle",
@@ -284,10 +286,23 @@ with conn:
                 # like Annual Reports where most metadata is the same
                 # except the date issued.
                 if days_difference <= args.days_threshold:
-                    # By this point if we have any matches then they are
-                    # similar in title and have an exact match for the type
-                    # and an issue date within the threshold. Now we are
-                    # reasonably sure it's a duplicate, so get the handle.
+                    # Get the item type of the potential duplicate
+                    sql = "SELECT text_value FROM metadatavalue WHERE dspace_object_id=%s AND metadata_field_id=%s"
+
+                    cursor.execute(
+                        sql,
+                        (
+                            dspace_object_id,
+                            criteria2_field_id,
+                        ),
+                    )
+
+                    potential_duplicate_item_type = cursor.fetchone()[0]
+
+                    # By now we have items that are similar in title and
+                    # have an exact match for the type and an issue date
+                    # within the threshold. Now we are reasonably sure it's
+                    # a duplicate, so get the handle.
                     sql = "SELECT handle FROM handle WHERE resource_id=%s"
                     cursor.execute(sql, (dspace_object_id,))
                     try:
@@ -318,6 +333,8 @@ with conn:
                         "Your Title": input_row[criteria1_column_name],
                         "Their Title": duplicate_title[0],
                         "Similarity": trgm_similarity,
+                        "Your Type": input_row[criteria2_column_name],
+                        "Their Type": potential_duplicate_item_type,
                         "Your Date": input_row[criteria3_column_name],
                         "Their Date": duplicate_item_date,
                         "Handle": handle,
