@@ -1,4 +1,4 @@
-# util.py v0.0.5
+# util.py v0.0.6
 #
 # Copyright Alan Orth.
 #
@@ -14,11 +14,17 @@ import os
 import re
 import shutil
 import sys
+from datetime import timedelta
 
 import psycopg
-import requests
-import requests_cache
 from colorama import Fore
+from requests_cache import CachedSession
+
+session = CachedSession(
+    "requests-cache", expire_after=timedelta(days=30), allowable_codes=(200, 404)
+)
+# prune old cache entries
+session.cache.delete(expired=True)
 
 
 def field_name_to_field_id(cursor, metadata_field: str):
@@ -131,8 +137,8 @@ def read_dois_from_file(input_file) -> list:
 def download_file(url, filename) -> bool:
     # Disable cache for streaming downloads
     # See: https://github.com/requests-cache/requests-cache/issues/75
-    with requests_cache.disabled():
-        r = requests.get(url, stream=True, allow_redirects=True)
+    with session.cache_disabled():
+        r = session.get(url, stream=True, allow_redirects=True)
 
     # Download failed for some reason
     if not r.ok:
