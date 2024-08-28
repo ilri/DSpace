@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# get_pdfs_dspace.py 0.0.2
+# get_pdfs_dspace.py 0.0.3
 #
 # Copyright Alan Orth.
 #
@@ -8,137 +8,99 @@
 #
 # ---
 #
-# Queries a DSpace 6 REST API for bitstreams from a list of handles and then
-# downloads them if they are PDFs. Input file is hardcoded at /tmp/handles.txt
-# and should have one handle per line, for example:
+# Queries the DSpace 7 API for bitstreams from a list of handles and then down-
+# loads them if they are PDFs. Input file is hardcoded at /tmp/handles.txt and
+# should have one handle per line, for example:
 #
 #   10568/93010
 #   10568/75869
+#   https://hdl.handle.net/10568/33365
 #
-# The original use for this was to download a list of PDFs corresponding with
-# a certain search result. I generated the list of handles by extracting them
-# from the results of an OpenSearch query where the user had asked for all the
-# items matching the term "trade off" in the WLE community:
-#
-#   $ http 'https://cgspace.cgiar.org/open-search/discover?scope=10568%2F34494&query=trade+off&rpp=100&start=0' User-Agent:'curl' > /tmp/wle-trade-off-page1.xml
-#   $ xmllint --xpath '//*[local-name()="entry"]/*[local-name()="id"]/text()' /tmp/wle-trade-off-page1.xml >> /tmp/ids.txt
-#   # ... and on and on for each page of results...
-#   $ sort -u /tmp/ids.txt > /tmp/ids-sorted.txt
-#   $ grep -oE '[0-9]+/[0-9]+' /tmp/ids.txt > /tmp/handles.txt
-#
-# This script is written for Python 3.7+ and requires several modules that you
-# can install with pip (I recommend using a Python virtual environment):
-#
-#   $ pip install colorama requests requests-cache
-#
+# For now the Handles should belong to one repository, with the REST API URL
+# hardcoded in this script.
 
 import logging
-import os.path
-from datetime import timedelta
+import os
+import re
 
-import requests
-import requests_cache
 from colorama import Fore
+from dspace_rest_client.client import DSpaceClient
+from dspace_rest_client.models import Bitstream, Bundle, Item
 
 # Create a local logger instance
 logger = logging.getLogger(__name__)
 
 
 def resolve_bitstreams(handle):
-    url = f"{rest_base_url}/{rest_handle_endpoint}/{handle}"
-    request_params = {"expand": "bitstreams"}
-    request_headers = {"user-agent": rest_user_agent, "Accept": "application/json"}
-    response = requests.get(url, params=request_params, headers=request_headers)
+    # This returns a list, even if it is only one item
+    items = d.search_objects(query=f"handle:{handle}", dso_type="item")
 
-    if response.status_code == 200:
-        bitstreams = response.json()["bitstreams"]
+    # We should only have one result for an exact Handle query!
+    if len(items) == 1:
+        bundles = d.get_bundles(parent=items[0])
+        for bundle in bundles:
+            if bundle.name == "ORIGINAL":
+                bitstreams = d.get_bitstreams(bundle=bundle)
 
-        if len(bitstreams) > 0:
-            pdf_bitstream_ids = list()
+                pdf_bitstreams = []
+                for bitstream in bitstreams:
+                    # DSpace Python client doesn't have mime currently
+                    if ".pdf" in bitstream.name:
+                        pdf_bitstreams.append(bitstream)
 
-            for bitstream in bitstreams:
-                if bitstream["format"] == "Adobe PDF":
-                    pdf_bitstream_ids.append(bitstream["uuid"])
-
-            if len(pdf_bitstream_ids) > 0:
-                download_bitstreams(pdf_bitstream_ids)
+                # Temporary so we don't have to worry about handling multiple PDFs
+                if len(pdf_bitstreams) == 1:
+                    download_bitstreams(handle, pdf_bitstreams)
 
     return
 
 
-def download_bitstreams(pdf_bitstream_ids):
-    import re
-
-    for pdf_bitstream_id in pdf_bitstream_ids:
-        url = f"{rest_base_url}/{rest_bitstream_endpoint}/{pdf_bitstream_id}/retrieve"
-        request_headers = {
-            "user-agent": rest_user_agent,
-        }
-
-        # do a HEAD request first to get the filename from the content disposition header
-        # See: https://stackoverflow.com/questions/31804799/how-to-get-pdf-filename-with-python-requests
-        response = requests.head(url, headers=request_headers)
-
-        if response.status_code == 200:
-            content_disposition = response.headers["content-disposition"]
-            filename = re.findall("filename=(.+)", content_disposition)[0]
-            # filenames in the header have quotes so let's strip them in a super hacky way
-            filename_stripped = filename.strip('"')
-            logger.debug(f"> filename: {filename_stripped}")
+def download_bitstreams(handle, pdf_bitstreams):
+    for pdf_bitstream in pdf_bitstreams:
+        filename = handle.replace("/", "-") + ".pdf"
 
         # check if file exists
-        if os.path.isfile(filename_stripped):
-            logger.debug(
-                Fore.YELLOW
-                + "> {} already downloaded.".format(filename_stripped)
-                + Fore.RESET
-            )
+        if os.path.isfile(filename):
+            logger.debug(f"{Fore.YELLOW}> {filename} already downloaded.{Fore.RESET}")
         else:
-            logger.info(
-                Fore.GREEN
-                + "> Downloading {}...".format(filename_stripped)
-                + Fore.RESET
-            )
+            logger.info(f"{Fore.GREEN}> Trying to download {filename}...{Fore.RESET}")
 
-            response = requests.get(
-                url, headers={"user-agent": rest_user_agent}, stream=True
-            )
-            if response.status_code == 200:
-                with open(filename_stripped, "wb") as fd:
-                    for chunk in response:
-                        fd.write(chunk)
-            else:
+            r = d.download_bitstream(pdf_bitstream.uuid)
+
+            try:
+                with open(filename, "wb") as fd:
+                    fd.write(r.content)
+            except AttributeError:
+                # The item may be locked on DSpace, which causes the content to be None
                 logger.error(
-                    Fore.RED
-                    + "> Download failed, I will try again next time."
-                    + Fore.RESET
+                    f"{Fore.RED}> Failed to download {filename}...{Fore.RESET}"
                 )
+
+                os.remove(filename)
+
+                pass
 
     return
 
 
-rest_base_url = "https://cgspace.cgiar.org/rest"
-rest_handle_endpoint = "handle"
-rest_bitstream_endpoint = "bitstreams"
-rest_user_agent = "get_pdfs_dspace.py/0.0.2 (python / curl)"
+dspace_rest_api = "https://cgspace.cgiar.org/server/api"
 
 # Set local logging level to INFO
 logger.setLevel(logging.INFO)
 # Set the global log format to display just the message without the log level
 logging.basicConfig(format="%(message)s")
 
+d = DSpaceClient(api_endpoint=dspace_rest_api)
+
 with open("/tmp/handles.txt", "r") as fd:
     handles = fd.readlines()
 
-# Set up a transparent requests cache to be nice to the REST API
-expire_after = timedelta(days=30)
-requests_cache.install_cache("requests-cache", expire_after=expire_after)
-
-# prune old cache entries
-requests_cache.delete()
-
 for handle in handles:
-    # strip the handle because it has a line feed (%0A)
+    # Extract Handle from URI if this is the format
+    if "https://hdl.handle.net/" in handle:
+        handle = handle.split("https://hdl.handle.net/")[1]
+
+    # strip the handle in case it has a line feed (%0A)
     handle = handle.strip()
 
     logger.info(f"Checking for PDF bitstreams in {handle}")
