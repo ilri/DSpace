@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# crossref-doi-lookup.py 0.2.1
+# crossref-doi-lookup.py 0.2.2
 #
 # Copyright Alan Orth.
 #
@@ -203,6 +203,12 @@ def resolve_doi(doi: str) -> None:
     except KeyError:
         abstract = ""
 
+    # Get the language if it exists
+    try:
+        language = data["message"]["language"]
+    except KeyError:
+        language = ""
+
     try:
         journal = data["message"]["container-title"][0]
     except IndexError:
@@ -324,6 +330,7 @@ def resolve_doi(doi: str) -> None:
         {
             "title": title,
             "abstract": abstract,
+            "language": language,
             "authors": "||".join(authors),
             "affiliations": "||".join(affiliations),
             "funders": "||".join(funders),
@@ -409,6 +416,7 @@ if args.output_file:
     fieldnames = [
         "title",
         "abstract",
+        "language",
         "authors",
         "affiliations",
         "funders",
