@@ -41,7 +41,6 @@
     <node id="38" label="Alemaya University" />
     <node id="39" label="Alex Ekwueme Federal University" />
     <node id="40" label="Alliance for a Green Revolution in Africa" />
-    <node id="41" label="Alliance of Bioversity International and CIAT" />
     <node id="42" label="Ambo University" />
     <node id="43" label="Ambrose Alli University" />
     <node id="44" label="Amhara Regional Agricultural Research Institute, Ethiopia" />
@@ -80,6 +79,7 @@
     <node id="77" label="Bill &amp; Melinda Gates Foundation" />
     <node id="78" label="Biodiversity for Food and Nutrition Project, Brazil" />
     <node id="79" label="Bioversity International" />
+    <node id="41" label="Bioversity International and the International Center for Tropical Agriculture" />
     <node id="80" label="BlueGreen Labs, Belgium" />
     <node id="81" label="Bogor Agricultural University" />
     <node id="82" label="Bonga Agricultural Research Center, Ethiopia" />
