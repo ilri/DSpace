@@ -179,6 +179,7 @@
                 <ref bean="searchFilterSponsorship" />
                 <ref bean="searchFilterAccessRights"/>
                 <ref bean="searchFilterUsageRights"/>
+                <ref bean="searchFilterContentInOriginalBundle"/>
             </list>
         </property>
         <!-- Set TagCloud configuration per discovery configuration -->
@@ -190,6 +191,7 @@
                 <ref bean="searchFilterAuthor" />
                 <ref bean="searchFilterAffiliation" />
                 <ref bean="searchFilterIssued" />
+                <ref bean="searchFilterContentInOriginalBundle"/>
                 <ref bean="searchFilterType" />
                 <ref bean="searchFilterPublisher" />
                 <ref bean="searchFilterInitiative" />
