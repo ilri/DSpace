@@ -133,6 +133,20 @@
 			</identifier>
 			</xsl:for-each>
 
+			<!-- Handles -->
+			<xsl:for-each select="doc:metadata/doc:element[@name='dc']/doc:element[@name='identifier']/doc:element[@name='uri']/doc:element/doc:field[@name='value']">
+				<identifier type="hdl">
+					<xsl:value-of select="." />
+				</identifier>
+			</xsl:for-each>
+
+			<!-- Other URLs -->
+			<xsl:for-each select="doc:metadata/doc:element[@name='cg']/doc:element[@name='identifier']/doc:element[@name='url']/doc:element/doc:field[@name='value']">
+				<identifier type="uri">
+					<xsl:value-of select="." />
+				</identifier>
+			</xsl:for-each>
+
 			<xsl:for-each select="doc:metadata/doc:element[@name='cg']/doc:element[@name='identifier']/doc:element[@name='doi']/doc:element/doc:field[@name='value']">
 				<identifier type="doi">
 					<xsl:value-of select="." />
