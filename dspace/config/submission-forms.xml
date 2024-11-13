@@ -235,7 +235,7 @@
                     <label>Date of online publication</label>
                     <input-type>date</input-type>
                     <hint>Enter the date when the item was available online. Use this to indicate a journal article was online first, and use the publication date for the issue date.</hint>
-                    <type-bind>Journal Article,Data Paper</type-bind>
+                    <type-bind>Journal Article,Data Paper,Preprint</type-bind>
                     <required></required>
                 </field>
             </row>
@@ -402,7 +402,7 @@
                     <input-type>onebox</input-type>
                     <hint>Enter the ISSN for the serial publication where this item appears, for example: 2049-3630</hint>
                     <required></required>
-                    <type-bind>Journal Article,Data Paper</type-bind>
+                    <type-bind>Journal Article,Data Paper,Preprint</type-bind>
                 </field>
             </row>
             <row>
@@ -2048,6 +2048,10 @@
             <pair>
                 <displayed-value>Poster</displayed-value>
                 <stored-value>Poster</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Preprint</displayed-value>
+                <stored-value>Preprint</stored-value>
             </pair>
             <pair>
                 <displayed-value>Presentation</displayed-value>
