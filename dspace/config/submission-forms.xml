@@ -425,7 +425,7 @@
                     <label>Document Object Identifier (DOI)</label>
                     <style>col-sm-6</style>
                     <input-type>onebox</input-type>
-                    <hint>If this item has a DOI, enter the full address here. For example: https://doi.org/10.1038/s41598-019-43406-0</hint>
+                    <hint>If this item has a DOI issued by the publisher, enter the full address here. For example: https://doi.org/10.1038/s41598-019-43406-0</hint>
                     <required></required>
                 </field>
             </row>
