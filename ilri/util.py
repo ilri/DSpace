@@ -107,7 +107,7 @@ def db_connect(
 def read_dois_from_file(input_file) -> list:
     """Read DOIs from a file.
 
-    DOIs should be one per line with either http, https, dx.doi.org, doig.org
+    DOIs should be one per line with either http, https, dx.doi.org, doi.org
     or just the DOI itself. Anything other than the DOI will be stripped.
 
     :param input_file: a file handle (class _io.TextIOWrapper ???).
