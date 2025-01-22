@@ -477,6 +477,19 @@
             <row>
                 <field>
                     <dc-schema>cg</dc-schema>
+                    <dc-element>contributor</dc-element>
+                    <dc-qualifier>programAccelerator</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>CGIAR Programs and Accelerators</label>
+                    <style>col-sm-6</style>
+                    <input-type value-pairs-name="cgiar-programs-accelerators">dropdown</input-type>
+                    <hint>Select any CGIAR Programs(s) or Accelerator(s) associated with this item. Use this to show that a Program or Accelerator funded this item.</hint>
+                    <required></required>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>cg</dc-schema>
                     <dc-element>subject</dc-element>
                     <dc-qualifier>impactPlatform</dc-qualifier>
                     <repeatable>true</repeatable>
@@ -2980,6 +2993,56 @@
       <pair>
         <displayed-value>West and Central African Food Systems Transformation</displayed-value>
         <stored-value>West and Central African Food Systems Transformation</stored-value>
+      </pair>
+    </value-pairs>
+    <value-pairs value-pairs-name="cgiar-programs-accelerators">
+      <pair>
+        <displayed-value>Better Diets and Nutrition</displayed-value>
+        <stored-value>Better Diets and Nutrition</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Breeding for Tomorrow and Genebanks</displayed-value>
+        <stored-value>Breeding for Tomorrow and Genebanks</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Capacity Sharing</displayed-value>
+        <stored-value>Capacity Sharing</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Climate Action</displayed-value>
+        <stored-value>Climate Action</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Digital Transformation</displayed-value>
+        <stored-value>Digital Transformation</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Food Frontiers and Security</displayed-value>
+        <stored-value>Food Frontiers and Security</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Gender Equality and Inclusion</displayed-value>
+        <stored-value>Gender Equality and Inclusion</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Multifunctional Landscapes</displayed-value>
+        <stored-value>Multifunctional Landscapes</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Policy Innovations</displayed-value>
+        <stored-value>Policy Innovations</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Scaling for Impact</displayed-value>
+        <stored-value>Scaling for Impact</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Sustainable Animal and Aquatic Foods</displayed-value>
+        <stored-value>Sustainable Animal and Aquatic Foods</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Sustainable Farming</displayed-value>
+        <stored-value>Sustainable Farming</stored-value>
       </pair>
     </value-pairs>
     <value-pairs value-pairs-name="crpsubject" dc-term="crsubject_crpsubject">
