@@ -168,6 +168,7 @@
                 <ref bean="searchFilterType" />
                 <ref bean="searchFilterRegion"/>
                 <ref bean="searchFilterCountry"/>
+                <ref bean="searchFilterProgramAccelerator" />
                 <ref bean="searchFilterInitiative" />
                 <ref bean="searchFilterImpactPlatform" />
                 <ref bean="searchFilterSubject"/>
@@ -194,6 +195,7 @@
                 <ref bean="searchFilterContentInOriginalBundle"/>
                 <ref bean="searchFilterType" />
                 <ref bean="searchFilterPublisher" />
+                <ref bean="searchFilterProgramAccelerator" />
                 <ref bean="searchFilterInitiative" />
                 <ref bean="searchFilterImpactPlatform" />
                 <ref bean="searchFilterCrpSubject" />
@@ -2949,6 +2951,21 @@
             </list>
         </property>
         <property name="facetLimit" value="3"/>
+        <property name="sortOrderSidebar" value="COUNT"/>
+        <property name="sortOrderFilterPage" value="COUNT"/>
+        <property name="isOpenByDefault" value="true"/>
+        <property name="pageSize" value="10"/>
+        <property name="exposeMinAndMaxValue" value="true"/>
+    </bean>
+
+    <bean id="searchFilterProgramAccelerator" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
+        <property name="indexFieldName" value="programAccelerator"/>
+        <property name="metadataFields">
+            <list>
+                <value>cg.contributor.programAccelerator</value>
+            </list>
+        </property>
+        <property name="facetLimit" value="10"/>
         <property name="sortOrderSidebar" value="COUNT"/>
         <property name="sortOrderFilterPage" value="COUNT"/>
         <property name="isOpenByDefault" value="true"/>
