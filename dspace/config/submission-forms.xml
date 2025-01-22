@@ -465,12 +465,12 @@
                 <field>
                     <dc-schema>cg</dc-schema>
                     <dc-element>contributor</dc-element>
-                    <dc-qualifier>initiative</dc-qualifier>
+                    <dc-qualifier>programAccelerator</dc-qualifier>
                     <repeatable>true</repeatable>
-                    <label>CGIAR Initiatives</label>
+                    <label>CGIAR Programs and Accelerators</label>
                     <style>col-sm-6</style>
-                    <input-type value-pairs-name="cgiar-initiatives">dropdown</input-type>
-                    <hint>Select any CGIAR Initiatives(s) associated with this item. Use this to show that an Initiative funded this item.</hint>
+                    <input-type value-pairs-name="cgiar-programs-accelerators">dropdown</input-type>
+                    <hint>Select any CGIAR Programs(s) or Accelerator(s) associated with this item. Use this to show that a Program or Accelerator funded this item.</hint>
                     <required></required>
                 </field>
             </row>
@@ -478,12 +478,12 @@
                 <field>
                     <dc-schema>cg</dc-schema>
                     <dc-element>contributor</dc-element>
-                    <dc-qualifier>programAccelerator</dc-qualifier>
+                    <dc-qualifier>initiative</dc-qualifier>
                     <repeatable>true</repeatable>
-                    <label>CGIAR Programs and Accelerators</label>
+                    <label>CGIAR Initiatives</label>
                     <style>col-sm-6</style>
-                    <input-type value-pairs-name="cgiar-programs-accelerators">dropdown</input-type>
-                    <hint>Select any CGIAR Programs(s) or Accelerator(s) associated with this item. Use this to show that a Program or Accelerator funded this item.</hint>
+                    <input-type value-pairs-name="cgiar-initiatives">dropdown</input-type>
+                    <hint>Select any CGIAR Initiatives(s) associated with this item. Use this to show that an Initiative funded this item.</hint>
                     <required></required>
                 </field>
             </row>
