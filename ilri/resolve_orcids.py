@@ -187,6 +187,9 @@ def resolve_orcid_identifiers(orcids):
                         )
                 # check if line has something (a credit-name, given-names, and or family-name)
                 if line and line != "":
+                    # Naive replacement of double spaces
+                    line = re.sub(r'\s+', ' ', line)
+
                     line = f"{line.strip()}: {orcid}"
                 else:
                     logger.debug(
