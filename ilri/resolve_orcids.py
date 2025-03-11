@@ -187,7 +187,7 @@ def resolve_orcid_identifiers(orcids):
                         )
                 # check if line has something (a credit-name, given-names, and or family-name)
                 if line and line != "":
-                    line = "{0}: {1}".format(line.strip(), orcid)
+                    line = f"{line.strip()}: {orcid}"
                 else:
                     logger.debug(
                         Fore.RED
