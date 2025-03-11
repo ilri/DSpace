@@ -70,9 +70,7 @@ def read_identifiers_from_solr():
 
     numFound = res.json()["response"]["numFound"]
     logger.debug(
-        Fore.GREEN
-        + f"Total number of Solr records with ORCID iDs: {numFound}"
-        + Fore.RESET
+        f"{Fore.GREEN}Total number of Solr records with ORCID iDs: {numFound}{Fore.RESET}"
     )
 
     # initialize an empty list for ORCID iDs
@@ -94,9 +92,7 @@ def read_identifiers_from_solr():
     if args.extract_only:
         orcids_extracted = str(len(orcids))
         logger.debug(
-            Fore.GREEN
-            + f"Number of unique ORCID identifiers: {orcids_extracted}"
-            + Fore.RESET
+            f"{Fore.GREEN}Number of unique ORCID identifiers: {orcids_extracted}{Fore.RESET}"
         )
         # close output file before we exit
         args.output_file.close()
@@ -111,9 +107,7 @@ def read_identifiers_from_solr():
 def resolve_orcid_identifiers(orcids):
     unique_orcids = str(len(orcids))
     logger.debug(
-        Fore.GREEN
-        + f"Resolving names associated with {unique_orcids} unique ORCID identifiers.\n"
-        + Fore.RESET
+        f"{Fore.GREEN}Resolving names associated with {unique_orcids} unique ORCID identifiers.\n{Fore.RESET}"
     )
 
     # ORCID API endpoint, see: https://pub.orcid.org
@@ -133,9 +127,7 @@ def resolve_orcid_identifiers(orcids):
     # iterate through our ORCID iDs and fetch their names from the ORCID API
     for orcid in orcids:
         logger.debug(
-            Fore.GREEN
-            + f"Looking up the names associated with ORCID iD: {orcid}"
-            + Fore.RESET
+            f"{Fore.GREEN}Looking up the names associated with ORCID iD: {orcid}{Fore.RESET}"
         )
 
         # build request URL for current ORCID ID
@@ -168,9 +160,7 @@ def resolve_orcid_identifiers(orcids):
                         line = data["name"]["given-names"]["value"]
                     else:
                         logger.debug(
-                            Fore.YELLOW
-                            + "Ignoring null or deactivated given-names element."
-                            + Fore.RESET
+                            f"{Fore.YELLOW}Ignoring null or deactivated given-names element.{Fore.RESET}"
                         )
                     # make sure family-name is present and not deactivated
                     if (
@@ -181,21 +171,17 @@ def resolve_orcid_identifiers(orcids):
                         line = f'{line} {data["name"]["family-name"]["value"]}'
                     else:
                         logger.debug(
-                            Fore.YELLOW
-                            + "Ignoring null or deactivated family-name element."
-                            + Fore.RESET
+                            f"{Fore.YELLOW}Ignoring null or deactivated family-name element.{Fore.RESET}"
                         )
                 # check if line has something (a credit-name, given-names, and or family-name)
                 if line and line != "":
                     # Naive replacement of double spaces
-                    line = re.sub(r'\s+', ' ', line)
+                    line = re.sub(r"\s+", " ", line)
 
                     line = f"{line.strip()}: {orcid}"
                 else:
                     logger.debug(
-                        Fore.RED
-                        + "Skipping identifier with no valid name elements."
-                        + Fore.RESET
+                        f"{Fore.RED}Skipping identifier with no valid name elements.{Fore.RESET}"
                     )
 
                     continue
@@ -210,17 +196,13 @@ def resolve_orcid_identifiers(orcids):
                 line = None
             else:
                 logger.debug(
-                    Fore.YELLOW
-                    + "Skipping identifier with null name element."
-                    + Fore.RESET
+                    f"{Fore.YELLOW}Skipping identifier with null name element.{Fore.RESET}"
                 )
         # HTTP 404 means that the API url or identifier was not found. If the
         # API URL is correct, let's assume that the identifier was not found.
         elif request.status_code == 404:
             logger.debug(
-                Fore.YELLOW
-                + "Skipping missing identifier (API request returned HTTP 404)."
-                + Fore.RESET
+                f"{Fore.YELLOW}Skipping missing identifier (API request returned HTTP 404).{Fore.RESET}"
             )
 
             continue
@@ -228,14 +210,12 @@ def resolve_orcid_identifiers(orcids):
         # See: https://members.orcid.org/api/resources/error-codes
         elif request.status_code == 409:
             logger.debug(
-                Fore.YELLOW
-                + "Skipping locked identifier (API request returned HTTP 409)."
-                + Fore.RESET
+                f"{Fore.YELLOW}Skipping locked identifier (API request returned HTTP 409).{Fore.RESET}"
             )
 
             continue
         else:
-            logger.error(Fore.RED + "Request failed." + Fore.RESET)
+            logger.error(f"{Fore.RED}Request failed.{Fore.RESET}")
             # close output file before we exit
             args.output_file.close()
             sys.exit(1)
