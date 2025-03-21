@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# post_bitstreams.py 0.2.0
+# post_bitstreams.py 0.2.1
 #
 # SPDX-License-Identifier: GPL-3.0-only
 #
@@ -91,6 +91,13 @@ def check_item(item_id: str, bundle_name: str):
 
     # Create new bundle if we didn't find one
     if bundle is None:
+        if args.dry_run:
+            logger.info(
+                f"{Fore.YELLOW}> (DRY RUN) Created {bundle_name} bundle{Fore.RESET}"
+            )
+
+            return False
+
         bundle = d.create_bundle(parent=item, name=bundle_name)
         if isinstance(bundle, Bundle) and bundle.uuid is not None:
             logger.debug(
