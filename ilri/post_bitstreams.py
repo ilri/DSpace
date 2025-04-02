@@ -27,6 +27,7 @@
 #
 # TODO: fix overwriting by mime
 # TODO: allow overwriting by bitstream description
+# TODO: allow uploading multiple bitstreams (place?)
 
 import argparse
 import csv
