@@ -182,7 +182,7 @@ def delete_bitstream(bitstream_id: str):
         return False
 
 
-def upload_file(item_id: str, bundle_name: str, filename: str, description):
+def upload_file(item_id: str, bundle_name: str, filename: str, description: str):
     """Upload a file to an existing item in the DSpace repository.
 
     :param item_id: UUID of item to post the file to.
@@ -195,7 +195,7 @@ def upload_file(item_id: str, bundle_name: str, filename: str, description):
     bitstream_metadata = {
         "dc.description": [
             {
-                "value": f"{description}",
+                "value": description,
                 "language": "en",
                 "authority": None,
                 "confidence": -1,
