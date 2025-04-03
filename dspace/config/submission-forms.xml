@@ -2978,8 +2978,8 @@
         <stored-value>Better Diets and Nutrition</stored-value>
       </pair>
       <pair>
-        <displayed-value>Breeding for Tomorrow and Genebanks</displayed-value>
-        <stored-value>Breeding for Tomorrow and Genebanks</stored-value>
+        <displayed-value>Breeding for Tomorrow</displayed-value>
+        <stored-value>Breeding for Tomorrow</stored-value>
       </pair>
       <pair>
         <displayed-value>Capacity Sharing</displayed-value>
@@ -2996,6 +2996,10 @@
       <pair>
         <displayed-value>Food Frontiers and Security</displayed-value>
         <stored-value>Food Frontiers and Security</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>Genebanks</displayed-value>
+        <stored-value>Genebanks</stored-value>
       </pair>
       <pair>
         <displayed-value>Gender Equality and Inclusion</displayed-value>
