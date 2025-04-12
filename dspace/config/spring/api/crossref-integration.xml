@@ -156,7 +156,7 @@
         <property name="query" value="/publisher"/>
     </bean>
     <bean id="crossref.publisher" class="org.dspace.importer.external.metadatamapping.MetadataFieldConfig">
-        <constructor-arg value="dc.publisher"/>
+        <constructor-arg value="dcterms.publisher"/>
     </bean>
 
     <bean class="java.lang.Integer" id="maxRetry">
