@@ -31,6 +31,8 @@
         <entry key-ref="crossref.issue" value-ref="crossrefIssue" />
         <entry key-ref="crossref.abstract" value-ref="crossrefAbstract" />
         <entry key-ref="crossref.publisher" value-ref="crossrefPublisher" />
+        <entry key-ref="crossref.language" value-ref="crossrefLanguage" />
+        <entry key-ref="crossref.yearonline" value-ref="crossrefYearOnlineContrib"/>
     </util:map>
 
     <bean id="crossrefIDContrib" class="org.dspace.importer.external.metadatamapping.contributor.SimpleJsonPathMetadataContributor">
@@ -87,6 +89,17 @@
 	</bean>
     <bean id="crossref.year" class="org.dspace.importer.external.metadatamapping.MetadataFieldConfig">
         <constructor-arg value="dcterms.issued"/>
+    </bean>
+
+    <bean id="crossrefYearOnlineContrib" class="org.dspace.importer.external.metadatamapping.contributor.SimpleJsonPathMetadataContributor">
+        <property name="field" ref="crossref.yearonline"/>
+        <property name="metadataProcessor" ref="crossrefDateOnlineMetadataProcessor"></property>
+    </bean>
+	<bean name="crossrefDateOnlineMetadataProcessor" class="org.dspace.importer.external.crossref.CrossRefDateMetadataProcessor">
+	    <property name="pathToArray" value="/published-online/date-parts"></property>
+	</bean>
+    <bean id="crossref.yearonline" class="org.dspace.importer.external.metadatamapping.MetadataFieldConfig">
+        <constructor-arg value="dcterms.available"/>
     </bean>
 
     <bean id="crossrefISBNContrib" class="org.dspace.importer.external.metadatamapping.contributor.SimpleJsonPathMetadataContributor">
@@ -157,6 +170,14 @@
     </bean>
     <bean id="crossref.publisher" class="org.dspace.importer.external.metadatamapping.MetadataFieldConfig">
         <constructor-arg value="dcterms.publisher"/>
+    </bean>
+
+    <bean id="crossrefLanguage" class="org.dspace.importer.external.metadatamapping.contributor.SimpleJsonPathMetadataContributor">
+        <property name="field" ref="crossref.language"/>
+        <property name="query" value="/language"/>
+    </bean>
+    <bean id="crossref.language" class="org.dspace.importer.external.metadatamapping.MetadataFieldConfig">
+        <constructor-arg value="dcterms.language"/>
     </bean>
 
     <bean class="java.lang.Integer" id="maxRetry">
