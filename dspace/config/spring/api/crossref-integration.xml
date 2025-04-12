@@ -83,7 +83,7 @@
         <property name="metadataProcessor" ref="crossrefDateMetadataProcessor"></property>
     </bean>
 	<bean name="crossrefDateMetadataProcessor" class="org.dspace.importer.external.crossref.CrossRefDateMetadataProcessor">
-	    <property name="pathToArray" value="/issued/date-parts"></property>
+	    <property name="pathToArray" value="/published-print/date-parts"></property>
 	</bean>
     <bean id="crossref.year" class="org.dspace.importer.external.metadatamapping.MetadataFieldConfig">
         <constructor-arg value="dcterms.issued"/>
