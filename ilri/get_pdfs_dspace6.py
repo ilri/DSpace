@@ -136,7 +136,7 @@ expire_after = timedelta(days=30)
 requests_cache.install_cache("requests-cache", expire_after=expire_after)
 
 # prune old cache entries
-requests_cache.remove_expired_responses()
+requests_cache.delete(expired=True)
 
 for handle in handles:
     # strip the handle because it has a line feed (%0A)
