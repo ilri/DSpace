@@ -58,10 +58,7 @@ def resolve_bitstreams(handle):
 
             # Temporary so we don't have to worry about handling multiple PDFs
             if len(pdf_bitstream_ids) == 1:
-                # print(f'download_bitstreams({pdf_bitstream_ids})')
-                print(
-                    f"https://hdl.handle.net/{handle},{rest_base_url}/{rest_bitstream_endpoint}/{pdf_bitstream_ids[0]}/retrieve"
-                )
+                download_bitstreams(pdf_bitstream_ids)
 
     return
 
@@ -117,8 +114,7 @@ def download_bitstreams(pdf_bitstream_ids, filename=False):
     return
 
 
-# rest_base_url = "https://cgspace.cgiar.org/rest"
-rest_base_url = "https://digitalarchive.worldfishcenter.org/rest"
+rest_base_url = "https://cgspace.cgiar.org/rest"
 rest_handle_endpoint = "handle"
 rest_bitstream_endpoint = "bitstreams"
 rest_user_agent = "get_pdfs_dspace.py/0.0.2 (python / curl)"
