@@ -22,7 +22,7 @@ set -o errexit
 
 # defaults
 readonly DEF_SPIDERS_PATTERN_FILE=/dspace/config/spiders/agents/example
-readonly DEF_SOLR_URL=http://localhost:8081/solr
+readonly DEF_SOLR_URL=http://localhost:8983/solr
 readonly DEF_STATISTICS_SHARD=statistics
 
 ######
@@ -189,7 +189,7 @@ while read -r spider; do
     # Check for hits from this spider in Solr and save results into a variable,
     # setting a custom curl output format so I can get the HTTP status code and
     # Solr response in one request, then tease them out later.
-    solr_result=$(curl -s -w "http_code=%{http_code}" "$SOLR_URL/$STATISTICS_SHARD/select" -d "q=userAgent:/$spider/&rows=0")
+    solr_result=$(curl -s -w "http_code=%{http_code}" "$SOLR_URL/$STATISTICS_SHARD/select" -d "q=userAgent:/$spider/&rows=0&wt=xml")
 
     http_code=$(echo $solr_result | grep -o -E 'http_code=[0-9]+' | awk -F= '{print $2}')
 
