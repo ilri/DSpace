@@ -2279,6 +2279,7 @@
         <property name="metadataFields">
             <list>
                 <value>dc.title</value>
+                <value>dcterms.alternative</value>
             </list>
         </property>
         <property name="isOpenByDefault" value="true"/>
