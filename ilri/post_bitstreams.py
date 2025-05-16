@@ -322,7 +322,7 @@ if __name__ == "__main__":
                 description = row["filename"].split("__description:")[1]
             except IndexError:
                 filename = row["filename"].split("__description:")[0]
-                description = False
+                description = None
 
             if not os.path.isfile(filename):
                 logger.info(
