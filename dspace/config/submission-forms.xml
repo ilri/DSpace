@@ -61,6 +61,7 @@
                     <input-type>onebox</input-type>
                     <hint>Enter the full official title of the item (including any subtitles, etc).</hint>
                     <required>You must enter a main title for this item.</required>
+                    <language value-pairs-name="common_iso_languages">true</language>
                 </field>
             </row>
             <row>
@@ -73,6 +74,7 @@
                     <input-type>onebox</input-type>
                     <hint>Enter any alternative titles for the item (other languages, etc).</hint>
                     <required></required>
+                    <language value-pairs-name="common_iso_languages">true</language>
                 </field>
             </row>
             <row>
@@ -310,6 +312,7 @@
                     <input-type>textarea</input-type>
                     <hint>Enter the abstract of the item.</hint>
                     <required></required>
+                    <language value-pairs-name="common_iso_languages">true</language>
                 </field>
             </row>
             <row>
