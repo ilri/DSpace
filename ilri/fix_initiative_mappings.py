@@ -128,7 +128,7 @@ initiatives_list_url = "https://ilri.github.io/cgspace-submission-guidelines/cg-
 # Column names in the CSV
 id_column_name = "id"
 collection_column_name = "collection"
-initiative_column_name = "cg.contributor.initiative[en_US]"
+initiative_column_name = "cg.contributor.initiative[en]"
 # The prefix for all Initiative collection names
 initiative_column_name_prefix = "CGIAR Initiative on "
 
