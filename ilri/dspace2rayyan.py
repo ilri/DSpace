@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# dspace2rayyan.py 0.0.1
+# dspace2rayyan.py 0.0.2
 #
 # Copyright Alan Orth.
 #
@@ -36,6 +36,11 @@ parser.add_argument(
     help="File name to save CSV output.",
     required=True,
     type=argparse.FileType("w"),
+)
+parser.add_argument(
+    "--scope",
+    required=False,
+    help="Community or collection scope (UUID).",
 )
 parser.add_argument(
     "-s",
@@ -91,7 +96,7 @@ writer = csv.DictWriter(args.output_file, fieldnames=fieldnames)
 writer.writeheader()
 
 item_number = 0
-for item in d.search_objects_iter(dso_type="item", query=args.search_string):
+for item in d.search_objects_iter(dso_type="item", scope=args.scope, query=args.search_string):
     item = Item.from_dso(item)
 
     try:
