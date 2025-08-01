@@ -310,7 +310,7 @@
                     <repeatable>false</repeatable>
                     <label>Abstract</label>
                     <input-type>textarea</input-type>
-                    <hint>Enter the abstract of the item.</hint>
+                    <hint>Enter the abstract of the item (unless it is copyrighted).</hint>
                     <required></required>
                     <language value-pairs-name="common_iso_languages">true</language>
                 </field>
