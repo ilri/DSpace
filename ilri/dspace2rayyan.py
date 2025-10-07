@@ -69,89 +69,169 @@ else:
 
 d = DSpaceClient(api_endpoint=args.api_url)
 
-fieldnames = [
-    "Title",
-    "Authors",
-    "Author affiliations",
-    "Abstract",
-    "Funders",
-    "Language",
-    "DOI",
-    "Access rights",
-    "Usage rights",
-    "URL",
-    "Year",
-    "Journal",
-    "ISSN",
-    "Publisher",
-    "Volume",
-    "Issue",
-    "Pages",
-    "Type",
-    "Keywords",
-    "Countries",
-]
+field_mappings = {
+    "Title": [],  # this comes from DSpace's item.name
+    # Unfortunately MELSpace will need a custom harvester because they use one field
+    # for the first author, and another for the rest.
+    "Authors": ["dc.contributor.author", "dc.creator", "dc.contributor"],
+    "Author affiliations": ["cg.contributor.affiliation", "cg.contributor.center"],
+    # Try in order of liklihood (CIMMYT uses all of these, sigh...)
+    "Abstract": ["dcterms.abstract", "dc.description.abstract", "dc.description"],
+    "Funders": [
+        "cg.contributor.donor",
+        "cg.contributor.funder",
+        "dc.relation.funderName",
+    ],
+    "Language": ["dcterms.language", "dc.language.iso", "dc.language"],
+    "DOI": ["cg.identifier.doi", "dc.identifier.doi"],
+    "Access rights": [
+        "dcterms.accessRights",
+        "dc.identifier.status",
+        "dc.rights.accesslevel",
+    ],
+    "Usage rights": ["dcterms.license", "dc.rights"],
+    "URL": [],  # this comes from DSpace's item.handle
+    "Year": ["dcterms.issued", "dc.date.issued", "dcterms.available"],
+    "Journal": ["cg.journal", "dc.source", "dc.source.title", "dc.source.journal"],
+    "ISSN": ["cg.issn", "dc.identifier.issn", "dc.source.issn"],
+    "Publisher": ["dcterms.publisher", "dc.publisher"],
+    "Volume": ["cg.volume", "dc.source.volume"],
+    "Issue": ["cg.issue", "dc.source.issue"],
+    "Pages": ["dcterms.extent", "dc.description.pages"],
+    "Type": ["dcterms.type", "dc.type"],
+    "Keywords": [
+        "dcterms.subject",
+        "dc.subject",
+        "cg.subject.agrovoc",
+        "dc.subject.agrovoc",
+        "dc.subject.other",
+    ],
+    "Countries": ["cg.coverage.country", "dc.coverage.countryfocus"],
+}
 
-writer = csv.DictWriter(args.output_file, fieldnames=fieldnames)
+field_names = [field for field in field_mappings]
+
+writer = csv.DictWriter(args.output_file, fieldnames=field_names)
 writer.writeheader()
 
 item_number = 0
-for item in d.search_objects_iter(dso_type="item", scope=args.scope, query=args.search_string):
+for item in d.search_objects_iter(
+    dso_type="item", scope=args.scope, query=args.search_string
+):
     item = Item.from_dso(item)
 
-    try:
-        item_authors = [
-            k["value"] for k in item.get_metadata_values("dc.contributor.author")
-        ]
-    except IndexError:
-        item_authors = None
+    # Use a list instead of None here because an empty list is Falsy as well and
+    # we need an iterable to be able to join later when serializing to CSV.
+    item_authors = []
+    for field in field_mappings["Authors"]:
+        logger.debug(f"Trying to find authors in {field}")
 
-    try:
-        item_affiliations = [
-            k["value"] for k in item.get_metadata_values("cg.contributor.affiliation")
-        ]
-    except IndexError:
-        item_affiliations = None
+        if len(item.get_metadata_values(field)) > 0:
+            try:
+                item_authors = [k["value"] for k in item.get_metadata_values(field)]
+            except IndexError:
+                pass
 
-    try:
-        item_abstract = item.get_metadata_values("dcterms.abstract")[0]["value"]
-    except IndexError:
-        item_abstract = None
+        if item_authors:
+            break
 
-    try:
-        item_language = item.get_metadata_values("dcterms.language")[0]["value"]
-    except IndexError:
-        item_language = None
+    item_affiliations = []
+    for field in field_mappings["Author affiliations"]:
+        logger.debug(f"Trying to find author affiliations in {field}")
 
-    try:
-        item_doi = item.get_metadata_values("cg.identifier.doi")[0]["value"]
-    except IndexError:
-        item_doi = None
+        if len(item.get_metadata_values(field)) > 0:
+            try:
+                item_affiliations = [
+                    k["value"] for k in item.get_metadata_values(field)
+                ]
+            except IndexError:
+                pass
 
-    try:
-        item_access_rights = item.get_metadata_values("dcterms.accessRights")[0][
-            "value"
-        ]
-    except IndexError:
-        item_access_rights = None
+        if item_affiliations:
+            break
 
-    try:
-        item_usage_rights = item.get_metadata_values("dcterms.license")[0]["value"]
-    except IndexError:
-        item_usage_rights = None
+    item_abstract = None
+    for field in field_mappings["Abstract"]:
+        logger.debug(f"Trying to find abstract in {field}")
 
-    # Try to get either the issue date or online date
-    try:
-        item_date_issued = item.get_metadata_values("dcterms.issued")[0]["value"]
-    except IndexError:
-        try:
-            item_date_issued = item.get_metadata_values("dcterms.available")[0]["value"]
-        except IndexError:
-            logger.error(
-                f"Missing date. This shouldn't happen! {item.handle} ({item.id})"
-            )
+        if len(item.get_metadata_values(field)) > 0:
+            try:
+                item_abstract = item.get_metadata_values(field)[0]["value"]
+            except IndexError:
+                item_abstract = None
 
-            sys.exit(1)
+        if item_abstract:
+            break
+
+    item_language = None
+    for field in field_mappings["Language"]:
+        logger.debug(f"Trying to find language in {field}")
+
+        if len(item.get_metadata_values(field)) > 0:
+            try:
+                item_language = item.get_metadata_values(field)[0]["value"]
+            except IndexError:
+                item_language = None
+
+        if item_language:
+            break
+
+    item_doi = None
+    for field in field_mappings["DOI"]:
+        logger.debug(f"Trying to find DOI in {field}")
+
+        if len(item.get_metadata_values(field)) > 0:
+            try:
+                item_doi = item.get_metadata_values(field)[0]["value"]
+            except IndexError:
+                item_doi = None
+
+        if item_doi:
+            break
+
+    item_access_rights = None
+    for field in field_mappings["Access rights"]:
+        logger.debug(f"Trying to find access rights in {field}")
+
+        if len(item.get_metadata_values(field)) > 0:
+            try:
+                item_access_rights = item.get_metadata_values(field)[0]["value"]
+            except IndexError:
+                item_access_rights = None
+
+        if item_access_rights:
+            break
+
+    item_usage_rights = None
+    for field in field_mappings["Usage rights"]:
+        logger.debug(f"Trying to find usage rights in {field}")
+
+        if len(item.get_metadata_values(field)) > 0:
+            try:
+                item_usage_rights = item.get_metadata_values(field)[0]["value"]
+            except IndexError:
+                item_usage_rights = None
+
+        if item_usage_rights:
+            break
+
+    item_date_issued = None
+    for field in field_mappings["Year"]:
+        logger.debug(f"Trying to find date issued in {field}")
+
+        if len(item.get_metadata_values(field)) > 0:
+            try:
+                item_date_issued = item.get_metadata_values(field)[0]["value"]
+            except IndexError:
+                item_date_issued = None
+
+        if item_date_issued:
+            break
+
+    if not item_date_issued:
+        logger.error(f"Missing date. This shouldn't happen! {item.handle} ({item.id})")
+
+        sys.exit(1)
 
     # Truncate to YYYY for Rayyan
     try:
@@ -161,64 +241,138 @@ for item in d.search_objects_iter(dso_type="item", scope=args.scope, query=args.
 
         sys.exit(1)
 
-    try:
-        item_journal = item.get_metadata_values("cg.journal")[0]["value"]
-    except IndexError:
-        item_journal = None
+    item_journal = None
+    for field in field_mappings["Journal"]:
+        logger.debug(f"Trying to find journal in {field}")
 
-    try:
-        item_issn = item.get_metadata_values("cg.issn")[0]["value"]
-    except IndexError:
-        item_issn = None
+        if len(item.get_metadata_values(field)) > 0:
+            try:
+                item_journal = item.get_metadata_values(field)[0]["value"]
+            except IndexError:
+                item_journal = None
 
-    # TODO: this could be multiple values for some items
-    try:
-        item_publisher = item.get_metadata_values("dcterms.publisher")[0]["value"]
-    except IndexError:
-        item_publisher = None
+        if item_journal:
+            break
 
-    try:
-        item_volume = item.get_metadata_values("cg.volume")[0]["value"]
-    except IndexError:
-        item_volume = None
+    item_issn = []
+    for field in field_mappings["ISSN"]:
+        logger.debug(f"Trying to find ISSN in {field}")
 
-    try:
-        item_issue = item.get_metadata_values("cg.issue")[0]["value"]
-    except IndexError:
-        item_issue = None
+        if len(item.get_metadata_values(field)) > 0:
+            try:
+                item_issn = [k["value"] for k in item.get_metadata_values(field)]
+            except IndexError:
+                item_issn = []
 
-    try:
-        item_extent = item.get_metadata_values("dcterms.extent")[0]["value"]
-    except IndexError:
-        item_extent = None
+        if item_issn:
+            break
 
-    try:
-        item_type = item.get_metadata_values("dcterms.type")[0]["value"]
-    except IndexError:
+    item_publisher = []
+    for field in field_mappings["Publisher"]:
+        logger.debug(f"Trying to find publisher in {field}")
+
+        if len(item.get_metadata_values(field)) > 0:
+            try:
+                item_publisher = [k["value"] for k in item.get_metadata_values(field)]
+            except IndexError:
+                item_publisher = []
+
+        if item_publisher:
+            break
+
+    item_volume = None
+    for field in field_mappings["Volume"]:
+        logger.debug(f"Trying to find volume in {field}")
+
+        if len(item.get_metadata_values(field)) > 0:
+            try:
+                item_volume = item.get_metadata_values(field)[0]["value"]
+            except IndexError:
+                item_volume = None
+
+        if item_volume:
+            break
+
+    item_issue = None
+    for field in field_mappings["Issue"]:
+        logger.debug(f"Trying to find issue in {field}")
+
+        if len(item.get_metadata_values(field)) > 0:
+            try:
+                item_issue = item.get_metadata_values(field)[0]["value"]
+            except IndexError:
+                item_issue = None
+
+        if item_issue:
+            break
+
+    item_extent = None
+    for field in field_mappings["Pages"]:
+        logger.debug(f"Trying to find pages in {field}")
+
+        if len(item.get_metadata_values(field)) > 0:
+            try:
+                item_extent = item.get_metadata_values(field)[0]["value"]
+            except IndexError:
+                item_extent = None
+
+        if item_extent:
+            break
+
+    item_type = None
+    for field in field_mappings["Type"]:
+        logger.debug(f"Trying to find type in {field}")
+
+        if len(item.get_metadata_values(field)) > 0:
+            try:
+                item_type = item.get_metadata_values(field)[0]["value"]
+            except IndexError:
+                item_type = None
+
+        if item_type:
+            break
+
+    if not item_type:
         logger.error(f"Missing type. This shouldn't happen! {item.handle}")
 
-        item_type = None
+    item_funders = []
+    for field in field_mappings["Funders"]:
+        logger.debug(f"Trying to find funders in {field}")
 
-    try:
-        item_funders = [
-            k["value"] for k in item.get_metadata_values("cg.contributor.donor")
-        ]
-    except IndexError:
-        item_funders = None
+        if len(item.get_metadata_values(field)) > 0:
+            try:
+                item_funders = [k["value"] for k in item.get_metadata_values(field)]
+            except IndexError:
+                item_funders = []
 
-    try:
-        item_subjects = [
-            k["value"] for k in item.get_metadata_values("dcterms.subject")
-        ]
-    except IndexError:
-        item_subjects = None
+        if item_funders:
+            break
 
-    try:
-        item_countries = [
-            k["value"] for k in item.get_metadata_values("cg.coverage.country")
-        ]
-    except IndexError:
-        item_countries = None
+    item_subjects = []
+    for field in field_mappings["Keywords"]:
+        logger.debug(f"Trying to find keywords in {field}")
+
+        if len(item.get_metadata_values(field)) > 0:
+            try:
+                item_subjects = [k["value"] for k in item.get_metadata_values(field)]
+            except IndexError:
+                item_subjects = []
+
+        if item_subjects:
+            break
+
+    item_countries = []
+    for field in field_mappings["Countries"]:
+        logger.debug(f"Trying to find countries in {field}")
+
+        if len(item.get_metadata_values(field)) > 0:
+            try:
+                item_countries = [k["value"] for k in item.get_metadata_values(field)]
+            except IndexError:
+                item_countries = []
+
+        if item_countries:
+            break
 
     writer.writerow(
         {
@@ -233,8 +387,8 @@ for item in d.search_objects_iter(dso_type="item", scope=args.scope, query=args.
             "URL": f"https://hdl.handle.net/{item.handle}",
             "Year": item_date_issued,
             "Journal": item_journal,
-            "ISSN": item_issn,
-            "Publisher": item_publisher,
+            "ISSN": "; ".join(item_issn),
+            "Publisher": "; ".join(item_publisher),
             "Volume": item_volume,
             "Issue": item_issue,
             "Pages": item_extent,
