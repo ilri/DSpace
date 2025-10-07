@@ -163,3 +163,42 @@ def download_file(url, filename) -> bool:
         return True
     else:
         return False
+
+
+def normalize_doi(doi):
+    """
+    Try to normalize a DOI based on some cases I noticed. Return a clean
+    DOI in https://doi.org/10. format, lowercased, and stripped.
+    """
+
+    if not doi:
+        return ""
+
+    # normalize DOIs like doi:10.1088/1748-9326/ac413a
+    doi = doi.replace("doi:", "")
+
+    # fix typo in DOIs like 0.1002/2014WR016668
+    if doi.startswith("0."):
+        doi = f"1{doi}"
+
+    # fix typo in DOIs like http://dx.doi.org/DOI:
+    doi = doi.replace("http://dx.doi.org/DOI:", "")
+
+    # fix old dx.doi.org
+    doi = re.sub(r"^https?://(dx\.)?doi\.org/", "", doi)
+
+    # fix typo in DOI URI like https:// doi.org/10.3390/agronomy13030727
+    doi = doi.replace("https:// doi.org/", "")
+
+    # fix URLs that should be DOIs like https://www.tandfonline.com/doi/full/10.1080/23322039.2019.1640098
+    doi = doi.replace("https://www.tandfonline.com/doi/full/", "")
+
+    # fix Unicode non-printing characters like in 10.​1007/​s10113-016-0983-6
+    pattern = re.compile(r"\u200B")
+    match = re.findall(pattern, doi)
+
+    if match:
+        doi = re.sub(pattern, "", doi)
+
+    # return the normalized DOI, and strip it just in case
+    return f"https://doi.org/{doi.lower().strip()}"
