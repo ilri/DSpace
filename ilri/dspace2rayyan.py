@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# dspace2rayyan.py 0.0.2
+# dspace2rayyan.py 0.1.0
 #
 # Copyright Alan Orth.
 #
@@ -78,12 +78,12 @@ field_mappings = {
         "dc.contributor.author",
         "dc.creator",
         "dc.contributor",
-        "dc.creator.corporate", # CIMMYT
+        "dc.creator.corporate",  # CIMMYT
     ],
     "Author affiliations": [
         "cg.contributor.affiliation",
         "cg.contributor.center",
-        "dc.creator.corporate", # CIMMYT
+        "dc.creator.corporate",  # CIMMYT
     ],
     # Try in order of liklihood (CIMMYT uses all of these, sigh...)
     "Abstract": ["dcterms.abstract", "dc.description.abstract", "dc.description"],
