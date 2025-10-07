@@ -139,7 +139,7 @@ for item in d.search_objects_iter(
         if len(item.get_metadata_values(field)) > 0:
             try:
                 item_authors = normalize_cgiar_affiliations(
-                    [k["value"] for k in item.get_metadata_values(field)]
+                    [k["value"].strip() for k in item.get_metadata_values(field)]
                 )
             except IndexError:
                 pass
@@ -154,7 +154,7 @@ for item in d.search_objects_iter(
         if len(item.get_metadata_values(field)) > 0:
             try:
                 item_affiliations = normalize_cgiar_affiliations(
-                    [k["value"] for k in item.get_metadata_values(field)]
+                    [k["value"].strip() for k in item.get_metadata_values(field)]
                 )
             except IndexError:
                 pass
@@ -272,7 +272,9 @@ for item in d.search_objects_iter(
 
         if len(item.get_metadata_values(field)) > 0:
             try:
-                item_issn = [k["value"] for k in item.get_metadata_values(field)]
+                item_issn = [
+                    k["value"].strip() for k in item.get_metadata_values(field)
+                ]
             except IndexError:
                 item_issn = []
 
@@ -286,7 +288,7 @@ for item in d.search_objects_iter(
         if len(item.get_metadata_values(field)) > 0:
             try:
                 item_publisher = normalize_cgiar_affiliations(
-                    [k["value"] for k in item.get_metadata_values(field)]
+                    [k["value"].strip() for k in item.get_metadata_values(field)]
                 )
             except IndexError:
                 item_publisher = []
@@ -355,7 +357,9 @@ for item in d.search_objects_iter(
 
         if len(item.get_metadata_values(field)) > 0:
             try:
-                item_funders = [k["value"] for k in item.get_metadata_values(field)]
+                item_funders = [
+                    k["value"].strip() for k in item.get_metadata_values(field)
+                ]
             except IndexError:
                 item_funders = []
 
@@ -368,7 +372,9 @@ for item in d.search_objects_iter(
 
         if len(item.get_metadata_values(field)) > 0:
             try:
-                item_subjects = [k["value"] for k in item.get_metadata_values(field)]
+                item_subjects = [
+                    k["value"].strip() for k in item.get_metadata_values(field)
+                ]
             except IndexError:
                 item_subjects = []
 
@@ -381,7 +387,9 @@ for item in d.search_objects_iter(
 
         if len(item.get_metadata_values(field)) > 0:
             try:
-                item_countries = [k["value"] for k in item.get_metadata_values(field)]
+                item_countries = [
+                    k["value"].strip() for k in item.get_metadata_values(field)
+                ]
             except IndexError:
                 item_countries = []
 
