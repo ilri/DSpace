@@ -20,6 +20,7 @@ from datetime import timedelta
 import requests_cache
 from dspace_rest_client.client import DSpaceClient
 from dspace_rest_client.models import Item
+from util import normalize_doi
 
 requests_cache.install_cache(
     "harvest-cache", expire_after=timedelta(days=30), allowable_codes=(200, 404)
@@ -182,7 +183,7 @@ for item in d.search_objects_iter(
 
         if len(item.get_metadata_values(field)) > 0:
             try:
-                item_doi = item.get_metadata_values(field)[0]["value"]
+                item_doi = normalize_doi(item.get_metadata_values(field)[0]["value"])
             except IndexError:
                 item_doi = None
 
