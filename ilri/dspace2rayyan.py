@@ -22,6 +22,56 @@ from dspace_rest_client.client import DSpaceClient
 from dspace_rest_client.models import Item
 from util import normalize_cgiar_affiliations, normalize_doi
 
+
+def get_metadata_value_list(item_dso, fields: list) -> list:
+    """Get multi-value metadata from an item. Use this when the metadata you are
+    getting is logically more than one thing. For example: authors or ISSNs.
+
+    :param item_dso: a dspace_rest_client Item object.
+    :param fields: a list of metadata fields to look up (in order, first one wins).
+    :returns list
+    """
+
+    # Use a list instead of None here because an empty list is Falsy as well and
+    # we need an iterable to be able to join later when serializing to CSV.
+    item_metadata_values = []
+    for field in fields:
+        if len(item.get_metadata_values(field)) > 0:
+            try:
+                item_metadata_values = [
+                    k["value"].strip() for k in item.get_metadata_values(field)
+                ]
+            except IndexError:
+                item_metadata_values = []
+
+        if item_metadata_values:
+            break
+
+    return item_metadata_values
+
+
+def get_metadata_value_string(item_dso, fields: list) -> str:
+    """Get single metadata value from an item. Use this when the metadata you are
+    getting is logically only one thing. For example: title or DOI.
+
+    :param item_dso: a dspace_rest_client Item object.
+    :param fields: a list of metadata fields to look up (in order, first one wins).
+    :returns list
+    """
+    item_metadata_value = None
+    for field in fields:
+        if len(item.get_metadata_values(field)) > 0:
+            try:
+                item_metadata_value = item.get_metadata_values(field)[0]["value"]
+            except IndexError:
+                item_metadata_value = None
+
+        if item_metadata_value:
+            break
+
+    return item_metadata_value
+
+
 requests_cache.install_cache(
     "harvest-cache", expire_after=timedelta(days=30), allowable_codes=(200, 404)
 )
@@ -130,115 +180,20 @@ for item in d.search_objects_iter(
 ):
     item = Item.from_dso(item)
 
-    # Use a list instead of None here because an empty list is Falsy as well and
-    # we need an iterable to be able to join later when serializing to CSV.
-    item_authors = []
-    for field in field_mappings["Authors"]:
-        logger.debug(f"Trying to find authors in {field}")
-
-        if len(item.get_metadata_values(field)) > 0:
-            try:
-                item_authors = normalize_cgiar_affiliations(
-                    [k["value"].strip() for k in item.get_metadata_values(field)]
-                )
-            except IndexError:
-                pass
-
-        if item_authors:
-            break
-
-    item_affiliations = []
-    for field in field_mappings["Author affiliations"]:
-        logger.debug(f"Trying to find author affiliations in {field}")
-
-        if len(item.get_metadata_values(field)) > 0:
-            try:
-                item_affiliations = normalize_cgiar_affiliations(
-                    [k["value"].strip() for k in item.get_metadata_values(field)]
-                )
-            except IndexError:
-                pass
-
-        if item_affiliations:
-            break
-
-    item_abstract = None
-    for field in field_mappings["Abstract"]:
-        logger.debug(f"Trying to find abstract in {field}")
-
-        if len(item.get_metadata_values(field)) > 0:
-            try:
-                item_abstract = item.get_metadata_values(field)[0]["value"]
-            except IndexError:
-                item_abstract = None
-
-        if item_abstract:
-            break
-
-    item_language = None
-    for field in field_mappings["Language"]:
-        logger.debug(f"Trying to find language in {field}")
-
-        if len(item.get_metadata_values(field)) > 0:
-            try:
-                item_language = item.get_metadata_values(field)[0]["value"]
-            except IndexError:
-                item_language = None
-
-        if item_language:
-            break
-
-    item_doi = None
-    for field in field_mappings["DOI"]:
-        logger.debug(f"Trying to find DOI in {field}")
-
-        if len(item.get_metadata_values(field)) > 0:
-            try:
-                item_doi = normalize_doi(item.get_metadata_values(field)[0]["value"])
-            except IndexError:
-                item_doi = None
-
-        if item_doi:
-            break
-
-    item_access_rights = None
-    for field in field_mappings["Access rights"]:
-        logger.debug(f"Trying to find access rights in {field}")
-
-        if len(item.get_metadata_values(field)) > 0:
-            try:
-                item_access_rights = item.get_metadata_values(field)[0]["value"]
-            except IndexError:
-                item_access_rights = None
-
-        if item_access_rights:
-            break
-
-    item_usage_rights = None
-    for field in field_mappings["Usage rights"]:
-        logger.debug(f"Trying to find usage rights in {field}")
-
-        if len(item.get_metadata_values(field)) > 0:
-            try:
-                item_usage_rights = item.get_metadata_values(field)[0]["value"]
-            except IndexError:
-                item_usage_rights = None
-
-        if item_usage_rights:
-            break
-
-    item_date_issued = None
-    for field in field_mappings["Year"]:
-        logger.debug(f"Trying to find date issued in {field}")
-
-        if len(item.get_metadata_values(field)) > 0:
-            try:
-                item_date_issued = item.get_metadata_values(field)[0]["value"]
-            except IndexError:
-                item_date_issued = None
-
-        if item_date_issued:
-            break
+    item_authors = normalize_cgiar_affiliations(
+        get_metadata_value_list(item, field_mappings["Authors"])
+    )
+    item_affiliations = normalize_cgiar_affiliations(
+        get_metadata_value_list(item, field_mappings["Author affiliations"])
+    )
+    item_abstract = get_metadata_value_string(item, field_mappings["Abstract"])
+    item_language = get_metadata_value_string(item, field_mappings["Language"])
+    item_doi = normalize_doi(get_metadata_value_string(item, field_mappings["DOI"]))
+    item_access_rights = get_metadata_value_string(
+        item, field_mappings["Access rights"]
+    )
+    item_usage_rights = get_metadata_value_string(item, field_mappings["Usage rights"])
+    item_date_issued = get_metadata_value_string(item, field_mappings["Year"])
 
     if not item_date_issued:
         logger.error(f"Missing date. This shouldn't happen! {item.handle} ({item.id})")
@@ -253,148 +208,24 @@ for item in d.search_objects_iter(
 
         sys.exit(1)
 
-    item_journal = None
-    for field in field_mappings["Journal"]:
-        logger.debug(f"Trying to find journal in {field}")
-
-        if len(item.get_metadata_values(field)) > 0:
-            try:
-                item_journal = item.get_metadata_values(field)[0]["value"]
-            except IndexError:
-                item_journal = None
-
-        if item_journal:
-            break
-
-    item_issn = []
-    for field in field_mappings["ISSN"]:
-        logger.debug(f"Trying to find ISSN in {field}")
-
-        if len(item.get_metadata_values(field)) > 0:
-            try:
-                item_issn = [
-                    k["value"].strip() for k in item.get_metadata_values(field)
-                ]
-            except IndexError:
-                item_issn = []
-
-        if item_issn:
-            break
-
-    item_publisher = []
-    for field in field_mappings["Publisher"]:
-        logger.debug(f"Trying to find publisher in {field}")
-
-        if len(item.get_metadata_values(field)) > 0:
-            try:
-                item_publisher = normalize_cgiar_affiliations(
-                    [k["value"].strip() for k in item.get_metadata_values(field)]
-                )
-            except IndexError:
-                item_publisher = []
-
-        if item_publisher:
-            break
-
-    item_volume = None
-    for field in field_mappings["Volume"]:
-        logger.debug(f"Trying to find volume in {field}")
-
-        if len(item.get_metadata_values(field)) > 0:
-            try:
-                item_volume = item.get_metadata_values(field)[0]["value"]
-            except IndexError:
-                item_volume = None
-
-        if item_volume:
-            break
-
-    item_issue = None
-    for field in field_mappings["Issue"]:
-        logger.debug(f"Trying to find issue in {field}")
-
-        if len(item.get_metadata_values(field)) > 0:
-            try:
-                item_issue = item.get_metadata_values(field)[0]["value"]
-            except IndexError:
-                item_issue = None
-
-        if item_issue:
-            break
-
-    item_extent = None
-    for field in field_mappings["Pages"]:
-        logger.debug(f"Trying to find pages in {field}")
-
-        if len(item.get_metadata_values(field)) > 0:
-            try:
-                item_extent = item.get_metadata_values(field)[0]["value"]
-            except IndexError:
-                item_extent = None
-
-        if item_extent:
-            break
-
-    item_type = None
-    for field in field_mappings["Type"]:
-        logger.debug(f"Trying to find type in {field}")
-
-        if len(item.get_metadata_values(field)) > 0:
-            try:
-                item_type = item.get_metadata_values(field)[0]["value"]
-            except IndexError:
-                item_type = None
-
-        if item_type:
-            break
+    item_journal = get_metadata_value_string(item, field_mappings["Journal"])
+    item_issn = get_metadata_value_list(item, field_mappings["ISSN"])
+    item_publisher = normalize_cgiar_affiliations(
+        get_metadata_value_list(item, field_mappings["Publisher"])
+    )
+    item_volume = get_metadata_value_string(item, field_mappings["Volume"])
+    item_issue = get_metadata_value_string(item, field_mappings["Issue"])
+    item_extent = get_metadata_value_string(item, field_mappings["Pages"])
+    item_type = get_metadata_value_string(item, field_mappings["Type"])
 
     if not item_type:
         logger.error(f"Missing type. This shouldn't happen! {item.handle}")
 
-    item_funders = []
-    for field in field_mappings["Funders"]:
-        logger.debug(f"Trying to find funders in {field}")
-
-        if len(item.get_metadata_values(field)) > 0:
-            try:
-                item_funders = [
-                    k["value"].strip() for k in item.get_metadata_values(field)
-                ]
-            except IndexError:
-                item_funders = []
-
-        if item_funders:
-            break
-
-    item_subjects = []
-    for field in field_mappings["Keywords"]:
-        logger.debug(f"Trying to find keywords in {field}")
-
-        if len(item.get_metadata_values(field)) > 0:
-            try:
-                item_subjects = [
-                    k["value"].strip() for k in item.get_metadata_values(field)
-                ]
-            except IndexError:
-                item_subjects = []
-
-        if item_subjects:
-            break
-
-    item_countries = []
-    for field in field_mappings["Countries"]:
-        logger.debug(f"Trying to find countries in {field}")
-
-        if len(item.get_metadata_values(field)) > 0:
-            try:
-                item_countries = [
-                    k["value"].strip() for k in item.get_metadata_values(field)
-                ]
-            except IndexError:
-                item_countries = []
-
-        if item_countries:
-            break
+    item_funders = normalize_cgiar_affiliations(
+        get_metadata_value_list(item, field_mappings["Funders"])
+    )
+    item_subjects = get_metadata_value_list(item, field_mappings["Keywords"])
+    item_countries = get_metadata_value_list(item, field_mappings["Countries"])
 
     writer.writerow(
         {
