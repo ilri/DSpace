@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# dspace2rayyan.py 0.1.0
+# dspace2rayyan.py 0.2.0
 #
 # Copyright Alan Orth.
 #
