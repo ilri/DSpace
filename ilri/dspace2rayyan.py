@@ -74,8 +74,17 @@ field_mappings = {
     "Title": [],  # this comes from DSpace's item.name
     # Unfortunately MELSpace will need a custom harvester because they use one field
     # for the first author, and another for the rest.
-    "Authors": ["dc.contributor.author", "dc.creator", "dc.contributor"],
-    "Author affiliations": ["cg.contributor.affiliation", "cg.contributor.center"],
+    "Authors": [
+        "dc.contributor.author",
+        "dc.creator",
+        "dc.contributor",
+        "dc.creator.corporate", # CIMMYT
+    ],
+    "Author affiliations": [
+        "cg.contributor.affiliation",
+        "cg.contributor.center",
+        "dc.creator.corporate", # CIMMYT
+    ],
     # Try in order of liklihood (CIMMYT uses all of these, sigh...)
     "Abstract": ["dcterms.abstract", "dc.description.abstract", "dc.description"],
     "Funders": [
