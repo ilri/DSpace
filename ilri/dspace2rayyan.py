@@ -154,10 +154,10 @@ field_mappings = {
     "Year": ["dcterms.issued", "dc.date.issued", "dcterms.available"],
     "Journal": ["cg.journal", "dc.source", "dc.source.title", "dc.source.journal"],
     "ISSN": ["cg.issn", "dc.identifier.issn", "dc.source.issn"],
-    "Publisher": ["dcterms.publisher", "dc.publisher"],
+    "Publisher": ["dcterms.publisher", "dc.publisher", "dc.publisher.name"],
     "Volume": ["cg.volume", "dc.source.volume"],
     "Issue": ["cg.issue", "dc.source.issue"],
-    "Pages": ["dcterms.extent", "dc.description.pages"],
+    "Pages": ["dcterms.extent", "dc.description.pages", "dc.source.page"],
     "Type": ["dcterms.type", "dc.type"],
     "Keywords": [
         "dcterms.subject",
