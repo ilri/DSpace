@@ -216,7 +216,10 @@ def normalize_cgiar_affiliations(affiliations):
 
     for affiliation in affiliations:
         # Strip some nonsense at the beginning and end
-        affiliation = affiliation.strip("();.[§¶*†")
+        affiliation = affiliation.strip(";.[§¶*†")
+
+        # Strip some acronymns at the end
+        affiliation = re.sub(r"\s+\(\w+\)$", "", affiliation)
 
         affiliation = re.sub(
             r"^Africa Rice Center.+", "Africa Rice Center", affiliation
