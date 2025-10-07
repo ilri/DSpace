@@ -20,7 +20,7 @@ from datetime import timedelta
 import requests_cache
 from dspace_rest_client.client import DSpaceClient
 from dspace_rest_client.models import Item
-from util import normalize_doi
+from util import normalize_cgiar_affiliations, normalize_doi
 
 requests_cache.install_cache(
     "harvest-cache", expire_after=timedelta(days=30), allowable_codes=(200, 404)
@@ -138,7 +138,9 @@ for item in d.search_objects_iter(
 
         if len(item.get_metadata_values(field)) > 0:
             try:
-                item_authors = [k["value"] for k in item.get_metadata_values(field)]
+                item_authors = normalize_cgiar_affiliations(
+                    [k["value"] for k in item.get_metadata_values(field)]
+                )
             except IndexError:
                 pass
 
@@ -151,9 +153,9 @@ for item in d.search_objects_iter(
 
         if len(item.get_metadata_values(field)) > 0:
             try:
-                item_affiliations = [
-                    k["value"] for k in item.get_metadata_values(field)
-                ]
+                item_affiliations = normalize_cgiar_affiliations(
+                    [k["value"] for k in item.get_metadata_values(field)]
+                )
             except IndexError:
                 pass
 
@@ -283,7 +285,9 @@ for item in d.search_objects_iter(
 
         if len(item.get_metadata_values(field)) > 0:
             try:
-                item_publisher = [k["value"] for k in item.get_metadata_values(field)]
+                item_publisher = normalize_cgiar_affiliations(
+                    [k["value"] for k in item.get_metadata_values(field)]
+                )
             except IndexError:
                 item_publisher = []
 
