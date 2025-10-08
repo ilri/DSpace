@@ -200,9 +200,10 @@ for item in d.search_objects_iter(
 
         sys.exit(1)
 
-    # Truncate to YYYY for Rayyan
+    # Strip some weird characters from some dates like "[2014]" I've seen in one
+    # repository and truncate to YYYY for Rayyan.
     try:
-        item_date_issued = item_date_issued[0:4]
+        item_date_issued = item_date_issued.strip("[]")[0:4]
     except AttributeError:
         logger.error(f"Malformed date. This shouldn't happen! {item.handle}")
 
