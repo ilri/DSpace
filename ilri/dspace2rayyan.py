@@ -148,6 +148,7 @@ field_mappings = {
         "dcterms.accessRights",
         "dc.identifier.status",
         "dc.rights.accesslevel",
+        "cg.identifier.status", # WorldFish
     ],
     "Usage rights": ["dcterms.license", "dc.rights"],
     "URL": [],  # this comes from DSpace's item.handle
