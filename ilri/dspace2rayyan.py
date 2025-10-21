@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# dspace2rayyan.py 0.2.0
+# dspace2rayyan.py 0.2.1
 #
 # Copyright Alan Orth.
 #
@@ -20,7 +20,7 @@ from datetime import timedelta
 import requests_cache
 from dspace_rest_client.client import DSpaceClient
 from dspace_rest_client.models import Item
-from util import normalize_cgiar_affiliations, normalize_doi
+from util import normalize_doi
 
 
 def get_metadata_value_list(item_dso, fields: list) -> list:
@@ -181,12 +181,8 @@ for item in d.search_objects_iter(
 ):
     item = Item.from_dso(item)
 
-    item_authors = normalize_cgiar_affiliations(
-        get_metadata_value_list(item, field_mappings["Authors"])
-    )
-    item_affiliations = normalize_cgiar_affiliations(
-        get_metadata_value_list(item, field_mappings["Author affiliations"])
-    )
+    item_authors = get_metadata_value_list(item, field_mappings["Authors"])
+    item_affiliations = get_metadata_value_list(item, field_mappings["Author affiliations"])
     item_abstract = get_metadata_value_string(item, field_mappings["Abstract"])
     item_language = get_metadata_value_string(item, field_mappings["Language"])
     item_doi = normalize_doi(get_metadata_value_string(item, field_mappings["DOI"]))
@@ -212,9 +208,7 @@ for item in d.search_objects_iter(
 
     item_journal = get_metadata_value_string(item, field_mappings["Journal"])
     item_issn = get_metadata_value_list(item, field_mappings["ISSN"])
-    item_publisher = normalize_cgiar_affiliations(
-        get_metadata_value_list(item, field_mappings["Publisher"])
-    )
+    item_publisher = get_metadata_value_list(item, field_mappings["Publisher"])
     item_volume = get_metadata_value_string(item, field_mappings["Volume"])
     item_issue = get_metadata_value_string(item, field_mappings["Issue"])
     item_extent = get_metadata_value_string(item, field_mappings["Pages"])
@@ -223,9 +217,7 @@ for item in d.search_objects_iter(
     if not item_type:
         logger.error(f"Missing type. This shouldn't happen! {item.handle}")
 
-    item_funders = normalize_cgiar_affiliations(
-        get_metadata_value_list(item, field_mappings["Funders"])
-    )
+    item_funders = get_metadata_value_list(item, field_mappings["Funders"])
     item_subjects = get_metadata_value_list(item, field_mappings["Keywords"])
     item_countries = get_metadata_value_list(item, field_mappings["Countries"])
 
