@@ -15,6 +15,7 @@ import re
 import shutil
 import sys
 from datetime import timedelta
+from urllib.parse import unquote, urldefrag
 
 import psycopg
 from colorama import Fore
@@ -181,8 +182,15 @@ def normalize_doi(doi):
     if doi.startswith("0."):
         doi = f"1{doi}"
 
+    # Replace %xx escapes with their single-character equivalent. Note, some URLs
+    # may be double encoded, which needs more work.
+    doi = unquote(doi)
+
+    # Remove fragments like https://doi.org/10.1371/journal.pone.0027275#aff1
+    doi = urldefrag(doi).url
+
     # fix typo in DOIs like http://dx.doi.org/DOI:
-    doi = doi.replace("http://dx.doi.org/DOI:", "")
+    doi = re.sub(r"https?://dx.doi.org/DOI:\s*", "", doi)
 
     # fix old dx.doi.org
     doi = re.sub(r"^https?://(dx\.)?doi\.org/", "", doi)
@@ -190,15 +198,29 @@ def normalize_doi(doi):
     # fix typo in DOI URI like https:// doi.org/10.3390/agronomy13030727
     doi = doi.replace("https:// doi.org/", "")
 
+    # ICRISAT typos
+    doi = doi.replace("ttps://doi.org/", "")
+    doi = doi.replace("https://10.", "10.")
+    doi = doi.replace("https://www.doi.org/", "")
+
     # fix URLs that should be DOIs like https://www.tandfonline.com/doi/full/10.1080/23322039.2019.1640098
-    doi = doi.replace("https://www.tandfonline.com/doi/full/", "")
+    doi = re.sub(r"https?://www\.tandfonline\.com/doi/full/10.", "10.", doi)
+    doi = re.sub(
+        r"https?://bsssjournals\.onlinelibrary\.wiley\.com/doi/abs/10.", "10.", doi
+    )
+    doi = re.sub(r"https?://link\.springer.com/(book|chapter)/10\.", "10.", doi)
+    doi = re.sub(r"https?://www\.worldscientific\.com/worldscibooks/10\.", "10.", doi)
+    doi = re.sub(r"https?://www\.crcnetbase\.com/doi/abs/10\.", "10.", doi)
+    # Seems to be some old format of PLOS One URLs
+    doi = re.sub(r"https?://www\.plosone\.org/article/info:doi/10\.", "10.", doi)
 
     # fix Unicode non-printing characters like in 10.​1007/​s10113-016-0983-6
-    pattern = re.compile(r"\u200B")
-    match = re.findall(pattern, doi)
+    doi = re.sub("\u200b", "", doi)
 
-    if match:
-        doi = re.sub(pattern, "", doi)
+    # Try to find either "doi" or "10.xxxx" in the string, otherwise return the
+    # string unmodified, as it is most likely not a DOI.
+    if not re.search(r"(doi|10\.\d{4,9})", doi):
+        return doi
 
     # return the normalized DOI, and strip it just in case
     return f"https://doi.org/{doi.lower().strip()}"
