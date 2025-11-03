@@ -21,11 +21,9 @@
 
 import logging
 import os
-import re
 
 from colorama import Fore
 from dspace_rest_client.client import DSpaceClient
-from dspace_rest_client.models import Bitstream, Bundle, Item
 
 # Create a local logger instance
 logger = logging.getLogger(__name__)

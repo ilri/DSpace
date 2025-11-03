@@ -14,7 +14,6 @@
 import argparse
 import logging
 import os
-import re
 import signal
 import sys
 from datetime import timedelta
