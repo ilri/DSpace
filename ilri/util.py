@@ -1,4 +1,4 @@
-# util.py v0.0.7
+# util.py v0.0.8
 #
 # Copyright Alan Orth.
 #
@@ -347,7 +347,7 @@ def normalize_cgiar_affiliations(affiliations):
             affiliation,
         )
         affiliation = re.sub(
-            r"^Centro Internacional de Mejoramiento de Ma(i|í)z y Trigo.*",
+            r"^Centro Internacional de Mejoramiento de Ma[ií]z [Yy].*",
             "International Maize and Wheat Improvement Center",
             affiliation,
         )
