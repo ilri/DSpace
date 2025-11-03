@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# dspace2csv.py v0.0.1
+# dspace2csv.py v0.0.2
 #
 # SPDX-License-Identifier: GPL-3.0-only
 #
@@ -89,8 +89,9 @@ def main(args):
     logger.debug(f"Connected to {args.api_url}")
 
     # Prepare the CSV header based on the user's list of metadata fields plus the
-    # item's ID.
-    fields = ["id"] + args.fields.split(",")
+    # item's ID, ignoring the ID field if the user specified it because we always
+    # want it.
+    fields = ["id"] + [field for field in args.fields.split(",") if field != "id"]
     writer = csv.DictWriter(args.output_file, fieldnames=fields)
     writer.writeheader()
 
