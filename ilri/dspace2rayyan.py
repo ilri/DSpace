@@ -148,7 +148,7 @@ field_mappings = {
         "dcterms.accessRights",
         "dc.identifier.status",
         "dc.rights.accesslevel",
-        "cg.identifier.status", # WorldFish
+        "cg.identifier.status",  # WorldFish
     ],
     "Usage rights": ["dcterms.license", "dc.rights"],
     "URL": [],  # this comes from DSpace's item.handle
@@ -182,7 +182,9 @@ for item in d.search_objects_iter(
     item = Item.from_dso(item)
 
     item_authors = get_metadata_value_list(item, field_mappings["Authors"])
-    item_affiliations = get_metadata_value_list(item, field_mappings["Author affiliations"])
+    item_affiliations = get_metadata_value_list(
+        item, field_mappings["Author affiliations"]
+    )
     item_abstract = get_metadata_value_string(item, field_mappings["Abstract"])
     item_language = get_metadata_value_string(item, field_mappings["Language"])
     item_doi = normalize_doi(get_metadata_value_string(item, field_mappings["DOI"]))
