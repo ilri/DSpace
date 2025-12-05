@@ -475,7 +475,7 @@
                     <label>CGIAR Programs and Accelerators</label>
                     <style>col-md-6</style>
                     <input-type value-pairs-name="cgiar-programs-accelerators">dropdown</input-type>
-                    <hint>Select any CGIAR Programs(s) or Accelerator(s) associated with this item. Use this to show that a Program or Accelerator funded this item.</hint>
+                    <hint>Select any CGIAR Programs(s) or Accelerator(s) that contributed funding to this item. Note: these are not thematic areas. Please double check before tagging these.</hint>
                     <required></required>
                 </field>
             </row>
@@ -488,7 +488,7 @@
                     <label>CGIAR Initiatives</label>
                     <style>col-md-6</style>
                     <input-type value-pairs-name="cgiar-initiatives">dropdown</input-type>
-                    <hint>Select any CGIAR Initiatives(s) associated with this item. Use this to show that an Initiative funded this item.</hint>
+                    <hint>Select any CGIAR Initiatives(s) that contributed funding to this item. Note: these are not thematic areas. Please double check before tagging these.</hint>
                     <required></required>
                 </field>
             </row>
