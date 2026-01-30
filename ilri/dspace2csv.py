@@ -8,6 +8,8 @@
 #
 # Queries the DSpace 7+ API for items matching search results and writes to CSV.
 #
+# TODO:
+#   - fetch collections
 import argparse
 import csv
 import logging
