@@ -23,7 +23,7 @@ from dspace_rest_client.models import Item
 logger = logging.getLogger(__name__)
 
 requests_cache.install_cache(
-    "harvest-cache", expire_after=timedelta(days=30), allowable_codes=(200, 404)
+    "harvest-cache", expire_after=timedelta(days=30), allowable_codes=[200]
 )
 
 # prune old cache entries

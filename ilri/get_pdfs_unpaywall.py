@@ -148,7 +148,7 @@ else:
 # Install a transparent request cache
 expire_after = timedelta(days=30)
 requests_cache.install_cache(
-    "requests-cache", expire_after=expire_after, allowable_codes=(200, 404)
+    "requests-cache", expire_after=expire_after, allowable_codes=[200]
 )
 requests_cache.delete()
 

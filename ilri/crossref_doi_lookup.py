@@ -406,7 +406,7 @@ signal.signal(signal.SIGINT, signal_handler)
 # install a transparent requests cache
 expire_after = timedelta(days=30)
 requests_cache.install_cache(
-    "requests-cache", expire_after=expire_after, allowable_codes=(200, 404)
+    "requests-cache", expire_after=expire_after, allowable_codes=[200]
 )
 # prune old cache entries
 requests_cache.delete()

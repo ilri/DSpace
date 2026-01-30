@@ -22,7 +22,7 @@ from colorama import Fore
 from requests_cache import CachedSession
 
 session = CachedSession(
-    "requests-cache", expire_after=timedelta(days=30), allowable_codes=(200, 404)
+    "requests-cache", expire_after=timedelta(days=30), allowable_codes=[200]
 )
 # prune old cache entries
 session.cache.delete(expired=True)
