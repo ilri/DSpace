@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# dspace2csv.py v0.0.2
+# dspace2csv.py v0.0.3
 #
 # SPDX-License-Identifier: GPL-3.0-only
 #
@@ -121,7 +121,13 @@ def main(args):
                     metadatum["value"] for metadatum in item.get_metadata_values(field)
                 ]
 
-                row[field] = "; ".join(metadatum)
+                # Don't use multiple values for date fields, e.g. dc.date.issued
+                # or dcterms.issued, or dcterms.available. Instead, if the field
+                # is a date and has multiple values, only take the first!
+                if "issued" in field or "available" in field:
+                    row[field] = metadatum[0]
+                else:
+                    row[field] = "; ".join(metadatum)
 
         writer.writerow(row)
 
