@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# fix-metadata-values.py v1.2.7
+# fix-metadata-values.py v1.2.8
 #
 # Copyright Alan Orth
 #
@@ -124,6 +124,8 @@ if args.dry_run:
 
 cursor = conn.cursor()
 
+metadata_field_id = util.field_name_to_field_id(cursor, args.from_field_name)
+
 for row in reader:
     if row[args.from_field_name] == row[args.to_field_name]:
         # sometimes editors send me corrections with identical search/replace patterns
@@ -144,8 +146,6 @@ for row in reader:
         )
 
         continue
-
-    metadata_field_id = util.field_name_to_field_id(cursor, args.from_field_name)
 
     # Get item UUIDs for metadata values that will be updated
     sql = "SELECT dspace_object_id FROM metadatavalue WHERE dspace_object_id IN (SELECT uuid FROM item WHERE in_archive AND NOT withdrawn) AND metadata_field_id=%s AND text_value=%s"
