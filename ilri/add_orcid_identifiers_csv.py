@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# add-orcid-identifiers-csv.py v1.1.6
+# add-orcid-identifiers-csv.py v1.1.7
 #
 # Copyright Alan Orth.
 
@@ -114,6 +114,11 @@ def main():
     # open the CSV
     reader = csv.DictReader(args.csv_file)
 
+    # get the metadata_field_id for the cg.creator.identifier field
+    metadata_field_id = util.field_name_to_field_id(
+        cursor, "cg.creator.identifier"
+    )
+
     # iterate over rows in the CSV
     for row in reader:
         author_name = row[args.author_field_name]
@@ -163,11 +168,6 @@ def main():
                 # "place" is the order of a metadata value so we can add the cg.creator.identifier metadata matching the author order
                 place = record[1]
                 confidence = -1
-
-                # get the metadata_field_id for the cg.creator.identifier field
-                metadata_field_id = util.field_name_to_field_id(
-                    cursor, "cg.creator.identifier"
-                )
 
                 # check if there is an existing cg.creator.identifier with this author's ORCID identifier for this item (without restricting the "place")
                 # note that the SQL here is quoted differently to allow us to use LIKE with % wildcards with our paremeter subsitution

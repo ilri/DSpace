@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# crossref-doi-lookup.py 0.2.2
+# crossref-doi-lookup.py 0.2.3
 #
 # Copyright Alan Orth.
 #
@@ -257,6 +257,11 @@ def resolve_doi(doi: str) -> None:
         page = ""
 
     try:
+        article_number = data["message"]["article-number"]
+    except KeyError:
+        article_number = ""
+
+    try:
         item_type = data["message"]["type"]
     except KeyError:
         item_type = ""
@@ -342,6 +347,7 @@ def resolve_doi(doi: str) -> None:
             "volume": volume,
             "issue": issue,
             "page": page,
+            "article_number": article_number,
             "type": item_type,
             "issued": issued,
             "published_print": published_print,
@@ -406,7 +412,7 @@ signal.signal(signal.SIGINT, signal_handler)
 # install a transparent requests cache
 expire_after = timedelta(days=30)
 requests_cache.install_cache(
-    "requests-cache", expire_after=expire_after, allowable_codes=(200, 404)
+    "requests-cache", expire_after=expire_after, allowable_codes=[200]
 )
 # prune old cache entries
 requests_cache.delete()
@@ -428,6 +434,7 @@ if args.output_file:
         "volume",
         "issue",
         "page",
+        "article_number",
         "type",
         "issued",
         "published_print",

@@ -125,7 +125,7 @@ def resolve_orcid_identifier(args, orcid):
 
     # cache HTTP 200 and 404 responses, because ORCID uses HTTP 404 when an identifier doesn't exist
     requests_cache.install_cache(
-        "requests-cache", expire_after=expire_after, allowable_codes=(200, 404)
+        "requests-cache", expire_after=expire_after, allowable_codes=[200]
     )
 
     # build request URL for current ORCID ID
