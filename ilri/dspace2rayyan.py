@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# dspace2rayyan.py 0.0.2
+# dspace2rayyan.py 0.2.1
 #
 # Copyright Alan Orth.
 #
@@ -20,9 +20,60 @@ from datetime import timedelta
 import requests_cache
 from dspace_rest_client.client import DSpaceClient
 from dspace_rest_client.models import Item
+from util import normalize_doi
+
+
+def get_metadata_value_list(item_dso, fields: list) -> list:
+    """Get multi-value metadata from an item. Use this when the metadata you are
+    getting is logically more than one thing. For example: authors or ISSNs.
+
+    :param item_dso: a dspace_rest_client Item object.
+    :param fields: a list of metadata fields to look up (in order, first one wins).
+    :returns list
+    """
+
+    # Use a list instead of None here because an empty list is Falsy as well and
+    # we need an iterable to be able to join later when serializing to CSV.
+    item_metadata_values = []
+    for field in fields:
+        if len(item.get_metadata_values(field)) > 0:
+            try:
+                item_metadata_values = [
+                    k["value"].strip() for k in item.get_metadata_values(field)
+                ]
+            except IndexError:
+                item_metadata_values = []
+
+        if item_metadata_values:
+            break
+
+    return item_metadata_values
+
+
+def get_metadata_value_string(item_dso, fields: list) -> str:
+    """Get single metadata value from an item. Use this when the metadata you are
+    getting is logically only one thing. For example: title or DOI.
+
+    :param item_dso: a dspace_rest_client Item object.
+    :param fields: a list of metadata fields to look up (in order, first one wins).
+    :returns list
+    """
+    item_metadata_value = None
+    for field in fields:
+        if len(item.get_metadata_values(field)) > 0:
+            try:
+                item_metadata_value = item.get_metadata_values(field)[0]["value"]
+            except IndexError:
+                item_metadata_value = None
+
+        if item_metadata_value:
+            break
+
+    return item_metadata_value
+
 
 requests_cache.install_cache(
-    "harvest-cache", expire_after=timedelta(days=30), allowable_codes=(200, 404)
+    "harvest-cache", expire_after=timedelta(days=30), allowable_codes=[200]
 )
 
 # prune old cache entries
@@ -69,156 +120,108 @@ else:
 
 d = DSpaceClient(api_endpoint=args.api_url)
 
-fieldnames = [
-    "Title",
-    "Authors",
-    "Author affiliations",
-    "Abstract",
-    "Funders",
-    "Language",
-    "DOI",
-    "Access rights",
-    "Usage rights",
-    "URL",
-    "Year",
-    "Journal",
-    "ISSN",
-    "Publisher",
-    "Volume",
-    "Issue",
-    "Pages",
-    "Type",
-    "Keywords",
-    "Countries",
-]
+field_mappings = {
+    "Title": [],  # this comes from DSpace's item.name
+    # Unfortunately MELSpace will need a custom harvester because they use one field
+    # for the first author, and another for the rest.
+    "Authors": [
+        "dc.contributor.author",
+        "dc.creator",
+        "dc.contributor",
+        "dc.creator.corporate",  # CIMMYT
+    ],
+    "Author affiliations": [
+        "cg.contributor.affiliation",
+        "cg.contributor.center",
+        "dc.creator.corporate",  # CIMMYT
+    ],
+    # Try in order of liklihood (CIMMYT uses all of these, sigh...)
+    "Abstract": ["dcterms.abstract", "dc.description.abstract", "dc.description"],
+    "Funders": [
+        "cg.contributor.donor",
+        "cg.contributor.funder",
+        "dc.relation.funderName",
+    ],
+    "Language": ["dcterms.language", "dc.language.iso", "dc.language"],
+    "DOI": ["cg.identifier.doi", "dc.identifier.doi"],
+    "Access rights": [
+        "dcterms.accessRights",
+        "dc.identifier.status",
+        "dc.rights.accesslevel",
+        "cg.identifier.status",  # WorldFish
+    ],
+    "Usage rights": ["dcterms.license", "dc.rights"],
+    "URL": [],  # this comes from DSpace's item.handle
+    "Year": ["dcterms.issued", "dc.date.issued", "dcterms.available"],
+    "Journal": ["cg.journal", "dc.source", "dc.source.title", "dc.source.journal"],
+    "ISSN": ["cg.issn", "dc.identifier.issn", "dc.source.issn"],
+    "Publisher": ["dcterms.publisher", "dc.publisher", "dc.publisher.name"],
+    "Volume": ["cg.volume", "dc.source.volume"],
+    "Issue": ["cg.issue", "dc.source.issue"],
+    "Pages": ["dcterms.extent", "dc.description.pages", "dc.source.page"],
+    "Type": ["dcterms.type", "dc.type"],
+    "Keywords": [
+        "dcterms.subject",
+        "dc.subject",
+        "cg.subject.agrovoc",
+        "dc.subject.agrovoc",
+        "dc.subject.other",
+    ],
+    "Countries": ["cg.coverage.country", "dc.coverage.countryfocus"],
+}
 
-writer = csv.DictWriter(args.output_file, fieldnames=fieldnames)
+field_names = [field for field in field_mappings]
+
+writer = csv.DictWriter(args.output_file, fieldnames=field_names)
 writer.writeheader()
 
 item_number = 0
-for item in d.search_objects_iter(dso_type="item", scope=args.scope, query=args.search_string):
+for item in d.search_objects_iter(
+    dso_type="item", scope=args.scope, query=args.search_string
+):
     item = Item.from_dso(item)
 
-    try:
-        item_authors = [
-            k["value"] for k in item.get_metadata_values("dc.contributor.author")
-        ]
-    except IndexError:
-        item_authors = None
+    item_authors = get_metadata_value_list(item, field_mappings["Authors"])
+    item_affiliations = get_metadata_value_list(
+        item, field_mappings["Author affiliations"]
+    )
+    item_abstract = get_metadata_value_string(item, field_mappings["Abstract"])
+    item_language = get_metadata_value_string(item, field_mappings["Language"])
+    item_doi = normalize_doi(get_metadata_value_string(item, field_mappings["DOI"]))
+    item_access_rights = get_metadata_value_string(
+        item, field_mappings["Access rights"]
+    )
+    item_usage_rights = get_metadata_value_string(item, field_mappings["Usage rights"])
+    item_date_issued = get_metadata_value_string(item, field_mappings["Year"])
 
-    try:
-        item_affiliations = [
-            k["value"] for k in item.get_metadata_values("cg.contributor.affiliation")
-        ]
-    except IndexError:
-        item_affiliations = None
+    if not item_date_issued:
+        logger.error(f"Missing date. This shouldn't happen! {item.handle} ({item.id})")
 
-    try:
-        item_abstract = item.get_metadata_values("dcterms.abstract")[0]["value"]
-    except IndexError:
-        item_abstract = None
+        sys.exit(1)
 
+    # Strip some weird characters from some dates like "[2014]" I've seen in one
+    # repository and truncate to YYYY for Rayyan.
     try:
-        item_language = item.get_metadata_values("dcterms.language")[0]["value"]
-    except IndexError:
-        item_language = None
-
-    try:
-        item_doi = item.get_metadata_values("cg.identifier.doi")[0]["value"]
-    except IndexError:
-        item_doi = None
-
-    try:
-        item_access_rights = item.get_metadata_values("dcterms.accessRights")[0][
-            "value"
-        ]
-    except IndexError:
-        item_access_rights = None
-
-    try:
-        item_usage_rights = item.get_metadata_values("dcterms.license")[0]["value"]
-    except IndexError:
-        item_usage_rights = None
-
-    # Try to get either the issue date or online date
-    try:
-        item_date_issued = item.get_metadata_values("dcterms.issued")[0]["value"]
-    except IndexError:
-        try:
-            item_date_issued = item.get_metadata_values("dcterms.available")[0]["value"]
-        except IndexError:
-            logger.error(
-                f"Missing date. This shouldn't happen! {item.handle} ({item.id})"
-            )
-
-            sys.exit(1)
-
-    # Truncate to YYYY for Rayyan
-    try:
-        item_date_issued = item_date_issued[0:4]
+        item_date_issued = item_date_issued.strip("[]")[0:4]
     except AttributeError:
         logger.error(f"Malformed date. This shouldn't happen! {item.handle}")
 
         sys.exit(1)
 
-    try:
-        item_journal = item.get_metadata_values("cg.journal")[0]["value"]
-    except IndexError:
-        item_journal = None
+    item_journal = get_metadata_value_string(item, field_mappings["Journal"])
+    item_issn = get_metadata_value_list(item, field_mappings["ISSN"])
+    item_publisher = get_metadata_value_list(item, field_mappings["Publisher"])
+    item_volume = get_metadata_value_string(item, field_mappings["Volume"])
+    item_issue = get_metadata_value_string(item, field_mappings["Issue"])
+    item_extent = get_metadata_value_string(item, field_mappings["Pages"])
+    item_type = get_metadata_value_string(item, field_mappings["Type"])
 
-    try:
-        item_issn = item.get_metadata_values("cg.issn")[0]["value"]
-    except IndexError:
-        item_issn = None
-
-    # TODO: this could be multiple values for some items
-    try:
-        item_publisher = item.get_metadata_values("dcterms.publisher")[0]["value"]
-    except IndexError:
-        item_publisher = None
-
-    try:
-        item_volume = item.get_metadata_values("cg.volume")[0]["value"]
-    except IndexError:
-        item_volume = None
-
-    try:
-        item_issue = item.get_metadata_values("cg.issue")[0]["value"]
-    except IndexError:
-        item_issue = None
-
-    try:
-        item_extent = item.get_metadata_values("dcterms.extent")[0]["value"]
-    except IndexError:
-        item_extent = None
-
-    try:
-        item_type = item.get_metadata_values("dcterms.type")[0]["value"]
-    except IndexError:
+    if not item_type:
         logger.error(f"Missing type. This shouldn't happen! {item.handle}")
 
-        item_type = None
-
-    try:
-        item_funders = [
-            k["value"] for k in item.get_metadata_values("cg.contributor.donor")
-        ]
-    except IndexError:
-        item_funders = None
-
-    try:
-        item_subjects = [
-            k["value"] for k in item.get_metadata_values("dcterms.subject")
-        ]
-    except IndexError:
-        item_subjects = None
-
-    try:
-        item_countries = [
-            k["value"] for k in item.get_metadata_values("cg.coverage.country")
-        ]
-    except IndexError:
-        item_countries = None
+    item_funders = get_metadata_value_list(item, field_mappings["Funders"])
+    item_subjects = get_metadata_value_list(item, field_mappings["Keywords"])
+    item_countries = get_metadata_value_list(item, field_mappings["Countries"])
 
     writer.writerow(
         {
@@ -233,8 +236,8 @@ for item in d.search_objects_iter(dso_type="item", scope=args.scope, query=args.
             "URL": f"https://hdl.handle.net/{item.handle}",
             "Year": item_date_issued,
             "Journal": item_journal,
-            "ISSN": item_issn,
-            "Publisher": item_publisher,
+            "ISSN": "; ".join(item_issn),
+            "Publisher": "; ".join(item_publisher),
             "Volume": item_volume,
             "Issue": item_issue,
             "Pages": item_extent,

@@ -96,7 +96,7 @@ def resolve_addresses(addresses):
     requests_cache.install_cache(
         "requests-cache",
         expire_after=expire_after,
-        allowable_codes=(200, 404),
+        allowable_codes=[200],
     )
 
     # prune old cache entries

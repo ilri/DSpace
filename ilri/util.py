@@ -1,4 +1,4 @@
-# util.py v0.0.6
+# util.py v0.0.8
 #
 # Copyright Alan Orth.
 #
@@ -15,13 +15,14 @@ import re
 import shutil
 import sys
 from datetime import timedelta
+from urllib.parse import unquote, urldefrag
 
 import psycopg
 from colorama import Fore
 from requests_cache import CachedSession
 
 session = CachedSession(
-    "requests-cache", expire_after=timedelta(days=30), allowable_codes=(200, 404)
+    "requests-cache", expire_after=timedelta(days=30), allowable_codes=[200]
 )
 # prune old cache entries
 session.cache.delete(expired=True)
@@ -163,3 +164,242 @@ def download_file(url, filename) -> bool:
         return True
     else:
         return False
+
+
+def normalize_doi(doi):
+    """
+    Try to normalize a DOI based on some cases I noticed. Return a clean
+    DOI in https://doi.org/10. format, lowercased, and stripped.
+    """
+
+    if not doi:
+        return ""
+
+    # normalize DOIs like doi:10.1088/1748-9326/ac413a
+    doi = doi.replace("doi:", "")
+
+    # fix typo in DOIs like 0.1002/2014WR016668
+    if doi.startswith("0."):
+        doi = f"1{doi}"
+
+    # Replace %xx escapes with their single-character equivalent. Note, some URLs
+    # may be double encoded, which needs more work.
+    doi = unquote(doi)
+
+    # Remove fragments like https://doi.org/10.1371/journal.pone.0027275#aff1
+    doi = urldefrag(doi).url
+
+    # fix typo in DOIs like http://dx.doi.org/DOI:
+    doi = re.sub(r"https?://dx.doi.org/DOI:\s*", "", doi)
+
+    # fix old dx.doi.org
+    doi = re.sub(r"^https?://(dx\.)?doi\.org/", "", doi)
+
+    # fix typo in DOI URI like https:// doi.org/10.3390/agronomy13030727
+    doi = doi.replace("https:// doi.org/", "")
+
+    # ICRISAT typos
+    doi = doi.replace("ttps://doi.org/", "")
+    doi = doi.replace("https://10.", "10.")
+    doi = doi.replace("https://www.doi.org/", "")
+
+    # fix URLs that should be DOIs like https://www.tandfonline.com/doi/full/10.1080/23322039.2019.1640098
+    doi = re.sub(r"https?://www\.tandfonline\.com/doi/full/10.", "10.", doi)
+    doi = re.sub(
+        r"https?://bsssjournals\.onlinelibrary\.wiley\.com/doi/abs/10.", "10.", doi
+    )
+    doi = re.sub(r"https?://link\.springer.com/(book|chapter)/10\.", "10.", doi)
+    doi = re.sub(r"https?://www\.worldscientific\.com/worldscibooks/10\.", "10.", doi)
+    doi = re.sub(r"https?://www\.crcnetbase\.com/doi/abs/10\.", "10.", doi)
+    # Seems to be some old format of PLOS One URLs
+    doi = re.sub(r"https?://www\.plosone\.org/article/info:doi/10\.", "10.", doi)
+
+    # fix Unicode non-printing characters like in 10.​1007/​s10113-016-0983-6
+    doi = re.sub("\u200b", "", doi)
+
+    # Try to find either "doi" or "10.xxxx" in the string, otherwise return the
+    # string unmodified, as it is most likely not a DOI.
+    if not re.search(r"(doi|10\.\d{4,9})", doi):
+        return doi
+
+    # return the normalized DOI, and strip it just in case
+    return f"https://doi.org/{doi.lower().strip()}"
+
+
+def normalize_cgiar_affiliations(affiliations):
+    """
+    Try to normalize affiliations. For now this is a manual list of replacements
+    for CGIAR centers only.
+    """
+    if not affiliations:
+        return []
+
+    affiliations_normalized = list()
+
+    for affiliation in affiliations:
+        # Strip some nonsense at the beginning and end
+        affiliation = affiliation.strip(";.[§¶*†")
+
+        # Strip some acronymns at the end, for example:
+        # Nordic Genetic Resources Center (NordGen)
+        # Orange Agricultural Institute(Orange)
+        affiliation = re.sub(r"\s*\(\w+\)$", "", affiliation)
+
+        # Strip some acronymns at the end, for example:
+        # Global Crop Diversity Trust - GCDT
+        affiliation = re.sub(r"\s+-\s+[A-Z]+$", "", affiliation)
+
+        affiliation = re.sub(
+            r"^Africa Rice Center.+", "Africa Rice Center", affiliation
+        )
+        affiliation = re.sub(r"^AfricaRice.*", "Africa Rice Center", affiliation)
+
+        affiliation = re.sub(
+            r"^Alliance of Bioversity International and.*",
+            "Alliance of Bioversity International and CIAT",
+            affiliation,
+        )
+
+        affiliation = re.sub(
+            r"^Bioversity International.*", "Bioversity International", affiliation
+        )
+
+        affiliation = re.sub(
+            r"^Cent(er|re) for International Forestry Research.*",
+            "Center for International Forestry Research",
+            affiliation,
+        )
+        affiliation = re.sub(
+            r"^CIFOR.*", "Center for International Forestry Research", affiliation
+        )
+
+        affiliation = re.sub(
+            r"^International Cent(er|re) for Agricultural Research in the Dry Areas.*",
+            "International Center for Agricultural Research in the Dry Areas",
+            affiliation,
+        )
+        affiliation = re.sub(
+            r"^ICARDA.*",
+            "International Center for Agricultural Research in the Dry Areas",
+            affiliation,
+        )
+
+        affiliation = re.sub(
+            r"^International Cent(er|re) for Tropical Agriculture.*",
+            "International Center for Tropical Agriculture",
+            affiliation,
+        )
+        affiliation = re.sub(
+            r"^Centro Internacional de Agricultura Tropical.*",
+            "International Center for Tropical Agriculture",
+            affiliation,
+        )
+        affiliation = re.sub(
+            r"^CIAT.*", "International Center for Tropical Agriculture", affiliation
+        )
+
+        affiliation = re.sub(
+            r"^International Crops Research Institute for the Semi-Arid Tropics.*",
+            "International Crops Research Institute for the Semi-Arid Tropics",
+            affiliation,
+        )
+        affiliation = re.sub(
+            r"^ICRISAT.*",
+            "International Crops Research Institute for the Semi-Arid Tropics",
+            affiliation,
+        )
+
+        affiliation = re.sub(
+            r"^International Food Policy Research Institute.*",
+            "International Food Policy Research Institute",
+            affiliation,
+        )
+        affiliation = re.sub(
+            r"^IFPRI.*", "International Food Policy Research Institute", affiliation
+        )
+
+        affiliation = re.sub(
+            r"^International Institute of Tropical Agriculture.*",
+            "International Institute of Tropical Agriculture",
+            affiliation,
+        )
+        affiliation = re.sub(
+            r"^IITA.*", "International Institute of Tropical Agriculture", affiliation
+        )
+
+        affiliation = re.sub(
+            r"^International Livestock Research Institute.*",
+            "International Livestock Research Institute",
+            affiliation,
+        )
+        affiliation = re.sub(
+            r"^International Livestock Research Centre.*",
+            "International Livestock Research Institute",
+            affiliation,
+        )
+        affiliation = re.sub(
+            r"^ILRI.*", "International Livestock Research Institute", affiliation
+        )
+
+        affiliation = re.sub(
+            r"^International Maize and Wheat Improvement Cent(er|re).*",
+            "International Maize and Wheat Improvement Center",
+            affiliation,
+        )
+        affiliation = re.sub(
+            r"^Centro Internacional de Mejoramiento de Ma[ií]z [Yy].*",
+            "International Maize and Wheat Improvement Center",
+            affiliation,
+        )
+        affiliation = re.sub(
+            r"^CIMMYT.*",
+            "International Maize and Wheat Improvement Center",
+            affiliation,
+        )
+
+        affiliation = re.sub(
+            r"^International Potato Cent(er|re).*",
+            "International Potato Center",
+            affiliation,
+        )
+        affiliation = re.sub(
+            r"^Centro Internacional de la Papa.*",
+            "International Potato Center",
+            affiliation,
+        )
+        affiliation = re.sub(r"^CIP.*", "International Potato Center", affiliation)
+
+        affiliation = re.sub(
+            r"^International Rice Research Institute.*",
+            "International Rice Research Institute",
+            affiliation,
+        )
+        affiliation = re.sub(
+            r"^IRRI.*", "International Rice Research Institute", affiliation
+        )
+
+        affiliation = re.sub(
+            r"^International Water Management Institute.*",
+            "International Water Management Institute",
+            affiliation,
+        )
+        affiliation = re.sub(
+            r"^IWMI.*", "International Water Management Institute", affiliation
+        )
+
+        affiliation = re.sub(
+            r"^World Agroforestry Cent(er|re)\s?.*", "World Agroforestry", affiliation
+        )
+        affiliation = re.sub(
+            r"^International Cent(er|re) for Research in Agroforestry.*",
+            "World Agroforestry",
+            affiliation,
+        )
+        affiliation = re.sub(r"^ICRAF.*", "World Agroforestry", affiliation)
+
+        affiliation = re.sub(r"^WorldFish.*", "WorldFish", affiliation)
+
+        if affiliation not in affiliations_normalized:
+            affiliations_normalized.append(affiliation)
+
+    return affiliations_normalized

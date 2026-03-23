@@ -25,7 +25,7 @@
 # You can optionally specify the URL of a DSpace REST application (default is to
 # use http://localhost:8080/server/api).
 #
-# TODO: fix overwriting by mime
+# TODO: fix overwriting by mime (dspace-rest-client doesn't make mime available yet)
 # TODO: allow overwriting by bitstream description
 # TODO: allow uploading multiple bitstreams (place?)
 
