@@ -2014,6 +2014,10 @@
                 <stored-value>Logo</stored-value>
             </pair>
             <pair>
+                <displayed-value>Magazine Article</displayed-value>
+                <stored-value>Magazine Article</stored-value>
+            </pair>
+            <pair>
                 <displayed-value>Manual</displayed-value>
                 <stored-value>Manual</stored-value>
             </pair>
