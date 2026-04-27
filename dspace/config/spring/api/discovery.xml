@@ -375,6 +375,14 @@
             <bean class="org.dspace.discovery.configuration.DiscoverySortConfiguration">
                 <property name="sortFields">
                     <list>
+                        <!--
+                             2026-04-27: Note from Alan that the DSpace frontend
+                             seems to use the first sort field here and it isn't
+                             possible to set a default sort.
+
+                             See: https://github.com/DSpace/DSpace/pull/8857
+                        -->
+                        <ref bean="sortDateAccessionedDesc"/>
                         <ref bean="sortDateAccessioned"/>
                         <ref bean="sortScore"/>
                         <ref bean="sortTitle"/>
