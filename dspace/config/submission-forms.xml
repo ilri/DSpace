@@ -4326,8 +4326,8 @@
         <stored-value>BIGDATA</stored-value>
       </pair>
       <pair>
-        <displayed-value>BIODIVERSITY FOR THE FUTURE</displayed-value>
-        <stored-value>BIODIVERSITY FOR THE FUTURE</stored-value>
+        <displayed-value>BIODIVERSITY</displayed-value>
+        <stored-value>BIODIVERSITY</stored-value>
       </pair>
       <pair>
         <displayed-value>BIOFORTIFICATION</displayed-value>
@@ -4346,16 +4346,28 @@
         <stored-value>CLIMATE-SMART AGRICULTURE</stored-value>
       </pair>
       <pair>
+        <displayed-value>CROP AND SEED SYSTEMS SCIENCES CSS</displayed-value>
+        <stored-value>CROP AND SEED SYSTEMS SCIENCES CSS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>CROP IMPROVEMENT</displayed-value>
+        <stored-value>CROP IMPROVEMENT</stored-value>
+      </pair>
+      <pair>
         <displayed-value>CROP PROTECTION</displayed-value>
         <stored-value>CROP PROTECTION</stored-value>
       </pair>
       <pair>
-        <displayed-value>CROP AND SYSTEMS SCIENCES CSS</displayed-value>
-        <stored-value>CROP AND SYSTEMS SCIENCES CSS</stored-value>
-      </pair>
-      <pair>
         <displayed-value>CRYOPRESERVATION</displayed-value>
         <stored-value>CRYOPRESERVATION</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>EMPLOYMENT</displayed-value>
+        <stored-value>EMPLOYMENT</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>FOOD SAFETY</displayed-value>
+        <stored-value>FOOD SAFETY</stored-value>
       </pair>
       <pair>
         <displayed-value>FOOD SECURITY</displayed-value>
@@ -4364,6 +4376,10 @@
       <pair>
         <displayed-value>FOOD SYSTEMS</displayed-value>
         <stored-value>FOOD SYSTEMS</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>FOOD WASTE</displayed-value>
+        <stored-value>FOOD WASTE</stored-value>
       </pair>
       <pair>
         <displayed-value>GENDER</displayed-value>
@@ -4378,8 +4394,8 @@
         <stored-value>GENETIC RESOURCES</stored-value>
       </pair>
       <pair>
-        <displayed-value>GENETICS, GENOMICS AND CROP IMPROVEMENT SCIENCES GGCI</displayed-value>
-        <stored-value>GENETICS, GENOMICS AND CROP IMPROVEMENT SCIENCES GGCI</stored-value>
+        <displayed-value>GENETICS</displayed-value>
+        <stored-value>GENETICS</stored-value>
       </pair>
       <pair>
         <displayed-value>IMPACT ASSESSMENT</displayed-value>
@@ -4398,28 +4414,28 @@
         <stored-value>NUTRITIONAL SECURITY</stored-value>
       </pair>
       <pair>
-        <displayed-value>POTATO AGRI-FOOD SYSTEMS</displayed-value>
-        <stored-value>POTATO AGRI-FOOD SYSTEMS</stored-value>
-      </pair>
-      <pair>
         <displayed-value>POTATOES</displayed-value>
         <stored-value>POTATOES</stored-value>
+      </pair>
+      <pair>
+        <displayed-value>REGENERATIVE AGRICULTURE</displayed-value>
+        <stored-value>REGENERATIVE AGRICULTURE</stored-value>
       </pair>
       <pair>
         <displayed-value>SEED SYSTEMS</displayed-value>
         <stored-value>SEED SYSTEMS</stored-value>
       </pair>
       <pair>
-        <displayed-value>SOCIAL AND NUTRITIONAL SCIENCES SNS</displayed-value>
-        <stored-value>SOCIAL AND NUTRITIONAL SCIENCES SNS</stored-value>
+        <displayed-value>SOCIAL SCIENCES</displayed-value>
+        <stored-value>SOCIAL SCIENCES</stored-value>
       </pair>
       <pair>
-        <displayed-value>SWEETPOTATOES</displayed-value>
-        <stored-value>SWEETPOTATOES</stored-value>
+        <displayed-value>SWEET POTATOES</displayed-value>
+        <stored-value>SWEET POTATOES</stored-value>
       </pair>
       <pair>
-        <displayed-value>SWEETPOTATO AGRI-FOOD SYSTEMS</displayed-value>
-        <stored-value>SWEETPOTATO AGRI-FOOD SYSTEMS</stored-value>
+        <displayed-value>URBAN FOOD SYSTEMS</displayed-value>
+        <stored-value>URBAN FOOD SYSTEMS</stored-value>
       </pair>
     </value-pairs>
     <value-pairs value-pairs-name="ilrisubject" dc-term="ilrisubject">
