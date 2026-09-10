@@ -19,6 +19,7 @@
     <submission-map>
         <!-- Default submission process -->
         <name-map collection-handle="default" submission-name="traditional"/>
+        <name-map community-handle="10568/173051" submission-name="LegalAndGovernance"/>
 
         <!-- Sample Entities Collection configuration based on the demo Entities dataset available at:
              https://github.com/DSpace-Labs/AIP-Files/releases/tag/demo-entities-data
@@ -155,6 +156,12 @@
         </step-definition>
         <step-definition id="journalIssueStep" mandatory="true">
             <heading>submit.progressbar.describe.stepone</heading>
+            <processing-class>org.dspace.app.rest.submit.step.DescribeStep</processing-class>
+            <type>submission-form</type>
+        </step-definition>
+
+        <step-definition id="legalpagetwo" mandatory="true">
+            <heading>submit.progressbar.describe.steptwo</heading>
             <processing-class>org.dspace.app.rest.submit.step.DescribeStep</processing-class>
             <type>submission-form</type>
         </step-definition>
@@ -312,6 +319,19 @@
 
             <!-- Uncomment this step to allow the user to select a Creative Commons License -->
             <!-- <step id="cclicense"/> -->
+
+            <!--Step will be to Sign off on the required DSpace License agreement -->
+            <step id="license"/>
+        </submission-process>
+
+        <submission-process name="LegalAndGovernance">
+            <step id="collection"/>
+
+            <step id="traditionalpageone"/>
+            <step id="legalpagetwo"/>
+
+            <!--Step will be to Upload the item -->
+            <step id="upload"/>
 
             <!--Step will be to Sign off on the required DSpace License agreement -->
             <step id="license"/>

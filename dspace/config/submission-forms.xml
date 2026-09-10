@@ -461,6 +461,185 @@
             </row>
         </form>
 
+        <form name="legalpagetwo">
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>contributor</dc-element>
+                    <dc-qualifier>author</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Authors (required)</label>
+                    <vocabulary>dc-contributor-author</vocabulary>
+                    <input-type>onebox</input-type>
+                    <hint>Enter the names of individual or corporate authors of this item (enter each individually).</hint>
+                    <required>Please enter the author(s).</required>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>dcterms</dc-schema>
+                    <dc-element>extent</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Pagination</label>
+                    <style>col-sm-6</style>
+                    <input-type>onebox</input-type>
+                    <hint>Enter the page range for an article or chapter (p. 10-17); or the total pages for a report (120 p.).</hint>
+                    <required></required>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>dcterms</dc-schema>
+                    <dc-element>issued</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Date of publication (required)</label>
+                    <input-type>date</input-type>
+                    <hint>Enter the date when the item was officially published or made public. For journal articles, this is the date the article was included in a volume/issue, if known. If the issue date is not known, please use the online first date here.</hint>
+                    <required>You must enter at least the year.</required>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>dcterms</dc-schema>
+                    <dc-element>publisher</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Publisher</label>
+                    <input-type>onebox</input-type>
+                    <hint>Enter the full name of the publisher. Click to see a pre-populated list of common commercial and CGIAR publishers or enter a new one.</hint>
+                    <required></required>
+                    <vocabulary>dcterms-publisher</vocabulary>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>dcterms</dc-schema>
+                    <dc-element>bibliographicCitation</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Citation (required)</label>
+                    <input-type>onebox</input-type>
+                    <hint>Enter the standard citation.</hint>
+                    <required>Standard citation is required.</required>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>dcterms</dc-schema>
+                    <dc-element>abstract</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Abstract</label>
+                    <input-type>textarea</input-type>
+                    <hint>Enter the abstract of the item (unless it is copyrighted).</hint>
+                    <required></required>
+                    <language value-pairs-name="common_iso_languages">true</language>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>dcterms</dc-schema>
+                    <dc-element>accessRights</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Access rights (required)</label>
+                    <input-type value-pairs-name="access-rights">dropdown</input-type>
+                    <hint>Indicate the accessibility of the item. If the item is free to read this should be "Open Access", even if it is copyrighted.</hint>
+                    <required>Access rights is required.</required>
+                </field>
+                <field>
+                    <dc-schema>dcterms</dc-schema>
+                    <dc-element>license</dc-element>
+                    <repeatable>false</repeatable>
+                    <label>Usage rights (required)</label>
+                    <input-type value-pairs-name="usage-rights">dropdown</input-type>
+                    <hint>Indicate the usage rights of the item. For most items this will be a Creative Commons license. Look on the publisher's page or in the PDF itself if available. Choose "Other" if the item does not have a license or none is specified.</hint>
+                    <required>Usage rights is required.</required>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>dcterms</dc-schema>
+                    <dc-element>audience</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Target audience</label>
+                    <hint>Indicate the main audience for whom the item is produced.</hint>
+                    <input-type value-pairs-name="TARGET_AUDIENCE">dropdown</input-type>
+                    <required></required>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>cg</dc-schema>
+                    <dc-element>identifier</dc-element>
+                    <dc-qualifier>url</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>External URL</label>
+                    <style>col-sm-6</style>
+                    <input-type>onebox</input-type>
+                    <hint>Enter an official external URL for this item. For example: a link to the website, blog post, dataset, etc itself. Do not enter a DOI here.</hint>
+                    <required></required>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>dcterms</dc-schema>
+                    <dc-element>language</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Language</label>
+                    <style>col-sm-6</style>
+                    <input-type value-pairs-name="common_iso_languages">dropdown</input-type>
+                    <hint>Select the language of the main content of the item. If the language does not appear in the
+                        list, please select 'Other'. If the content does not really have a language (for example, if it
+                        is a dataset or an image) please leave this blank.
+                    </hint>
+                    <required></required>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>cg</dc-schema>
+                    <dc-element>place</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Publication place</label>
+                    <style>col-sm-6</style>
+                    <input-type>onebox</input-type>
+                    <hint>NOT for journal articles. Enter the city and country, for example: Nairobi, Kenya</hint>
+                    <required></required>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>dcterms</dc-schema>
+                    <dc-element>subject</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>AGROVOC Keywords</label>
+                    <input-type>onebox</input-type>
+                    <hint>Enter AGROVOC subjects in lower case.</hint>
+                    <required></required>
+                    <vocabulary>dcterms-subject</vocabulary>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>cg</dc-schema>
+                    <dc-element>subject</dc-element>
+                    <dc-qualifier>system</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>CGIAR System subject</label>
+                    <input-type>onebox</input-type>
+                    <hint>Enter subjects describing this item, for example: SC, SC21, etc. This will make the item more findable in the future.</hint>
+                    <required></required>
+                </field>
+            </row>
+        </form>
+
         <!-- Form which defines the second page/section of the "traditional" DSpace submission process,
              often used when depositing normal Items. -->
         <form name="traditionalpagethree">
