@@ -166,73 +166,267 @@
     <node id="163" label="IFPRI - Women Improving Nutrition through Group-based Strategies (WINGS)" />
     <node id="164" label="IFPRI - Women's Empowerment in Agriculture Index (WEIA)" />
     <node id="165" label="IFPRI - Women’s Empowerment in Agrifood Governance (WEAGov)" />
-    <node id="166" label="IITA - Central Africa Hub" />
-    <node id="167" label="IITA - Eastern Africa Hub" />
-    <node id="168" label="IITA - Southern Africa Hub" />
-    <node id="169" label="IITA - Western Africa Hub" />
-    <node id="170" label="IWMI - C-0001" />
-    <node id="171" label="IWMI - C-0002" />
-    <node id="172" label="IWMI - C-0003" />
-    <node id="173" label="IWMI - C-0004" />
-    <node id="174" label="IWMI - C-0005" />
-    <node id="175" label="IWMI - C-0006" />
-    <node id="176" label="IWMI - C-0007" />
-    <node id="177" label="IWMI - C-0008" />
-    <node id="178" label="IWMI - C-0009" />
-    <node id="179" label="IWMI - C-0010" />
-    <node id="180" label="IWMI - C-0011" />
-    <node id="181" label="IWMI - C-0012" />
-    <node id="182" label="IWMI - C-0014" />
-    <node id="183" label="IWMI - C-0015" />
-    <node id="184" label="IWMI - C-0016" />
-    <node id="185" label="IWMI - C-0017" />
-    <node id="186" label="IWMI - C-0018" />
-    <node id="187" label="IWMI - C-0019" />
-    <node id="188" label="IWMI - C-0020" />
-    <node id="189" label="IWMI - C-0021" />
-    <node id="190" label="IWMI - C-0023" />
-    <node id="191" label="IWMI - C-0052" />
-    <node id="192" label="IWMI - C-0055" />
-    <node id="193" label="IWMI - C-0056" />
-    <node id="194" label="IWMI - C-0057" />
-    <node id="195" label="IWMI - C-0058" />
-    <node id="196" label="IWMI - C-0059" />
-    <node id="197" label="IWMI - D-0015" />
-    <node id="198" label="IWMI - D-0091" />
-    <node id="199" label="IWMI - D-0170" />
-    <node id="200" label="IWMI - D-0200" />
-    <node id="201" label="IWMI - D-0247" />
-    <node id="202" label="IWMI - D-0270" />
-    <node id="203" label="IWMI - D-0286" />
-    <node id="204" label="IWMI - D-0305" />
-    <node id="205" label="IWMI - D-0340" />
-    <node id="206" label="IWMI - D-0361" />
-    <node id="207" label="IWMI - D-0392" />
-    <node id="208" label="IWMI - D-0423" />
-    <node id="209" label="IWMI - D-0437" />
-    <node id="210" label="IWMI - D-0440" />
-    <node id="211" label="IWMI - D-0455" />
-    <node id="212" label="IWMI - D-0456" />
-    <node id="213" label="IWMI - D-0458" />
-    <node id="214" label="IWMI - D-0466" />
-    <node id="215" label="IWMI - D-0470" />
-    <node id="216" label="IWMI - D-0471" />
-    <node id="217" label="IWMI - D-0475" />
-    <node id="218" label="IWMI - D-0476" />
-    <node id="219" label="IWMI - D-0479" />
-    <node id="220" label="IWMI - D-0498" />
-    <node id="221" label="IWMI - D-0501" />
-    <node id="222" label="IWMI - D-0504" />
-    <node id="223" label="IWMI - D-0506" />
-    <node id="224" label="IWMI - D-0511" />
-    <node id="225" label="IWMI - D-0514" />
-    <node id="226" label="IWMI - D-0519" />
-    <node id="227" label="IWMI - D-0523" />
-    <node id="228" label="IWMI - D-0526" />
-    <node id="229" label="IWMI - D-0527" />
-    <node id="230" label="IWMI - D-0529" />
-    <node id="231" label="IWMI - D-0544" />
-    <node id="232" label="IWMI - D-0560" />
-    <node id="233" label="IWMI - D-0569" />
+    <node id="166" label="IITA - 1000Farms Trials Platform" />
+    <node id="167" label="IITA - A data ecosystem enabling AI for small scale producers- phase 1" />
+    <node id="168" label="IITA - Accelerating Impacts of CGIAR Climate Research for Africa (AICCRA-Ghana)" />
+    <node id="169" label="IITA - Accelerating Taro Variety Adoption and Delivery in Ghana, Ethiopia, and Nigeria (DCPVACSImpact accelerating subgrantTAROIITA)" />
+    <node id="170" label="IITA - ACRESAL Technical Assistance Contract" />
+    <node id="171" label="IITA - Advanced utilization of genetic resources of yam and cowpea for food security and land sustainability under unfavorable environments" />
+    <node id="172" label="IITA - Advancing Climate-Resilient Cowpea: Evaluation, Release, Seed Production, and Commercialization of New Varieties in Zambia" />
+    <node id="173" label="IITA - Advancing Sustainable Agronomy and Climate Adaptation Through Data-Driven Agricultural Solutions in the Zambezi River Basin" />
+    <node id="174" label="IITA - African Plant Breeding Academy (AfPBA) CRISPR Course in Kenya" />
+    <node id="175" label="IITA - African Simulium damnosum Blackfly Pheromone" />
+    <node id="176" label="IITA - African Union Soil Observatory" />
+    <node id="177" label="IITA - Agricultural transformation in Nigerian federal states and Togolese regions towards achieving Zero Hunger" />
+    <node id="178" label="IITA - AgVACS: A Climate-Smart Agronomy Vision for Adapted Crops and Soils" />
+    <node id="179" label="IITA - APPUI A LA TRANSFORMATION ET A LA RESILIENCE DES SYSTEMES ALIMENTAIRES DE MADAGASCAR A TRAVERS LA RECHERCHE POUR LE DEVELOPPEMENT" />
+    <node id="180" label="IITA - Assistance Technique de l'llTA pour le developpement d'un systeme semencier de manioc et diffusion dons la province de Lualaba. RDC        (Technical Assistance from the International Institute of Tropical Agriculture (IITA) for the Development of a Cassava Seed System and Dissemination in Lualaba Province, DRC)" />
+    <node id="181" label="IITA - Assistance Technique pour la mise en place, Cle en mains, d'un laboratoire de production des vitroplants et de 2 serres (SAH et de production de mini-boutures) de pommes de terre a l'Universite Catholique de Graben de Butembo au Nord-Kivu" />
+    <node id="182" label="IITA - Association between Provitamin A Maize Consumption and Exposure to Aflatoxins &amp; Fumonisins in Northern Nigeria – A Prospective Cohort Study" />
+    <node id="183" label="IITA - Banana breeding networks: delivering high-impact products" />
+    <node id="184" label="IITA - Biotechnological Innovations for Sustainable Red Palm Weevil (RPW) Control on Date Palm Cultivation" />
+    <node id="185" label="IITA - Blackfly Trap Placement Field Test and S vittatum lure and behavior in lab" />
+    <node id="186" label="IITA - Boosting food production and income in the irrigation schemes in Kano State, Nigeria" />
+    <node id="187" label="IITA - Breakthrough Cowpea Products for the West African Drylands" />
+    <node id="188" label="IITA - Breeding for enhanced photosynthesis to improve climate resilience of African cowpea and common bean." />
+    <node id="189" label="IITA - Building a bioconductor community in Africa" />
+    <node id="190" label="IITA - Building resilient seed systems for rice, cassava, soybean, coffee, and fish value chains to strengthen food and economic diversification in Liberia" />
+    <node id="191" label="IITA - Cabinda Province Agriculture Value Chains Development (CPAVCDP) Project in Angola" />
+    <node id="192" label="IITA - CARBO-RESTORE: CARBON POWERED SOIL RESTORATION FOR ENGINEERING DEGRADED LANDSCAPES" />
+    <node id="193" label="IITA - Cassava Source Sink (CASS)- Phase III" />
+    <node id="194" label="IITA - Cassava Value Chain Development to Support Food Security and the Bread Industry in DRC" />
+    <node id="195" label="IITA - Central Africa Hub" />
+    <node id="196" label="IITA - CGIAR Accelerator on Digital Transformation" />
+    <node id="197" label="IITA - CGIAR Genetic Innovations Public-Private Partnership Platform" />
+    <node id="198" label="IITA - Chicken, Fish and Pigs Feed and Organic Fertilizer Value Chain Development Using BSF-Based Urban Biowaste Processing in Ghana, Mali, Niger and the Democratic Republic of Congo" />
+    <node id="199" label="IITA - City Regions Food Systems, RUNRES (The rural-urban nexus:  Establishing a nutrient loop to improve city region food system resilience) Phase II" />
+    <node id="200" label="IITA - Climate Smart innovations and measures for East African smallholder farming" />
+    <node id="201" label="IITA - Climate-Resilient Maize Hybrids for sub-Saharan Africa" />
+    <node id="202" label="IITA - Cocoa Agroforestry Systems for resilient smallholder livelihoods in Ghana (CASILIENT)" />
+    <node id="203" label="IITA - Cocoa Rejuvenation Project (Accelerate Program on the development of Valued crops in Oyo State)" />
+    <node id="204" label="IITA - Collaboration between Group of Sustainable Agroecosystems at the Swiss Federal Institute of Technology and IITA" />
+    <node id="205" label="IITA - Collaborative research to boost understanding of coreid insect pests of grain legumes in Benin" />
+    <node id="206" label="IITA - Collection, isolation and characterization of leaf spot disease causal agents in cowpea in Nigeria, with a focus on the isolation of Cercospora spp. isolates." />
+    <node id="207" label="IITA - Combating Malnutrition in Africa Through Diversification of the Food System (HealthyDiets4Africa)" />
+    <node id="208" label="IITA - Consulting Services For The Development Of Climate-Smart And Nutrition­ Smart  Agricultural Technology Packages" />
+    <node id="209" label="IITA - Counteracting the emergence of invasive and virulent plant-parasitic nematodes as driven by global warming and genetic selection" />
+    <node id="210" label="IITA - Cowpea breeding for future climate conditions" />
+    <node id="211" label="IITA - Creation of agropastoral centers of excellence using the IITA BIP model" />
+    <node id="212" label="IITA - Deployment of a novel biodegradable carrier (banana fibre) for efficient crop protection" />
+    <node id="213" label="IITA - Development and promotion of aflatoxin biological control in the groundnut, sorghum, sesame, and cottonseed value chains to improve public health and enhance food security in Sudan." />
+    <node id="214" label="IITA - Development of a bundled flood and crop alert system using LoRaWAN for Eriti lowlands and adjoining agrarian communities in Obafemi Owode LGA of Ogun State, Nigeria" />
+    <node id="215" label="IITA - Development of a SeedTracker tool for South Sudan" />
+    <node id="216" label="IITA - Development of climate smart agriculture manual for NGO in Tanzania" />
+    <node id="217" label="IITA - Development of nutritional enhancement genetic materials for cowpea and yam crops, improved nutritional status in West Africa and developing countries" />
+    <node id="218" label="IITA - Development of Resilient Cowpea Varieties to emerging Climatic Conditions (Waterlogging Tolerance) in South-West Nigeria" />
+    <node id="219" label="IITA - Development of utilization technique of plant growth-promoting bacteria isolated from White guinea yam to enhance crop production in Africa." />
+    <node id="220" label="IITA - Developpement de Biopesticide pour lutter contre l'Aflatoxine en vue de faire respecter les normes Internationales (Development of Biopesticide to fight against Aflatoxin in order to enforce international standards)" />
+    <node id="221" label="IITA - Driving agroecological transitions in the humid tropics of Central and Eastern Africa through traNsdisciplinary Agroecology Living LabS (CANALLS)" />
+    <node id="222" label="IITA - Eastern Africa Hub" />
+    <node id="223" label="IITA - Effect of WonderGro Soil Conditioner on incidence of plant parasitic nematodes on roots of crops in Kenya" />
+    <node id="224" label="IITA - Efficient cassava prebreeding for PPD and whitefly resistance" />
+    <node id="225" label="IITA - Empowering Malawian Women Farmers through Precision Agriculture and Market E-Linkages (EMPOWER-ME)" />
+    <node id="226" label="IITA - Enabling Breakthrough Product Delivery through Regional Breeding Networks" />
+    <node id="227" label="IITA - ENABLING SUSTAINABLE REGIONAL AGRICULTURAL EXTENSION (ENSURE) PROJECT" />
+    <node id="228" label="IITA - Enhancing Bamboo-based agroforestry and aflatoxin management in Uganda" />
+    <node id="229" label="IITA - Enhancing cassava productivity and utilization for food and incomes of smallholder farmers in Rwanda" />
+    <node id="230" label="IITA - Enhancing decision support tools with soil health information to drive the implementation of soil health interventions at scale" />
+    <node id="231" label="IITA - Enhancing production of locally-adapted, climate resilient underutilized crops" />
+    <node id="232" label="IITA - Enhancing resilience: variety testing, releasing, production of early generation seed and commercializing climate resilient, nutrient dense soybean varieties in three provinces of Mozambique" />
+    <node id="233" label="IITA - Enhancing resistance to Fusarium Wilt (Foc TR4) disease in banana through induced mutagenesis and gene-editing" />
+    <node id="234" label="IITA - ENHANCING SITE-SPECIFIC NUTRIENT RECOMMENDATION FOR DIVERSE CROPS IN SIERRA LEONE" />
+    <node id="235" label="IITA - Evidence-based Regenerative Agriculture to Address Climate Change in Africa (Ethiopia and Nigeria)" />
+    <node id="236" label="IITA - Exploiting induced mutations to unearth molecular associations for resistance to Maruca pod borer and striga resistance in cowpea, Vigna unguiculata" />
+    <node id="237" label="IITA - Exploring High-Saponin Yam Varieties and the Impact of Growth Stages" />
+    <node id="238" label="IITA - ExtendinG productivity and resilience through the dry season in Africa: new Agroforestry soLutions that efficiently combine trees, agrIcuLturE and livestOck" />
+    <node id="239" label="IITA - Fair Food and Trade Systems for Africa through Food Convergence Innovation" />
+    <node id="240" label="IITA - Fast-track Soybean Varieties for Moisture Stress Tolerance and Enhanced Nutritional Composition for Ghana" />
+    <node id="241" label="IITA - Fast-tracking release, registration and commercialization of climateresilience cowpea varieties to increase yield and enhance food and nutrition security in Nigeria" />
+    <node id="242" label="IITA - Feed the Future Vision for Adapted Crops and Soils Capacity Activity (VACS Capacity)" />
+    <node id="243" label="IITA - Field testing of S. damnosum pheromone lure on oviposition traps" />
+    <node id="244" label="IITA - Food Safety For Africa - Addressing Food Safety Challenges in the African Informal Sector through Innovative Strategies and Use Cases" />
+    <node id="245" label="IITA - Food Systems Resilience Program interventions in Feed Salone" />
+    <node id="246" label="IITA - FRSP seed and capacity building with Ministry of agriculture of comoros" />
+    <node id="247" label="IITA - GAMBIA - PROJECT 2 OF THE PROGRAMME TO STRENGTHEN RESILIENCE  TO FOOD AND NUTRITION INSECURITY IN THE SAHEL (P2-P2RS)" />
+    <node id="248" label="IITA - GEMINI (&quot;GxExM Innovation in Intelligence for climate adaptation&quot;) project" />
+    <node id="249" label="IITA - Genetic Improvement of Bambara Groundnut (Vigna subterranea) for Future Nutrition and Climate Resilience" />
+    <node id="250" label="IITA - Genetic improvement of banana for control of bacterial wilt disease." />
+    <node id="251" label="IITA - Green Tea: Creating clean heat, power and biochar with biomass residues and gasification technology" />
+    <node id="252" label="IITA - Hacking for Photosynthesis: “From field photosynthesis to genetic architecture”" />
+    <node id="253" label="IITA - Identification of mechanisms to regulate growth habits in yam (Dioscorea rotundata) aiming at cost-effective mechanization in farmerâ€™s fields" />
+    <node id="254" label="IITA - Identifying potential biosecurity systems for Fusarium wilt TR4 with smallholder banana producers in Tanzania and Mozambique" />
+    <node id="255" label="IITA - IITA Accelerated Innovation  Delivery Initiative (AID-I) for Mozambique" />
+    <node id="256" label="IITA - IITA Accelerated Innovation Delivery Initiative AID-I:  Great Lakes Highlands" />
+    <node id="257" label="IITA - IITA Technical Assistance to PADECAS II" />
+    <node id="258" label="IITA - IITA technical assistance to the project to support the sustainable development of agricultural and livestock value chains in Burundi (PADCAE-B)" />
+    <node id="259" label="IITA - IITA-Pathway to Scale" />
+    <node id="260" label="IITA - IITA’s Semi-Autotrophic Hydroponics technology seedling support" />
+    <node id="261" label="IITA - Improving Food Security and Nutrition in Africa: Advancing Yam Productivity and Nutritional/Functional Traits" />
+    <node id="262" label="IITA - Improving food security through a food systems approach, improving improving agricultural productivity and increasing trade in selected value chains" />
+    <node id="263" label="IITA - Improving Rice Productivity by Decarbonizing Cultivation For 12,000 Hectares of Irrigated Land in Benin Republic" />
+    <node id="264" label="IITA - Inclusive Agri-Food Value Chain Development Programme (PROCAVA)" />
+    <node id="265" label="IITA - Increasing Photosynthetic Efficiency in Cassava" />
+    <node id="266" label="IITA - Innovative Youth in Agriculture (I-Youth) 2.0" />
+    <node id="267" label="IITA - INtact and effectively managed FORests and BIOdiversity as natural barriers to mitigate climate change and risk of pathogen spillover" />
+    <node id="268" label="IITA - International Society for Tropical Root Crops - Africa Branch (ISTRC-AB) Symposium" />
+    <node id="269" label="IITA - Involving local communities to protect fragile, small forest ecosystems in Benin (second phase)" />
+    <node id="270" label="IITA - iSPARK:  innovation in sustainability, policy, adaptation and resilience in Kenya" />
+    <node id="271" label="IITA - La mise en place et de l'operationnalisation du dispositif d'appui-conseil pour les paysans et cooperativesdans les regions Alaotra Mangoro et Sofia" />
+    <node id="272" label="IITA - LA PRODUCTION DE SEMENCES ET DES GENTITEURS DES ANNEES 1 ET 2 DANS LE CADRE DU Programme National de Developpement Agricole (PNDA)" />
+    <node id="273" label="IITA - Lafarge Reforestation Project" />
+    <node id="274" label="IITA - Legume-based agroecological intensification of maize and cassava cropping systems in Sub-Saharan Africa for water-food-energy nexus sustainability, nutritional security and livelihood resilence (LEG4DEV)" />
+    <node id="275" label="IITA - Leveraging Digital Systems for Emergency Preparedness and Response to Food Crises (EmergenSys)" />
+    <node id="276" label="IITA - Liberia Land and Soil Resources Knowledge project (Soils4Liberia)" />
+    <node id="277" label="IITA - Long-term funding of Ex Situ collections of germplasm held by IITA" />
+    <node id="278" label="IITA - Making Agrifood Markets Accessible for soy farmers (MAMA)" />
+    <node id="279" label="IITA - Making effective bioinputs work for smallholder farmers in SSA (Bio-SSA)" />
+    <node id="280" label="IITA - Malawi Digital Plant Health Service (MaDiPHS)" />
+    <node id="281" label="IITA - Mali Resilience Challenge Fund (MRCF) Project" />
+    <node id="282" label="IITA - Market-led Transformation of the Root and Tuber Crops Subsector in Malawi (RTC-MARKET programme)" />
+    <node id="283" label="IITA - MATERIAL TRANSFER AGREEMENT FOR SOYBEAN" />
+    <node id="284" label="IITA - MICROBIAL AND MOLECULAR CHARACTERIZATION OF Fusarium graminearum IN KENYA" />
+    <node id="285" label="IITA - Mining useful alleles for climate change adaptation in Cassava from CGIAR gene banks" />
+    <node id="286" label="IITA - Mining useful alleles for climate change adaptation in cowpea from CGIAR gene banks" />
+    <node id="287" label="IITA - MSc student scholarships  to support soybean research ." />
+    <node id="288" label="IITA - Muhogo Bora:  Plentiful Cassava for all" />
+    <node id="289" label="IITA - National Genebanks Phytosanitary Capacity Development Initiative" />
+    <node id="290" label="IITA - NetHope Digital Protection Program Sub-Grant 2025 project proposal application" />
+    <node id="291" label="IITA - Nigeria For Women Project" />
+    <node id="292" label="IITA - Nigeria for Women Project (NFWP)-SU - Methane Reduction Initiatives Targeting Women Groups" />
+    <node id="293" label="IITA - Olokemeji Reforestation Project" />
+    <node id="294" label="IITA - Olokemeji Reforestation Project Phase II" />
+    <node id="295" label="IITA - One health sustainability partnership between EU-Africa for food security" />
+    <node id="296" label="IITA - Partnership for facilitating Access of Integrated Pest Management innovations through the African Development Bank's (AfDB) Program to Build Resilience for Food and Nutrition Security in the Horn of Africa (BREFONS)" />
+    <node id="297" label="IITA - PCN follow-up assessment and training in Malawi" />
+    <node id="298" label="IITA - Post-tissue culture multiplication of banana for efficient scaling (Banana Vegetative Starts)" />
+    <node id="299" label="IITA - PowerPollen technology to improve the breeding of RTB crops: Banana, Cassava, and Yam" />
+    <node id="300" label="IITA - Preparing the ground for Climate Smart and Nutrition Sensitive Agriculture for improving Food Security (SaNSA) in Mali and Niger" />
+    <node id="301" label="IITA - Program for Seed System Innovation for VPCs in Africa (PROSSIVA)" />
+    <node id="302" label="IITA - Projet de Developpement Integre Burundi-Rwanda (BRIDEP)" />
+    <node id="303" label="IITA - Projet de Transformation de l' Agriculture en Repuhlique Democratique du Congo dans Ie cadre du Programme de Developpement Local des 145 territoires (PDL-145T), Premiere annee de Demarrage" />
+    <node id="304" label="IITA - Projet Regional de Developpement Agricole Integre dans les Grands-Lacs" />
+    <node id="305" label="IITA - Redesigning banana breeding" />
+    <node id="306" label="IITA - Regional approach towards addressing invasive quarantine pests of potato in East and Southern Africa" />
+    <node id="307" label="IITA - Regional Multi-Actor Network on Agroecology in East Africa (RMRN-EA)" />
+    <node id="308" label="IITA - Reinforcing Conservation and Livelihood Hub in the Dja" />
+    <node id="309" label="IITA - Research-actions and dissemination of innovative technologies in the cassava value chain in Beni and Lubero territories (North Kivu Province), in eastern DR Congo" />
+    <node id="310" label="IITA - Resilient Agriculture Livelihood Project South Sudan (RALP)" />
+    <node id="311" label="IITA - RESPONSE TO CASSAVA BROWN STREAK DISEASE OUTBREAK IN MULANJE AND SORROUNDING DISTRICTS" />
+    <node id="312" label="IITA - Restoring degraded environments and improving livelihoods in refugee settlements and refugee host communities in Uganda" />
+    <node id="313" label="IITA - Resurrecting a role for roguing:  pre-symptomatic detection with multispectral imaging to quantify and control the transmission of cassava brown streak disease" />
+    <node id="314" label="IITA - Reviving taro production in Western Africa:  High throughput phenotyping and omics approaches to study taro diseases" />
+    <node id="315" label="IITA - Roots/Tubers CGIAR-NARS breeding for impact W3 bridge_planning" />
+    <node id="316" label="IITA - RTBfoodomics: RTB food quality - refining targets with metabolomics" />
+    <node id="317" label="IITA - Rwanda Agricultural Biotechnology Program - CMP" />
+    <node id="318" label="IITA - Rwanda Biotech Capacity Building (GPP)" />
+    <node id="319" label="IITA - Safeguarding carbon sinks and their sequestration with agro-tech solutions in Western Uganda" />
+    <node id="320" label="IITA - Scaling component for FASA WorldFish Project" />
+    <node id="321" label="IITA - SGP-GENOME EDITING Accelerating Crop Improvement Through Genome Editing" />
+    <node id="322" label="IITA - Sofala Province Water, Energy, and Food Security Project (SWEF) - Phase II" />
+    <node id="323" label="IITA - Soil Values" />
+    <node id="324" label="IITA - Southern Africa Hub" />
+    <node id="325" label="IITA - Strengthen Markets, Agroecology, Resilience and Employment (SMART)" />
+    <node id="326" label="IITA - Strengthening smallholder cassava farmers backward integration and technical partnership (Rural Economic Transformation Project)" />
+    <node id="327" label="IITA - Strengthening soybean crop improvement in Africa to accelerate development of a stream of climate-smart varieties for small-scale producers, enabling their income growth, improved nutrition and national economic growth." />
+    <node id="328" label="IITA - Support the implementation of the Regional Hub for Fertilizer and Soil Health for West Africa and the Sahel" />
+    <node id="329" label="IITA - Supporting Small-scale Family Farmers who are Members of CAPAD Cooperatives in Burundi to be Resilient to the Effects of the COVID-19 Pandemic" />
+    <node id="330" label="IITA - Supporting the development of global soil spectral library" />
+    <node id="331" label="IITA - Supporting the Digitize Genebanks initiative in 5 African ountries" />
+    <node id="332" label="IITA - Sustainable Animal feeds project preparation grant" />
+    <node id="333" label="IITA - Sustainable COwpea grain yield by boosting Photosynthetic Efficiency- SCOPE" />
+    <node id="334" label="IITA - TAAT Clearinghouse:  Re-invest to Accelerate Innovation Adoption" />
+    <node id="335" label="IITA - TAAT technical assistance to the Project 2 of the Program to Strengthen Resilience to Food and Nutritional Insecurity in the Sahel (P2-P2RS)" />
+    <node id="336" label="IITA - Tech for African Ag Transformation (TAAT) Clearinghouse Transition" />
+    <node id="337" label="IITA - Technical and Financial Proposal for the Provision of Services Related to the Technical Capacity Assessment and Capacity Building of the Sesame Value Chain in Gedaref State, Sudan" />
+    <node id="338" label="IITA - Technical assistance in capacity building activities within the PACVEAR project in Guinea-Bissau" />
+    <node id="339" label="IITA - Technical assistance to the Building Resilience for Food and Nutritional Security in Djibouti" />
+    <node id="340" label="IITA - Technical Assistance to the Projet d'Appui a la Commercialisation, A  la Productivite Agricole et a la Nutrition" />
+    <node id="341" label="IITA - Technical support for implementation of the sustainable management of soybean rust project for smallholder farmers in Ethiopia and Kenya" />
+    <node id="342" label="IITA - Technologies for African Agricultural Transformation Phase II" />
+    <node id="343" label="IITA - Technologies for African Agricultural Transformation Phase II (TAAT II):  Fish Compact" />
+    <node id="344" label="IITA - Technologies for African Agriculture Transformation (TAAT)-Phase II Addendum" />
+    <node id="345" label="IITA - Technologies for African Agriculture Transformation Phase III (TAATIII)" />
+    <node id="346" label="IITA - The Nigeria Special Agro-Industrial Processing Zones (SAPZ) Program - Phase II" />
+    <node id="347" label="IITA - Toward Precision Diagnostics of Soybean Red Leaf Blotch: Genomic and Digital Resources for Coniothyrium glycines" />
+    <node id="348" label="IITA - Transferring Aflatoxin Biocontrol Experiences to Iranian Technical Experts" />
+    <node id="349" label="IITA - Unravelling the genetics of cowpea adaptation to high temperatures for legume improvement" />
+    <node id="350" label="IITA - USDA Food for Progress (FFPr):  Traceability and Resilience in Agriculture and Cocoa Ecosystems of Nigeria (TRACE) Project, Nigeria" />
+    <node id="351" label="IITA - Using birds to monitor the success of forest restoration in southern Nigeria" />
+    <node id="352" label="IITA - Utilizing induced mutation to accelerate breeding for resistance to striga and maruca pod borer in cowpea (Vigna unguiculata)" />
+    <node id="353" label="IITA - VACS Bambara groundnut scaling (DCPVACSImpact accelerating subgrantBambaraIITA)" />
+    <node id="354" label="IITA - VACS-Breeding:  TARO" />
+    <node id="355" label="IITA - VACS-Breeding: Bambara" />
+    <node id="356" label="IITA - VACS_IITA_Bambara_Y3" />
+    <node id="357" label="IITA - VACS_IITA_TARO_Y3" />
+    <node id="358" label="IITA - Virus Resistant Cassava for Africa Deployment" />
+    <node id="359" label="IITA - Wassa Amenfi Cocoa Landscape Initiative, Ghana" />
+    <node id="360" label="IITA - Western Africa Hub" />
+    <node id="361" label="IITA - Yam optimized architecture through gene editing (YOAGA)" />
+    <node id="362" label="IITA - Yam physiology: conversion of flower sex and managing tuber dormancy" />
+    <node id="363" label="IITA - Youth In Agribusiness:  enabling scaling of innovative technologies for sustainable food solutions" />
+    <node id="364" label="IWMI - C-0001" />
+    <node id="365" label="IWMI - C-0002" />
+    <node id="366" label="IWMI - C-0003" />
+    <node id="367" label="IWMI - C-0004" />
+    <node id="368" label="IWMI - C-0005" />
+    <node id="369" label="IWMI - C-0006" />
+    <node id="370" label="IWMI - C-0007" />
+    <node id="371" label="IWMI - C-0008" />
+    <node id="372" label="IWMI - C-0009" />
+    <node id="373" label="IWMI - C-0010" />
+    <node id="374" label="IWMI - C-0011" />
+    <node id="375" label="IWMI - C-0012" />
+    <node id="376" label="IWMI - C-0014" />
+    <node id="377" label="IWMI - C-0015" />
+    <node id="378" label="IWMI - C-0016" />
+    <node id="379" label="IWMI - C-0017" />
+    <node id="380" label="IWMI - C-0018" />
+    <node id="381" label="IWMI - C-0019" />
+    <node id="382" label="IWMI - C-0020" />
+    <node id="383" label="IWMI - C-0021" />
+    <node id="384" label="IWMI - C-0023" />
+    <node id="385" label="IWMI - C-0052" />
+    <node id="386" label="IWMI - C-0055" />
+    <node id="387" label="IWMI - C-0056" />
+    <node id="388" label="IWMI - C-0057" />
+    <node id="389" label="IWMI - C-0058" />
+    <node id="390" label="IWMI - C-0059" />
+    <node id="391" label="IWMI - D-0015" />
+    <node id="392" label="IWMI - D-0091" />
+    <node id="393" label="IWMI - D-0170" />
+    <node id="394" label="IWMI - D-0200" />
+    <node id="395" label="IWMI - D-0247" />
+    <node id="396" label="IWMI - D-0270" />
+    <node id="397" label="IWMI - D-0286" />
+    <node id="398" label="IWMI - D-0305" />
+    <node id="399" label="IWMI - D-0340" />
+    <node id="400" label="IWMI - D-0361" />
+    <node id="401" label="IWMI - D-0392" />
+    <node id="402" label="IWMI - D-0423" />
+    <node id="403" label="IWMI - D-0437" />
+    <node id="404" label="IWMI - D-0440" />
+    <node id="405" label="IWMI - D-0455" />
+    <node id="406" label="IWMI - D-0456" />
+    <node id="407" label="IWMI - D-0458" />
+    <node id="408" label="IWMI - D-0466" />
+    <node id="409" label="IWMI - D-0470" />
+    <node id="410" label="IWMI - D-0471" />
+    <node id="411" label="IWMI - D-0475" />
+    <node id="412" label="IWMI - D-0476" />
+    <node id="413" label="IWMI - D-0479" />
+    <node id="414" label="IWMI - D-0498" />
+    <node id="415" label="IWMI - D-0501" />
+    <node id="416" label="IWMI - D-0504" />
+    <node id="417" label="IWMI - D-0506" />
+    <node id="418" label="IWMI - D-0511" />
+    <node id="419" label="IWMI - D-0514" />
+    <node id="420" label="IWMI - D-0519" />
+    <node id="421" label="IWMI - D-0523" />
+    <node id="422" label="IWMI - D-0526" />
+    <node id="423" label="IWMI - D-0527" />
+    <node id="424" label="IWMI - D-0529" />
+    <node id="425" label="IWMI - D-0544" />
+    <node id="426" label="IWMI - D-0560" />
+    <node id="427" label="IWMI - D-0569" />
   </isComposedBy>
 </node>
